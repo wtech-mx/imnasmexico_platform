@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 use App\Models\Chat;
 use App\Models\Message;
-
+use Illuminate\Support\Facades\Http;
 class WhatsAppWebhookController extends Controller
 {
     /**
@@ -28,35 +29,49 @@ class WhatsAppWebhookController extends Controller
      */
     public function handleWebhook(Request $request)
     {
-        $data = json_encode($request->all(), JSON_PRETTY_PRINT);
+        // Log en Laravel
+        Log::info('📩 Webhook recibido:', $request->all());
 
-        // ✅ 1. Guardar en storage/logs/webhook_log.txt
-        try {
-            $logFile = storage_path('logs/webhook_log.txt');
-            file_put_contents($logFile, now() . " - Webhook recibido:\n" . $data . "\n\n", FILE_APPEND);
-        } catch (\Exception $e) {
-            Log::error("❌ Error escribiendo en storage/logs/webhook_log.txt: " . $e->getMessage());
+        // Guardar en un archivo para depuración
+        File::put(public_path('webhook_log.txt'), json_encode($request->all(), JSON_PRETTY_PRINT));
+
+        $data = $request->all();
+
+        // Verificar si el webhook tiene mensajes de WhatsApp
+        if (!isset($data['entry'][0]['changes'][0]['value']['messages'])) {
+            return response()->json(['status' => 'no_messages_received']);
         }
 
-        // ✅ 2. Guardar en public/webhook_log.txt (para verlo desde el navegador)
-        try {
-            $publicLogFile = public_path('webhook_log.txt');
-            file_put_contents($publicLogFile, now() . " - Webhook recibido:\n" . $data . "\n\n", FILE_APPEND);
-        } catch (\Exception $e) {
-            Log::error("❌ Error escribiendo en public/webhook_log.txt: " . $e->getMessage());
+        $message = $data['entry'][0]['changes'][0]['value']['messages'][0];
+
+        // Extraer datos importantes
+        $phoneNumber = $message['from'];
+        $text = $message['text']['body'] ?? null;
+        $timestamp = $message['timestamp'] ?? now()->timestamp;
+        $messageId = $message['id'];
+
+        if ($text) {
+            // Buscar o crear la conversación
+            $chat = Chat::firstOrCreate([
+                'client_phone' => $phoneNumber
+            ]);
+
+            // Guardar el mensaje en la base de datos
+            Message::create([
+                'chat_id' => $chat->id,
+                'message_id' => $messageId,
+                'content' => $text,
+                'direction' => 'toApp', // Indica que es un mensaje entrante
+                'timestamp' => $timestamp
+            ]);
+
+            Log::info("📥 Mensaje guardado en la BD: {$text}");
+
+            // Responder con un mensaje de "Echo"
         }
 
-        // ✅ 3. Guardar en el Log de Laravel
-        Log::info("📩 Webhook recibido:", $request->all());
-
-        // ✅ 4. Responder con los datos del webhook para verificar que llega
-        return response()->json([
-            'status' => 'Webhook recibido!',
-            'data' => $request->all()
-        ], 200);
+        return response()->json(['status' => 'success']);
     }
-
-
 
 
 }
