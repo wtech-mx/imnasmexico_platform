@@ -28,41 +28,13 @@ class WhatsAppWebhookController extends Controller
      */
     public function handleWebhook(Request $request)
     {
-        $logFile = storage_path('logs/webhook_log.txt'); // Archivo para registrar los webhooks
+        // 📌 Guardar el webhook en un archivo de texto en `public/` para que sea accesible desde el navegador
+        $logFile = public_path('webhook_log.txt');
         file_put_contents($logFile, json_encode($request->all(), JSON_PRETTY_PRINT) . "\n\n", FILE_APPEND);
-
-        $data = $request->all();
-
-        if (isset($data['entry'][0]['changes'][0]['value']['messages'])) {
-            foreach ($data['entry'][0]['changes'][0]['value']['messages'] as $message) {
-                $phoneNumber = $message['from'] ?? null;
-                $text = $message['text']['body'] ?? null;
-                $timestamp = $message['timestamp'] ?? now()->timestamp;
-                $messageId = $message['id'] ?? null;
-
-                if (!$phoneNumber || !$text || !$messageId) {
-                    file_put_contents($logFile, "❌ Falta información en el mensaje\n", FILE_APPEND);
-                    continue;
-                }
-
-                // 📌 Buscar o crear el chat
-                $chat = Chat::firstOrCreate(['client_phone' => $phoneNumber]);
-
-                // 📌 Guardar mensaje en la base de datos
-                $msg = Message::create([
-                    'chat_id' => $chat->id,
-                    'message_id' => $messageId,
-                    'body' => $text,
-                    'direction' => 'toApp',
-                    'timestamp' => $timestamp
-                ]);
-
-                file_put_contents($logFile, "✅ Mensaje guardado en la BD: " . json_encode($msg->toArray()) . "\n", FILE_APPEND);
-            }
-        }
 
         return response()->json(['status' => 'success']);
     }
+
 
 
 }
