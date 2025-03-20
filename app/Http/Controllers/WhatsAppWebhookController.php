@@ -28,7 +28,8 @@ class WhatsAppWebhookController extends Controller
      */
     public function handleWebhook(Request $request)
     {
-        Log::info('📩 Webhook recibido:', $request->all());
+        $logFile = storage_path('logs/webhook_log.txt'); // Archivo para registrar los webhooks
+        file_put_contents($logFile, json_encode($request->all(), JSON_PRETTY_PRINT) . "\n\n", FILE_APPEND);
 
         $data = $request->all();
 
@@ -39,9 +40,8 @@ class WhatsAppWebhookController extends Controller
                 $timestamp = $message['timestamp'] ?? now()->timestamp;
                 $messageId = $message['id'] ?? null;
 
-                // 🛑 Verificar que todos los datos existen
                 if (!$phoneNumber || !$text || !$messageId) {
-                    Log::error("❌ Falta información en el mensaje", $message);
+                    file_put_contents($logFile, "❌ Falta información en el mensaje\n", FILE_APPEND);
                     continue;
                 }
 
@@ -57,11 +57,12 @@ class WhatsAppWebhookController extends Controller
                     'timestamp' => $timestamp
                 ]);
 
-                Log::info("📥 Mensaje guardado en la BD:", $msg->toArray());
+                file_put_contents($logFile, "✅ Mensaje guardado en la BD: " . json_encode($msg->toArray()) . "\n", FILE_APPEND);
             }
         }
 
         return response()->json(['status' => 'success']);
     }
+
 
 }
