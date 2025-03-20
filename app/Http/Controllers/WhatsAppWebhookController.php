@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Support\Facades\Http;
+
 class WhatsAppWebhookController extends Controller
 {
     /**
@@ -68,10 +69,31 @@ class WhatsAppWebhookController extends Controller
             Log::info("📥 Mensaje guardado en la BD: {$text}");
 
             // Responder con un mensaje de "Echo"
+            $this->sendMessage($phoneNumber, "Echo: " . $text, $messageId);
         }
 
         return response()->json(['status' => 'success']);
     }
 
+    /**
+     * Enviar un mensaje de respuesta
+     */
+    private function sendMessage($to, $text, $contextMessageId)
+    {
+        $businessPhoneNumberId = env('BUSINESS_PHONE_NUMBER_ID');
+        $graphApiToken = env('GRAPH_API_TOKEN');
 
+        $response = Http::withToken($graphApiToken)->post("https://graph.facebook.com/v18.0/{$businessPhoneNumberId}/messages", [
+            'messaging_product' => 'whatsapp',
+            'to' => $to,
+            'text' => ['body' => $text],
+            'context' => ['message_id' => $contextMessageId],
+        ]);
+
+        if ($response->successful()) {
+            Log::info("📤 Mensaje enviado: {$text}");
+        } else {
+            Log::error("❌ Error al enviar el mensaje: {$response->body()}");
+        }
+    }
 }
