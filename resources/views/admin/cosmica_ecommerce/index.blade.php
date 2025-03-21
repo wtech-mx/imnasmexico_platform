@@ -72,6 +72,15 @@
                                                 <h5>TC{{ $item->id }}</h5>
                                             </td>
                                             <td>
+                                                @if ($item->estatus_bodega == 'En preparacion')
+                                                    <span class="badge" style="color: #ffd709; background-color: #f8fee0;">En preparacion</span>
+                                                @elseif ($item->estatus_bodega == 'Preparado')
+                                                    <span class="badge" style="color: #5904f7; background-color: #f0e0fe;">Preparado</span>
+                                                @elseif ($item->estatus_bodega == 'Enviado')
+                                                    <span class="badge badge-success">Enviado</span>
+                                                @else
+                                                    <span class="badge badge-info">Enviar a bodega</span>
+                                                @endif
                                                 <h5>
                                                     {{ $item->User->name }}  <br>
                                                     {{ $item->User->telefono }}
