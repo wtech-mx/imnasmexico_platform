@@ -260,6 +260,8 @@ class BodegaController extends Controller
         $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
 
         $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal);
+
+        $notas_cosmica_on = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega', '=' , 'Preparado')->get();
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_preparados', compact(
             'ApiFiltradaCollectPreparado',
@@ -267,7 +269,8 @@ class BodegaController extends Controller
             'notas_cosmica_preparado',
             'notas_preparado',
             'notas_presencial_preparado',
-            'cantidad_preparacion'
+            'cantidad_preparacion',
+            'notas_cosmica_on'
         ));
     }
 

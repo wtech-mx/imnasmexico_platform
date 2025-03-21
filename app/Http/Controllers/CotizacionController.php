@@ -579,6 +579,17 @@ class CotizacionController extends Controller
         return redirect()->back()->with('success', 'Se ha actualizado');
     }
 
+    public function update_t_cosmica(Request $request, $id){
+        $diaActual = date('Y-m-d');
+
+        $nota = OrdersCosmica::findOrFail($id);
+        $nota->fecha_envio  = $diaActual;
+        $nota->estatus_bodega  = $request->get('estatus_bodega');
+        $nota->update();
+
+        return redirect()->back()->with('success', 'Se ha actualizado');
+    }
+
     public function update_guia(Request $request, $id){
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
