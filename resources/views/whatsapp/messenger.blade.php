@@ -186,33 +186,56 @@
 
     // ✅ Renderizar los mensajes en la vista
     function renderMessages() {
-        if (!chatbox) {
-            console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
-            return;
+    if (!chatbox) {
+        console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
+        return;
+    }
+
+    // Verificar si el usuario está en la parte inferior del chat
+    const isAtBottom = chatbox.scrollHeight - chatbox.scrollTop === chatbox.clientHeight;
+
+    chatbox.innerHTML = '';
+
+    let lastMessageDate = null;
+
+    messages.forEach(message => {
+        let messageText = message.body;
+
+        try {
+            const parsedMessage = JSON.parse(message.body);
+            if (parsedMessage.text && parsedMessage.text.body) {
+                messageText = parsedMessage.text.body;
+            }
+        } catch (error) {
+            console.warn("⚠️ No se pudo parsear el JSON del mensaje, usando el valor original.");
         }
 
-        chatbox.innerHTML = '';
+        const messageDate = new Date(message.timestamp * 1000);
+        const messageDateString = messageDate.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        messages.forEach(message => {
-            let messageText = message.body;
+        if (lastMessageDate !== messageDateString) {
+            const dateSeparator = document.createElement('div');
+            dateSeparator.classList.add('date-separator');
+            dateSeparator.innerHTML = `
+                <div>
+                    ${messageDateString}
+                </div>
+            `;
+            chatbox.appendChild(dateSeparator);
+            lastMessageDate = messageDateString;
+        }
 
-            try {
-                const parsedMessage = JSON.parse(message.body);
-                if (parsedMessage.text && parsedMessage.text.body) {
-                    messageText = parsedMessage.text.body;
-                }
-            } catch (error) {
-                console.warn("⚠️ No se pudo parsear el JSON del mensaje, usando el valor original.");
-            }
+        const div = document.createElement('div');
+        div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
+        div.innerHTML = `<p>${messageText} <br><span>${messageDate.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', hour12: true })}</span></p>`;
+        chatbox.appendChild(div);
+    });
 
-            const div = document.createElement('div');
-            div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
-            div.innerHTML = `<p>${messageText} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span></p>`;
-            chatbox.appendChild(div);
-        });
-
+    // Solo desplazarse hacia abajo si el usuario ya estaba en la parte inferior del chat
+    if (isAtBottom) {
         chatbox.scrollTop = chatbox.scrollHeight;
     }
+}
 
     // ✅ Enviar mensaje
     function sendMessage() {
