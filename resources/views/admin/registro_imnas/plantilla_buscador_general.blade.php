@@ -54,13 +54,25 @@
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-6 my-auto">
-                            @if(in_array($tickets->Cursos->nombre, [
-                                'Diplomado en Drenaje Linfático Facial y Corporal',
-                                'Diplomado en Drenaje Linfático Facial y Corporal',
-                                'Micropuntura Brasileña'
+                            @php
+                                $curso_normalizado = normalizeString($tickets->Cursos->nombre);
+                            @endphp
+
+                            @if(in_array($curso_normalizado, [
+                                normalizeString('Diplomado en Drenaje Linfático Facial y Corporal'),
+                                normalizeString('Micropuntura Brasileña'),
                             ]))
                                 <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                                     Título Honorífico
+                                </a>
+                            @elseif(in_array($curso_normalizado, [
+                                normalizeString('Masoterapia en Técnicas de Masaje Relajante, Descontracturante y Deportivo'),
+                            ]))
+                                <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
+                                    Título Honorífico
+                                </a>
+                                <a href="{{ route('folio.index_diploma',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">
+                                    Diploma de Profesionalización
                                 </a>
                             @else
                                 <a href="{{ route('folio.index_cedula',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cédula de Identidad de Papel</a>
@@ -207,16 +219,19 @@
             </div>
 
             <div class="col-12 col-md-6 col-lg-6 my-auto">
-                @if(in_array($tickets_externo->curso, [
-                    'Diplomado en Drenaje Linfático Facial y Corporal',
-                    'Diplomado en Drenaje Linfático Facial y Corporal',
-                    'Micropuntura Brasileña',
+                @php
+                    $curso_normalizado = normalizeString($tickets_externo->curso);
+                @endphp
+
+                @if(in_array($curso_normalizado, [
+                    normalizeString('Diplomado en Drenaje Linfático Facial y Corporal'),
+                    normalizeString('Micropuntura Brasileña'),
                 ]))
                     <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
                     </a>
-                @elseif(in_array($tickets_externo->curso, [
-                    'Masoterapia en Técnicas de Masaje Relajante, Descontracturante y Deportivo',
+                @elseif(in_array($curso_normalizado, [
+                    normalizeString('Masoterapia en Técnicas de Masaje Relajante, Descontracturante y Deportivo'),
                 ]))
                     <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
@@ -224,7 +239,6 @@
                     <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">
                         Diploma de Profesionalización
                     </a>
-
                 @else
                     <a href="{{ route('folio.index_cedula',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cédula de Identidad de Papel</a>
                     <a href="{{ route('folio.index_crednecial',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
