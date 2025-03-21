@@ -1,0 +1,21 @@
+/* Definir la animación */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Aplicar la animación */
+.animation_card{
+    animation: slideInFromLeft 1.3s ease forwards;
+}
+
+.animation_card_header{
+    animation: slideInFromLeft 1s ease forwards;
+    z-index: 100;
+}

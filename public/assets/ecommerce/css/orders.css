@@ -1,0 +1,18 @@
+.bg_orders{
+    background-color: #92ADC5;
+}
+
+.tittle_orders{
+    color: #fff !important;
+    font-family: Lexend;
+    font-size: 26px;
+    font-weight: 300;
+    background-color: #577590;
+    z-index: 1000;
+    position: relative;
+    text-shadow: 3px 7px 11px rgba(0, 0, 0, 1);
+    display: inline-block;
+    border-radius: 16px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 2rem!important;
+}

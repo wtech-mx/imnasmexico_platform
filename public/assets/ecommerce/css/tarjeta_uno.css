@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Lexend';
+    src: url('/assets/media/fonts/Lexend/Lexend-VariableFont_wght.ttf');
+ }
+
+.logo_desgin_tarjetas{
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.icon_desgin_tarjetas{
+    border-radius: 25%!important;
+    display: block;
+    width: 80%;
+}
+
+.bg_tarjeta_uno{
+    background-color: #577590;
+}
+
+.bg_card_tarjetas_uno{
+    border-radius: 19px;
+    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.25)!important;
+    background-color: #F0F0F0!important;
+}
+
+.tittle_vendexa_tarjeta{
+    text-decoration: none;
+    color: #000!important;
+    font-family: Lexend;
+    font-size: 25px;
+    letter-spacing: 0;
+    font-weight: 600;
+    text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.2);
+}
+
+.subtittle_vendexa_tarjeta{
+    text-decoration: none;
+    color: #000!important;
+    font-family: Lexend;
+    font-size: 30px;
+    letter-spacing: 0;
+    font-weight: 600;
+    text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.2);
+}
+
+.link_redirecionamiento_tp{
+    text-decoration: none;
+    color: #000!important;
+    font-family: Lexend;
+    font-size: 17px;
+    letter-spacing: 0;
+    font-weight: 400;
+    text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Montserrat_ExtraBold';
+    font-style: normal;
+    font-weight: normal;
+    src: url('{{ asset('documentos_nuevos/Montserrat-ExtraBold.ttf') }}') format('truetype');
+}

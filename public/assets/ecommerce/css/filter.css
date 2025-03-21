@@ -1,0 +1,64 @@
+.container_filtro{
+    width: 100%;
+    padding: 10px;
+    border-radius: 23px;
+    background: var(--Blanco, #FFF);
+    box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+}
+
+.input_filter{
+    padding: 6px;
+    border: solid 0px;
+    border-radius: 9px;
+    background: var(--Bg, #F7F5EE);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.hr_filtro{
+    height: 1px;
+    background-color: #48745B;
+    opacity: 1;
+}
+
+.title_filtro{
+    color: #176419;
+    font-family: Lato;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.subtitle_filtro{
+    color: var(--Black, #000);
+    font-family: Lato;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.btn_filter{
+    background-color: #E5B467;
+    border-radius: 12px;
+    color: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.input_filter2 {
+    padding: 6px;
+    border: solid 0px;
+    border-radius: 9px;
+    background: var(--Bg, #fff);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.collapse_filter{
+    padding: 20px;
+    width: 100%;
+    border-radius: 23px;
+    background: var(--Blanco, #FFF);
+    box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+    border: solid 0px transparent;
+}
+

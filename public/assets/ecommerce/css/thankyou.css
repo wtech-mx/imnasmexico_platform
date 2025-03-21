@@ -1,0 +1,86 @@
+.title_thankyou{
+    color:#176419;
+    text-align: center;
+    font-family: 'Roboto_Regular';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.img_thankyou{
+    width: 20%;
+}
+
+.thankyou_subtitle{
+    color:#176419;
+    font-family: Lato;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.container_order_item{
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.img_portada_thankyou{
+    width: 60px;
+    height: 60px;
+    /* filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); */
+}
+
+.title_product_tahnkyou{
+    color: #000;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.tittle_cantidad_thankyou{
+    color: #000;
+    font-family: Lato;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.title_price_thankyou{
+    color: #176419;
+    font-family: Lato;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
+.subtitle_order_datos{
+    color: #176419;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.texto_order_thanks{
+    color: #000;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

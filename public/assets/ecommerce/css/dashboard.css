@@ -1,0 +1,243 @@
+.bg_dash{
+    background-color: #F0F0F0;
+    zoom: 0!important;
+}
+
+.card_header_dash{
+    background-color: #F0F0F0;
+    border-radius: 16px;
+    width: 120px;
+    height: 140px;
+    position: relative;
+    z-index: 100;
+    box-shadow:1px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.img_card_head_dash{
+    width: 50px;
+    height: 50px;
+}
+
+.text_minicards{
+    font-family: Lexend;
+    font-size: 14px;
+    font-weight: 400;
+    text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.2);
+    color: #577590;
+}
+
+.tittle_dash{
+    color: #fff !important;
+    font-family: Lexend;
+    font-size: 26px;
+    font-weight: 300;
+    background-color: #92ADC5;
+    z-index: 1000;
+    position: relative;
+    text-shadow: 3px 7px 11px rgba(0, 0, 0, 1);
+    display: inline-block;
+    border-radius: 16px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 2rem!important;
+}
+
+.ingresos_dash{
+    color: #14213D !important;
+    font-family: Lexend;
+    font-size: 22px;
+    font-weight: 400;
+    background-color: #F0F0F0;
+    z-index: 1000;
+    position: relative;
+    text-shadow: 3px 7px 11px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    border-radius: 16px;
+    padding: 10px 40px 10px 40px;
+    margin-top: 2rem!important;
+}
+
+.subtiitle_dash{
+    color: #fff !important;
+    font-family: Lexend;
+    font-size: 22px;
+    font-weight: 400;
+    z-index: 1000;
+    position: relative;
+    text-shadow: 3px 7px 11px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    border-radius: 16px;
+    padding: 10px 40px 10px 40px;
+    margin-top: 2rem!important;
+}
+
+.border_card_header {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    padding: 450px 50px 300px 50px;
+}
+
+.border_card_header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    background-image: url(/assets/media/img/backgrounds/patter_2_grande_azul15.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom right;
+    opacity: 0.9;
+    z-index: 1;
+    width: 200%;
+}
+
+.card_dashboard{
+	box-shadow:1px 4px 5px rgba(0, 0, 0, 0.25);
+	background-color:rgba(255, 255, 255, 1);
+    border-radius: 16px;
+    width: 170px;
+    height: 225px;
+}
+
+.img_icon_dash{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    z-index: 100;
+    top: 15px;
+    left: 35px;
+}
+
+.card_img{
+    position: relative; /* Asegura que los elementos superpuestos sean posicionados correctamente */
+    overflow: hidden; /* Para que la imagen no se desborde del contenedor */
+    width: 152px;
+    height: 110px;
+    border: solid 0px transparent;
+    background-color: hsl(208deg 25% 45% / 30%); /* Color de fondo */
+    border-radius: 9px;
+    border: solid 4px #577590;
+}
+
+.card_img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -263px;
+    right: 0;
+    bottom: -6px;
+    background-image: url(/assets/media/img/backgrounds/patter_2_grande.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.2;
+    z-index: 1;
+    width: 500%;
+}
+
+.tittle_card_dash{
+    color: #577590 !important;
+    font-family: Lexend;
+    font-size:24px;
+	letter-spacing:0;
+    font-weight: 500;
+    text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.2);
+}
+
+.btn_primary_blue_dash{
+    box-shadow: 1px 1px 6px #577590;
+    background-color: #577590;
+    border-radius: 9px;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: Lexend;
+}
+
+
+.btn_primary_blue_dash:hover {
+    box-shadow: inset 3px 3px 9px #33506d; /* Cambia la sombra al pasar el mouse */
+    font-size: 16px;
+    font-weight: 300;
+}
+
+
+.btn_plus_dash{
+    box-shadow: 1px 1px 6px #577590;
+    background-color: rgb(87 117 144 / 60%);
+    border-radius: 9px;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.btn_plus_dash:hover{
+    box-shadow: inset 1px 1px 6px #577590; /* Cambia la sombra al pasar el mouse */
+}
+
+.img_plus_dash{
+    width: 19px;
+    height: 19px;
+    margin-bottom: 2px;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    .border_card_header {
+        position: relative; /* Asegura que los elementos superpuestos sean posicionados correctamente */
+        overflow: hidden; /* Para que la imagen no se desborde del contenedor */
+        height: auto;
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+
+    .border_card_header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -47%;
+        right: 0;
+        bottom: 60px;
+        background-image: url(/assets/media/img/backgrounds/fondo_redondeado_sf_azul.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom right;
+        opacity: 0.9;
+        z-index: 1;
+        width: 200%;
+    }
+
+  }
+
+    @media only screen and (max-width: 430px) {
+
+    .card_header_dash {
+        width: 120px;
+        height: 120px;
+    }
+
+    .tittle_dash{
+        font-size: 19px!important;
+    }
+
+    .ingresos_dash{
+        font-size: 22px;
+    }
+
+    .img_card_head_dash {
+        width: 35px;
+        height: 35px;
+    }
+    .text_minicards {
+        font-size: 11px;
+    }
+
+    .ingresos_dash {
+        font-size: 19px;
+    }
+
+  }
