@@ -59,8 +59,8 @@
                             @endphp
 
                             @if(in_array($curso_normalizado, [
-                                normalizeString('Diplomado en Drenaje Linfático Facial y Corporal'),
-                                normalizeString('Micropuntura Brasileña'),
+                                normalizeString('Diplomado en Drenaje Linfatico Facial y Corporal'),
+                                normalizeString('Micropuntura Brasilena'),
                             ]))
                                 <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                                     Título Honorífico
@@ -220,12 +220,25 @@
 
             <div class="col-12 col-md-6 col-lg-6 my-auto">
                 @php
+                    function normalizeString($string) {
+                        $string = trim($string); // Eliminar espacios al inicio y al final
+                        $string = strtolower($string); // Convertir a minúsculas
+                        $string = preg_replace('/\s+/', ' ', $string); // Reemplazar múltiples espacios por uno solo
+                        $string = str_replace(
+                            ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'Ü'],
+                            ['a', 'e', 'i', 'o', 'u', 'n', 'u', 'a', 'e', 'i', 'o', 'u', 'n', 'u'],
+                            $string
+                        ); // Reemplazar acentos y caracteres especiales
+                        return $string;
+                    }
+                    @endphp
+                @php
                     $curso_normalizado = normalizeString($tickets_externo->curso);
                 @endphp
 
                 @if(in_array($curso_normalizado, [
-                    normalizeString('Diplomado en Drenaje Linfático Facial y Corporal'),
-                    normalizeString('Micropuntura Brasileña'),
+                    normalizeString('Diplomado en Drenaje Linfatico Facial y Corporal'),
+                    normalizeString('Micropuntura Brasilena'),
                 ]))
                     <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
