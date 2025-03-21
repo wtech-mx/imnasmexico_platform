@@ -56,7 +56,8 @@
                         <div class="col-12 col-md-6 col-lg-6 my-auto">
                             @if(in_array($tickets->Cursos->nombre, [
                                 'Diplomado en Drenaje Linfático Facial y Corporal',
-                                'Micropuntura Brasileña'
+                                'Micropuntura Brasileña',
+                                'Micropuntura Brasileña',
                             ]))
                                 <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                                     Título Honorífico
@@ -209,6 +210,7 @@
                 @if(in_array($tickets_externo->curso, [
                     'Diplomado en Drenaje Linfático Facial y Corporal',
                     'Micropuntura Brasileña',
+                    'Micropuntura Brasileña',
                 ]))
                     <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
