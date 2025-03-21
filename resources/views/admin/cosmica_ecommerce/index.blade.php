@@ -87,7 +87,14 @@
                                                     {{ $fechaCarbon->format('g:i A') }}
                                                 </h5>
                                             </td>
-                                            <td><h5>${{ $item->pago }}</h5></td>
+                                            <td>
+                                                <h5>${{ $item->pago }}</h5>
+                                                @if ($item->forma_envio == 'envio')
+                                                    <span class="badge badge-success">Envio</span>
+                                                @else
+                                                    <span class="badge badge-warning">Recoge en tienda</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 @php
                                                     $fecha = $item->fecha;
