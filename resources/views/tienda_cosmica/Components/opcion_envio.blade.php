@@ -1,12 +1,12 @@
 <div class="button_collapse_cart mt-5 mb-5">
     <div class="d-flex justify-content-center">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required>
             <label class="form-check-label text-white" for="inlineRadio1">Envio a Domicilio</label>
           </div>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" required>
             <label class="form-check-label text-white" for="inlineRadio2">Recojer en Tienda</label>
           </div>
     </div>
