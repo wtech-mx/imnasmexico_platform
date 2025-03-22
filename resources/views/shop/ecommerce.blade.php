@@ -13,12 +13,20 @@
     <div id="carouselExample" class="carousel slide" data-bs-interval="4000" data-bs-ride="carousel">
 
         <div class="carousel-inner img_banners">
-            <a href="#">
-                <div class="carousel-item active">
-                    <img src="{{ asset('ecommerce/banners/ban_3.png') }}" class="d-block w-100" alt="">
-                </div>
-            </a>
-        </div>
+            @foreach ($nas_slide as $item)
+                 @if ($item->seccion === 'NAS_SLIDE')
+                    @if ($item->tipo === 'imagen')
+                        <a href="{{ $item->link }}">
+                            <img src="{{asset('noticias/'.$item->multimedia) }}" class="d-block w-100" alt="{{ $item->titulo }}">
+                        </a>
+                    @elseif ($item->tipo === 'Video')
+                        <video controls autoplay muted>
+                            <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
+                        </video>
+                    @endif
+                 @endif
+            @endforeach
+         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

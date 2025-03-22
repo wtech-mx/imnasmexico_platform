@@ -10,9 +10,9 @@
                 <div class="col-12 my-auto">
                     <a href="">
                         @if ($producto_popular->imagen_principal == NULL)
-                        <div class="mx-auto img_grid" style="background: url('{{ asset('ecommerce/Isotipo_negro.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                        <div class="mx-auto img_grid" style="background: url('{{ asset('ecommerce/logo_nas.png') }}') #ffffff00 50% / contain no-repeat;"></div>
                         @else
-                        <div class="mx-auto img_grid" style="background: url(&quot;{{ asset('imagen_principal/empresa' . $empresa->id . '/' . $producto_popular->imagen_principal) }}&quot;) #ffffff00 50% / contain no-repeat;"></div>
+                        <div class="mx-auto img_grid" style="background: url(&quot;{{$product->imagenes}}&quot;) #ffffff00 50% / contain no-repeat;"></div>
                         @endif
                     </a>
                 </div>
@@ -61,23 +61,4 @@
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const productos = @json($productos_populares);
 
-        productos.forEach(producto => {
-            fetch(`/odoo/stock/${producto.id_woocommerce}`)
-                .then(response => response.json())
-                .then(data => {
-                    const productoElement = document.getElementById(`producto-${producto.id}`);
-                    if (data.stock <= 0) {
-                        const agotadoDiv = document.createElement('div');
-                        agotadoDiv.classList.add('etiqueta_grid_product');
-                        agotadoDiv.innerHTML = '<p class="text-center texto_etiqueta_grid">Agotado</p>';
-                        productoElement.prepend(agotadoDiv);
-                    }
-                })
-                .catch(error => console.error('Error fetching stock:', error));
-        });
-    });
-</script>

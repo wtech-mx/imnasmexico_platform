@@ -47,10 +47,21 @@ class ProductsController extends Controller
     }
 
     public function index(Request $request){
-        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
+        $products = Products::orderBy('id','DESC')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
+
+        return view('admin.products.index', compact('products'));
+    }
+
+    public function index_cosmica(Request $request){
+        $products = Products::orderBy('id','DESC')->where('categoria', 'Cosmica')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
+
+        return view('admin.products.index_cosmica', compact('products'));
+    }
+
+    public function index_tiendita(Request $request){
         $productsTiendita = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Tiendita')->get();
 
-        return view('admin.products.index', compact('products','productsTiendita'));
+        return view('admin.products.index_tiendita', compact('productsTiendita'));
     }
 
     public function index_bundle(Request $request){

@@ -9,12 +9,15 @@ use App\Models\BannersTienda;
 use App\Models\Categorias;
 use App\Models\ProductosStock;
 use App\Models\SubCategorias;
+use App\Models\Noticias;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Doctrine\Inflector\InflectorFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
+
 use Illuminate\Support\Facades\Response;
 
 class TiendaController extends Controller
@@ -85,10 +88,11 @@ class TiendaController extends Controller
         }
 
         $producto = Products::inRandomOrder()->first();
-
         $productos_categoria = Products::take(10)->get();
+        $nas_slide = Noticias::where('seccion', '=', 'NAS_SLIDE')->get();
+        $banner_slide = Noticias::where('seccion', '=', 'NAS_BANNER')->get();
 
-        return view('shop.ecommerce', compact('productos_populares', 'producto', 'productos_categoria'));
+        return view('shop.ecommerce', compact('productos_populares', 'producto', 'productos_categoria','nas_slide','banner_slide'));
     }
 
     public function generateFeed()

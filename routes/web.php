@@ -602,6 +602,9 @@ Route::group(['middleware' => ['auth']], function() {
 
      // =============== M O D U L O   WEB PAGE ===============================
      Route::get('/admin/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
+     Route::get('/admin/products/cosmica', [App\Http\Controllers\ProductsController::class, 'index_cosmica'])->name('products.index_cosmica');
+     Route::get('/admin/products/tiendita', [App\Http\Controllers\ProductsController::class, 'index_tiendita'])->name('products.index_tiendita');
+
      Route::get('/admin/products/bundle', [App\Http\Controllers\ProductsController::class, 'index_bundle'])->name('bundle.index');
      Route::patch('admin/products/update-estatus/{id}', [App\Http\Controllers\ProductsController::class, 'update_estatus'])->name('products.update_estatus');
      Route::get('/admin/products/create/bundle', [App\Http\Controllers\ProductsController::class, 'create_bundle'])->name('bundle.create');

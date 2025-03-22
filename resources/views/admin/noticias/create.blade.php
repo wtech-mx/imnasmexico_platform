@@ -96,7 +96,8 @@
                             </span>
                             <select name="seccion" id="seccion" class="form-select d-inline-block" required>
                                 <option value="">Seleccione una opción</option>
-                                <option value="NAS" {{ old('seccion') == 'NAS' ? 'selected' : '' }}>Tienda NAS</option>
+                                <option value="NAS_SLIDE" {{ old('seccion') == 'NAS_SLIDE' ? 'selected' : '' }}>NAS Tienda Slide</option>
+                                <option value="NAS_BANNER" {{ old('seccion') == 'NAS_BANNER' ? 'selected' : '' }}>NAS Banner</option>
                                 <option value="Cosmica" {{ old('seccion') == 'Cosmica' ? 'selected' : '' }}>Tienda Cosmica</option>
                                 <option value="Inicio" {{ old('seccion') == 'Inicio' ? 'selected' : '' }}>Inicio</option>
                                 <option value="Videos_Alumnas" {{ old('seccion') == 'Videos_Alumnas' ? 'selected' : '' }}>Videos_Alumnas</option>
