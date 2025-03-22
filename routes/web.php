@@ -875,7 +875,9 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/perfil/cliente/api/productos-nota/{notaId}', [App\Http\Controllers\PerfilClienteController::class, 'getProductosByNota']);
         Route::get('/perfil/cliente/api/productos', [App\Http\Controllers\PerfilClienteController::class, 'getAllProductos']);
         Route::post('/perfil/cliente/create/reposicion', [App\Http\Controllers\PerfilClienteController::class, 'create_reposicion'])->name('reposicion.create');
-        Route::get('/perfil/cliente/liga/reposicion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'liga_reposicion'])->name('reposicion.liga');
+        Route::get('/perfil/cliente/liga/reposicion/nas/{id}', [App\Http\Controllers\PerfilClienteController::class, 'liga_reposicion'])->name('reposicion.liga');
+        Route::get('/perfil/cliente/liga/reposicion/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'liga_reposicion_cosmica'])->name('reposicion_cosmica.liga');
+        Route::patch('/perfil/cliente/update/liga/reposicion/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'liga_reposicion_update'])->name('reposicion_update.liga');
         // =============== M O D U L O  C O T I Z A C I O N  E X P O ===============================
         Route::get('/cotizacion/expo/index', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_expo'])->name('corizacion_expo.index');
         Route::get('/cotizacion/expo/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador_expo'])->name('corizacion_expo.buscador');

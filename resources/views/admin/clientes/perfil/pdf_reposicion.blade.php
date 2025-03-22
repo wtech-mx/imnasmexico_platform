@@ -97,7 +97,7 @@
                            <p class="text-left"> <strong>FIRMA</strong></p>
                         </div>
 
-                        <form method="POST" class="row" action="" enctype="multipart/form-data" role="form">
+                        <form method="POST" class="row" action="{{ route('reposicion_update.liga', $pedido->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="col-12">

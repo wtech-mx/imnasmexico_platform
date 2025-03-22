@@ -56,17 +56,24 @@
                                     Cancelada
                                 @else
                                     @if ($nota->estatus_reposicion ==  'Aprobada')
-                                        <label class="badge" style="color: #9fe300;background-color: #9fe30048;">Aprobada</label>
+                                        <label class="badge" style="color: #719f07;background-color: #9fe30061;">Aprobada</label>
                                     @else
                                         <label class="badge" style="color: #636363;background-color: #5f5f5f40;">Pendiente de aprobación</label>
                                     @endif
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('reposicion.liga', ['id' => $nota->id]) }}">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                @if ($nota->estatus_reposicion == 'Pendiente')
+                                @if ($nota->id_reposicion_nas == null)
+                                    <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('reposicion_cosmica.liga', ['id' => $nota->id]) }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                @elseif ($nota->id_reposicion_cosmica == null)
+                                    <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('reposicion.liga', ['id' => $nota->id]) }}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                @endif
+
+                                @if ($nota->estatus_reposicion == 'Aprobada')
                                     <a class="btn btn-xs btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#guiaModal{{$nota->id}}">
                                         <i class="fa fa-file"></i>
                                     </a>
@@ -112,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     data.forEach(nota => {
                         const option = document.createElement('option');
                         option.value = nota.id;
-                        option.textContent = `Nota #${nota.id} - ${nota.descripcion || 'Sin descripción'}`;
+                        option.textContent = `Nota ${nota.folio} - ${nota.fecha}`;
                         notasSelect.appendChild(option);
                     });
                 })
@@ -148,13 +155,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                 // Crear el select de reemplazo
                                 let selectOptions = '<option value="">Seleccione un producto de reemplazo</option>';
                                 productosDisponibles.forEach(productoDisponible => {
-                                    selectOptions += `<option value="${productoDisponible.id}">${productoDisponible.nombre}</option>`;
+                                    selectOptions += `<option value="${productoDisponible.id}">${productoDisponible.id} ${productoDisponible.nombre}</option>`;
                                 });
 
                                 div.innerHTML = `
                                     <div class="row">
                                         <h4 for="producto_${producto.id}">${producto.cantidad} - ${producto.producto}</h4>
-                                        <input type="hidden" name="productos[${producto.id}][original]" value="${producto.id}">
+                                        <input type="hidden" name="productos[${producto.id}][original]" value="${producto.id_producto}">
                                         <div class="col-6">
                                             <select name="productos[${producto.id}][reemplazo]" class="form-select">
                                                 ${selectOptions}

@@ -822,6 +822,10 @@ class CotizacionCosmicaController extends Controller
             $file->move($path, $fileName);
             $nota->doc_guia = $fileName;
         }
+        if ($nota->estatus_cotizacion == NULL) {
+            $nota->estatus_cotizacion = 'Aprobada';
+            $nota->fecha_aprobada = date("Y-m-d");
+        }
         $nota->save();
 
         return redirect()->back()->with('success', 'Se ha actualizada');

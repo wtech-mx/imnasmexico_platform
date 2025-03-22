@@ -318,7 +318,11 @@ class PerfilClienteController extends Controller
         $notas_productos->estatus_reposicion = 'Pendiente';
         $notas_productos->nota_reposicion = $request->get('nota_reposicion');
         $notas_productos->id_reposicion_user = auth()->user()->id;
-        $notas_productos->id_reposicion_nas = $request->notas;
+        if($request->opcion == 'Cosmica'){
+            $notas_productos->id_reposicion_cosmica = $request->notas;
+        }else{
+            $notas_productos->id_reposicion_nas = $request->notas;
+        }
         $tipoNota = $notas_productos->tipo_nota;
 
         // Obtener todos los folios del tipo de nota específico
@@ -380,10 +384,53 @@ class PerfilClienteController extends Controller
         return view('admin.clientes.perfil.pdf_reposicion', compact('pedido', 'pedido_productos', 'pedido_original', 'pedido_original_productos'));
     }
 
+    public function liga_reposicion_cosmica($id){
+        $pedido = NotasProductosCosmica::where('id', $id)->first();
+        $pedido_productos = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
+
+        $pedido_original = NotasProductosCosmica::where('id', $pedido->id_reposicion_cosmica)->first();
+        $pedido_original_productos = ProductosNotasCosmica::where('id_notas_productos', $pedido->id_reposicion_cosmica)->get();
+        return view('admin.clientes.perfil.pdf_reposicion', compact('pedido', 'pedido_productos', 'pedido_original', 'pedido_original_productos'));
+    }
+
+    public function liga_reposicion_update(Request $request, $id)
+    {
+
+        $dominio = $request->getHost();
+        $today =  date('Y-m-d');
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/firma_pedido/');
+        }else{
+            $ruta_estandar = public_path() . '/firma_pedido/';
+        }
+
+        if (!file_exists($ruta_estandar)) {
+            mkdir($ruta_estandar, 0777, true);
+        }
+
+        $firma = NotasProductosCosmica::find($id);
+        $image_parts = explode(";base64,", $request->signed);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $signature = uniqid() . '.'.$image_type;
+        $file = $ruta_estandar . $signature;
+
+        file_put_contents($file, $image_base64);
+
+        $firma->firma_reposicion = $signature;
+        $firma->fecha_reposicion = date("Y-m-d H:i:s");
+        $firma->estatus_reposicion = 'Aprobada';
+        $firma->update();
+
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+
+    }
+
     public function getNotasCosmicaByUsuario($id)
     {
         // Obtener las notas de la tabla notas_productos_cosmica por id_usuario
-        $notasCosmica = NotasProductosCosmica::where('id_usuario', $id)->get();
+        $notasCosmica = NotasProductosCosmica::where('id_usuario', $id)->where('tipo_nota', '=', 'Cotizacion')->get();
 
         // Retornar las notas como JSON
         return response()->json($notasCosmica);
