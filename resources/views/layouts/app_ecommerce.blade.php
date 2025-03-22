@@ -43,7 +43,7 @@
     <!-- ligthbox  -->
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/lightbox.min.css') }}">
 
-    <link href="{{ asset('assets/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{asset('assets/ecommerce/css/btn_flotante.css')}}" rel="stylesheet" />
 
 
@@ -333,6 +333,35 @@ $(document).ready(function() {
                         }
                     }
                 });
+
+                $("#loop_ofertasPromos").owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    autoplay: false,
+                    autoplayTimeout: 9000,
+                    autoplayHoverPause: true,
+                    responsive: {
+                        0: {
+                            items: 2
+                        },
+                        576: {
+                            items: 2
+                        },
+                        676: {
+                            items: 3
+                        },
+                        768: {
+                            items: 3 // 📌 Ajuste en pantallas de 768px
+                        },
+                        950: {  // 📌 Nuevo breakpoint para pantallas de 900px
+                            items: 4
+                        },
+                        1200: {
+                            items: 4
+                        }
+                    }
+                });
+
 
                 // Inicializar el segundo carrusel (Departamentos)
                 $("#departmentsCarousel").owlCarousel({

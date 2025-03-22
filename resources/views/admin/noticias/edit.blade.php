@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="edit_noticia{{$item->id}}">Crear Noticia</h5>
+                <h5 class="modal-title" id="edit_noticia{{$item->id}}">Editar Noticia</h5>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
@@ -97,9 +97,14 @@
                             </span>
                             <select name="seccion" id="seccion" class="form-select d-inline-block" value="{{ $item->id }}">
                                 <option selected>{{ $item->seccion }}</option>
+                                <option value="NAS_SLIDE" {{ old('seccion') == 'NAS_SLIDE' ? 'selected' : '' }}>NAS Tienda Slide</option>
+                                <option value="NAS_BANNER" {{ old('seccion') == 'NAS_BANNER' ? 'selected' : '' }}>NAS Banner</option>
+                                <option value="Cosmica" {{ old('seccion') == 'Cosmica' ? 'selected' : '' }}>Tienda Cosmica</option>
                                 <option value="Inicio" {{ old('seccion') == 'Inicio' ? 'selected' : '' }}>Inicio</option>
                                 <option value="Videos_Alumnas" {{ old('seccion') == 'Videos_Alumnas' ? 'selected' : '' }}>Videos_Alumnas</option>
                                 <option value="Videos_Productos" {{ old('seccion') == 'Videos_Productos' ? 'selected' : '' }}>Videos_Productos</option>
+                                <option value="Galeria Cursos" {{ old('seccion') == 'Galeria Cursos' ? 'selected' : '' }}>Galeria Cursos</option>
+
                             </select>
                         </div>
                     </div>

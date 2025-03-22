@@ -6,7 +6,7 @@
 
 </style>
 
-<header class="py-3 border-bottom bg-black fixed-top" style="height: 100px;">
+<header class="py-3 border-bottom fixed-top" style="height: 100px;background-color: #EBDBDB">
     <div class="container d-flex align-items-center justify-content-between">
 
         <!-- LOGO -->
@@ -34,7 +34,7 @@
             <ul class="nav flex-row d-flex align-items-center">
                 <li class="nav-item">
                     <a href="{{ route('cart.index') }}" class="nav-link px-1 px-md-2 px-lg-2">
-                        <i class="text-white icons_header bi bi-cart2"></i>
+                        <i class=" icons_header bi bi-cart2" style="color: #875053"></i>
                         <span class="badge rounded-pill bg-danger" id="contador-carrito">
                             {{ session('cart') ? count(session('cart')) : 0 }}
                         </span>
@@ -48,12 +48,12 @@
                     </a> --}}
 
                 <li class="nav-item">
-                    <a target="_blank" href="https://maps.app.goo.gl/bgpY7t7DiifF4KH6A" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header text-white">
-                        <i class="text-white icons_header bi bi-geo-alt"></i></a>
+                    <a target="_blank" href="https://maps.app.goo.gl/bgpY7t7DiifF4KH6A" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header" style="color: #875053">
+                        <i class=" icons_header bi bi-geo-alt" style="color: #875053""></i></a>
                 </li>
                 <li class="nav-item">
 
-                    <a target="_blank" href="https://maps.app.goo.gl/bgpY7t7DiifF4KH6A" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header text-white">
+                    <a target="_blank" href="https://maps.app.goo.gl/bgpY7t7DiifF4KH6A" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header"  style="color: #875053">
                          Castilla 136 <br> Álamos, CDMX
                     </a>
                 </li>
