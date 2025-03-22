@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Products Nas
+    Products tiendita
 @endsection
 
 @section('css')
@@ -15,13 +15,13 @@
       <div class="row">
         <div class="col">
           <div class="card">
-            <!-- Card header -->
 
             @include('admin.products.botones')
 
-                <div class="table-responsive p-4">
-                    <form id="barcodeForm">
-                        <table class="table table-flush" id="datatable-search">
+            <div class="table-responsive p-4">
+                <form id="barcodeForm">
+
+                            <table class="table table-flush" id="datatable-search">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>#</th>
@@ -29,11 +29,12 @@
                                         <th>Foto</th>
                                         <th>Nombre</th>
                                         <th>Precio Normal</th>
+                                        <th>Categoria</th>
                                         <th>Stock</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                @foreach ($products as $product)
+                                @foreach ($productsTiendita as $product)
                                 @php
                                     $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
                                     $precio_normal = number_format($product->precio_normal, 0, '.', ',');
@@ -49,6 +50,7 @@
                                         SKU: {{ $product->sku }} <br>
                                     </td>
                                     <td>${{ $precio_normal }}</td>
+                                    <td>{{ $product->categoria }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>
 
@@ -73,10 +75,10 @@
                                 @include('admin.products.modal_update')
                                 @endforeach
 
-                        </table>
-                        <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
-                    </form>
-                </div>
+                            </table>
+                            <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
+                </form>
+            </div>
 
           </div>
         </div>
@@ -326,17 +328,11 @@
                   if (response) {
                       alert('Producto actualizado con éxito');
 
-                      // Actualizar solo los campos necesarios en la fila del producto
-                      $('#productRow' + response.id + ' td:nth-child(3)').html(`
-                          ${response.nombre} <br>
-                          SKU: ${response.sku}
-                      `);
-                      $('#productRow' + response.id + ' td:nth-child(4)').text(`$${response.precio_normal}`);
-                      $('#productRow' + response.id + ' td:nth-child(5)').text(response.stock);
-
-                      // Mantener los botones de acciones
-                      let actions = $('#productRow' + response.id + ' td:nth-child(6)').html();
-                      $('#productRow' + response.id + ' td:nth-child(6)').html(actions);
+                      $('#productRow' + response.id + ' td:nth-child(2)').text(response.imagenes);
+                      $('#productRow' + response.id + ' td:nth-child(3)').text(response.nombre);
+                      $('#productRow' + response.id + ' td:nth-child(4)').text(response.precio_normal);
+                      $('#productRow' + response.id + ' td:nth-child(5)').text(response.categoria);
+                      $('#productRow' + response.id + ' td:nth-child(6)').text(response.stock);
 
                       // Cerrar modal
                       $('#editProductModal').modal('hide');

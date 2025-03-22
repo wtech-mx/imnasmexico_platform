@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Products Nas
+    Products cosmica
 @endsection
 
 @section('css')
@@ -16,12 +16,12 @@
         <div class="col">
           <div class="card">
             <!-- Card header -->
-
             @include('admin.products.botones')
 
-                <div class="table-responsive p-4">
-                    <form id="barcodeForm">
-                        <table class="table table-flush" id="datatable-search">
+            <div class="table-responsive p-4">
+                <form id="barcodeForm">
+
+                            <table class="table table-flush" id="datatable-search">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>#</th>
@@ -73,10 +73,10 @@
                                 @include('admin.products.modal_update')
                                 @endforeach
 
-                        </table>
-                        <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
-                    </form>
-                </div>
+                            </table>
+                            <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
+                </form>
+            </div>
 
           </div>
         </div>
