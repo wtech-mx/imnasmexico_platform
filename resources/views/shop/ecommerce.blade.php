@@ -13,22 +13,11 @@
     <div id="carouselExample" class="carousel slide" data-bs-interval="4000" data-bs-ride="carousel">
 
         <div class="carousel-inner img_banners">
-            @php
-                $activeAdded = false; // Asegurar que solo un elemento tenga la clase 'active'
-            @endphp
-
-            @foreach ($banners as $banner)
-                @if (is_null($banner->orden) || $banner->orden != 0) {{-- Mostrar si es NULL o distinto de 0 --}}
-                    <a href="{{$banner->url}}">
-                        <div class="carousel-item {{ !$activeAdded ? 'active' : '' }}">
-                            <img src="{{ asset('/banners/empresa1/' . $banner->imagen) }}" class="d-block w-100" alt="">
-                        </div>
-                    </a>
-                    @php
-                        $activeAdded = true; // Marcar el primer elemento activo
-                    @endphp
-                @endif
-            @endforeach
+            <a href="#">
+                <div class="carousel-item active">
+                    <img src="{{ asset('ecommerce/banners/ban_3.png') }}" class="d-block w-100" alt="">
+                </div>
+            </a>
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

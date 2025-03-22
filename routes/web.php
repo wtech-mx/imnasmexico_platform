@@ -112,6 +112,27 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+
+// =============== E C O M M E C E   N A S===============================
+
+Route::get('/tienda/nas', [App\Http\Controllers\TiendaController::class, 'index_ecommerce'])->name('tienda_online.index');
+Route::get('/tienda/nas/aviso-privacidad', [App\Http\Controllers\TiendaController::class, 'aviso'])->name('aviso.index');
+Route::get('/tienda/nas/terminos-y-condiciones', [App\Http\Controllers\TiendaController::class, 'terminos'])->name('terminos.index');
+Route::get('/tienda/nas/tienda/feedGoogle.xml', [App\Http\Controllers\TiendaController::class, 'generateFeed'])->name('generateFeed');
+Route::get('/tienda/nas/tienda/producto/{slug}', [App\Http\Controllers\TiendaController::class, 'single_product'])->name('tienda_online.single');
+Route::get('/tienda/nas/tienda/categories/{slug}', [App\Http\Controllers\TiendaController::class, 'categories'])->name('tienda_online.categories');
+Route::get('/tienda/nas/filter', [App\Http\Controllers\TiendaController::class, 'filter'])->name('tienda_online.filter');
+
+Route::post('/tienda/nas/agregar-al-carrito', [App\Http\Controllers\TiendaController::class, 'agregar'])->name('carrito.agregar');
+Route::post('/tienda/nas/actualizar-carrito', [App\Http\Controllers\TiendaController::class, 'actualizar'])->name('carrito.actualizar');
+Route::post('/tienda/nas/cart/update', [App\Http\Controllers\TiendaController::class, 'update'])->name('cart.update');
+Route::post('/tienda/nas/cart/remove', [App\Http\Controllers\TiendaController::class, 'remove'])->name('cart.remove');
+Route::get('/tienda/nas/tienda/nas/tienda/cart', [App\Http\Controllers\TiendaController::class, 'cart'])->name('cart.index');
+Route::get('/tienda/nas/tienda/buscador', [App\Http\Controllers\TiendaController::class, 'buscador'])->name('tienda_online.buscador');
+Route::get('/tienda/nas/filtrar-productos', [App\Http\Controllers\TiendaController::class, 'filtrarPorCategoria'])->name('productos.filtrar');
+Route::get('/tienda/nas/buscar-productos', [App\Http\Controllers\TiendaController::class, 'buscar'])->name('productos.buscar');
+
+
 // =============== E C O M M E R C E C O S M I C A ===============================
 
 Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');

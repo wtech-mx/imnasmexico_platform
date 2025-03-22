@@ -9,22 +9,17 @@
 
     <!-- Owl Carousel -->
     <div id="departmentsCarousel" class="owl-carousel">
-        @foreach ($categorias as $categoria)
-            @if (trim($categoria->nombre) === "Lacteos" || trim($categoria->nombre) === "Verduras" || trim($categoria->nombre) === "Sin categoria")
-                @continue
-            @endif
 
-            <a href="{{ route('tienda_online.categories', $categoria->slug) }}" style="text-decoration: none;">
+            <a href="" style="text-decoration: none;">
                 <div class="item">
-                    <div class="container_categories" style="background-color: {{$categoria->color}}">
-                        <div class="container_img_box mx-auto img_categories_2" style="background: url('{{ asset('categorias/'.$categoria->imagen) }}') #ffffff00  50% / contain no-repeat;"></div>
+                    <div class="container_categories" style="background-color: ">
+                        <div class="container_img_box mx-auto img_categories_2" style=""></div>
                         <h4 class="text-center text-dark title_categories">
-                            {{$categoria->nombre}}
+
                         </h4>
                     </div>
                 </div>
             </a>
-        @endforeach
     </div>
 
 </div>

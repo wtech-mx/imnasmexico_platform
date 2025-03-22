@@ -11,7 +11,7 @@
 
         <!-- LOGO -->
         <a href="{{route("tienda_online.index")}}" class="me-3">
-            <img class="img_logo_header" src="{{ asset('logo/empresa1/' . $empresa->logo) }}" alt="" style="max-width: 150px;">
+            <img class="img_logo_header" src="{{ asset('ecommerce/logo_nas.png') }}" alt="" style="max-width: 100px;">
         </a>
 
         <!-- BUSCADOR EN EL CENTRO (Visible en PC) -->
@@ -48,13 +48,13 @@
                     </a> --}}
 
                 <li class="nav-item">
-                    <a target="_blank" href="https://maps.app.goo.gl/yZsBNo6V23KsJQdp7" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header text-white">
+                    <a target="_blank" href="https://maps.app.goo.gl/bgpY7t7DiifF4KH6A" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header text-white">
                         <i class="text-white icons_header bi bi-geo-alt"></i></a>
                 </li>
                 <li class="nav-item">
 
-                    <a target="_blank" href="https://maps.app.goo.gl/yZsBNo6V23KsJQdp7" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header text-white">
-                         Mérida no. 64, <br> Roma Nte., CDMX
+                    <a target="_blank" href="https://maps.app.goo.gl/bgpY7t7DiifF4KH6A" class="nav-link px-1 px-md-2 px-lg-2 text_ubi_header text-white">
+                         Castilla 136 <br> Álamos, CDMX
                     </a>
                 </li>
             </ul>
@@ -75,16 +75,7 @@
                     <li class="nav-item">
                         <a href="{{ route('tienda_online.filter') }}" class="nav-link text-dark nav_header active fw-bold" style="font-family: 'Roboto_Regular';">Productos</a>
                     </li>
-                    @foreach ($categorias as $categoria)
-                        @if (trim($categoria->nombre) === "Lacteos" || trim($categoria->nombre) === "Verduras" || trim($categoria->nombre) === "Sin categoria")
-                            @continue
-                        @endif
-                        <li class="nav-item fw-bolder" style="font-family: 'Roboto_Regular';">
-                            <a href="{{ route('tienda_online.categories', $categoria->slug) }}" class="nav-link text-dark nav_header">
-                                {{ $categoria->nombre }}
-                            </a>
-                        </li>
-                    @endforeach
+
                 </ul>
             </div>
         </div>
