@@ -98,7 +98,7 @@
     <div class="card">
         <div class="card-header pb-0 p-3">
             <div class="d-flex justify-content-between">
-                <h6 class="mb-0">Comisiones venta kits</h6>
+                <h6 class="mb-0">Comisiones ventas</h6>
             </div>
         </div>
         <div class="card-body p-3">
@@ -114,6 +114,7 @@
             <div class="mt-3">
                 <p><strong>Total de Ventas:</strong> ${{ number_format($totalVentas, 2) }}</p>
                 <p><strong>Comisión Grupal:</strong> ${{ number_format($comisionGrupal, 2) }}</p>
+                <a class="btn btn-warning" href="{{ route('comision_kit.imprimir') }}" target="_blank">Imprimir</a>
             </div>
         </div>
     </div>
