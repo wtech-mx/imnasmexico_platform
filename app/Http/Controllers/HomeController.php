@@ -183,7 +183,12 @@ class HomeController extends Controller
                 $endOfWeek = Carbon::now()->endOfWeek();
 
                 $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
-                ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
+                ->where('tipo_nota', 'Cotizacion')
+                ->whereDoesntHave('productos', function ($query) {
+                    $query->where('id_producto', 1989);
+                })
+                ->orderBy('id', 'DESC')
+                ->get();
 
                 $totalVentas = $notasAprobadasCosmicaComision->sum('total'); // Asumiendo que la columna 'total' contiene el monto de cada venta
 

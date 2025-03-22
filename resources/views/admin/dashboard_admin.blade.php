@@ -268,30 +268,31 @@
     </div> --}}
 
     @can('comisiones-kits')
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header pb-0 p-3">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-0">Comisiones venta kits</h6>
-                </div>
-            </div>
-            <div class="card-body p-3">
-                <p class="text-center">
-                    <img id="cerdito" src="{{ asset('assets/cam/piggy-bank.png') }}" alt="Cerdito" style="width: 100px; position: relative; top: 0;">
-                </p>
-                <div class="progress mt-4" style="height: 30px; position: relative;">
-
-                    <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        <span id="progress-text" style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold;">0%</span>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-0">Comisiones venta kits</h6>
                     </div>
                 </div>
-                <div class="mt-3">
-                    <p><strong>Total de Ventas:</strong> ${{ number_format($totalVentas, 2) }}</p>
-                    <p><strong>Comisión Grupal:</strong> ${{ number_format($comisionGrupal, 2) }}</p>
+                <div class="card-body p-3">
+                    <p class="text-center">
+                        <img id="cerdito" src="{{ asset('assets/cam/piggy-bank.png') }}" alt="Cerdito" style="width: 100px; position: relative; top: 0;">
+                    </p>
+                    <div class="progress mt-4" style="height: 30px; position: relative;">
+
+                        <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <span id="progress-text" style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold;">0%</span>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <p><strong>Total de Ventas:</strong> ${{ number_format($totalVentas, 2) }}</p>
+                        <p><strong>Comisión Grupal:</strong> ${{ number_format($comisionGrupal, 2) }}</p>
+                        <a class="btn btn-warning" href="{{ route('comision_kit.imprimir') }}" target="_blank">Imprimir</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endcan
 
     <div class="col-lg-6">

@@ -14,7 +14,7 @@
             top: -160px;
             right: 0px;
             height: 100px;
-            background-color: #836262;
+            background-color: #322338;
             color: #fff;
             text-align: center;
         }
@@ -30,7 +30,7 @@
             bottom: -50px;
             right: 0px;
             height: 40px;
-            border-bottom: 2px solid #836262;
+            border-bottom: 2px solid #322338;
         }
         footer .page:after {
             content: counter(page);
@@ -125,7 +125,6 @@
 <body>
   <header>
     <h1>Comisiones kits</h1>
-    <h2>{{$user_comision_kit->name}}</h2>
   </header>
 
   <footer>
@@ -146,243 +145,41 @@
   </footer>
 
   <div id="content">
-    @php
-        $mitad = $user_comision_kit->comision_kit/2;
-    @endphp
-    <span class="badge rounded-pill text-white" style="background:rgba(24, 160, 184, 0.397)">Ventas individuales: <b>${{$user_comision_kit->comision_kit}}</b></span>
-    <span class="badge rounded-pill text-white " style="background:rgba(137, 43, 226, 0.295)">Ventas compartidas: <b>${{$mitad}}</b></span>
-    <span class="badge rounded-pill text-white " style="background:#b8184b65">Ventas kits nuevos</span>
+@php
+        $comisionGrupal = 0;
+    if ($totalVentas >= 60000 && $totalVentas <= 80000) {
+        $comisionGrupal = 1000;
+    } elseif ($totalVentas >= 100000 && $totalVentas <= 149999) {
+        $comisionGrupal = 2000;
+    } elseif ($totalVentas >= 150000) {
+        $comisionGrupal = 3000;
+    }
+@endphp
+    <h2 class="text-center">Ventas: <b>${{number_format($totalVentas, 2)}}</b></h2>
+    <h3 class="text-center">Comision: <b>${{number_format($comisionGrupal, 2)}}</b></h3>
 
     <table class="table table-bordered border-primary">
-        <thead class="text-center" style="background-color: #836262; color: #fff">
+        <thead class="text-center" style="background-color: #322338; color: #fff">
             <tr>
                 <th>Folio</th>
-                <th>kits</th>
+                <th>Vendedora</th>
                 <th>Subtotal</th>
                 <th>Descuento</th>
                 <th>Total</th>
             </tr>
         </thead>
         <tbody class="text-center">
-            @php
-                $notas_nas_individual_cosmica = 0;
-                $notas_nas_comp_cosmica = 0;
-                $notas_nas_comp2_cosmica = 0;
-                $sum_comp_cosmica = 0;
-                $notas_nas_individual_pares_cosmica = 0;
-                $comision_comp_cosmica = 0;
-                $notas_nas_compartida_pares_cosmica = 0;
-                $division_comp_cosmica = 0;
-                $comision_cosmica = 0;
-                $comision_uno_cosmica = 0;
-
-                $suma_individual = 0;
-                $suma_compartidas = 0;
-            @endphp
-                {{-- C O M I S I O N E S  C O S M I C A --}}
                 @foreach ($notasAprobadasCosmicaComision as $notas)
-                    @if ($notas->id_admin == $user_comision_kit->id && $notas->id_admin_venta == $user_comision_kit->id)
-                        @php
-                            $notas_nas_individual_cosmica += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
-                        @endphp
-                    @endif
-                    @if ($notas->id_admin == $user_comision_kit->id && $notas->id_admin_venta !== $user_comision_kit->id)
-                        @php
-                            $notas_nas_comp_cosmica += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
-                        @endphp
-                    @endif
-                    @if ($notas->id_admin !== $user_comision_kit->id && $notas->id_admin_venta == $user_comision_kit->id)
-                        @php
-                            $notas_nas_comp2_cosmica += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
-                        @endphp
-                    @endif
-                    @php
-                        $sum_comp_cosmica = $notas_nas_comp_cosmica + $notas_nas_comp2_cosmica;
-
-                        $notas_nas_individual_pares_cosmica = $notas_nas_individual_cosmica;
-                        if ($notas_nas_individual_pares_cosmica % 2 != 0) {
-                            $notas_nas_individual_pares_cosmica--; // Reducir en 1 si es impar
-                        }
-
-                        $division = $notas_nas_individual_pares_cosmica / 2;
-                        $comision_cosmica = $division * $user_comision_kit->comision_kit;
-
-                        $notas_nas_compartida_pares_cosmica = $sum_comp_cosmica;
-                        if ($notas_nas_compartida_pares_cosmica % 2 != 0) {
-                            $notas_nas_compartida_pares_cosmica--; // Reducir en 1 si es impar
-                        }
-                        $comision_comp_cosmica = $user_comision_kit->comision_kit / 2;
-                        $division_comp_cosmica = $notas_nas_compartida_pares_cosmica / 2;
-                        $comision_uno_cosmica = $division_comp_cosmica * $comision_comp_cosmica;
-
-                        $suma_individual = $notas_nas_individual_cosmica;
-                        $suma_compartidas = $sum_comp_cosmica;
-                    @endphp
-                @endforeach
-
-                @foreach ($notasAprobadasCosmicaComision as $notas)
-                    @if ($notas->id_admin == $user_comision_kit->id && $notas->id_admin_venta == $user_comision_kit->id)
-                        <tr style="background-color:rgba(24, 160, 184, 0.397)">
-                            <td class="form-group col-3">Cosmica - {{$notas->folio}}</td>
-                            <td>
-                                @if ($notas->id_kit != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit}} - {{$notas->Kit->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit2 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit2}} - {{$notas->Kit2->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit3 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit3}} - {{$notas->Kit3->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit4 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit4}} - {{$notas->Kit4->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit5 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit5}} - {{$notas->Kit5->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit6 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit6}} - {{$notas->Kit6->nombre}}</li>
-                                @endif
-                            </td>
-                            <td class="form-group col-3">${{$notas->total}}</td>
-                            <td class="form-group col-3">{{$notas->restante}}%</td>
-                            <td class="form-group col-3">${{$notas->subtotal}}</td>
-                        </tr>
-                    @endif
-                    @if ($notas->id_admin == $user_comision_kit->id && $notas->id_admin_venta !== $user_comision_kit->id)
-                        <tr style="background-color:rgba(137, 43, 226, 0.295)">
-                            <td class="form-group col-3">Cosmica - {{$notas->folio}}</td>
-                            <td>
-                                @if ($notas->id_kit != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit}} - {{$notas->Kit->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit2 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit2}} - {{$notas->Kit2->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit3 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit3}} - {{$notas->Kit3->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit4 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit4}} - {{$notas->Kit4->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit5 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit5}} - {{$notas->Kit5->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit6 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit6}} - {{$notas->Kit6->nombre}}</li>
-                                @endif
-                            </td>
-                            <td class="form-group col-3">${{$notas->total}}</td>
-                            <td class="form-group col-3">{{$notas->restante}}%</td>
-                            <td class="form-group col-3">${{$notas->subtotal}}</td>
-                        </tr>
-                    @endif
-                    @if ($notas->id_admin !== $user_comision_kit->id && $notas->id_admin_venta == $user_comision_kit->id)
-                        <tr style="background-color:rgba(137, 43, 226, 0.295)">
-                            <td class="form-group col-3">Cosmica - {{$notas->folio}}</td>
-                            <td>
-                                @if ($notas->id_kit != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit}} - {{$notas->Kit->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit2 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit2}} - {{$notas->Kit2->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit3 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit3}} - {{$notas->Kit3->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit4 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit4}} - {{$notas->Kit4->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit5 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit5}} - {{$notas->Kit5->nombre}}</li>
-                                @endif
-                                @if ($notas->id_kit6 != NULL)
-                                    <li><b>Kit:</b> {{$notas->cantidad_kit6}} - {{$notas->Kit6->nombre}}</li>
-                                @endif
-                            </td>
-                            <td class="form-group col-3">${{$notas->total}}</td>
-                            <td class="form-group col-3">{{$notas->restante}}%</td>
-                            <td class="form-group col-3">${{$notas->subtotal}}</td>
-                        </tr>
-                    @endif
-                @endforeach
-
-                @foreach ($notasAprobadasMatutinoReg as $notas)
-                    <tr style="background-color:#b8184b65">
+                    <tr >
                         <td>{{$notas->folio}}</td>
-                        <td>
-                            @if ($notas->id_kit != NULL)
-                                <li><b>Kit:</b> {{$notas->cantidad_kit}} - {{$notas->Kit->nombre}}</li>
-                            @endif
-                            @if ($notas->id_kit2 != NULL)
-                                <li><b>Kit:</b> {{$notas->cantidad_kit2}} - {{$notas->Kit2->nombre}}</li>
-                            @endif
-                            @if ($notas->id_kit3 != NULL)
-                                <li><b>Kit:</b> {{$notas->cantidad_kit3}} - {{$notas->Kit3->nombre}}</li>
-                            @endif
-                            @if ($notas->id_kit4 != NULL)
-                                <li><b>Kit:</b> {{$notas->cantidad_kit4}} - {{$notas->Kit4->nombre}}</li>
-                            @endif
-                            @if ($notas->id_kit5 != NULL)
-                                <li><b>Kit:</b> {{$notas->cantidad_kit5}} - {{$notas->Kit5->nombre}}</li>
-                            @endif
-                            @if ($notas->id_kit6 != NULL)
-                                <li><b>Kit:</b> {{$notas->cantidad_kit6}} - {{$notas->Kit6->nombre}}</li>
-                            @endif
-                        </td>
-                        <td class="form-group col-3">${{$notas->subtotal}}</td>
+                        <td>{{$notas->Vendido->name}}</td>
+                        <td class="form-group col-3">${{number_format($notas->subtotal, 2)}}</td>
                         <td class="form-group col-3">{{$notas->restante}}%</td>
-                        <td class="form-group col-3">${{$notas->total}}</td>
+                        <td class="form-group col-3">${{number_format($notas->total, 2)}}</td>
                     </tr>
                 @endforeach
         </tbody>
     </table>
-    @php
-        $suma_comisiones_indv = $comision_cosmica;
-        $suma_comisiones_comp = $comision_uno_cosmica;
-        $suma_comisiones = $comision_cosmica + $comision_uno_cosmica;
-        $suma_final = $suma_comisiones + $comision_individual;
-    @endphp
-<div class="card">
-    <div class="card-header">
-        <h5>Resumen de Comisiones</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <p><strong>Comisión Individual:</strong></p>
-            <p class="text-end">${{ number_format($suma_comisiones_indv, 2) }}</p>
-        </div>
-        <div class="row">
-            <p><strong>Comisión Compartida:</strong></p>
-            <p class="text-end">${{ number_format($suma_comisiones_comp, 2) }}</p>
-        </div>
-        <hr>
-        <div class="row">
-            <p><strong>Total Comisiones:</strong></p>
-            <p class="fw-bold text-end">${{ number_format($suma_comisiones, 2) }}</p>
-        </div>
-        <div class="row mt-3 bg-success text-white rounded p-2">
-            <p><strong>Total Ventas:</strong></p>
-            <p class="text-end">${{ number_format($notasAprobadasMatutino, 2) }}</p>
-        </div>
-        <hr>
-        <div class="row">
-            <p><strong>Porcentaje de Comisión:</strong></p>
-            <p class="text-end">{{ $comision * 100 }}%</p>
-        </div>
-        <div class="row">
-            <p><strong>Monto de la Comisión:</strong></p>
-            <p class="fw-bold text-end">${{ number_format($comision_individual, 2) }}</p>
-        </div>
-        <hr>
-        <div class="row">
-            <p><strong>Total de Bonos:</strong></p>
-            <p class="fw-bold text-end">${{ number_format($suma_final, 2) }}</p>
-        </div>
-    </div>
-</div>
-
-
   </div>
 </body>
 </html>

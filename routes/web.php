@@ -321,7 +321,7 @@ Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroI
 Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   C O M I S I O N E S ===============================
-    Route::get('/admin/comision/kit/imprimir/{id}', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
+    Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 
     // =============== M O D U L O  L A B O R A T I O S ===============================
 

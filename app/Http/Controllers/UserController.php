@@ -190,154 +190,21 @@ class UserController extends Controller
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
 
-    public function imprimir($id){
+    public function imprimir(){
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
         $today =  date('d-m-Y');
 
-        $idsPermitidos = [1950, 1949, 1948, 1947, 1946, 1945, 1820];
-
         $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
-        ->where('tipo_nota', '=', 'Cotizacion')
-        ->where(function ($query) use ($id, $idsPermitidos) {
-            $query->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
-                  ->orWhere('id_admin', '=', $id);  // Incluir si está en id_admin
-        }) // Filtrar por id_admin_venta
-        ->where(function ($query) use ($idsPermitidos) {
-            $query->whereNotIn('id_kit', $idsPermitidos)
-                  ->orWhereNotIn('id_kit2', $idsPermitidos)
-                  ->orWhereNotIn('id_kit3', $idsPermitidos)
-                  ->orWhereNotIn('id_kit4', $idsPermitidos)
-                  ->orWhereNotIn('id_kit5', $idsPermitidos)
-                  ->orWhereNotIn('id_kit6', $idsPermitidos);
-        })
-        ->where(function ($query) {
-            $query->whereNotNull('id_kit')
-                  ->orWhereNotNull('id_kit2')
-                  ->orWhereNotNull('id_kit3')
-                  ->orWhereNotNull('id_kit4')
-                  ->orWhereNotNull('id_kit5')
-                  ->orWhereNotNull('id_kit6');
+        ->where('tipo_nota', 'Cotizacion')
+        ->whereDoesntHave('productos', function ($query) {
+            $query->where('id_producto', 1989);
         })
         ->orderBy('id', 'DESC')
         ->get();
+        $totalVentas = $notasAprobadasCosmicaComision->sum('total');
 
-        $notasAprobadasMatutino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
-        ->leftJoin('products as p1', 'notas_productos_cosmica.id_kit', '=', 'p1.id')
-        ->leftJoin('products as p2', 'notas_productos_cosmica.id_kit2', '=', 'p2.id')
-        ->leftJoin('products as p3', 'notas_productos_cosmica.id_kit3', '=', 'p3.id')
-        ->leftJoin('products as p4', 'notas_productos_cosmica.id_kit4', '=', 'p4.id')
-        ->leftJoin('products as p5', 'notas_productos_cosmica.id_kit5', '=', 'p5.id')
-        ->leftJoin('products as p6', 'notas_productos_cosmica.id_kit6', '=', 'p6.id')
-        ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
-        ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
-        ->where(function ($query) use ($id, $idsPermitidos) {
-            $query->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
-                  ->orWhere('id_admin', '=', $id);  // Incluir si está en id_admin
-        })
-        ->selectRaw("
-            SUM(
-                (CASE WHEN id_kit IN (" . implode(',', $idsPermitidos) . ") THEN p1.precio_normal ELSE 0 END +
-                CASE WHEN id_kit2 IN (" . implode(',', $idsPermitidos) . ") THEN p2.precio_normal ELSE 0 END +
-                CASE WHEN id_kit3 IN (" . implode(',', $idsPermitidos) . ") THEN p3.precio_normal ELSE 0 END +
-                CASE WHEN id_kit4 IN (" . implode(',', $idsPermitidos) . ") THEN p4.precio_normal ELSE 0 END +
-                CASE WHEN id_kit5 IN (" . implode(',', $idsPermitidos) . ") THEN p5.precio_normal ELSE 0 END +
-                CASE WHEN id_kit6 IN (" . implode(',', $idsPermitidos) . ") THEN p6.precio_normal ELSE 0 END
-                ) * (1 - COALESCE(notas_productos_cosmica.restante, 0) / 100)
-            ) AS total_precio_kits
-        ")
-        ->value('total_precio_kits');
-
-            $notasAprobadasMatutinoReg = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
-            ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
-            ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
-            ->where(function ($query) use ($id, $idsPermitidos) {
-                $query->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
-                      ->orWhere('id_admin', '=', $id);  // Incluir si está en id_admin
-            })
-            ->where(function ($query) use ($idsPermitidos) {
-                $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit3', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit4', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit5', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit6', $idsPermitidos);
-            })
-            ->get();
-
-        $notasAprobadasVespertino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
-        ->leftJoin('products as p1', 'notas_productos_cosmica.id_kit', '=', 'p1.id')
-        ->leftJoin('products as p2', 'notas_productos_cosmica.id_kit2', '=', 'p2.id')
-        ->leftJoin('products as p3', 'notas_productos_cosmica.id_kit3', '=', 'p3.id')
-        ->leftJoin('products as p4', 'notas_productos_cosmica.id_kit4', '=', 'p4.id')
-        ->leftJoin('products as p5', 'notas_productos_cosmica.id_kit5', '=', 'p5.id')
-        ->leftJoin('products as p6', 'notas_productos_cosmica.id_kit6', '=', 'p6.id')
-        ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
-        ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
-        ->where('users.turno', '=', 'Vespertino')
-        ->selectRaw("
-            SUM(
-                CASE WHEN id_kit IN (" . implode(',', $idsPermitidos) . ") THEN p1.precio_normal ELSE 0 END +
-                CASE WHEN id_kit2 IN (" . implode(',', $idsPermitidos) . ") THEN p2.precio_normal ELSE 0 END +
-                CASE WHEN id_kit3 IN (" . implode(',', $idsPermitidos) . ") THEN p3.precio_normal ELSE 0 END +
-                CASE WHEN id_kit4 IN (" . implode(',', $idsPermitidos) . ") THEN p4.precio_normal ELSE 0 END +
-                CASE WHEN id_kit5 IN (" . implode(',', $idsPermitidos) . ") THEN p5.precio_normal ELSE 0 END +
-                CASE WHEN id_kit6 IN (" . implode(',', $idsPermitidos) . ") THEN p6.precio_normal ELSE 0 END
-            ) AS total_precio_kits
-        ")
-        ->value('total_precio_kits');
-
-        $user_comision_kit = User::where('id', $id)->first();
-
-        $comision = 0;
-        $comisionVespertino = 0;
-
-        if ($notasAprobadasMatutino >= 4000 && $notasAprobadasMatutino <= 5999) {
-            $comision = 0.03;
-        } elseif ($notasAprobadasMatutino >= 6000 && $notasAprobadasMatutino <= 7999) {
-            $comision = 0.04;
-        } elseif ($notasAprobadasMatutino >= 8000 && $notasAprobadasMatutino <= 9999) {
-            $comision = 0.05;
-        } elseif ($notasAprobadasMatutino >= 10000 && $notasAprobadasMatutino <= 14999) {
-            $comision = 0.06;
-        } elseif ($notasAprobadasMatutino >= 15000 && $notasAprobadasMatutino <= 19999) {
-            $comision = 0.07;
-        } elseif ($notasAprobadasMatutino >= 20000) {
-            $comision = 0.08;
-        }
-
-        // Calcular el monto de la comisión
-        $montoComisionVespertino = $notasAprobadasVespertino * $comisionVespertino;
-
-        if ($notasAprobadasVespertino >= 4000 && $notasAprobadasVespertino <= 5999) {
-            $comisionVespertino = 0.03;
-        } elseif ($notasAprobadasVespertino >= 6000 && $notasAprobadasVespertino <= 7999) {
-            $comisionVespertino = 0.04;
-        } elseif ($notasAprobadasVespertino >= 8000 && $notasAprobadasVespertino <= 9999) {
-            $comisionVespertino = 0.05;
-        } elseif ($notasAprobadasVespertino >= 10000 && $notasAprobadasVespertino <= 14999) {
-            $comisionVespertino = 0.06;
-        } elseif ($notasAprobadasVespertino >= 15000 && $notasAprobadasVespertino <= 19999) {
-            $comisionVespertino = 0.07;
-        } elseif ($notasAprobadasVespertino >= 20000) {
-            $comisionVespertino = 0.08;
-        }
-
-        // Calcular el monto de la comisión
-        $montoComisionMatutino = $notasAprobadasMatutino * $comision;
-        $montoComisionVespertino = $notasAprobadasVespertino * $comisionVespertino;
-
-        // Calcular el monto de la comisión individual
-        $user_comisionmatutino = User::where('turno', '=', 'Matutino')->count();
-        $user_comisionvespertino = User::where('turno', '=', 'Vespertino')->count();
-
-        $comision_individual = 0;
-        $comisionVespertino_individual = 0;
-
-        $comision_individual = $montoComisionMatutino;
-        $comisionVespertino_individual = $montoComisionVespertino;
-
-        $pdf = \PDF::loadView('admin.users.pdf_comision_new', compact('today', 'user_comision_kit', 'notasAprobadasMatutinoReg', 'notasAprobadasCosmicaComision', 'notasAprobadasMatutino', 'notasAprobadasVespertino', 'comision', 'comisionVespertino', 'comision_individual', 'comisionVespertino_individual'));
+        $pdf = \PDF::loadView('admin.users.pdf_comision_new', compact('today', 'notasAprobadasCosmicaComision', 'totalVentas'));
        return $pdf->stream();
 
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
