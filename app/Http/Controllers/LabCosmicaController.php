@@ -10,6 +10,7 @@ use App\Models\Products;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use DB;
 
 class LabCosmicaController extends Controller
 {
@@ -368,5 +369,113 @@ class LabCosmicaController extends Controller
         $pdf = \PDF::loadView('admin.laboratorio_cosmica.etiqueta.pdf_reporte', compact('today', 'historial_etiqueta', 'fechaFormateada'));
         //return $pdf->stream();
         return $pdf->download('Reporte etiquetas / '.$today.'.pdf');
+    }
+
+    public function pdfProduccionEstimado(){
+            $today =  date('d-m-Y');
+            $productos = Products::where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Producto')->get(); // Obtener todos los productos
+
+            $resultados = [];
+
+            foreach ($productos as $producto) {
+                // Cantidad de granel por unidad (en litros)
+                $cantidad_granel_por_unidad = $producto->granel_unidad ?? 0;
+
+                // Stock disponible
+                $stock_granel = $this->obtenerStockGranel($producto);
+                $stock_etiquetas = $this->obtenerStockEtiquetas($producto);
+                $stock_envases = $this->obtenerStockEnvases($producto);
+
+                // Calcular máximo de producción posible
+                $max_por_granel = $cantidad_granel_por_unidad > 0 ? floor($stock_granel / ($cantidad_granel_por_unidad / 1000)) : INF;
+                $max_por_etiquetas = min($stock_etiquetas);
+                $max_por_envases = min($stock_envases);
+
+                // La cantidad máxima es el mínimo entre los tres factores
+                $max_producible = min($max_por_granel, $max_por_etiquetas, $max_por_envases);
+
+                $resultados[] = [
+                    'producto' => $producto->nombre,
+                    'max_producible' => $max_producible,
+                    'stock_granel' => $stock_granel,
+                    'stock_envases' => $this->obtenerStockEnvasesConNombres($producto),
+                    'stock_etiquetas' => $this->obtenerStockEtiquetasConNombres($producto)
+                ];
+                $resultados = collect($resultados)->sortByDesc('max_producible')->values()->all();
+            }
+
+        // Generar el PDF
+        $today = date('d-m-Y');
+        $pdf = \PDF::loadView('admin.laboratorio_cosmica.pdf_produccion_estimado', compact('resultados', 'today'));
+        //return $pdf->stream();
+        return $pdf->download('Produccion_Estimada_' . $today . '.pdf');
+    }
+
+    private function obtenerStockGranel($producto)
+    {
+        return DB::table('products')
+            ->where('id', $producto->id)
+            ->sum('conteo_lab');
+    }
+
+    private function obtenerStockEtiquetas($producto){
+        $etiquetas = [];
+
+        if ($producto->estatus_frente) {
+            $etiquetas[] = $producto->etiqueta_frente;
+        }
+        if ($producto->estatus_lateral) {
+            $etiquetas[] = $producto->etiqueta_lateral;
+        }
+        if ($producto->estatus_tapa) {
+            $etiquetas[] = $producto->etiqueta_tapa;
+        }
+        if ($producto->estatus_reversa) {
+            $etiquetas[] = $producto->etiqueta_reversa;
+        }
+
+        return $etiquetas ?: [INF]; // Si no requiere etiquetas, devolver infinito
+    }
+
+    private function obtenerStockEnvases($producto){
+        $envases_ids = DB::table('envases_prosuctos')
+            ->where('id_producto', $producto->id)
+            ->pluck('id_envase');
+
+        $stock_envases = DB::table('envases')
+            ->whereIn('id', $envases_ids)
+            ->pluck('conteo')
+            ->toArray();
+
+        return $stock_envases ?: [INF]; // Si no requiere envases, devolver infinito
+    }
+
+    private function obtenerStockEnvasesConNombres($producto){
+        $envases = \DB::table('envases_prosuctos')
+            ->join('envases', 'envases.id', '=', 'envases_prosuctos.id_envase')
+            ->where('envases_prosuctos.id_producto', $producto->id)
+            ->select('envases.envase', 'envases.conteo')
+            ->get();
+
+        return $envases->pluck('conteo', 'envase')->toArray();
+    }
+
+    private function obtenerStockEtiquetasConNombres($producto){
+        $etiquetas = [];
+
+        if ($producto->estatus_frente) {
+            $etiquetas['Frente'] = $producto->etiqueta_frente;
+        }
+        if ($producto->estatus_lateral) {
+            $etiquetas['Lateral'] = $producto->etiqueta_lateral;
+        }
+        if ($producto->estatus_tapa) {
+            $etiquetas['Tapa'] = $producto->etiqueta_tapa;
+        }
+        if ($producto->estatus_reversa) {
+            $etiquetas['Reversa'] = $producto->etiqueta_reversa;
+        }
+
+        return $etiquetas;
     }
 }
