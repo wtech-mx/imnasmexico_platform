@@ -159,7 +159,7 @@ class ProductsController extends Controller
 
     public function index(Request $request){
         $products = Products::orderBy('id','DESC')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
-        $categorias = Categorias::orderBy('id','DESC')->get();
+        $categorias = Categorias::orderBy('nombre','ASC')->get();
 
         return view('admin.products.index', compact('products','categorias'));
     }
