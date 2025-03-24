@@ -16,6 +16,10 @@
                     <div class="col-sm-12">
                         @if (Route::currentRouteName() == 'peril_cliente.index')
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
+                                <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #322338; color: #ffffff;">
+                                    <i class="fa fa-fw fa-edit"></i> Crear Distribuidora
+                                </a>
+
                                 <h5>Filtro</h5>
                                 <form action="{{ route('peril_cliente.buscador') }}" method="GET" >
                                     <div class="row">
@@ -211,6 +215,7 @@
         </div>
       </div>
 </div>
+@include('cosmica.distribuidoras.modal_create')
 @endsection
 
 @section('datatable')

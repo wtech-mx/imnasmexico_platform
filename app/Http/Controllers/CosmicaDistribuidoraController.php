@@ -139,7 +139,7 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');
         $usercosmika->save();
 
-        return redirect()->back()->with('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('peril_cliente.membresia_cosmica', ['id' => $usercosmika->id_cliente]);
     }
 
     public function update(Request $request,$id){

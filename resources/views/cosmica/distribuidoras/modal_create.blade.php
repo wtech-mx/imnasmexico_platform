@@ -10,7 +10,6 @@
 
         <form method="POST" action="{{ route('distribuidoras.store') }}" enctype="multipart/form-data" role="form">
             @csrf
-
             <div class="modal-body row">
                 <div class="form-group col-6">
                     <label for="name">Nombre(s) *</label>
@@ -74,15 +73,14 @@
                                 <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                             </span>
                             <select name="membresia_estatus" id="membresia_estatus" class="form-select d-inline-block" required>
-                                <option value="">Seleccione una opción</option>
-                                <option value="Activa" {{ old('membresia_estatus') == 'Activa' ? 'selected' : '' }}>Activa</option>
+                                <option value="Activa" {{ old('membresia_estatus') == 'Activa' ? 'selected' : '' }} selected>Activa</option>
                                 <option value="inactiva" {{ old('membresia_estatus') == 'inactiva' ? 'selected' : '' }}>Inactiva</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="membresia_inicio">Membrecia Inicio*</label>
+                        <label for="membresia_inicio">Membrecia Inicio *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
@@ -92,7 +90,7 @@
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="membresia_fin">Membrecia Fin*</label>
+                        <label for="membresia_fin">Membrecia Fin *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
@@ -102,12 +100,12 @@
                     </div>
 
                     <div class="form-group col-4">
-                        <label for="meses_acomulados">Meses acomulados*</label>
+                        <label for="meses_acomulados">Meses acomulados</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/calendarioo.png') }}" alt="" width="35px">
                             </span>
-                            <input id="meses_acomulados" name="meses_acomulados" type="number" class="form-control" required value="{{old('meses_acomulados')}}">@error('meses_acomulados') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input id="meses_acomulados" name="meses_acomulados" type="number" class="form-control" required value="0">@error('meses_acomulados') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -117,22 +115,22 @@
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/tarjeta-de-fidelidad.png') }}" alt="" width="35px">
                             </span>
-                            <input id="puntos_acomulados" name="puntos_acomulados" type="number" class="form-control" required value="{{old('puntos_acomulados')}}">@error('puntos_acomulados') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input id="puntos_acomulados" name="puntos_acomulados" type="number" class="form-control" required value="0">@error('puntos_acomulados') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div class="form-group col-4">
-                        <label for="consumido_totalmes">Consumido Total Mes*</label>
+                        <label for="consumido_totalmes">Consumido Total Mes</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                             </span>
-                            <input id="consumido_totalmes" name="consumido_totalmes" type="text" class="form-control" required value="{{old('consumido_totalmes')}}">@error('consumido_totalmes') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input id="consumido_totalmes" name="consumido_totalmes" type="text" class="form-control" required value="0">@error('consumido_totalmes') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="direccion_local">Direccion del Local</label>
+                        <label for="direccion_local">Direccion del Local *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
@@ -142,13 +140,13 @@
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="direccion_local">Estado</label>
+                        <label for="direccion_local">Estado *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
                             </span>
                             <select class="form-select d-inline-block" data-toggle="select" id="state" name="state" required>
-                                <option value="{{ $item->User->state  }}">{{ $item->User->state  }}</option>
+                                {{-- <option value="{{ $item->User->state  }}">{{ $item->User->state  }}</option> --}}
                                 <option value="">Seleciona Estado</option>
                                 <option value="Aguascalientes">Aguascalientes</option>
                                 <option value="Baja California">Baja California</option>
@@ -193,7 +191,7 @@
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                             </span>
-                            <input id="direccion_foto" name="direccion_foto" type="file" class="form-control" required value="{{old('direccion_foto')}}">@error('direccion_foto') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input id="direccion_foto" name="direccion_foto" type="file" class="form-control" value="{{old('direccion_foto')}}">@error('direccion_foto') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -203,7 +201,7 @@
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/facebook.png') }}" alt="" width="35px">
                             </span>
-                            <input id="direccion_rs_face" name="direccion_rs_face" type="text" class="form-control" required value="{{old('direccion_rs_face')}}">@error('direccion_rs_face') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input id="direccion_rs_face" name="direccion_rs_face" type="text" class="form-control" value="{{old('direccion_rs_face')}}">@error('direccion_rs_face') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
@@ -213,12 +211,12 @@
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/instagram.png') }}" alt="" width="35px">
                             </span>
-                            <input id="direccion_rs_insta" name="direccion_rs_insta" type="text" class="form-control" required value="{{old('direccion_rs_insta')}}">@error('direccion_rs_insta') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <input id="direccion_rs_insta" name="direccion_rs_insta" type="text" class="form-control" value="{{old('direccion_rs_insta')}}">@error('direccion_rs_insta') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div class="form-group col-4">
-                        <label for="direccion_rs_whats">WhatsApp*</label>
+                        <label for="direccion_rs_whats">WhatsApp *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/cam/whatsapp.png') }}" alt="" width="35px">
@@ -231,8 +229,18 @@
 
                     </div>
 
+                    {{-- <div class="form-group col-6">
+                        <label for="direccion_foto">Foto del pago</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="foto_pago" name="foto_pago" type="file" class="form-control" value="{{old('foto_pago')}}">@error('foto_pago') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div> --}}
+
                     <div class="col-6">
-                        <button type="submit" class="btn btn-success w-100" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Actualizar</button>
+                        <button type="submit" class="btn btn-success w-100" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                     </div>
 
             </div>
