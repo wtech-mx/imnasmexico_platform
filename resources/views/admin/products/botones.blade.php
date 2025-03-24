@@ -51,8 +51,8 @@
             </li>
 
             <li class="nav-item" >
-                <a class="nav-link" href="{{ route('index_categrias') }}" style="background: #86ff61a3">
-                    Categorias  <img src="{{ asset('assets/user/icons/productos.png') }}" alt="" width="35px">
+                <a class="nav-link" href="{{ route('index_categrias') }}" style="background: #9affffa3">
+                    Categorias
                 </a>
             </li>
     </ul>

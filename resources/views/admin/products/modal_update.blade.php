@@ -52,13 +52,26 @@
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Categoria</label>
+                                        <label for="name">Marca</label>
                                         <select class="form-control" id="categoria" name="categoria">
                                             <option value="{{ $product->categoria }}">{{ $product->categoria }}</option>
                                             <option value="NAS">NAS</option>
                                             <option value="Cosmica">Cosmica</option>
                                         </select>
                                     </div>
+
+                                    @if(request()->routeIs('products.index'))
+                                        <div class="form-group col-6">
+                                            <label for="categoria">Categoría</label>
+                                            <select class="form-control" id="id_categoria" name="id_categoria">
+                                                @foreach($categorias as $categoria)
+                                                    <option value="{{ $categoria->id }}" {{ $product->id_categoria == $categoria->id ? 'selected' : '' }}>
+                                                        {{ $categoria->nombre }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
 
                                     <div class="form-group col-6">
                                         <label for="name">Stock</label>
