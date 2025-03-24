@@ -81,14 +81,26 @@
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#datatable-search').DataTable({
-            responsive: true,
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
+    $('#datatable-search').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'excel',
+            'pdf',
+            'colvis'
+        ],
+        responsive: true,
+        stateSave: true,
+
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+        }
     });
 </script>
 @endsection
