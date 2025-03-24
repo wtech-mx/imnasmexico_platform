@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cotizacion_cosmica.update', $cotizacion->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('cotizacion_cosmica.update', $cotizacion->id) }}" enctype="multipart/form-data" role="form" id="formulario-cotizacion">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
@@ -197,7 +197,7 @@
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                                 </span>
-                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2">
+                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2 campo-cantidad">
                                                             </div>
                                                         </div>
 
@@ -312,6 +312,23 @@
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
+    document.getElementById('formulario-cotizacion').addEventListener('submit', function(e) {
+    const cantidades = document.querySelectorAll('input[name="campo3[]"]');
+    let error = false;
+
+    cantidades.forEach(input => {
+        const valor = input.value.trim();
+        if (valor === '' || isNaN(valor) || parseInt(valor) <= 0) {
+            error = true;
+        }
+    });
+
+    if (error) {
+        e.preventDefault(); // Cancela el envío del formulario
+        alert('Por favor, asegúrate de ingresar una cantidad válida para cada producto nuevo.');
+    }
+});
+
     document.addEventListener('DOMContentLoaded', function () {
         $('.producto2').select2();
         const productos = @json($cotizacion_productos);
