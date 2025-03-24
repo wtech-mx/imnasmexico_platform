@@ -601,6 +601,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/reporte/imprimir/corte', [App\Http\Controllers\CajaController::class, 'imprimir_corte'])->name('caja.print_corte');
 
      // =============== M O D U L O   WEB PAGE ===============================
+
+     Route::post('/admin/categorias/store', [App\Http\Controllers\ProductsController::class, 'store_categorias'])->name('store_categorias');
+     Route::put('/admin/categorias/{id}', [App\Http\Controllers\ProductsController::class, 'update_categorias'])->name('update_categorias');
+     Route::get('/admin/categorias', [App\Http\Controllers\ProductsController::class, 'index_categrias'])->name('index_categrias');
      Route::get('/admin/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
      Route::get('/admin/products/cosmica', [App\Http\Controllers\ProductsController::class, 'index_cosmica'])->name('products.index_cosmica');
      Route::get('/admin/products/tiendita', [App\Http\Controllers\ProductsController::class, 'index_tiendita'])->name('products.index_tiendita');

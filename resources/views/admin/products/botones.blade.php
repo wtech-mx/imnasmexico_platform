@@ -16,6 +16,10 @@
             </a>
         @endcan
 
+        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_categoria" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+            <i class="fa fa-fw fa-edit"></i> Categorias
+        </a>
+
     </div>
 </div>
 
@@ -45,5 +49,13 @@
                     Kits  <img src="{{ asset('assets/user/icons/productos.png') }}" alt="" width="35px">
                 </a>
             </li>
+
+            <li class="nav-item" >
+                <a class="nav-link" href="{{ route('index_categrias') }}" style="background: #86ff61a3">
+                    Categorias  <img src="{{ asset('assets/user/icons/productos.png') }}" alt="" width="35px">
+                </a>
+            </li>
     </ul>
 </div>
+
+@include('admin.products.modal_categorias')

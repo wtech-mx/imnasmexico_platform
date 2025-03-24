@@ -44,6 +44,7 @@ class Products extends Model
         'precauciones',
         'favorito',
         'estatus',
+        'id_categoria',
     ];
 
     public function ProductosBundleId()
@@ -54,6 +55,11 @@ class Products extends Model
     public function getNombreAttribute($value)
     {
         return trim($value);
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categorias::class, 'id_categoria');
     }
 
 }

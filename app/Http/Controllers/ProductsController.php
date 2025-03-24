@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\ProductosBundleId;
 use App\Models\HistorialStock;
 use App\Models\OrderOnlineCosmica;
+use App\Models\Categorias;
 use App\Models\OrderOnlineNas;
 use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
@@ -19,6 +20,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use DB;
 use Session;
+use Illuminate\Support\Str;
+
 use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
@@ -45,6 +48,114 @@ class ProductsController extends Controller
         // Para mostrar el PDF en el navegador
         return $pdf->stream('codigos_barras_'.$fechaHora.'.pdf');
     }
+
+    public function index_categrias(){
+        $categorias = Categorias::orderBy('id','DESC')->get();
+
+        return view('admin.products.index_categorias', compact('categorias'));
+    }
+
+    public function store_categorias(Request $request)
+    {
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_categorias = base_path('../public_html/plataforma.imnasmexico.com/categorias');
+        } else {
+            $ruta_categorias = public_path() . '/categorias';
+        }
+
+        $categoria = new Categorias;
+        $categoria->nombre = $request->get('nombre');
+        $categoria->linea = $request->get('linea');
+        $categoria->fecha_inicio = $request->get('fecha_inicio');
+        $categoria->fecha_fin = $request->get('fecha_fin');
+        $categoria->descuento = $request->get('descuento');
+        $categoria->estatus_descuento = $request->get('estatus_descuento');
+        $categoria->estatus_visibilidad = $request->get('estatus_visibilidad');
+        $categoria->color = $request->get('color');
+        $categoria->frase = $request->get('frase');
+
+        if ($request->hasFile("imagen")) {
+            $file = $request->file('imagen');
+            $path = $ruta_categorias;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $categoria->imagen = $fileName;
+        }
+
+        if ($request->hasFile("portada")) {
+            $file = $request->file('portada');
+            $path = $ruta_categorias;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $categoria->portada = $fileName;
+        }
+
+        // Generar un slug único basado en el nombre
+        $slug = Str::slug($request->get('nombre'));
+        $existingSlug = Categorias::where('slug', $slug)->first();
+        if ($existingSlug) {
+            $slug = $slug . '-' . uniqid();
+        }
+        $categoria->slug = $slug;
+
+        $categoria->save();
+
+        Session::flash('success', 'Se ha guardado sus datos con éxito');
+        return redirect()->back()->with('success', 'Categoría creada exitosamente.');
+    }
+
+    public function update_categorias(Request $request, $id)
+    {
+    $dominio = $request->getHost();
+    if($dominio == 'plataforma.imnasmexico.com'){
+        $ruta_categorias = base_path('../public_html/plataforma.imnasmexico.com/categorias');
+    } else {
+        $ruta_categorias = public_path() . '/categorias';
+    }
+
+    $categoria = Categorias::findOrFail($id);
+    $categoria->nombre = $request->get('nombre');
+    $categoria->linea = $request->get('linea');
+    $categoria->fecha_inicio = $request->get('fecha_inicio');
+    $categoria->fecha_fin = $request->get('fecha_fin');
+    $categoria->descuento = $request->get('descuento');
+    $categoria->estatus_descuento = $request->get('estatus_descuento');
+    $categoria->estatus_visibilidad = $request->get('estatus_visibilidad');
+    $categoria->color = $request->get('color');
+    $categoria->frase = $request->get('frase');
+
+    if ($request->hasFile("imagen")) {
+        $file = $request->file('imagen');
+        $path = $ruta_categorias;
+        $fileName = uniqid() . $file->getClientOriginalName();
+        $file->move($path, $fileName);
+        $categoria->imagen = $fileName;
+    }
+
+    if ($request->hasFile("portada")) {
+        $file = $request->file('portada');
+        $path = $ruta_categorias;
+        $fileName = uniqid() . $file->getClientOriginalName();
+        $file->move($path, $fileName);
+        $categoria->portada = $fileName;
+    }
+
+    // Generar un slug único basado en el nombre si el nombre ha cambiado
+    if ($categoria->nombre != $request->get('nombre')) {
+        $slug = Str::slug($request->get('nombre'));
+        $existingSlug = Categorias::where('slug', $slug)->first();
+        if ($existingSlug) {
+            $slug = $slug . '-' . uniqid();
+        }
+        $categoria->slug = $slug;
+    }
+
+    $categoria->save();
+
+    Session::flash('success', 'Se ha actualizado sus datos con éxito');
+    return redirect()->back()->with('success', 'Categoría actualizada exitosamente.');
+}
 
     public function index(Request $request){
         $products = Products::orderBy('id','DESC')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
