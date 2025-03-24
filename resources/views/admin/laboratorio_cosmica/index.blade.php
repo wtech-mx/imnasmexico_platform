@@ -24,6 +24,8 @@
                         </span>
                     </a>
 
+                    <a class="btn btn-info" href="{{ route('laboratorio_cosmica.pdf_produccion_estimado') }}" target="_blank">Imprimir general</a>
+                    
                     <h3 class="mb-3">Stock de Envases Laboratorio Cosmica </h3>
 
                     <a class="btn btn-warning" href="{{ route('reporte.pdf') }}" target="_blank">Imprimir reporte</a>
