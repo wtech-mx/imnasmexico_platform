@@ -147,7 +147,7 @@
   <div id="content">
 @php
         $comisionGrupal = 0;
-    if ($totalVentas >= 60000 && $totalVentas <= 80000) {
+    if ($totalVentas >= 60000 && $totalVentas <= 99999) {
         $comisionGrupal = 1000;
     } elseif ($totalVentas >= 100000 && $totalVentas <= 149999) {
         $comisionGrupal = 2000;
