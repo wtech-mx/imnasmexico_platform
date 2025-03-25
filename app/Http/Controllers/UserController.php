@@ -191,10 +191,10 @@ class UserController extends Controller
     }
 
     public function imprimir(){
-               // $startOfWeek = Carbon::now()->startOfWeek();
-               $startOfWeek = '2025-03-17';
-               //  $endOfWeek = Carbon::now()->endOfWeek();
-                 $endOfWeek = '2025-03-23';
+        $startOfWeek = Carbon::now()->startOfWeek();
+       //  $startOfWeek = '2025-03-17';
+        $endOfWeek = Carbon::now()->endOfWeek();
+        //    $endOfWeek = '2025-03-23';
         $today =  date('d-m-Y');
 
         $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])

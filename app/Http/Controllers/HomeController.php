@@ -179,10 +179,10 @@ class HomeController extends Controller
                 } while (count($results) > 0);
 
                 // C O M I S I O N E S  V E N T A  K I T S
-               // $startOfWeek = Carbon::now()->startOfWeek();
-                $startOfWeek = '2025-03-17';
-              //  $endOfWeek = Carbon::now()->endOfWeek();
-                $endOfWeek = '2025-03-23';
+                $startOfWeek = Carbon::now()->startOfWeek();
+                //  $startOfWeek = '2025-03-17';
+                 $endOfWeek = Carbon::now()->endOfWeek();
+                 //    $endOfWeek = '2025-03-23';
 
                 $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
                 ->where('tipo_nota', 'Cotizacion')
