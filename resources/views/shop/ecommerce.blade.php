@@ -8,6 +8,7 @@
 
 @section('ecomeerce')
 
+@include('shop.components.categorias_corporales')
 
 <div class="container-lg mt-10 px-2 px-md-3 px-lg-4 py-3">
     <div id="carouselExample" class="carousel slide" data-bs-interval="4000" data-bs-ride="carousel">
@@ -42,6 +43,7 @@
 
 
     @include('shop.components.categories_ecommerce')
+
 
     @include('shop.components.products_slide')
 

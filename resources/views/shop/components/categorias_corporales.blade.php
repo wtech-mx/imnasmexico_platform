@@ -3,18 +3,18 @@
     $indiceColor = 0;
 @endphp
 
-<div class="container-lg px-2 px-md-3 px-lg-4 py-0 py-md-3 py-lg-3">
+<div class="container-lg px-2 px-md-3 px-lg-4 py-0 py-md-3 py-lg-3" style="margin-top: 9rem;">
     <div class="row">
         <div class="col-12">
             <h3 class="mb-4">
-                Lineas Faciales
+                Lineas Corporales
             </h3>
         </div>
     </div>
 
     <!-- Owl Carousel -->
-    <div id="departmentsCarousel" class="owl-carousel">
-        @foreach ($categoriasFacial as $categoria)
+    <div id="departmentsCarouselCorporal" class="owl-carousel">
+        @foreach ($categoriasCorporal as $categoria)
             <a href="{{ route('tienda_online.categories', $categoria->slug) }}" style="text-decoration: none;">
                 <div class="item">
                     <div class="container_categories" style="background-color: {{ $colores[$indiceColor] }}">

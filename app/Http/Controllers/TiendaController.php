@@ -91,8 +91,10 @@ class TiendaController extends Controller
         $productos_categoria = Products::take(10)->get();
         $nas_slide = Noticias::where('seccion', '=', 'NAS_SLIDE')->get();
         $banner_slide = Noticias::where('seccion', '=', 'NAS_BANNER')->get();
+        $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
+        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->orderBy('id','DESC')->get();
 
-        return view('shop.ecommerce', compact('productos_populares', 'producto', 'productos_categoria','nas_slide','banner_slide'));
+        return view('shop.ecommerce', compact('productos_populares', 'producto', 'productos_categoria','nas_slide','banner_slide','categoriasFacial','categoriasCorporal'));
     }
 
     public function generateFeed()

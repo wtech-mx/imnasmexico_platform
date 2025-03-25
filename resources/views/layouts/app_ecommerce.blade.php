@@ -386,6 +386,30 @@ $(document).ready(function() {
                     }
                 });
 
+                $("#departmentsCarouselCorporal").owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    autoplay: true, // Activar autoplay
+                    autoplayTimeout: 6000, // Tiempo en milisegundos (3 segundos)
+                    autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
+                    responsive: {
+                        0: {
+                            items: 3
+                        },
+                        576: {
+                            items: 4
+                        },
+                        768: {
+                            items: 5
+                        },
+                        1200: {
+                            items: 6
+                        }
+                    }
+                });
+
+                
+
                 // Inicializar el carrusel de Carnes y pescados
                 $("#meatAndFishCarousel").owlCarousel({
                     loop: true,
