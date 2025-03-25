@@ -6,7 +6,7 @@
 
 </style>
 
-<header class="py-3 border-bottom fixed-top" style="height: 100px;background-color: #EBDBDB">
+<header class="py-3 border-bottom fixed-top" style="height: 100px;background-color: #EBDBDB;border-radius: 0 0 29px 29px;box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);">
     <div class="container d-flex align-items-center justify-content-between">
 
         <!-- LOGO -->
@@ -34,7 +34,7 @@
             <ul class="nav flex-row d-flex align-items-center">
                 <li class="nav-item">
                     <a href="{{ route('cart.index') }}" class="nav-link px-1 px-md-2 px-lg-2">
-                        <i class=" icons_header bi bi-cart2" style="color: #875053"></i>
+                        <i class=" icons_header bi bi-cart2" style="color: #875053;    color: #ffffff;background: #D19B9B;padding: 10px 10px 10px 10px;border-radius: 16px;"></i>
                         <span class="badge rounded-pill bg-danger" id="contador-carrito">
                             {{ session('cart') ? count(session('cart')) : 0 }}
                         </span>
@@ -62,24 +62,6 @@
         </div>
 
     </div>
-
-    <!-- NAVEGACIÓN SECUNDARIA -->
-    <nav class="py-2 bg-body-tertiary border-bottom ">
-        <div class="container">
-            <button class="navbar-toggler d-lg-none w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                ☰ Pasillos
-            </button>
-
-            <div class="collapse navbar-collapse d-lg-block " id="navMenu">
-                <ul class="nav flex-column flex-lg-row d-flex justify-content-between mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a href="{{ route('tienda_online.filter') }}" class="nav-link text-dark nav_header active fw-bold" style="font-family: 'Roboto_Regular';">Productos</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <!-- BUSCADOR EN MÓVIL -->
     <div class="container d-lg-none mt-2 position-relative">

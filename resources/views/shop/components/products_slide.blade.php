@@ -9,10 +9,10 @@
             <div class="container_grid row" id="producto-{{ $producto_popular->id }}">
                 <div class="col-12 my-auto">
                     <a href="">
-                        @if ($producto_popular->imagen_principal == NULL)
+                        @if ($producto_popular->imagenes == NULL)
                         <div class="mx-auto img_grid" style="background: url('{{ asset('ecommerce/logo_nas.png') }}') #ffffff00 50% / contain no-repeat;"></div>
                         @else
-                        <div class="mx-auto img_grid" style="background: url(&quot;{{$product->imagenes}}&quot;) #ffffff00 50% / contain no-repeat;"></div>
+                        <div class="mx-auto img_grid" style="background: url(&quot;{{$producto_popular->imagenes}}&quot;) #ffffff00 50% / contain no-repeat;"></div>
                         @endif
                     </a>
                 </div>

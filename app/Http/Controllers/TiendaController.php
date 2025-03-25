@@ -38,6 +38,7 @@ class TiendaController extends Controller
 
         $productos = Products::query();
 
+
         $productos->where(function($subQuery) use ($palabras, $inflector) {
             foreach ($palabras as $palabra) {
                 $singular = $inflector->singularize($palabra);
@@ -60,7 +61,7 @@ class TiendaController extends Controller
             END", [$query, "%{$query}%"]);
 
         // Obtener los productos con los campos necesarios
-        $productos = $productos->limit(30)->get(['id', 'nombre', 'imagen_principal', 'slug']);
+        $productos = $productos->limit(30)->get(['id', 'nombre', 'imagenes', 'slug']);
 
         return view('shop.components.buscador', compact('productos'));
     }
@@ -75,7 +76,7 @@ class TiendaController extends Controller
 
     public function index_ecommerce()
     {
-        $productos_populares = Products::orderBy('id','DESC')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->inRandomOrder()->take(30)->get();
+        $productos_populares = Products::orderby('nombre','asc')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->inRandomOrder()->take(30)->get();
 
         // Aplicar descuento del 10% si es lunes y la categoría es 26
         if (date('N') == 1) {
@@ -88,7 +89,7 @@ class TiendaController extends Controller
         }
 
         $producto = Products::inRandomOrder()->first();
-        $productos_categoria = Products::take(10)->get();
+        $productos_categoria = Products::take(30)->get();
         $nas_slide = Noticias::where('seccion', '=', 'NAS_SLIDE')->get();
         $banner_slide = Noticias::where('seccion', '=', 'NAS_BANNER')->get();
         $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
