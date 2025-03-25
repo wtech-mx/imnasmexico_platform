@@ -59,7 +59,7 @@
 </head>
 
 {{-- <body style="background: linear-gradient(0deg, rgba(247, 245, 238, 0.97) 0%, rgba(247, 245, 238, 0.97) 100%), url('{{ asset('ecommerce/patter_2_grande.png') }}') lightgray 50% / cover no-repeat;"> --}}
-    <body style="background:#F1F1F1">
+    <body style="background:#F7F5EE">
 
         <div class="container-fluid p-0">
             @include('shop.components.header')
@@ -408,7 +408,7 @@ $(document).ready(function() {
                     }
                 });
 
-                
+
 
                 // Inicializar el carrusel de Carnes y pescados
                 $("#meatAndFishCarousel").owlCarousel({

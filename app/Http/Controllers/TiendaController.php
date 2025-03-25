@@ -75,7 +75,7 @@ class TiendaController extends Controller
 
     public function index_ecommerce()
     {
-        $productos_populares = Products::inRandomOrder()->take(10)->get();
+        $productos_populares = Products::orderBy('id','DESC')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->inRandomOrder()->take(30)->get();
 
         // Aplicar descuento del 10% si es lunes y la categoría es 26
         if (date('N') == 1) {
