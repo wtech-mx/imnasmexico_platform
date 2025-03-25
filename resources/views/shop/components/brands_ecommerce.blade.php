@@ -6,286 +6,34 @@
     </div>
 
     <div id="brandsCarousel" class="owl-carousel">
+
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/BAMBUS_LOGO.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Barney.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/BIOFLORA_LOGO.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/BIRDMAN.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Bob_s Red_Mill.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/cosmika/menu/logo.png') #ffffff00 50% / contain no-repeat;"></div>
             </div>
         </div>
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Bragg.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/CACEP.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/CAMPO.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Castagno.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/CERES.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp') #ffffff00 50% / contain no-repeat;"></div>
             </div>
         </div>
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/FEMME.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/BOVE.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/MONTTAGNE.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/pena_real.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/raiz_verde.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/La_Selva.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/CESMASH.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Kobol.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Nocon.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/OMNIPAL.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/assets/user/logotipos/registro_nacional.png') #ffffff00 50% / contain no-repeat;"></div>
             </div>
         </div>
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Logo_TO.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/ALOEVIDA.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Logo-Casa-Tlalmamatla.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Manantial.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Bioflora.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://scontent.fmex41-1.fna.fbcdn.net/v/t39.30808-6/316939165_645289057383334_6306143196086823020_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8Uyo3BjyrT4Q7kNvgHIIQn2&_nc_oc=Adlj0hIr7fetyT3lok0NQhHpXCI3xVSzjhakuISZDC2mCYdExmcbox326KbsHHJN20aLdXc3xd4hgIbl-oXzrN99&_nc_zt=23&_nc_ht=scontent.fmex41-1.fna&_nc_gid=AdCEtFGt9sSg6GjJ29uO1g&oh=00_AYEPZ197gItmGC_ARv_JLMyvUKZPWtAQAuOn9V5T5WntVA&oe=67E8913B') #ffffff00 50% / contain no-repeat;"></div>
             </div>
         </div>
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Real.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Traditional.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/vital.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Cesarfer.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/kefir.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/for_life.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/nekutli.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/siembra_lo_bueno.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/solo_dios.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/spiral.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/teccino.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/enature.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/aires.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/albait.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/cosaco.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/daily.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/duosoft.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/ecosal.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/flor.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/gallo.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/rumorosa.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/yogi.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/tia.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/colive.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/ortiz.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/santiveri.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/Smiley.png') }}') #ffffff00 50% / contain no-repeat;"></div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/marcas/zocofarm.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/logo_nas.png') }}') #ffffff00 50% / contain no-repeat;"></div>
             </div>
         </div>
 
