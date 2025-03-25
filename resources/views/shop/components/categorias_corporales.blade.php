@@ -3,7 +3,7 @@
     $indiceColor = 0;
 @endphp
 
-<div class="container-lg px-2 px-md-3 px-lg-4 py-0 py-md-3 py-lg-3" style="margin-top: 9rem;">
+<div class="container-lg px-2 px-md-3 px-lg-4 py-0 py-md-3 py-lg-3" style="margin-top: 6rem;">
     <div class="row">
         <div class="col-12">
             <h3 class="mb-4">

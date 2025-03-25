@@ -362,11 +362,11 @@ $(document).ready(function() {
                     }
                 });
 
-
                 // Inicializar el segundo carrusel (Departamentos)
                 $("#departmentsCarousel").owlCarousel({
                     loop: true,
                     margin: 15,
+                    dots:false,
                     autoplay: true, // Activar autoplay
                     autoplayTimeout: 6000, // Tiempo en milisegundos (3 segundos)
                     autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
@@ -389,6 +389,7 @@ $(document).ready(function() {
                 $("#departmentsCarouselCorporal").owlCarousel({
                     loop: true,
                     margin: 15,
+                    dots:false,
                     autoplay: true, // Activar autoplay
                     autoplayTimeout: 6000, // Tiempo en milisegundos (3 segundos)
                     autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
@@ -407,8 +408,6 @@ $(document).ready(function() {
                         }
                     }
                 });
-
-
 
                 // Inicializar el carrusel de Carnes y pescados
                 $("#meatAndFishCarousel").owlCarousel({

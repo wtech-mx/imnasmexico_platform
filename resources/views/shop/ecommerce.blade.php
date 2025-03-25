@@ -24,20 +24,29 @@
 
 @include('shop.components.categorias_corporales')
 
-<div class="container-lg mt-10 px-2 px-md-3 px-lg-4 py-3">
+<div class="container-lg  px-2 px-md-3 px-lg-4 py-3">
     <div id="carouselExample" class="carousel slide" data-bs-interval="4000" data-bs-ride="carousel">
 
         <div class="carousel-inner img_banners">
+            @php
+                $activeAdded = false; // Asegurar que solo un elemento tenga la clase 'active'
+            @endphp
             @foreach ($nas_slide as $item)
                  @if ($item->seccion === 'NAS_SLIDE')
                     @if ($item->tipo === 'imagen')
                         <a href="{{ $item->link }}">
+                            <div class="carousel-item {{ !$activeAdded ? 'active' : '' }}">
                             <img src="{{asset('noticias/'.$item->multimedia) }}" class="d-block w-100" alt="{{ $item->titulo }}">
+                            </div>
                         </a>
+
+
                     @elseif ($item->tipo === 'Video')
-                        <video controls autoplay muted>
-                            <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
-                        </video>
+                        <div class="carousel-item {{ !$activeAdded ? 'active' : '' }}">
+                            <video controls autoplay muted>
+                                <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
+                            </video>
+                        </div>
                     @endif
                  @endif
             @endforeach
