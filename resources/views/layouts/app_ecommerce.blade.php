@@ -143,7 +143,7 @@
                     debounceTimer = setTimeout(() => {
                         if (query.length > 1) {
                             $.ajax({
-                                url: "{{ route('productos.buscar') }}",
+                                url: "{{ route('productos.buscarNas') }}",
                                 type: "GET",
                                 data: { query: query },
                                 success: function (data) {
@@ -186,7 +186,7 @@ $(document).ready(function() {
         boton.prop("disabled", true);
 
         $.ajax({
-            url: "{{ route('carrito.agregar') }}",
+            url: "{{ route('carrito.agregarNas') }}",
             type: "POST",
             data: {
                 _token: "{{ csrf_token() }}",

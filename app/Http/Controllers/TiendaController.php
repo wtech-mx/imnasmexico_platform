@@ -38,6 +38,9 @@ class TiendaController extends Controller
 
         $productos = Products::query();
 
+        // Aplicar filtros adicionales
+        $productos->where('categoria', 'NAS')
+                  ->where('subcategoria', '=', 'Producto');
 
         $productos->where(function($subQuery) use ($palabras, $inflector) {
             foreach ($palabras as $palabra) {
@@ -147,36 +150,13 @@ class TiendaController extends Controller
     {
         $producto = Products::where('slug', '=', $slug)->first();
 
-        // Obtener stock desde Odoo por id_woocommerce
-        $stockDisponible = $this->odooService->getStockByProductIdWoo($producto->id_woocommerce);
+        $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
+        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->orderBy('id','DESC')->get();
+        $productos_categoria = Products::take(30)->get();
 
-        // Si hay un error en la conexión con Odoo, usamos el stock local
-        if (isset($stockDisponible['error'])) {
-            $stockDisponible = optional($producto->ProductoStock)->stock ?? 0;
-        }
+        $productos_populares = Products::orderby('nombre','asc')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->inRandomOrder()->take(30)->get();
 
-        // Aplicar descuento del 10% si es lunes y la categoría es 26
-        $precioOriginal = $producto->ProductoStock->precio_normal;
-        if (date('N') == 1 && $producto->id_categoria == 26) {
-            $producto->ProductoStock->precio_normal = $precioOriginal * 0.9;
-        }
-
-        $productos_categoria = Products::join('productos_stock', 'productos.id', '=', 'productos_stock.id_producto')
-            ->where('productos.id_categoria', '=', $producto->id_categoria)->take(10)->get();
-
-        $productos_populares = Products::join('productos_stock', 'productos.id', '=', 'productos_stock.id_producto')
-            ->inRandomOrder()->take(10)->select('Products.*')->get();
-
-            if (date('N') == 1) {
-                foreach ($productos_populares as $producto_popular) {
-                    if ($producto_popular->id_categoria == 26) {
-                        $producto_popular->precio_original = $producto_popular->ProductoStock->precio_normal;
-                        $producto_popular->ProductoStock->precio_normal *= 0.9;
-                    }
-                }
-            }
-
-        return view('shop.single_product_ecommerce', compact('producto', 'productos_categoria', 'productos_populares', 'stockDisponible', 'precioOriginal'));
+        return view('shop.single_product_ecommerce', compact('producto', 'categoriasFacial','categoriasCorporal', 'productos_populares','productos_categoria'));
     }
 
     public function thankyou(){
