@@ -68,6 +68,7 @@ class TiendaController extends Controller
         return view('shop.components.buscador', compact('productos'));
     }
 
+
     private function removeAccents($string) {
         return strtr($string, [
             'á'=>'a', 'é'=>'e', 'í'=>'i', 'ó'=>'o', 'ú'=>'u',
@@ -178,7 +179,13 @@ class TiendaController extends Controller
         $page = $request->get('page', 1);
         $itemsPerPage = 44;
 
+        $categorias  = Categorias::orderBy('nombre','asc')->get();
+
         $productos = Products::query();
+
+        // Aplicar filtros adicionales
+        $productos->where('categoria', 'NAS')
+                  ->where('subcategoria', '=', 'Producto');
 
         if ($query) {
             // Remover acentos y convertir a minúsculas
@@ -222,7 +229,7 @@ class TiendaController extends Controller
             return view('shop.filter_show', compact('productos'))->render();
         }
 
-        return view('shop.filter', compact('productos'));
+        return view('shop.filter', compact('productos','categorias'));
     }
 
     private function removeAccentsSearch($string) {
@@ -241,6 +248,10 @@ class TiendaController extends Controller
         $itemsPerPage = 32;
 
         $productos = Products::query();
+
+        // Aplicar filtros adicionales
+        $productos->where('categoria', 'NAS')
+                  ->where('subcategoria', '=', 'Producto');
 
         // Filtro por categoría usando la relación uno a muchos
         if ($categoriaSeleccionada && $categoriaSeleccionada != 0) {

@@ -30,27 +30,24 @@
         <div class="col-12 col-sm-3 d-none d-md-block mt-4">
             <h3 class="mb-4 d-none d-md-block">-</h3>
             <div class="container_filtro">
-                <h2 class="title_filtro mb-3" style="font-family: 'Roboto_Regular';">Filtro</h2>
-                <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Pasillos</h3>
+                <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Corporal</h3>
                 <!-- Opciones de categoría -->
                 <div class="form-check mt-3">
-                    @foreach ($categorias as $categoria)
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "corporal")
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" >
+                            <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
+                        @endif
+                    @endforeach
+                </div>
 
-                    @if (trim($categoria->nombre) === "Lacteos" || trim($categoria->nombre) === "Verduras" || trim($categoria->nombre) === "Sin categoria")
-                        @continue
-                    @endif
-                        <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $categoria->id }}" id="categoria{{ $categoria->id }}">
-                        <label class="form-check-label" for="categoria{{ $categoria->id }}">{{ $categoria->nombre }}</label>
-                        <br>
-
-                        <div id="subcategorias{{ $categoria->id }}" class="subcategorias" style="display: none;">
-                            @foreach ($categoria->subcategorias as $subcategoria)
-                                <input class="form-check-input subcategoria-checkbox" type="checkbox" name="subcategoria[]" value="{{ $subcategoria->id }}" id="subcategoria{{ $subcategoria->id }}">
-                                <label class="form-check-label" for="subcategoria{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</label>
-                                <br>
-                            @endforeach
-                        </div>
-                        <br>
+                <h3 class="subtitle_filtro mt-3" style="font-family: 'Roboto_Regular';">Facial</h3>
+                <div class="form-check mt-3">
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "facial")
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" >
+                            <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -79,24 +76,19 @@
             <div class="offcanvas-body">
                 <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Pasillos</h3>
                 <div class="form-check mt-3">
-                    @foreach ($categorias as $categoria)
-
-                        @if (trim($categoria->nombre) === "Lacteos" || trim($categoria->nombre) === "Verduras" || trim($categoria->nombre) === "Sin categoria")
-                            @continue
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "corporal")
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
+                            <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
                         @endif
+                    @endforeach
 
-                        <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $categoria->id }}" id="categoriaMovil{{ $categoria->id }}">
-                        <label class="form-check-label" for="categoriaMovil{{ $categoria->id }}">{{ $categoria->nombre }}</label>
-                        <br>
-
-                        <div id="subcategoriasMovil{{ $categoria->id }}" class="subcategorias" style="display: none;">
-                            @foreach ($categoria->subcategorias as $subcategoria)
-                                <input class="form-check-input subcategoria-checkbox" type="checkbox" name="subcategoria[]" value="{{ $subcategoria->id }}" id="subcategoriaMovil{{ $subcategoria->id }}">
-                                <label class="form-check-label" for="subcategoriaMovil{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</label>
-                                <br>
-                            @endforeach
-                        </div>
-                        <br>
+                    <h3 class="subtitle_filtro mt-3" style="font-family: 'Roboto_Regular';">Facial</h3>
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "facial")
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
+                            <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -109,10 +101,6 @@
                     <h3 class="mb-4">-</h3>
                 </div>
 
-                {{-- <div id="listaProductos" class="d-flex flex-wrap">
-                    @include('shop.filter_show', ['productos' => $productos ?? collect()])
-                </div> --}}
-
                 <div id="listaProductos" class="d-flex flex-wrap">
                     @include('shop.filter_show', ['productos' => $productos])
                 </div>
@@ -122,27 +110,19 @@
         </div>
 
         <div class="col-12">
-
             <p class="text-center">
                 <a class="btn btn_filter" data-bs-toggle="offcanvas" data-bs-target="#filtroSidebar">
                     Filtrar
                 </a>
                 <a id="cargarMasProductos" class="btn btn_filter" style="background: #000!important;color:#fff!important;">Cargar más productos</a>
-
             </p>
-
-
         </div>
-
     </div>
 </div>
-
-
 
 @endsection
 
 @section('js_custom')
-
 <script>
 $(document).ready(function () {
     let page = 1;
@@ -155,9 +135,6 @@ $(document).ready(function () {
     function cargarMasProductos(page) {
         let query = $('#searchInput').val();
         let categoriaSeleccionada = $('input[name="categoria"]:checked').val();
-        let subcategoriasSeleccionadas = $('.subcategoria-checkbox:checked').map(function () {
-            return $(this).val();
-        }).get();
 
         $.ajax({
             url: '{{ route("productos.filtrar") }}',
@@ -166,7 +143,6 @@ $(document).ready(function () {
                 query: query,
                 page: page,
                 categoria: categoriaSeleccionada,
-                subcategoria: subcategoriasSeleccionadas
             },
             success: function(data) {
                 $('#listaProductos').append(data);
@@ -266,37 +242,20 @@ $(document).ready(function () {
     $('.categoria-radio').on('change', function () {
         page = 1; // Reiniciar la página al cambiar la categoría
         let categoriaSeleccionada = $('input[name="categoria"]:checked').val();
-
-        // Ocultar todas las subcategorías y desmarcar los checkboxes en ambas versiones (escritorio y móvil)
-        $('.subcategorias').hide();
-        $('.subcategoria-checkbox').prop('checked', false);
-
-        // Mostrar las subcategorías correspondientes a la categoría seleccionada en ambas versiones
-        $('#subcategorias' + categoriaSeleccionada).show(); // Escritorio
-        $('#subcategoriasMovil' + categoriaSeleccionada).show(); // Móvil
-
         // Filtrar productos
         filtrarProductos();
     });
 
-    // Filtrar productos cuando se cambien las subcategorías seleccionadas
-    $('.subcategoria-checkbox').on('change', function () {
-        filtrarProductos();
-    });
 
     // Función para filtrar los productos según la categoría y subcategoría seleccionadas
     function filtrarProductos() {
         let categoriaSeleccionada = $('input[name="categoria"]:checked').val();
-        let subcategoriasSeleccionadas = $('.subcategoria-checkbox:checked').map(function () {
-            return $(this).val();
-        }).get();
 
         $.ajax({
             url: '{{ route("productos.filtrar") }}',
             type: 'GET',
             data: {
                 categoria: categoriaSeleccionada,
-                subcategoria: subcategoriasSeleccionadas
             },
             success: function (data) {
                 $('#listaProductos').html(data);
@@ -310,8 +269,5 @@ $(document).ready(function () {
         });
     }
 });
-
 </script>
-
-
 @endsection
