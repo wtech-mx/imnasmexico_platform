@@ -8,7 +8,10 @@
 
 @section('ecomeerce')
 
-<div class="container-lg px-2 px-md-3 px-lg-4 py-0 py-md-3 py-lg-3 mt-10">
+@include('shop.components.categorias_corporales')
+
+
+<div class="container-lg px-2 px-md-3 px-lg-4 py-0 py-md-3 py-lg-3">
 
     <div class="row">
 
@@ -36,7 +39,7 @@
 
             <!-- Nombre del producto -->
             <h5 class="text-left mt-2 brand_text_single" itemprop="brand" itemscope itemtype="https://schema.org/Brand">
-                <span itemprop="name">NAS</span>
+                <span itemprop="name">{{ $producto->Categoria->nombre }}</span>
             </h5>
 
             <h4 class="text-left mt-2 title_product_single" itemprop="name">{{ $producto->nombre }}</h4>
@@ -89,17 +92,12 @@
                 </div>
             </div>
 
-            <!-- Categoría -->
-            <p class="text-left mt-2 category_text_grid_single">
-                By <span itemprop="category">By {{ $producto->Categoria->nombre ?? 'Sin categoría' }}</span>
-            </p>
-
             @if($producto->stock <= 0)
                 <p class="text-left mt-2 category_text_grid_single" style="color:#C41E1E!important">
                     Stock <span itemprop="category">{{ $producto->stock }}</span>
                 </p>
             @else
-                <p class="text-left mt-2 category_text_grid_single"  style="color:#83c890!important">
+                <p class="text-left mt-2 category_text_grid_single"  style="color:#000!important">
                     Stock <span itemprop="category">{{ $producto->stock }}</span>
                 </p>
             @endif
@@ -120,7 +118,6 @@
 @include('shop.components.products_slide')
 
 @include('shop.components.categories_slide')
-
 
 
 <script>

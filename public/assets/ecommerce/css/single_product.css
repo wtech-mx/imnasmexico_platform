@@ -12,7 +12,7 @@
 }
 
 .brand_text_single{
-    color: var(--Verde-Obscuro, #176419);
+    color: var(--Verde-Obscuro, #875053);
     font-family: 'Roboto_Regular';
     font-size: 20px;
     font-style: normal;
@@ -47,7 +47,7 @@
     background: #48745B;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: #fff;
-}
+}f83c890
 
 .input_single_cantidad{
     width: 30%;
@@ -73,7 +73,7 @@
 }
 
 .category_text_grid_single{
-    color: var(--Verde-Obscuro, #176419);
+    color: var(--Verde-Obscuro, #875053);
     font-family: 'Roboto_Regular';
     font-size: 20px;
     font-style: normal;
@@ -102,7 +102,7 @@
 .btn_comprar_single{
     border-radius: 12px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    background-color: #40AA54!important;
+    background-color: #F7CE5B!important;
 }
 
 @media screen and (max-width: 952px) {

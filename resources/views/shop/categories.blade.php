@@ -1,9 +1,8 @@
 @extends('layouts.app_ecommerce')
-
 @section('template_title') {{$categoria->nombre}} @endsection
 
 @section('css_custom')
-    <link rel="stylesheet" href="{{ asset('assets/css/categories.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/categories.css') }}">
 @endsection
 
 @section('ecomeerce')
@@ -20,7 +19,7 @@
 @endphp
 
 <section class="category-banner d-flex align-items-center mt-6"
-         style="background-image: url('{{ asset($categoria->portada ? '/categorias/portadas/' . $categoria->portada : '/ecommerce/categoria1.jpg') }}')">
+         style="background-image: url('{{ asset($categoria->portada ? '/categorias/' . $categoria->portada : '/ecommerce/categoria1.jpg') }}')">
 
     <div class="overlay"></div>
     <div class="container text-center">
@@ -35,27 +34,29 @@
         <div class="col-12 col-sm-3 d-none d-md-block mt-4">
             <h3 class="mb-4 d-none d-md-block">-</h3>
             <div class="container_filtro">
-                <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Pasillos</h3>
+                <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Corporal</h3>
                 <!-- Opciones de categoría -->
                 <div class="form-check mt-3">
                     @foreach ($categorias as $cat)
-                        @if (trim($cat->nombre) === "Lacteos" || trim($cat->nombre) === "Verduras" || trim($cat->nombre) === "Sin categoria")
-                            @continue
-                        @endif
-                        <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
-                        <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
-                        <br>
+                        @if (trim($cat->linea) === "corporal")
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
+                            <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
 
-                        <div id="subcategorias{{ $cat->id }}" class="subcategorias" style="{{ $cat->id == $categoria->id ? 'display: block;' : 'display: none;' }}">
-                            @foreach ($cat->subcategorias as $subcategoria)
-                                <input class="form-check-input subcategoria-checkbox" type="checkbox" name="subcategoria[]" value="{{ $subcategoria->id }}" id="subcategoria{{ $subcategoria->id }}">
-                                <label class="form-check-label" for="subcategoria{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</label>
-                                <br>
-                            @endforeach
-                        </div>
-                        <br>
+                        @endif
                     @endforeach
                 </div>
+
+                <h3 class="subtitle_filtro mt-3" style="font-family: 'Roboto_Regular';">Facial</h3>
+                <div class="form-check mt-3">
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "facial")
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
+                            <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
+
+                        @endif
+                    @endforeach
+                </div>
+
             </div>
         </div>
 
@@ -82,23 +83,7 @@
             <div class="offcanvas-body">
                 <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Pasillos</h3>
                 <div class="form-check mt-3">
-                    @foreach ($categorias as $cat)
-                        @if (trim($cat->nombre) === "Lacteos" || trim($cat->nombre) === "Verduras" || trim($cat->nombre) === "Sin categoria")
-                            @continue
-                        @endif
-                        <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
-                        <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
-                        <br>
 
-                        <div id="subcategoriasMovil{{ $cat->id }}" class="subcategorias" style="{{ $cat->id == $categoria->id ? 'display: block;' : 'display: none;' }}">
-                            @foreach ($cat->subcategorias as $subcategoria)
-                                <input class="form-check-input subcategoria-checkbox" type="checkbox" name="subcategoria[]" value="{{ $subcategoria->id }}" id="subcategoriaMovil{{ $subcategoria->id }}">
-                                <label class="form-check-label" for="subcategoriaMovil{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</label>
-                                <br>
-                            @endforeach
-                        </div>
-                        <br>
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -114,59 +99,47 @@
                     @foreach ($productos as $producto)
                         <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3">
                             <div class="container_grid row mx-auto">
-                                @if($producto->ProductoStock->precio_descuento == NULL)
+                                @if($producto->precio_rebajado == NULL)
                                 @else
-                                    @if(strtotime($producto->ProductoStock->fecha_fin_desc) >= strtotime(date('Y-m-d')))
+                                    @if(strtotime($producto->fecha_fin) >= strtotime(date('Y-m-d')))
                                     <div class="etiqueta_grid_product">
                                         <p class="text-center texto_etiqueta_grid">Promo</p>
                                     </div>
                                     @endif
                                 @endif
                                 <div class="col-12 my-auto">
-                                    @if ($producto->imagen_principal == NULL)
+                                    @if ($producto->imagenes == NULL)
                                     <a href="{{ route('tienda_online.single', $producto->slug) }}">
                                         <div class="mx-auto img_grid" style="background: url('{{ asset('ecommerce/Isotipo_negro.png') }}') #ffffff00  50% / contain no-repeat;"></div>
                                     </a>
                                     @else
-                                        @php
-                                            $validExtensions = ['png', 'jpg', 'jpeg', 'webp'];
-                                            $extension = strtolower(pathinfo($producto->imagen_principal, PATHINFO_EXTENSION));
-                                            $isImageFile = in_array($extension, $validExtensions);
-                                        @endphp
                                         <a href="{{ route('tienda_online.single', $producto->slug) }}">
-                                            @if ($isImageFile)
-                                                <div class="mx-auto img_grid"
-                                                    style="background: url(&quot;{{ asset('imagen_principal/empresa' . $empresa->id . '/' . $producto->imagen_principal) }}&quot;) #ffffff00  50% / contain no-repeat;">
-                                                </div>
-                                            @else
-                                                <div class="mx-auto img_grid"
-                                                    style="background-image: url('data:image/png;base64,{{ $producto->imagen_principal }}') #ffffff00  50% / contain no-repeat;">
-                                                </div>
-                                            @endif
+                                            <div class="mx-auto img_grid" style="background: url(&quot;{{$producto->imagenes}}&quot;) #ffffff00 50% / contain no-repeat;"></div>
                                         </a>
                                     @endif
                                 </div>
+
                                 <div class="col-12">
-                                    <h5 class="text-left m-1 brand_text_grid">{{ $producto->Marca->nombre ?? 'SM' }}</h5>
+                                    <h5 class="text-left m-1 brand_text_grid">NAS</h5>
                                     <h4 class="text-left m-1 title_product">{{$producto->nombre}}</h4>
-                                    <p class="text-left m-1 category_text_grid">By  {{ $producto->categorias->pluck('nombre')->implode(', ') }}</p>
-                                    @if($producto->ProductoStock->precio_descuento == NULL)
+                                    <p class="text-left m-1 category_text_grid">By  {{ $producto->Categoria->nombre ?? 'Sin categoría' }}</p>
+                                    @if($producto->precio_rebajado == NULL)
                                         @if(date('N') == 1 && $producto->id_categoria == 26)
                                             <h6 class="price_text_grid_desc">
                                                 <strong class="precio_reaja">de <s>${{number_format($producto->precio_original, 2, '.', ',');}}</s></strong>
-                                                a ${{number_format($producto->ProductoStock->precio_normal, 2, '.', ',');}}
+                                                a ${{number_format($producto->precio_original, 2, '.', ',');}}
                                             </h6>
                                         @else
-                                            <h6 class="price_text_grid">${{ number_format($producto->ProductoStock->precio_normal, 2) }}</h6>
+                                            <h6 class="price_text_grid">${{ number_format($producto->precio_normal, 2) }}</h6>
                                         @endif
                                     @else
-                                        @if(strtotime($producto->ProductoStock->fecha_fin_desc) >= strtotime(date('Y-m-d')))
+                                        @if(strtotime($producto->fecha_fin) >= strtotime(date('Y-m-d')))
                                             <h6 class="price_text_grid_desc">
-                                                <strong class="precio_reaja">de <s>${{number_format($producto->ProductoStock->precio_normal, 2, '.', ',');}}</s></strong>
-                                                a ${{number_format($producto->ProductoStock->precio_descuento, 2, '.', ',');}}
+                                                <strong class="precio_reaja">de <s>${{number_format($producto->precio_original, 2, '.', ',');}}</s></strong>
+                                                a ${{number_format($producto->precio_rebajado, 2, '.', ',');}}
                                             </h6>
                                         @else
-                                            <h6 class="price_text_grid">${{ number_format($producto->ProductoStock->precio_normal, 2) }}</h6>
+                                            <h6 class="price_text_grid">${{ number_format($producto->precio_normal, 2) }}</h6>
                                         @endif
                                     @endif
                                 </div>
@@ -203,37 +176,19 @@ $(document).ready(function () {
     $('.categoria-radio').on('change', function () {
         page = 1; // Reiniciar la página al cambiar la categoría
         let categoriaSeleccionada = $('input[name="categoria"]:checked').val();
-
-        // Ocultar todas las subcategorías y desmarcar los checkboxes en ambas versiones (escritorio y móvil)
-        $('.subcategorias').hide();
-        $('.subcategoria-checkbox').prop('checked', false);
-
-        // Mostrar las subcategorías correspondientes a la categoría seleccionada en ambas versiones
-        $('#subcategorias' + categoriaSeleccionada).show(); // Escritorio
-        $('#subcategoriasMovil' + categoriaSeleccionada).show(); // Móvil
-
         // Filtrar productos
-        filtrarProductos();
-    });
-
-    // Filtrar productos cuando se cambien las subcategorías seleccionadas
-    $('.subcategoria-checkbox').on('change', function () {
         filtrarProductos();
     });
 
     // Función para filtrar los productos según la categoría y subcategoría seleccionadas
     function filtrarProductos() {
         let categoriaSeleccionada = $('input[name="categoria"]:checked').val();
-        let subcategoriasSeleccionadas = $('.subcategoria-checkbox:checked').map(function () {
-            return $(this).val();
-        }).get();
 
         $.ajax({
             url: '{{ route("productos.filtrar") }}',
             type: 'GET',
             data: {
                 categoria: categoriaSeleccionada,
-                subcategoria: subcategoriasSeleccionadas
             },
             success: function (data) {
                 $('#listaProductos').html(data);

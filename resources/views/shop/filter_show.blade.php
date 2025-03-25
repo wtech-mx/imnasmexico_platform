@@ -11,10 +11,10 @@
         <div class="container_grid row mx-auto">
 
 
-                @if($producto->ProductoStock->precio_descuento == NULL)
+                @if($producto->precio_rebajado == NULL)
                 @else
 
-                    @if(strtotime($producto->ProductoStock->fecha_fin_desc) >= strtotime(date('Y-m-d')))
+                    @if(strtotime($producto->fecha_fin) >= strtotime(date('Y-m-d')))
 
                     <div class="etiqueta_grid_product">
                         <p class="text-center texto_etiqueta_grid">Promo</p>
@@ -26,30 +26,30 @@
 
                 <div class="col-12 my-auto">
                     <a href="{{ route('tienda_online.single', $producto->slug) }}">
-                        @if ($producto->imagen_principal == NULL)
+                        @if ($producto->imagenes == NULL)
                             <div class="img_grid" style="background: url('{{ asset('ecommerce/Isotipo_negro.png') }}') center/contain no-repeat;"></div>
                         @else
-                            <div class="img_grid" style="background: url(&quot;{{ asset('imagen_principal/empresa1/' . $producto->imagen_principal) }}&quot;) center/contain no-repeat;"></div>
+                            <div class="mx-auto img_grid" style="background: url(&quot;{{$producto->imagenes}}&quot;) #ffffff00 50% / contain no-repeat;"></div>
                         @endif
                     </a>
                 </div>
 
                 <div class="col-12">
-                    <h5 class="brand_text_grid">{{ $producto->Marca->nombre ?? 'SM' }}</h5>
+                    <h5 class="brand_text_grid">NAS</h5>
                     <h4 class="title_product">{{ $producto->nombre }}</h4>
-                    <p class="category_text_grid">By {{ $producto->categorias->pluck('nombre')->implode(', ') }}</p>
+                    <p class="category_text_grid">By {{ $producto->Categoria->nombre ?? 'Sin categoría' }}</p>
 
-                    @if($producto->ProductoStock->precio_descuento == NULL)
-                        <h6 class="price_text_grid">${{ number_format($producto->ProductoStock->precio_normal, 2) }}</h6>
+                    @if($producto->precio_rebajado == NULL)
+                        <h6 class="price_text_grid">${{ number_format($producto->precio_normal, 2) }}</h6>
                     @else
 
-                        @if(strtotime($producto->ProductoStock->fecha_fin_desc) >= strtotime(date('Y-m-d')))
+                        @if(strtotime($producto->fecha_fin) >= strtotime(date('Y-m-d')))
                             <h6 class="price_text_grid_desc">
-                                <strong class="precio_reaja">de ${{number_format($producto->ProductoStock->precio_normal, 2, '.', ',');}}</strong>
-                                a ${{number_format($producto->ProductoStock->precio_descuento, 2, '.', ',');}}
+                                <strong class="precio_reaja">de ${{number_format($producto->precio_original, 2, '.', ',');}}</strong>
+                                a ${{number_format($producto->precio_rebajado, 2, '.', ',');}}
                             </h6>
                         @else
-                            <h6 class="price_text_grid">${{ number_format($producto->ProductoStock->precio_normal, 2) }}</h6>
+                            <h6 class="price_text_grid">${{ number_format($producto->precio_normal, 2) }}</h6>
                         @endif
 
                     @endif

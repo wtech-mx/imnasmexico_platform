@@ -8,7 +8,7 @@
             @foreach ($productos_populares as $producto_popular)
             <div class="container_grid row" id="producto-{{ $producto_popular->id }}">
                 <div class="col-12 my-auto">
-                    <a href="">
+                    <a href="{{ route('tienda_online.single', $producto_popular->slug) }}">
                         @if ($producto_popular->imagenes == NULL)
                         <div class="mx-auto img_grid" style="background: url('{{ asset('ecommerce/logo_nas.png') }}') #ffffff00 50% / contain no-repeat;"></div>
                         @else
@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <h5 class="text-left m-1 brand_text_grid">NAS</h5>
                     <h4 class="text-left m-1 title_product">
-                        <a class="title_product" href="" style="text-decoration: none">
+                        <a class="title_product" href="{{ route('tienda_online.single', $producto_popular->slug) }}" style="text-decoration: none">
                             {{ $producto_popular->nombre }}
                         </a>
                     </h4>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-6 p-0">
                     <p class="text-center">
-                        <a class="btn btn-xs btn_ver_mas tex-white mb-1" href="">Ver más <i class="bi bi-basket3 icon_vermas"></i></a>
+                        <a class="btn btn-xs btn_ver_mas tex-white mb-1" href="{{ route('tienda_online.single', $producto_popular->slug) }}">Ver más <i class="bi bi-basket3 icon_vermas"></i></a>
                     </p>
                 </div>
             </div>

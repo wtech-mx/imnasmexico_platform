@@ -8,7 +8,6 @@ use App\Models\Products;
 use App\Models\BannersTienda;
 use App\Models\Categorias;
 use App\Models\ProductosStock;
-use App\Models\SubCategorias;
 use App\Models\Noticias;
 
 use Illuminate\Support\Facades\Session;
@@ -165,32 +164,12 @@ class TiendaController extends Controller
 
     public function categories($slug)
     {
-        // Obtener categoría desde slug
-        $categoria = Categorias::where('slug', '=', $slug)->firstOrFail();
 
-        // Obtener todas las categorías con sus subcategorías
-        $categorias = Categorias::with('subcategorias')->get()->sortBy(function($cat) use ($categoria) {
-            return $cat->id == $categoria->id ? 0 : 1;
-        });
+        $categoria = Categorias::where('slug', '=', $slug)->first();
+        $categorias  = Categorias::orderBy('nombre','asc')->get();
+        $productos  = Products::orderby('nombre','asc')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->inRandomOrder()->take(30)->get();
 
-        // Obtener productos que pertenezcan a esta categoría (relación muchos a muchos)
-        $productos = Products::whereHas('categorias', function ($q) use ($categoria) {
-                $q->where('categorias.id', $categoria->id);
-            })
-            ->with('productoStock') // Traer relación con precio_normal
-            ->get();
-
-        // Aplicar descuento del 10% si es lunes y categoría es 26
-        if (date('N') == 1 && $categoria->id == 26) {
-            foreach ($productos as $producto) {
-                if ($producto->productoStock) {
-                    $producto->precio_original = $producto->productoStock->precio_normal;
-                    $producto->productoStock->precio_normal *= 0.9;
-                }
-            }
-        }
-
-        return view('shop.categories', compact('categoria', 'categorias', 'productos'));
+        return view('shop.categories',compact('categoria','categorias','productos'));
     }
 
     public function filter(Request $request)
@@ -258,26 +237,18 @@ class TiendaController extends Controller
     public function filtrarPorCategoria(Request $request)
     {
         $categoriaSeleccionada = $request->get('categoria');
-        $subcategoriasSeleccionadas = $request->get('subcategoria');
         $page = $request->get('page', 1);
         $itemsPerPage = 32;
 
         $productos = Products::query();
 
-        // 🔁 Nuevo filtro por categoría usando la relación muchos a muchos
+        // Filtro por categoría usando la relación uno a muchos
         if ($categoriaSeleccionada && $categoriaSeleccionada != 0) {
-            $productos->whereHas('categorias', function ($q) use ($categoriaSeleccionada) {
-                $q->where('id_categorias', $categoriaSeleccionada);
-            });
+            $productos->where('id_categoria', $categoriaSeleccionada);
         }
 
-        // 🔁 Filtro por subcategorías (asumo que sigue en el producto directamente)
-        if ($subcategoriasSeleccionadas && !empty($subcategoriasSeleccionadas)) {
-            $productos->whereIn('id_subcategoria', $subcategoriasSeleccionadas);
-        }
-
-        // 🔁 Usar with() para traer stock y categorías
-        $productos = $productos->with(['productoStock', 'categorias'])
+        // Usar with() para traer stock y categorías
+        $productos = $productos->with(['categoria'])
             ->orderBy('nombre', 'ASC')
             ->skip(($page - 1) * $itemsPerPage)
             ->take($itemsPerPage)
@@ -289,7 +260,6 @@ class TiendaController extends Controller
 
         return view('shop.filter', compact('productos'));
     }
-
 
     public function agregar(Request $request)
     {

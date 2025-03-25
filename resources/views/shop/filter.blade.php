@@ -1,9 +1,9 @@
 @extends('layouts.app_ecommerce')
 
-@section('template_title') Single @endsection
+@section('template_title') Filtro @endsection
 
 @section('css_custom')
-    <link rel="stylesheet" href="{{ asset('assets/css/filter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/filter.css') }}">
 <style>
 
 /* Estilo para el offcanvas (filtro móvil) */
