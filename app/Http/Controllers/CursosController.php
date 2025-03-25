@@ -520,7 +520,6 @@ class CursosController extends Controller
         $fechaActual = date('Y-m-d');
         $curso = Cursos::find($id);
         $ordenes = OrdersTickets::where('id_curso', $id)->get();
-        $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $tipo_documentos = Tipodocumentos::get();
 
         $estados = [
@@ -530,7 +529,13 @@ class CursosController extends Controller
             'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
-        return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso','tipo_documentos','estados'));
+
+        if($curso->precio == NULL){
+            return view('admin.cursos.lista_gratis', compact('ordenes', 'curso'));
+        }else{
+            return view('admin.cursos.listas', compact('ordenes', 'curso','tipo_documentos','estados'));
+        }
+
     }
 
     public function imprimir_mp ($id)

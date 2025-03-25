@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="name">Ticket</label>
                         <select id="ticket" name="ticket" class="form-control">
-                            @foreach ($tickets as $ticket)
+                            @foreach ($ordenes as $ticket)
                             <option value="{{$ticket->id}}">{{$ticket->nombre}}</option>
                             @endforeach
                         </select>

@@ -49,7 +49,7 @@
                     </div>
 
                     <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
-                        @foreach ($tickets as $ticket)
+                        @foreach ($ordenes as $ticket)
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#pills-home{{$ticket->id}}" role="tab" aria-controls="pills-home" aria-selected="true" id="pills-home-tab{{$ticket->id}}">
                                     <i class="ni ni-folder-17 text-sm me-2"></i> {{$ticket->nombre}} -
@@ -63,7 +63,7 @@
                         @endforeach
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        @foreach ($tickets as $ticket)
+                        @foreach ($ordenes as $ticket)
                         @include('admin.cursos.add_lista')
                             <div class="tab-pane fade show active" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
                                 <div class="card-body">
@@ -362,7 +362,7 @@
 
 
 <script>
-    @foreach ($tickets as $ticket)
+    @foreach ($ordenes as $ticket)
         $(document).ready(function() {
             $('#orden_servicio-{{$ticket->id}}').DataTable({
                 dom: 'Bfrtip',
