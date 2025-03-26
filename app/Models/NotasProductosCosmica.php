@@ -61,6 +61,11 @@ class NotasProductosCosmica extends Model
         'id_reposicion_nas',
         'id_reposicion_cosmica',
         'id_reposicion_user',
+        'fecha_reposicion',
+        'estatus_reposicion',
+        'firma_reposicion',
+        'nota_reposicion',
+
     ];
     public function NotasNAS()
     {
