@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+<style>
+    .border-yellow {
+        border: 2px solid yellow;
+    }
+</style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -236,7 +241,11 @@
                                             @endforeach
 
                                             @foreach ($notas_cosmica_preparacion as $item)
-                                                <tr style="background: #d486d6">
+                                                @php
+                                                    $borderClass = $item->item_id_meli ? 'border-yellow' : '';
+                                                @endphp
+
+                                                <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -456,7 +465,6 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-
                                                 @include('admin.cosmica_ecommerce.modal_direccion')
                                             @endforeach
                                             </tbody>
