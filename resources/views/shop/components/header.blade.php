@@ -11,7 +11,7 @@
 
         <!-- LOGO -->
         <a href="{{route("tienda_online.index")}}" class="me-3">
-            <img class="img_logo_header" src="{{ asset('ecommerce/logo_nas.png') }}" alt="" style="max-width: 100px;">
+            <img class="img_logo_header" src="{{ asset('ecommerce/logo_nas_h.png') }}" alt="" style="max-width: 160px;">
         </a>
 
         <!-- BUSCADOR EN EL CENTRO (Visible en PC) -->

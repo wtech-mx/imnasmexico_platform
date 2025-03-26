@@ -59,7 +59,7 @@
 </head>
 
 {{-- <body style="background: linear-gradient(0deg, rgba(247, 245, 238, 0.97) 0%, rgba(247, 245, 238, 0.97) 100%), url('{{ asset('ecommerce/patter_2_grande.png') }}') lightgray 50% / cover no-repeat;"> --}}
-    <body style="background:#F7F5EE">
+    <body style="background:#f9f4f4">
 
         <div class="container-fluid p-0">
             @include('shop.components.header')
