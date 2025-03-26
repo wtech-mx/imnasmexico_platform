@@ -312,22 +312,28 @@
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
-    document.getElementById('formulario-cotizacion').addEventListener('submit', function(e) {
-    const cantidades = document.querySelectorAll('input[name="campo3[]"]');
-    let error = false;
+document.getElementById('formulario-cotizacion').addEventListener('submit', function(e) {
+    const productosSeleccionados = document.querySelectorAll('.producto2'); // Productos nuevos seleccionados
+    let productoConCantidadInvalida = false;
+    let hayProductoSeleccionado = false;
 
-    cantidades.forEach(input => {
-        const valor = input.value.trim();
-        if (valor === '' || isNaN(valor) || parseInt(valor) <= 0) {
-            error = true;
+    productosSeleccionados.forEach(producto => {
+        const cantidadInput = producto.closest('.campo2').querySelector('input[name="campo3[]"]');
+        if (producto.value !== "") { // Solo validar si un producto fue seleccionado
+            hayProductoSeleccionado = true;
+
+            if (!cantidadInput || cantidadInput.value.trim() === '' || isNaN(cantidadInput.value) || parseInt(cantidadInput.value) <= 0) {
+                productoConCantidadInvalida = true;
+            }
         }
     });
 
-    if (error) {
+    if (hayProductoSeleccionado && productoConCantidadInvalida) {
         e.preventDefault(); // Cancela el envío del formulario
-        alert('Por favor, asegúrate de ingresar una cantidad válida para cada producto nuevo.');
+        alert('Por favor, asegúrate de ingresar una cantidad válida para cada producto nuevo seleccionado.');
     }
 });
+
 
     document.addEventListener('DOMContentLoaded', function () {
         $('.producto2').select2();
