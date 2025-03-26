@@ -46,15 +46,7 @@
                 <h4 style="color:#836262"><strong>Seleciona los productos</strong> </h4>
             </div>
 
-            <div class="col-1">
-                <div class="form-group">
-                    <button class="mt-5" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
-                        <i class="fa fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="col-11">
+            <div class="col-12">
                 <div class="form-group">
                     <div id="camposContainer">
                         <div class="campo mt-3">
@@ -114,6 +106,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group">
+                    <button class="mt-5" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             </div>
 
