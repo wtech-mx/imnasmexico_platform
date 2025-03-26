@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+<style>
+    .border-yellow {
+        background: #fff61a!important;
+    }
+</style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -13,7 +18,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <h2 class="mb-3">Notas ventas del Mes</h2>
+                            <h2 class="mb-3">Notas ventas del Mes Preparados</h2>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
@@ -184,8 +189,15 @@
                                     @endforeach
 
                                     @foreach ($notas_cosmica_preparado as $item)
-                                        <tr style="background: #d486d6">
+                                        @php
+                                            $borderClass = $item->item_id_meli ? 'border-yellow' : '';
+                                        @endphp
+
+                                        <tr class="{{ $borderClass }}" style="background: #d486d6">
                                             <td>
+                                                @if ($item->item_id_meli)
+                                                    <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">
+                                                @endif
                                                 <h5>
                                                     @if ($item->folio == null)
                                                         {{ $item->id }}
@@ -194,6 +206,7 @@
                                                     @endif
                                                 </h5>
                                             </td>
+
                                             <td>
                                                 <h5>
                                                     @if ($item->id_usuario == NULL)
