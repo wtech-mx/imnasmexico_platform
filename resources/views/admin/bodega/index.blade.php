@@ -7,7 +7,7 @@
 @section('content')
 <style>
     .border-yellow {
-        border: 2px solid yellow;
+        background: #fff61a!important;
     }
 </style>
     <div class="container-fluid">
@@ -248,7 +248,7 @@
                                                 <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                     <td>
                                                         @if ($item->item_id_meli)
-                                                            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="30px">
+                                                            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">
                                                         @endif
                                                         <h5>
                                                             @if ($item->folio == null)
