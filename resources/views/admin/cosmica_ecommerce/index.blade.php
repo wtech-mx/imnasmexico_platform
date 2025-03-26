@@ -50,7 +50,7 @@
                                     </a>
 
                                     <a class="nav-link " href="{{ route('pedidos_cosmica_ecommerce.index_pen') }}">
-                                        Pendiente Pago<img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                        Carritos Abandonados<img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
                                     </a>
                                 </div>
                             </nav>
