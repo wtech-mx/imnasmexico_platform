@@ -247,6 +247,9 @@
 
                                                 <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                     <td>
+                                                        @if ($item->item_id_meli)
+                                                            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="30px">
+                                                        @endif
                                                         <h5>
                                                             @if ($item->folio == null)
                                                                 {{ $item->id }}
