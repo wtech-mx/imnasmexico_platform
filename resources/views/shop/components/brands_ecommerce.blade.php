@@ -9,19 +9,25 @@
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/cosmika/menu/logo.png') #ffffff00 50% / contain no-repeat;"></div>
+                <a href="https://cosmicaskin.com" target="_blank">
+                    <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/cosmika/menu/logo.png') #ffffff00 50% / contain no-repeat;"></div>
+                </a>
             </div>
         </div>
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp') #ffffff00 50% / contain no-repeat;"></div>
+                <a href="https://plataforma.imnasmexico.com" target="_blank">
+                    <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp') #ffffff00 50% / contain no-repeat;"></div>
+                </a>
             </div>
         </div>
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/assets/user/logotipos/registro_nacional.png') #ffffff00 50% / contain no-repeat;"></div>
+                <a href="https://plataforma.imnasmexico.com/registro/" target="_blank">
+                    <div class="my-auto mx-auto img_grid_brands" style="background: url('https://plataforma.imnasmexico.com/assets/user/logotipos/registro_nacional.png') #ffffff00 50% / contain no-repeat;"></div>
+                </a>
             </div>
         </div>
 
@@ -33,7 +39,9 @@
 
         <div class="item">
             <div class="container_brands">
-                <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/logo_nas.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                <a href="" target="_blank" >
+                    <div class="my-auto mx-auto img_grid_brands" style="background: url('{{ asset('ecommerce/logo_nas.png') }}') #ffffff00 50% / contain no-repeat;"></div>
+                </a>
             </div>
         </div>
 

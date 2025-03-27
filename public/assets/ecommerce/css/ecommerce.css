@@ -58,7 +58,7 @@
 .img_grid_brands{
     width: 70px;
     height: 70px;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+    /* filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); */
 }
 
 .img_categories_2{
