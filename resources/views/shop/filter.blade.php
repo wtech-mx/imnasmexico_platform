@@ -78,16 +78,16 @@
                 <div class="form-check mt-3">
                     @foreach ($categorias as $cat)
                         @if (trim($cat->linea) === "corporal")
-                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
                             <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
                         @endif
                     @endforeach
 
                     <h3 class="subtitle_filtro mt-3" style="font-family: 'Roboto_Regular';">Facial</h3>
                     @foreach ($categorias as $cat)
                         @if (trim($cat->linea) === "facial")
-                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
                             <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
                         @endif
                     @endforeach
                 </div>

@@ -39,9 +39,8 @@
                 <div class="form-check mt-3">
                     @foreach ($categorias as $cat)
                         @if (trim($cat->linea) === "corporal")
-                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
                             <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
-
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
                         @endif
                     @endforeach
                 </div>
@@ -50,9 +49,8 @@
                 <div class="form-check mt-3">
                     @foreach ($categorias as $cat)
                         @if (trim($cat->linea) === "facial")
-                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
                             <label class="form-check-label" for="categoria{{ $cat->id }}">{{ $cat->nombre }}</label>
-
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoria{{ $cat->id }}" {{ $cat->id == $categoria->id ? 'checked' : '' }}>
                         @endif
                     @endforeach
                 </div>
