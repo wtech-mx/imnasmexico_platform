@@ -53,10 +53,9 @@
                             <table class="table table-flush" id="orden_servicio">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
                                         <th>Nombre</th>
-                                        <th>Metodo de Pago</th>
-                                        <th>Acciones</th>
+                                        <th>Telefono</th>
+                                        <th>ID</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,23 +64,11 @@
                                     @endphp
                                     @foreach ($ordenes as $order)
                                         <tr class="{{ ($order->estatus_doc == 1 && $order->estatus_cedula == 1 && $order->estatus_titulo == 1 && $order->estatus_diploma == 1 && $order->estatus_credencial == 1 && $order->estatus_tira == 1) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
-                                            <td>{{ $contador++ }}</td>
                                             <td>
                                                 <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
-                                                <p>{{ $order->User->telefono }}</p>
-                                                <p>{{ $order->User->email }}</p>
                                             </td>
-                                            <td>{{ $order->Orders->forma_pago }} <br> Subido por: <br>
-                                                @if ($order->Orders->id_externo != NULL)
-                                                <b>{{ $order->Orders->PagosFuera->usuario }}</b>
-                                                @elseif ($order->Orders->id_admin != NULL)
-                                                <b>{{ $order->Orders->Admin->name }}</b>
-                                                @else
-                                                <b>Pago por pagina</b>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-sm btn-danger" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-newspaper" title="Ver Orden"></i> </a>
+                                            <td><p>{{ $order->User->telefono }}</p></td>
+                                            <td><p>{{ $order->User->id }}</p>
                                             </td>
                                         </tr>
                                     @endforeach
