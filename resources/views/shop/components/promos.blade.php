@@ -8,9 +8,11 @@
 
         <div id="loop_ofertasPromos" class="owl-carousel owl-theme">
             @foreach ($banner_slide as $item)
-                <a href="{{$item->link}}">
-                    <img class="img_post_promos" src="{{asset('noticias/'.$item->multimedia) }}" alt="">
-                </a>
+                @if ($item->estatus === 'Activo')
+                    <a href="{{$item->link}}">
+                        <img class="img_post_promos" src="{{asset('noticias/'.$item->multimedia) }}" alt="">
+                    </a>
+                @endif
             @endforeach
 
         </div>
