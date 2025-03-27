@@ -10,9 +10,17 @@ class NoticiasController extends Controller
 {
     public function index(Request $request)
     {
-        $noticias = Noticias::orderBy('id','DESC')->get();
+        $noticiasPorSeccion = [
+            'NAS_SLIDE' => Noticias::where('seccion', 'NAS_SLIDE')->orderBy('id', 'DESC')->get(),
+            'NAS_BANNER' => Noticias::where('seccion', 'NAS_BANNER')->orderBy('id', 'DESC')->get(),
+            'Cosmica' => Noticias::where('seccion', 'Cosmica')->orderBy('id', 'DESC')->get(),
+            'Inicio' => Noticias::where('seccion', 'Inicio')->orderBy('id', 'DESC')->get(),
+            'Videos_Alumnas' => Noticias::where('seccion', 'Videos_Alumnas')->orderBy('id', 'DESC')->get(),
+            'Videos_Productos' => Noticias::where('seccion', 'Videos_Productos')->orderBy('id', 'DESC')->get(),
+            'Galeria_Cursos' => Noticias::where('seccion', 'Galeria Cursos')->orderBy('id', 'DESC')->get(),
+        ];
 
-        return view('admin.noticias.index', compact('noticias'));
+        return view('admin.noticias.index', compact('noticiasPorSeccion'));
     }
 
     public function store(Request $request)
@@ -51,9 +59,9 @@ class NoticiasController extends Controller
     {
         $dominio = $request->getHost();
 
-        if($dominio == 'plataforma.imnasmexico.com'){
+        if ($dominio == 'plataforma.imnasmexico.com') {
             $ruta_noticias = base_path('../public_html/plataforma.imnasmexico.com/noticias');
-        }else{
+        } else {
             $ruta_noticias = public_path() . '/noticias';
         }
 
@@ -67,7 +75,6 @@ class NoticiasController extends Controller
         $noticias->orden = $request->get('orden');
 
         if ($request->hasFile("multimedia")) {
-
             $file = $request->file('multimedia');
             $path = $ruta_noticias;
             $fileName = uniqid() . $file->getClientOriginalName();
@@ -78,21 +85,17 @@ class NoticiasController extends Controller
                 unlink($imagenExistente);
             }
 
-            $imagenAnterior = $path . '/' . $noticias->multimedia;
-            if (file_exists($imagenAnterior)) {
-                unlink($imagenAnterior);
-            }
+            // Mueve la nueva imagen al directorio correspondiente.
+            $file->move($path, $fileName);
 
-            // Mueve la nueva imagen con el mismo nombre de archivo que la imagen anterior.
-            $file->move($path, $noticias->multimedia);
-
-            $noticias->multimedia = $noticias->multimedia; // No cambia el nombre.
+            // Asigna el nuevo nombre del archivo al campo multimedia.
+            $noticias->multimedia = $fileName;
         }
 
         $noticias->update();
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Actualziado con exito');
+        Session::flash('success', 'Se ha actualizado la noticia con éxito');
+        return redirect()->back()->with('success', 'Actualizado con éxito');
     }
 
     public function destroy($id){
