@@ -53,23 +53,19 @@
                             <table class="table table-flush" id="orden_servicio">
                                 <thead class="thead">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Telefono</th>
-                                        <th>ID</th>
+                                        <th>WhatsApp Number(with country code)</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Other</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $contador = 1;
-                                    @endphp
                                     @foreach ($ordenes as $order)
-                                        <tr class="{{ ($order->estatus_doc == 1 && $order->estatus_cedula == 1 && $order->estatus_titulo == 1 && $order->estatus_diploma == 1 && $order->estatus_credencial == 1 && $order->estatus_tira == 1) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
-                                            <td>
-                                                <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
-                                            </td>
-                                            <td><p>{{ $order->User->telefono }}</p></td>
-                                            <td><p>{{ $order->User->id }}</p>
-                                            </td>
+                                        <tr>
+                                            <td>+52{{ $order->User->telefono }}</td>
+                                            <td>{{ $order->User->name }}</td>
+                                            <td>{{ $order->User->id }}</td>
+                                            <th>WAPI Sender Support</th>
                                         </tr>
                                     @endforeach
                                 </tbody>
