@@ -94,4 +94,30 @@ class NoticiasController extends Controller
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Actualziado con exito');
     }
+
+    public function destroy($id){
+    $noticia = Noticias::find($id);
+
+    if (!$noticia) {
+        return redirect()->back()->with('error', 'La noticia no existe.');
+    }
+
+    $dominio = request()->getHost();
+    if ($dominio == 'plataforma.imnasmexico.com') {
+        $ruta_noticias = base_path('../public_html/plataforma.imnasmexico.com/noticias');
+    } else {
+        $ruta_noticias = public_path() . '/noticias';
+    }
+
+    // Eliminar el archivo multimedia asociado si existe
+    $filePath = $ruta_noticias . '/' . $noticia->multimedia;
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
+
+    // Eliminar la noticia
+    $noticia->delete();
+
+    return redirect()->back()->with('success', 'Noticia eliminada con éxito.');
+}
 }

@@ -122,6 +122,13 @@
                                                     <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#edit_noticia{{$item->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                                         <i class="fa fa-fw fa-edit"></i>
                                                     </a>
+                                                    <form action="{{ route('noticias.destroy', $item->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta noticia?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger">
+                                                            <i class="fa fa-fw fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
 
 
