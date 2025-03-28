@@ -118,9 +118,9 @@ Route::get('folio', function () {
 Route::get('/tienda/nas', [App\Http\Controllers\TiendaController::class, 'index_ecommerce'])->name('tienda_online.index');
 Route::get('/tienda/nas/aviso-privacidad', [App\Http\Controllers\TiendaController::class, 'aviso'])->name('aviso.index');
 Route::get('/tienda/nas/terminos-y-condiciones', [App\Http\Controllers\TiendaController::class, 'terminos'])->name('terminos.index');
-Route::get('/tienda/nas/tienda/feedGoogle.xml', [App\Http\Controllers\TiendaController::class, 'generateFeed'])->name('generateFeed');
-Route::get('/tienda/nas/tienda/producto/{slug}', [App\Http\Controllers\TiendaController::class, 'single_product'])->name('tienda_online.single');
-Route::get('/tienda/nas/tienda/categories/{slug}', [App\Http\Controllers\TiendaController::class, 'categories'])->name('tienda_online.categories');
+Route::get('/tienda/nas/feedGoogle.xml', [App\Http\Controllers\TiendaController::class, 'generateFeed'])->name('generateFeed');
+Route::get('/tienda/nas/producto/{slug}', [App\Http\Controllers\TiendaController::class, 'single_product'])->name('tienda_online.single');
+Route::get('/tienda/nas/categories/{slug}', [App\Http\Controllers\TiendaController::class, 'categories'])->name('tienda_online.categories');
 Route::get('/tienda/nas/filter', [App\Http\Controllers\TiendaController::class, 'filter'])->name('tienda_online.filter');
 
 Route::post('/tienda/nas/agregar-al-carrito', [App\Http\Controllers\TiendaController::class, 'agregar'])->name('carrito.agregarNas');

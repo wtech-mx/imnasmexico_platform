@@ -136,12 +136,6 @@ class TiendaController extends Controller
         return Response::make($xml->asXML(), 200, ['Content-Type' => 'application/xml']);
     }
 
-    public function getStockFromOdoo($id)
-    {
-        $stockOdoo = $this->odooService->getStockByProductIodoo($id);
-        return response()->json(['stock' => $stockOdoo]);
-    }
-
     public function cart(){
         return view('shop.cart');
     }
@@ -275,40 +269,17 @@ class TiendaController extends Controller
     public function agregar(Request $request)
     {
         $product = Products::find($request->id);
-        $cantidadNueva = (float) $request->cantidad; // Cantidad a agregar
 
+        $cantidadNueva = (float) $request->cantidad; // Cantidad a agregar
         if (!$product) {
             return response()->json(['error' => '❌ Producto no encontrado'], 404);
         }
 
-        // ✅ 🚀 Obtener stock desde Odoo por id_woocommerce
-        $stockDisponible = $this->odooService->getStockByProductIdWoo($product->id_woocommerce);
-
-        // Si hay un error en la conexión con Odoo, usamos el stock local
-        if (isset($stockDisponible['error'])) {
-            $stockDisponible = optional($product->ProductoStock)->stock ?? 0;
-        }
-
-        // Aplicar descuento del 10% si es lunes y la categoría es 26
-        $precio = $product->ProductoStock->precio_normal;
-
-        $precioOriginal = $precio;
-        if (date('N') == 1 && $product->id_categoria == 26) {
-            $precio *= 0.9;
-
-        }
         // 🛒 Obtener carrito actual desde la sesión
         $cart = session()->get('cart', []);
 
         // 📌 Obtener la cantidad actual del producto en el carrito
         $cantidadEnCarrito = isset($cart[$product->id]) ? $cart[$product->id]['cantidad'] : 0;
-
-        // ⚠️ Verificar si al sumar la cantidad nueva se supera el stock disponible
-        if (($cantidadEnCarrito + $cantidadNueva) > $stockDisponible) {
-            return response()->json([
-                'error' => '❌ No puedes agregar más de este producto. Stock insuficiente.'
-            ], 400);
-        }
 
         // ✅ Agregar o actualizar el producto en el carrito
         if (isset($cart[$product->id])) {
@@ -317,11 +288,10 @@ class TiendaController extends Controller
             $cart[$product->id] = [
                 'id' => $product->id,
                 'nombre' => $product->nombre,
-                'precio' => $precio,
-                'precio_original' => $precioOriginal,
+                'precio' => $product->precio_normal,
                 'cantidad' => $cantidadNueva,
-                'stock' => $stockDisponible,
-                'imagen' => $product->imagen_principal,
+                'stock' =>  $product->stock,
+                'imagenes' => $product->imagenes,
             ];
         }
 

@@ -24,67 +24,23 @@ Carrito
 
                 @if(session('cart'))
                     @foreach(session('cart') as $id => $producto)
-                        @php
-                            $producto_stock = App\Models\ProductosStock::where('id_producto', '=', $id)->first();
-                            $esPorKg = isset($producto_stock->Producto->unidad_venta) &&
-                                        ($producto_stock->Producto->unidad_venta === 'Kg' ||
-                                            $producto_stock->Producto->unidad_venta === 'kg');
-                            $precioPorKg = $producto_stock->precio_normal;
-                            // Definir opciones según id_marca
-                            $opciones = [];
-
-                            if ($producto_stock->Producto->id_marca == 147 || $producto_stock->Producto->id_marca == 102) {
-                                $opciones = [
-                                    1 => $precioPorKg,
-                                    0.5 => ($precioPorKg * 500) / 1000,
-                                    2 => $precioPorKg * 2,
-                                    3 => $precioPorKg * 3
-                                ];
-                            } elseif ($producto_stock->Producto->id_marca == 5) {
-                                $opciones = [
-                                    1 => $precioPorKg,
-                                    2 => $precioPorKg * 2,
-                                    3 => $precioPorKg * 3
-                                ];
-                            } else {
-                                $opciones = [
-                                    1 => $precioPorKg,
-                                    0.6 => ($precioPorKg * 600) / 1000,
-                                    0.4 => ($precioPorKg * 400) / 1000
-                                ];
-                            }
-                        @endphp
                         <div class="container_order_item_cart row mb-4">
                             <div class="d-flex justify-content-between">
 
-                                @if ($producto['imagen'] == NULL)
+                                @if ($producto['imagenes'] == NULL)
                                     <div class="mx-auto img_portada_cart" style="background: url({{ asset('ecommerce/Isotipo_negro.png') }}) #ffffff00  50% / contain no-repeat;"></div>
                                 @else
-                                <div class="mx-auto img_portada_cart" style="background: url(&quot;{{ asset('imagen_principal/empresa' . $empresa->id . '/' . $producto['imagen']) }}&quot;) #ffffff00  50% / contain no-repeat;"></div>
-
+                                    <div class="mx-auto img_portada_cart" style="background: url(&quot;{{$producto['imagenes']}}&quot;) #ffffff00  50% / contain no-repeat;"></div>
                                 @endif
 
                                 <p class="title_product_cart m-0 my-auto">{{ $producto['nombre'] }}</p>
 
                                 <div class="container_item_cart my-auto" style="">
-                                    @if ($esPorKg)
-                                    <div class="d-flex align-items-center">
-                                        <div href="javascript:void(0);" class="btn_menos decrementar_kg" data-id="{{ $id }}" data-marca="{{ $producto_stock->Producto->id_marca }}">
-                                            <i class="bi bi-dash icon-small"></i>
-                                        </div>
 
-                                        <input type="text" class="btn_input_cart text-center" value="{{ $producto['cantidad'] }}" min="1"
-                                               data-id="{{ $id }}" data-marca="{{ $producto_stock->Producto->id_marca }}" data-stock="{{ $producto['stock'] }}" readonly>
-
-                                        <div href="javascript:void(0);" class="btn_plus incrementar_kg" data-id="{{ $id }}" data-marca="{{ $producto_stock->Producto->id_marca }}">
-                                            <i class="bi bi-plus-lg icon-small"></i>
-                                        </div>
-                                    </div>
-                                    @else
                                         <div href="javascript:void(0);" class="btn_menos d-inline decrementar" data-id="{{ $id }}"><i class="bi bi-dash icon-small"></i></div>
                                         <input type="number" class="btn_input_cart" value="{{ $producto['cantidad'] }}" min="1" data-id="{{ $id }}" data-stock="{{ $producto['stock'] }}">
                                         <div href="javascript:void(0);" class="btn_plus d-inline incrementar" data-id="{{ $id }}"><i class="bi bi-plus-lg icon-small"></i></div>
-                                    @endif
+
                                 </div>
 
                                 <p class="title_price_cart m-0 my-auto" id="total-{{ $id }}">
@@ -123,7 +79,7 @@ Carrito
             </div>
 
             <div class="col-12 col-sm-6 col-md-6 col-lg-6 p-4 p-sm-3 p-md-3 p-lg-3">
-                <form method="POST" action="{{ route('procesar.pago') }}">
+                <form method="POST" action="">
                     @csrf
                     <div class="row">
                         <h3 class="mb-3">Detalles del cliente</h3>

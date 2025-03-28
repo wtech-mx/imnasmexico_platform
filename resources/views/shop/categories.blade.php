@@ -220,7 +220,7 @@ $(document).ready(function () {
             boton.prop("disabled", true);
 
             $.ajax({
-                url: "{{ route('carrito.agregar') }}",
+                url: "{{ route('carrito.agregarNas') }}",
                 type: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
