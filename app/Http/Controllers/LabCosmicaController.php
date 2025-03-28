@@ -258,7 +258,7 @@ class LabCosmicaController extends Controller
     }
     // =============== C O N T E O  E T I Q U E T A S ===============================
     public function index_etiqueta(Request $request){
-        $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
+        $products = Products::orderBy('id', 'ASC')->where('categoria', 'Cosmica')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
         $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 200)->where('estatus_lateral','=', '1')->get();
         $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 200)->where('estatus_tapa','=', '1')->get();
         $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->get();
@@ -302,6 +302,11 @@ class LabCosmicaController extends Controller
             $cantidad_reversa = $product->etiqueta_reversa - $request->get('etiqueta_reversa_uti');
         }
 
+        $estatus_lateral = ($request->filled('etiqueta_lateral_comp') || $request->filled('etiqueta_lateral_uti')) ? 1 : $product->estatus_lateral;
+        $estatus_tapa = ($request->filled('etiqueta_tapa_comp') || $request->filled('etiqueta_tapa_uti')) ? 1 : $product->estatus_tapa;
+        $estatus_frente = ($request->filled('etiqueta_frente_comp') || $request->filled('etiqueta_frente_uti')) ? 1 : $product->estatus_frente;
+        $estatus_reversa = ($request->filled('etiqueta_reversa_comp') || $request->filled('etiqueta_reversa_uti')) ? 1 : $product->estatus_reversa;
+
         // Guardar los valores anteriores del producto en la tabla historial_stock
         $historialData = [
             'id_producto' => $product->id,
@@ -325,6 +330,11 @@ class LabCosmicaController extends Controller
         $product->etiqueta_tapa = $cantidad_tapa;
         $product->etiqueta_frente = $cantidad_frente;
         $product->etiqueta_reversa = $cantidad_reversa;
+
+        $product->estatus_lateral = $estatus_lateral;
+        $product->estatus_tapa = $estatus_tapa;
+        $product->estatus_frente = $estatus_frente;
+        $product->estatus_reversa = $estatus_reversa;
         $product->update();
 
         return response()->json([

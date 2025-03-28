@@ -301,6 +301,11 @@ class LabNasController extends Controller
             $cantidad_reversa = $product->etiqueta_reversa - $request->get('etiqueta_reversa_uti');
         }
 
+        $estatus_lateral = ($request->filled('etiqueta_lateral_comp') || $request->filled('etiqueta_lateral_uti')) ? 1 : $product->estatus_lateral;
+        $estatus_tapa = ($request->filled('etiqueta_tapa_comp') || $request->filled('etiqueta_tapa_uti')) ? 1 : $product->estatus_tapa;
+        $estatus_frente = ($request->filled('etiqueta_frente_comp') || $request->filled('etiqueta_frente_uti')) ? 1 : $product->estatus_frente;
+        $estatus_reversa = ($request->filled('etiqueta_reversa_comp') || $request->filled('etiqueta_reversa_uti')) ? 1 : $product->estatus_reversa;
+
         // Guardar los valores anteriores del producto en la tabla historial_stock
         $historialData = [
             'id_producto' => $product->id,
@@ -324,6 +329,11 @@ class LabNasController extends Controller
         $product->etiqueta_tapa = $cantidad_tapa;
         $product->etiqueta_frente = $cantidad_frente;
         $product->etiqueta_reversa = $cantidad_reversa;
+
+        $product->estatus_lateral = $estatus_lateral;
+        $product->estatus_tapa = $estatus_tapa;
+        $product->estatus_frente = $estatus_frente;
+        $product->estatus_reversa = $estatus_reversa;
         $product->update();
 
         return response()->json([

@@ -43,6 +43,7 @@
                             <option value="">Seleciona una opcion</option>
                             <option value="Tiendita">Tiendita</option>
                             <option value="Producto">Producto</option>
+                            <option value="Muestras">Muestras</option>
                         </select>
                     </div>
 
