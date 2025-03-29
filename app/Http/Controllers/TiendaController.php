@@ -344,6 +344,7 @@ class TiendaController extends Controller
         ]);
     }
 
+
     public function remove(Request $request)
     {
         $cart = session()->get('cart', []);
@@ -353,7 +354,24 @@ class TiendaController extends Controller
             session()->put('cart', $cart);
         }
 
-        return response()->json(['success' => true]);
+        // Recalcular subtotal
+        $subtotal = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart));
+
+        // Determinar el costo de envío
+        $costoEnvio = 0;
+        if ($request->envio === 'domicilio' && $subtotal < 1000) {
+            $costoEnvio = 150;
+        }
+
+        // Calcular el total
+        $total = $subtotal + $costoEnvio;
+
+        return response()->json([
+            'success' => true,
+            'subtotal' => $subtotal,
+            'costo_envio' => $costoEnvio,
+            'total' => $total
+        ]);
     }
 
     public function aviso(Request $request){

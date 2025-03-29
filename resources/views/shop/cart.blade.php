@@ -214,6 +214,11 @@ Carrito
 $(document).ready(function () {
     let envio = 'pickup'; // Valor predeterminado para el método de envío
 
+    if ($('.container_order_item_cart').length === 0) {
+        $('.subtotal_cart, .envio_cart, .total_cart').hide();
+        $('#listaProductos').html('<p>Tu carrito está vacío.</p>');
+    }
+
     // Cambiar el método de envío
     $('input[name="inlineRadioOptions"]').on('change', function () {
         envio = $(this).val(); // Actualizar el método de envío
@@ -266,22 +271,43 @@ $(document).ready(function () {
     });
 
         // ✅ Eliminar producto del carrito
-        $('.eliminar-producto').click(function () {
-            let id = $(this).data('id');
+// ✅ Eliminar producto del carrito
+$('.eliminar-producto').click(function () {
+    let id = $(this).data('id');
 
-            $.ajax({
-                url: "{{ route('cart.removeNas') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: id
-                },
-                success: function (response) {
-                    mostrarToast("🗑️ Producto eliminado del carrito", "success");
-                    location.reload(); // 🔄 Recargar para actualizar el carrito
+    $.ajax({
+        url: "{{ route('cart.removeNas') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id: id,
+            envio: envio // Enviar el método de envío al servidor
+        },
+        success: function (response) {
+            if (response.success) {
+                // Eliminar el producto del DOM
+                $('a[data-id="' + id + '"]').closest('.container_order_item_cart').remove();
+
+                // Actualizar los totales en el DOM
+                $('#subtotal-carrito').text('$' + response.subtotal.toFixed(2));
+                $('#envio-carrito').text('$' + response.costo_envio.toFixed(2));
+                $('#total-carrito').text('$' + response.total.toFixed(2));
+
+                // Mostrar mensaje de envío gratis si aplica
+                if (response.costo_envio === 0 && envio === 'domicilio') {
+                    $('#envio-gratis').show();
+                } else {
+                    $('#envio-gratis').hide();
                 }
-            });
-        });
+
+                mostrarToast("🗑️ Producto eliminado del carrito", "success");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al eliminar el producto:", error);
+        }
+    });
+});
 
     // Función para actualizar la cantidad en el carrito vía AJAX
     function actualizarCantidad(id, cantidad) {
