@@ -380,7 +380,7 @@
 }
 
 .title_price_cart{
-    color: #000;
+    color: #875053;
     font-family: 'Roboto_Regular';
     font-size: 19px;
     font-style: normal;
@@ -436,7 +436,7 @@
 }
 
 .envio_cart{
-    color: #E5B467;
+    color: #D19B9B;
 }
 
 .total_cart{
@@ -451,7 +451,7 @@
 }
 
 .btn_cupon_cart{
-    background: #E5B467;
+    background: #D19B9B;
     border-radius: 16px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 13px;

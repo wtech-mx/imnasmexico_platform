@@ -125,8 +125,8 @@ Route::get('/tienda/nas/filter', [App\Http\Controllers\TiendaController::class, 
 
 Route::post('/tienda/nas/agregar-al-carrito', [App\Http\Controllers\TiendaController::class, 'agregar'])->name('carrito.agregarNas');
 Route::post('/tienda/nas/actualizar-carrito', [App\Http\Controllers\TiendaController::class, 'actualizar'])->name('carrito.actualizar');
-Route::post('/tienda/nas/cart/update', [App\Http\Controllers\TiendaController::class, 'update'])->name('cart.update');
-Route::post('/tienda/nas/cart/remove', [App\Http\Controllers\TiendaController::class, 'remove'])->name('cart.remove');
+Route::post('/tienda/nas/cart/update', [App\Http\Controllers\TiendaController::class, 'update'])->name('cart.updateNas');
+Route::post('/tienda/nas/cart/remove', [App\Http\Controllers\TiendaController::class, 'remove'])->name('cart.removeNas');
 Route::get('/tienda/nas/tienda/nas/tienda/cart', [App\Http\Controllers\TiendaController::class, 'cart'])->name('cart.index');
 Route::get('/tienda/nas/tienda/buscador', [App\Http\Controllers\TiendaController::class, 'buscador'])->name('tienda_online.buscador');
 Route::get('/tienda/nas/filtrar-productos', [App\Http\Controllers\TiendaController::class, 'filtrarPorCategoria'])->name('productos.filtrar');

@@ -9,8 +9,8 @@ Carrito
     <link rel="stylesheet" href="{{ asset('assets/css/single_product.css') }}">
     <style>
         .form-check-input:checked {
-            background-color: #E5B467;
-            border-color: #E5B467;
+            background-color: #D19B9B;
+            border-color: #D19B9B;
         }
     </style>
 @endsection
@@ -127,11 +127,11 @@ Carrito
                                         <!-- Contenedor PickUp -->
                                         <div class="container_pickup row mt-3">
                                             <p>
-                                                <a href="https://maps.app.goo.gl/WoEycdRbmkpVLquXA" style="color: #E5B467">
-                                                    Mérida 64, Cuahutemoc 19-4214, -99.1579, Roma Nte., 06700 Ciudad de México, CDMX
+                                                <a href="https://maps.app.goo.gl/iVavCu1K9nh6k6DN7" style="color: #D19B9B">
+                                                    Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
                                                 </a>
                                             </p>
-                                            <iframe class="ifram_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.7954834491547!2d-99.16045332523932!3d19.421240581855653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ffbe36afe1f7%3A0x3ea01a1b1ae9104c!2sZoco%20Fresh%20Roma%20Tienda%20org%C3%A1nica!5e0!3m2!1ses-419!2smx!4v1735834614408!5m2!1ses-419!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            <iframe class="ifram_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30106.79577601507!2d-99.18064112568361!3d19.397300699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses!2smx!4v1743215720695!5m2!1ses!2smx" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                         </div>
 
                                         <!-- Contenedor Envio a Domicilio -->
@@ -211,156 +211,66 @@ Carrito
 @section('js_custom')
 
 <script>
-    $(document).ready(function() {
+$(document).ready(function () {
+    let envio = 'pickup'; // Valor predeterminado para el método de envío
 
-        // Definición de variables y objetos
-        const zonas = {
-            13: ["01588","01700","01708","01720","01770","01800","01807","01810","01820","01830","01840","01849","01857","01859","01860","01863","01870","01904","04500","04840","04899","04909","04918","04919","04920","04930","04938","04939","04950","04960","04970","05000","05010","05020","05030","05050","05100","05200","05219","05220","05230","05240","05260","05269","05270","05280","05310","05320","05330","05348","05360","05370","05379","05400","05410","05500","05520","05530","05600","05610","05700","05710","05730","05750","05760","05780","07100","07109","07110","07119","07130","07140","07144","07149","07150","07160","07164","07170","07180","07183","07187","07188","07189","07190","07199","07200","07207","07209","07210","07214","07220","07224","07239","07240","07259","09130","09140","09180","09200","10000","10010","10020","10130","10300","10320","10330","10340","10350","10360","10368","10369","10370","10378","10379","10380","10500","10580","10600","10610","10620","10630","10640","10660","10710","10800","10810","10820","10830","10840","10900","10910","10920","10926","12000","12070","12080","12100","12110","12200","12250","12300","12400","12410","12500","12600","12700","12800","12910","12920","12930","12940","12950","13000","13010","13020","13030","13040","13050","13060","13070","13080","13090","13093","13094","13099","13100","13120","13150","13180","13200","13210","13219","13220","13230","13250","13270","13273","13278","13280","13300","13310","13315","13319","13360","13400","13410","13419","13420","13430","13440","13450","13460","13508","13509","13510","13520","13530","13540","13545","13549","13550","13600","13610","13625","13630","13640","13700","14000","14010","14030","14039","14040","14049","14050","14060","14070","14080","14090","14100","14108","14110","14120","14140","14150","14160","14200","14208","14209","14210","14219","14220","14230","14239","14240","14248","14250","14260","14266","14267","14268","14269","14270","14275","14300","14308","14325","14326","14330","14340","14357","14360","14376","14377","14380","14386","14387","14388","14389","14390","14400","14406","14408","14409","14410","14420","14426","14427","14429","14430","14438","14439","14440","14449","14460","14470","14476","14479","14480","14490","14500","14600","14608","14609","14610","14620","14629","14630","14640","14643","14646","14647","14650","14653","14655","14657","14658","14659","14700","14710","14720","14730","14734","14735","14737","14738","14739","14740","14748","14749","14760","14900","15640","15660","16000","16010","16020","16029","16030","16034","16035","16036","16038","16040","16050","16059","16060","16070","16080","16083","16090","16100","16200","16210","16240","16300","16310","16320","16340","16400","16410","16420","16428","16429","16430","16440","16443","16450","16457","16459","16500","16513","16514","16520","16530","16533","16550","16600","16604","16605","16606","16607","16609","16610","16614","16615","16616","16617","16620","16629","16630","16640","16710","16720","16739","16740","16749","16750","16770","16776","16780","16797","16799","16800","16810","16813","16840","16850","16860","16880","16900"],
-            12: ["01049","01060","01089","01090","01230","01239","01290","01330","01376","01389","01539","01549","01645","01729","01740","01780","01789","01900","02100","02230","02440","02710","02719","04440","04480","04489","04490","04510","04519","04700","04710","04730","04739","04800","04870","04890","04910","04929","04940","04980","05129","07090","07500","07509","07510","07530","07540","07550","07560","07580","07630","07650","07910","09208","09209","09230","09239","09240","09250","09260","09270","09280","09290","09300","09350","09359","09360","10200","10400","10700","14020","14310","14320","14350","14370","15400","15600","15620"],
-            11: ["01259","01260","01296","01298","01299","01310","01320","01340","01377","01430","01500","01509","01520","01530","01538","01540","01548","01550","01560","01569","01590","01610","01618","01630","01650","01730","01750","01759","01760","01790","02120","02128","02129","02130","02140","02400","02410","04210","04260","04300","04369","04420","04450","04460","04470","04530","04600","04620","04630","04640","04650","04660","04810","04815","04830","05110","05118","05119","05120","07080","07089","07230","07250","07268","07270","07279","07280","07290","07310","07320","07330","07340","07350","07359","07360","07410","07420","07430","07440","07455","07520","07600","07640","07670","07707","07708","07900","07918","07919","07920","07940","07950","07969","07980","07990","08500","09100","09210","09220","09310","09319","09320","09819","09820","09828","09829","09830","09837","09838","09839","09840","09849","09850","09856","09858","09859","09860","09868","09870","09880","09890","09897","09900","09910","09920","09930","09940","09960","09969","09970","11700","15440","15520","15530","15610","15650","15680"],
-            10: ["01080","01210","01219","01240","01250","01269","01270","01275","01276","01278","01279","01285","01289","01407","01408","01410","01450","01460","01470","01480","01490","01510","01566","01619","01620","01640","01710","02150","02160","02200","02240","02250","02300","02310","02320","02360","02420","02459","02460","02470","02480","02490","02519","02720","02750","04200","04240","04250","04330","04340","04360","04370","04380","04390","04400","04410","04610","07010","07040","07058","07060","07069","07070","07300","07369","07400","07450","07456","07460","07469","07470","07480","07570","07620","07680","07700","07720","07730","07739","07740","07754","07755","07760","07930","07939","07960","07970","07979","08510","08730","08760","08900","09000","09010","09020","09030","09040","09060","09070","09080","09089","09090","09099","09410","09420","09429","09430","09438","09440","09450","09460","09470","09479","09480","09500","09510","09520","09530","09550","09560","09570","09578","09600","09608","09609","09620","09630","09637","09638","09640","09648","09660","09670","09696","09698","09700","09704","09708","09709","09710","09720","09730","09740","09750","09760","09769","09770","09780","09790","09800","09810","11619","11910","11920","11930","11950","15320"],
-            9: ["09680", "09689", "09690", "09705", "09706"],
-            8: ["08770"],
-            7: ["01180"],
-            6: ["01000","01010","01020","01030","01040","01050","01070","01110","01170","01200","01220","01280","01400","01419","01420","01600","02000","02010","02020","02040","02050","02060","02070","02330","02340","02500","02520","02630","02700","02730","02760","02790","02810","02950","03230","03570","03580","03590","03700","03730","03900","03910","03920","03930","03940","04000","04010","04020","04030","04040","04120","04230","04310","04318","04320","07000","07020","07050","07370","07380","07750","07770","07780","07790","07800","07810","07820","07830","07838","07839","07840","07850","07858","07859","07860","07869","07870","07880","07889","07890","07899","08000","08010","08020","08030","08040","08100","08420","09400","11000","11210","11220","11650","15250","15300","15309","15310","15339","15370","15390","15410","15420","15430","15450","15470","15510","15540","15630","15670","15700","15730","15740","15750"],
-            5: ["01100","01109","01120","01125","01130","01139","01140","01150","01160","02099","02530","02600","02640","02650","02670","02680","02770","02780","02800","02830","02840","02860","02870","02900","02910","02920","02930","02940","02960","02970","02980","02990","03104","03240","03300","03303","03310","03320","03330","03340","03400","03500","03540","03550","03560","03740","03800","04100","06350","06430","06450","06920","08240","08320","08400","08600","08610","08620","08650","08700","08710","08720","08800","08810","08830","08840","08910","08920","08930","11100","11200","11230","11240","11250","11260","11270","11289","11290","11410","11500","11510","11600","11610","15000","15010","15020","15200","15210","15220","15230","15240","15260","15270","15280","15290","15330","15340","15350","15460","15500","15710"],
-            4: ["02660"],
-            3: ["02080","02090","03023","03100","03200","03410","03420","03430","03440","03510","03520","03530","03600","03610","03620","03630","03640","03650","03660","03710","03720","03820","03840","06010","06020","06060","06200","06220","06240","06250","06270","06280","08200","08210","08220","08230","08300","08310","11040","11280","11350","11400","11420","11430","11440","11450","11470","11480","11489","11490","11529","11530","11540","11550","11560","11570","11580","11820","11830","11840","11850","11860","11870","15100","15380","15800","15810","15820","15830","15840","15850","15860","15870","15900","15960","15970","15980","15990"],
-            2: ["03010","03020","03103","03810","06000","06030","06050","06090","06140","06170","06300","06400","06470","06820","06850","06870","06890","06900","11300","11310","11320","11330","11340","11360","11370","11460","11520","11590","11800","11810"],
-            1: ["03000","06040","06070","06080","06100","06500","06600","06700","06720","06760","06780","06800","06840","06860","06880"]
-        };
+    // Cambiar el método de envío
+    $('input[name="inlineRadioOptions"]').on('change', function () {
+        envio = $(this).val(); // Actualizar el método de envío
+        actualizarTotales(); // Recalcular los totales
+    });
 
-        const costosZona = { 13: 90, 12: 83, 11: 76, 10: 69, 9: 68, 8: 67, 7: 65, 6: 61, 5: 56, 4: 51, 3: 49, 2: 42, 1: 35 };
+    // Incrementar cantidad
+    $('.incrementar').click(function () {
+        let id = $(this).data('id');
+        let input = $('input[data-id="' + id + '"]');
+        let cantidad = parseInt(input.val()) || 1;
+        let stockMaximo = parseInt(input.data('stock')) || 1;
 
-        let subtotal = parseFloat("{{ $subtotal }}"); // Obtener el subtotal desde Blade
-        let costoEnvio = 0; // Inicializar el costo de envío en 0
-
-        // Función para obtener el costo de envío basado en el CP
-        function obtenerCostoEnvio(codigoPostal) {
-            for (const zona in zonas) {
-                if (zonas[zona].includes(codigoPostal)) {
-                    return costosZona[zona];
-                }
-            }
-            return 0; // Devolver 0 si el CP no está en ninguna zona
+        if (cantidad < stockMaximo) {
+            cantidad++;
+            input.val(cantidad); // Actualizamos el valor del input
+            actualizarCantidad(id, cantidad);
+        } else {
+            mostrarToast("❌ ¡No hay más stock disponible!", "error");
         }
+    });
 
-        // Evento cuando se cambia el CP
-        $("input[name='codigo_postal']").on("input", function () {
-            const codigoPostal = $(this).val().trim();
-            costoEnvio = obtenerCostoEnvio(codigoPostal);
+    // Disminuir cantidad
+    $('.decrementar').click(function () {
+        let id = $(this).data('id');
+        let input = $('input[data-id="' + id + '"]');
+        let cantidad = parseInt(input.val()) || 1;
 
-            if (costoEnvio === 0) {
-                $("#mensaje-envio").text("Lo sentimos, no realizamos envíos a esta zona.").show();
-                $("#btn-pagar").prop("disabled", true);
-            } else {
-                $("#mensaje-envio").hide();
-                $("#btn-pagar").prop("disabled", false);
-            }
-
-            actualizarTotales();
-        });
-
-        // ✅ Aumentar cantidad con validación de stock
-        $('.incrementar').click(function () {
-            let id = $(this).data('id');
-            let input = $('input[data-id="' + id + '"]');
-            let cantidad = parseInt(input.val()) || 1;
-            let stockMaximo = parseInt(input.data('stock')) || 1;
-
-            if (cantidad < stockMaximo) {
-                cantidad++;
-                input.val(cantidad); // Actualizamos el valor del input
-                actualizarCantidad(id, cantidad);
-            } else {
-                mostrarToast("❌ ¡No hay más stock disponible!", "error");
-            }
-        });
-
-        // ✅ Disminuir cantidad con límite mínimo de 1
-        $('.decrementar').click(function () {
-            let id = $(this).data('id');
-            let input = $('input[data-id="' + id + '"]');
-            let cantidad = parseInt(input.val()) || 1;
-
-            if (cantidad > 1) {
-                cantidad--;
-                input.val(cantidad); // Actualizamos el valor del input
-                actualizarCantidad(id, cantidad);
-            }
-        });
-
-        // ✅ Cambiar cantidad manualmente en el input
-        $('.btn_input_cart').on('change', function () {
-            let id = $(this).data('id');
-            let cantidad = parseInt($(this).val()) || 1;
-            let stockMaximo = parseInt($(this).data('stock')) || 1;
-
-            if (cantidad < 1) {
-                $(this).val(1);
-            } else if (cantidad > stockMaximo) {
-                $(this).val(stockMaximo);
-                mostrarToast("❌ ¡No hay más stock disponible!", "error");
-            } else {
-                actualizarCantidad(id, cantidad);
-            }
-        });
-
-        $(document).on("click", ".incrementar_kg, .decrementar_kg", function() {
-            let input = $(this).siblings(".btn_input_cart");
-            let id = input.data("id");
-            let id_marca = parseInt(input.data("marca"));
-            let stock = parseFloat(input.data("stock"));
-            let cantidadActual = parseFloat(input.val());
-
-            // Determinar si se incrementa o decrementa
-            let isIncrement = $(this).hasClass("incrementar_kg");
-            let isKg = $(this).hasClass("decrementar_kg");
-
-            // Definir el incremento/decremento según id_marca
-            let cambioCantidad = 1; // Valor por defecto
-
-                if (id_marca == 147 || id_marca == 102) {
-                    cambioCantidad = 0.5; // 500 g para estas marcas
-                } else if (id_marca == 5) {
-                    cambioCantidad = 1; // 1 kg
-                } else {
-                    cambioCantidad = 0.4; // 400 g para las demás marcas
-                }
-
-            // Calcular nueva cantidad
-            let cantidad = isIncrement ? cantidadActual + cambioCantidad : cantidadActual - cambioCantidad;
-
-            // Validaciones
-            if (cantidad < cambioCantidad) return; // No bajar más del mínimo permitido
-            if (cantidad > stock) return; // No superar el stock disponible
-
-            // Asignar nueva cantidad
-            input.val(cantidad.toFixed(1));
-
-            // Enviar actualización al backend
+        if (cantidad > 1) {
+            cantidad--;
+            input.val(cantidad); // Actualizamos el valor del input
             actualizarCantidad(id, cantidad);
-        });
+        }
+    });
 
-        // ✅ Cambiar cantidad en productos por peso
-        $('.select_peso_cart').on('change', function () {
-            let id = $(this).data('id');
-            let cantidad = parseFloat($(this).val());
-            let precioSeleccionado = $(this).find(':selected').data('precio');
+    // Actualizar cantidad manualmente
+    $('.btn_input_cart').on('change', function () {
+        let id = $(this).data('id');
+        let cantidad = parseInt($(this).val()) || 1;
+        let stockMaximo = parseInt($(this).data('stock')) || 1;
 
-            // Actualizar la vista del precio
-            $('#total-' + id).text('$' + precioSeleccionado.toFixed(2));
-
-            // Llamar AJAX para actualizar el carrito
+        if (cantidad < 1) {
+            $(this).val(1);
+        } else if (cantidad > stockMaximo) {
+            $(this).val(stockMaximo);
+            mostrarToast("❌ ¡No hay más stock disponible!", "error");
+        } else {
             actualizarCantidad(id, cantidad);
-        });
+        }
+    });
 
         // ✅ Eliminar producto del carrito
         $('.eliminar-producto').click(function () {
             let id = $(this).data('id');
 
             $.ajax({
-                url: "{{ route('cart.remove') }}",
+                url: "{{ route('cart.removeNas') }}",
                 type: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
@@ -373,74 +283,87 @@ Carrito
             });
         });
 
-        // ✅ Función para actualizar la cantidad en el carrito vía AJAX
-        function actualizarCantidad(id, cantidad) {
-            $.ajax({
-                url: "{{ route('cart.update') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: id,
-                    cantidad: cantidad
-                },
-                success: function (response) {
-                    if (response.success) {
-                        let precioTotal = response.total_producto.toFixed(2);
-                        subtotal = response.subtotal; // Actualizamos el subtotal global
-                        let total = response.total.toFixed(2);
+    // Función para actualizar la cantidad en el carrito vía AJAX
+    function actualizarCantidad(id, cantidad) {
+        $.ajax({
+            url: "{{ route('cart.updateNas') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+                cantidad: cantidad,
+                envio: envio // Enviar el método de envío al servidor
+            },
+            success: function (response) {
+                if (response.success) {
+                    let precioTotal = response.total_producto.toFixed(2);
+                    let subtotal = response.subtotal.toFixed(2);
+                    let costoEnvio = response.costo_envio.toFixed(2);
+                    let total = response.total.toFixed(2);
 
-                        // Actualizar precios en la vista
-                        $('#total-' + id).text('$' + precioTotal);
-                        $('#subtotal-carrito').text('$' + subtotal.toFixed(2));
+                    // Actualizar precios en la vista
+                    $('#total-' + id).text('$' + precioTotal);
+                    $('#subtotal-carrito').text('$' + subtotal);
+                    $('#envio-carrito').text('$' + costoEnvio);
+                    $('#total-carrito').text('$' + total);
 
-                        // Recalcular el costo de envío cada vez que se actualiza la cantidad
-                        const codigoPostal = $("input[name='codigo_postal']").val().trim();
-                        costoEnvio = obtenerCostoEnvio(codigoPostal);
-                        actualizarTotales();
-
-                        mostrarToast("🛒 Carrito actualizado", "success");
+                    // Mostrar mensaje de envío gratis si aplica
+                    if (costoEnvio == 0 && envio === 'domicilio') {
+                        $('#envio-gratis').show();
+                    } else {
+                        $('#envio-gratis').hide();
                     }
+
+                    mostrarToast("🛒 Carrito actualizado", "success");
                 }
-            });
-        }
+            }
+        });
+    }
 
-        // ✅ Función para mostrar Toast con sonido
-        function mostrarToast(mensaje, tipo) {
-            let audioSrc = tipo === "success"
-                ? "{{ asset('assets/media/audio/save_global.mp3') }}"
-                : "{{ asset('assets/media/audio/stock_insuficiente.mp3') }}";
+    // Función para mostrar Toast con sonido
+    function mostrarToast(mensaje, tipo) {
+        let audioSrc = tipo === "success"
+            ? "{{ asset('assets/media/audio/save_global.mp3') }}"
+            : "{{ asset('assets/media/audio/stock_insuficiente.mp3') }}";
 
-            let audio = new Audio(audioSrc);
-            audio.play();
+        let audio = new Audio(audioSrc);
+        audio.play();
 
-            Swal.fire({
-                toast: true,
-                position: "top-end",
-                icon: tipo,
-                title: mensaje,
-                showConfirmButton: false,
-                timer: 2000
-            });
-        }
+        Swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: tipo,
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
 
-        // ✅ Función para actualizar los totales
-        function actualizarTotales() {
-            let totalFinal = subtotal + costoEnvio;
+    function actualizarTotales() {
+        let subtotal = parseFloat($('#subtotal-carrito').text().replace('$', '').replace(',', '')) || 0;
+        let costoEnvio = 0;
 
-            if (totalFinal >= 1000) {
-                costoEnvio = 0; // Envío gratis si el total es mayor o igual a 1000
+        // Verificar si el método de envío es "domicilio"
+        if (envio === 'domicilio') {
+            if (subtotal >= 1000) {
+                costoEnvio = 0; // Envío gratis si el subtotal es mayor o igual a $1000
                 $('#envio-gratis').show(); // Mostrar mensaje de envío gratis
             } else {
+                costoEnvio = 150; // Costo de envío si el subtotal es menor a $1000
                 $('#envio-gratis').hide(); // Ocultar mensaje de envío gratis
             }
-
-            // Actualizar el DOM con los valores correctos
-            $('#subtotal-carrito').text('$' + subtotal.toFixed(2));
-            $('#envio-carrito').text('$' + costoEnvio.toFixed(2));
-            $('#total-carrito').text('$' + totalFinal.toFixed(2));
-            $('#total_carrito').val(totalFinal.toFixed(2)); // Actualizar el valor del campo oculto
+        } else {
+            $('#envio-gratis').hide(); // Ocultar mensaje de envío gratis si no es "domicilio"
         }
-    });
+
+        // Calcular el total
+        let total = subtotal + costoEnvio;
+
+        // Actualizar los valores en el DOM
+        $('#envio-carrito').text('$' + costoEnvio.toFixed(2));
+        $('#total-carrito').text('$' + total.toFixed(2));
+    }
+});
 </script>
 
 <script>

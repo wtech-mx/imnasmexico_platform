@@ -323,14 +323,23 @@ class TiendaController extends Controller
             session(['cart' => $cart]);
         }
 
-        // Recalcular subtotal y total
+        // Recalcular subtotal
         $subtotal = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart));
-        $total = $subtotal; // Aquí podrías agregar el costo de envío si aplica
+
+        // Determinar el costo de envío
+        $costoEnvio = 0;
+        if ($request->envio === 'domicilio' && $subtotal < 1000) {
+            $costoEnvio = 150;
+        }
+
+        // Calcular el total
+        $total = $subtotal + $costoEnvio;
 
         return response()->json([
             'success' => true,
             'total_producto' => $cart[$request->id]['total'],
             'subtotal' => $subtotal,
+            'costo_envio' => $costoEnvio,
             'total' => $total
         ]);
     }
