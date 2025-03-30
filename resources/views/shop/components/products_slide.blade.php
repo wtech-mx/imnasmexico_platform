@@ -11,7 +11,7 @@
                 <div class="card_base_white"></div>
 
                 <!-- Contenido encima del fondo blanco -->
-                <div class="card_content position-relative z-1">
+                <div class="card_content position-relative row">
                     <div class="col-12 my-auto text-center">
                         <a href="{{ route('tienda_online.single', $producto_popular->slug) }}">
                             @if ($producto_popular->imagenes == NULL)

@@ -8,9 +8,12 @@
 
 @forelse ($productos as $producto)
     <div class="col-6 col-md-4 col-lg-3 mb-3">
-        <div class="container_grid row mx-auto">
+        <div class="container_grid" id="">
+            <!-- Fondo blanco que sube desde abajo -->
+            <div class="card_base_white"></div>
 
-
+            <!-- Contenido encima del fondo blanco -->
+            <div class="card_content position-relative row">
                 @if($producto->precio_rebajado == NULL)
                 @else
 
@@ -72,6 +75,7 @@
                 </div>
 
         </div>
+    </div>
     </div>
 @empty
     <p>No se encontraron productos.</p>
