@@ -76,13 +76,32 @@
     padding: 10px;
 }
 
-.container_grid{
-    padding: 10px;
+.container_grid {
+    position: relative;
     width: 100%;
     height: 486px;
     border-radius: 23px;
-    background: var(--Blanco, #FFF);
+    background: transparent;
     box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+/* Fondo blanco inferior */
+.card_base_white {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%; /* Podés ajustar este valor si querés más o menos fondo blanco */
+    background-color: #fff;
+    border-radius: 23px;
+    z-index: 0;
+}
+
+/* Contenido visible encima */
+.card_content {
+    position: relative;
+    z-index: 1;
+    padding: 10px 15px;
 }
 
 .container_grid_category{
