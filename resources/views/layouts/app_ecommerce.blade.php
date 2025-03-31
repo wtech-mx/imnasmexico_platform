@@ -310,6 +310,7 @@ $(document).ready(function() {
                     loop: true,
                     margin: 15,
                     autoplay: false,
+                    dots:false,
                     autoplayTimeout: 9000,
                     autoplayHoverPause: true,
                     responsive: {
@@ -413,6 +414,7 @@ $(document).ready(function() {
                 $("#meatAndFishCarousel").owlCarousel({
                     loop: true,
                     margin: 15,
+                    dots:false,
                     autoplay: true, // Activar autoplay
                     autoplayTimeout: 4500, // Tiempo en milisegundos (3 segundos)
                     autoplayHoverPause: true, // Pausar autoplay al pasar el mouse

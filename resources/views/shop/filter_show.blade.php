@@ -37,7 +37,7 @@
                     </a>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12" style="height: 140px;">
                     <h5 class="brand_text_grid">NAS</h5>
                     <h4 class="title_product">{{ $producto->nombre }}</h4>
                     <p class="category_text_grid">By {{ $producto->Categoria->nombre ?? 'Sin categoría' }}</p>

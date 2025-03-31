@@ -22,7 +22,7 @@
                         </a>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12" style="height: 140px;">
                         <h5 class="text-left m-1 brand_text_grid">NAS</h5>
                         <h4 class="text-left m-1 title_product">
                             <a class="title_product" href="{{ route('tienda_online.single', $producto_popular->slug) }}" style="text-decoration: none">

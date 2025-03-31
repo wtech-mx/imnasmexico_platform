@@ -133,10 +133,11 @@
 .category_text_grid{
     color: var(--Verde-Obscuro, #000);
     font-family: 'Roboto_Regular';
-    font-size: 19px;
+    font-size: 17px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    margin: 0;
 }
 
 .price_text_grid{
