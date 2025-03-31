@@ -247,13 +247,16 @@ class TiendaController extends Controller
         $productos->where('categoria', 'NAS')
                   ->where('subcategoria', '=', 'Producto');
 
-        // Filtro por categoría usando la relación uno a muchos
+        // Filtro por categoría usando las relaciones del modelo Categorias
         if ($categoriaSeleccionada && $categoriaSeleccionada != 0) {
-            $productos->where('id_categoria', $categoriaSeleccionada);
+            $productos->where(function ($query) use ($categoriaSeleccionada) {
+                $query->where('id_categoria', $categoriaSeleccionada)
+                      ->orWhere('id_categoria2', $categoriaSeleccionada);
+            });
         }
 
-        // Usar with() para traer stock y categorías
-        $productos = $productos->with(['categoria'])
+        // Usar with() para traer las relaciones de categorías
+        $productos = $productos->with(['categoria', 'categoria.products', 'categoria.products2'])
             ->orderBy('nombre', 'ASC')
             ->skip(($page - 1) * $itemsPerPage)
             ->take($itemsPerPage)

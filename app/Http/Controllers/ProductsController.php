@@ -485,6 +485,7 @@ class ProductsController extends Controller
         $product->stock_nas = $suma_nas;
         $product->stock_cosmica = $suma;
         $product->id_categoria = $request->get('id_categoria'); // Actualizar el id de la categoría
+        $product->id_categoria2 = $request->get('id_categoria2'); // Actualizar el id de la categoría
 
         // Solo actualizar los campos si están presentes en la solicitud
         if ($request->has('linea')) {

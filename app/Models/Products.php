@@ -45,6 +45,7 @@ class Products extends Model
         'favorito',
         'estatus',
         'id_categoria',
+        'id_categoria2',
     ];
 
     public function ProductosBundleId()
@@ -61,5 +62,11 @@ class Products extends Model
     {
         return $this->belongsTo(Categorias::class, 'id_categoria');
     }
+
+    public function categoria2()
+    {
+        return $this->belongsTo(Categorias::class, 'id_categoria2');
+    }
+
 
 }

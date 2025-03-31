@@ -198,7 +198,7 @@
             $('#precauciones').val(product.precauciones);
             $('#favorito').val(product.favorito);
             $('#id_categoria').val(product.id_categoria);
-
+            $('#id_categoria2').val(product.id_categoria2);
 
             $('#precio_normal').val(product.precio_normal);
             $('#stock').val(product.stock);
@@ -313,6 +313,7 @@
               precauciones: $('#precauciones').val(),
               favorito: $('#favorito').val(),
               id_categoria: $('#id_categoria').val(),
+              id_categoria2: $('#id_categoria2').val(),
               imagenes: $('#imagenes').val(),
               _token: $('meta[name="csrf-token"]').attr('content'), // Token CSRF
               _method: 'PATCH' // Especificamos el método PATCH para Laravel

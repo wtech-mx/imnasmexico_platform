@@ -71,6 +71,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="categoria">Categoría 2</label>
+                                            <select class="form-control" id="id_categoria2" name="id_categoria2">
+                                                @foreach($categorias as $categoria)
+                                                    <option value="{{ $categoria->id }}" {{ $product->id_categoria2 == $categoria->id ? 'selected' : '' }}>
+                                                        {{ $categoria->nombre }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     @endif
 
                                     <div class="form-group col-6">
