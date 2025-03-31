@@ -82,7 +82,6 @@ class GenerarPedidosAutomaticos extends Command
                     $subQuery->where('stock', '<', 30)
                              ->where('nombre', 'NOT LIKE', '%Hydrabooster%')
                              ->where('nombre', 'NOT LIKE', '%Hydraboosters%')
-                             ->where('nombre', 'NOT LIKE', '%Protector Solar%')
                              ->where('nombre', 'NOT LIKE', '%Shampoo%')
                              ->where('nombre', 'NOT LIKE', '%Micelar%')
                              ->whereNotIn('sku', ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230']);
@@ -90,6 +89,7 @@ class GenerarPedidosAutomaticos extends Command
         })
         ->where('categoria', '=', 'Cosmica')
         ->where('subcategoria', '=', 'Producto')
+        ->whereNotIn('sku', ['551406', '995323', '604407', '478898', '319895', '631091', '631363', '197263', '868760'])
         ->get();
 
         if ($productosBajoStock->isEmpty()) {
@@ -160,6 +160,8 @@ class GenerarPedidosAutomaticos extends Command
                     });
                 });
         })
+        ->whereNotIn('sku', ['263292', '805359', '959657', '244210', '754705', '937604', '386082',
+        '441220', '209024', '787771', '231249', '731016', '391267', '350675', '960248', '768448'])
         ->get();
 
         if ($productosBajoStock->isEmpty()) {

@@ -160,36 +160,37 @@ class BodegaPedidosController extends Controller
 
                 // Verifica si hay datos previos en la cantidad recibida
                 if ($pedidoProducto) {
-                    $cantidad_lab_entrega = $pedidoProducto->lab_entrega ?? 0;
-                    // Si la cantidad recibida es NULL, considerarla como 0
+                    // $cantidad_lab_entrega = $pedidoProducto->lab_entrega ?? 0;
+                    // // Si la cantidad recibida es NULL, considerarla como 0
                     $cantidad_recibida_actual = $pedidoProducto->cantidad_recibido ?? 0;
 
-                    // Sumar la nueva cantidad recibida con la cantidad que ya había sido registrada
-                    $nueva_cantidad_recibida = $cantidad_recibida_actual + $cantidades_recibido[$index];
+                    // // Sumar la nueva cantidad recibida con la cantidad que ya había sido registrada
+                     $nueva_cantidad_recibida = $cantidad_recibida_actual + $cantidades_recibido[$index];
 
-                    $diferencia = $cantidades_recibido[$index] - $cantidad_lab_entrega;
+                    // $diferencia = $cantidades_recibido[$index] - $cantidad_lab_entrega;
 
-                    // Ajustar el stock del producto con la diferencia
-                    $producto->stock += $diferencia;
-                    $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
+                    // // Ajustar el stock del producto con la diferencia
+                    // $producto->stock += $diferencia;
+                    // $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
+                    $producto->stock += $cantidades_recibido[$index];
                     $producto->update();
 
-                    // Calcular la cantidad restante restando lo que se ha recibido del total pedido
-                    $cantidad_restante = $cantidades_pedido[$index] - $nueva_cantidad_recibida;
+                    // // Calcular la cantidad restante restando lo que se ha recibido del total pedido
+                     $cantidad_restante = $cantidades_pedido[$index] - $nueva_cantidad_recibida;
 
-                    $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
-                    // Actualizar los campos correspondientes
-                    $pedidoProducto->cantidad_recibido = $nueva_cantidad_recibida;
-                    $pedidoProducto->cantidad_restante = $cantidad_restante;
+                    // $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
+                    // // Actualizar los campos correspondientes
+                    // $pedidoProducto->cantidad_recibido = $nueva_cantidad_recibida;
+                    // $pedidoProducto->cantidad_restante = $cantidad_restante;
 
-                    // Marcar la fecha de liquidación o recepción según la cantidad restante
+                    // // Marcar la fecha de liquidación o recepción según la cantidad restante
                     if ($cantidad_restante <= 0) {
                         $pedidoProducto->fecha_liquidado = now(); // Fecha y hora actual
                     } elseif ($cantidad_restante > 0) {
                         $pedidoProducto->fecha_recibido = now();
                     }
 
-                    $pedidoProducto->save();
+                    // $pedidoProducto->save();
 
                     $productosPendientes = BodegaPedidosProductos::where('id_pedido', $id_pedido)
                     ->where('cantidad_restante', '>', 0) // Busca productos con cantidad restante mayor a 0
@@ -357,39 +358,40 @@ class BodegaPedidosController extends Controller
 
                 // Verifica si hay datos previos en la cantidad recibida
                 if ($pedidoProducto) {
-                    // Si la cantidad recibida es NULL, considerarla como 0
-                    $cantidad_recibida_actual = $pedidoProducto->cantidad_recibido ?? 0;
-                    $lab_entrega = $pedidoProducto->lab_entrega ?? 0;
+                    // // Si la cantidad recibida es NULL, considerarla como 0
+                    // $cantidad_recibida_actual = $pedidoProducto->cantidad_recibido ?? 0;
+                    // $lab_entrega = $pedidoProducto->lab_entrega ?? 0;
 
-                    // Sumar la nueva cantidad recibida con la cantidad que ya había sido registrada
-                    $nueva_cantidad_recibida = $cantidad_recibida_actual + $cantidades_recibido[$index];
+                    // // Sumar la nueva cantidad recibida con la cantidad que ya había sido registrada
+                    // $nueva_cantidad_recibida = $cantidad_recibida_actual + $cantidades_recibido[$index];
 
-                    $diferencia = $cantidades_recibido[$index] - $lab_entrega;
-                    // Actualizar el stock según la diferencia
-                    if ($diferencia > 0) {
-                        // Si se recibe más de lo entregado por laboratorio, sumar la diferencia al stock
-                        $producto->stock += $diferencia;
-                    } elseif ($diferencia < 0) {
-                        // Si se recibe menos de lo entregado por laboratorio, restar la diferencia del stock
-                        $producto->stock += $diferencia; // $diferencia es negativa aquí
-                        $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
-                    }
+                    // $diferencia = $cantidades_recibido[$index] - $lab_entrega;
+                    // // Actualizar el stock según la diferencia
+                    // if ($diferencia > 0) {
+                    //     // Si se recibe más de lo entregado por laboratorio, sumar la diferencia al stock
+                    //     $producto->stock += $diferencia;
+                    // } elseif ($diferencia < 0) {
+                    //     // Si se recibe menos de lo entregado por laboratorio, restar la diferencia del stock
+                    //     $producto->stock += $diferencia; // $diferencia es negativa aquí
+                    //     $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
+                    // }
 
-                    // Calcular la cantidad restante restando lo que se ha recibido del total pedido
-                    $cantidad_restante = $cantidades_pedido[$index] - $nueva_cantidad_recibida;
+                    // // Calcular la cantidad restante restando lo que se ha recibido del total pedido
+                    // $cantidad_restante = $cantidades_pedido[$index] - $nueva_cantidad_recibida;
 
-                    // Actualizar los campos correspondientes
-                    $pedidoProducto->cantidad_recibido = $nueva_cantidad_recibida;
-                    $pedidoProducto->cantidad_restante = $cantidad_restante;
+                    // // Actualizar los campos correspondientes
+                    // $pedidoProducto->cantidad_recibido = $nueva_cantidad_recibida;
+                    // $pedidoProducto->cantidad_restante = $cantidad_restante;
 
-                    // Marcar la fecha de liquidación o recepción según la cantidad restante
-                    if ($cantidad_restante <= 0) {
-                        $pedidoProducto->fecha_liquidado = now(); // Fecha y hora actual
-                    } elseif ($cantidad_restante > 0) {
-                        $pedidoProducto->fecha_recibido = now();
-                    }
+                    // // Marcar la fecha de liquidación o recepción según la cantidad restante
+                    // if ($cantidad_restante <= 0) {
+                    //     $pedidoProducto->fecha_liquidado = now(); // Fecha y hora actual
+                    // } elseif ($cantidad_restante > 0) {
+                    //     $pedidoProducto->fecha_recibido = now();
+                    // }
 
-                    $pedidoProducto->save();
+                    // $pedidoProducto->save();
+                    $producto->stock += $producto->stock + $cantidades_recibido[$index];
                     $producto->update();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
