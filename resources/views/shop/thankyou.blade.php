@@ -129,11 +129,11 @@
                     <h4 class=" mb-4">Recoge en tienda <b> con tu numero de Folio: #{{$order->id}}</b></h4>
                     <div class="container_pickup row mt-3">
                         <p>
-                            <a href="https://maps.app.goo.gl/WoEycdRbmkpVLquXA">
-                                Mérida 64, Cuahutemoc 19-4214, -99.1579, Roma Nte., 06700 Ciudad de México, CDMX
+                            <a href="https://maps.app.goo.gl/iVavCu1K9nh6k6DN7" style="color: #D19B9B">
+                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
                             </a>
                         </p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.7954834491547!2d-99.16045332523932!3d19.421240581855653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ffbe36afe1f7%3A0x3ea01a1b1ae9104c!2sZoco%20Fresh%20Roma%20Tienda%20org%C3%A1nica!5e0!3m2!1ses-419!2smx!4v1735834614408!5m2!1ses-419!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe class="ifram_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30106.79577601507!2d-99.18064112568361!3d19.397300699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses!2smx!4v1743215720695!5m2!1ses!2smx" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 @endif
             </div>
