@@ -532,6 +532,11 @@ class ProductsController extends Controller
     public function update_ocultar(Request $request, $id)
     {
         $product = Products::find($id);
+
+        if (!$product) {
+            return response()->json(['error' => 'Producto no encontrado'], 404);
+        }
+
         $product->categoria = $request->get('categoria');
         $product->update();
 
@@ -539,10 +544,6 @@ class ProductsController extends Controller
             'id' => $product->id,
             'categoria' => $product->categoria,
         ]);
-
-        // Session::flash('success', 'Se ha guardado sus datos con exito');
-        // return redirect()->back()->with('success', 'Envio de correo exitoso.');
-
     }
 
     public function import_products(Request $request){

@@ -57,15 +57,15 @@
                                             </a>
 
                                         @can('productos-edit')
-                                            <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
-                                                @csrf
-                                                <input type="hidden" name="_method" value="PATCH">
-                                                <input type="hidden" name="categoria" value="Ocultar">
+                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}" action="{{ route('products.update_ocultar', $product->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="categoria" value="Ocultar">
+                                            <button type="button" class="btn btn-danger btn-sm btn-ocultar">
+                                                <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
 
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-fw fa-trash"></i>
-                                                </button>
-                                            </form>
 
                                         @endcan
                                     </td>
@@ -357,32 +357,33 @@
           });
       });
 
-      $(document).on('submit', '.OcultarProductForm', function(e) {
-        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+        // ✅ NUEVO: Manejo del botón para ocultar producto
+        $(document).on('click', '.btn-ocultar', function(e) {
+            e.preventDefault();
+            let form = $(this).closest('form');
+            let url = form.attr('action');
 
-        let productId = $(this).data('id'); // Obtener el ID del producto
-        let form = $(this); // Referencia al formulario
-        let url = "{{ route('products.update_ocultar', ':id') }}".replace(':id', productId); // Ruta con el ID del producto
+            $.ajax({
+                url: url,
+                type: 'PATCH',
+                data: form.serialize(),
+                success: function(response) {
+                    $('#productRow' + response.id).fadeOut(300, function() {
+                        $(this).remove();
+                    });
 
-        $.ajax({
-            url: url,
-            type: 'PATCH',
-            data: form.serialize(), // Serializar los datos del formulario
-            success: function(response) {
-            // Si la respuesta es exitosa, elimina la fila del producto de la tabla
-            $('#productRow' + response.id).fadeOut(300, function() {
-                $(this).remove(); // Eliminar la fila después de que desaparezca
+                    alert('Producto eliminado con éxito');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un problema al intentar ocultar el producto.',
+                    });
+                }
             });
-
-            // Opcional: Mostrar mensaje de éxito
-            alert('Eliminado con exito');
-            },
-            error: function(xhr, status, error) {
-            console.error('Error:', error);
-            alert('Error:', error);
-            }
         });
-     });
 
     });
 
