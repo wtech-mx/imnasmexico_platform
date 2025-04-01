@@ -202,7 +202,7 @@
                 </a>
             @endcan
 
-            @can('bodega-menu')
+            @can('bodega-salon-menu')
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#pageBodegaSalon" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodegaSalon" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
