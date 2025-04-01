@@ -172,7 +172,7 @@ class BodegaPedidosController extends Controller
                     // // Ajustar el stock del producto con la diferencia
                     // $producto->stock += $diferencia;
                     // $pedidoProducto->cantidad_entregada_lab = abs($diferencia);
-                    $producto->stock += $cantidades_recibido[$index];
+                    $producto->stock_salon += $cantidades_recibido[$index];
                     $producto->update();
 
                     // // Calcular la cantidad restante restando lo que se ha recibido del total pedido
@@ -391,7 +391,7 @@ class BodegaPedidosController extends Controller
                     // }
 
                     // $pedidoProducto->save();
-                    $producto->stock += $producto->stock + $cantidades_recibido[$index];
+                    $producto->stock_salon += $producto->stock_salon + $cantidades_recibido[$index];
                     $producto->update();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)

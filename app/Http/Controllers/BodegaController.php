@@ -792,7 +792,6 @@ class BodegaController extends Controller
         return view('admin.bodega.scaner.show_cosmica', compact('nota_scaner', 'productos_scaner', 'allChecked'));
     }
 
-
     public function checkProduct_cosmica(Request $request){
         $sku_scaner = $request->input('sku');
         $sku = trim($sku_scaner);

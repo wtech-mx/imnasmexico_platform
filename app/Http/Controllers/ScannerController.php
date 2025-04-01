@@ -50,7 +50,6 @@ class ScannerController extends Controller
         return response()->json(['success' => true, 'message' => 'Estatus actualizado correctamente']);
     }
 
-
     public function buscador_ajax(Request $request){
 
         if ($request->ajax()) {
@@ -101,5 +100,37 @@ class ScannerController extends Controller
         }
     }
 
+    public function salon_index(){
 
+        return view('admin.bodega.scanner_salon.index');
+    }
+
+    public function salon_buscador_ajax(Request $request){
+        if ($request->ajax()) {
+            $now = Carbon::now();
+            $mesActual = $now->month;
+
+            $codigo = $request->input('search');
+            $product = Products::where('sku','=',$codigo)->get();
+
+            $productId = Products::where('sku','=',$codigo)->first();
+            $extraccionID = $productId->id;
+
+            $historialMods = HistorialStock::where('sku', $codigo)->get();
+
+            $HistorialVendidos = HistorialVendidos::where('id_producto','=',$extraccionID)->get();
+
+            return view('admin.bodega.scanner_salon.producto_info',compact('product','historialMods','HistorialVendidos'));
+        }
+    }
+
+    public function salon_update(Request $request, $id){
+
+        $product = Products::find($id);
+        $product->stock_salon -= $request->get('cantidad');
+        $product->stock += $request->get('cantidad');
+        $product->update();
+
+        return redirect()->back()->with('success', 'Se ha solicitado correctamente.');
+    }
 }

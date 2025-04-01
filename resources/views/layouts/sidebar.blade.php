@@ -204,6 +204,74 @@
 
             @can('bodega-menu')
                 <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#pageBodegaSalon" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodegaSalon" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-industry text-sm opacity-10" style="color:#bce649"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Bodega (salon 1)</span>
+                    </a>
+                    <div class="collapse " id="pageBodegaSalon">
+                        <ul class="nav ms-4">
+                            <li class="nav-item ">
+
+                                <a class="nav-link {{ (Request::is('admin/scanner/salon') ? 'active' : '') }}" href="{{ route('scanner_salon.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-camera text-sm opacity-10" style="color:#e6b449"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Scanner</span>
+                                </a>
+
+                                @can('bodega-nas-pedido')
+                                    <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock.index') }}">
+                                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-pencil text-sm opacity-10" style="color:#e6b449"></i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Pedidos Lab NAS</span>
+                                    </a>
+                                @endcan
+
+                                @can('bodega-nas-historial')
+                                    <a class="nav-link {{ (Request::is('admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_nas.index') }}">
+                                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-list text-sm opacity-10" style="color:#e6b449"></i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Historial P. NAS</span>
+                                    </a>
+                                @endcan
+
+                                @can('bodega-cosmica-pedido')
+                                    <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock_cosmica.index') }}">
+                                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-pencil text-sm opacity-10" style="color:#322338"></i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Pedidos Lab Cosmi.</span>
+                                    </a>
+                                @endcan
+
+                                @can('bodega-cosmica-historial')
+                                    <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_cosmica.index') }}">
+                                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-list text-sm opacity-10" style="color:#322338"></i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Historial P. Cosmi.</span>
+                                    </a>
+                                @endcan
+
+                                <a class="nav-link {{ (Request::is('productos/vendidos') ? 'active' : '') }}" href="{{ route('productsHistorialVendidos.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-file-pdf text-sm opacity-10" style="color:#322338"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Historial Productos Vendidos</span>
+                                </a>
+
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endcan
+
+            @can('bodega-menu')
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#pageBodega" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodega" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                         <i class="fa fa-industry text-sm opacity-10" style="color:#e6b449"></i>
@@ -227,42 +295,6 @@
                                         <i class="fa fa-box text-sm opacity-10" style="color:#e6b449"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Bodega</span>
-                                </a>
-                            @endcan
-
-                            @can('bodega-nas-pedido')
-                                <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock.index') }}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-pencil text-sm opacity-10" style="color:#e6b449"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Pedidos Lab NAS</span>
-                                </a>
-                            @endcan
-
-                            @can('bodega-nas-historial')
-                                <a class="nav-link {{ (Request::is('admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_nas.index') }}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-list text-sm opacity-10" style="color:#e6b449"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Historial P. NAS</span>
-                                </a>
-                            @endcan
-
-                            @can('bodega-cosmica-pedido')
-                                <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock_cosmica.index') }}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-pencil text-sm opacity-10" style="color:#322338"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Pedidos Lab Cosmi.</span>
-                                </a>
-                            @endcan
-
-                            @can('bodega-cosmica-historial')
-                                <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_cosmica.index') }}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-list text-sm opacity-10" style="color:#322338"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Historial P. Cosmi.</span>
                                 </a>
                             @endcan
 

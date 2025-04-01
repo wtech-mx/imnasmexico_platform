@@ -30,6 +30,7 @@ Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsContr
 
 Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
 Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -342,6 +343,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/ordenes/finalizar/update/{id}', [App\Http\Controllers\LaboratoriosController::class, 'ordenes_lab_orden_finalizar_update'])->name('ordenes_lab_update_finalizar.update');
 
     Route::get('/cosmica/cajas/stock/pdf', [App\Http\Controllers\LaboratoriosController::class, 'pdf_cajas'])->name('cajas.pdf');
+
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
     Route::get('/admin/comprobar_transferenciass', [App\Http\Controllers\VerificarTransferenciasController::class, 'index'])->name('trasnferencias.index');
     Route::post('/admin/comprobar_transferencias/verificar', [App\Http\Controllers\VerificarTransferenciasController::class, 'store'])->name('trasnferencias.store');
@@ -643,6 +645,13 @@ Route::group(['middleware' => ['auth']], function() {
      Route::get('/generate-pdf-all-products', [App\Http\Controllers\ProductsController::class, 'generateAllProductsPDF'])->name('products.generateAllPDF');
 
      Route::get('/admin/scanner/estatus', [App\Http\Controllers\ScannerController::class, 'esatus_nota'])->name('scanner.esatus_nota');
+
+     // =============== M O D U L O   S C A N N E R  S A L O N  1===============================
+     Route::get('/admin/scanner/salon', [App\Http\Controllers\ScannerController::class, 'salon_index'])->name('scanner_salon.index');
+     Route::get('/admin/scanner/salon/buscador', [App\Http\Controllers\ScannerController::class, 'salon_buscador_ajax'])->name('scanner_salon.buscador');
+     Route::get('/admin/scanner/salon/buscador/palabra', [App\Http\Controllers\ScannerController::class, 'salon_buscador_ajax_palabra'])->name('scanner_salon.buscador_palabra');
+     Route::patch('/admin/scanner/salon/update/{id}', [App\Http\Controllers\ScannerController::class, 'salon_update'])->name('products_salon.update');
+
     // =============== M O D U L O   M A N U A L ===============================
     Route::get('/admin/manual', [App\Http\Controllers\ManualController::class, 'index'])->name('manual.index');
     Route::post('/admin/manual/store', [App\Http\Controllers\ManualController::class, 'store'])->name('manual.store');
@@ -817,6 +826,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('bodega/preparacion/scaner/cosmica/online/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_online_cosmica'])->name('preparacion_scaner_cosmica_online.bodega');
     Route::post('/check-product/cosmica/online', [App\Http\Controllers\BodegaController::class, 'checkProduct_online_cosmica'])->name('check_cosmica_online.product');
+
+    // =============== M O D U L O   B O D E G A  (S A L O N  1)===============================
+    Route::get('bodega/salon/preparacion/', [App\Http\Controllers\BodegaController::class, 'index_salon_preparacion'])->name('index_salon_preparacion.bodega');
+    Route::get('bodega/salon/preparados/', [App\Http\Controllers\BodegaController::class, 'index_salon_preparados'])->name('index_salon_preparados.bodega');
+    Route::get('bodega/salon/enviados/', [App\Http\Controllers\BodegaController::class, 'index_salon_enviados'])->name('index_salon_enviados.bodega');
+    Route::get('bodega/salon/entregados/', [App\Http\Controllers\BodegaController::class, 'index_salon_entregados'])->name('index_salon_entregados.bodega');
+    Route::get('bodega/salon/canceladas/', [App\Http\Controllers\BodegaController::class, 'index_salon_canceladas'])->name('index_salon_canceladas.bodega');
+
     // =============== M O D U L O   R E P O R T E  V E N T A S ===============================
     Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');
     Route::get('reporte/ventas/buscador', [App\Http\Controllers\ReporteVentasController::class, 'buscador'])->name('reporte_ventas.buscador');
