@@ -22,8 +22,8 @@ Carrito
             <div class="col-12 col-sm-6 col-md-6 col-lg-6 p-4 p-sm-3 p-md-3 p-lg-3">
                 <h3 class="mb-4">Compras</h3>
 
-                @if(session('cart'))
-                    @foreach(session('cart') as $id => $producto)
+                @if(session('cart_productos'))
+                    @foreach(session('cart_productos') as $id => $producto)
                         <div class="container_order_item_cart row mb-4">
                             <div class="d-flex justify-content-between">
 
@@ -56,7 +56,7 @@ Carrito
                 @endif
 
                 @php
-                    $cart_productos = session('cart', []);
+                    $cart_productos = session('cart_productos', []);
                     $subtotal = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart_productos));
                 @endphp
 
@@ -79,127 +79,123 @@ Carrito
             </div>
 
             <div class="col-12 col-sm-6 col-md-6 col-lg-6 p-4 p-sm-3 p-md-3 p-lg-3">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('process-payment_nas') }}">
                     @csrf
                     <div class="row">
                         <h3 class="mb-3">Detalles del cliente</h3>
                         <input type="hidden" name="total_carrito" id="total_carrito" value="{{ $subtotal }}">
                         <div class="input-group col-12 mb-3">
-                                    <span class="input-group-text span_cart_pay" id="">
-                                        <i class="bi bi-person-circle"></i>
-                                    </span>
-                                    <input type="text" name="nombre" class="form-control input_cart_pay" placeholder="Nombre Completo" required>
+                            <span class="input-group-text span_cart_pay" id="">
+                                <i class="bi bi-person-circle"></i>
+                            </span>
+                            <input type="text" name="nombre" class="form-control input_cart_pay" placeholder="Nombre Completo" required>
                         </div>
 
                         <div class="input-group col-12 mb-3">
-                                    <span class="input-group-text span_cart_pay" id="">
-                                        <i class="bi bi-envelope"></i>
-                                    </span>
-                                    <input type="email" name="correo" class="form-control input_cart_pay" placeholder="correo@correo.com" required>
+                            <span class="input-group-text span_cart_pay" id="">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email" name="email" class="form-control input_cart_pay" placeholder="correo@correo.com" required>
                         </div>
 
                         <div class="input-group col-12 mb-3">
-                                    <span class="input-group-text span_cart_pay" id="">
-                                        <i class="bi bi-telephone"></i>
-                                    </span>
-                                    <input type="tel" minlength="10" maxlength="10" name="telefono" id="telefono" class="form-control input_cart_pay" placeholder="Telefono *" required>
+                            <span class="input-group-text span_cart_pay" id="">
+                                <i class="bi bi-telephone"></i>
+                            </span>
+                            <input type="tel" minlength="10" maxlength="10" name="telefono" id="telefono" class="form-control input_cart_pay" placeholder="Telefono *" required>
                         </div>
 
                         @include('shop.components.inputs_factura')
 
                         <div class="col-12 mt-3 mb-3">
-                                    <div class="row">
-                                        <h3 class="">Detalles del Envio</h3>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="pickup" checked>
-                                                    <label class="form-check-label" for="inlineRadio1">PickUp</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="domicilio">
-                                                    <label class="form-check-label" for="inlineRadio2">Envio a Domicilio</label>
-                                                </div>
-                                            </div>
+                            <div class="row">
+                                <h3 class="">Detalles del Envio</h3>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="pickup" checked>
+                                            <label class="form-check-label" for="inlineRadio1">PickUp</label>
                                         </div>
 
-                                        <!-- Contenedor PickUp -->
-                                        <div class="container_pickup row mt-3">
-                                            <p>
-                                                <a href="https://maps.app.goo.gl/iVavCu1K9nh6k6DN7" style="color: #D19B9B">
-                                                    Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
-                                                </a>
-                                            </p>
-                                            <iframe class="ifram_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30106.79577601507!2d-99.18064112568361!3d19.397300699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses!2smx!4v1743215720695!5m2!1ses!2smx" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                        </div>
-
-                                        <!-- Contenedor Envio a Domicilio -->
-                                        <div class="container_envioDomicilio row mt-3" style="display: none;">
-
-                                            <div class="input-group col-6 mb-3">
-                                                <span class="input-group-text span_cart_pay" id="">
-                                                    <i class="bi bi-123"></i>
-                                                </span>
-                                                <input type="text" name="codigo_postal" class="form-control input_cart_pay" placeholder="CP">
-                                            </div>
-
-                                            <div class="input-group col-6 mb-3">
-                                                <span class="input-group-text span_cart_pay" id="">
-                                                    <i class="bi bi-mailbox-flag"></i>
-                                                </span>
-                                                <input type="text" name="colonia" class="form-control input_cart_pay" placeholder="Colonia">
-                                            </div>
-
-                                            <div class="input-group col-6 mb-3">
-                                                <span class="input-group-text span_cart_pay" id="">
-                                                    <i class="bi bi-geo-alt"></i>
-                                                </span>
-                                                <input type="text" name="estado" class="form-control input_cart_pay" placeholder="Estado">
-                                            </div>
-
-                                            <div class="input-group col-6 mb-3">
-                                                <span class="input-group-text span_cart_pay" id="">
-                                                    <i class="bi bi-bank"></i>
-                                                </span>
-                                                <input type="text" name="alcaldia" class="form-control input_cart_pay" placeholder="Municipio o Alcaldia">
-                                            </div>
-
-                                            <div class="input-group col-6 mb-3">
-                                                <span class="input-group-text span_cart_pay" id="">
-                                                    <i class="bi bi-signpost-split"></i>
-                                                </span>
-                                                <input type="text" name="calle_numero" class="form-control input_cart_pay" placeholder="Calle y numero">
-                                            </div>
-
-                                            <div class="input-group col-6 mb-3">
-                                                <span class="input-group-text span_cart_pay" id="">
-                                                    <i class="bi bi-house"></i>
-                                                </span>
-                                                <input type="text" name="referencia" class="form-control input_cart_pay" placeholder="Referencia (Dep  Casa, Color , etc)">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 mt-3">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" required>
-                                                <a href="{{ route('terminos.index') }}" target="_blank" rel="noopener noreferrer">He leído y acepto los términos y condiciones del sitio.</a>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <p class="text-center">
-                                                <p id="mensaje-envio" style="color: red; display: none;"></p>
-                                                <button id="btn-pagar" class="btn btn_cupon_cart text-white mt-2 w-100" type="submit">Pagar</button>
-                                            </p>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="domicilio">
+                                            <label class="form-check-label" for="inlineRadio2">Envio a Domicilio</label>
                                         </div>
                                     </div>
+                                </div>
+
+                                <!-- Contenedor PickUp -->
+                                <div class="container_pickup row mt-3">
+                                    <p>
+                                        <a href="https://maps.app.goo.gl/iVavCu1K9nh6k6DN7" style="color: #D19B9B">
+                                            Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                        </a>
+                                    </p>
+                                    <iframe class="ifram_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30106.79577601507!2d-99.18064112568361!3d19.397300699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses!2smx!4v1743215720695!5m2!1ses!2smx" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+
+                                <!-- Contenedor Envio a Domicilio -->
+                                <div class="container_envioDomicilio row mt-3" style="display: none;">
+
+                                    <div class="input-group col-6 mb-3">
+                                        <span class="input-group-text span_cart_pay" id="">
+                                            <i class="bi bi-123"></i>
+                                        </span>
+                                        <input type="text" name="codigo_postal" class="form-control input_cart_pay" placeholder="CP">
+                                    </div>
+
+                                    <div class="input-group col-6 mb-3">
+                                        <span class="input-group-text span_cart_pay" id="">
+                                            <i class="bi bi-mailbox-flag"></i>
+                                        </span>
+                                        <input type="text" name="colonia" class="form-control input_cart_pay" placeholder="Colonia">
+                                    </div>
+
+                                    <div class="input-group col-6 mb-3">
+                                        <span class="input-group-text span_cart_pay" id="">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </span>
+                                        <input type="text" name="estado" class="form-control input_cart_pay" placeholder="Estado">
+                                    </div>
+
+                                    <div class="input-group col-6 mb-3">
+                                        <span class="input-group-text span_cart_pay" id="">
+                                            <i class="bi bi-bank"></i>
+                                        </span>
+                                        <input type="text" name="alcaldia" class="form-control input_cart_pay" placeholder="Municipio o Alcaldia">
+                                    </div>
+
+                                    <div class="input-group col-6 mb-3">
+                                        <span class="input-group-text span_cart_pay" id="">
+                                            <i class="bi bi-signpost-split"></i>
+                                        </span>
+                                        <input type="text" name="calle_numero" class="form-control input_cart_pay" placeholder="Calle y numero">
+                                    </div>
+
+                                    <div class="input-group col-6 mb-3">
+                                        <span class="input-group-text span_cart_pay" id="">
+                                            <i class="bi bi-house"></i>
+                                        </span>
+                                        <input type="text" name="referencia" class="form-control input_cart_pay" placeholder="Referencia (Dep  Casa, Color , etc)">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" required>
+                                        <a href="{{ route('terminos.index') }}" target="_blank" rel="noopener noreferrer">He leído y acepto los términos y condiciones del sitio.</a>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <p class="text-center">
+                                        <p id="mensaje-envio" style="color: red; display: none;"></p>
+                                        <button id="btn-pagar" class="btn btn_cupon_cart text-white mt-2 w-100" type="submit">Pagar</button>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-
-
-
                     </div>
-
                 </form>
             </div>
 
@@ -271,43 +267,43 @@ $(document).ready(function () {
     });
 
         // ✅ Eliminar producto del carrito
-// ✅ Eliminar producto del carrito
-$('.eliminar-producto').click(function () {
-    let id = $(this).data('id');
+    // ✅ Eliminar producto del carrito
+    $('.eliminar-producto').click(function () {
+        let id = $(this).data('id');
 
-    $.ajax({
-        url: "{{ route('cart.removeNas') }}",
-        type: "POST",
-        data: {
-            _token: "{{ csrf_token() }}",
-            id: id,
-            envio: envio // Enviar el método de envío al servidor
-        },
-        success: function (response) {
-            if (response.success) {
-                // Eliminar el producto del DOM
-                $('a[data-id="' + id + '"]').closest('.container_order_item_cart').remove();
+        $.ajax({
+            url: "{{ route('cart.removeNas') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+                envio: envio // Enviar el método de envío al servidor
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Eliminar el producto del DOM
+                    $('a[data-id="' + id + '"]').closest('.container_order_item_cart').remove();
 
-                // Actualizar los totales en el DOM
-                $('#subtotal-carrito').text('$' + response.subtotal.toFixed(2));
-                $('#envio-carrito').text('$' + response.costo_envio.toFixed(2));
-                $('#total-carrito').text('$' + response.total.toFixed(2));
+                    // Actualizar los totales en el DOM
+                    $('#subtotal-carrito').text('$' + response.subtotal.toFixed(2));
+                    $('#envio-carrito').text('$' + response.costo_envio.toFixed(2));
+                    $('#total-carrito').text('$' + response.total.toFixed(2));
 
-                // Mostrar mensaje de envío gratis si aplica
-                if (response.costo_envio === 0 && envio === 'domicilio') {
-                    $('#envio-gratis').show();
-                } else {
-                    $('#envio-gratis').hide();
+                    // Mostrar mensaje de envío gratis si aplica
+                    if (response.costo_envio === 0 && envio === 'domicilio') {
+                        $('#envio-gratis').show();
+                    } else {
+                        $('#envio-gratis').hide();
+                    }
+
+                    mostrarToast("🗑️ Producto eliminado del carrito", "success");
                 }
-
-                mostrarToast("🗑️ Producto eliminado del carrito", "success");
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al eliminar el producto:", error);
             }
-        },
-        error: function (xhr, status, error) {
-            console.error("Error al eliminar el producto:", error);
-        }
+        });
     });
-});
 
     // Función para actualizar la cantidad en el carrito vía AJAX
     function actualizarCantidad(id, cantidad) {

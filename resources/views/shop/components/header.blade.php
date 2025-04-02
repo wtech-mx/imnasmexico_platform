@@ -36,7 +36,7 @@
                     <a href="{{ route('cart.index') }}" class="nav-link px-1 px-md-2 px-lg-2">
                         <i class=" icons_header bi bi-cart2" style="color: #875053;    color: #ffffff;background: #D19B9B;padding: 10px 10px 10px 10px;border-radius: 16px;"></i>
                         <span class="badge rounded-pill bg-danger" id="contador-carrito">
-                            {{ session('cart') ? count(session('cart')) : 0 }}
+                            {{ session('cart_productos') ? count(session('cart_productos')) : 0 }}
                         </span>
                     </a>
                 </li>

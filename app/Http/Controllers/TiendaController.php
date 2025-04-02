@@ -9,15 +9,22 @@ use App\Models\BannersTienda;
 use App\Models\Categorias;
 use App\Models\ProductosStock;
 use App\Models\Noticias;
-
+use App\Models\OrdersNas;
+use App\Models\OrdersNasOnline;
+use App\Models\ProductosBundleId;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Doctrine\Inflector\InflectorFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
-
+use MercadoPago\{Exception, SDK, Preference, Item};
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Response;
+use Hash;
+use Illuminate\Support\Facades\Redirect;
+use Throwable;
 
 class TiendaController extends Controller
 {
@@ -153,8 +160,12 @@ class TiendaController extends Controller
         return view('shop.single_product_ecommerce', compact('producto', 'categoriasFacial','categoriasCorporal', 'productos_populares','productos_categoria'));
     }
 
-    public function thankyou(){
-        return view('shop.thankyou');
+    public function thankyou($code){
+        $order = OrdersNas::where('code', $code)->firstOrFail();
+        $order_ticket = OrdersNasOnline::where('id_order', '=', $order->id)->get();
+        $productos_populares = Products::orderby('nombre','asc')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->inRandomOrder()->take(30)->get();
+
+        return view('shop.thankyou', compact('order', 'order_ticket', 'productos_populares'));
     }
 
     public function categories($slug)
@@ -279,7 +290,7 @@ class TiendaController extends Controller
         }
 
         // 🛒 Obtener carrito actual desde la sesión
-        $cart = session()->get('cart', []);
+        $cart = session()->get('cart_productos', []);
 
         // 📌 Obtener la cantidad actual del producto en el carrito
         $cantidadEnCarrito = isset($cart[$product->id]) ? $cart[$product->id]['cantidad'] : 0;
@@ -295,11 +306,12 @@ class TiendaController extends Controller
                 'cantidad' => $cantidadNueva,
                 'stock' =>  $product->stock,
                 'imagenes' => $product->imagenes,
+                'id_producto' => $product->id,
             ];
         }
 
         // Guardar carrito en la sesión
-        session()->put('cart', $cart);
+        session()->put('cart_productos', $cart);
 
         // 🔥 Calcular el total de productos sumando las cantidades
         $totalProductos = array_sum(array_column($cart, 'cantidad'));
@@ -313,7 +325,7 @@ class TiendaController extends Controller
 
     public function update(Request $request)
     {
-        $cart = session('cart', []);
+        $cart = session('cart_productos', []);
 
         if (isset($cart[$request->id])) {
             // Actualizamos la cantidad del producto en el carrito
@@ -323,7 +335,7 @@ class TiendaController extends Controller
             $cart[$request->id]['total'] = $cart[$request->id]['precio'] * $request->cantidad;
 
             // Guardamos la sesión con los cambios
-            session(['cart' => $cart]);
+            session(['cart_productos' => $cart]);
         }
 
         // Recalcular subtotal
@@ -347,14 +359,13 @@ class TiendaController extends Controller
         ]);
     }
 
-
     public function remove(Request $request)
     {
-        $cart = session()->get('cart', []);
+        $cart = session()->get('cart_productos', []);
 
         if (isset($cart[$request->id])) {
             unset($cart[$request->id]);
-            session()->put('cart', $cart);
+            session()->put('cart_productos', $cart);
         }
 
         // Recalcular subtotal
@@ -388,6 +399,180 @@ class TiendaController extends Controller
 
     }
 
+    public function processPayment_nas(Request $request)
+    {
+        // Configurar el SDK de Mercado Pago con las credenciales de API
+       SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Crear un objeto de preferencia de pago
+        $preference = new Preference();
+        $code = Str::random(8);
+
+        // Crear un objeto de artículo
+        foreach (session('cart_productos') as $id => $details) {
+            // dd(session('cart_productos'));
+            $item = new Item();
+            $item->title = $details['nombre'];
+            $item->quantity = $details['cantidad'];
+            $item->unit_price = $details['precio'];
+            $ticketss[] = $item;
+        }
+
+        // Crear un objeto de preferencias de pago
+        $preference = new \MercadoPago\Preference();
+
+        $preference->back_urls = array(
+            "success" => route('order_nas.pay'),
+            "pending" => route('order_nas.pay'),
+            "failure" => "https://plataforma.imnasmexico.com/tienda/nas",
+        );
+
+        $preference->auto_return = "approved";
+        $preference->external_reference = $code;
+        $preference->items = $ticketss;
+
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
+                $user = User::where('telefono', $request->telefono)->first();
+                $user->postcode = $request->get('postcode');
+                $user->state = $request->get('state');
+                $user->country = $request->get('country');
+                $user->direccion = $request->get('direccion');
+                $user->city = $request->get('city');
+                $user->referencia = $request->get('referencia');
+                $user->update();
+            } else {
+                $user = User::where('email', $request->email)->first();
+                $user->postcode = $request->get('postcode');
+                $user->state = $request->get('state');
+                $user->country = $request->get('country');
+                $user->direccion = $request->get('direccion');
+                $user->city = $request->get('city');
+                $user->referencia = $request->get('referencia');
+                $user->update();
+            }
+            $payer = $user;
+        } else {
+            $payer = new User;
+            $payer->name = $request->get('name') . ' ' . $request->get('ape_paterno') . ' ' . $request->get('ape_materno');
+            $payer->email = $request->get('email');
+            $payer->username = $request->get('telefono');
+            $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('telefono'));
+
+            $payer->postcode = $request->get('postcode');
+            $payer->state = $request->get('state');
+            $payer->country = $request->get('country');
+            $payer->direccion = $request->get('direccion');
+            $payer->city = $request->get('city');
+            $payer->referencia = $request->get('referencia');
+            $payer->save();
+            $datos = User::where('id', '=', $payer->id)->first();
+        }
+
+        try {
+            // Crear la preferencia en Mercado Pago
+
+            $preference->save();
+
+            $fechaActual = date('Y-m-d');
+            $total = 0;
+            foreach (session('cart_productos') as $id => $details) {
+                $total += $details['precio'] * $details['cantidad'];
+            }
+
+            $order_cosmica = new OrdersNas;
+            $order_cosmica->id_usuario = $payer->id;
+            $order_cosmica->pago = $total;
+            $order_cosmica->forma_pago = 'Mercado Pago';
+            $order_cosmica->fecha = $fechaActual;
+            $order_cosmica->estatus = 0;
+            $order_cosmica->code = $code;
+            $order_cosmica->external_reference = $code;
+            if($request->get('postcode') != NULL ){
+                $order_cosmica->forma_envio = 'envio';
+            }
+            $order_cosmica->save();
+
+            foreach (session('cart_productos') as $id => $details) {
+
+                $producto = Products::where('id', $details['id_producto'])->first();
+
+                if ($producto) {
+                    if ($producto && $producto->subcategoria == 'Kit') {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+
+                        foreach ($productos_bundle as $producto_bundle) {
+                            $order_ticket = new OrdersNasOnline;
+                            $order_ticket->id_order = $order_cosmica->id;
+                            $order_ticket->nombre = $producto_bundle->producto;
+                            $order_ticket->id_producto = $producto_bundle->id_producto;
+                            $order_ticket->precio = '0';
+                            $order_ticket->cantidad = $producto_bundle->cantidad;
+                            $order_ticket->kit = '1';
+                            $order_ticket->num_kit = $producto_bundle->id_product;
+                            $order_ticket->save();
+                        }
+                    }else{
+                        $order_ticket = new OrdersNasOnline;
+                        $order_ticket->id_order = $order_cosmica->id;
+                        $order_ticket->id_producto = $details['id_producto'];
+                        $order_ticket->nombre = $details['nombre'];
+                        $order_ticket->precio = $details['precio'];
+                        $order_ticket->cantidad = $details['cantidad'];
+                        $order_ticket->save();
+                    }
+                }
+            }
+            // Redirigir al usuario al proceso de pago de Mercado Pago
+            return Redirect::to($preference->init_point);
+        } catch (Exception $e) {
+            // Manejar errores de Mercado Pago
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        } catch (Throwable $e) {
+            // Manejar errores de PHP
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function pay(OrdersNas $order, Request $request)
+    {
+        $payment_id = $request->get('payment_id');
+        $external_reference = $request->get('external_reference');
+
+        $dominio = $request->getHost();
+        $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+
+        $response = json_decode($response);
+        if (isset($response->error)) {
+            return redirect()->route('order_nas.show', $order->code)->with('error', 'Hubo un problema al verificar el pago.');
+        }
+        $status = $response->status ?? null;
+        $external_reference_api = $response->external_reference ?? null;
+        $external_reference = $external_reference_api ?: $external_reference;
+
+        // Si no se encuentra el external_reference, redirige con error
+        if (!$external_reference) {
+            return redirect()->route('order_nas.show', $order->code)->with('error', 'No se pudo verificar el pago. Falta external_reference.');
+        }
+
+        if ($status == 'approved') {
+            $order = OrdersNas::where('code', '=', $external_reference)->first();
+            $order->num_order = $payment_id;
+            $order->estatus = 1;
+            $order->update();
+
+            Session::forget('cart_productos');
+        } else {
+            $order = OrdersNas::where('code', '=', $external_reference)->first();
+            $order->num_order = $payment_id;
+            $order->update();
 
 
+            Session::forget('cart_productos');
+        }
+        return redirect()->route('order_nas.show', $order->code);
+    }
 }

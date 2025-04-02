@@ -128,12 +128,14 @@ Route::post('/tienda/nas/agregar-al-carrito', [App\Http\Controllers\TiendaContro
 Route::post('/tienda/nas/actualizar-carrito', [App\Http\Controllers\TiendaController::class, 'actualizar'])->name('carrito.actualizar');
 Route::post('/tienda/nas/cart/update', [App\Http\Controllers\TiendaController::class, 'update'])->name('cart.updateNas');
 Route::post('/tienda/nas/cart/remove', [App\Http\Controllers\TiendaController::class, 'remove'])->name('cart.removeNas');
-Route::get('/tienda/nas/tienda/nas/tienda/cart', [App\Http\Controllers\TiendaController::class, 'cart'])->name('cart.index');
+Route::get('/tienda/nas/tienda/cart', [App\Http\Controllers\TiendaController::class, 'cart'])->name('cart.index');
 Route::get('/tienda/nas/tienda/buscador', [App\Http\Controllers\TiendaController::class, 'buscador'])->name('tienda_online.buscador');
 Route::get('/tienda/nas/filtrar-productos', [App\Http\Controllers\TiendaController::class, 'filtrarPorCategoria'])->name('productos.filtrar');
 Route::get('/tienda/nas/buscar-productos', [App\Http\Controllers\TiendaController::class, 'buscar'])->name('productos.buscarNas');
 
-
+Route::post('/cart/nas/process-payment', [App\Http\Controllers\TiendaController::class, 'processPayment_nas'])->name('process-payment_nas');
+Route::get('/cart/nas/orders/pay', [App\Http\Controllers\TiendaController::class, 'pay'])->name('order_nas.pay');
+Route::get('/cart/nas/orders/{code}/show', [App\Http\Controllers\TiendaController::class, 'thankyou'])->name('order_nas.show');
 // =============== E C O M M E R C E C O S M I C A ===============================
 
 Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');
@@ -568,7 +570,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/productos/update/{id}', [App\Http\Controllers\NotasProductosController::class, 'update'])->name('notas_productos.update');
     Route::get('/admin/notas/productos/buscador', [App\Http\Controllers\NotasProductosController::class, 'buscador'])->name('advance_productos.buscador');
     Route::patch('/admin/notas/productos/update/estatus/{id}', [App\Http\Controllers\NotasProductosController::class, 'update_estatus'])->name('notas_productos.update_estatus');
-
+    Route::get('/admin/products/insumos/castilla', [App\Http\Controllers\ProductsController::class, 'index_insumos_castilla'])->name('products_insumos_castilla.index');
     Route::delete('/admin/notas/productos/delete/{id}', [App\Http\Controllers\NotasProductosController::class, 'delete'])->name('notas_productos.delete');
     Route::post('/admin/productos/update/', [App\Http\Controllers\NotasProductosController::class, 'update_productos'])->name('notas_productos.productos');
 

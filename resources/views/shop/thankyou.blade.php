@@ -42,7 +42,7 @@
             @foreach ($order_ticket as $item)
                 <div class="container_order_item row mb-4">
                     <div class="col-2 my-auto">
-                        <div class="mx-auto img_portada_thankyou" style="background: url('{{ asset('/imagen_principal/empresa1' . $item->Producto->imagen_principal) }}') #ffffff00  50% / contain no-repeat;"></div>
+                        <div class="mx-auto img_portada_thankyou" style="background: url(&quot;{{$item->Producto->imagenes}}&quot;) #ffffff00  50% / contain no-repeat;"></div>
                     </div>
 
                     <div class="col-6 my-auto">
@@ -54,11 +54,14 @@
                     </div>
 
                     <div class="col-2 my-auto">
-                        <p class="title_price_thankyou m-0">${{number_format($item->precio, 2, '.', ',')}}</p>
+                        @php
+                            $total = $item->cantidad * $item->precio;
+                        @endphp
+                        <p class="title_price_thankyou m-0">${{number_format($total, 2, '.', ',')}}</p>
                     </div>
                 </div>
             @endforeach
-            <h4 class=" mb-4">Total: $<b>{{number_format($order->total, 2, '.', ',')}} </b></h4>
+            <h4 class=" mb-4">Total: $<b>{{number_format($order->pago, 2, '.', ',')}} </b></h4>
 
             @if ($order->factura == 'Si')
                 <div class="col-12">
