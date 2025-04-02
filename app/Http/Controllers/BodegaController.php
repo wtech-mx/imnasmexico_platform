@@ -112,6 +112,20 @@ class BodegaController extends Controller
         $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
         $oreders_cosmica_ecommerce = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
 
+        // Unir los datos de la API con los registros de la base de datos
+        $notas_cosmica_preparacion = $notas_cosmica_preparacion->map(function ($nota) {
+            if ($nota->shippingId_meli) {
+                // Obtener los datos de la API para este shippingId
+                $meliData = $this->fetchShippingLabelsFromMeli($nota->shippingId_meli);
+                // Agregar los datos de la API al registro
+                if ($meliData) {
+                    $nota->meli_data = $meliData;
+                }
+            }
+
+            return $nota;
+        });
+
         $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($ApiFiltradaCollectAprobadoreposicion) + count($orders_tienda_principal) + count($oreders_cosmica_ecommerce);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index', compact(

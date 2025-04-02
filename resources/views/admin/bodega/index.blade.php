@@ -269,6 +269,40 @@
                                                     </td>
 
                                                     <td>
+
+                                                        @if($item->shippingId_meli)
+                                                        @php
+                                                            $meliData = $item->meli_data; // Asegúrate de que esta variable contiene los datos de meli
+                                                            // Obtener el color correspondiente al estado actual
+                                                            $statusColor = $statusColors[$meliData['status']] ?? 'text-muted'; // Color predeterminado si no se encuentra el estado
+                                                            $status = $meliData['status'] ?? 'N/A';
+                                                            $dateCreated = $meliData['date_created'] ?? 'N/A';
+                                                            $substatus = $meliData['substatus'] ?? null;
+                                                            $statusHistory = $meliData['status_history'] ?? [];
+                                                            $shipmentDate = new DateTime($dateCreated);
+                                                            $currentDate = new DateTime();
+                                                            $shipmentDateFormatted = $shipmentDate->format('Y-m-d');
+                                                            $currentDateFormatted = $currentDate->format('Y-m-d');
+                                                            $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                                            $isDelayed = $isReadyOrPrepared && $shipmentDateFormatted < $currentDateFormatted;
+                                                            $substatusDroppedOff = in_array($substatus, ['dropped_off', 'in_hub']);
+                                                            $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
+                                                        @endphp
+
+                                                        <p>
+
+                                                            @if ($isLabelNotPrinted)
+
+                                                            @else
+                                                                @if ($isDelayed)
+                                                                    <br><br>
+                                                                    <strong style="color:red">Estás con demora</strong><br>
+                                                                    Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                                @endif
+                                                            @endif
+                                                        </p>
+                                                    @endif
+
                                                             En preparación
                                                     </td>
 
