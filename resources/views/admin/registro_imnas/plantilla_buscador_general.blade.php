@@ -41,7 +41,7 @@
                             <p class="text-center mt-4">
                                 <strong>Nombre del Alumno:</strong> {{$tickets->User->name}} <br>
                                 <strong>Especialidad:</strong> {{$tickets->Cursos->nombre}} <br>
-                                <strong>Escuela donde estudió:</strong> INSTITUTO MEXICANO NATURALES AIN SPA s<br>
+                                <strong>Escuela donde estudió:</strong> INSTITUTO MEXICANO NATURALES AIN SPA<br>
                                 <strong>Fecha que estudió del:</strong> {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }} al: {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_final)->isoFormat('DD [de] MMMM [del] YYYY') }}<br>
                             </p>
                             <p class="text-center mt-4">
@@ -67,7 +67,11 @@
                                 <a href="{{ route('folio.index_crednecial',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
                                 <a href="{{ route('folio.index_diploma',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma de Profesionalización</a>
                                 <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Título Honorífico</a>
-                                <a href="{{ route('folio.index_tira',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materiass</a>
+
+                                @if($tickets->Cursos->nombre === 'Carrera de Cosmiatria Estética')
+                                    <a href="{{ route('folio.index_tira',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
+                                @endif
+
                             @endif
                         </div>
 
