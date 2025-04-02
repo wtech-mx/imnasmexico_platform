@@ -18,7 +18,6 @@
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
 
-
             if (isset($tickets->foto_cuadrada)) {
                 $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
 
@@ -32,13 +31,15 @@
             }else{
 
                 if ($tickets == null) {
-
                     $palabras = explode(' ', ucwords(strtolower($tickets_externo->cliente)));
                     $firma = null;
                     $foto = $tickets_externo->foto;
+
                 }else {
 
                 $foto = $tickets->User->Documentos->foto_tam_infantil;
+
+                $firma =$tickets->User->Documentos->firma;
 
                 $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
 
@@ -46,7 +47,6 @@
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
                 }
-
             }
 
             $cantidad_palabras = count($palabras);
