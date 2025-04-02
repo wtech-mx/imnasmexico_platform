@@ -291,9 +291,26 @@
 
         <div class="container_texto_tira">
             <ul>
-                @foreach ($subtemas as $item)
-                    <li>{{$item->subtema}}</li>
-                @endforeach
+                @if (is_int($subtemas) && $subtemas === 0)
+                    <li>Anatomía </li>
+                    <li>Fisiología </li>
+                    <li>Bioquímica </li>
+                    <li>Química Cosmética </li>
+                    <li>Nutrición </li>
+                    <li>Patologías Estéticas Faciales </li>
+                    <li>Patologías Estéticas Corporales </li>
+                    <li>Masoterapia, Diferentes Técnicas </li>
+                    <li>Aparatologías Estéticas </li>
+                    <li>Técnicas Combinadas </li>
+                    <li>Tratamientos Avanzados Faciales Y Corporales </li>
+                    <li>Administración SPA </li>
+                @elseif(is_iterable($subtemas))
+                    @foreach ($subtemas as $item)
+                        <li>{{ $item->subtema }}</li>
+                    @endforeach
+                @endif
+
+
             </ul>
         </div>
 
