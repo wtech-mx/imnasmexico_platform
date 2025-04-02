@@ -12,7 +12,7 @@ use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
 use App\Models\Products;
 use Illuminate\Http\Request;
-
+use App\Models\Meli;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
@@ -23,6 +23,22 @@ use DB;
 
 class BodegaController extends Controller
 {
+    private $accessToken;
+    private $sellerId;
+
+    public function __construct()
+    {
+        // Obtener los datos dinámicos del modelo
+        $meliData = Meli::first(); // Asumiendo que siempre hay un registro
+        if ($meliData) {
+            $this->accessToken = $meliData->autorizacion ?? 'APP_USR-4791982421745244-120619-6e5686be00416a46416e810056b082a8-2084225921'; // Proporciona un valor predeterminado si es nulo
+            $this->sellerId = $meliData->sellerId ?? '2084225921';
+        } else {
+            // Opcional: manejar el caso donde no exista un registro
+            abort(500, 'No se encontraron datos de configuración en la tabla Meli.');
+        }
+    }
+
     public function index_preparacion(Request $request) {
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
@@ -191,6 +207,29 @@ class BodegaController extends Controller
         return $pdf->download("Order_Cosmica_Woo_{$id}.pdf");
     }
 
+    public function fetchShippingLabelsFromMeli($shippingId)
+    {
+        // Endpoint para obtener los detalles del envío
+        $endpoint = "https://api.mercadolibre.com/shipments/{$shippingId}";
+
+        try {
+            // Realizar la petición a la API de Mercado Libre
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$this->accessToken}",
+            ])->get($endpoint);
+
+            if ($response->successful()) {
+                return $response->json(); // Retornar los datos de la API como un array
+            } else {
+                // Manejar errores de la API
+                return null; // Retornar null en caso de error
+            }
+        } catch (\Exception $e) {
+            // Manejar excepciones
+            return null; // Retornar null en caso de excepción
+        }
+    }
+
     public function index_preparados(Request $request) {
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
@@ -257,7 +296,27 @@ class BodegaController extends Controller
         ->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')
+        ->where('estatus_cotizacion', '=', 'Preparado')
+        ->get();
+
+
+        // Unir los datos de la API con los registros de la base de datos
+        $notas_cosmica_preparado = $notas_cosmica_preparado->map(function ($nota) {
+            if ($nota->shippingId_meli) {
+                // Obtener los datos de la API para este shippingId
+                $meliData = $this->fetchShippingLabelsFromMeli($nota->shippingId_meli);
+                // Agregar los datos de la API al registro
+                if ($meliData) {
+                    $nota->meli_data = $meliData;
+                }
+            }
+
+            return $nota;
+        });
+
+
 
         $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal);
 

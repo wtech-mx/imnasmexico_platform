@@ -246,10 +246,14 @@
                                                 </div>
                                                 <div class="col-3 my-auto">
                                                     @if ($order['shipping_id'])
-                                                            <a href="{{ route('meli.downloadShippingLabel', ['shippingId' => $order['shipping_id']]) }}"
+                                                            {{-- <a href="{{ route('meli.downloadShippingLabel', ['shippingId' => $order['shipping_id']]) }}"
                                                             class="btn btn-primary btn-sm">
                                                                 Imprimir Guía
-                                                            </a>
+                                                            </a> --}}
+                                                            <a href="{{ route('meli.downloadShippingLabel', ['shippingId' => $order['shipping_id'], 'cosmica_nota_id' => $order['cosmica_nota_id'] ?? null]) }}"
+                                                                class="btn btn-primary btn-sm">
+                                                                 Imprimir Guía
+                                                             </a>
                                                         @else
                                                             <button class="btn btn-secondary btn-sm" disabled>Guía no disponible</button>
                                                     @endif

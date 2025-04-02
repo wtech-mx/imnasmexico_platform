@@ -165,6 +165,7 @@ class MeliController extends Controller
 
          return null; // Devuelve null si no es exitoso o no hay datos
      }
+
      private function getItemDetails($itemId){
         $endpoint = "https://api.mercadolibre.com/items/{$itemId}";
 
@@ -301,8 +302,18 @@ class MeliController extends Controller
         return view('admin.meli.ventas', compact('groupedOrders', 'meli', 'errorMessage', 'fechaInicio', 'fechaFin'));
     }
 
-    public function downloadShippingLabel($shippingId)
+    public function downloadShippingLabel($shippingId, $cosmica_nota_id = null)
     {
+
+        // Actualizar el registro de NotasProductosCosmica con el shippingId
+        if ($cosmica_nota_id) {
+            // Buscar el registro de NotasProductosCosmica si se proporciona $cosmica_nota_id
+            $notasCosmica = NotasProductosCosmica::find($cosmica_nota_id);
+            $notasCosmica->update([
+                'shippingId_meli' => $shippingId,
+            ]);
+        }
+
         // Endpoint para obtener la guía en formato PDF
         $endpoint = "https://api.mercadolibre.com/shipment_labels?shipment_ids={$shippingId}&response_type=pdf";
 
@@ -329,13 +340,16 @@ class MeliController extends Controller
                     'message' => "Error al obtener la guía de envío: {$response->status()}",
                 ]);
             }
+
         } catch (\Exception $e) {
             // Manejar excepciones
             return redirect()->back()->withErrors([
                 'message' => "Ocurrió un error: {$e->getMessage()}",
             ]);
         }
+
     }
+
 
     public function meli_show($id, $order_id = null)
     {

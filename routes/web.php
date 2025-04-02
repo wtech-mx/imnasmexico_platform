@@ -722,9 +722,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/mercado_libre_api', [App\Http\Controllers\MeliController::class, 'index_token'])->name('meli_token.index');
     Route::post('/meli/update-token', [App\Http\Controllers\MeliController::class, 'updateToken'])->name('meli.updateToken');
     Route::post('/meli/refresh-token', [App\Http\Controllers\MeliController::class, 'refreshToken'])->name('meli.refreshToken');
-    Route::get('/meli/print/{shippingId}', [App\Http\Controllers\MeliController::class, 'downloadShippingLabel'])->name('meli.downloadShippingLabel');
-
-    // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
+    // Route::get('/meli/print/{shippingId}', [App\Http\Controllers\MeliController::class, 'downloadShippingLabel'])->name('meli.downloadShippingLabel');
+    Route::get('/meli/print/{shippingId}/{cosmica_nota_id?}', [App\Http\Controllers\MeliController::class, 'downloadShippingLabel'])->name('meli.downloadShippingLabel');    // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
     Route::get('/cosmica/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
     Route::get('/cosmica/registro/compras/buscador', [App\Http\Controllers\RegistroComprasController::class, 'buscador'])->name('registro_compras.buscador');
 

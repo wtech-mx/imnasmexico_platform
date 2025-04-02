@@ -55,6 +55,7 @@ class NotasProductosCosmica extends Model
         'estatus_cotizacion',
         'estadociudad',
         'item_id_meli',
+        'shippingId_meli',
         'item_title_meli',
         'item_descripcion_meli',
         'item_descripcion_permalink',
