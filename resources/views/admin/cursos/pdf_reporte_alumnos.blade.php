@@ -43,7 +43,7 @@
         <tbody>
             @foreach ($cursosComprados as $curso)
                 <tr>
-                    <td>{{ $curso->nombre }} <br><p>{{ $curso->modalidad }}</p></td>
+                    <td>{{ $curso->nombre }} <br><b>{{ $curso->modalidad }}</b></td>
                     <td>{{ $curso->orderTicket->count() }}</td>
                 </tr>
             @endforeach
