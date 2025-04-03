@@ -52,19 +52,14 @@ class CursosController extends Controller
             $fechaFinSemana =  $request->fecha_inicial_a;
             $today = date('Y-m-d');
 
-            $cursosComprados = Orders::join('orders_tickets', 'orders.id', '=', 'orders_tickets.id_order')
-            ->join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id') // Asegúrate de que esta tabla exista y tenga los nombres de los cursos
-            ->whereBetween('orders.fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('orders.estatus', '1')
-            ->where('cursos.precio', '!=', 0)
-            ->where('cursos.nombre', 'not like', '%Estandar%')
-            ->where('cursos.nombre', 'not like', '%WORKSHOP%')
-            ->where('cursos.nombre', 'not like', '%Pago%')
-            ->where('cursos.nombre', 'not like', '%Afiliación%')
-            ->select('cursos.nombre as curso', DB::raw('COUNT(orders_tickets.id_curso) as inscritos'))
-            ->groupBy('cursos.nombre')
-            ->orderBy('inscritos', 'desc') // Opcional, para ordenar por mayor número de inscritos
-            ->get();
+           $cursos = Cursos::orderBy('fecha_inicial', 'DESC');
+
+            if( $request->fecha_inicial_de && $request->fecha_inicial_a ){
+                $cursos = $cursos->where('fecha_inicial', '>=', $request->fecha_inicial_de)
+                                        ->where('fecha_inicial', '<=', $request->fecha_inicial_a);
+            }
+            $cursosComprados = $cursos->get();
+
 
             $fechaInicioSemana = Carbon::parse($fechaInicioSemana)->translatedFormat('d F Y');
             $fechaFinSemana = Carbon::parse($fechaFinSemana)->translatedFormat('d F Y');
