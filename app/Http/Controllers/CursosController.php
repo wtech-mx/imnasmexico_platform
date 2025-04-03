@@ -29,6 +29,7 @@ use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 use App\Models\Tipodocumentos;
 use Codexshaper\WooCommerce\Models\Order;
+use Carbon\Carbon;
 
 class CursosController extends Controller
 {
@@ -45,14 +46,41 @@ class CursosController extends Controller
 
     public function filtro(Request $request){
         $fechaActual = date('Y-m-d');
-        $cursos = Cursos::orderBy('fecha_inicial', 'DESC');
 
-        if( $request->fecha_inicial_de && $request->fecha_inicial_a ){
-            $cursos = $cursos->where('fecha_inicial', '>=', $request->fecha_inicial_de)
-                                     ->where('fecha_inicial', '<=', $request->fecha_inicial_a);
+        if($request->action == 'Generar PDF'){
+            $fechaInicioSemana =  $request->fecha_inicial_de;
+            $fechaFinSemana =  $request->fecha_inicial_a;
+            $today = date('Y-m-d');
+
+            $cursosComprados = Orders::join('orders_tickets', 'orders.id', '=', 'orders_tickets.id_order')
+            ->join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id') // Asegúrate de que esta tabla exista y tenga los nombres de los cursos
+            ->whereBetween('orders.fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('orders.estatus', '1')
+            ->where('cursos.precio', '!=', 0)
+            ->where('cursos.nombre', 'not like', '%Estandar%')
+            ->where('cursos.nombre', 'not like', '%WORKSHOP%')
+            ->where('cursos.nombre', 'not like', '%Pago%')
+            ->where('cursos.nombre', 'not like', '%Afiliación%')
+            ->select('cursos.nombre as curso', DB::raw('COUNT(orders_tickets.id_curso) as inscritos'))
+            ->groupBy('cursos.nombre')
+            ->orderBy('inscritos', 'desc') // Opcional, para ordenar por mayor número de inscritos
+            ->get();
+
+            $fechaInicioSemana = Carbon::parse($fechaInicioSemana)->translatedFormat('d F Y');
+            $fechaFinSemana = Carbon::parse($fechaFinSemana)->translatedFormat('d F Y');
+            $pdf = \PDF::loadView('admin.cursos.pdf_reporte_alumnos', compact('cursosComprados', 'today', 'fechaInicioSemana', 'fechaFinSemana'));
+            //return $pdf->stream();
+           return $pdf->download('Reporte cursos'.'/'.$today.'.pdf');
+        }else{
+            $cursos = Cursos::orderBy('fecha_inicial', 'DESC');
+
+            if( $request->fecha_inicial_de && $request->fecha_inicial_a ){
+                $cursos = $cursos->where('fecha_inicial', '>=', $request->fecha_inicial_de)
+                                        ->where('fecha_inicial', '<=', $request->fecha_inicial_a);
+            }
+            $cursos = $cursos->get();
+            $cursos_modal = CursosTickets::where('fecha_final','>=', $fechaActual)->orderBy('nombre', 'DESC')->get();
         }
-        $cursos = $cursos->get();
-        $cursos_modal = CursosTickets::where('fecha_final','>=', $fechaActual)->orderBy('nombre', 'DESC')->get();
 
         return view('admin.cursos.index_dia', compact('cursos', 'cursos_modal'));
     }

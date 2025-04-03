@@ -71,6 +71,7 @@
                                         </button>
                                     </div>
 
+                                    <button type="submit" name="action" value="Generar PDF" class="btn btn-success">Generar PDF</button>
                                 </div>
                             </form>
                         </div>
