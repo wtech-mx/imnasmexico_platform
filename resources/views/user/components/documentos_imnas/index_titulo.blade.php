@@ -669,15 +669,26 @@
             </div>
 
             <div class="container_firma_director_text2">
+
                 <p class="text-center texto_firma_direct">
                     @php
-                        $words = explode(' ', $tickets->User->name);
-                        $chunks = array_chunk($words, 3);
-                        foreach ($chunks as $chunk) {
-                            echo implode(' ', $chunk) . '<br>';
-                        }
+
+
+                        $textoFinal = $tickets?->texto_firma_personalizada ?: $tickets?->texto_director;
                     @endphp
-                    {{ $tickets->texto_director }}
+
+                    {{-- Solo mostrar el nombre del director si no hay texto personalizado --}}
+                    @if (empty($tickets?->texto_firma_personalizada))
+                        @php
+                            $words = explode(' ', $tickets?->User?->name ?? '');
+                            $chunks = array_chunk($words, 3);
+                            foreach ($chunks as $chunk) {
+                                echo implode(' ', $chunk) . '<br>';
+                            }
+                        @endphp
+                    @else
+                        {!! insertarSaltosDeLinea($textoFinal, 3) !!}
+                    @endif
                 </p>
             </div>
         @endif
