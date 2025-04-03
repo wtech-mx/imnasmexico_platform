@@ -20,10 +20,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use App\Models\Meli;
+use Illuminate\Support\Facades\Http;
 
 
 class CotizacionCosmicaController extends Controller
 {
+
+    private $accessToken;
+    private $sellerId;
+
+    public function __construct()
+    {
+        // Obtener los datos dinámicos del modelo
+        $meliData = Meli::first(); // Asumiendo que siempre hay un registro
+        if ($meliData) {
+            $this->accessToken = $meliData->autorizacion ?? 'APP_USR-4791982421745244-120619-6e5686be00416a46416e810056b082a8-2084225921'; // Proporciona un valor predeterminado si es nulo
+            $this->sellerId = $meliData->sellerId ?? '2084225921';
+        } else {
+            // Opcional: manejar el caso donde no exista un registro
+            abort(500, 'No se encontraron datos de configuración en la tabla Meli.');
+        }
+    }
 
     public function index(Request $request) {
         $this->checkMembresia();
@@ -570,7 +588,7 @@ class CotizacionCosmicaController extends Controller
                 $productosIdsEnviados[] = $productoModelo->id;
             }
         }
-        
+
         // Ahora sí: eliminamos los que ya no están
         ProductosNotasCosmica::where('id_notas_productos', $id)
             ->whereNotIn('id_producto', $productosIdsEnviados)
@@ -662,14 +680,43 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function update_estatus(Request $request, $id){
+
+        $nota = NotasProductosCosmica::find($id);
+
+        if ($request->estatus_cotizacion == 'Cancelada') {
+            if ($nota->item_id_meli) {
+                try {
+                    $itemId = $nota->item_id_meli;
+                    $endpoint = "https://api.mercadolibre.com/items/{$itemId}";
+
+                    $response = Http::withHeaders([
+                        'Authorization' => "Bearer {$this->accessToken}",
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                    ])->put($endpoint, [
+                        'status' => 'closed',
+                    ]);
+
+                    if ($response->successful()) {
+                        // Opcional: marcar localmente como cerrada si tienes un campo para eso
+                        // $nota->update(['publicacion_meli_estatus' => 'closed']);
+
+                        \Log::info("Publicación {$itemId} cancelada exitosamente en Mercado Libre.");
+                    } else {
+                        \Log::error("Error al cancelar publicación Meli ({$itemId}):", $response->json());
+                    }
+                } catch (\Exception $e) {
+                    \Log::error("Excepción al cancelar publicación Meli: " . $e->getMessage());
+                }
+            }
+        }
+
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
             $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera/');
         }else{
             $pago_fuera = public_path() . '/pago_fuera/';
         }
-
-        $nota = NotasProductosCosmica::find($id);
 
         $nota->estatus_cotizacion =  $request->get('estatus_cotizacion');
         $nota->estadociudad =  $request->get('estado');
