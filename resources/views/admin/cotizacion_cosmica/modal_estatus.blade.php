@@ -28,13 +28,14 @@
                                 @if ($nota->tipo_nota ==  'Cotizacion')
                                     <option value="Aprobada">Aprobada</option>
                                     <option value="Aprobar Duo y Amor">Aprobar Duo y Amor</option>
-                                    @if ($nota->estatus_cotizacion ==  'Aprobada' || $nota->estatus_cotizacion ==  NULL)
+                                    {{-- @if ($nota->estatus_cotizacion ==  'Aprobada' || $nota->estatus_cotizacion ==  NULL)
                                         <option value="Cancelada">Cancelada</option>
-                                    @endif
+                                    @endif --}}
                                     <option value="Aprobado por tiendita">Aprobado por tiendita</option>
                                 @else
                                     <option value="Aprobada Expo">Aprobada Expo</option>
                                 @endif
+                                <option value="Cancelada">Cancelada</option>
                             </select>
                         </div>
                     </div>
