@@ -67,7 +67,7 @@
                                             <button type="submit" class="btn close-modal"  id="btn-buscar" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Calcular</button>
 
                                             <a class="btn btn-sm btn-success" href="{{ route('reporte.pdf_anual') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                                <i class="fa fa-fw fa-edit"></i> Crear
+                                                <i class="fa fa-fw fa-edit"></i> Reporte Anual
                                             </a>
                                         </div>
                                     </div>

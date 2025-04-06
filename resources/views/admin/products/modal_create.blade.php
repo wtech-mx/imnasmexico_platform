@@ -34,6 +34,7 @@
                             <option value="">Seleciona una opcion</option>
                             <option value="NAS">NAS</option>
                             <option value="Cosmica">Cosmica</option>
+                            <option value="Insumos Bodega">Insumos Bodega</option>
                         </select>
                     </div>
 

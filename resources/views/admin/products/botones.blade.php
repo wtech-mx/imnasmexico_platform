@@ -55,6 +55,12 @@
                     Categorias
                 </a>
             </li>
+
+            <li class="nav-item" >
+                <a class="nav-link" href="{{ route('products_insumos_castilla.index') }}" style="background: #fcc154a3">
+                    Insumos
+                </a>
+            </li>
     </ul>
 </div>
 

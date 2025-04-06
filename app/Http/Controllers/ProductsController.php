@@ -183,6 +183,12 @@ class ProductsController extends Controller
         return view('admin.products.index_bundle', compact('productsKit'));
     }
 
+    public function index_insumos_castilla(Request $request){
+        $products = Products::orderBy('id','DESC')->where('categoria', 'Ocultar')->where('subcategoria', '=', 'Insumos Bodega')->orderby('nombre','asc')->get();
+
+        return view('admin.products.index_insumos', compact('products'));
+    }
+
     public function update_estatus(Request $request, $id){
 
         $product = Products::find($id);
@@ -222,8 +228,13 @@ class ProductsController extends Controller
         $product->stock = $request->get('stock');
         $product->precio_rebajado = $request->get('precio_rebajado');
         $product->precio_normal = $request->get('precio_normal');
-        $product->categoria = $request->get('categoria');
-        $product->subcategoria = $request->get('subcategoria');
+        if($request->get('categoria') == 'Insumos Bodega'){
+            $product->categoria = 'Ocultar';
+            $product->subcategoria = 'Insumos Bodega';
+        }else{
+            $product->categoria = $request->get('categoria');
+            $product->subcategoria = $request->get('subcategoria');
+        }
         $product->imagenes = $request->get('imagenes');
         $product->save();
 
