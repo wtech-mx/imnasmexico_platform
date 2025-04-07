@@ -532,6 +532,8 @@ class ProductsController extends Controller
             'stock' => $product->stock,
             'stock_nas' => $product->stock_nas,
             'stock_cosmica' => $product->stock_cosmica,
+            'stock_salon' => $product->stock_salon,
+
         ]);
     }
 

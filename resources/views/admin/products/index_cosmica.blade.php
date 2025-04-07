@@ -30,6 +30,7 @@
                                         <th>Nombre</th>
                                         <th>Precio Normal</th>
                                         <th>Stock</th>
+                                        <th>Stock Salon</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -50,6 +51,8 @@
                                     </td>
                                     <td>${{ $precio_normal }}</td>
                                     <td>{{ $product->stock }}</td>
+                                    <td>{{ $product->stock_salon }}</td>
+
                                     <td>
 
                                             <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
@@ -201,6 +204,7 @@
             $('#precio_normal').val(product.precio_normal);
             $('#stock').val(product.stock);
             $('#stock_cosmica').val(product.stock_cosmica);
+            $('#stock_salon').val(product.stock_salon);
             $('#stock_nas').val(product.stock_nas);
             $('#precio_rebajado').val(product.precio_rebajado);
             $('#imagenes').val(product.imagenes);
@@ -300,6 +304,7 @@
               categoria: $('#categoria').val(),
               stock_cosmica: $('#stock_cosmica').val(),
               stock_nas: $('#stock_nas').val(),
+              stock_salon: $('#stock_salon').val(),
               stock: $('#stock').val(),
               descripcion: $('#descripcion').val(),
 
@@ -333,6 +338,7 @@
                       `);
                       $('#productRow' + response.id + ' td:nth-child(4)').text(`$${response.precio_normal}`);
                       $('#productRow' + response.id + ' td:nth-child(5)').text(response.stock);
+                      $('#productRow' + response.id + ' td:nth-child(6)').text(response.stock_salon);
 
                       // Mantener los botones de acciones
                       let actions = $('#productRow' + response.id + ' td:nth-child(6)').html();
