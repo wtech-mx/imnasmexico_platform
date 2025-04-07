@@ -608,6 +608,7 @@ class PagosFueraController extends Controller
         $pagos_fuera = PagosFuera::find($id);
         $pagos_fuera->abono2 = $request->get('abono2');
         $pagos_fuera->fecha_hora_2 = $request->get('fecha_hora_2');
+        $pagos_fuera->metodo_pago2 = $request->get('metodo_pago2');
         $pagos_fuera->comentario = $request->get('comentario');
         $pagos_fuera->deudor = '0';
 
@@ -620,7 +621,7 @@ class PagosFueraController extends Controller
         }
         $pagos_fuera->update();
 
-        $total = $pagos_fuera->abono - $pagos_fuera->abono2;
+        $total = $pagos_fuera->abono + $pagos_fuera->abono2;
 
         $order = Orders::where('id_externo', '=', $pagos_fuera->id)->first();
         $order->estatus = 1;

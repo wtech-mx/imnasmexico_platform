@@ -89,25 +89,30 @@
                             </div>
 
                             <div class="row" id="">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
-                                        <label for="foto2">Comprobante</label>
-                                        <input id="foto2" name="foto2" type="file" class="form-control" @if($pago_fuera->PagosFuera->foto2) disabled @endif>
-                                        @error('foto2') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <label for="name">Metodo de Pago</label>
+                                        <select name="metodo_pago2" id="metodo_pago2" class="form-select d-inline-block">
+                                            <option value="Efectivo">Efectivo</option>
+                                            <option value="Tarjeta">Tarjeta</option>
+                                            <option value="Transferencia">Transferencia</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="abono2">Abono 2</label>
                                         <input id="abono2" name="abono2" type="number" class="form-control" value="{{ $pago_fuera->PagosFuera->abono2 ? $pago_fuera->PagosFuera->abono2 : $restande }}" @if($pago_fuera->PagosFuera->abono2) disabled @endif>
                                     </div>
                                 </div>
 
-                                <div class="col-6">
-                                    @if(!$pago_fuera->PagosFuera->foto2 && !$pago_fuera->PagosFuera->abono2)
-                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                                    @endif
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        @if(!$pago_fuera->PagosFuera->foto2 && !$pago_fuera->PagosFuera->abono2)
+                                        <button type="submit" class="btn close-modal mt-4" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                        @endif
+                                    </div>
                                 </div>
 
                                 <div class="col-6">
