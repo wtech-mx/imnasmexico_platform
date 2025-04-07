@@ -163,37 +163,11 @@
     <h2>Pago</h2>
     <b for="">Metodo de Pago:</b> {{ $nota->PagosFuera->modalidad }} <br>
     <b for="">Monto:</b> ${{ number_format($nota->PagosFuera->abono, 1, '.', ',') }} <br>
-    @if ($nota->id_externo != NULL)
-        <div class="col-6">
-            <div class="form-group">
-                <label for="foto">Comprobante 1</label> <br>
-                @if (pathinfo($nota->PagosFuera->foto, PATHINFO_EXTENSION) === 'pdf')
-                    <iframe src="{{ asset('pago_fuera/'.$nota->PagosFuera->foto) }}" width="40%" ></iframe>
-                @else
-                    <img id="blah" src="{{ asset('pago_fuera/'.$nota->PagosFuera->foto) }}" alt="Imagen" style="width: 10%">
-                @endif
-            </div>
-        </div>
-    @endif
 
     @if ($nota->PagosFuera->abono2 != NULL)
         <h2>Pago 2</h2>
+        <b for="">Metodo de Pago:</b> {{ $nota->PagosFuera->metodo_pago2 }} <br>
         <b for="">Monto 2:</b> ${{ number_format($nota->PagosFuera->abono2, 1, '.', ',') }} <br>
-    @endif
-
-    @if ($nota->id_externo != NULL)
-        @if ($nota->PagosFuera->foto2 != NULL)
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="foto">Comprobante 2</label> <br>
-                    @if (pathinfo($nota->PagosFuera->foto2, PATHINFO_EXTENSION) === 'pdf')
-                        <iframe src="{{ asset('pago_fuera/'.$nota->PagosFuera->foto2) }}" width="40%" ></iframe>
-                    @else
-                        <img id="blah" src="{{ asset('pago_fuera/'.$nota->PagosFuera->foto2) }}" alt="Imagen" style="width: 10%">
-                    @endif
-                </div>
-            </div>
-        @endif
     @endif
 
   </div>
