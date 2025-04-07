@@ -16,6 +16,7 @@ class Products extends Model
         'slug',
         'nombre',
         'stock_nas',
+        'stock_salon',
         'categoria',
         'laboratorio',
         'subcategoria',
