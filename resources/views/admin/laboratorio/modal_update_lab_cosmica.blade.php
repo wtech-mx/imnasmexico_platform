@@ -39,6 +39,8 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                             <div class="row">
+                                <input id="stock_salon" name="stock_salon" type="hidden" class="form-control" value="{{ $product->stock_salon}}">
+
                                 <div class="form-group col-12">
                                     <label for="name">Nombre</label>
                                     <input id="nombre" name="nombre" type="text" class="form-control" value="{{ $product->nombre }}" readonly>

@@ -204,6 +204,7 @@
             $('#stock').val(product.stock);
             $('#stock_cosmica').val(product.stock_cosmica);
             $('#stock_nas').val(product.stock_nas);
+            $('#stock_salon').val(product.stock_salon);
             $('#precio_rebajado').val(product.precio_rebajado);
             $('#imagenes').val(product.imagenes);
             // Llena los otros campos si es necesario
@@ -304,6 +305,7 @@
               stock_nas: $('#stock_nas').val(),
               stock: $('#stock').val(),
               descripcion: $('#descripcion').val(),
+              stock_salon: $('#stock_salon').val(),
 
               linea: $('#linea').val(),
               sublinea: $('#sublinea').val(),

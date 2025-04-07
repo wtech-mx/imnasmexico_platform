@@ -155,6 +155,7 @@
           $('#stock_nas').val(product.stock_nas);
           $('#precio_rebajado').val(product.precio_rebajado);
           $('#imagenes').val(product.imagenes);
+          $('#stock_salon').val(product.stock_salon);
           // Llena los otros campos si es necesario
         // Actualiza la imagen en el modal
         $('#editProductModal #blah').attr('src', product.imagenes);
@@ -186,6 +187,7 @@
             stock_nas: $('#stock_nas').val(),
             stock: $('#stock').val(),
             descripcion: $('#descripcion').val(),
+            stock_salon: $('#stock_salon').val(),
             cantidad_aumentada: $('#cantidad_aumentada').val(),
             imagenes: $('#imagenes').val(),
             _token: $('meta[name="csrf-token"]').attr('content'), // Token CSRF

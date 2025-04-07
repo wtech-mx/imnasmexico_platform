@@ -90,6 +90,11 @@
                                     </div>
 
                                     <div class="form-group col-6">
+                                        <label for="name">Stock Salon 1</label>
+                                        <input id="stock_salon" name="stock_salon" type="number" class="form-control" value="{{ $product->stock_salon}}">
+                                    </div>
+
+                                    <div class="form-group col-6">
                                         <label for="name">Destacar</label>
                                         <select class="form-control" id="favorito" name="favorito">
                                             <option value="{{ $product->favorito }}">{{ $product->favorito }}</option>

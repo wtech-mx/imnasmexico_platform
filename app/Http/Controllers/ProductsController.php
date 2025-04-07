@@ -493,6 +493,7 @@ class ProductsController extends Controller
         $product->precio_normal = $request->get('precio_normal');
         $product->imagenes = $request->get('imagenes');
         $product->stock = $request->get('stock');
+        $product->stock_salon = $request->get('stock_salon');
         $product->stock_nas = $suma_nas;
         $product->stock_cosmica = $suma;
         $product->id_categoria = $request->get('id_categoria'); // Actualizar el id de la categoría
