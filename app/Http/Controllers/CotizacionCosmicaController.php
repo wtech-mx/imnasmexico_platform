@@ -591,8 +591,13 @@ class CotizacionCosmicaController extends Controller
 
         // Ahora sí: eliminamos los que ya no están
         ProductosNotasCosmica::where('id_notas_productos', $id)
-            ->whereNotIn('id_producto', $productosIdsEnviados)
-            ->delete();
+        ->where(function ($query) use ($productosIdsEnviados) {
+            $query->whereNotIn('id_producto', $productosIdsEnviados)
+                  ->where(function ($q) {
+                      $q->whereNull('kit')->orWhere('kit', '!=', 1);
+                  });
+        })
+        ->delete();
 
         // Actualizar productos existentes
         for ($count = 0; $count < count($producto); $count++) {
@@ -647,12 +652,28 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
+
+
         $nota = NotasProductosCosmica::findOrFail($id);
         $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
         $cleanPriceTotal = floatval(str_replace(['$', ','], '', $request->get('total_final')));
         $nota->subtotal = $cleanPrice4;
         $nota->total = $cleanPriceTotal;
         $nota->envio = $request->get('envio');
+
+        $kits_cantidades = $request->input('cantidad_kit');
+        for ($i = 1; $i <= 6; $i++) {
+            $idKitCampo = "id_kit" . ($i == 1 ? '' : $i); // id_kit, id_kit2, ..., id_kit6
+            $cantidadKitCampo = "cantidad_kit" . ($i == 1 ? '' : $i); // cantidad_kit, cantidad_kit2, ...
+
+            if (!empty($nota->$idKitCampo)) {
+                // Si existe el kit, actualizamos su cantidad con la correspondiente del array
+                $index = $i - 1; // los arrays empiezan en 0
+                if (isset($kits_cantidades[$index])) {
+                    $nota->$cantidadKitCampo = $kits_cantidades[$index];
+                }
+            }
+        }
         $nota->save();
 
         return redirect()->route('cotizacion_cosmica.index')

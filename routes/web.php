@@ -557,6 +557,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/notas/cursos/edit/{id}', [App\Http\Controllers\NotasCursosController::class, 'edit'])->name('notas_cursos.edit');
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
     Route::get('/admin/notas/cursos/imprimir/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir'])->name('notas_cursos.imprimir');
+    Route::get('/admin/notas/cursos/imprimir/orders/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir_order'])->name('notas_orders.imprimir');
     Route::get('/admin/notas/cursos/imprimir/canceladas/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir_canceladas'])->name('notas_cursos.imprimir_canceladas');
     Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
 

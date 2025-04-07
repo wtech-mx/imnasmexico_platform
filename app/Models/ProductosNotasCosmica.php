@@ -19,6 +19,7 @@ class ProductosNotasCosmica extends Model
         'descuento',
         'total',
         'id_reposicion_producto',
+        'num_kit',
     ];
 
     public function Nota()
@@ -33,5 +34,9 @@ class ProductosNotasCosmica extends Model
     public function ProductosRepo()
     {
         return $this->belongsTo(Products::class, 'id_reposicion_producto');
+    }
+    public function ProductoKit()
+    {
+        return $this->belongsTo(Products::class, 'num_kit');
     }
 }

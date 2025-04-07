@@ -464,6 +464,19 @@ class NotasCursosController extends Controller
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
 
+    public function imprimir_order($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = Orders::find($id);
+        $nota_productos = OrdersTickets::where('id_order', $nota->id)->get();
+
+        $pdf = \PDF::loadView('admin.clientes.perfil.cotizaciones.pdf_order', compact('nota', 'today', 'nota_productos'));
+       return $pdf->stream();
+
+        //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
+    }
+
     public function imprimir_canceladas($id){
         $diaActual = date('Y-m-d');
         $today =  date('d-m-Y');

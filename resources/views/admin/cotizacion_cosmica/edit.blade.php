@@ -99,69 +99,126 @@
                                     @php
                                         $total = 0;
                                         $totalCantidad = 0;
+                                        $total_kits = 0;
+
+                                        $kits = [
+                                            ['id' => $cotizacion->id_kit, 'cantidad' => $cotizacion->cantidad_kit],
+                                            ['id' => $cotizacion->id_kit2, 'cantidad' => $cotizacion->cantidad_kit2],
+                                            ['id' => $cotizacion->id_kit3, 'cantidad' => $cotizacion->cantidad_kit3],
+                                            ['id' => $cotizacion->id_kit4, 'cantidad' => $cotizacion->cantidad_kit4],
+                                            ['id' => $cotizacion->id_kit5, 'cantidad' => $cotizacion->cantidad_kit5],
+                                            ['id' => $cotizacion->id_kit6, 'cantidad' => $cotizacion->cantidad_kit6],
+                                        ];
                                     @endphp
 
+                                    @foreach($kits as $index => $kit)
+                                        @if($kit['id'])
+                                            @php
+                                                $kit_producto = \App\Models\Products::find($kit['id']);
+                                                $componentes = $cotizacion_productos->where('num_kit', $kit['id'])->where('kit', 1);
+                                                $precio_kit = ($kit_producto->precio_normal ?? 0) * $kit['cantidad'];
+                                                $total_kits += $precio_kit;
+                                            @endphp
+
+                                            <div class="row campo_kit" data-kit-id="{{ $kit['id'] }}">
+                                                <div class="col-3">
+                                                    <label>Kit</label>
+                                                    <input type="text" class="form-control" value="{{ $kit_producto->nombre }}" readonly>
+                                                </div>
+
+                                                <div class="form-group col-2">
+                                                    <label>Cantidad *</label>
+                                                    <input type="number" name="cantidad_kit[]" class="form-control cantidad_kit" value="{{ $kit['cantidad'] }}">
+                                                </div>
+
+                                                <div class="form-group col-2">
+                                                    <label>Descuento *</label>
+                                                    <input type="number" name="descuento_kit[]" class="form-control descuento_kit" value="0" readonly>
+                                                </div>
+
+                                                <div class="form-group col-3">
+                                                    <label>Subtotal *</label>
+                                                    <input type="text" class="form-control subtotal_kit" value="${{ number_format($precio_kit, 2) }}" readonly>
+                                                </div>
+
+                                                <div class="col-12 mt-2">
+                                                    <p><strong>Incluye:</strong></p>
+                                                    <ul>
+                                                        @foreach($componentes as $componente)
+                                                            <li>({{ $componente->cantidad }}) {{ $componente->Productos->nombre ?? 'Producto' }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Hidden inputs para cálculos JS -->
+                                                <input type="hidden" class="precio_unitario_kit" value="{{ $kit_producto->precio_normal }}">
+                                            </div>
+                                        @endif
+                                    @endforeach
+
                                     @foreach ($cotizacion_productos as  $productos)
-                                        <div class="row campo3" data-id="{{ $productos->id }}">
-                                            @php
-                                                if($productos->cantidad != NULL){
-                                                    $precio_unitario = $productos->price / $productos->cantidad;
-                                                    $precio_format = number_format($productos->price, 0, '.', ',');
-                                                    $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
-                                                }
-                                            @endphp
+                                        @if($productos->kit != 1 && !$cotizacion_productos->where('num_kit', $productos->num_kit)->where('kit', 1)->count())
+                                            <div class="row campo3" data-id="{{ $productos->id }}">
+                                                @php
+                                                    if($productos->cantidad != NULL){
+                                                        $precio_unitario = $productos->price / $productos->cantidad;
+                                                        $precio_format = number_format($productos->price, 0, '.', ',');
+                                                        $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
+                                                    }
+                                                @endphp
 
-                                            <div class="col-3">
-                                                <label for="">Nombre</label>
-                                                <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
-                                            </div>
-
-                                            <div class="form-group col-2">
-                                                <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                                <div class="col-3">
+                                                    <label for="">Nombre</label>
+                                                    <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group col-2">
-                                                <label for="descuento_{{ $productos->id }}">Descuento *</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
+                                                <div class="form-group col-2">
+                                                    <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group col-3">
-                                                <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
+                                                <div class="form-group col-2">
+                                                    <label for="descuento_{{ $productos->id }}">Descuento *</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group col-2">
-                                                <h4 for="name">Quitar</h4>
-                                                <div class="input-group mb-3">
-                                                    <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                <div class="form-group col-3">
+                                                    <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
+                                                    </div>
                                                 </div>
+
+                                                <div class="form-group col-2">
+                                                    <h4 for="name">Quitar</h4>
+                                                    <div class="input-group mb-3">
+                                                        <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Campo oculto para el precio unitario -->
+                                                <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
+
+                                                @php
+                                                    $subtotal = $productos->price;
+                                                    $total += $subtotal;
+                                                    $precio = $total + $total_kits;
+                                                @endphp
                                             </div>
-
-                                            <!-- Campo oculto para el precio unitario -->
-                                            <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
-
-                                            @php
-                                                $subtotal = $productos->price;
-                                                $total += $subtotal;
-                                                $precio = $total;
-                                            @endphp
-                                        </div>
+                                        @endif
                                     @endforeach
 
                                     <div class="col-12">
@@ -353,6 +410,11 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
                 total += subtotalValue;
             });
 
+            document.querySelectorAll('.subtotal_kit').forEach(el => {
+                const value = parseFloat(el.value.replace('$', '').replace(',', '')) || 0;
+                total += value;
+            });
+
             document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
 
             const descuentoInput = document.getElementById('descuento_total');
@@ -384,6 +446,27 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
 
             document.getElementById('total_final').value = `$${totalConDescuento.toFixed(2)}`;
         }
+
+        document.querySelectorAll('.campo_kit').forEach(kit => {
+            const cantidadInput = kit.querySelector('.cantidad_kit');
+            const descuentoInput = kit.querySelector('.descuento_kit');
+            const precioUnitario = parseFloat(kit.querySelector('.precio_unitario_kit').value) || 0;
+            const subtotalInput = kit.querySelector('.subtotal_kit');
+
+            function updateKitSubtotal() {
+                const cantidad = parseFloat(cantidadInput.value) || 0;
+                const descuento = parseFloat(descuentoInput.value) || 0;
+
+                let subtotal = cantidad * precioUnitario;
+                subtotal -= (subtotal * (descuento / 100));
+
+                subtotalInput.value = `$${subtotal.toFixed(2)}`;
+                updateTotal();
+            }
+
+            cantidadInput.addEventListener('input', updateKitSubtotal);
+            descuentoInput.addEventListener('input', updateKitSubtotal);
+        });
 
         function updateSubtotalExistente(id) {
             const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;

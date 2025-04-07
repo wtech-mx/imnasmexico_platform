@@ -31,6 +31,7 @@
                                 <th>Curso</th>
                                 <th>Fecha</th>
                                 <th>Modalidad</th>
+                                <th>Estatus</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -45,7 +46,11 @@
                                             <tr>
                                     @endif
                                 @endif
-                                    <td>{{ $nota->id }}</td>
+                                    <td>
+                                        Remision: <br>
+                                        {{ $nota->id }}
+
+                                    </td>
                                     <td>{{ $nota->User->name }}</td>
 
                                     <td>
@@ -56,6 +61,7 @@
                                         @endphp
                                         {{$fecha_formateada}}
                                     </td>
+                                    <td><span class="badge" style="color: #355002; background-color: #a2f70465;">Pagado</span></td>
                                     <td>
                                         @if ($nota->paquete != NULL)
                                             <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$nota->paquete) }}" target="_blank">Ver orden</a>
@@ -78,6 +84,37 @@
                                         @endif
                                     </td>
                                 </tr>
+                            @endforeach
+                            @foreach ($pagos_externos as $pago_fuera)
+                                <tr>
+                                    <td>{{ $pago_fuera->id }}</td>
+                                    <td>{{ $pago_fuera->User->name }}</td>
+                                    <td>
+                                       {{$pago_fuera->PagosFuera->curso}}
+                                    </td>
+                                    <td>
+                                        @if ($pago_fuera->PagosFuera != NULL)
+                                            @if ($pago_fuera->PagosFuera->deudor == '1')
+                                                    <span class="badge" style="color: #d51d1d; background-color: #d51d1d70;">Deudor</span> <br>
+                                                    Abono: <b>${{$pago_fuera->PagosFuera->abono}}</b>
+                                                @else
+                                                    <span class="badge" style="color: #355002; background-color: #a2f70465;">Pagado</span>
+                                            @endif
+                                        @else
+                                            <span class="badge" style="color: #355002; background-color: #a2f70465;">Pagado</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$pago_fuera->id}}" style="color: #ffff"><i class="fa fa-users"></i></a>
+
+                                        <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_orders.imprimir', $pago_fuera->id) }}">
+                                            <i class="fa fa-file"></i>
+                                        </a>
+
+                                        <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$pago_fuera->id) }}"><i class="fa fa-money" title="Ver Orden"></i> </a>
+                                    </td>
+                                </tr>
+                                @include('admin.clientes.perfil.cotizaciones.deudor_curso')
                             @endforeach
                         </tbody>
                     </table>

@@ -146,10 +146,11 @@ class PerfilClienteController extends Controller
         $tipo = 'Usuario';
 
         $notas = NotasCursos::where('id_usuario', '=', $id)->orderBy('id','DESC')->get();
+        $pagos_externos = Orders::where('id_usuario', '=', $id)->where('id_externo', '!=', NULL)->orderBy('id','DESC')->get();
         $cursos_compra = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
         $fechaPerfil = date('Y-m-d');
 
-        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cursos', 'tipo', 'fechaPerfil', 'cursos_compra', 'notas'));
+        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cursos', 'tipo', 'fechaPerfil', 'cursos_compra', 'notas', 'pagos_externos'));
     }
 
     public function compras_tiendita(Request $request, $phone){
