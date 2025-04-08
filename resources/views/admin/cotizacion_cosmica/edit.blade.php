@@ -118,6 +118,7 @@
                                                 $componentes = $cotizacion_productos->where('num_kit', $kit['id'])->where('kit', 1);
                                                 $precio_kit = ($kit_producto->precio_normal ?? 0) * $kit['cantidad'];
                                                 $total_kits += $precio_kit;
+                                                $precio = $total_kits;
                                             @endphp
 
                                             <div class="row campo_kit" data-kit-id="{{ $kit['id'] }}">
