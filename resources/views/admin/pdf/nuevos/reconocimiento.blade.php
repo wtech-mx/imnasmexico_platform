@@ -191,7 +191,7 @@
             <div class="col-8 text-center border p-2">
                 <p class="parrafo">  Por haber concluido exitosamente el curso o diplomado de:</p>
                 <h2 class="curso"> {{ ucwords(strtolower($curso)) }}</h2>
-                <p class="parrafo"> Realizado desde el {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}. </p>
+                <p class="parrafo"> Realizado el {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}. </p>
             </div>
 
             <div class="col-2 text-center border p-2">
