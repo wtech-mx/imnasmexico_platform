@@ -344,14 +344,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function eliminarProducto(productoId) {
-        const productoDiv = document.querySelector(`.campo3[data-id="${productoId}"]`);
+        if (!confirm("¿Estás seguro de eliminar este producto de la cotización?")) return;
 
-        // Si el elemento existe, eliminarlo del DOM
+        const productoDiv = document.querySelector(`.campo3[data-id="${productoId}"]`);
         if (productoDiv) {
             productoDiv.remove();
-            updateTotal();  // Actualizar el total después de eliminar un campo
+            updateTotal();
         }
     }
+
 
     function updateSubtotalExistente(id) {
         const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;
@@ -439,26 +440,31 @@ document.addEventListener('DOMContentLoaded', function () {
         const nuevoCampo = crearNuevoCampo();
         camposContainer2.appendChild(nuevoCampo);
         asignarEventos(nuevoCampo);
+        updateTotal(); // 🔁 recalcula al agregar producto
     });
+
 
     function crearNuevoCampo() {
         const campoTemplate = document.querySelector('.campo2');
         const nuevoCampo = campoTemplate.cloneNode(true);
 
-        // Limpia los valores de los inputs en el nuevo campo
+        // Limpia valores
         nuevoCampo.querySelector('.producto2').value = '';
         nuevoCampo.querySelector('.cantidad2').value = '';
         nuevoCampo.querySelector('.descuento_prod').value = '0';
         nuevoCampo.querySelector('.subtotal2').value = '';
 
-        // Eliminar la clase 'select2-hidden-accessible' y el contenedor generado por select2 antes de clonar
+        // Limpia select2
         $(nuevoCampo).find('.producto2').removeClass('select2-hidden-accessible').next('.select2').remove();
 
-        // Inicializar select2 después de clonar
-        $(nuevoCampo).find('.producto2').select2();
+        // Reasigna nuevo select2
+        setTimeout(() => {
+            $(nuevoCampo).find('.producto2').select2();
+        }, 10);
 
         return nuevoCampo;
     }
+
 
     function eliminarCampo(campo) {
         campo.remove();
@@ -479,12 +485,21 @@ document.addEventListener('DOMContentLoaded', function () {
         productSelect.addEventListener('change', function () {
             const selectedOption = productSelect.options[productSelect.selectedIndex];
             const precio = parseFloat(selectedOption.dataset.precio_normal2) || 0;
-            cantidadInput.value = 1;
+
+            // Si no hay cantidad aún, poner 1 como valor por defecto
+            if (!cantidadInput.value || cantidadInput.value <= 0) {
+                cantidadInput.value = 1;
+            }
+
+            const cantidad = parseFloat(cantidadInput.value) || 1;
             const descuento = parseFloat(descuentoInput.value) || 0;
-            const subtotal = precio - (precio * (descuento / 100));
+
+            const subtotal = (precio * cantidad) - ((precio * cantidad) * (descuento / 100));
             campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
+
             updateTotal();
         });
+
 
         cantidadInput.addEventListener('input', function () {
             actualizarSubtotalNuevo(campo);
@@ -501,10 +516,36 @@ document.addEventListener('DOMContentLoaded', function () {
         const precio = parseFloat(selectedOption.dataset.precio_normal2) || 0;
         const cantidad = parseFloat(campo.querySelector('.cantidad2').value) || 0;
         const descuento = parseFloat(campo.querySelector('.descuento_prod').value) || 0;
+
         const subtotal = (precio * cantidad) - ((precio * cantidad) * (descuento / 100));
         campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
-        updateTotal();
+
+        updateTotal(); // 🔄 recalcula el total
+
+        // Obtener dinero recibido
+        const dineroRecibido = parseFloat(document.getElementById('dineroRecibido')?.value || 0);
+        const dineroRecibido2 = parseFloat(document.getElementById('dineroRecibido2')?.value || 0);
+        const totalRecibido = dineroRecibido + dineroRecibido2;
+
+        // Calcular restante o cambio
+        const restanteInput = document.getElementById('restante');
+        const cambioInput = document.getElementById('cambio');
+
+        if (totalRecibido < sumaSubtotales) {
+            // Aún falta dinero
+            const restante = sumaSubtotales - totalRecibido;
+            if (restanteInput) restanteInput.value = restante.toFixed(2);
+            if (cambioInput) cambioInput.value = '0.00';
+        } else {
+            // Hay cambio
+            const cambio = totalRecibido - sumaSubtotales;
+            if (restanteInput) restanteInput.value = '0.00';
+            if (cambioInput) cambioInput.value = cambio.toFixed(2);
+        }
+
+
     }
+
 });
 </script>
 @endsection
