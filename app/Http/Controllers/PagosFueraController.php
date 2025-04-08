@@ -611,6 +611,7 @@ class PagosFueraController extends Controller
         $pagos_fuera->metodo_pago2 = $request->get('metodo_pago2');
         $pagos_fuera->comentario = $request->get('comentario');
         $pagos_fuera->deudor = '0';
+        $pagos_fuera->user2 = auth()->user()->name;
 
         if ($request->hasFile("foto2")) {
             $file = $request->file('foto2');
