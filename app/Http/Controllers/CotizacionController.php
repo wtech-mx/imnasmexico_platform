@@ -410,11 +410,11 @@ class CotizacionController extends Controller
         }
 
         // Eliminar los productos que ya no están en la solicitud
-        // foreach ($productosExistentes as $productoExistente) {
-        //     if (!in_array($productoExistente->id, $productosIdsEnviados)) {
-        //         $productoExistente->delete();
-        //     }
-        // }
+        foreach ($productosExistentes as $productoExistente) {
+            if (!in_array($productoExistente->id, $productosIdsEnviados)) {
+                $productoExistente->delete();
+            }
+        }
 
         $campo = $request->input('campo');
         if(!empty(array_filter($campo, fn($value) => !is_null($value)))){
