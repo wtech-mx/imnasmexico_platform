@@ -582,13 +582,17 @@ class CotizacionCosmicaController extends Controller
 
         $productosIdsEnviados = [];
 
-        foreach ($producto as $nombreProducto) {
-            $productoModelo = Products::where('nombre', $nombreProducto)->first();
-            if ($productoModelo) {
-                $productosIdsEnviados[] = $productoModelo->id;
+        if($producto == NULL){
+
+        }else{
+
+            foreach ($producto as $nombreProducto) {
+                $productoModelo = Products::where('nombre', $nombreProducto)->first();
+                if ($productoModelo) {
+                    $productosIdsEnviados[] = $productoModelo->id;
+                }
             }
         }
-
         // Ahora sí: eliminamos los que ya no están
         ProductosNotasCosmica::where('id_notas_productos', $id)
         ->where(function ($query) use ($productosIdsEnviados) {
@@ -599,34 +603,37 @@ class CotizacionCosmicaController extends Controller
         })
         ->delete();
 
-        // Actualizar productos existentes
-        for ($count = 0; $count < count($producto); $count++) {
-            // Buscar el producto en tabla Products
-            $producto_first = Products::where('nombre', $producto[$count])
-                ->where('categoria', '!=', 'Ocultar')
-                ->first();
+        if($producto == NULL){
 
-            if (!$producto_first) {
-                continue; // Si no existe el producto, saltamos
-            }
+        }else{
+            for ($count = 0; $count < count($producto); $count++) {
+                // Buscar el producto en tabla Products
+                $producto_first = Products::where('nombre', $producto[$count])
+                    ->where('categoria', '!=', 'Ocultar')
+                    ->first();
 
-            // Buscar el producto ya asociado a la cotización
-            $producto_nota = ProductosNotasCosmica::where('id_notas_productos', $id)
-                ->where('id_producto', $producto_first->id)
-                ->first();
+                if (!$producto_first) {
+                    continue; // Si no existe el producto, saltamos
+                }
 
-            $cleanPrice = floatval(str_replace(['$', ','], '', $price[$count]));
+                // Buscar el producto ya asociado a la cotización
+                $producto_nota = ProductosNotasCosmica::where('id_notas_productos', $id)
+                    ->where('id_producto', $producto_first->id)
+                    ->first();
 
-            // Si ya existe, lo actualizamos
-            if ($producto_nota) {
-                $producto_nota->update([
-                    'price' => $cleanPrice,
-                    'cantidad' => $cantidad[$count],
-                    'descuento' => $descuento[$count],
-                ]);
+                $cleanPrice = floatval(str_replace(['$', ','], '', $price[$count]));
+
+                // Si ya existe, lo actualizamos
+                if ($producto_nota) {
+                    $producto_nota->update([
+                        'price' => $cleanPrice,
+                        'cantidad' => $cantidad[$count],
+                        'descuento' => $descuento[$count],
+                    ]);
+                }
             }
         }
-
+        
         $campo = $request->input('campo');
         if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {
             $campo4 = $request->input('campo4');
