@@ -160,14 +160,14 @@
         <p>{{ $nota->PagosFuera->nota }}</p>
     @endif
 
-    <h2>Pago</h2>
+    <h2>Pago Online</h2>
     <b for="">Subido por:</b> {{ $nota->PagosFuera->usuario }} <br>
     <b for="">Fecha y hora:</b> {{ $nota->PagosFuera->fecha_hora_1 }} <br>
     <b for="">Metodo de Pago:</b> {{ $nota->PagosFuera->modalidad }} <br>
     <b for="">Monto:</b> ${{ number_format($nota->PagosFuera->abono, 1, '.', ',') }} <br>
 
     @if ($nota->PagosFuera->abono2 != NULL)
-        <h2>Pago 2</h2>
+        <h2>Pago 2 Presencial</h2>
         <b for="">Subido por:</b> {{ $nota->PagosFuera->user2 }} <br>
         <b for="">Fecha y hora:</b> {{ $nota->PagosFuera->fecha_hora_2 }} <br>
         <b for="">Metodo de Pago:</b> {{ $nota->PagosFuera->metodo_pago2 }} <br>
