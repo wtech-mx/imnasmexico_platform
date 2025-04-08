@@ -295,9 +295,10 @@ class PerfilClienteController extends Controller
         // Retornar las notas como JSON
         return response()->json($notas);
     }
+
     public function getProductosByNota($notaId)
     {
-        $productos = ProductosNotasCosmica::where('id_notas_productos', $notaId)->get();
+        $productos = ProductosNotasId::where('id_notas_productos', $notaId)->get();
         return response()->json($productos);
     }
 
