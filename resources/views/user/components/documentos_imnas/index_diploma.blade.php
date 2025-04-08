@@ -254,6 +254,25 @@
             width: 50px;
         }
 
+        .container_clave_rfc{
+            position: absolute;
+            top: 92.1%;
+            left: 8%;
+            padding: 0 10px 0 10px;
+            margin: 0px;
+        }
+
+        .clave_rfc{
+            color: #000;
+            font-size: 10px;
+            font-weight: bold;
+            background: #fff;
+            padding: 0px;
+            margin: 0px;
+            letter-spacing: 0.5px;
+            line-height: 7px;
+        }
+
     </style>
 @endsection
 
@@ -335,44 +354,44 @@
 
 
 
-@if($tickets?->firma_director == 'si')
-    <div class="container_firma_director">
-        <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firna">
-        <p class="text-center texto_firma_direct">
-            @php
-                function insertarSaltosDeLinea($texto, $cadaCuantasPalabras = 3) {
-                    $palabras = explode(' ', $texto);
-                    $resultado = '';
+        @if($tickets?->firma_director == 'si')
+            <div class="container_firma_director">
+                <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firna">
+                <p class="text-center texto_firma_direct">
+                    @php
+                        function insertarSaltosDeLinea($texto, $cadaCuantasPalabras = 3) {
+                            $palabras = explode(' ', $texto);
+                            $resultado = '';
 
-                    foreach ($palabras as $index => $palabra) {
-                        $resultado .= $palabra . ' ';
-                        if (($index + 1) % $cadaCuantasPalabras === 0) {
-                            $resultado .= '<br>';
+                            foreach ($palabras as $index => $palabra) {
+                                $resultado .= $palabra . ' ';
+                                if (($index + 1) % $cadaCuantasPalabras === 0) {
+                                    $resultado .= '<br>';
+                                }
+                            }
+
+                            return $resultado;
                         }
-                    }
 
-                    return $resultado;
-                }
+                        $textoFinal = $tickets?->texto_firma_personalizada ?: $tickets?->texto_director;
+                    @endphp
 
-                $textoFinal = $tickets?->texto_firma_personalizada ?: $tickets?->texto_director;
-            @endphp
+                    {{-- Solo mostrar el nombre del director si no hay texto personalizado --}}
+                    @if (empty($tickets?->texto_firma_personalizada))
+                        @php
+                            $words = explode(' ', $tickets?->User?->name ?? '');
+                            $chunks = array_chunk($words, 3);
+                            foreach ($chunks as $chunk) {
+                                echo implode(' ', $chunk) . '<br>';
+                            }
+                        @endphp
+                    @else
+                        {!! insertarSaltosDeLinea($textoFinal, 3) !!}
+                    @endif
+                </p>
 
-            {{-- Solo mostrar el nombre del director si no hay texto personalizado --}}
-            @if (empty($tickets?->texto_firma_personalizada))
-                @php
-                    $words = explode(' ', $tickets?->User?->name ?? '');
-                    $chunks = array_chunk($words, 3);
-                    foreach ($chunks as $chunk) {
-                        echo implode(' ', $chunk) . '<br>';
-                    }
-                @endphp
-            @else
-                {!! insertarSaltosDeLinea($textoFinal, 3) !!}
-            @endif
-        </p>
-
-    </div>
-@endif
+            </div>
+        @endif
 
 
     </div>
@@ -434,6 +453,16 @@
 
                     </p>
             </div>
+        </div>
+
+        <div class="container_clave_rfc">
+            <p class="clave_rfc">
+                @if(!isset($tickets->User->clave_clasificacion))
+                    RIFC680910-879-0013
+                @else
+                    {{ $tickets->User->clave_clasificacion }}
+                @endif
+            </p>
         </div>
 
         {{-- <div class="container_cursoTrasero">
