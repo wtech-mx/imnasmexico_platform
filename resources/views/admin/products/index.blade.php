@@ -57,16 +57,14 @@
                                             </a>
 
                                         @can('productos-edit')
-                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}" action="{{ route('products.update_ocultar', $product->id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="categoria" value="Ocultar">
-                                            <button type="button" class="btn btn-danger btn-sm btn-ocultar">
-                                                <i class="fa fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
-
-
+                                            <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}" action="{{ route('products.update_ocultar', $product->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="categoria" value="Ocultar">
+                                                <button type="button" class="btn btn-danger btn-sm btn-ocultar">
+                                                    <i class="fa fa-fw fa-trash"></i>
+                                                </button>
+                                            </form>
                                         @endcan
                                     </td>
                                 </tr>
@@ -74,7 +72,9 @@
                                 @endforeach
 
                         </table>
-                        <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
+                        @can('productos-menu')
+                            <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
+                        @endcan
                     </form>
                 </div>
 

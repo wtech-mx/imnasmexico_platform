@@ -221,14 +221,22 @@
                                     <span class="nav-link-text ms-1">Scanner</span>
                                 </a>
 
-                                @can('bodega-nas-pedido')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (Request::is('admin/products') ? 'active' : '') }}" href="{{ route('products_insumos_castilla.index') }}">
+                                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-shopping-basket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                                        </div>
+                                        <span class="sidenav-normal">Insumos</span>
+                                    </a>
+                                </li>
+                                {{-- @can('bodega-nas-pedido')
                                     <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock.index') }}">
                                         <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                             <i class="fa fa-pencil text-sm opacity-10" style="color:#e6b449"></i>
                                         </div>
                                         <span class="nav-link-text ms-1">Pedidos Lab NAS</span>
                                     </a>
-                                @endcan
+                                @endcan --}}
 
                                 @can('bodega-nas-historial')
                                     <a class="nav-link {{ (Request::is('admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_nas.index') }}">
@@ -239,14 +247,14 @@
                                     </a>
                                 @endcan
 
-                                @can('bodega-cosmica-pedido')
+                                {{-- @can('bodega-cosmica-pedido')
                                     <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock_cosmica.index') }}">
                                         <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                             <i class="fa fa-pencil text-sm opacity-10" style="color:#322338"></i>
                                         </div>
                                         <span class="nav-link-text ms-1">Pedidos Lab Cosmi.</span>
                                     </a>
-                                @endcan
+                                @endcan --}}
 
                                 @can('bodega-cosmica-historial')
                                     <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_cosmica.index') }}">
