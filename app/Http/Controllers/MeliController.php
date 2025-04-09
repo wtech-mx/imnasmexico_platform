@@ -477,43 +477,78 @@ class MeliController extends Controller
         $descripcionFinal = "Productos:\n" . $productosDetalle . "\n" . $validatedData['description'];
 
         $endpoint = 'https://api.mercadolibre.com/items';
+        // $payload = [
+        //     "title" => $request->title,
+        //     "category_id" => "MLM178705",
+        //     'price' => $validatedData['price'],
+        //     "currency_id" => "MXN",
+        //     "available_quantity" => 1,
+        //     "buying_mode" => "buy_it_now",
+        //     "listing_type_id" => "gold_special",
+        //     "condition" => "new",
+        //     "pictures" => [
+        //         ["source" => "https://plataforma.imnasmexico.com/meli/PROPUESTA-1.png"]
+        //     ],
+        //     "attributes" => [
+        //         [
+        //             "id" => "BRAND",
+        //             "value_name" => "Cosmética Natural"
+        //         ],
+        //         [
+        //             "id" => "SKIN_TYPE",
+        //             "value_name" => "Grasa"
+        //         ],
+        //         [
+        //             "id" => "APPLICATION_MOMENT",
+        //             "value_name" => "Día/Noche"
+        //         ],
+        //         [
+        //             "id" => "NAME",
+        //             "value_name" => $request->title
+        //         ]
+        //     ],
+        //     "shipping" => [
+        //         "mode" => "me2",
+        //         "local_pick_up" => false,
+        //         "free_shipping" => false,
+        //         "logistic_type" => "drop_off",
+        //         "store_pick_up" => false
+        //     ],
+        // ];
+
         $payload = [
             "title" => $request->title,
             "category_id" => "MLM178705",
-            'price' => $validatedData['price'],
+            "price" => $validatedData['price'],
             "currency_id" => "MXN",
             "available_quantity" => 1,
             "buying_mode" => "buy_it_now",
-            "listing_type_id" => "gold_special",
-            "condition" => "new",
+            "listing_type_id" => "silver", // Puedes cambiarlo dinámicamente si gustas
+            "condition" => "not_specified", // O "new" si aplica
+
             "pictures" => [
                 ["source" => "https://plataforma.imnasmexico.com/meli/PROPUESTA-1.png"]
             ],
+
             "attributes" => [
                 [
                     "id" => "BRAND",
                     "value_name" => "Cosmética Natural"
                 ],
                 [
-                    "id" => "SKIN_TYPE",
-                    "value_name" => "Grasa"
-                ],
-                [
-                    "id" => "APPLICATION_MOMENT",
-                    "value_name" => "Día/Noche"
-                ],
-                [
                     "id" => "NAME",
                     "value_name" => $request->title
-                ]
+                ],
+                // Puedes agregar más dinámicamente si quieres
             ],
+
             "shipping" => [
-                "mode" => "me2",
+                "mode" => "me2", // usa "me2" si tienes habilitado Mercado Envíos
                 "local_pick_up" => false,
-                "free_shipping" => false,
+                "free_shipping" => $request->envio_gratis ?? false, // true o false
                 "logistic_type" => "drop_off",
                 "store_pick_up" => false
-            ],
+            ]
         ];
 
         try {
