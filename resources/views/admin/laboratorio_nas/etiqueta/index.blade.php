@@ -127,7 +127,7 @@ Conteo de Etiquetas NAS
         </div>
       </div>
 </div>
-@include('admin.laboratorio_cosmica.etiqueta.modal_vencer')
+@include('admin.laboratorio_nas.etiqueta.modal_vencer')
 @endsection
 
 @section('datatable')

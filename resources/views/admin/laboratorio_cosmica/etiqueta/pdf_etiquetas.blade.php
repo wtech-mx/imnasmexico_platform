@@ -62,7 +62,7 @@
   <header>
     <h1>Etiquetas bajo stock
     </h1>
-    <h2>Laboratorio
+    <h2>Laboratorio Cosmica
     </h2>
   </header>
 
@@ -97,71 +97,55 @@
         <thead style="background-color: #322338; color: #fff">
             <tr>
                 <th>Nombre</th>
-                <th>Stock</th>
-                <th>Tipo</th>
+                <th>Lateral</th>
+                <th>Tapa</th>
+                <th>Frente</th>
+                <th>Reversa</th>
             </tr>
         </thead>
         <tbody>
-                @foreach ($etiqueta_lateral as $item)
+            @foreach ($productos as $grupo)
+                @php
+                    $producto = $grupo->first(); // Tomamos el producto base del grupo
+                @endphp
+
+                @if (
+                    ($producto->estatus_lateral == '1' && $producto->etiqueta_lateral <= 200) ||
+                    ($producto->estatus_tapa == '1' && $producto->etiqueta_tapa <= 200) ||
+                    ($producto->estatus_frente == '1' && $producto->etiqueta_frente <= 200) ||
+                    ($producto->estatus_reversa == '1' && $producto->etiqueta_reversa <= 200)
+                )
                     <tr>
                         <td class="col-6">
-                            <b> {{ $item->nombre }} </b>
+                            <b> {{ $producto->nombre }} </b>
                         </td>
-                        @if ($item->etiqueta_lateral <= 150)
-                            <td class="col-3 text-center" style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_lateral }}</td>
-                        @elseif ($item->etiqueta_lateral > 150 && $item->etiqueta_lateral <= 200)
-                            <td class="col-3 text-center" style="background-color: #e7dc3c;">{{ $item->etiqueta_lateral }}</td>
+                        @if ($producto->estatus_lateral == '1' && $producto->etiqueta_lateral <= 200)
+                                @php $cantidad = $producto->etiqueta_lateral; @endphp
+                            <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
+                                {{ $cantidad }}
+                            </td>
                         @endif
-                        <td class="col-3 text-center">
-                            Lateral
-                        </td>
-                    </tr>
-                @endforeach
-                @foreach ($etiqueta_tapa as $item)
-                    <tr>
-                        <td class="col-6">
-                            <b> {{ $item->nombre }} </b>
-                        </td>
-                        @if ($item->etiqueta_tapa <= 150)
-                            <td class="col-3 text-center" style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_tapa }}</td>
-                        @elseif ($item->etiqueta_tapa > 150 && $item->etiqueta_tapa <= 200)
-                            <td class="col-3 text-center" style="background-color: #e7dc3c;">{{ $item->etiqueta_tapa }}</td>
+                        @if ($producto->estatus_tapa == '1' && $producto->etiqueta_tapa <= 200)
+                                @php $cantidad = $producto->etiqueta_tapa; @endphp
+                            <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
+                                {{ $cantidad }}
+                            </td>
                         @endif
-                        <td class="col-3 text-center">
-                            Tapa
-                        </td>
-                    </tr>
-                @endforeach
-                @foreach ($etiqueta_frente as $item)
-                    <tr>
-                        <td class="col-6">
-                            <b> {{ $item->nombre }} </b>
-                        </td>
-                        @if ($item->etiqueta_frente <= 150)
-                            <td class="col-3 text-center" style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_frente }}</td>
-                        @elseif ($item->etiqueta_frente > 150 && $item->etiqueta_frente <= 200)
-                            <td class="col-3 text-center" style="background-color: #e7dc3c;">{{ $item->etiqueta_frente }}</td>
+                        @if ($producto->estatus_frente == '1' && $producto->etiqueta_frente <= 200)
+                                @php $cantidad = $producto->etiqueta_frente; @endphp
+                            <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
+                                {{ $cantidad }}
+                            </td>
                         @endif
-                        <td class="col-3 text-center">
-                            Frente
-                        </td>
-                    </tr>
-                @endforeach
-                @foreach ($etiqueta_reversa as $item)
-                    <tr>
-                        <td class="col-6">
-                            <b> {{ $item->nombre }} </b>
-                        </td>
-                        @if ($item->etiqueta_reversa <= 150)
-                            <td class="col-3 text-center" style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_reversa }}</td>
-                        @elseif ($item->etiqueta_reversa > 150 && $item->etiqueta_reversa <= 200)
-                            <td class="col-3 text-center" style="background-color: #e7dc3c;">{{ $item->etiqueta_reversa }}</td>
+                        @if ($producto->estatus_reversa == '1' && $producto->etiqueta_reversa <= 200)
+                                @php $cantidad = $producto->etiqueta_reversa; @endphp
+                            <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
+                                {{ $cantidad }}
+                            </td>
                         @endif
-                        <td class="col-3 text-center">
-                            Reversa
-                        </td>
                     </tr>
-                @endforeach
+                @endif
+            @endforeach
         </tbody>
     </table>
   </div>

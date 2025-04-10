@@ -258,10 +258,10 @@ class LabNasController extends Controller
     // =============== C O N T E O  E T I Q U E T A S ===============================
     public function index_etiqueta(Request $request){
         $products = Products::orderBy('id','ASC')->where('categoria', 'NAS')->where('subcategoria', 'Producto')->get();
-        $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 200)->where('estatus_lateral','=', '1')->get();
-        $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 200)->where('estatus_tapa','=', '1')->get();
-        $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->get();
-        $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->get();
+        $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 200)->where('estatus_lateral','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
+        $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 200)->where('estatus_tapa','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
+        $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
+        $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
 
         $suma = $etiqueta_lateral->count() + $etiqueta_tapa->count() + $etiqueta_frente->count() + $etiqueta_reversa->count();
         return view('admin.laboratorio_nas.etiqueta.index', compact('products', 'etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'suma'));
@@ -352,14 +352,22 @@ class LabNasController extends Controller
 
     public function pdf_etiquetas(Request $request){
         $today =  date('d-m-Y');
-        $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 200)->where('estatus_lateral','=', '1')->get();
-        $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 200)->where('estatus_tapa','=', '1')->get();
-        $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->get();
-        $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->get();
+        $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 200)->where('estatus_lateral','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
+        $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 200)->where('estatus_tapa','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
+        $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
+        $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->where('categoria', 'NAS')->whereIn('subcategoria', ['Producto', 'Muestras'])->get();
 
-        $pdf = \PDF::loadView('admin.laboratorio_nas.etiqueta.pdf_etiquetas', compact('etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'today'));
-        //return $pdf->stream();
-         return $pdf->download('Etiquetas bajo stock nas / '.$today.'.pdf');
+        $productos = collect()
+        ->merge($etiqueta_lateral)
+        ->merge($etiqueta_tapa)
+        ->merge($etiqueta_frente)
+        ->merge($etiqueta_reversa)
+        ->unique('id') // Para evitar duplicados si el producto aparece en más de una
+        ->groupBy('id');
+
+        $pdf = \PDF::loadView('admin.laboratorio_nas.etiqueta.pdf_etiquetas', compact('etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'today', 'productos'));
+        return $pdf->stream();
+         //return $pdf->download('Etiquetas bajo stock nas / '.$today.'.pdf');
     }
 
     public function pdf_etiquetas_reporte(Request $request){
