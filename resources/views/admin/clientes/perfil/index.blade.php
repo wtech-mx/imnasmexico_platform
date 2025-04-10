@@ -153,7 +153,7 @@
                                 <div class="h-100">
                                     <h5 class="mb-1 font-weight-bolder">
                                         @if ($tipo == 'Usuario')
-                                            {{$cliente->name}}
+                                           <a href="{{ route('perfil.show', $cliente->id) }}" target="_blank"> {{$cliente->name}} </a>
                                         @else
                                             {{$cliente->nombre}}
                                         @endif

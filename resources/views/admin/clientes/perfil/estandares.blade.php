@@ -40,8 +40,18 @@
             @endforeach
             @foreach ($estandar_user as $estandar)
                 @if ($estandar->Estandar)
-                    <div class="col-12">
+                    <div class="col-8">
                         <p style="color: #25748c"><b> {{$estandar->Estandar->nombre}}</b></p>
+                    </div>
+                    <div class="col-4">
+                        <form action="{{ route('peril_cliente.destroy_estandares', $estandar->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <input type="text" name="estandar_id" value="{{ $estandar->Estandar->id }}" hidden>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este estándar?')">
+                                Borrar
+                            </button>
+                        </form>
                     </div>
                 @endif
             @endforeach

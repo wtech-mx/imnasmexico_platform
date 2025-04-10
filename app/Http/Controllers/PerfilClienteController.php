@@ -324,42 +324,65 @@ class PerfilClienteController extends Controller
 
     public function store_estandar(Request $request, $id){
 
-        $notas_cam = new CamNotas;
-        $notas_cam->id_cliente = $id;
-        $notas_cam->tipo = 'Compra Estandar';
-        $notas_cam->fecha = date('Y-m-d');
-        $notas_cam->id_usuario = auth()->user()->id;
-        $notas_cam->save();
+        if(CamNotas::where('id_cliente', $id)->exists()){
+            $notas_cam = CamNotas::where('id_cliente', $id)->first();
 
-        $estandares = $request->input('estandares');
+            $estandares = $request->input('estandares');
+            for ($count = 0; $count < count($estandares); $count++) {
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
+        }else{
+            $notas_cam = new CamNotas;
+            $notas_cam->id_cliente = $id;
+            $notas_cam->tipo = 'Compra Estandar';
+            $notas_cam->fecha = date('Y-m-d');
+            $notas_cam->id_usuario = auth()->user()->id;
+            $notas_cam->save();
 
-        for ($count = 0; $count < count($estandares); $count++) {
-            $data = array(
-                'id_nota' => $notas_cam->id,
-                'id_estandar' => $estandares[$count],
-                'estatus' => 'Sin estatus',
-                'estatus_renovacion' => 'renovo',
-                'id_usuario' => auth()->user()->id,
-            );
-            $insert_data[] = $data;
+            $estandares = $request->input('estandares');
+
+            for ($count = 0; $count < count($estandares); $count++) {
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
+
+            $checklist = new CamChecklist;
+            $checklist->id_nota = $notas_cam->id;
+            $checklist->save();
+
+            $citas = new CamCitas;
+            $citas->id_nota = $notas_cam->id;
+            $citas->save();
+
+            $videos = new CamVideosUser;
+            $videos->id_nota = $notas_cam->id;
+            $videos->id_cliente = $notas_cam->id_cliente;
+            $videos->tipo = 'Compra Estandar';
+            $videos->save();
         }
-        CamNotEstandares::insert($insert_data);
-
-        $checklist = new CamChecklist;
-        $checklist->id_nota = $notas_cam->id;
-        $checklist->save();
-
-        $citas = new CamCitas;
-        $citas->id_nota = $notas_cam->id;
-        $citas->save();
-
-        $videos = new CamVideosUser;
-        $videos->id_nota = $notas_cam->id;
-        $videos->id_cliente = $notas_cam->id_cliente;
-        $videos->tipo = 'Compra Estandar';
-        $videos->save();
-
         return redirect()->back()->with('success', 'Se agregaron estandar(es) con exito.');
+    }
+
+    public function destroy(Request $request, $id){
+        $estandar = CamNotEstandares::where('id_nota', $id)->where('id_estandar', $request->estandar_id)->first(); // Reemplaza `EstandarUser` con el modelo correspondiente
+        $estandar->delete();
+
+        return redirect()->back()->with('success', 'Estándar eliminado correctamente.');
     }
 
     public function getNotasByUsuario($id)
