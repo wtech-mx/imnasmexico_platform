@@ -633,7 +633,7 @@ class CotizacionCosmicaController extends Controller
                 }
             }
         }
-        
+
         $campo = $request->input('campo');
         if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {
             $campo4 = $request->input('campo4');
@@ -667,6 +667,7 @@ class CotizacionCosmicaController extends Controller
         $nota->subtotal = $cleanPrice4;
         $nota->total = $cleanPriceTotal;
         $nota->envio = $request->get('envio');
+        $nota->dinero_recibido = $request->get('costo_envio');
 
         $kits_cantidades = $request->input('cantidad_kit');
         for ($i = 1; $i <= 6; $i++) {
