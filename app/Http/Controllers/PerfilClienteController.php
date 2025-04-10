@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cam\CamChecklist;
+use App\Models\Cam\CamCitas;
+use App\Models\Cam\CamDocuemntos;
+use App\Models\Cam\CamNotas;
+use App\Models\Cam\CamNotEstandares;
+use App\Models\Cam\CamVideosUser;
+use App\Models\CarpetasEstandares;
 use App\Models\Cosmikausers;
+use App\Models\CursosEstandares;
 use App\Models\CursosTickets;
 use App\Models\NotasCursos;
 use App\Models\NotasProductos;
@@ -285,6 +293,96 @@ class PerfilClienteController extends Controller
         $fechaPerfil = date('Y-m-d');
 
         return view('admin.clientes.perfil.index',compact('cliente', 'distribuidora', 'cosmica_user', 'tipo', 'cotizaciones', 'products', 'fechaPerfil'));
+    }
+
+    public function estandares($id){
+
+        $estandar_user = CamNotEstandares::join('cam_notas', 'cam_notestandares.id_nota', '=', 'cam_notas.id')
+        ->where('cam_notas.id_cliente', $id)
+        ->where('cam_notas.fecha', '>', '2024-07-30')
+        ->get();
+
+        $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $id)
+                        ->where('orders.estatus','=', 1)
+                        ->where('orders_tickets.id_curso', '!=', 553)
+                        ->get();
+        $ordenesCompletadas = Orders::where('id_usuario', $id)->where('estatus', 1)->pluck('id');
+        $cursosComprados = OrdersTickets::whereIn('id_order', $ordenesCompletadas)->pluck('id_curso');
+        // Obtener los IDs de los estándares asociados a los cursos comprados
+        $estandares = CursosEstandares::whereIn('id_curso', $cursosComprados)->pluck('id_carpeta');
+        $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
+
+        $estandares_cam = CarpetasEstandares::orderBy('nombre','asc')->get();
+
+        $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id)->first();
+        $distribuidora = Cosmikausers::where('id_cliente', $id)->orderBy('id','DESC')->first();
+        $tipo = 'Usuario';
+
+        return view('admin.clientes.perfil.index',compact('cliente', 'estandares_cam', 'distribuidora', 'tipo', 'estandar_user', 'usuario_compro','estandaresComprados'));
+    }
+
+    public function store_estandar(Request $request, $id){
+
+        if(CamNotas::where('id_cliente', $id)->exists()){
+            $notas_cam = CamNotas::where('id_cliente', $id)->first();
+
+            $estandares = $request->input('estandares');
+            for ($count = 0; $count < count($estandares); $count++) {
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
+        }else{
+            $notas_cam = new CamNotas;
+            $notas_cam->id_cliente = $id;
+            $notas_cam->tipo = 'Compra Estandar';
+            $notas_cam->fecha = date('Y-m-d');
+            $notas_cam->id_usuario = auth()->user()->id;
+            $notas_cam->save();
+
+            $estandares = $request->input('estandares');
+
+            for ($count = 0; $count < count($estandares); $count++) {
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
+
+            $checklist = new CamChecklist;
+            $checklist->id_nota = $notas_cam->id;
+            $checklist->save();
+
+            $citas = new CamCitas;
+            $citas->id_nota = $notas_cam->id;
+            $citas->save();
+
+            $videos = new CamVideosUser;
+            $videos->id_nota = $notas_cam->id;
+            $videos->id_cliente = $notas_cam->id_cliente;
+            $videos->tipo = 'Compra Estandar';
+            $videos->save();
+        }
+        return redirect()->back()->with('success', 'Se agregaron estandar(es) con exito.');
+    }
+
+    public function destroy(Request $request, $id){
+        $estandar = CamNotEstandares::where('id_nota', $id)->where('id_estandar', $request->estandar_id)->first(); // Reemplaza `EstandarUser` con el modelo correspondiente
+        $estandar->delete();
+
+        return redirect()->back()->with('success', 'Estándar eliminado correctamente.');
     }
 
     public function getNotasByUsuario($id)
