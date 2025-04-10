@@ -122,6 +122,16 @@
                                         </a>
                                     </li>
                                 @endif
+                                @if ($tipo == 'Usuario')
+                                    <li class="nav-item pt-2">
+                                        <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.estandares', $cliente->id)}}">
+                                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                                <img src="{{ asset('assets/cam/contrato.png') }}"width="30px" >
+                                            </div>
+                                            <span class="text-sm">Estandares</span>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                             </div>
                         </div>
@@ -207,6 +217,9 @@
                     @endif
                     @if(Route::currentRouteName() == 'peril_cliente.membresia_cosmica')
                         @include('admin.clientes.perfil.membresia')
+                    @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.estandares')
+                        @include('admin.clientes.perfil.estandares')
                     @endif
                   </div>
                 </div>

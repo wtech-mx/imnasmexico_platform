@@ -908,6 +908,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/perfil/cliente/cotizaciones/cosmica/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_cosmica'])->name('peril_cliente.cotizaciones_cosmica');
         Route::get('/perfil/cliente/reposicion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'reposicion'])->name('peril_cliente.reposicion');
         Route::get('/perfil/cliente/membresia/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'membresia_cosmica'])->name('peril_cliente.membresia_cosmica');
+        Route::get('/perfil/cliente/estandares/{id}', [App\Http\Controllers\PerfilClienteController::class, 'estandares'])->name('peril_cliente.estandares');
+        Route::post('/perfil/cliente/estandares/crear/{id}', [App\Http\Controllers\PerfilClienteController::class, 'store_estandar'])->name('peril_cliente.crear_estandares');
 
         Route::get('/perfil/cliente/search-phone', [App\Http\Controllers\PerfilClienteController::class, 'searchPhone'])->name('peril_cliente.searchPhone');
         Route::get('/perfil/cliente/search-name', [App\Http\Controllers\PerfilClienteController::class, 'searchName'])->name('peril_cliente.searchName');
