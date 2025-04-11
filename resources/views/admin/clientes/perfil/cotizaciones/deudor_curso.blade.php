@@ -109,7 +109,7 @@
 
                                 <div class="col-4">
                                     <div class="form-group">
-                                        @if(!$pago_fuera->PagosFuera->foto2 && !$pago_fuera->PagosFuera->abono2)
+                                        @if(!$pago_fuera->PagosFuera->abono2)
                                         <button type="submit" class="btn close-modal mt-4" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                         @endif
                                     </div>
