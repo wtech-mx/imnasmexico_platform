@@ -270,7 +270,7 @@
 
                                                     <td>
 
-                                                        @if($item->shippingId_meli)
+                                                        @if($item->shippingId_meli && is_array($item->meli_data))
                                                         @php
                                                             $meliData = $item->meli_data; // Asegúrate de que esta variable contiene los datos de meli
                                                             // Obtener el color correspondiente al estado actual
