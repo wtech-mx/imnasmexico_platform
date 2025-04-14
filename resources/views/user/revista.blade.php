@@ -22,6 +22,7 @@
     @if(session('show_iframe') || $show_iframe)
         <div class="d-flex justify-content-center">
             <iframe src="{{asset('books/pdf/revista_comprimida.pdf')}}" frameborder="0" class="container" style="margin-top: 6rem"></iframe>
+            <a href="{{asset('books/pdf/revista_comprimida.pdf')}}" target="_blank" >Ver Revista</a>
         </div>
     @else
 
