@@ -74,22 +74,22 @@ class GenerarPedidosAutomaticos extends Command
         $productosBajoStock = Products::where('categoria', 'Cosmica')
             ->where('subcategoria', 'Producto')
             ->where(function ($query) {
-                $query->whereRaw('(stock + stock_salon) < 60')
+                $query->whereRaw('(stock + COALESCE(stock_salon, 0)) < 60')
                     ->where(function ($subQuery) {
                         $subQuery->where('nombre', 'LIKE', '%Hydrabooster%')
                                  ->orWhere('nombre', 'LIKE', '%Hydraboosters%')
                                  ->orWhereIn('sku', ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230']);
                     })
                     ->orWhere(function ($subQuery) {
-                        $subQuery->whereRaw('(stock + stock_salon) < 20')
+                        $subQuery->whereRaw('(stock + COALESCE(stock_salon, 0)) < 20')
                                  ->orWhereIn('sku', ['638320']);
                     })
                     ->orWhere(function ($subQuery) {
-                        $subQuery->whereRaw('(stock + stock_salon) < 10')
+                        $subQuery->whereRaw('(stock + COALESCE(stock_salon, 0)) < 10')
                                  ->orWhereIn('sku', ['551406', '995323', '319895', '604407', '478898']);
                     })
                     ->orWhere(function ($subQuery) {
-                        $subQuery->whereRaw('(stock + stock_salon) < 30')
+                        $subQuery->whereRaw('(stock + COALESCE(stock_salon, 0)) < 30')
                                  ->where('nombre', 'NOT LIKE', '%Hydrabooster%')
                                  ->where('nombre', 'NOT LIKE', '%Hydraboosters%')
                                  ->where('nombre', 'NOT LIKE', '%Shampoo%')
@@ -114,18 +114,21 @@ class GenerarPedidosAutomaticos extends Command
         ]);
 
         foreach ($productosBajoStock as $producto) {
-            $totalStock = $producto->stock + $producto->stock_salon;
+            $totalStock = $producto->stock + ($producto->stock_salon ?? 0);
 
-            $umbral = (stripos($producto->nombre, 'Hydrabooster') !== false || stripos($producto->nombre, 'Hydraboosters') !== false || in_array($producto->sku, ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230']))
-                ? 60
-                : 30;
-
-            if (in_array($producto->sku, ['638320'])) {
-                $umbral = 20;
-            }
-
+            // Asignar el umbral según SKU o nombre
             if (in_array($producto->sku, ['551406', '995323', '319895', '604407', '478898'])) {
                 $umbral = 10;
+            } elseif (in_array($producto->sku, ['638320'])) {
+                $umbral = 20;
+            } elseif (
+                stripos($producto->nombre, 'Hydrabooster') !== false ||
+                stripos($producto->nombre, 'Hydraboosters') !== false ||
+                in_array($producto->sku, ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230'])
+            ) {
+                $umbral = 60;
+            } else {
+                $umbral = 30;
             }
 
             $cantidadNecesaria = max(0, $umbral - $totalStock);
@@ -151,26 +154,26 @@ class GenerarPedidosAutomaticos extends Command
             ->where('subcategoria', 'Producto')
             ->where(function ($query) {
                 $query->where(function ($q) {
-                    $q->whereRaw('(stock + stock_salon) < 15')
+                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 15')
                       ->where(function ($q2) {
                           $q2->where('nombre', 'LIKE', '%1.3 kg%')
                              ->orWhere('nombre', 'LIKE', '%1300 g%');
                       });
                 })
                 ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + stock_salon) < 30')
+                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 30')
                       ->where('nombre', 'LIKE', '%125ml%');
                 })
                 ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + stock_salon) < 15')
+                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 15')
                       ->where('nombre', 'LIKE', '%500 g%');
                 })
                 ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + stock_salon) < 10')
+                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 10')
                       ->whereIn('sku', ['392959', '771609', '753403']);
                 })
                 ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + stock_salon) < 20')
+                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 20')
                       ->where('nombre', 'NOT LIKE', '%1.3 kg%')
                       ->where('nombre', 'NOT LIKE', '%1300 g%')
                       ->where('nombre', 'NOT LIKE', '%125ml%')
@@ -194,7 +197,7 @@ class GenerarPedidosAutomaticos extends Command
         ]);
 
         foreach ($productosBajoStock as $producto) {
-            $stockTotal = $producto->stock + $producto->stock_salon;
+            $stockTotal = $producto->stock + ($producto->stock_salon ?? 0);
 
             $umbral = 20;
 
