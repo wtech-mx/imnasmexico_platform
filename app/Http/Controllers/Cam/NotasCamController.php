@@ -37,57 +37,6 @@ class NotasCamController extends Controller
 
         $fecha = Carbon::now()->locale('es')->isoFormat('D [de] MMMM [del] YYYY');
 
-        $usuariosDuplicados = DB::table('cam_notas')
-            ->select('id_cliente')
-            ->groupBy('id_cliente')
-            ->havingRaw('COUNT(*) > 1')
-            ->get();
-
-        foreach ($usuariosDuplicados as $user) {
-            $notas = DB::table('cam_notas')
-                ->where('id_cliente', $user->id_cliente)
-                ->where('tipo', '!=', 'Compra Estandar')
-                ->orderBy('created_at', 'desc')
-                ->pluck('id');
-
-            $notaNueva = $notas->first(); // la más nueva
-            $notasAEliminar = $notas->slice(1); // todas las viejas
-
-            foreach ($notasAEliminar as $notaViejaId) {
-                // 1. Reasignar cam_notestandares
-                DB::table('cam_notestandares')
-                    ->where('id_nota', $notaViejaId)
-                    ->update(['id_nota' => $notaNueva]);
-
-                // 2. Eliminar de todas las demás tablas
-                $tablasRelacionadas = [
-                    'cam_checklist',
-                    'cam_cedulas',
-                    'cam_certificados',
-                    'cam_citas',
-                    'cam_contrato',
-                    'cam_diplomas',
-                    'cam_docexp',
-                    'cam_docusers',
-                    'cam_mini_exp',
-                    'cam_nombramientos',
-                    'cam_pagos_emision',
-                    'cam_pagos_estandar',
-                    'cam_pagos_renovacion',
-                    'cam_renovacion_estandares',
-                    'cam_videosuser'
-                ];
-
-                foreach ($tablasRelacionadas as $tabla) {
-                    DB::table($tabla)->where('id_nota', $notaViejaId)->delete();
-                }
-
-                // 3. Eliminar la nota vieja
-                DB::table('cam_notas')->where('id', $notaViejaId)->delete();
-            }
-        }
-
-
         return view('cam.admin.notas.index', compact('estandares_cam', 'notas_cam', 'siguienteId', 'fecha','estandar_user'));
     }
 
