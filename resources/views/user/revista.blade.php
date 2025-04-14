@@ -24,6 +24,15 @@
             <iframe src="{{asset('books/pdf/revista_comprimida.pdf')}}" frameborder="0" class="container" style="margin-top: 6rem"></iframe>
             <a href="{{asset('books/pdf/revista_comprimida.pdf')}}" target="_blank" >Ver Revista</a>
         </div>
+
+        <div class="container" id="container1" style="margin-top: 1rem">
+            <div class="d-flex justify-content-center">
+                <p class="text-center text-white mt-1">
+                    <a class="mt-5 text-white" href="{{asset('books/pdf/revista_comprimida.pdf')}}" target="_blank" >Ver Protocolo</a>
+                </p>
+            </div>
+        </div>
+
     @else
 
         <div class="container" id="container1" style="margin-top: 6rem">
