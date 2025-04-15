@@ -138,6 +138,7 @@ Route::get('/cart/nas/orders/pay', [App\Http\Controllers\TiendaController::class
 Route::get('/cart/nas/orders/{code}/show', [App\Http\Controllers\TiendaController::class, 'thankyou'])->name('order_nas.show');
 // =============== E C O M M E R C E C O S M I C A ===============================
 
+Route::get('/doc/tratamientos_cosmica', [App\Http\Controllers\NewDocumentsController::class, 'tratamientos_cosmica'])->name('doc.tratamientos_cosmica');
 Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');
 Route::get('/doc/titulo', [App\Http\Controllers\NewDocumentsController::class, 'titulo'])->name('doc.titulo');
 Route::get('/doc/diploma', [App\Http\Controllers\NewDocumentsController::class, 'diploma'])->name('doc.diploma');
@@ -146,6 +147,9 @@ Route::get('/doc/tira', [App\Http\Controllers\NewDocumentsController::class, 'ti
 Route::get('/doc/reconocimiento', [App\Http\Controllers\NewDocumentsController::class, 'reconocimiento'])->name('doc.reconocimiento');
 
 // =============== E C O M M E R C E C O S M I C A ===============================
+Route::get('/diploma/tratamientos', [App\Http\Controllers\NewDocumentsController::class, 'diploma_tratamientos'])->name('diploma_tratamientos');
+Route::post('/diploma/tratamientos/generar', [App\Http\Controllers\NewDocumentsController::class, 'generarDiploma'])->name('diploma_tratamientos.generar');
+
 Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
 Route::get('/tienda/producto/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
 Route::get('/tienda/cart', [App\Http\Controllers\EcommerceCosmikaController::class, 'cart'])->name('tienda.cart');

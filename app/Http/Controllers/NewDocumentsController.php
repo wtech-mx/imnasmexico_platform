@@ -46,6 +46,41 @@ class NewDocumentsController extends Controller
         return $pdf->stream('diploma.pdf');
     }
 
+    public function generarDiploma(Request $request)
+    {
+        $nombre = $request->input('nombre'); // Obtener el nombre del formulario
+
+        // Tamaño carta en puntos
+        $ancho_puntos = 612;
+        $alto_puntos = 792;
+
+        $pdf = PDF::loadView('admin.pdf.nuevos.diploma_tratamientos_cosmica', compact('nombre'));
+        $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait');
+
+        // Reemplazar espacios en el nombre por guiones bajos para el nombre del archivo
+        $nombreArchivo = str_replace(' ', '_', $nombre);
+
+        return $pdf->download("diploma_tratamientos_cosmica_{$nombreArchivo}.pdf");
+    }
+
+    public function diploma_tratamientos(){
+
+
+        return view('tienda_cosmica.diploma');
+    }
+
+    public function tratamientos_cosmica(){
+
+        // Tamaño carta en puntos
+        $ancho_puntos = 612;
+        $alto_puntos = 792;
+
+        $pdf = PDF::loadView('admin.pdf.nuevos.diploma_tratamientos_cosmica');
+        $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait');
+
+        return $pdf->stream('diploma_tratamientos_cosmica.pdf');
+    }
+
     public function credencial(){
 
         $ancho_cm = 5.5;
