@@ -26,7 +26,7 @@
             height: 1055px; /* 11 in * 96 dpi */
             margin: 0 auto;
             overflow: hidden;
-            background-image: url('{{ $basePath . 'diploma_cosmica.png'}}');
+            background-image: url('https://plataforma.imnasmexico.com/documentos_nuevos/diploma_cosmica.png');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
