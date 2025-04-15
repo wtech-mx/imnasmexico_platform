@@ -7,7 +7,7 @@
     @php
         $domain = request()->getHost();
         $basePath = ($domain == 'plataforma.imnasmexico.com')
-                ? 'https://plataforma.imnasmexico.com/documentos_nuevos//'
+                ? 'https://plataforma.imnasmexico.com/documentos_nuevos/'
                 : 'documentos_nuevos/';
 
     @endphp
