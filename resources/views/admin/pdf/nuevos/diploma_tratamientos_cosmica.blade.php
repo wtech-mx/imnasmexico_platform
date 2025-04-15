@@ -118,9 +118,9 @@
 
         .nombre_flotante{
             position: absolute;
-            top: 33.5%;
+            top: 33%;
             left: 15%;
-            font-size: 30px;
+            font-size: 20px;
         }
 
 
@@ -138,23 +138,10 @@
     <div class="container">
 
         <div class="row" style="position: relative">
-            <div class="col-2 text-center border" style="margin-top: 70px">
+            <div class="col-12 text-center nombre_flotante" style="">
+                <h1>{{ $nombre }}
+                </h1>
             </div>
-
-            <div class="col-8 text-center border" style="margin-top: 70px">
-
-                <div class="img_logo">
-                    <img src="" alt="Logo">
-                </div>
-
-            </div>
-
-            <div class="col-2 text-center border" style="margin-top: 70px">
-            </div>
-
-            <h2 class="nombre_flotante" style="">
-                {{ $nombre }}
-            </h2>
 
             <h2 class="fecha_flotante" style="">
                 12 y 13 de Abril 2025
