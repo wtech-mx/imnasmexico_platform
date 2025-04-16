@@ -14,6 +14,7 @@
 <link href="{{asset('assets/user/custom/calendario.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/single_course_horizon.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/modal_checkout.css')}}" rel="stylesheet" />
 
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
@@ -49,6 +50,17 @@
 
     .card_bg_btn {
         background-color: #ECFDFF;
+    }
+
+    .span_custom_checkout {
+        background: #5bb4c2;
+        color: #ECFDFF;
+    }
+
+    .input_custom_checkout {
+        background: #5bb4c2;
+        color: #ECFDFF;
+
     }
 
 </style>
