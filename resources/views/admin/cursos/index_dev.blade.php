@@ -53,7 +53,6 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($cursos as $curso)
-                                            @if ($curso->estatus == 1)
                                                 <tr >
 
                                                 <td>{{ $curso->id }}</td>
