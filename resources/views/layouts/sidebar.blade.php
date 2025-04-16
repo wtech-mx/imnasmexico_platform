@@ -407,6 +407,12 @@
                                 <span class="sidenav-normal">Crear Curso</span>
                             </a>
                         @endcan
+                        @can('cursos-dev')
+                            <a class="nav-link {{ (Request::is('/admin/cursos/mes*') ? 'show' : '') }}" href="{{ route('cursos.index_mes_dev') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal">Cursos</span>
+                            </a>
+                        @endcan
                         @can('cursos-show')
                             <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('cursos.index_dia') }}">
                                 <span class="sidenav-mini-icon"> P </span>

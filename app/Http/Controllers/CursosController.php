@@ -116,6 +116,21 @@ class CursosController extends Controller
         return view('admin.cursos.index_mes', compact('cursos'));
     }
 
+    public function index_mes_dev(Request $request)
+    {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $cursos = Cursos::whereBetween('fecha_inicial', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('fecha_inicial', 'DESC')
+        ->get();
+
+        foreach ($cursos as $curso) {
+            $curso->userCount = $curso->uniqueOrderTicketCount();
+        }
+
+        return view('admin.cursos.index_dev', compact('cursos'));
+    }
     public function create()
     {
         $profesores = User::where('cliente', '2')
@@ -306,7 +321,14 @@ class CursosController extends Controller
 
         return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','carpetas_estandares', 'carpetas','profesores'));
     }
+    public function update_estatus(Request $request, $id)
+    {
+        $curso = Cursos::find($id);
+        $curso->estatus = '1';
+        $curso->update();
 
+        return redirect()->back()->with('success', 'curso actualizado con exito.');
+    }
     public function update(Request $request, $id)
     {
         $fechaHoraActual = date('Y-m-d H:i:s');
