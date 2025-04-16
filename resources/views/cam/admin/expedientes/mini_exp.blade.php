@@ -84,29 +84,32 @@ Expediente
                                                         </span>
                                                         <select name="id_estandar" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" required>
                                                             @foreach ($estandares_cam_user as $estandar_cam)
-                                                                <option value="{{$estandar_cam->id_estandar}}">{{$estandar_cam->Estandar->estandar}}</option>
+                                                                {{-- <option value="{{$estandar_cam->id_estandar}}">{{$estandar_cam->Estandar->estandar}}</option> --}}
+                                                                <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                    {{$estandar_cam->nombre}}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <h6 for="contrato_general">Fecha evaluación *</h6>
+                                                    <h6 for="contrato_general">Fecha evaluación </h6>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
                                                         </span>
-                                                        <input id="fecha_evaluar" name="fecha_evaluar" class="form-control" type="date" required>
+                                                        <input id="fecha_evaluar" name="fecha_evaluar" class="form-control" type="date">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-2">
-                                                    <label for="name">Estatus *</label>
+                                                    <label for="name">Estatus </label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
                                                         </span>
-                                                        <select name="estatus" id="estatus" class="form-select d-inline-block" required>
+                                                        <select name="estatus" id="estatus" class="form-select d-inline-block">
                                                             <option value="Programado">Programado</option>
                                                             <option value="Evaluado">Evaluado</option>
                                                             <option value="En proceso">En proceso</option>

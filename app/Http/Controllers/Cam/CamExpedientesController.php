@@ -627,7 +627,8 @@ class CamExpedientesController extends Controller
         $minis_exps = CamMiniExp::where('id_nota', $expediente->id_nota)->get();
         $minis_exp_nom = CamNombramiento::where('id_mini_exp', $mini_exp->id)->get();
         $minis_exp_cer = CamCertificados::where('id_mini_exp', $mini_exp->id)->get();
-        $estandares_cam_user = CamNotEstandares::where('id_nota', $mini_exp->id_nota)->where('estatus', '=', 'Entregado')->get();
+      //  $estandares_cam_user = CamNotEstandares::where('id_nota', $mini_exp->id_nota)->where('estatus', '=', 'Entregado')->get();
+      $estandares_cam_user = CarpetasEstandares::orderBy('nombre','asc')->get();
         $estandares_cam_mini = CamNotEstandares::where('id_mini_exp', $mini_exp->id)->get();
 
         return view('cam.admin.expedientes.mini_exp', compact('estandares_cam_mini','estandares_cam_user','minis_exp_nom','minis_exp_cer','estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps'));
