@@ -582,6 +582,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/notas/productos/imprimir/{id}', [App\Http\Controllers\NotasProductosController::class, 'imprimir'])->name('notas_productos.imprimir');
     Route::delete('/notas/{id}', [App\Http\Controllers\NotasProductosController::class, 'eliminar'])->name('notas.eliminar');
 
+    // =============== M O D U L O   C O M P R A S  N A S ===============================
+    Route::get('/admin/compras/nas', [App\Http\Controllers\TiendaController::class, 'index'])->name('compras.nas');
+    Route::patch('/admin/compras/nas/guia/{id}', [App\Http\Controllers\TiendaController::class, 'update_guia_ecommerce'])->name('update_guia_ecommerce.nas');
+    Route::get('/admin/compras/nas/imprimir/{id}', [App\Http\Controllers\TiendaController::class, 'imprimir_admin'])->name('imprimir_admin.nas');
+    Route::get('/admin/compras/nas/bodega/preparacion/scaner/{id}', [App\Http\Controllers\TiendaController::class, 'preparacion_scaner'])->name('preparacion_scaner.nas');
+    Route::post('/admin/compras/nas/bodega/check-product', [App\Http\Controllers\TiendaController::class, 'checkProduct'])->name('check_eco.nas');
+
     Route::get('/admin/notas/cotizacion', [App\Http\Controllers\CotizacionController::class, 'index'])->name('notas_cotizacion.index');
     Route::get('/admin/notas/cotizacion/aprobada', [App\Http\Controllers\CotizacionController::class, 'index_aprobada'])->name('notas_cotizacion.index_aprobada');
     Route::get('/admin/notas/cotizacion/cancelada', [App\Http\Controllers\CotizacionController::class, 'index_cancelada'])->name('notas_cotizacion.index_cancelada');
@@ -764,6 +771,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);
     Route::get('cosmica/cotizacion/reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('notas_cosmica.imprimir_reporte');
     Route::get('cotizacion_cosmica/imprimir_reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('cotizacion_cosmica.imprimir_reporte');
+
+
     // =============== M O D U L O   c o s m i k a ===============================
     Route::get('cosmica/distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index'])->name('distribuidoras.index');
     Route::post('cosmica/distribuidoras/store', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'store'])->name('distribuidoras.store');

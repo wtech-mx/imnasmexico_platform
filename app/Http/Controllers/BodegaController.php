@@ -13,6 +13,7 @@ use App\Models\ProductosNotasId;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Models\Meli;
+use App\Models\OrdersNas;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
@@ -111,6 +112,7 @@ class BodegaController extends Controller
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
         $oreders_cosmica_ecommerce = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
+        $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
 
         // Unir los datos de la API con los registros de la base de datos
         $notas_cosmica_preparacion = $notas_cosmica_preparacion->map(function ($nota) {
@@ -136,7 +138,8 @@ class BodegaController extends Controller
             'cantidad_preparacion',
             'ApiFiltradaCollectAprobado',
             'ApiFiltradaCollectAprobadoreposicion',
-            'oreders_cosmica_ecommerce'));
+            'oreders_cosmica_ecommerce',
+            'orders_nas_ecommerce'));
     }
 
     public function generarEtiqueta($tabla, $id){

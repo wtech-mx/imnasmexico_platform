@@ -76,10 +76,9 @@
                                                 <a href="{{ route('notas_productos.index') }}" class="btn btn-sm btn-success m-2" style="background: #836262">Tienda Fisica
                                                     <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                                                 </a>
-                                                <a href="{{ route('pedidos_woo.index') }}" class="btn btn-sm m-2" style="background:#f5ece4;">Tienda Online
+                                                <a href="{{ route('compras.nas') }}" class="btn btn-sm m-2" style="background:#f5ece4;">Tienda Online
                                                     <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                                                 </a>
-
                                             </div>
                                         </div>
                                     </div>

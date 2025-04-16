@@ -24,7 +24,7 @@
                 @endif
 
                 <p class="text-center ">
-                    <img src="{{asset('ecommerce/Isotipo_negro.png')}}" class="img_thankyou">
+                    <img src="{{asset('ecommerce\cart_nas.png')}}" class="img_thankyou" style="width: 20%;">
                 </p>
 
                 <div class="d-flex justify-content-center">
@@ -99,7 +99,7 @@
                     <h2 class="thankyou_subtitle mb-4">Dirección</h2>
                 </div>
 
-                @if ($order->tipo_envio == 'envio')
+                @if ($order->forma_envio == 'envio')
                     <div class="col-6">
                         <p class="texto_order_thanks">
                             <strong class="subtitle_order_datos">CP:</strong> <br>

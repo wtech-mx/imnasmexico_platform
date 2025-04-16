@@ -347,51 +347,58 @@
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
 
-                                            @foreach($orders_tienda_principal as $order)
-                                                <tr style="background: #F5ECE4">
-                                                    <td>{{ $order->id }}</td>
-                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                            @foreach ($orders_nas_ecommerce as $item)
+                                                <tr style="background: #F5ECE4;color:#070707">
                                                     <td>
-                                                            En preparación
+                                                        <h5>
+                                                            TN{{ $item->id }}
+                                                        </h5>
                                                     </td>
-                                                    <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
-                                                    <td>${{ $order->total }}</td>
                                                     <td>
-                                                        {{-- <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
-                                                            <i class="fa fa-list-alt"></i>
-                                                        </a> --}}
+                                                        <h5>
+                                                            {{ $item->User->name }}
+                                                            {{ $item->User->telefono }}
+                                                        </h5>
+                                                    </td>
 
-                                                        <a class="btn btn-sm btn-info text-white" href="{{ route('woo_nas_orders.pdf', $order->id) }}" target="_blank">
-                                                            <i class="fa fa-file-pdf"></i>
+                                                    <td>
+                                                        En preparación <br>
+                                                        Ecommerce NAS
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->pago }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir_ecommerce', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-list-alt"></i>
                                                         </a>
 
-                                                        @if(isset($order->meta_data))
-                                                            @foreach($order->meta_data as $meta)
-                                                                @if($meta->key == 'guia_de_envio')
+                                                        <a class="text-center text-white btn btn-sm"
+                                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $item->id]) }}"
+                                                            style="background: #7d2de6;">
+                                                            <i class="fa fa-qrcode"></i>
+                                                        </a>
 
-                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
-                                                                    <i class="fa fa-truck"></i>
-                                                                </a>
-
-                                                                @endif
-                                                            @endforeach
+                                                        @if ($item->forma_envio == NULL)
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->guia_doc) }}" download="{{asset('pago_fuera/'.$item->guia_doc) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
-
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_nas.bodega', $order->id) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.nas', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
-
                                                     </td>
                                                 </tr>
-
-                                                {{-- @include('admin.bodega.modal_productos') --}}
-                                                @include('admin.bodega.modal_edit_estatus_woo')
-                                                @include('admin.bodega.modal_estatus_woo')
-
+                                                @include('admin.notas_productos.modal_direccion')
                                             @endforeach
 
                                             @foreach($ApiFiltradaCollectAprobado as $order)

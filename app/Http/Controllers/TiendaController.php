@@ -575,4 +575,98 @@ class TiendaController extends Controller
         }
         return redirect()->route('order_nas.show', $order->code);
     }
+
+    public function index(){
+        $orders_pagadas = OrdersNas::orderBy('id','DESC')->where('estatus','=' , '1')->get();
+
+        return view('admin.notas_productos.index_ecommerce', compact('orders_pagadas'));
+    }
+
+    public function update_guia_ecommerce(Request $request, $id){
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera/');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera/';
+        }
+
+        $nota = OrdersNas::findOrFail($id);
+        $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+        $nota->estatus_bodega  = 'En preparacion';
+        if ($request->hasFile("doc_guia")) {
+            $file = $request->file('doc_guia');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $nota->guia_doc = $fileName;
+        }
+        $nota->save();
+
+        return redirect()->back()->with('success', 'Se ha actualizada');
+
+    }
+
+    public function imprimir_admin($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = OrdersNas::find($id);
+
+        $nota_productos = OrdersNasOnline::where('id_order', $nota->id)->get();
+
+
+        $pdf = \PDF::loadView('admin.notas_productos.pdf_compra', compact('nota', 'today', 'nota_productos'));
+
+        return $pdf->stream();
+    }
+
+    public function preparacion_scaner(Request $request, $id){
+
+        $nota_scaner = OrdersNas::where('id', '=', $id)->first();
+        $productos_scaner = OrdersNasOnline::where('id_order', '=', $id)
+        ->get()
+        ->map(function ($producto) {
+            $producto->escaneados = $producto->escaneados ?? 0; // Asegúrate de incluir el valor actual
+            return $producto;
+        });
+
+        $allChecked = $productos_scaner->every(function ($producto) {
+            return $producto->estatus === 1;
+        });
+
+        return view('admin.bodega.scaner.show_nas_ecome', compact('nota_scaner', 'productos_scaner', 'allChecked'));
+    }
+
+    public function checkProduct(Request $request){
+
+        $sku_scaner = $request->input('sku');
+        $sku = trim($sku_scaner);
+        $idNotaProducto = $request->input('id_notas_productos');
+
+        // Busca el producto en la tabla `Products`
+        $product = Products::where('sku', $sku)->first();
+
+        if ($product) {
+            // Verifica y actualiza el registro correcto en `productos_notas`
+            $notaProducto = OrdersNasOnline::where('id_order', $idNotaProducto)
+            ->where('id_producto', $product->id)
+            ->first();
+
+            if ($notaProducto) {
+                if ($notaProducto->escaneados < $notaProducto->cantidad) {
+                    $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
+                    if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
+                        $notaProducto->estatus = 1; // Marca como completo
+                    }
+                        $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
+                } else {
+
+                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                }
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
 }
