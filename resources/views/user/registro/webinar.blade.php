@@ -1,7 +1,7 @@
-@extends('layouts.app_user')
+@extends('layouts.app_registro')
 
 @section('template_title')
-    {{$curso->nombre}}
+{{$curso->nombre}}
 @endsection
 
 @section('css_custom')
@@ -25,30 +25,58 @@
         cursor: not-allowed; /* Cambia el cursor al estilo "no permitido" */
         color: #666; /* Cambia el color del texto */
     }
+
+    .title_curso {
+        color: #5bb4c2!important;
+    }
+    .btn-primario {
+        background-color: #5bb4c2!important;
+        color: #ECFDFF;
+    }
+
+    .card_colapsable_comprar {
+        border: solid 3px #5bb4c2!important;
+    }
+
+    .btn-secundario_grid {
+        background-color: #ECFDFF;
+        color: #5bb4c2;
+    }
+
+    .icon_nav_course {
+        background-color: #5bb4c2;
+    }
+
+    .card_bg_btn {
+        background-color: #ECFDFF;
+    }
+
 </style>
 @endsection
-    @php
-        use Carbon\Carbon;
-        $fecha_ini = $curso->fecha_inicial;
-        $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
-        $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
-        $nombreDiaCapitalizado = ucfirst($nombreDia);
-        $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
 
-        $fecha_f = $curso->fecha_final;
-        $fechaInicialCarbon2 = Carbon::createFromFormat('Y-m-d', $fecha_f);
-        $nombreDia2 = $fechaInicialCarbon2->locale('es')->isoFormat('dddd');
-        $nombreDiaCapitalizado2 = ucfirst($nombreDia2);
-        $fecha_final = $nombreDiaCapitalizado2 . ' ' . $fechaInicialCarbon2->isoFormat('D [de] MMMM');
+@section('section_pag')
 
-        $horaInicial = $curso->hora_inicial;
-        $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
+@php
+    use Carbon\Carbon;
+    $fecha_ini = $curso->fecha_inicial;
+    $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
+    $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
+    $nombreDiaCapitalizado = ucfirst($nombreDia);
+    $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
 
-        $horaFinal = $curso->hora_final;
-        $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
+    $fecha_f = $curso->fecha_final;
+    $fechaInicialCarbon2 = Carbon::createFromFormat('Y-m-d', $fecha_f);
+    $nombreDia2 = $fechaInicialCarbon2->locale('es')->isoFormat('dddd');
+    $nombreDiaCapitalizado2 = ucfirst($nombreDia2);
+    $fecha_final = $nombreDiaCapitalizado2 . ' ' . $fechaInicialCarbon2->isoFormat('D [de] MMMM');
 
-    @endphp
-@section('content')
+    $horaInicial = $curso->hora_inicial;
+    $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
+
+    $horaFinal = $curso->hora_final;
+    $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
+
+@endphp
 
 <div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
     <span class="mask_calendar"></span>
@@ -76,7 +104,7 @@
                                     @php
                                     $descripcion = $curso->descripcion;
                                     if (strlen($descripcion) > 162) {
-                                        $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#836262;background: #fff;padding: 10px;border-radius: 19px;text-decoration: none;position: relative;top: 1rem;">Continuar leyendo</a>';
+                                        $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#5bb4c2;background: #fff;padding: 10px;border-radius: 19px;text-decoration: none;position: relative;top: 1rem;">Continuar leyendo</a>';
                                         echo $descripcion;
                                     }
                                     @endphp
@@ -216,14 +244,14 @@
                                                         $precio = number_format($ticket->precio, 2, '.', ',');
                                                 @endphp
                                                     <div class="col-12 mt-3">
-                                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                        <strong style="color: #5bb4c2">{{$ticket->nombre}}</strong>
                                                     </div>
                                                     <div class="col-6 col-lg-6 mt-3">
                                                         @if ($ticket->descuento == NULL)
-                                                            <h5 style="color: #836262"><strong>$ {{ $precio }}</strong></h5>
+                                                            <h5 style="color: #5bb4c2"><strong>$ {{ $precio }}</strong></h5>
                                                         @else
-                                                            <del style="color: #836262"><strong>De ${{ $precio }}</strong></del>
-                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                                            <del style="color: #5bb4c2"><strong>De ${{ $precio }}</strong></del>
+                                                            <h5 style="color: #5bb4c2"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                         @endif
                                                     </div>
 
@@ -236,7 +264,7 @@
                                                     </div>
 
                                                     <div class="col-12">
-                                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                        <p style="color: #5bb4c2">{{$ticket->descripcion}}</p>
                                                     </div>
                                                     @if ($curso->registro_imnas == '1')
                                                         @break
@@ -257,7 +285,7 @@
     </div>
 
 {{-- Grid --}}
-<section class="primario bg_overley" style="background-color:#F5ECE4;" id="contenido">
+<section class="primario bg_overley" style="background-color:#ECFDFF;" id="contenido">
     <div class="row" >
         <div class="col-12 col-md-6">
             <div class="card_single_horizon">
@@ -441,7 +469,7 @@
 
                                                 <div class="d-flex justify-content-center">
                                                     <p class="text-center text-white">
-                                                        <a href="{{ $item->link }}" class="btn btn-sm btn_enfiar_form text-white" style="background: #836262;">Ver Más</a>
+                                                        <a href="{{ $item->link }}" class="btn btn-sm btn_enfiar_form text-white" style="background: #5bb4c2;">Ver Más</a>
                                                     </p>
                                                 </div>
 
@@ -545,7 +573,7 @@
                         <p class="text_cards_horizon ">
                             @if ($curso->direccion == NULL)
 
-                            <a href="https://goo.gl/maps/NRt7RT1TEkEnfDW38" target="_blank" style="text-decoration: none;color:#836262">Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México</a>
+                            <a href="https://goo.gl/maps/NRt7RT1TEkEnfDW38" target="_blank" style="text-decoration: none;color:#5bb4c2">Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México</a>
 
                             @else
                                 <p class="">{{ $curso->direccion }}</p>
@@ -927,14 +955,14 @@
                                             $precio = number_format($ticket->precio, 2, '.', ',');
                                     @endphp
                                         <div class="col-12 mt-3">
-                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                            <strong style="color: #5bb4c2">{{$ticket->nombre}}</strong>
                                         </div>
                                         <div class="col-6 col-lg-8 mt-3">
                                             @if ($ticket->descuento == NULL)
-                                                <h5 style="color: #836262"><strong>${{$precio}}</strong></h5>
+                                                <h5 style="color: #5bb4c2"><strong>${{$precio}}</strong></h5>
                                             @else
-                                                <del style="color: #836262"><strong>De ${{$precio}}</strong></del>
-                                                <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                                <del style="color: #5bb4c2"><strong>De ${{$precio}}</strong></del>
+                                                <h5 style="color: #5bb4c2"><strong>A ${{$ticket->descuento}}</strong></h5>
                                             @endif
                                         </div>
 
@@ -947,7 +975,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                            <p style="color: #5bb4c2">{{$ticket->descripcion}}</p>
                                         </div>
                                     @endforeach
 
@@ -1003,48 +1031,9 @@
     </div>
 </section>
 @include('user.components.modal_certificados_single');
-{{-- Grid --}}
-{{-- slide de cursos --}}
-@include('user.components.carousel_courses')
-{{-- slide de cursos --}}
-
-{{--Contactanos --}}
-<section class="primario bg_overley" id="contactenos"  style="background-color:#F5ECE4;">
-    <div class="row border_row" style="">
-
-        <div class="col-12 col-md-6">
-            <h2 class="text-center tittle-contact">Contáctanos</h2>
-            <p class="text-center text-white">
-                Complementa tus conocimientos y conviértete un experto de la Cosmetología.
-            </p>
-
-            <form method="POST" id="form_contact" action="{{ route('mensaje.form') }}" role="form">
-                @csrf
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" name="nombre" id="nombre" placeholder="Nombre (requerido)" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" name="mensaje" id="mensaje" placeholder="Message">
-                </div>
-                <input type="hidden" class="form-control form_contact mt-4" name="curso" id="curso" value="{{$curso->nombre}}">
-                <input type="hidden" class="form-control form_contact mt-4" name="fecha" id="fecha" value="{{$curso->fecha_inicial}}">
-                <input type="hidden" class="form-control form_contact mt-4" name="modalidad" id="modalidad" value="{{$curso->modalidad}}">
-                <p class="text-center text-white">
-                    <button type="submit" class="btn btn_enfiar_form" id="token_submit">Enviar <i class="fab fa-whatsapp"></i></button>
-                </p>
-            </form>
-        </div>
-
-        <div class="col-12 col-md-6 desaparecer_contenedor_sm">
-                <div class="d-flex justify-content-center">
-                    <img class="img_contact" src="{{asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
-                </div>
-        </div>
-
-    </div>
-</section>
 
 @endsection
+
 @section('js')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -1133,6 +1122,3 @@
 </script>
 
 @endsection
-
-
-

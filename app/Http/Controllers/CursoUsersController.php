@@ -52,6 +52,25 @@ class CursoUsersController extends Controller
         return view('user.single_coursenew', compact('curso', 'tickets', 'usuario_compro','cursos','noticias_gallery'));
     }
 
+    public function showRegistroWebinar($slug)
+    {
+        $fechaActual = date('Y-m-d');
+
+        $noticias_gallery = Noticias::orderBy('id','DESC')->where('seccion','=','Galeria Cursos')->get();
+
+        $curso = Cursos::where('slug','=', $slug)->firstOrFail();
+        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
+        $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
+
+        $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
+        // Verifica si el usuario ha comprado un ticket para el curso
+        $usuario_compro = OrdersTickets::where('id_usuario', $usuarioId)
+                        ->where('id_curso','=', $curso->id)
+                        ->first();
+
+        return view('user.registro/webinar', compact('curso', 'tickets', 'usuario_compro','cursos','noticias_gallery'));
+    }
+
     public function paquetes()
     {
         $fechaActual = date('Y-m-d');

@@ -229,6 +229,7 @@ Route::get('show', [App\Http\Controllers\WebPageController::class, 'reality'])->
 Route::get('cosmica/revista', [App\Http\Controllers\WebPageController::class, 'revista'])->name('user.revista');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
+Route::get('/registro/webinar/{slug}', [App\Http\Controllers\CursoUsersController::class, 'showRegistroWebinar'])->name('cursos.showRegistroWebinar');
 Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');
 Route::get('/calendario', [App\Http\Controllers\CursoUsersController::class, 'index_user'])->name('cursos.index_user');
 Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::class, 'advance'])->name('advance_search');
