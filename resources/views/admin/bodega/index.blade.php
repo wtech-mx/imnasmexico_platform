@@ -241,9 +241,22 @@
                                             @endforeach
 
                                             @foreach ($notas_cosmica_preparacion as $item)
+
                                             @php
-                                            $borderClass = ($item->item_id_meli && !$item->estadociudad) ? 'border-yellow' : '';
+                                            $status = $item->meli_data['status'] ?? null;
+                                            $dateCreated = $item->meli_data['date_created'] ?? null;
+                                            $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                            $isDelayed = false;
+
+                                            if ($isReadyOrPrepared && $dateCreated) {
+                                                $shipmentDate = new DateTime($dateCreated);
+                                                $currentDate = new DateTime();
+                                                $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
+                                            }
+
+                                            $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
                                             @endphp
+
 
                                             <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                 <td>
