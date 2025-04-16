@@ -54,10 +54,7 @@
                                     <tbody>
                                         @foreach ($cursos as $curso)
                                             @if ($curso->estatus == 1)
-                                                <tr style="background-color: #9fdb1260">
-                                            @else
-                                                <tr style="background-color: #e3790059">
-                                            @endif
+                                                <tr >
 
                                                 <td>{{ $curso->id }}</td>
                                                 <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>

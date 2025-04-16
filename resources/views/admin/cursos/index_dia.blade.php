@@ -94,7 +94,11 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($cursos as $curso)
-                                            <tr class="{{ ($curso->orderTicket->where('estatus_doc', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_cedula', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_titulo', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_diploma', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_credencial', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_tira', '!=', 1)->isEmpty()) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
+                                            @if ($curso->estatus == 1)
+                                                <tr style="background-color: #9fdb1260">
+                                            @else
+                                                <tr style="background-color: #e3790059">
+                                            @endif
                                                 <td>{{ $curso->id }}</td>
                                                 <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                                                 <td>
@@ -139,6 +143,14 @@
                                                         <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#inscripcion_{{ $curso->id }}" title="Ligas">
                                                             <i class="fab fa-google"></i>
                                                         </a>
+                                                    @endcan
+                                                    @can('cursos-dev')
+                                                        <form method="POST" action="{{ route('cursos.update_estatus', $curso->id) }}" enctype="multipart/form-data" role="form">
+                                                            @csrf
+                                                            <input type="hidden" name="_method" value="PATCH">
+                                                            <input id="estatus" name="estatus" type="hidden" class="form-control" value="1">
+                                                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"><i class="fas fa-external-link-alt"></i></a></button>
+                                                        </form>
                                                     @endcan
                                                 </td>
                                             </tr>
