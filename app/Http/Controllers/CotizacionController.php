@@ -426,6 +426,18 @@ class CotizacionController extends Controller
 
             $contadorKits = 1;
 
+            $nota = NotasProductos::findOrFail($id);
+
+            // Detectar en qué columna `id_kit` hay espacio disponible
+            $kit_slots_disponibles = [];
+            for ($i = 1; $i <= 6; $i++) {
+                $columnaKit = "id_kit" . ($i == 1 ? '' : $i);
+                if (empty($nota->$columnaKit)) {
+                    $kit_slots_disponibles[] = $i;
+                }
+            }
+
+
             for ($count = 0; $count < count($campo); $count++) {
                 $producto_first = Products::where('id', $campo[$count])
                     ->where('categoria', '!=', 'Ocultar')->first();
@@ -433,32 +445,41 @@ class CotizacionController extends Controller
                 if (!$producto_first) continue;
 
                 if ($producto_first->subcategoria == 'Kit') {
-                    $productos_bundle = ProductosBundleId::where('id_product', $producto_first->id)->get();
+                    // Verifica si ya existen productos con ese num_kit
+                    $ya_existe_kit = ProductosNotasId::where('id_notas_productos', $id)
+                        ->where('num_kit', $producto_first->id)
+                        ->exists();
 
-                    foreach ($productos_bundle as $producto_bundle) {
-                        ProductosNotasId::create([
-                            'id_notas_productos' => $id,
-                            'producto' => $producto_bundle->producto,
-                            'id_producto' => $producto_bundle->id_producto,
-                            'price' => 0,
-                            'cantidad' => $producto_bundle->cantidad,
-                            'kit' => 1,
-                            'num_kit' => $producto_first->id
-                        ]);
+                    if (!$ya_existe_kit) {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto_first->id)->get();
+
+                        foreach ($productos_bundle as $producto_bundle) {
+                            ProductosNotasId::create([
+                                'id_notas_productos' => $id,
+                                'producto' => $producto_bundle->producto,
+                                'id_producto' => $producto_bundle->id_producto,
+                                'price' => 0,
+                                'cantidad' => $producto_bundle->cantidad,
+                                'kit' => 1,
+                                'num_kit' => $producto_first->id
+                            ]);
+                        }
+
+                        // Guardar el kit y su cantidad en la nota
+                        if (!empty($kit_slots_disponibles)) {
+                            $slot = array_shift($kit_slots_disponibles); // Toma el primer slot disponible
+                            $columnaKit = "id_kit" . ($slot == 1 ? '' : $slot);
+                            $columnaCantidadKit = "cantidad_kit" . ($slot == 1 ? '' : $slot);
+
+                            $nota->$columnaKit = $producto_first->id;
+                            $nota->$columnaCantidadKit = $campo3[$count];
+                            $nota->save();
+                        }
+
+
                     }
-
-                    if ($contadorKits <= 6) {
-                        $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
-                        $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
-
-                        $nota = NotasProductos::findOrFail($id);
-                        $nota->$columnaKit = $producto_first->id;
-                        $nota->$columnaCantidadKit = $campo3[$count];
-                        $nota->save();
-
-                        $contadorKits++;
-                    }
-                } else {
+                }
+                 else {
                     ProductosNotasId::create([
                         'id_notas_productos' => $id,
                         'producto' => $producto_first->nombre,
