@@ -17,6 +17,7 @@ class ProductosNotasId extends Model
         'cantidad',
         'descuento',
         'estatus',
+        'num_kit',
         'id_producto',
         'escaneados',
     ];
@@ -29,5 +30,15 @@ class ProductosNotasId extends Model
     public function Productos()
     {
         return $this->belongsTo(Products::class, 'id_producto');
+    }
+
+    public function ProductosRepo()
+    {
+        return $this->belongsTo(Products::class, 'id_reposicion_producto');
+    }
+
+    public function ProductoKit()
+    {
+        return $this->belongsTo(Products::class, 'num_kit');
     }
 }

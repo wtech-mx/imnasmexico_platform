@@ -313,6 +313,7 @@ class CotizacionController extends Controller
                         $notas_inscripcion->id_producto = $producto_bundle->id_producto;
                         $notas_inscripcion->price = '0';
                         $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                        $notas_inscripcion->num_kit = $producto_bundle->id_product;
                         $notas_inscripcion->save();
                     }
 
@@ -390,12 +391,10 @@ class CotizacionController extends Controller
         }
 
         ProductosNotasId::where('id_notas_productos', $id)
-            ->where(function ($query) use ($productosIdsEnviados) {
-                $query->whereNotIn('id_producto', $productosIdsEnviados)
-                      ->where(function ($q) {
-                          $q->whereNull('kit')->orWhere('kit', '!=', 1);
-                      });
-            })->delete();
+        ->where(function ($query) use ($productosIdsEnviados) {
+            $query->whereNotIn('id_producto', $productosIdsEnviados)
+                  ->whereNull('num_kit'); // <--- Evita borrar los que pertenecen a un kit
+        })->delete();
 
         if ($producto !== null) {
             for ($count = 0; $count < count($producto); $count++) {

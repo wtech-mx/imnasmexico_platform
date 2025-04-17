@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Cotizacion Cosmica
+    {{ $cotizacion->folio }} Cosmica Cotizacion
 @endsection
 
 @section('css')
@@ -23,6 +23,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12 mt-2">
+                                        <h5>Cotizacion Cosmica #{{ $cotizacion->folio }}</h5>
                                         <h5 style="color:#783E5D"><strong>Datos del cliente</strong> </h5>
                                     </div>
                                     <input id="id_cliente" name="id_cliente" type="hidden" class="form-control" value="{{ $cotizacion->id_usuario }}" >
