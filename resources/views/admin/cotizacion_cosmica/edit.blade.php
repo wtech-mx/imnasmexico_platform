@@ -114,13 +114,13 @@
 
                                     @foreach($kits as $index => $kit)
                                         @if($kit['id'])
-                                            @php
-                                                $kit_producto = \App\Models\Products::find($kit['id']);
-                                                $componentes = $cotizacion_productos->where('num_kit', $kit['id'])->where('kit', 1);
-                                                $precio_kit = ($kit_producto->precio_normal ?? 0) * $kit['cantidad'];
-                                                $total_kits += $precio_kit;
-                                                $precio = $total_kits;
-                                            @endphp
+                                        @php
+                                            $kit_producto = \App\Models\Products::find($kit['id']);
+                                            $componentes = $cotizacion_productos->where('num_kit', $kit['id']);
+                                            $precio_kit = ($kit_producto->precio_normal ?? 0) * $kit['cantidad'];
+                                            $total_kits += $precio_kit;
+                                            $precio = $total_kits;
+                                        @endphp
 
                                             <div class="row campo_kit" data-kit-id="{{ $kit['id'] }}">
                                                 <div class="col-3">
@@ -158,8 +158,11 @@
                                         @endif
                                     @endforeach
 
+                                    @php
+                                        $kitsComponentes = $cotizacion_productos->where('kit', 1)->pluck('num_kit')->unique();
+                                    @endphp
                                     @foreach ($cotizacion_productos as  $productos)
-                                        @if($productos->kit != 1 && !$cotizacion_productos->where('num_kit', $productos->num_kit)->where('kit', 1)->count())
+                                        @if($productos->num_kit == $kit['id'])
                                             <div class="row campo3" data-id="{{ $productos->id }}">
                                                 @php
                                                     if($productos->cantidad != NULL){

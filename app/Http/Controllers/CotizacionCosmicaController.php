@@ -9,8 +9,8 @@ use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosBundleId;
 use App\Models\ProductosNotasCosmica;
-use App\Models\ProductosNotasId;
 use App\Models\Products;
+use App\Models\ProductosNotasId;
 use App\Models\User;
 use DB;
 use Hash;
@@ -562,13 +562,13 @@ class CotizacionCosmicaController extends Controller
         $cotizacion = NotasProductosCosmica::find($id);
         $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
 
-        $products = Products::where('categoria', '=', 'Cosmica')
-                            ->where(function($query) {
-                                $query->whereNull('fecha_fin')
-                                      ->orWhere('fecha_fin', '>', Carbon::now());
-                            })
-                            ->orderBy('nombre', 'ASC')
-                            ->get();
+        $products = Products::where('categoria', '!=', 'Ocultar')
+        ->where(function($query) {
+            $query->whereNull('fecha_fin')
+                  ->orWhere('fecha_fin', '>', Carbon::now());
+        })
+        ->orderBy('nombre', 'ASC')
+        ->get();
 
         return view('admin.cotizacion_cosmica.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
@@ -593,15 +593,12 @@ class CotizacionCosmicaController extends Controller
                 }
             }
         }
-        // Ahora sí: eliminamos los que ya no están
+
         ProductosNotasCosmica::where('id_notas_productos', $id)
         ->where(function ($query) use ($productosIdsEnviados) {
             $query->whereNotIn('id_producto', $productosIdsEnviados)
-                  ->where(function ($q) {
-                      $q->whereNull('kit')->orWhere('kit', '!=', 1);
-                  });
-        })
-        ->delete();
+                  ->whereNull('num_kit'); // <--- Evita borrar los que pertenecen a un kit
+        })->delete();
 
         if($producto == NULL){
 
@@ -635,26 +632,77 @@ class CotizacionCosmicaController extends Controller
         }
 
         $campo = $request->input('campo');
-        if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {
+
+        if (!empty(array_filter($campo))) {
+
             $campo4 = $request->input('campo4');
             $campo3 = $request->input('campo3');
             $descuento_prod = $request->input('descuento_prod');
 
-            // Agregar nuevos productos
+            $contadorKits = 1;
+
+            $nota = NotasProductosCosmica::findOrFail($id);
+
+            // Detectar en qué columna `id_kit` hay espacio disponible
+            $kit_slots_disponibles = [];
+            for ($i = 1; $i <= 6; $i++) {
+                $columnaKit = "id_kit" . ($i == 1 ? '' : $i);
+                if (empty($nota->$columnaKit)) {
+                    $kit_slots_disponibles[] = $i;
+                }
+            }
+
+
             for ($count = 0; $count < count($campo); $count++) {
-                $producto_first = Products::where('id', $campo[$count])->where('categoria', '!=', 'Ocultar')->first();
-                if ($producto_first) {
-                    $price = $campo4[$count];
-                    $cleanPrice = floatval(str_replace(['$', ','], '', $price));
-                    $data = array(
+                $producto_first = Products::where('id', $campo[$count])
+                    ->where('categoria', '!=', 'Ocultar')->first();
+
+                if (!$producto_first) continue;
+
+                if ($producto_first->subcategoria == 'Kit') {
+                    // Verifica si ya existen productos con ese num_kit
+                    $ya_existe_kit = ProductosNotasCosmica::where('id_notas_productos', $id)
+                        ->where('num_kit', $producto_first->id)
+                        ->exists();
+
+                    if (!$ya_existe_kit) {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto_first->id)->get();
+
+                        foreach ($productos_bundle as $producto_bundle) {
+                            ProductosNotasCosmica::create([
+                                'id_notas_productos' => $id,
+                                'producto' => $producto_bundle->producto,
+                                'id_producto' => $producto_bundle->id_producto,
+                                'price' => 0,
+                                'cantidad' => $producto_bundle->cantidad,
+                                'kit' => 1,
+                                'num_kit' => $producto_first->id
+                            ]);
+                        }
+
+                        // Guardar el kit y su cantidad en la nota
+                        if (!empty($kit_slots_disponibles)) {
+                            $slot = array_shift($kit_slots_disponibles); // Toma el primer slot disponible
+                            $columnaKit = "id_kit" . ($slot == 1 ? '' : $slot);
+                            $columnaCantidadKit = "cantidad_kit" . ($slot == 1 ? '' : $slot);
+
+                            $nota->$columnaKit = $producto_first->id;
+                            $nota->$columnaCantidadKit = $campo3[$count];
+                            $nota->save();
+                        }
+
+
+                    }
+                }
+                 else {
+                    ProductosNotasCosmica::create([
                         'id_notas_productos' => $id,
                         'producto' => $producto_first->nombre,
                         'id_producto' => $producto_first->id,
-                        'price' => $cleanPrice,
+                        'price' => floatval(str_replace(['$', ','], '', $campo4[$count])),
                         'cantidad' => $campo3[$count],
-                        'descuento' => $descuento_prod[$count],
-                    );
-                    ProductosNotasCosmica::create($data);
+                        'descuento' => $descuento_prod[$count] ?? 0,
+                    ]);
                 }
             }
         }
@@ -662,6 +710,7 @@ class CotizacionCosmicaController extends Controller
 
 
         $nota = NotasProductosCosmica::findOrFail($id);
+
         $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
         $cleanPriceTotal = floatval(str_replace(['$', ','], '', $request->get('total_final')));
         $nota->subtotal = $cleanPrice4;
@@ -682,6 +731,7 @@ class CotizacionCosmicaController extends Controller
                 }
             }
         }
+
         $nota->save();
 
         return redirect()->route('cotizacion_cosmica.index')
@@ -849,10 +899,10 @@ class CotizacionCosmicaController extends Controller
                 $nuevaNota->folio = $folio;
                 $nuevaNota->save();
 
-                // Copiar productos a ProductosNotasId
+                // Copiar productos a ProductosNotasCosmica
                 $productosCosmica = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
                 foreach ($productosCosmica as $productoCosmica) {
-                    $nuevoProducto = new ProductosNotasId();
+                    $nuevoProducto = new ProductosNotasCosmica();
                     $nuevoProducto->fill($productoCosmica->toArray());
                     $nuevoProducto->id_notas_productos = $nuevaNota->id;
                     $nuevoProducto->save();
