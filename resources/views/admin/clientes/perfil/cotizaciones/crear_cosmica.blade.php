@@ -53,7 +53,7 @@
                     <div id="camposContainer">
                         <div class="campo mt-3">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-7">
                                     <h4 for="">Producto</h4>
                                     <div class="form-group">
                                         <select name="campo[]" class="form-select d-inline-block producto">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-2">
+                                <div class="form-group col-5">
                                     <h4 for="name">Cantidad *</h4>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-2">
+                                <div class="form-group col-4">
                                     <h4 for="name">Des. (%)</h4>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-2">
+                                <div class="form-group col-4">
                                     <h4 for="name">Subtotal *</h4>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-2">
+                                <div class="form-group col-4">
                                     <h4 for="name">Quitar</h4>
                                     <div class="input-group mb-3">
                                         <button type="button" class="btn btn-danger btn-sm eliminarCampo"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -110,7 +110,7 @@
             <div class="col-3">
                 <div class="form-group">
                     <button class="mt-5" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
-                        <i class="fa fa-plus"></i> 
+                        <i class="fa fa-plus"></i>
                     </button>
                 </div>
             </div>
