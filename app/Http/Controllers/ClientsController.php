@@ -1090,26 +1090,31 @@ class ClientsController extends Controller
 
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
-            $documento_ids = $request->get('documento_ids'); // Cambio a documento_ids (plural) ya que es un array
+            $documento_ids = $request->get('documento_ids');
             $id_curso = $request->get('curso');
+            $ultimoNombre = '';
+
             foreach ($archivos as $key => $archivo) {
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $archivo->getClientOriginalName();
                 $archivo->move($path, $fileName);
                 $documentos = new DocumentosEstandares();
                 $documentos->documento = $fileName;
-                $documentos->id_documento = $documento_ids[$key]; // Usar el ID correspondiente
+                $documentos->id_documento = $documento_ids[$key];
                 $documentos->id_curso = $id_curso;
                 $documentos->id_usuario = $id;
                 $documentos->save();
+
+                $ultimoNombre = $fileName;
             }
+
+            return response()->json([
+                'success' => true,
+                'archivo' => $ultimoNombre,
+                'telefono' => $cliente->telefono
+            ]);
         }
-        return response()->json([
-            'success' => true,
-            'archivo' => $fileName,
-            'ext' => pathinfo($fileName, PATHINFO_EXTENSION),
-            'telefono' => $cliente->telefono
-        ]);
+
     }
 
     public function reconocimiento_webinar(){

@@ -1662,7 +1662,7 @@ Mi perfil- {{$cliente->name}}
 
 <script>
     $(document).ready(function () {
-        $("input[type=file]").on("change", function () {
+        $(document).on("change", "input[type=file]", function () {
             let input = $(this);
             let form = input.closest("form");
             let progressContainer = input.siblings(".progress-subida");
@@ -1693,19 +1693,23 @@ Mi perfil- {{$cliente->name}}
                     return xhr;
                 },
                 success: function (response) {
-                    progressBar.removeClass('bg-danger').addClass('bg-success');
-                    progressBar.text('¡Listo!');
+                    if (response.success) {
+                        progressBar.removeClass('bg-danger').addClass('bg-success');
+                        progressBar.text('¡Listo!');
 
-                    // Crear el botón para ver el archivo
-                    let url = `/documentos/${response.telefono}/${response.archivo}`;
-                    let html = `
-                        <a href="${url}" target="_blank" class="btn btn-sm btn-success mt-2">
-                            Ver documento
-                        </a>
-                    `;
+                        // Crear el botón para ver el archivo
+                        let url = `/documentos/${response.telefono}/${response.archivo}`;
+                        let html = `
+                            <a href="${url}" target="_blank" class="btn btn-sm btn-success mt-2">
+                                Ver documento
+                            </a>
+                        `;
 
-                    // Insertar el botón en el contenedor correspondiente
-                    input.closest('.col-lg-4, .col-md-3, .col-6').find('.archivo-subido').html(html);
+                        // Insertar el botón en el contenedor correspondiente
+                        input.closest('.col-lg-4, .col-md-3, .col-6').find('.archivo-subido').html(html);
+                    } else {
+                        alert('Hubo un problema al cargar el archivo.');
+                    }
                 },
                 error: function () {
                     progressBar.removeClass('bg-success').addClass('bg-danger');
