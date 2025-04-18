@@ -1661,34 +1661,70 @@ Mi perfil- {{$cliente->name}}
 
 
 <script>
-    $(document).ready(function() {
-        // Capturamos el evento de cambio en los campos de archivo
-        $("input[type=file]").change(function() {
-            // Obtenemos el formulario al que pertenece el campo de archivo
-            var form = $(this).closest('form');
+    $(document).ready(function () {
+        $("input[type=file]").on("change", function () {
+            let input = $(this);
+            let form = input.closest("form");
+            let progressContainer = input.siblings(".progress-subida");
+            let progressBar = progressContainer.find(".progress-bar");
 
-            // Creamos un objeto FormData para enviar los datos del formulario
-            var formData = new FormData(form[0]);
+            let formData = new FormData(form[0]);
 
-            // Realizamos la solicitud AJAX al controlador
+            progressContainer.removeClass("d-none");
+
             $.ajax({
-                url: "{{ route('documentos.store_cliente', $cliente->id) }}",
+                url: form.attr("action") || "{{ route('documentos.store_cliente', $cliente->id) }}",
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function(response) {
-                    // Manejamos la respuesta del controlador (si es necesario)
-                    alert('Archivo cargado con éxito');
+                xhr: function () {
+                    let xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            let percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                            progressBar.css("width", percentComplete + "%");
+                            progressBar.attr("aria-valuenow", percentComplete);
+                            progressBar.text(percentComplete + "%");
+                        }
+                    }, false);
+
+                    return xhr;
                 },
-                error: function(error) {
-                    // Manejamos los errores (si los hay)
-                    console.log('Error al cargar el archivo');
+                success: function (response) {
+                    progressBar.removeClass('bg-danger').addClass('bg-success');
+                    progressBar.text('¡Listo!');
+
+                    // Crear el botón para ver el archivo
+                    let url = `/documentos/${response.telefono}/${response.archivo}`;
+                    let html = `
+                        <a href="${url}" target="_blank" class="btn btn-sm btn-success mt-2">
+                            Ver documento
+                        </a>
+                    `;
+
+                    // Insertar el botón en el contenedor correspondiente
+                    input.closest('.col-lg-4, .col-md-3, .col-6').find('.archivo-subido').html(html);
+                },
+                error: function () {
+                    progressBar.removeClass('bg-success').addClass('bg-danger');
+                    progressBar.text('Error');
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        progressBar.css("width", "0%").attr("aria-valuenow", "0").text("0%");
+                        progressBar.removeClass('bg-success bg-danger');
+                        progressContainer.addClass("d-none");
+                    }, 1500);
                 }
             });
         });
     });
 </script>
+
+
+
 
 @endsection
 

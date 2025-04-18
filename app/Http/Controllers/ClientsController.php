@@ -165,11 +165,21 @@ class ClientsController extends Controller
                 }
 }
 
-    public function eliminarDocumento($documentoId){
+    public function eliminarDocumento($documentoId)
+    {
         $documento = DocumentosEstandares::findOrFail($documentoId);
-        $documentoSubido = DB::table('documentos_estandares')->where('id_documento', $documento->id_documento)->where('id_usuario', $documento->id_usuario)->where('id_curso', $documento->id_curso)->delete();
+        DB::table('documentos_estandares')
+            ->where('id_documento', $documento->id_documento)
+            ->where('id_usuario', $documento->id_usuario)
+            ->where('id_curso', $documento->id_curso)
+            ->delete();
 
+        return response()->json([
+            'success' => true,
+            'message' => 'El documento ha sido eliminado correctamente.'
+        ]);
         return redirect()->back()->with('success', 'El documento ha sido eliminado correctamente.');
+
     }
 
     public function eliminarDocumentoPer($id, $tipo){
@@ -1094,7 +1104,12 @@ class ClientsController extends Controller
                 $documentos->save();
             }
         }
-        return redirect()->back()->with('success', 'Creado con exito');
+        return response()->json([
+            'success' => true,
+            'archivo' => $fileName,
+            'ext' => pathinfo($fileName, PATHINFO_EXTENSION),
+            'telefono' => $cliente->telefono
+        ]);
     }
 
     public function reconocimiento_webinar(){
