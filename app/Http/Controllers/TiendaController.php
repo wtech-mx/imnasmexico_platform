@@ -99,7 +99,22 @@ class TiendaController extends Controller
         }
 
         $producto = Products::inRandomOrder()->first();
-        $productos_categoria = Products::take(30)->get();
+
+        // 1. Obtener un id_categoria aleatorio que tenga productos activos y válidos
+        $id_categoria_random = Products::where('categoria', 'NAS')
+            ->where('subcategoria', 'Producto')
+            ->whereNotNull('id_categoria')
+            ->inRandomOrder()
+            ->value('id_categoria');
+
+        // 2. Si existe, traer productos solo de esa categoría aleatoria
+        $productos_categoria = Products::where('categoria', 'NAS')
+            ->where('subcategoria', 'Producto')
+            ->where('id_categoria', $id_categoria_random)
+            ->orderBy('nombre', 'asc')
+            ->get();
+
+
         $nas_slide = Noticias::where('seccion', '=', 'NAS_SLIDE')->get();
         $banner_slide = Noticias::where('seccion', '=', 'NAS_BANNER')->get();
         $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();

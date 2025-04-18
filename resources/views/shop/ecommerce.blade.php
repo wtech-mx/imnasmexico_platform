@@ -66,7 +66,6 @@
 
     @include('shop.components.categories_ecommerce')
 
-
     @include('shop.components.products_slide')
 
     @include('shop.components.promos')
