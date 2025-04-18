@@ -7,6 +7,13 @@
 @section('css')
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+    <style>
+.low-stock {
+    background-color: red; /* Fondo rojo */
+    color: white; /* Letras blancas */
+    font-weight: bold; /* Opcional: texto en negrita */
+}
+    </style>
 @endsection
 
 @section('content')
@@ -31,7 +38,29 @@
                                     </tr>
                                 </thead>
                                 @foreach ($products as $product)
-                                <tr id="productRow{{ $product->id }}">
+                                @php
+                                    // Definir los criterios de bajo stock
+                                    $lowStockProducts = [
+                                        'CHETOS' => 1,
+                                        'BURBUJA' => 1,
+                                        'BOLSAS MORADAS CHICAS' => 100,
+                                        'BOLSAS MORADAS MEDIANAS' => 100,
+                                        'CINTA CANELA' => 6,
+                                        'CINTA TRANSPARENTE' => 6,
+                                        'CINTA DE PRECAUCIÓN' => 6,
+                                        'Caja Kr8' => 10,
+                                        'Caja Kr10' => 10,
+                                        'Caja Kr12' => 10,
+                                        'Caja Kr13' => 10,
+                                        'Caja Kr14' => 10,
+                                        'Caja Kb4' => 10,
+                                        'ETIQUETAS DE PRECAUCIÓN' => 1,
+                                    ];
+
+                                    // Verificar si el producto está en bajo stock
+                                    $isLowStock = isset($lowStockProducts[$product->nombre]) && $product->stock <= $lowStockProducts[$product->nombre];
+                                @endphp
+                                <tr id="productRow{{ $product->id }}" class="{{ $isLowStock ? 'low-stock' : '' }}">
                                     <td>{{ $product->id }} <br>
                                         <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
                                     </td>
