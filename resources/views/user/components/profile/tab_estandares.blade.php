@@ -324,7 +324,7 @@
                                                                                         // Insertar nuevamente el input para subir archivos
                                                                                         parentCol.append(`
                                                                                             <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
-                                                                                            <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
+                                                                                            
                                                                                             <input name="archivos[]" id="btnoriginal{{ $documento->id }}{{$video->id_tickets}}" class="form-control btnoriginal{{ $documento->id }}{{$video->id_tickets}}" type="file">
                                                                                         `);
                                                                                         location.reload();
