@@ -230,7 +230,7 @@ class PagosFueraController extends Controller
                 $order_ticket2->save();
 
                 for($i = 1; $i <= $request->get('cantidad2'); $i++){
-                    if($order_ticket2->id_tickets == 1008 || $order_ticket2->id_tickets == 1372 || $order_ticket2->id_tickets == 1355){
+                    if($order_ticket->id_tickets == 1373 || $order_ticket->id_tickets == 1520 || $order_ticket2->id_tickets == 1008 || $order_ticket2->id_tickets == 1372 || $order_ticket2->id_tickets == 1355){
                         $envio = new RegistroImnas;
                         $envio->id_order = $order->id;
                         $envio->id_usuario = $payer->id;
@@ -280,7 +280,7 @@ class PagosFueraController extends Controller
                 $order_ticket3->save();
 
                 for($i = 1; $i <= $request->get('cantidad3'); $i++){
-                    if($order_ticket3->id_tickets == 1008 || $order_ticket3->id_tickets == 1372 || $order_ticket3->id_tickets == 1355){
+                    if($order_ticket->id_tickets == 1373 || $order_ticket->id_tickets == 1520 || $order_ticket3->id_tickets == 1008 || $order_ticket3->id_tickets == 1372 || $order_ticket3->id_tickets == 1355){
                         $envio = new RegistroImnas;
                         $envio->id_order = $order->id;
                         $envio->id_usuario = $payer->id;
@@ -330,7 +330,7 @@ class PagosFueraController extends Controller
                 $order_ticket4->save();
 
                 for($i = 1; $i <= $request->get('cantidad4'); $i++){
-                    if($order_ticket4->id_tickets == 1008 || $order_ticket4->id_tickets == 1372 || $order_ticket4->id_tickets == 1355){
+                    if($order_ticket->id_tickets == 1373 || $order_ticket->id_tickets == 1520 || $order_ticket4->id_tickets == 1008 || $order_ticket4->id_tickets == 1372 || $order_ticket4->id_tickets == 1355){
                         $envio = new RegistroImnas;
                         $envio->id_order = $order->id;
                         $envio->id_usuario = $payer->id;
