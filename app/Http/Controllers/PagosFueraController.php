@@ -179,7 +179,7 @@ class PagosFueraController extends Controller
                 $order_ticket->id_curso = $cursos->id_curso;
 
                 for($i = 1; $i <= $request->get('cantidad'); $i++){
-                    if($order_ticket->id_tickets == 1008 || $order_ticket->id_tickets == 1372 || $order_ticket->id_tickets == 1355){
+                    if($order_ticket->id_tickets == 1373 || $order_ticket->id_tickets == 1520 || $order_ticket->id_tickets == 1008 || $order_ticket->id_tickets == 1372 || $order_ticket->id_tickets == 1355){
                         $envio = new RegistroImnas;
                         $envio->id_order = $order->id;
                         $envio->id_usuario = $payer->id;
