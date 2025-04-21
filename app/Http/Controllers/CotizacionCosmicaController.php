@@ -1394,8 +1394,8 @@ class CotizacionCosmicaController extends Controller
             //  return $pdf->stream();
             return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
         }else if($request->input('action') === 'Generar PDF Global'){
-            $fechaInicioAnio = '2024-01-01';
-            $fechaFinAnio = '2024-12-31';
+            $fechaInicioAnio = '2025-01-01';
+            $fechaFinAnio = '2025-04-21';
 
             // Query
             $productosVendidos = DB::table('notas_productos_cosmica')
@@ -1610,15 +1610,19 @@ class CotizacionCosmicaController extends Controller
                 $chartDataGrafica = file_get_contents($chartURLGrafica);
                 $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
 
+                // Agrega esta línea antes de la consulta
+                $anioActual = Carbon::now()->year;
+
                 $ventasPorMes = DB::table('notas_productos_cosmica')
                     ->select(
-                        DB::raw("DATE_FORMAT(fecha, '%Y-%m') as mes"), // Formato Año-Mes
-                        DB::raw("SUM(total) as total_mensual")        // Suma de los totales
+                        DB::raw("DATE_FORMAT(fecha, '%Y-%m') as mes"),
+                        DB::raw("SUM(total) as total_mensual")
                     )
-                    ->whereNotNull('estatus_cotizacion')             // Excluir los que son null
-                    ->where('estatus_cotizacion', '!=', 'Cancelada') // Excluir los que están cancelados
-                    ->groupBy(DB::raw("DATE_FORMAT(fecha, '%Y-%m')")) // Agrupar por Año-Mes
-                    ->orderBy('mes', 'asc')                           // Ordenar por fecha ascendente
+                    ->whereYear('fecha', $anioActual) // ← Aquí filtramos solo el año actual
+                    ->whereNotNull('estatus_cotizacion')
+                    ->where('estatus_cotizacion', '!=', 'Cancelada')
+                    ->groupBy(DB::raw("DATE_FORMAT(fecha, '%Y-%m')"))
+                    ->orderBy('mes', 'asc')
                     ->get();
 
                 // Formatear los resultados para incluir meses sin ventas
@@ -1635,7 +1639,11 @@ class CotizacionCosmicaController extends Controller
                     ];
                 });
 
-            $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte_global', compact('productosVendidos', 'resultado','today', 'ventas',  'chart2','chart3','chartGrafica', 'totalSum2', 'fechaInicio', 'fechaFin'));
+                $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte_global', compact(
+                    'productosVendidos', 'resultado','today', 'ventas',
+                    'chart2','chart3','chartGrafica', 'totalSum2',
+                    'fechaInicioAnio', 'fechaFinAnio' // <- agrega estas variables
+                ));
 
             return $pdf->stream();
             //  return $pdf->download('Reporte Cosmica Ventas Global/ '.$today.'.pdf');

@@ -101,8 +101,13 @@
   </footer>
 
   <div id="content">
+    @php
+        $fechaInicioFormat = Carbon::parse($fechaInicioAnio)->locale('es')->isoFormat('dddd D [de] MMMM YYYY');
+        $fechaFinFormat = Carbon::parse($fechaFinAnio)->locale('es')->isoFormat('dddd D [de] MMMM YYYY');
+    @endphp
+
     <table class="table text-center table-bordered border-primary">
-        <thead >
+        <thead>
             <tr>
                 <th>Rango de fecha De:</th>
                 <th>Rango de fecha A:</th>
@@ -110,33 +115,12 @@
         </thead>
         <tbody>
             <tr>
-                <td>
-                    Lunes 01 de enero 2024
-                </td>
-                <td>
-                    Viernes 27 de diciembre 2024
-                </td>
+                <td>{{ $fechaInicioFormat }}</td>
+                <td>{{ $fechaFinFormat }}</td>
             </tr>
         </tbody>
     </table>
 
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    <h2 style="text-align: center;">Total de Ventas <img src="https://plataforma.imnasmexico.com/assets/user/icons/money.png" alt="" width="35px"></h2>
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>
-                    <h2><strong> ${{ number_format($totalSum2, 1, '.', ',') }}</strong></h2>
-                </th>
-            </tr>
-        </tbody>
-    </table>
     <h2 style="text-align: center;"> <br>Ventas <br></h2>
     <table class="mt-5">
         <thead style="background-color: #87c5ca; color: #fff">
@@ -156,22 +140,7 @@
     </table>
     <div style="page-break-after: always;"></div>
 
-    <table class="mt-5">
-        <thead style="background-color: #CA87A6; color: #fff">
-            <tr>
-                <th>Ciudades donde compran</th>
-            </tr>
-        </thead>
 
-        <tbody>
-            <tr>
-                <th>
-                    <img src="{{$chartGrafica }}" width="80%">
-                </th>
-
-            </tr>
-        </tbody>
-    </table>
     <div style="page-break-after: always;"></div>
 
     <table class="mt-5">
