@@ -109,6 +109,34 @@
             </p>
         </div>
 
+       <div class="col-12 col-sm-12 col-md-6 col-lg-3 align-self-start mt-3">
+            <h6 class="text-left mt-2 title_details_ingle">Modo de Empleo</h6>
+            <p class="text-left mt-2 detalles_text_single" itemprop="description">
+                {{ strip_tags($producto->modo_empleo) }}
+            </p>
+        </div>
+
+       <div class="col-12 col-sm-12 col-md-6 col-lg-3 align-self-start mt-3">
+            <h6 class="text-left mt-2 title_details_ingle">Beneficios</h6>
+            <p class="text-left mt-2 detalles_text_single" itemprop="description">
+                {{ strip_tags($producto->beneficios) }}
+            </p>
+        </div>
+
+       <div class="col-12 col-sm-12 col-md-6 col-lg-3 align-self-start mt-3">
+            <h6 class="text-left mt-2 title_details_ingle">Ingredientes</h6>
+            <p class="text-left mt-2 detalles_text_single" itemprop="description">
+                {{ strip_tags($producto->ingredientes) }}
+            </p>
+        </div>
+
+       <div class="col-12 col-sm-12 col-md-6 col-lg-3 align-self-start mt-3">
+            <h6 class="text-left mt-2 title_details_ingle">Precauciones</h6>
+            <p class="text-left mt-2 detalles_text_single" itemprop="description">
+                {{ strip_tags($producto->precauciones) }}
+            </p>
+        </div>
+
     </div>
 
 </div>
