@@ -375,10 +375,10 @@ $(document).ready(function() {
                         0: {
                             items: 3
                         },
-                        576: {
+                        705: {
                             items: 4
                         },
-                        768: {
+                        879: {
                             items: 5
                         },
                         1200: {
@@ -391,17 +391,17 @@ $(document).ready(function() {
                     loop: true,
                     margin: 15,
                     dots:false,
-                    autoplay: true, // Activar autoplay
+                    autoplay: false, // Activar autoplay
                     autoplayTimeout: 6000, // Tiempo en milisegundos (3 segundos)
                     autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
                     responsive: {
                         0: {
                             items: 3
                         },
-                        576: {
+                        705: {
                             items: 4
                         },
-                        768: {
+                        879: {
                             items: 5
                         },
                         1200: {

@@ -19,7 +19,7 @@
                 <div class="item">
                     <div class="container_categories" style="background-color: {{ $colores[$indiceColor] }}">
                         <div class="container_img_box mx-auto img_categories_2" style="background: url('{{ asset('categorias/'.$categoria->imagen) }}') #ffffff00  50% / contain no-repeat;"></div>
-                        <h4 class="text-center text-dark title_categories">
+                        <h4 class="text-center text-dark title_categories" style="margin-top: 16px;">
                             {{$categoria->nombre}}
                         </h4>
                     </div>
