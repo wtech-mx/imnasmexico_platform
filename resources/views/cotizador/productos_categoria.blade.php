@@ -1,6 +1,6 @@
 <div class="row">
     @foreach ($productos as $producto)
-        <div class="col-3 col-sm-3 col-md-2 col-lg-2 mb-2">
+        <div class="col-4 col-sm-3 col-md-2 col-lg-2 mb-2">
             <div class="product-card agregar-carrito"
                 data-id="{{ $producto->id }}"
                 data-nombre="{{ $producto->nombre }}"

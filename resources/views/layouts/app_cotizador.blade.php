@@ -307,8 +307,11 @@
                 const owlSettings = {
                     loop: true,
                     margin: 15,
-                    dots: false,
                     autoplay: false,
+                    dots:false,
+                    autoplayTimeout: 9000,
+                    autoplayHoverPause: true,
+                    nav: true,
                     responsive: {
                         0: { items: 3 },
                         420: { items: 3 },
