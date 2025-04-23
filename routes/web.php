@@ -34,6 +34,7 @@ Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController:
 Route::get('/admin/cotizador', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index');
 Route::get('/cotizador/categoria/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoria'])->name('cotizador.productos_categoria');
 Route::get('/cotizador/buscar', [App\Http\Controllers\CotizadorController::class, 'buscar'])->name('cotizador.buscar');
+Route::post('/cotizador/render-item-carrito', [App\Http\Controllers\CotizadorController::class, 'renderizarItemCarrito']);
 
 
 /*

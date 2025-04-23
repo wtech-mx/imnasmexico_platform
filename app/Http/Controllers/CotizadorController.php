@@ -99,6 +99,12 @@ class CotizadorController extends Controller
         return array_unique($variantes);
     }
 
+    public function renderizarItemCarrito(Request $request)
+    {
+        $producto = $request->input('producto'); // Este será un array con los datos
+
+        return view('cotizador.item_carrito', compact('producto'))->render();
+    }
 
 
 }

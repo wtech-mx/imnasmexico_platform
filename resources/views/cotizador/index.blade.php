@@ -13,8 +13,18 @@
 
                 <div class="col-12 mb-3">
                     <div class="d-flex justify-content-start mt-3 mb-1 product-navbar my-auto">
-                        <p class="p-2 my-auto"><i class="bi bi-calendar3 p-2"></i>Miercoles 30 Abril 2024</p>
-                        <p class="p-2 my-auto"><i class="bi bi-clock p-2"></i> 07:35 AM</p>
+                        @php
+                            setlocale(LC_TIME, 'es_MX.UTF-8');
+                            $fecha = \Carbon\Carbon::now()->translatedFormat('l d F Y');
+                        @endphp
+
+                        <p class="p-2 my-auto">
+                            <i class="bi bi-calendar3 p-2"></i>{{ ucfirst($fecha) }}
+                        </p>
+
+                        <p class="p-2 my-auto">
+                            <i class="bi bi-clock p-2"></i> <span id="hora-actual"></span>
+                        </p>
                     </div>
                 </div>
 
@@ -100,33 +110,11 @@
         <!-- Orden -->
         <div class="col-lg-4 mt-3">
             <div class="sidebar">
-                <h5 class="mb-4 mt-1 text-center">Eloise's Order</h5>
+                <h5 class="mb-4 mt-1 text-center">Cotiza tu pedido</h5>
 
                 <!-- Lista de productos -->
                 <ul class="list-group mb-3" >
-                    <li class="list-group-item" style="padding: 0!important;border: 0!important;">
-                        <div class="d-flex">
-                            <!-- Imagen del producto -->
-                            <div class="me-3">
-                                <img src="https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU" alt="Beef Crough" class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
-                            </div>
 
-                            <!-- Detalles y controles -->
-                            <div class="flex-grow-1 d-flex flex-column justify-content-between" style="position: relative">
-                                <div>
-                                    <div class="fw-semibold">Beef Crough Beef Croug Beef Croug </div>
-                                    <small class="text-muted">$5.50</small>
-                                </div>
-
-                                <div class="d-flex justify-content-end align-items-center mt-2 btns_flotantes">
-                                    <button class="btn btn-counter btn-sm">-</button>
-                                    <span class="mx-2">1</span>
-                                    <button class="btn btn-counter btn-sm">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
                     <!-- ... más productos -->
                 </ul>
 
@@ -134,22 +122,21 @@
                 <!-- Totales -->
                 <div class="mb-2 d-flex justify-content-between">
                     <span>Subtotal:</span>
-                    <span>$20.00</span>
+                    <span id="subtotal">$0.00</span>
                 </div>
 
                 <div class="mb-2 d-flex justify-content-between">
                     <span>Discount:</span>
-                    <span class="text-danger">-$1.00</span>
+                    <span class="text-danger">-$0.00</span>
                 </div>
 
                 <div class="mb-3 d-flex justify-content-between fw-bold border-top pt-2">
                     <span>TOTAL:</span>
-                    <span>$21.00</span>
+                    <span id="total">$0.00</span>
                 </div>
 
-
                 <!-- Botón -->
-                <button class="btn btn-primary w-100">Place Order</button>
+                <button class="btn btn-xs btn-success w-100"><i class="bi bi-cart3"></i> Ralizar pedido </button>
             </div>
         </div>
 

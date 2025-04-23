@@ -166,6 +166,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
         <script>
             let timeout = null;
+            let carrito = [];
 
             // Evitar que el formulario recargue la página al hacer submit
             document.getElementById('formBuscarProductos').addEventListener('submit', function(e) {
@@ -211,6 +212,84 @@
                     });
             }
 
+
+            function modificarCantidad(idProducto, cambio) {
+                    const index = carrito.findIndex(p => p.id == idProducto);
+
+                    if (index !== -1) {
+                        carrito[index].cantidad += cambio;
+
+                        if (carrito[index].cantidad <= 0) {
+                            carrito.splice(index, 1);
+                        }
+
+                        renderizarCarrito();
+                    }
+            }
+
+            function actualizarTotales() {
+                    let subtotal = 0;
+
+                    carrito.forEach(producto => {
+                        subtotal += producto.precio * producto.cantidad;
+                    });
+
+                    const total = subtotal; // puedes restar descuento si lo usas
+
+                    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            }
+
+            function renderizarCarrito() {
+                carrito.forEach(async producto => {
+                    const total = producto.precio * producto.cantidad;
+
+                    // Verificar si el producto ya está en el DOM
+                    const productoExistente = document.querySelector(`.list-group-item[data-id="${producto.id}"]`);
+
+                    if (productoExistente) {
+                        // Si ya existe, solo actualizamos la cantidad y el total
+                        productoExistente.querySelector('.cantidad').textContent = producto.cantidad;
+                        productoExistente.querySelector('.total').textContent = `$${total.toFixed(2)}`;
+                    } else {
+                        // Si no existe, lo agregamos al carrito
+                        const response = await fetch('/cotizador/render-item-carrito', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({ producto })
+                        });
+
+                        const html = await response.text();
+                        document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
+                    }
+                });
+
+                // Actualizar los totales después de procesar todos los productos
+                actualizarTotales();
+            }
+
+            function eliminarDelCarrito(idProducto) {
+                // Buscar el índice del producto en el carrito
+                const index = carrito.findIndex(p => p.id == idProducto);
+
+                if (index !== -1) {
+                    // Eliminar el producto del array del carrito
+                    carrito.splice(index, 1);
+
+                    // Eliminar el elemento del DOM
+                    const productoElemento = document.querySelector(`.list-group-item[data-id="${idProducto}"]`);
+                    if (productoElemento) {
+                        productoElemento.remove();
+                    }
+
+                    // Actualizar los totales
+                    actualizarTotales();
+                }
+            }
+
             // Inicialización de los carouseles corporales y faciales
             $(document).ready(function() {
                 const owlSettings = {
@@ -230,7 +309,73 @@
 
                 $("#loop_categorias_corp").owlCarousel(owlSettings);
                 $("#loop_categorias_facial").owlCarousel(owlSettings);
+
+                function actualizarHora() {
+                    const ahora = new Date();
+                    let horas = ahora.getHours();
+                    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+                    const segundos = ahora.getSeconds().toString().padStart(2, '0');
+                    const ampm = horas >= 12 ? 'PM' : 'AM';
+
+                    horas = horas % 12;
+                    horas = horas ? horas : 12; // hora 0 debe ser 12
+
+                    const horaFormateada = `${horas}:${minutos}:${segundos} ${ampm}`;
+                    document.getElementById('hora-actual').textContent = horaFormateada;
+                }
+
+                // Actualizar al cargar y luego cada segundo
+                actualizarHora();
+                setInterval(actualizarHora, 1000);
+
+                document.addEventListener('click', function(e) {
+                    const target = e.target.closest('.agregar-carrito');
+                    if (target) {
+                        const id = target.dataset.id;
+                        const nombre = target.dataset.nombre;
+                        const precio = parseFloat(target.dataset.precio);
+                        const imagen = target.dataset.img;
+
+                        const existente = carrito.find(p => p.id == id);
+                        if (existente) {
+                            existente.cantidad++;
+                        } else {
+                            carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+                        }
+
+                        renderizarCarrito();
+                    }
+                });
+
+                function agregarAlCarrito(producto) {
+                    const existente = carrito.find(p => p.id === producto.id);
+
+                    if (existente) {
+                        existente.cantidad++;
+                        renderizarCarrito();
+                    } else {
+                        producto.cantidad = 1;
+                        carrito.push(producto);
+
+                        // Solo renderizar 1 nuevo producto y agregarlo al contenedor
+                        fetch('/cotizador/render-item-carrito', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({ producto })
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
+                            actualizarTotales();
+                        });
+                    }
+                }
+
             });
+
         </script>
 
 
