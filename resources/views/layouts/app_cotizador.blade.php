@@ -180,7 +180,6 @@
                 });
             }
 
-
             // Evitar que el formulario recargue la página al hacer submit
             document.getElementById('formBuscarProductos').addEventListener('submit', function(e) {
                 e.preventDefault(); // Evita recargar el formulario
@@ -242,7 +241,6 @@
                     }
                 }
             }
-
 
             function actualizarTotales() {
                     let subtotal = 0;
@@ -312,8 +310,9 @@
                     dots: false,
                     autoplay: false,
                     responsive: {
-                        0: { items: 5 },
-                        576: { items: 5 },
+                        0: { items: 3 },
+                        420: { items: 3 },
+                        576: { items: 4 },
                         676: { items: 5 },
                         768: { items: 5 },
                         950: { items: 6 },
@@ -393,7 +392,6 @@
             });
 
         </script>
-
 
         @yield('js_custom')
 
