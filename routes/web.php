@@ -31,6 +31,9 @@ Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsContr
 Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
 Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
 
+Route::get('/admin/cotizador', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index');
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
