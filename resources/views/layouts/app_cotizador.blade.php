@@ -168,6 +168,19 @@
             let timeout = null;
             let carrito = [];
 
+            function showToast(mensaje, icono = 'success') {
+                Swal.fire({
+                    toast: true,
+                    position: 'bottom-start',
+                    icon: icono,
+                    title: mensaje,
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true
+                });
+            }
+
+
             // Evitar que el formulario recargue la página al hacer submit
             document.getElementById('formBuscarProductos').addEventListener('submit', function(e) {
                 e.preventDefault(); // Evita recargar el formulario
@@ -214,18 +227,22 @@
 
 
             function modificarCantidad(idProducto, cambio) {
-                    const index = carrito.findIndex(p => p.id == idProducto);
+                const index = carrito.findIndex(p => p.id == idProducto);
 
-                    if (index !== -1) {
-                        carrito[index].cantidad += cambio;
+                if (index !== -1) {
+                    carrito[index].cantidad += cambio;
 
-                        if (carrito[index].cantidad <= 0) {
-                            carrito.splice(index, 1);
-                        }
-
+                    if (carrito[index].cantidad <= 0) {
+                        carrito.splice(index, 1);
+                        eliminarDelCarrito(idProducto); // Ya elimina del DOM
+                        showToast('Producto eliminado del carrito', 'info');
+                    } else {
                         renderizarCarrito();
+                        showToast('Cantidad actualizada', 'info');
                     }
+                }
             }
+
 
             function actualizarTotales() {
                     let subtotal = 0;
@@ -272,21 +289,18 @@
             }
 
             function eliminarDelCarrito(idProducto) {
-                // Buscar el índice del producto en el carrito
                 const index = carrito.findIndex(p => p.id == idProducto);
 
                 if (index !== -1) {
-                    // Eliminar el producto del array del carrito
-                    carrito.splice(index, 1);
+                    carrito.splice(index, 1); // ❌ eliminar del array
 
-                    // Eliminar el elemento del DOM
                     const productoElemento = document.querySelector(`.list-group-item[data-id="${idProducto}"]`);
                     if (productoElemento) {
-                        productoElemento.remove();
+                        productoElemento.remove(); // ❌ eliminar del DOM
                     }
 
-                    // Actualizar los totales
                     actualizarTotales();
+                    showToast('Producto eliminado del carrito', 'error');
                 }
             }
 
@@ -339,8 +353,10 @@
                         const existente = carrito.find(p => p.id == id);
                         if (existente) {
                             existente.cantidad++;
+                            showToast('Cantidad actualizada');
                         } else {
                             carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+                            showToast('Producto agregado al carrito');
                         }
 
                         renderizarCarrito();
