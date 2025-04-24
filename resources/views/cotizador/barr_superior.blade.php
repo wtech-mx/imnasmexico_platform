@@ -52,8 +52,8 @@
         </p>
 
         <p class="my-auto">
-            <a class="btn btn-sm btn-outline-dark" href="{{ route('index_nas.cotizador') }}">Comica</a>
-            <a class="btn btn-sm btn-outline-primary" href="{{ route('index_cosmica.cotizador') }}">NAS</a>
+            <a class="btn btn-sm btn-outline-dark" href="{{ route('index_cosmica.cotizador') }}">Comica</a>
+            <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a>
         </p>
     </div>
 </div>
