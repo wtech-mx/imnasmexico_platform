@@ -299,7 +299,6 @@ class PerfilClienteController extends Controller
 
         $estandar_user = CamNotEstandares::join('cam_notas', 'cam_notestandares.id_nota', '=', 'cam_notas.id')
         ->where('cam_notas.id_cliente', $id)
-        ->where('cam_notas.fecha', '>', '2024-07-30')
         ->get();
 
         $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
