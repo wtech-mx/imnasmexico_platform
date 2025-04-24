@@ -31,8 +31,8 @@ Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsContr
 Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
 Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
 
-Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index');
-Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica');
+Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index_nas.cotizador');
+Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
 
 Route::get('/cotizador/categoria/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoriaCosmica'])->name('cotizador.productos_categoriaCosmica');
 Route::get('/cotizador/categoria/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoria'])->name('cotizador.productos_categoria');
