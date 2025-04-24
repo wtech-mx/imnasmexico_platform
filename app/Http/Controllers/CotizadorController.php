@@ -34,7 +34,7 @@ class CotizadorController extends Controller
         // Determinar ruta según entorno
         $dominio = $request->getHost();
         if ($dominio == 'plataforma.imnasmexico.com') {
-            $ruta_imgs = base_path('../public_html/plataforma.imnasmexico.com/cosmika/INICIO/lineas/');
+            $ruta_imgs = base_path('../public_html/plataforma.imnasmexico.com/cosmika/lineas/lineas/');
             $ruta_asset = 'cosmika/INICIO/lineas/';
         } else {
             $ruta_imgs = public_path('cosmika/INICIO/lineas/');
