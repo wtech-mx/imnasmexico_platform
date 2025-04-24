@@ -57,7 +57,7 @@ Cosmica
                                     <div class="item">
                                         <div class="product_category" onclick="cargarProductosPorCategoria('{{ $categoria->nombre }}')">
                                             <h6 class="mt-3 mb-1 tittle_category">Corporal</h6>
-                                            <img src="{{ asset('categorias/'.$categoria->imagen) }}" alt="Producto">
+                                            <img src="{{ asset('cosmika\INICIO\lineas/'.$categoria->nombre.'.png') }}" alt="Producto">
                                             <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
                                             <div class="fw-bold mt-1">
                                                 <p class="text_items" style="margin: 0;">
@@ -77,7 +77,7 @@ Cosmica
                                     <div class="item">
                                         <div class="product_category" onclick="cargarProductosPorCategoria('{{ $categoria->nombre }}')">
                                             <h6 class="mt-3 mb-1 tittle_category">Facial</h6>
-                                            <img src="{{ asset('categorias/'.$categoria->imagen) }}" alt="Producto">
+                                            <img src="{{ asset('cosmika\INICIO\lineas/'.$categoria->nombre.'.png') }}" alt="Producto">
                                             <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
                                             <div class="fw-bold mt-1">
                                                 <p class="text_items" style="margin: 0;">

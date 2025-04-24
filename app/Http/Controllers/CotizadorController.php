@@ -7,6 +7,8 @@ use App\Models\Products;
 use App\Models\Categorias;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
+
 class CotizadorController extends Controller
 {
     public function index()
@@ -27,36 +29,54 @@ class CotizadorController extends Controller
         return view('cotizador.index', compact('categoriasFacial', 'categoriasCorporal'));
     }
 
-    public function index_cosmica()
+    public function index_cosmica(Request $request)
     {
-        // Productos faciales
+        // Determinar ruta según entorno
+        $dominio = $request->getHost();
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $ruta_imgs = base_path('../public_html/plataforma.imnasmexico.com/cosmika/INICIO/lineas/');
+            $ruta_asset = 'cosmika/INICIO/lineas/';
+        } else {
+            $ruta_imgs = public_path('cosmika/INICIO/lineas/');
+            $ruta_asset = 'cosmika/INICIO/lineas/';
+        }
+
+        // Función para verificar y asignar imagen de sublínea
+        $asignarImagen = function ($sublinea) use ($ruta_imgs, $ruta_asset) {
+            $nombre_archivo = Str::slug($sublinea, '_') . '.png';
+            $ruta_completa = $ruta_imgs . $nombre_archivo;
+
+            return File::exists($ruta_completa) ? $ruta_asset . $nombre_archivo : 'default.jpg';
+        };
+
+        // Faciales
         $faciales = Products::where('linea', 'Facial')
             ->where('categoria', 'Cosmica')
             ->where('subcategoria', 'Producto')
             ->get()
             ->groupBy('sublinea');
 
-        $categoriasFacial = $faciales->map(function ($productos, $sublinea) {
+        $categoriasFacial = $faciales->map(function ($productos, $sublinea) use ($asignarImagen) {
             return (object) [
-                'id' => Str::slug($sublinea), // Puedes ajustar esto según lo que necesites como ID
+                'id' => Str::slug($sublinea),
                 'nombre' => $sublinea,
-                'imagen' => 'default.jpg', // Asignar imagen por defecto o lógica según sublinea
+                'imagen' => $asignarImagen($sublinea),
                 'productos_count' => $productos->count(),
             ];
         })->values();
 
-        // Productos corporales
+        // Corporales
         $corporales = Products::where('linea', 'Corporal')
             ->where('categoria', 'Cosmica')
             ->where('subcategoria', 'Producto')
             ->get()
             ->groupBy('sublinea');
 
-        $categoriasCorporal = $corporales->map(function ($productos, $sublinea) {
+        $categoriasCorporal = $corporales->map(function ($productos, $sublinea) use ($asignarImagen) {
             return (object) [
                 'id' => Str::slug($sublinea),
                 'nombre' => $sublinea,
-                'imagen' => 'default.jpg',
+                'imagen' => $asignarImagen($sublinea),
                 'productos_count' => $productos->count(),
             ];
         })->values();
