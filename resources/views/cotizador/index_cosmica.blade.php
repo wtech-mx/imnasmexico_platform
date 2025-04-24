@@ -1,7 +1,7 @@
 @extends('layouts.app_cotizador')
 
 @section('template_title')
-NAS
+Cosmica
 @endsection
 
 @section('cotizador')
@@ -55,7 +55,7 @@ NAS
                             <div id="loop_categorias_corp" class="owl-carousel">
                                 @foreach ($categoriasCorporal as $categoria)
                                     <div class="item">
-                                        <div class="product_category" onclick="cargarProductosPorCategoria({{ $categoria->id }})">
+                                        <div class="product_category" onclick="cargarProductosPorCategoria('{{ $categoria->nombre }}')">
                                             <h6 class="mt-3 mb-1 tittle_category">Corporal</h6>
                                             <img src="{{ asset('categorias/'.$categoria->imagen) }}" alt="Producto">
                                             <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
@@ -75,7 +75,7 @@ NAS
                             <div id="loop_categorias_facial" class="owl-carousel">
                                 @foreach ($categoriasFacial as $categoria)
                                     <div class="item">
-                                        <div class="product_category" onclick="cargarProductosPorCategoria({{ $categoria->id }})">
+                                        <div class="product_category" onclick="cargarProductosPorCategoria('{{ $categoria->nombre }}')">
                                             <h6 class="mt-3 mb-1 tittle_category">Facial</h6>
                                             <img src="{{ asset('categorias/'.$categoria->imagen) }}" alt="Producto">
                                             <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
@@ -197,7 +197,7 @@ NAS
     }
     // Cargar productos por categoría (usado al hacer clic en una categoría)
     function cargarProductosPorCategoria(idCategoria) {
-        fetch(`/cotizador/categoria/${idCategoria}`)
+        fetch(`/cotizador/categoria/cosmica/${idCategoria}`)
             .then(response => response.text())
             .then(html => {
                 document.getElementById('contenedor_productos').innerHTML = html;

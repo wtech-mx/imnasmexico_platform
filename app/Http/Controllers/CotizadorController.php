@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Categorias;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Collection;
 class CotizadorController extends Controller
 {
     public function index()
@@ -27,6 +27,43 @@ class CotizadorController extends Controller
         return view('cotizador.index', compact('categoriasFacial', 'categoriasCorporal'));
     }
 
+    public function index_cosmica()
+    {
+        // Productos faciales
+        $faciales = Products::where('linea', 'Facial')
+            ->where('categoria', 'Cosmica')
+            ->where('subcategoria', 'Producto')
+            ->get()
+            ->groupBy('sublinea');
+
+        $categoriasFacial = $faciales->map(function ($productos, $sublinea) {
+            return (object) [
+                'id' => Str::slug($sublinea), // Puedes ajustar esto según lo que necesites como ID
+                'nombre' => $sublinea,
+                'imagen' => 'default.jpg', // Asignar imagen por defecto o lógica según sublinea
+                'productos_count' => $productos->count(),
+            ];
+        })->values();
+
+        // Productos corporales
+        $corporales = Products::where('linea', 'Corporal')
+            ->where('categoria', 'Cosmica')
+            ->where('subcategoria', 'Producto')
+            ->get()
+            ->groupBy('sublinea');
+
+        $categoriasCorporal = $corporales->map(function ($productos, $sublinea) {
+            return (object) [
+                'id' => Str::slug($sublinea),
+                'nombre' => $sublinea,
+                'imagen' => 'default.jpg',
+                'productos_count' => $productos->count(),
+            ];
+        })->values();
+
+        return view('cotizador.index_cosmica', compact('categoriasFacial', 'categoriasCorporal'));
+    }
+
     public function mostrarProductosCategoria($id)
     {
         $productos = Products::query();
@@ -36,7 +73,23 @@ class CotizadorController extends Controller
 
         $productos->where(function ($query) use ($id) {
             $query->where('id_categoria', $id)
-                  ->orWhere('id_categoria2', $id);
+                  ->Where('id_categoria2', $id);
+        });
+
+        $productos = $productos->orderBy('nombre', 'ASC')->get();
+
+        return view('cotizador.productos_categoria', compact('productos'));
+    }
+
+    public function mostrarProductosCategoriaCosmica($id)
+    {
+        $productos = Products::query();
+
+        $productos->where('categoria', 'Cosmica')
+                  ->where('subcategoria', 'Producto');
+
+        $productos->where(function ($query) use ($id) {
+            $query->where('sublinea', $id);
         });
 
         $productos = $productos->orderBy('nombre', 'ASC')->get();
