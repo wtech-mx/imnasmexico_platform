@@ -26,6 +26,8 @@ use App\Models\Cam\CamVideosUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Cam\CamVideos;
+use App\Models\CamMiniCitas;
+use App\Models\CarpetaDocumentosEstandares;
 use App\Models\CarpetasEstandares;
 
 class CamExpedientesController extends Controller
@@ -602,7 +604,7 @@ class CamExpedientesController extends Controller
 
     public function obtenerCarpetasCompradas($notaId) {
         $carpetas = CamNotEstandares::where('id_nota', $notaId)->with('Estandar')->get();
-        $nombresCarpetas = $carpetas->pluck('Estandar.estandar');
+        $nombresCarpetas = $carpetas->pluck('Estandar.nombre');
         return response()->json($nombresCarpetas);
 
     }
@@ -610,8 +612,8 @@ class CamExpedientesController extends Controller
     public function obtenerDocumentosPorCarpeta(Request $request) {
 
         $nombreCarpeta = $request->input('nombre_carpeta');
-        $carpdocumentos = CamCarpetaDocumentos::where('nombre', $nombreCarpeta )->first();
-        $documentos = CamDocuemntos::where('id_carpdoc', $carpdocumentos->id)->get();
+        $carpdocumentos = CarpetasEstandares::where('nombre', $nombreCarpeta)->first();
+        $documentos = CarpetaDocumentosEstandares::where('id_carpeta', $carpdocumentos->id)->get();
 
         return response()->json($documentos);
     }
@@ -619,6 +621,7 @@ class CamExpedientesController extends Controller
     public function edit_mini($id){
         $mini_exp = CamMiniExp::where('id', $id)->first();
         $mini_exp_diplomas = CamMiniExpDiplomas::where('id_mini', $id)->get();
+        $mini_cita = CamMiniCitas::where('id_mini', $id)->first();
 
         $expediente = CamCitas::where('id_nota', $mini_exp->id_nota)->first();
         $estandares_cam = CamEstandares::get();
@@ -627,11 +630,12 @@ class CamExpedientesController extends Controller
         $minis_exps = CamMiniExp::where('id_nota', $expediente->id_nota)->get();
         $minis_exp_nom = CamNombramiento::where('id_mini_exp', $mini_exp->id)->get();
         $minis_exp_cer = CamCertificados::where('id_mini_exp', $mini_exp->id)->get();
-      //  $estandares_cam_user = CamNotEstandares::where('id_nota', $mini_exp->id_nota)->where('estatus', '=', 'Entregado')->get();
-      $estandares_cam_user = CarpetasEstandares::orderBy('nombre','asc')->get();
+        //$estandares_cam_user = CamNotEstandares::where('id_nota', $mini_exp->id_nota)->where('estatus', '=', 'Entregado')->get();
+        $estandares_cam_user = CarpetasEstandares::orderBy('nombre','asc')->get();
         $estandares_cam_mini = CamNotEstandares::where('id_mini_exp', $mini_exp->id)->get();
 
-        return view('cam.admin.expedientes.mini_exp', compact('estandares_cam_mini','estandares_cam_user','minis_exp_nom','minis_exp_cer','estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps'));
+
+        return view('cam.admin.expedientes.mini_exp', compact('estandares_cam_mini','estandares_cam_user','minis_exp_nom','minis_exp_cer','estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps', 'mini_cita'));
     }
 
     public function crear_estandar_mini(Request $request){
@@ -891,5 +895,51 @@ class CamExpedientesController extends Controller
         $archivos = CamDocExp::where('tipo', $categoria)
             ->where('tipo', $categoria)->get();
         return response()->json($archivos);
+    }
+
+    public function update_mini_cita(Request $request, $id){
+
+        $cita = CamMiniCitas::firstOrNew(['id_mini' => $id]);
+        $cita->id_mini = $id;
+
+        $cita->evaluacion_ec0076 = $request->get('evaluacion_ec0076');
+        $cita->check1 = $request->get('check1');
+        if($request->get('check1') != NULL){
+            $cita->id_usuario_ec = auth()->user()->id;
+        }
+
+        $cita->evaluacion_afines = $request->get('evaluacion_afines');
+        $cita->check2 = $request->get('check2');
+        if($request->get('check2') != NULL){
+            $cita->id_usuario_afin = auth()->user()->id;
+        }
+
+        $cita->refuerzo_conocimiento = $request->get('refuerzo_conocimiento');
+        $cita->check3 = $request->get('check3');
+        if($request->get('check3') != NULL){
+            $cita->id_usuario_cono = auth()->user()->id;
+        }
+
+        $cita->refuerzo_formatos = $request->get('refuerzo_formatos');
+        $cita->check4 = $request->get('check4');
+        if($request->get('check4') != NULL){
+            $cita->id_usuario_form = auth()->user()->id;
+        }
+
+        $cita->coaching_empresarial = $request->get('coaching_empresarial');
+        $cita->check5 = $request->get('check5');
+        if($request->get('check5') != NULL){
+            $cita->id_usuario_empr = auth()->user()->id;
+        }
+
+        $cita->carpeta_cam = $request->get('carpeta_cam');
+        $cita->check6 = $request->get('check6');
+        if($request->get('check6') != NULL){
+            $cita->id_usuario_carpeta = auth()->user()->id;
+        }
+
+        $cita->save();
+
+        return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }
 }

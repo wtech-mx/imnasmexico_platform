@@ -76,6 +76,9 @@ Expediente {{$expediente->id}}
                         <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
                             <button class="nav-link " id="pills-pagos-tab" data-bs-toggle="pill" data-bs-target="#pills-pagos" type="button" role="tab" aria-controls="pills-pagos" aria-selected="false">Pagos</button>
                         </li>
+                        <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
+                            <button class="nav-link " id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-info" aria-selected="false">Info Personal</button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -102,6 +105,11 @@ Expediente {{$expediente->id}}
             {{-- ==================== S E C C I O N  P A G O S ==================== --}}
             <div class="tab-pane fade" id="pills-pagos" role="tabpanel" aria-labelledby="pills-pagos-tab">
                 @include('cam.admin.expedientes.seccion_pagos')
+            </div>
+
+            {{-- ==================== S E C C I O N  I N F O ==================== --}}
+            <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                @include('cam.admin.expedientes.info')
             </div>
         </div>
         @include('cam.admin.expedientes.modal_estatus_expediente')

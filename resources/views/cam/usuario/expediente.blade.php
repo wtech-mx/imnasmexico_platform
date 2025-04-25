@@ -1,7 +1,7 @@
 @extends('layouts.app_cam')
 
 @section('template_title')
-    Evaluador independiente
+    {{$expediente->tipo}}
 @endsection
 
 @section('css_custom')
@@ -15,7 +15,7 @@
     <div class="row">
 
         <div class="col-12 mb-5">
-            <h1 class="text-center tittle_bold_cam">Expediente <br> Evaluador independiente: </h1> <h3 class="text-center tittle_border_cam">{{ auth()->user()->name }}</h3>
+            <h1 class="text-center tittle_bold_cam">Expediente <br> {{$expediente->tipo}}: </h1> <h3 class="text-center tittle_border_cam">{{ auth()->user()->name }}</h3>
             <div class="d-flex justify-content-center">
                 <a class="text-center btn btn-lg btn-outline-light " href="{{ route('cam.index', auth()->user()->code) }}">Regresar al inicio</a>
             </div>
@@ -224,16 +224,20 @@
                 success: function(data) {
                     var carpetasHTML = '';
 
+                    carpetasHTML += '<div class="row">';
                     data.forEach(function(carpeta, index) {
                         console.log('Nombre de Carpeta:', carpeta); // Agrega esta línea para verificar el nombre
+
                         carpetasHTML += '<div class="col-6">';
                         carpetasHTML += '<button class="btn btn-sm btnCarpeta" data-nombre_carpeta="' + carpeta + '">';
-                        carpetasHTML += '<img src="{{ asset('assets/user/icons/folder.png') }}" class="img-fluid" style="width: 40%;">';
+                        carpetasHTML += '<img src="{{ asset('assets/user/icons/folder.png') }}" class="img-fluid" style="width: 20%;">';
+                        carpetasHTML += '<br>';
                         carpetasHTML += '<label for="">' + (index + 1) + '. ' + carpeta + '</label>';
                         carpetasHTML += '</button>';
                         carpetasHTML += '</div>';
-                    });
 
+                    });
+                    carpetasHTML += '</div>';
 
                     $('#contenedorCarpetas').html(carpetasHTML);
 
@@ -267,11 +271,16 @@
                     var extension = obtenerExtension(archivo.nombre);
                     var archivoURL = '{{ asset('cam_doc_general/') }}/' + archivo.nombre;
 
-                    archivosHTML += '<div class="col-6 p-2">'; // Define las columnas (ajusta según tus necesidades)
+                    archivosHTML += '<div class="col-3">'; // Define las columnas (ajusta según tus necesidades)
 
                     if (extension === 'pdf') {
                         archivosHTML += '<embed src="' + archivoURL + '" type="application/pdf" style="width: 140px; height: 140px;" /><br>';
                         archivosHTML += '<a class="text-center mt-1" href="' + archivoURL + '" target="_blank">Abrir PDF</a>';
+                    } else if (extension === 'docx' || extension === 'doc') {
+                        archivosHTML += '<img src="{{ asset('assets/user/icons/docx.png') }}" style="width: 40px; height: 40px;"><br>';
+                        archivosHTML += archivo.nombre;
+                        archivosHTML += '<br>';
+                        archivosHTML += '<a class="text-center mt-3 mb3" href="' + archivoURL + '" target="_blank">Abrir</a>';
                     } else if (extension === 'jpg' || extension === 'png' || extension === 'jpeg') {
                         archivosHTML += '<img src="' + archivoURL + '" alt="' + archivo.nombre + '" style="width: 100px; height: 100px;"><br>';
                         archivosHTML += '<a class="text-center mt-3 mb3" href="' + archivoURL + '" target="_blank">Abrir Imagen</a>';

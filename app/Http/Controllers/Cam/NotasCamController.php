@@ -226,4 +226,42 @@ class NotasCamController extends Controller
             ->with('success', 'Nota CAM creada con exito.');
     }
 
+    public function update(Request $request, $id)
+    {
+        $CamNotas = CamNotas::findOrFail($id);
+        $CamNotas->tipo = $request->get('tipo');
+        $CamNotas->membresia = $request->get('membresia');
+        $CamNotas->monto1 = $request->get('monto1');
+        $CamNotas->metodo_pago = $request->get('metodo_pago');
+        $CamNotas->monto2 = $request->get('monto2');
+        $CamNotas->metodo_pago2 = $request->get('metodo_pago2');
+        $CamNotas->comprobante2 = $request->get('comprobante2');
+        $CamNotas->nota = $request->get('nota');
+        $CamNotas->referencia = $request->get('referencia');
+        $CamNotas->update();
+
+        $CamUser = User::where('id', $CamNotas->id_cliente)->first();
+        $CamUser->name = $request->get('name');
+        $CamUser->telefono = $request->get('celular');
+        $CamUser->celular_casa = $request->get('telefono');
+        $CamUser->password = Hash::make($request->get('celular'));
+        $CamUser->email = $request->get('email');
+        $CamUser->curp = $request->get('curp');
+        $CamUser->razon_social = $request->get('razon_social');
+        $CamUser->direccion = $request->get('direccion');
+        $CamUser->state = $request->get('state');
+        $CamUser->postcode = $request->get('postcode');
+        $CamUser->country = $request->get('country');
+        $CamUser->city = $request->get('city');
+        $CamUser->facebook = $request->get('facebook');
+        $CamUser->tiktok = $request->get('tiktok');
+        $CamUser->instagram = $request->get('instagram');
+        $CamUser->pagina_web = $request->get('pagina_web');
+        $CamUser->otra_red = $request->get('otra_red');
+        $CamUser->puesto = $request->get('puesto');
+        $CamUser->rfc = $request->get('rfc');
+        $CamUser->update();
+
+        return redirect()->back()->with('success', 'Se edito con exito.');
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app_cam')
 
 @section('template_title')
-    Evaluador independiente
+    {{$expediente->tipo}}
 @endsection
 
 @section('css_custom')
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        {{-- <div class="col-4">
+        <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
                     <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
@@ -56,7 +56,8 @@
                     <h5 class="tittle_border_cam_min">Expediente</h5>
                 </a>
             </div>
-        </div> --}}
+        </div>
+
 
     </div>
 </section>

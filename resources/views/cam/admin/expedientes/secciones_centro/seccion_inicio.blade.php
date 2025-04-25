@@ -715,6 +715,18 @@
                             </label>
                             </div>
                         </li>
+                        <li class="list-group-item border-0 px-0 pb-0">
+                            <div class="form-check form-switch ps-0">
+                            @if ($check->c35 == '1')
+                                <input class="form-check-input ms-0" type="checkbox" id="c35" name="c35" value="1" checked>
+                            @else
+                                <input class="form-check-input ms-0" type="checkbox" id="c35" name="c35" value="1" checked>
+                            @endif
+                            <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                36.- Nombre de evaluadores independientes solicitados.
+                            </label>
+                            </div>
+                        </li>
                         </form>
                     </ul>
                 </div>

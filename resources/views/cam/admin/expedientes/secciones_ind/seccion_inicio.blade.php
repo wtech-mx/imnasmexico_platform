@@ -57,6 +57,16 @@
                                 <input id="usuario_eva" name="usuario_eva" class="form-control" type="text" value="{{ $expediente->Nota->Cliente->usuario_eva }}">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <h6 for="name" >Fecha se entrego placa</h6>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets\user\icons\calendario.png') }}" alt="" width="35px">
+                                </span>
+                                <input id="fecha_concluyo" name="fecha_concluyo" class="form-control" type="date" value="{{ $expediente->Nota->fecha_concluyo }}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-12 mt-4 mt-lg-0">
@@ -95,7 +105,6 @@
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-sm mt-2" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                             </div>
-
                         </div>
 
                     </div>

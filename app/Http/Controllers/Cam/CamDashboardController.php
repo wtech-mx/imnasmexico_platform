@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cam;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamVideos;
 
 use App\Models\User;
@@ -25,8 +26,9 @@ class CamDashboardController extends Controller
         }
 
         $usuario = User::where('code', $code)->firstOrFail();
+        $expediente = CamNotas::where('id_cliente', $usuario->id)->first();
 
-    return view('cam.usuario.dashboard',compact('usuario'));
+    return view('cam.usuario.dashboard',compact('usuario', 'expediente'));
 
     }
 }

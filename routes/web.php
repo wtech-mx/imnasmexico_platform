@@ -993,12 +993,11 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
 
     Route::patch('evaluador/videos/edit/{id}', [App\Http\Controllers\Cam\CamClientesController::class, 'update_videos'])->name('evaluador.update_videos');
 
-        // =============== M O D U L O   E X P E D I E N T E S ( C A R P E T A S)===============================
+        // =============== M O D U L O   E X P E D I E N T E S ( C L I E N T E S)===============================
         Route::get('evaluador/expediente/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index_expediente'])->name('evaluador.index_expediente');
         Route::get('/evaluador/ruta/para/obtener/archivos', [App\Http\Controllers\Cam\CamClientesController::class, 'obtenerArchivosPorCategoria'])->name('evaluador.obtener.archivos');
         Route::post('/evaluador/expediente/crear/certificado', [App\Http\Controllers\Cam\CamClientesController::class, 'crear_certificado'])->name('evaluador.crear.certificados');
         Route::post('/evaluador/expediente/crear/cedulas', [App\Http\Controllers\Cam\CamClientesController::class, 'crear_cedulas'])->name('evaluador.crear.cedulas');
-
         // =============== M O D U L O   E X P E D I E N T E S  I N D E===============================
         Route::get('/expedientes/independiente', [CamExpedientesController::class, 'index_ind'])->name('independiente.index');
         Route::get('/expediente', [CamExpedientesController::class, 'view'])->name('view.expediente');
@@ -1043,11 +1042,13 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
         Route::patch('/expediente/mini/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_mini'])->name('update.mini_exp');
         Route::post('/expediente/mini/estandar', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_estandar_mini'])->name('crear_estandar.mini_exp');
         Route::patch('/esstatus/expedientes/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_estatus_expedientes'])->name('estatus_expediente.update');
+        Route::patch('/expediente/mini/cita/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_mini_cita'])->name('update.mini_cita');
 
 
         // =============== M O D U L O  N O T A S ===============================
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
         Route::post('/notas/crear', [App\Http\Controllers\Cam\NotasCamController::class, 'crear'])->name('crear.notas');
+        Route::patch('/notas/crear/update/{id}', [App\Http\Controllers\Cam\NotasCamController::class, 'update'])->name('update.notas');
 
         // =============== M O D U L O   R E C U R S O S ===============================
         Route::get('/estandares/index', [App\Http\Controllers\Cam\CamEstandaresController::class, 'index'])->name('index.estandares');
