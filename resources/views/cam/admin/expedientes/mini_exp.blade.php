@@ -209,77 +209,57 @@ Expediente
                                                     <ul class="list-group">
                                                         <li class="list-group-item border-0 px-0">
                                                             <div class="form-check form-switch ps-0">
-                                                            @if ($mini_cita->check1 == '1')
-                                                                <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
-                                                                <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                                                    {{$mini_cita->UserEC->name}}</label>
-                                                            @else
+
                                                                 <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1">
-                                                            @endif
+
                                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                                                 1. Evaluación del EC0076</label>
                                                             </div>
-                                                            <input id="evaluacion_ec0076" name="evaluacion_ec0076" value="{{$mini_cita->evaluacion_ec0076}}" type="date" class="form-control">
+                                                            <input id="evaluacion_ec0076" name="evaluacion_ec0076"  type="date" class="form-control">
                                                         </li>
                                                         <hr>
                                                         <li class="list-group-item border-0 px-0">
                                                             <div class="form-check form-switch ps-0">
-                                                            @if ($mini_cita->check3 == '1')
-                                                                <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
-                                                                <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                                                    {{$mini_cita->UserCon->name}}</label>
-                                                            @else
+
                                                                 <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1">
-                                                            @endif
+
                                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                                                 3.- Refuerzo de transferencia de conocimiento y operatividad</label>
                                                             </div>
-                                                            <input id="refuerzo_conocimiento" name="refuerzo_conocimiento" value="{{$mini_cita->refuerzo_conocimiento}}" type="date" class="form-control">
+                                                            <input id="refuerzo_conocimiento" name="refuerzo_conocimiento"  type="date" class="form-control">
                                                         </li>
                                                         <hr>
                                                         <li class="list-group-item border-0 px-0">
                                                             <div class="form-check form-switch ps-0">
-                                                            @if ($mini_cita->check4 == '1')
-                                                                <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1" checked>
-                                                                <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                                                    {{$mini_cita->UserFor->name}}</label>
-                                                            @else
+
                                                                 <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1">
-                                                            @endif
+
                                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                                                 4.- Refuerzo de llenado de formatos</label>
                                                             </div>
-                                                            <input id="refuerzo_formatos" name="refuerzo_formatos" value="{{$mini_cita->refuerzo_formatos}}" type="date" class="form-control">
+                                                            <input id="refuerzo_formatos" name="refuerzo_formatos" type="date" class="form-control">
                                                         </li>
                                                         <hr>
                                                         <li class="list-group-item border-0 px-0">
                                                             <div class="form-check form-switch ps-0">
-                                                            @if ($mini_cita->check5 == '1')
-                                                                <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1" checked>
-                                                                <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                                                    {{$mini_cita->UserEm->name}}</label>
-                                                            @else
+
                                                                 <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1">
-                                                            @endif
+
                                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                                                 5.- Coaching empresarial</label>
                                                             </div>
-                                                            <input id="coaching_empresarial" name="coaching_empresarial" value="{{$mini_cita->coaching_empresarial}}" type="date" class="form-control">
+                                                            <input id="coaching_empresarial" name="coaching_empresarial"  type="date" class="form-control">
                                                         </li>
                                                         <hr>
                                                         <li class="list-group-item border-0 px-0 pb-0">
                                                             <div class="form-check form-switch ps-0">
-                                                            @if ($mini_cita->check6 == '1')
-                                                                <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1" checked>
-                                                                <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                                                    {{$mini_cita->UserCar->name}}</label>
-                                                            @else
+
                                                                 <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1">
-                                                            @endif
+
                                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                                                 6.- Entrega de carpeta cam y formatos</label>
                                                             </div>
-                                                            <input id="carpeta_cam" name="carpeta_cam" value="{{$mini_cita->carpeta_cam}}" type="date" class="form-control">
+                                                            <input id="carpeta_cam" name="carpeta_cam" type="date" class="form-control">
                                                         </li>
                                                     </ul>
                                                 </div>
