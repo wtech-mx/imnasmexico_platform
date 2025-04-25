@@ -32,8 +32,16 @@ Notas CAM
                 <div class="card">
 
                     <div class="card-header">
-
+                        @php
+                            $suma = $notas_faltan_10_dias->count() + $notas_faltan_5_dias->count();
+                        @endphp
                         <div class="d-flex justify-content-between">
+                            <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#alertaModal">
+                                <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ $suma ? $suma : 0 }}
+                                </span>
+                            </a>
 
                             <h3 class="mb-3">Notas CAM</h3>
 
@@ -46,7 +54,7 @@ Notas CAM
                             @include('cam.admin.notas.crear')
                         </div>
                     </div>
-
+                    @include('cam.admin.notas.campana')
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
@@ -106,12 +114,31 @@ Notas CAM
 
                                                 </td>
                                                 <td>
-                                                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#EditexampleModal{{$nota_cam->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                                        <i class="fa fa-fw fa-eye"></i>
+                                                    <a type="button" class="btn btn-xs bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#EditexampleModal{{$nota_cam->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                        Editar
                                                     </a>
+                                                        <a target="_blank" class="btn btn-xs btn-primary" href="{{ route('edit_independiente.citas', $nota_cam->Cliente->code) }}" >
+                                                            Citas
+                                                        </a>
+
+                                                        <a target="_blank" class="btn btn-xs btn-danger" href="{{ route('edit_independiente.contrato', $nota_cam->Cliente->code) }}" >
+                                                            Contrato
+                                                        </a>
+
+                                                        <a target="_blank" class="btn btn-xs btn-warning" href="{{ route('edit_independiente.carta', $nota_cam->Cliente->code) }}" >
+                                                            Carta
+                                                        </a>
+
+                                                        <a target="_blank" class="btn btn-xs btn-success" href="{{ route('edit_independiente.formato', $nota_cam->Cliente->code) }}" >
+                                                            Formato
+                                                        </a>
+
+                                                        <a target="_blank" class="btn btn-xs btn-dark" href="{{ route('edit_independiente.checklist', $nota_cam->Cliente->code) }}" >
+                                                            CHECK LIST
+                                                        </a>
                                                 </td>
                                             </tr>
-                                            @include('cam.admin.notas.edit_nuevos')
+                                            @include('cam.admin.notas.edit')
                                         @endforeach
                                     </tbody>
                                 </table>

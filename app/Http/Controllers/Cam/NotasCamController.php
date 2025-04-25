@@ -37,7 +37,33 @@ class NotasCamController extends Controller
 
         $fecha = Carbon::now()->locale('es')->isoFormat('D [de] MMMM [del] YYYY');
 
-        return view('cam.admin.notas.index', compact('estandares_cam', 'notas_cam', 'siguienteId', 'fecha','estandar_user'));
+        $hoy = Carbon::now();
+
+        $notas_faltan_10_dias = $notas_cam->filter(function ($nota) use ($hoy) {
+            if ($nota->fecha_concluyo) {
+                $fechaAniversario = Carbon::parse($nota->fecha_concluyo)->addYear();
+                return $hoy->diffInDays($fechaAniversario, false) === 10;
+            }
+            return false;
+        });
+
+        $notas_faltan_5_dias = $notas_cam->filter(function ($nota) use ($hoy) {
+            if ($nota->fecha_concluyo) {
+                $fechaAniversario = Carbon::parse($nota->fecha_concluyo)->addYear();
+                return $hoy->diffInDays($fechaAniversario, false) === 5;
+            }
+            return false;
+        });
+
+        $notas_faltan_3_dias = $notas_cam->filter(function ($nota) use ($hoy) {
+            if ($nota->fecha_concluyo) {
+                $fechaAniversario = Carbon::parse($nota->fecha_concluyo)->addYear();
+                return $hoy->diffInDays($fechaAniversario, false) === 3;
+            }
+            return false;
+        });
+        return view('cam.admin.notas.index', compact('estandares_cam', 'notas_cam', 'siguienteId', 'fecha','estandar_user','notas_faltan_10_dias',
+    'notas_faltan_5_dias','notas_faltan_3_dias'));
     }
 
     public function crear(Request $request){

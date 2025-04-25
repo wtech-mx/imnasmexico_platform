@@ -22,7 +22,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/password.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="" name="" type="text" class="form-control" value="{{$nota_cam->Cliente->cam}}" readonly>
+                                        <input id="" name="" type="text" class="form-control" value="{{$nota_cam->Cliente->cam}}">
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$nota_cam->fecha}}" readonly>
+                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$nota_cam->fecha}}">
                                     </div>
                                 </div>
                             </div>
@@ -46,11 +46,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="tipo" id="tipo" class="form-select d-inline-block" readonly >
+                                        <select name="tipo" id="tipo" class="form-select d-inline-block" >
                                             <option value="{{$nota_cam->tipo}}">{{$nota_cam->tipo}}</option>
-                                            {{-- <option value="Evaluador Independiente">Evaluador Independiente</option>
+                                            <option value="Evaluador Independiente">Evaluador Independiente</option>
                                             <option value="Centro Evaluación">Centro Evaluación</option>
-                                            <option value="Externo">Externo</option> --}}
+                                            {{-- <option value="Externo">Externo</option> --}}
                                         </select>
                                     </div>
                                 </div>
@@ -63,10 +63,10 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/membership.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block" readonly>
+                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block">
                                             <option value="{{$nota_cam->membresia}}" selected>{{$nota_cam->membresia}}</option>
-                                            {{-- <option value="Gold">Gold</option>
-                                            <option value="Diamante">Diamante</option> --}}
+                                            <option value="Gold">Gold</option>
+                                            <option value="Diamante">Diamante</option>
                                         </select>
                                     </div>
                                 </div>
@@ -76,26 +76,14 @@
                                 <h5>Datos personales</h5>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label for="name">Nombre(s) *</label>
+                                    <label for="name">Nombre completo *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="name" name="name" type="text" class="form-control" value="{{$nota_cam->Cliente->name}}">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="name">Apellidos *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/etiqueta.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input readonly id="apellido" name="apellido" type="text" class="form-control" value="{{$nota_cam->Cliente->apellido}}" >
+                                        <input id="name" name="name" type="text" class="form-control" value="{{$nota_cam->Cliente->name}}">
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +95,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/whatsapp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" value="{{$nota_cam->Cliente->telefono}}" >
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" value="{{$nota_cam->Cliente->telefono}}" >
                                     </div>
                                 </div>
 
@@ -120,7 +108,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" value="{{$nota_cam->Cliente->telefono}}"  >
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" value="{{$nota_cam->Cliente->telefono}}"  >
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +120,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" value="{{$nota_cam->Cliente->celular_casa}}" >
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" value="{{$nota_cam->Cliente->celular_casa}}" >
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +132,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="email" name="email" type="email" class="form-control" value="{{$nota_cam->Cliente->email}}">
+                                        <input id="email" name="email" type="email" class="form-control" value="{{$nota_cam->Cliente->email}}">
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +144,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="curp" name="curp" type="text" class="form-control" value="{{$nota_cam->Cliente->curp}}">
+                                        <input id="curp" name="curp" type="text" class="form-control" value="{{$nota_cam->Cliente->curp}}">
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +156,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="razon_social" name="razon_social" type="text" class="form-control" value="{{$nota_cam->Cliente->razon_social}}">
+                                        <input id="razon_social" name="razon_social" type="text" class="form-control" value="{{$nota_cam->Cliente->razon_social}}">
                                     </div>
                                 </div>
                             </div>
@@ -184,7 +172,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="direccion" name="direccion" type="text" class="form-control" value="{{$nota_cam->Cliente->direccion}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="direccion" name="direccion" type="text" class="form-control" value="{{$nota_cam->Cliente->direccion}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +184,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/street-market.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="state" name="state" type="text" class="form-control" value="{{$nota_cam->Cliente->state}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="state" name="state" type="text" class="form-control" value="{{$nota_cam->Cliente->state}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +196,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/cp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="postcode" name="postcode" type="text" class="form-control" value="{{$nota_cam->Cliente->postcode}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="postcode" name="postcode" type="text" class="form-control" value="{{$nota_cam->Cliente->postcode}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +208,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ecuador.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="country" name="country" type="text" class="form-control" value="{{$nota_cam->Cliente->country}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="country" name="country" type="text" class="form-control" value="{{$nota_cam->Cliente->country}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +220,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="city" name="city" type="text" class="form-control" value="{{$nota_cam->Cliente->city}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="city" name="city" type="text" class="form-control" value="{{$nota_cam->Cliente->city}}" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +236,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/facebook.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="facebook" name="facebook" type="text" class="form-control" placeholder="naturalesainspa" value="{{$nota_cam->Cliente->facebook}}">@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="facebook" name="facebook" type="text" class="form-control" placeholder="naturalesainspa" value="{{$nota_cam->Cliente->facebook}}">@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +248,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/tiktok.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="tiktok" name="tiktok" type="text" class="form-control" value="{{$nota_cam->Cliente->tiktok}}">@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="tiktok" name="tiktok" type="text" class="form-control" value="{{$nota_cam->Cliente->tiktok}}">@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +260,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/instagram.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="instagram" name="instagram" type="text" class="form-control" value="{{$nota_cam->Cliente->instagram}}">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="instagram" name="instagram" type="text" class="form-control" value="{{$nota_cam->Cliente->instagram}}">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +272,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/web-link.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="imnasmexico.com" value="{{$nota_cam->Cliente->pagina_web}}">@error('pagina_web') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="imnasmexico.com" value="{{$nota_cam->Cliente->pagina_web}}">@error('pagina_web') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -296,7 +284,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/heart.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="otra_red" name="otra_red" type="text" class="form-control" placeholder="naturalesainspa" value="{{$nota_cam->Cliente->otra_red}}">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="otra_red" name="otra_red" type="text" class="form-control" placeholder="naturalesainspa" value="{{$nota_cam->Cliente->otra_red}}">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +296,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/medico.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="puesto" name="puesto" type="text" class="form-control" value="{{$nota_cam->Cliente->puesto}}">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="puesto" name="puesto" type="text" class="form-control" value="{{$nota_cam->Cliente->puesto}}">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +316,7 @@
                                         @foreach ($estandares as $estandar_cam)
 
                                             <option value="{{ $estandar_cam->id }}" selected>
-                                               {{$estandar_cam->Estandar->estandar}}
+                                               {{$estandar_cam->Estandar->nombre}}
                                             </option>
 
                                         @endforeach
@@ -351,7 +339,7 @@
                                         @foreach ($estandaresOperables as $estandar_cam)
 
                                             <option value="{{ $estandar_cam->id }}" selected>
-                                               {{$estandar_cam->Estandar->estandar}}
+                                               {{$estandar_cam->Estandar->nombre}}
                                             </option>
 
                                         @endforeach
@@ -374,7 +362,7 @@
                                         @foreach ($estandaresContados as $estandar_cam)
 
                                             <option value="{{ $estandar_cam->id }}" selected>
-                                               {{$estandar_cam->Estandar->estandar}}
+                                               {{$estandar_cam->Estandar->nombre}}
                                             </option>
 
                                         @endforeach
@@ -390,7 +378,7 @@
                                     <label for="name">Precio *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/user/icons/order.webp') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input readonly class="form-control" type="text" id="costo" name="costo"  value="{{$nota_cam->costo}}">
+                                        <input class="form-control" type="text" id="costo" name="costo"  value="{{$nota_cam->costo}}">
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
@@ -401,7 +389,7 @@
                                     <label for="name">Restante *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input readonly class="form-control" type="number" id="restante" name="restante" value="{{$nota_cam->restante}}">
+                                        <input class="form-control" type="number" id="restante" name="restante" value="{{$nota_cam->restante}}">
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
@@ -418,7 +406,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly class="form-control" type="text" id="monto1" name="monto1" value="{{$nota_cam->monto1}}">
+                                        <input class="form-control" type="text" id="monto1" name="monto1" value="{{$nota_cam->monto1}}">
                                     </div>
                                 </div>
                             </div>
@@ -504,7 +492,7 @@
                             <div class="col-8">
                                 <div class="form-group">
                                     <label for="name">Info del cliente</label><br>
-                                    <textarea  readonly class="form-control" name="nota" id="nota" cols="20" rows="2">{{$nota_cam->nota}}</textarea>
+                                    <textarea  class="form-control" name="nota" id="nota" cols="20" rows="2">{{$nota_cam->nota}}</textarea>
                                 </div>
                             </div>
 
@@ -515,7 +503,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/refer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input readonly id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" value="{{$nota_cam->referencia}}" required>@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" value="{{$nota_cam->referencia}}" required>@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -524,7 +512,7 @@
                     </div>
 
                 <div class="modal-footer">
-                    {{-- <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Atualizar</button> --}}
+                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Atualizar</button>
                 </div>
 
             </form>
