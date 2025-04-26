@@ -372,8 +372,8 @@
                 ->toArray()
         );
         // Indica si este curso tiene redconocer==1
-        var redConocer = {{ $ticket->Cursos->redconocer === 1 ? 'true' : 'false' }};
-
+        var redConocer = {{ $ticket->Cursos->redconocer === 1 ? 'false' : 'true' }};
+       
         $('#orden_servicio-{{ $ticket->id }}').DataTable({
             dom: 'Bfrtip',
             buttons: [
@@ -404,6 +404,7 @@
                     // Este texto sale **antes** de la tabla en el PDF
                     messageTop: function() {
                         if (!redConocer) return '';
+
                         // Une con salto de línea cada estándar
                         return estandares.join('\n');
                     },
