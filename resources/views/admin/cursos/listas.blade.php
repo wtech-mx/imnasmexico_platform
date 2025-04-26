@@ -86,7 +86,7 @@
                                                 STPS
                                             @endif
                                             @if ($ticket->Cursos->redconocer == '1')
-                                                RedConocer
+                                                SepConocer
                                             @endif
                                             @if ($ticket->Cursos->unam == '1')
                                                 UNAM
@@ -153,7 +153,7 @@
                                                                             STPS
                                                                         @endif
                                                                         @if ($ticket->Cursos->redconocer == '1')
-                                                                            RedConocer
+                                                                            SepConocer
                                                                         @endif
                                                                         @if ($ticket->Cursos->unam == '1')
                                                                             UNAM
