@@ -153,7 +153,7 @@
                                                                             STPS
                                                                         @endif
                                                                         @if ($ticket->Cursos->redconocer == '1')
-                                                                            SepConocer
+                                                                        SepConocer
                                                                         @endif
                                                                         @if ($ticket->Cursos->unam == '1')
                                                                             UNAM
@@ -362,63 +362,71 @@
 
 
 <script>
-    @foreach ($tickets as $ticket)
-        $(document).ready(function() {
-            $('#orden_servicio-{{$ticket->id}}').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'print',
-                        text: 'Imprimir',
-                        exportOptions: {
-                            columns: ':visible',
-                            modifier: {
-                                styles: {
-                                    fontSize: '80px' // Tamaño de letra más grande para exportación PDF
-                                }
-                            }
-                        },
-                        title: function() {
-                            var customText = '';
-                            var titulo = 'Lista de {{$curso->nombre}} / {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat('l j \\de F \\de Y')) }} al {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat('l j \\de F \\de Y')) }} - ( {{ $curso->modalidad }} )';
-                            // Agregar un texto personalizado antes del título de la página
-                            @foreach ($ticket->Cursos->CursosEstandares as $cursoEstandar)
-                                customText += '<span style="font-size: 40px">{{$cursoEstandar->CarpetasEstandares->nombre}}</span>';
-                            @endforeach
-                            @if ($curso->redconocer == 1)
-                                return customText + '<br><br>' + titulo + '<br><br>' + '<span style="font-size: 40px">SEP-CONOCER  Fecha de evaluación:</span>';
-                            @else
-                                return titulo;
-                            @endif
+@foreach ($tickets as $ticket)
+    <script>
+    $(document).ready(function() {
+        // Prepara un array de nombres de estándares
+        var estandares = @json(
+            $ticket->Cursos->CursosEstandares
+                ->map(fn($ce) => $ce->CarpetasEstandares->nombre)
+                ->toArray()
+        );
+        // Indica si este curso tiene redconocer==1
+        var redConocer = {{ $ticket->Cursos->redconocer === 1 ? 'true' : 'false' }};
 
-                        }
-                    },
-                    'excel',
-                    {
-                        extend: 'pdfHtml5',
-                        customize: function(doc) {
-                            // Establecer el tamaño de fuente para el documento PDF
-                            doc.defaultStyle.fontSize = 14;
-
-                            // Establecer el tamaño de fuente para el encabezado
-                            doc.content[0].fontSize = 20;
-
-                        }
-                    },
-                    'colvis'
-                ],
-                responsive: false,
-                stateSave: true,
-
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+        $('#orden_servicio-{{ $ticket->id }}').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'print',
+                    text: 'Imprimir',
+                    title: function() {
+                        var titulo = 'Lista de {{ $curso->nombre }} / ' +
+                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat("l j \\de F \\de Y")) }}' +
+                            ' al ' +
+                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat("l j \\de F \\de Y")) }}' +
+                            ' - ( {{ $curso->modalidad }} )';
+                        return titulo;
+                    }
                 },
-                columnDefs: [
-                    { type: 'num', targets: 0 } // Indica que la columna 0 (No) debe ser tratada como número
-                ]
-            });
+                'excel',
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    title: function() {
+                        // Dejamos el título igual que en print
+                        return 'Lista de {{ $curso->nombre }} / ' +
+                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat("l j \\de F \\de Y")) }}' +
+                            ' al ' +
+                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat("l j \\de F \\de Y")) }}' +
+                            ' - ( {{ $curso->modalidad }} )';
+                    },
+                    // Este texto sale **antes** de la tabla en el PDF
+                    messageTop: function() {
+                        if (!redConocer) return '';
+                        // Une con salto de línea cada estándar
+                        return estandares.join('\n');
+                    },
+                    customize: function(doc) {
+                        // Ajustes de tamaño de fuente…
+                        doc.defaultStyle.fontSize = 14;
+                        doc.content[0].fontSize = 20;
+                    }
+                },
+                'colvis'
+            ],
+            responsive: false,
+            stateSave: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+            },
+            columnDefs: [
+                { type: 'num', targets: 0 }
+            ]
         });
-    @endforeach
+    });
+    </script>
+@endforeach
 </script>
 
 
