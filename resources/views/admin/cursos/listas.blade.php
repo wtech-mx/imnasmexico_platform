@@ -363,7 +363,6 @@
 
 <script>
 @foreach ($tickets as $ticket)
-    <script>
     $(document).ready(function() {
         // Prepara un array de nombres de estándares
         var estandares = @json(
@@ -373,7 +372,7 @@
         );
         // Indica si este curso tiene redconocer==1
         var redConocer = {{ $ticket->Cursos->redconocer === 1 ? 'false' : 'true' }};
-       
+
         $('#orden_servicio-{{ $ticket->id }}').DataTable({
             dom: 'Bfrtip',
             buttons: [
@@ -426,7 +425,6 @@
             ]
         });
     });
-    </script>
 @endforeach
 </script>
 
