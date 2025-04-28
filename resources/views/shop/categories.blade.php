@@ -3,6 +3,22 @@
 
 @section('css_custom')
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/categories.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/filter.css') }}">
+    <style>
+
+        /* Estilo para el offcanvas (filtro móvil) */
+        .offcanvas {
+            background: rgb(255 255 255 / 80%);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(10px);
+            max-width: 70%!important;
+        }
+
+        .offcanvas-backdrop {
+            background-color: transparent!important;
+        }
+
+        </style>
 @endsection
 
 @section('ecomeerce')
@@ -81,7 +97,20 @@
             <div class="offcanvas-body">
                 <h3 class="subtitle_filtro" style="font-family: 'Roboto_Regular';">Pasillos</h3>
                 <div class="form-check mt-3">
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "corporal")
+                            <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
+                        @endif
+                    @endforeach
 
+                    <h3 class="subtitle_filtro mt-3" style="font-family: 'Roboto_Regular';">Facial</h3>
+                    @foreach ($categorias as $cat)
+                        @if (trim($cat->linea) === "facial")
+                            <label class="form-check-label" for="categoriaMovil{{ $cat->id }}">{{ $cat->nombre }}</label>
+                            <input class="form-check-input categoria-radio" type="radio" name="categoria" value="{{ $cat->id }}" id="categoriaMovil{{ $cat->id }}" >
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
