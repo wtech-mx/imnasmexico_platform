@@ -85,6 +85,12 @@
             </div>
 
             <div class="d-flex justify-content-center">
+                <a href="{{ route('facturas_user.index') }}" class="preguntas_freceuntas">
+                   Facturacion
+                </a>
+            </div>
+
+            <div class="d-flex justify-content-center">
                 <a class="preguntas_freceuntas btn_ticket_comprar text-center" href="{{ route('cursos.show', 'afiliacion-imnas-6675e89c64f68') }}">Registro IMNAS</a>
             </div>
 

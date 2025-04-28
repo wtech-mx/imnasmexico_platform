@@ -123,6 +123,13 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+// =============== F A C T U R A C I O N===============================
+
+Route::get('/facturacion', [App\Http\Controllers\FacturasController::class, 'facturas_user'])->name('facturas_user.index');
+// Ruta para buscar un folio vía AJAX
+Route::get('/facturacion/search', action: [App\Http\Controllers\FacturasController::class, 'searchFolio'])->name('facturacion.search');
+Route::get('/buscar-cp', action: [App\Http\Controllers\FacturasController::class, 'buscarCP'])->name('buscarCP');
+
 
 // =============== E C O M M E C E   N A S===============================
 
