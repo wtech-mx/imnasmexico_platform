@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Factura;
 use Wafto\Sepomex\Models\Sepomex;
-
-
+use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 
 use Session;
@@ -16,9 +15,22 @@ use Hash;
 class FacturasController extends Controller
 {
 
+
+    public function facturascion_index(){
+
+        return view('user.facturacion.facturascion_index');
+
+    }
+
     public function facturas_user(){
 
         return view('user.facturacion.facturacion');
+    }
+
+
+    public function facturas_userNAS(){
+
+        return view('user.facturacion.facturacion_nas');
 
     }
 
@@ -38,7 +50,37 @@ class FacturasController extends Controller
         }
 
         // Renderizamos el partial con Blade
-        $html = view('user.facturacion.resultado', compact('nota'))->render();
+        $html = view('user.facturacion.resultado', [
+            'nota' => $nota,
+            'tipo' => 'cosmica',      // <-- marcamos que viene de Cosmica
+        ])->render();
+
+        return response()->json([
+            'success' => true,
+            'html'    => $html,
+        ]);
+    }
+
+    public function searchFolioNas(Request $request)
+    {
+        $folio = $request->query('folio');
+        if (! $folio) {
+            return response()->json(['success' => false, 'message' => 'Debes proporcionar un folio.'], 422);
+        }
+
+        $nota = NotasProductos::where('folio', $folio)->first();
+        if (! $nota) {
+            return response()->json(['success' => false, 'message' => 'No existe ninguna nota con ese folio.'], 404);
+        }
+        if ($nota->factura != 1) {
+            return response()->json(['success' => false, 'message' => 'Esta nota no está marcada para facturar.'], 403);
+        }
+
+
+        $html = view('user.facturacion.resultado', [
+            'nota' => $nota,
+            'tipo' => 'nas',          // <-- marcamos que viene de NAS
+        ])->render();
 
         return response()->json([
             'success' => true,
@@ -64,7 +106,6 @@ class FacturasController extends Controller
         ]);
 
     }
-
 
     public function index(){
         $facturas = Factura::get();

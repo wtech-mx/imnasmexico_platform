@@ -19,11 +19,19 @@
           <td>${{ number_format($nota->total, 2) }}</td>
           <td>{{ $nota->estatus_cotizacion }}</td>
           <td>
-            <a target="_blank"
-               href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}"
-               class="btn btn-sm btn-primary">
-              Ver Cotización
-            </a>
+            @if($tipo === 'nas')
+              <a target="_blank"
+                 href="{{ route('notas_cotizacion.imprimir', ['id' => $nota->id]) }}"
+                 class="btn btn-sm btn-primary">
+                Ver Cotización NAS
+              </a>
+            @else
+              <a target="_blank"
+                 href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}"
+                 class="btn btn-sm btn-primary">
+                Ver Cotización Cosmica
+              </a>
+            @endif
           </td>
         </tr>
       </tbody>

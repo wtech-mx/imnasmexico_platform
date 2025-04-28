@@ -124,10 +124,14 @@ Route::get('folio', function () {
 });
 
 // =============== F A C T U R A C I O N===============================
+Route::get('/facturacion', action: [App\Http\Controllers\FacturasController::class, 'facturascion_index'])->name('facturas_user.index');
+Route::get('/facturacion/cosmica', action: [App\Http\Controllers\FacturasController::class, 'facturas_user'])->name('facturas_userCosmica.index');
+Route::get('/facturacion/nas', [App\Http\Controllers\FacturasController::class, 'facturas_userNAS'])->name('facturas_userNas.index');
 
-Route::get('/facturacion', [App\Http\Controllers\FacturasController::class, 'facturas_user'])->name('facturas_user.index');
 // Ruta para buscar un folio vía AJAX
-Route::get('/facturacion/search', action: [App\Http\Controllers\FacturasController::class, 'searchFolio'])->name('facturacion.search');
+Route::get('/facturacion/search/', action: [App\Http\Controllers\FacturasController::class, 'searchFolio'])->name('facturacion.search');
+Route::get('/facturacion/search/nas', action: [App\Http\Controllers\FacturasController::class, 'searchFolioNas'])->name('facturacionNAS.search');
+
 Route::get('/buscar-cp', action: [App\Http\Controllers\FacturasController::class, 'buscarCP'])->name('buscarCP');
 
 

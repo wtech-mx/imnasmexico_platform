@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-   Facturacion Cosmica
+   Facturacion NAS
 @endsection
 
 @section('css_custom')
@@ -18,10 +18,11 @@
 
 
         <div class="col-12 col-md-12  m-auto">
-            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Facturacion Cosmica</h1>
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Facturacion NAS</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
                 Realiza tu facuracion dentro del mes que hiciste tu compra.
             </p>
+
 
             <div class="container py-4">
                 <div class="row justify-content-center mb-4">
@@ -36,6 +37,8 @@
                 <!-- Aquí inyectaremos el partial completo -->
                 <div id="resultadoFolio" style="display: none;"></div>
               </div>
+
+
 
         </div>
 
@@ -55,7 +58,7 @@ $(function(){
     }
 
     $.ajax({
-      url: '{{ route("facturacion.search") }}',
+      url: '{{ route("facturacionNAS.search") }}',
       data: { folio },
       success(response) {
         // Inyecta el HTML que vino del servidor
