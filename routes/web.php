@@ -315,7 +315,7 @@ Route::get('certificacion', [App\Http\Controllers\ClientsController::class, 'cer
 Route::post('certificacion/store', [App\Http\Controllers\ClientsController::class, 'store_certificaion'])->name('certificaion.store');
 
 Route::DELETE('/eliminar-documento/{documento}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumento'])->name('eliminar.documento');
-Route::post('/eliminar-documento/{id}/{tipo}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumentoPer'])->name('eliminar.documentoper');
+Route::get('/eliminar-documento/per/{id}/{tipo}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumentoPer'])->name('eliminar.documentoper');
 
 Route::patch('/perfil/estatus/certificaion/{id}', [App\Http\Controllers\ClientsController::class, 'estatus_update_certificaion'])->name('estatus_update.certificaion');
 
