@@ -70,7 +70,6 @@ class LabCosmicaController extends Controller
             $suma = $product->stock_cosmica + $request->get('cantidad_aumentada');
         }
 
-
         // Guardar los valores anteriores del producto en la tabla historial_stock
         $historialData = [
             'id_producto' => $product->id,
@@ -146,6 +145,17 @@ class LabCosmicaController extends Controller
         $envases->conteo = $resta;
         $envases->descripcion = $request->get('descripcion');
         $envases->update();
+
+        if ($request->has('productos_edit')) {
+            $nuevosCampos = $request->input('productos_edit');
+
+            foreach ($nuevosCampos as $campo) {
+                $envase_product = new EnvasesProductos;
+                $envase_product->id_envase = $envases->id;
+                $envase_product->id_producto = $campo;
+                $envase_product->save();
+            }
+        }
 
         return response()->json([
             'id' => $envases->id,

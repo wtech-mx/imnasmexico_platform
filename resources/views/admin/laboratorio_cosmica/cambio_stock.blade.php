@@ -62,6 +62,15 @@
                                         <label for="num_estandar">Descripcion</label>
                                         <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control" readonly>{{ $product->descripcion }}</textarea>
                                     </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="name">Productos</label>
+                                        <select class="form-control " id="productos_edit" name="productos_edit[]" multiple style="width: 70%;!important">
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}">{{ $product->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 

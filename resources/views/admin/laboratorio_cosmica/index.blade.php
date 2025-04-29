@@ -25,7 +25,7 @@
                     </a>
 
                     <a class="btn btn-info" href="{{ route('laboratorio_cosmica.pdf_produccion_estimado') }}" target="_blank">Imprimir general</a>
-                    
+
                     <h3 class="mb-3">Stock de Envases Laboratorio Cosmica </h3>
 
                     <a class="btn btn-warning" href="{{ route('reporte.pdf') }}" target="_blank">Imprimir reporte</a>
@@ -173,6 +173,19 @@
 <script>
 
     $(document).ready(function() {
+        $('#editProductModal').on('shown.bs.modal', function () {
+            // inicializa sólo una vez por apertura
+            $('#productos_edit').select2({
+                dropdownParent: $('#editProductModal'),
+                width: 'resolve'  // para que respete el style="width:70% !important;"
+            });
+        });
+
+            // Opcionalmente, si tu modal se reinicia y quieres limpiar:
+        $('#editProductModal').on('hidden.bs.modal', function () {
+            $('#productos_edit').select2('destroy');
+        });
+
         $('.js-example-basic-multiple').select2();
 
         // Evento para abrir el modal y llenar los datos del producto
@@ -263,6 +276,7 @@
                 cantidad_aumentada: $('#cantidad_aumentada').val(),
                 cantidad_uti: $('#cantidad_uti').val(),
                 descripcion: $('#descripcion').val(),
+                productos_edit: $('#productos_edit').val(),
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 _method: 'PATCH'
             };
