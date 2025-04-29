@@ -496,8 +496,18 @@ class ProductsController extends Controller
         $product->stock_salon = $request->get('stock_salon');
         $product->stock_nas = $suma_nas;
         $product->stock_cosmica = $suma;
-        $product->id_categoria = $request->get('id_categoria'); // Actualizar el id de la categoría
-        $product->id_categoria2 = $request->get('id_categoria2'); // Actualizar el id de la categoría
+
+        // $product->id_categoria = $request->get('id_categoria'); // Actualizar el id de la categoría
+        // $product->id_categoria2 = $request->get('id_categoria2'); // Actualizar el id de la categoría
+
+        // 5) Solo actualizamos categoría si viene rellena
+        if ($request->filled('id_categoria')) {
+            $product->id_categoria = $request->get('id_categoria');
+        }
+        // 6) Y lo mismo para la segunda categoría
+        if ($request->filled('id_categoria2')) {
+            $product->id_categoria2 = $request->get('id_categoria2');
+        }
 
         // Solo actualizar los campos si están presentes en la solicitud
         if ($request->has('linea')) {
