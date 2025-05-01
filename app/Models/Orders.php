@@ -20,10 +20,18 @@ class Orders extends Model
         'forma_pago',
         'estatus',
         'fecha',
+        'code',
+        'external_reference',
+        'clase_grabada_orden',
+        'registro_imnas',
         'asistencia',
         'id_externo',
+        'pago2',
+        'forma_pago2',
         'foto',
         'foto2',
+        'factura',
+        'id_nota',
 
     ];
 
