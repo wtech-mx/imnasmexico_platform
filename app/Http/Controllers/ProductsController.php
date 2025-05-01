@@ -223,24 +223,40 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = new Products;
-        $product->nombre = $request->get('nombre');
-        $product->descripcion = $request->get('descripcion');
-        $product->stock = $request->get('stock');
+
+        // 1) Generar el slug
+        $product->slug = Str::slug($request->get('nombre'));
+
+        // 2) Generar un SKU numérico único de 6 dígitos
+        do {
+            $sku = mt_rand(100000, 999999); // número aleatorio entre 100000 y 999999
+        } while (Products::where('sku', $sku)->exists());
+        $product->sku = $sku;
+
+        // 3) Resto de asignaciones
+        $product->nombre         = $request->get('nombre');
+        $product->descripcion    = $request->get('descripcion');
+        $product->stock          = $request->get('stock');
         $product->precio_rebajado = $request->get('precio_rebajado');
-        $product->precio_normal = $request->get('precio_normal');
-        if($request->get('categoria') == 'Insumos Bodega'){
-            $product->categoria = 'Ocultar';
+        $product->precio_normal  = $request->get('precio_normal');
+
+        if ($request->get('categoria') == 'Insumos Bodega') {
+            $product->categoria   = 'Ocultar';
             $product->subcategoria = 'Insumos Bodega';
-        }else{
-            $product->categoria = $request->get('categoria');
+        } else {
+            $product->categoria   = $request->get('categoria');
             $product->subcategoria = $request->get('subcategoria');
         }
+
         $product->imagenes = $request->get('imagenes');
+
+        // 4) Guardar y feedback
         $product->save();
 
         Session::flash('success', 'Se ha guardado sus datos con éxito');
-
-        return redirect()->back()->with('success', 'Producto creado exitosamente.');
+        return redirect()
+            ->back()
+            ->with('success', 'Producto creado exitosamente.');
     }
 
     public function create_bundle(Request $request){
