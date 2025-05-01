@@ -854,8 +854,31 @@ class CotizacionCosmicaController extends Controller
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
                 $nota->id_admin_venta  = auth()->user()->id;
-            }else if($request->get('estatus_cotizacion') == 'Aprobar Duo y Amor'){
+            }else if($request->get('estatus_cotizacion') == 'Aprobar Linea Lumina'){
                 $nota->estatus_cotizacion  = 'Enviado';
+                if ($request->hasFile("foto_pago")) {
+                    $file = $request->file('foto_pago');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->foto_pago = $fileName;
+                }
+
+                if ($request->hasFile("doc_guia")) {
+                    $file = $request->file('doc_guia');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
+
+                if ($request->hasFile("guia_rep")) {
+                    $file = $request->file('guia_rep');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
                 $nota->fecha_aprobada  = date("Y-m-d");
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");

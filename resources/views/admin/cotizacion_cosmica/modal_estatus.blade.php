@@ -27,7 +27,7 @@
                                 <option value="">Seleccionar Estatus</option>
                                 @if ($nota->tipo_nota ==  'Cotizacion')
                                     <option value="Aprobada">Aprobada</option>
-                                    <option value="Aprobar Duo y Amor">Aprobar Duo y Amor</option>
+                                    <option value="Aprobar Linea Lumina">Aprobar Linea Lumina</option>
                                     {{-- @if ($nota->estatus_cotizacion ==  'Aprobada' || $nota->estatus_cotizacion ==  NULL)
                                         <option value="Cancelada">Cancelada</option>
                                     @endif --}}
@@ -210,7 +210,7 @@ $(document).ready(function() {
 
         $modal.find('.estatus-cotizacion').change(function() {
             var selectedValue = $(this).val();
-            if (selectedValue === 'Aprobada') {
+            if (selectedValue === 'Aprobada' || selectedValue === 'Aprobar Linea Lumina') {
                 $modal.find('.estado-select').show();
                 $modal.find('.tiendita-select').hide();
 
