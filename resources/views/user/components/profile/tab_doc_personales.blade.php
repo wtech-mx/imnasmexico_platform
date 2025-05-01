@@ -6,11 +6,14 @@
         $tiene_documentos = count($documentos) > 0;
     @endphp
     <div class="modal-body row">
+        <div class="col-12 text-center mb-3">
+            <h3>Subir en formato JPG o PNG</h3>
+        </div>
         @if($tiene_documentos)
 
             @foreach($documentos as $documento)
                     <div class="col-6 form-group mb-5">
-                        <label for="ine">INE Frente y Atras</label>
+                        <label for="ine">INE Frente y Atras IMNAS Y CONOCER</label>
 
                         @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                             <input id="ine" name="ine" type="file" class="form-control ine_input" >
@@ -54,7 +57,7 @@
                     </div>
 
                     <div class="col-6 form-group mb-5">
-                        <label for="curp">CURP</label>
+                        <label for="curp">CURP IMNAS Y CONOCER</label>
                         @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                             <input id="curp" name="curp" type="file" class="form-control curp_input" >
                         @endif
@@ -188,7 +191,7 @@
                     @foreach ($usuario_compro as $video)
                         @if ($video->Cursos->imnas == '1')
                             <div class="col-6 form-group mb-5">
-                                <label for="foto_infantil_blanco">Foto Infantil Blanco y negro</label>
+                                <label for="foto_infantil_blanco">Foto Infantil Blanco y negro IMNAS</label>
                                 @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                     <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control infantil_blanco_input" >
                                 @endif
@@ -229,7 +232,7 @@
                     @endforeach
 
                     <div class="col-6 form-group mb-5">
-                        <label for="foto_tam_infantil">Foto Infantil a colors</label>
+                        <label for="foto_tam_infantil">Foto Infantil a color CONOCER</label>
                         @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                             <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control foto_tam_infantil_input" >
                         @endif
@@ -270,7 +273,7 @@
                     </div>
 
                     <div class="col-6 form-group mb-5">
-                        <label for="firma">Firma</label>
+                        <label for="firma">Firma IMNAS</label>
 
                         @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                             <input id="firma" name="firma" type="file" class="form-control firma_input" >
@@ -313,7 +316,7 @@
 
                     @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                         <div class="col-6 form-group mb-5">
-                            <label for="firma">Foto <b>Blanco y negros</b></label>
+                            <label for="firma">Foto <b>Blanco y negro</b> IMNAS</label>
                             <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control infantil_blanco_input" >
                             @if ($documento->foto_tam_titulo == NULL)
                                 <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 60px; height: auto;"/>
@@ -353,13 +356,13 @@
 
         @else
             <div class="col-6 form-group mb-5">
-                <label for="ine">INE Frente y Atras</label>
+                <label for="ine">INE Frente y Atras IMNAS Y CONOCER</label>
                 <input id="ine" name="ine" type="file" class="form-control ine_input">
                 <div id="resultado_ine"></div>
             </div>
 
             <div class="col-6 form-group mb-5">
-                <label for="curp">CURPs</label>
+                <label for="curp">CURP IMNAS Y CONOCER</label>
                 <input id="curp" name="curp" type="file" class="form-control curp_input" >
                 <div id="resultado_curp"></div>
             </div>
@@ -382,19 +385,19 @@
             @endforeach
 
             <div class="col-6 form-group mb-5">
-                <label for="foto_tam_infantil">Foto Infantil color</label>
+                <label for="foto_tam_infantil">Foto Infantil color CONOCER</label>
                 <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control foto_tam_infantil_input" >
                 <div id="resultado_foto_tam_infantil"></div>
             </div>
 
             <div class="col-6 form-group mb-5">
-                <label for="foto_infantil_blanco">Foto Infantil Blanco y negro</label>
+                <label for="foto_infantil_blanco">Foto Infantil Blanco y negro IMNAS</label>
                 <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control infantil_blanco_input" >
                 <div id="resultado_foto_tam_titulo"></div>
             </div>
 
             <div class="col-6 form-group mb-5">
-                <label for="firma">Firma</label>
+                <label for="firma">Firma IMNAS</label>
                 <input id="firma" name="firma" type="file" class="form-control firma_input" >
                 <div id="resultado_firma"></div>
             </div>
@@ -432,7 +435,7 @@
         </div>
         <div class="col-6">
             @if (isset($estandar_user))
-                <p><b>Requisitos CONOCER</b></p>
+                <p><b>Requisitos CONOCER para evaluar, foto a color y caracteristicas</b></p>
                 <a class="example-image-link" href="{{asset('documentos/conocer.jpg') }}" data-lightbox="example-2" data-title="conocer" target="_blank">
                     <img id="img_material_clase example-image" src="{{asset('documentos/conocer.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                 </a>

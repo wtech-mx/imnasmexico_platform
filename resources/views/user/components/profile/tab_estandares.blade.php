@@ -1,4 +1,7 @@
     <div class="accordion row" id="acordcion_mb_clases">
+        <div class="col-12 text-center mb-3">
+            <h3>Subir en formato PDF o Documento de WORD</h3>
+        </div>
         @php
             $displayedFolders = []; // Keep track of displayed folders
         @endphp
@@ -324,7 +327,7 @@
                                                                                         // Insertar nuevamente el input para subir archivos
                                                                                         parentCol.append(`
                                                                                             <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
-                                                                                            
+
                                                                                         `);
                                                                                         location.reload();
                                                                                     } else {

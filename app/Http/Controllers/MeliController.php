@@ -54,7 +54,7 @@ class MeliController extends Controller
             'grant_type'    => 'refresh_token',
             'client_id'     => $meliData->app_id,
             'client_secret' => $meliData->client_secret,
-            'refresh_token' => $meliData->accesstoken, // Token actual para renovarlo
+            'refresh_token' => $meliData->refresh_token, // Token actual para renovarlo
         ];
 
         // Hacer la solicitud a la API
@@ -68,7 +68,7 @@ class MeliController extends Controller
                 'autorizacion' => $data['access_token'],
                 'accesstoken' => $data['refresh_token'],
             ]);
-
+         
             return response()->json([
                 'message' => 'Token actualizado exitosamente',
                 'autorizacion' => $data['access_token'],
