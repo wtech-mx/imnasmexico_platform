@@ -17,6 +17,18 @@ class NotasCursos extends Model
         'restante',
         'nota',
         'paquete',
+        'subtotal',
+        'descuento',
+        'paquete',
+        'factura',
+        'total_iva',
+        'situacion_fiscal',
+        'razon_social',
+        'rfc',
+        'cfdi',
+        'correo',
+        'telefono',
+        'direccion_factura',
     ];
 
     public function User()

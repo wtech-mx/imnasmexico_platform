@@ -17,13 +17,15 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cotizacion_cosmica.store') }}" enctype="multipart/form-data" role="form" id="miFormulario">>
+                        <form method="POST" action="{{ route('cotizacion_cosmica.store') }}" enctype="multipart/form-data" role="form" id="miFormulario">
                             @csrf
                             <input id="tipo_cotizacion" name="tipo_cotizacion" type="hidden" class="form-control" value="Cotizacion">
                             <div class="modal-body">
                                 <div class="row">
 
                                     <div class="col-12 mt-2">
+                                        <h4 style="color:#783E5D"><strong>Crear Cotizacion NAS</strong> </h4>
+
                                         <h4 style="color:#783E5D"><strong>Datos del cliente</strong> </h4>
                                     </div>
 
@@ -228,7 +230,7 @@
                                             <input class="form-control" type="text" id="totalDescuento" name="totalDescuento" readonly>
                                         </div>
                                     </div>
-
+{{--
                                     <div id="divFactura" style="display: none;">
                                         <div class="row">
                                             <h2 style="color: #783E5D">Factura</h2>
@@ -309,7 +311,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-12">
                                         <div class="form-group">
@@ -558,11 +560,11 @@ document.addEventListener('DOMContentLoaded', function() {
             $('#divToToggle').toggle();
         });
 
-        // Manejar el cambio de estado del switch
-        $('#toggleFactura').change(function () {
-            // Mostrar u ocultar el div basado en el estado del switch
-            $('#divFactura').toggle();
-        });
+        // // Manejar el cambio de estado del switch
+        // $('#toggleFactura').change(function () {
+        //     // Mostrar u ocultar el div basado en el estado del switch
+        //     $('#divFactura').toggle();
+        // });
     });
 </script>
 @endsection

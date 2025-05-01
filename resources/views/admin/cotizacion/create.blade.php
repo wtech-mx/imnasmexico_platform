@@ -23,6 +23,8 @@
                                 <div class="row">
                                     <input id="tipo_cotizacion" name="tipo_cotizacion" type="hidden" class="form-control" value="Cotizacion">
                                     <div class="col-12 mt-2">
+                                        <h2 style="color:#836262"><strong>Cotizaciones NAS</strong> </h2>
+
                                         <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>
 
@@ -201,6 +203,7 @@
                                             </h4>
                                         </div>
                                     </div>
+
                                     <div class="col-4"></div>
                                     <div class="form-group col-4">
                                         <h4 for="name">Subtotal *</h4>
@@ -232,7 +235,7 @@
                                         </div>
                                     </div>
 
-                                    <div id="divFactura" style="display: none;">
+                                    {{-- <div id="divFactura" style="display: none;">
                                         <div class="row">
                                             <h2>Factura</h2>
 
@@ -312,7 +315,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-12">
                                         <div class="form-group">
@@ -543,10 +546,10 @@
         });
 
         // Manejar el cambio de estado del switch
-        $('#toggleFactura').change(function () {
+        //$('#toggleFactura').change(function () {
             // Mostrar u ocultar el div basado en el estado del switch
-            $('#divFactura').toggle();
-        });
+            //$('#divFactura').toggle();
+        //});
     });
 </script>
 @endsection
