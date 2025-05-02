@@ -883,7 +883,32 @@ class CotizacionCosmicaController extends Controller
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Aprobada Workshop'){
-                $nota->estatus_cotizacion  = 'Enviado';
+                $nota->estatus_cotizacion  = 'Aprobada';
+
+                if ($request->hasFile("foto_pago")) {
+                    $file = $request->file('foto_pago');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->foto_pago = $fileName;
+                }
+
+                if ($request->hasFile("doc_guia")) {
+                    $file = $request->file('doc_guia');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
+
+                if ($request->hasFile("guia_rep")) {
+                    $file = $request->file('guia_rep');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
+
                 $nota->fecha_aprobada  = date("Y-m-d");
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");

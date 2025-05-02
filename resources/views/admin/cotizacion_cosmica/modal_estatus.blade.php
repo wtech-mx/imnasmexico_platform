@@ -211,7 +211,7 @@ $(document).ready(function() {
 
         $modal.find('.estatus-cotizacion').change(function() {
             var selectedValue = $(this).val();
-            if (selectedValue === 'Aprobada' || selectedValue === 'Aprobar Linea Lumina') {
+            if (selectedValue === 'Aprobada' || selectedValue === 'Aprobar Linea Lumina' || selectedValue === 'Aprobada Workshop') {
                 $modal.find('.estado-select').show();
                 $modal.find('.tiendita-select').hide();
 
