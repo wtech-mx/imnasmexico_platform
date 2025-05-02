@@ -133,6 +133,7 @@ Route::get('/facturacion/search/', action: [App\Http\Controllers\FacturasControl
 Route::get('/facturacion/search/nas', action: [App\Http\Controllers\FacturasController::class, 'searchFolioNas'])->name('facturacionNAS.search');
 
 Route::get('/buscar-cp', action: [App\Http\Controllers\FacturasController::class, 'buscarCP'])->name('buscarCP');
+Route::post('/facturacion/emitir-facutura', action: [App\Http\Controllers\FacturasController::class, 'emisionfactura'])->name('emisionfactura');
 
 
 // =============== E C O M M E C E   N A S===============================
@@ -528,8 +529,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('clientes-import', [App\Http\Controllers\ClientsController::class, 'import_clientes'])->name('clientes.import');
     Route::post('/admin/clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares'])->name('documentos.store');
     Route::get('documentos/descargar/{id}/{cliente_id}', [App\Http\Controllers\ClientsController::class, 'descargarDocumento'])->name('descargar_documento');
+
     Route::get('/admin/facturas', [App\Http\Controllers\FacturasController::class, 'index'])->name('facturas.index');
+    Route::get('/admin/facturasCosmica', [App\Http\Controllers\FacturasController::class, 'indexfacturasCosmica'])->name('facturas.indexfacturasCosmica');
+    Route::get('/admin/facturasNas', [App\Http\Controllers\FacturasController::class, 'indexfacturasNas'])->name('facturas.indexfacturasNas');
+    Route::get('/admin/facturasNasTiendita', [App\Http\Controllers\FacturasController::class, 'indexfacturasNasTiendita'])->name('facturas.indexfacturasNasTiendita');
+    Route::get('/admin/facturasCursos', [App\Http\Controllers\FacturasController::class, 'indexfacturasCursos'])->name('facturas.indexfacturasCursos');
+
     Route::patch('/admin/facturas/update/{id}', [App\Http\Controllers\FacturasController::class, 'update'])->name('facturas.update');
+
 
     Route::post('/admin/borrar/usuarios', [App\Http\Controllers\ClientsController::class, 'destroy'])->name('usuarios.destroy');
 
