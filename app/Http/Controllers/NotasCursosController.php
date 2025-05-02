@@ -22,6 +22,7 @@ use App\Mail\PlantillaDocumentoStps;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Session;
 use Hash;
+use App\Models\Factura;
 
 class NotasCursosController extends Controller
 {
@@ -120,28 +121,49 @@ class NotasCursosController extends Controller
         $notas_cursos->total = $request->get('total');
         $notas_cursos->nota = $request->get('nota');
 
+        // if($request->get('factura') != NULL){
+        //     $total_con_iva = $request->get('total');
+        //     $sin_iva = $total_con_iva / 1.16;
+        //     $iva = $total_con_iva - $sin_iva;
+
+        //     if ($request->hasFile("situacion_fiscal")) {
+        //         $file = $request->file('situacion_fiscal');
+        //         $path = $pago_fuera;
+        //         $fileName = uniqid() . $file->getClientOriginalName();
+        //         $file->move($path, $fileName);
+        //         $notas_cursos->situacion_fiscal = $fileName;
+        //     }
+        //     $notas_cursos->factura = '1';
+        //     $notas_cursos->total_iva = $iva;
+        //     $notas_cursos->razon_social = $request->get('razon_social');
+        //     $notas_cursos->rfc = $request->get('rfc');
+        //     $notas_cursos->cfdi = $request->get('cfdi');
+        //     $notas_cursos->correo = $request->get('correo_fac');
+        //     $notas_cursos->telefono = $request->get('telefono_fac');
+        //     $notas_cursos->direccion_factura = $request->get('direccion_fac');
+        // }
+        // $notas_cursos->save();
+
         if($request->get('factura') != NULL){
             $total_con_iva = $request->get('total');
             $sin_iva = $total_con_iva / 1.16;
             $iva = $total_con_iva - $sin_iva;
 
-            if ($request->hasFile("situacion_fiscal")) {
-                $file = $request->file('situacion_fiscal');
-                $path = $pago_fuera;
-                $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $notas_cursos->situacion_fiscal = $fileName;
-            }
             $notas_cursos->factura = '1';
             $notas_cursos->total_iva = $iva;
-            $notas_cursos->razon_social = $request->get('razon_social');
-            $notas_cursos->rfc = $request->get('rfc');
-            $notas_cursos->cfdi = $request->get('cfdi');
-            $notas_cursos->correo = $request->get('correo_fac');
-            $notas_cursos->telefono = $request->get('telefono_fac');
-            $notas_cursos->direccion_factura = $request->get('direccion_fac');
+            $notas_cursos->save();
+
+            $facturas = new Factura;
+
+            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_notas_cursos = $notas_cursos->id;
+            $estado = 'Por Facturar';
+            $facturas->estatus = $estado;
+            $facturas->save();
+
+        }else{
+            $notas_cursos->save();
         }
-        $notas_cursos->save();
 
         $code = Str::random(8);
         $monto1 = $request->get('monto1') ?? 0;
