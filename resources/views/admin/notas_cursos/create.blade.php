@@ -23,6 +23,8 @@
                                 <div class="row">
 
                                     <div class="col-12 mt-2">
+                                        <h2 style="color:#836262"><strong>CREAR NOTA CURSOS </strong> </h2>
+
                                         <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>
 
@@ -136,7 +138,7 @@
                                         <h4 for="name">Descuento %</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
                                             </span>
                                             <input class="form-control descuento" type="text" id="descuento" name="descuento">
                                         </div>
@@ -146,7 +148,7 @@
                                         <h4 for="name">Total</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input class="form-control total" type="text" id="total" name="total" value="0" readonly>
                                         </div>
@@ -156,7 +158,7 @@
                                         <h4 for="name">Restante</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                <img src="{{ asset('assets/cam/dar-dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input type="text" class="form-control" id="restante" name="restante" value="0" readonly>
                                         </div>
@@ -215,7 +217,7 @@
                                         </div>
                                     </div>
 
-                                    <div id="divFactura" style="display: none;">
+                                    {{-- <div id="divFactura" style="display: none;">
                                         <div class="row">
                                             <h4>Factura</h4>
 
@@ -295,7 +297,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-12">
                                         <div class="form-group">
@@ -402,13 +404,13 @@
                 $('#total').val(totalConIva.toFixed(2));
 
                 // Mostrar el div
-                $('#divFactura').show();
+                //$('#divFactura').show();
             } else {
                 // Si se desmarca, calcular solo el total con descuento
                 $('#total').val(totalConDescuento.toFixed(2));
 
                 // Ocultar el div
-                $('#divFactura').hide();
+                //$('#divFactura').hide();
             }
 
             calcularRestante(); // Actualiza el restante con el nuevo total

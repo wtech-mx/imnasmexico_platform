@@ -179,7 +179,7 @@
                 </div>
             </div>
 
-            <div id="divFactura" style="display: none;">
+            {{-- <div id="divFactura" style="display: none;">
                 <div class="row">
                     <h2>Factura</h2>
 
@@ -259,7 +259,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-12">
                 <div class="form-group">

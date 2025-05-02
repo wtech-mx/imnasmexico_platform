@@ -672,6 +672,7 @@ class OrderController extends Controller
         $order->fecha = $fechaActual;
         $order->estatus = 0;
         $order->code = $code;
+        $order->factura = '1';
         $order->save();
 
         foreach (session('cart') as $id => $details) {

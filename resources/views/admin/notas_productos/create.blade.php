@@ -23,6 +23,8 @@
                                 <div class="row">
                                     <input id="tipo_cotizacion" name="tipo_cotizacion" type="hidden" class="form-control" value="Cotizacion">
                                     <div class="col-12 mt-2">
+                                        <h2 style="color:#836262"><strong>Tiendita</strong> </h2>
+
                                         <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>
 
@@ -285,7 +287,7 @@
 
                                     </div>
 
-                                    <div id="divFactura" style="display: none;">
+                                    {{-- <div id="divFactura" style="display: none;">
                                         <div class="row">
                                             <h4>Factura</h4>
 
@@ -365,7 +367,8 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
+
                                     <div class="col-12">
                                         <div class="form-group">
                                             <h4 for="name">Comentario/nota</h4>
@@ -652,10 +655,10 @@
         });
 
         // Manejar el cambio de estado del switch
-        $('#toggleFactura').change(function () {
-            // Mostrar u ocultar el div basado en el estado del switch
-            $('#divFactura').toggle();
-        });
+        // $('#toggleFactura').change(function () {
+        //     // Mostrar u ocultar el div basado en el estado del switch
+        //     $('#divFactura').toggle();
+        // });
 
         // $('#myForm').on('submit', function() {
         //     // Deshabilita el botón al enviar el formulario
