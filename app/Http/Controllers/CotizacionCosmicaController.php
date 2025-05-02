@@ -883,6 +883,12 @@ class CotizacionCosmicaController extends Controller
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
+            }else if($request->get('estatus_cotizacion') == 'Aprobada Workshop'){
+                $nota->estatus_cotizacion  = 'Enviado';
+                $nota->fecha_aprobada  = date("Y-m-d");
+                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+                $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Aprobada Expo'){
                 $nota->estatus_cotizacion  = 'Enviado';
                 $nota->fecha_aprobada  = date("Y-m-d");
