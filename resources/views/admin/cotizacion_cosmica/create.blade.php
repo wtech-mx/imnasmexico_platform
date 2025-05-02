@@ -24,7 +24,7 @@
                                 <div class="row">
 
                                     <div class="col-12 mt-2">
-                                        <h4 style="color:#783E5D"><strong>Crear Cotizacion NAS</strong> </h4>
+                                        <h4 style="color:#783E5D"><strong>Crear Cotizacion Cosmica</strong> </h4>
 
                                         <h4 style="color:#783E5D"><strong>Datos del cliente</strong> </h4>
                                     </div>

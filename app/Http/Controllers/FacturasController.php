@@ -107,11 +107,64 @@ class FacturasController extends Controller
 
     }
 
-    public function index(){
+    public function index()
+    {
+        // Sólo los que tengan id_orders distinto de null Y > 0
         $facturas = Factura::get();
+
 
         return view('admin.facturas.index',compact('facturas'));
     }
+
+    public function indexfacturasCosmica(){
+        // Sólo los que tengan id_notas_cosmica distinto de null Y > 0
+        $facturasCosmica = Factura::with(['User','NotasCosmica'])
+            ->where('id_notas_cosmica', '>', 0)
+            ->get();
+
+        return view('admin.facturas.index', compact(
+            'facturasCosmica',
+        ));
+    }
+
+    public function indexfacturasNas(){
+        // Sólo los que tengan id_notas_cosmica distinto de null Y > 0
+
+        $facturasNas = Factura::with(['User','NotasNas'])
+            ->where('id_notas_nas', '>', 0)
+            ->get();
+
+
+        return view('admin.facturas.index', compact(
+            'facturasNas',
+        ));
+    }
+
+    public function indexfacturasNasTiendita(){
+
+        // Sólo los que tengan id_notas_nas distinto de null Y > 0
+        $facturasNasTiendita = Factura::with('User')
+            ->where('id_notas_nas_tiendita', '>', 0)
+            ->get();
+
+
+        return view('admin.facturas.index', compact(
+            'facturasNasTiendita',
+        ));
+    }
+
+    public function indexfacturasCursos(){
+
+        // Sólo los que tengan id_notas_cursos distinto de null Y > 0
+        $facturasCursos = Factura::with(['User','NotasCursos'])
+            ->where('id_notas_cursos', '>', 0)
+            ->get();
+
+        return view('admin.facturas.index', compact(
+            'facturasCursos',
+        ));
+    }
+
 
     public function update(Request $request, $id){
         $cliente = User::where('id', $request->get('id_user'))->first();

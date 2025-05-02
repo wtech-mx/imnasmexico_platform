@@ -21,6 +21,7 @@ use DB;
 use Codexshaper\WooCommerce\Facades\Product;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Carbon\Carbon;
+use App\Models\Factura;
 
 
 class NotasProductosController extends Controller
@@ -257,22 +258,20 @@ class NotasProductosController extends Controller
         }
 
         if($request->get('factura') != NULL){
-            if ($request->hasFile("situacion_fiscal")) {
-                $file = $request->file('situacion_fiscal');
-                $path = $pago_fuera;
-                $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $notas_productos->situacion_fiscal = $fileName;
-            }
-            $notas_productos->factura = $request->get('factura');
-            $notas_productos->razon_social = $request->get('razon_social');
-            $notas_productos->rfc = $request->get('rfc');
-            $notas_productos->cfdi = $request->get('cfdi');
-            $notas_productos->correo_fac = $request->get('correo_fac');
-            $notas_productos->telefono_fac = $request->get('telefono_fac');
-            $notas_productos->direccion_fac = $request->get('direccion_fac');
+
+            $notas_productos->factura = '1';
+            $notas_productos->save();
+            $facturas = new Factura;
+
+            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_notas_nas_tiendita = $notas_productos->id;
+            $estado = 'Por Facturar';
+            $facturas->estatus = $estado;
+            $facturas->save();
+
+        }else{
+            $notas_productos->save();
         }
-        $notas_productos->save();
 
         $contadorKits = 1;
         if ($request->has('campo')) {
