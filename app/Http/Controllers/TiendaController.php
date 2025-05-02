@@ -117,8 +117,8 @@ class TiendaController extends Controller
 
         $nas_slide = Noticias::where('seccion', '=', 'NAS_SLIDE')->get();
         $banner_slide = Noticias::where('seccion', '=', 'NAS_BANNER')->get();
-        $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
-        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->orderBy('id','DESC')->get();
+        $categoriasFacial = Categorias::where('linea', '=', 'facial')->where('estatus_visibilidad', '=', 'Activo')->orderBy('id','DESC')->get();
+        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->where('estatus_visibilidad', '=', 'Activo')->orderBy('id','DESC')->get();
 
         return view('shop.ecommerce', compact('productos_populares', 'producto', 'productos_categoria','nas_slide','banner_slide','categoriasFacial','categoriasCorporal'));
     }
@@ -166,8 +166,8 @@ class TiendaController extends Controller
     {
         $producto = Products::where('slug', '=', $slug)->first();
 
-        $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
-        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->orderBy('id','DESC')->get();
+        $categoriasFacial = Categorias::where('linea', '=', 'facial')->where('estatus_visibilidad', '=', 'Activo')->orderBy('id','DESC')->get();
+        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->where('estatus_visibilidad', '=', 'Activo')->orderBy('id','DESC')->get();
         $productos_categoria = Products::take(30)->get();
 
         $productos_populares = Products::orderby('nombre','asc')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->inRandomOrder()->take(30)->get();
@@ -186,8 +186,8 @@ class TiendaController extends Controller
     public function categories($slug)
     {
 
-        $categoria = Categorias::where('slug', '=', $slug)->first();
-        $categorias  = Categorias::orderBy('nombre','asc')->get();
+        $categoria = Categorias::where('slug', '=', $slug)->where('estatus_visibilidad', '=', 'Activo')->first();
+        $categorias  = Categorias::orderBy('nombre','asc')->where('estatus_visibilidad', '=', 'Activo')->get();
         $productos  = Products::orderby('nombre','asc')->where('categoria', 'NAS')->where('subcategoria', '=', 'Producto')->inRandomOrder()->take(30)->get();
 
         return view('shop.categories',compact('categoria','categorias','productos'));
@@ -199,7 +199,7 @@ class TiendaController extends Controller
         $page = $request->get('page', 1);
         $itemsPerPage = 44;
 
-        $categorias  = Categorias::orderBy('nombre','asc')->get();
+        $categorias  = Categorias::orderBy('nombre','asc')->where('estatus_visibilidad', '=', 'Activo')->get();
 
         $productos = Products::query();
 
