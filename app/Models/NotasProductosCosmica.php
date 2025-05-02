@@ -127,4 +127,9 @@ class NotasProductosCosmica extends Model
     {
         return $this->belongsToMany(Products::class, 'productos_notas_cosmica', 'id_notas_productos', 'id_producto');
     }
+
+    public function factura()
+    {
+        return $this->hasOne(Factura::class, 'id_notas_cosmica');
+    }
 }

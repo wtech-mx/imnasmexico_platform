@@ -133,7 +133,13 @@ Route::get('/facturacion/search/', action: [App\Http\Controllers\FacturasControl
 Route::get('/facturacion/search/nas', action: [App\Http\Controllers\FacturasController::class, 'searchFolioNas'])->name('facturacionNAS.search');
 
 Route::get('/buscar-cp', action: [App\Http\Controllers\FacturasController::class, 'buscarCP'])->name('buscarCP');
-Route::post('/facturacion/emitir-facutura', action: [App\Http\Controllers\FacturasController::class, 'emisionfactura'])->name('emisionfactura');
+
+Route::get('/facturacion/emitir-facutura-nas/{id}', action: [App\Http\Controllers\FacturasController::class, 'emisionfacturaNas'])->name('emisionfacturaNas');
+// Para Cosmica
+Route::post(
+    '/facturacion/emitir-factura-cosmica/{id}',
+    [App\Http\Controllers\FacturasController::class, 'emisionfacturaCosmica']
+)->name('emisionfacturaCosmica');
 
 
 // =============== E C O M M E C E   N A S===============================

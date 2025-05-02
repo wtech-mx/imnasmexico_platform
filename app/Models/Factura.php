@@ -22,6 +22,16 @@ class Factura extends Model
         'factura',
         'estado',
         'nota',
+        'situacion_fiscal',
+        'razon_social',
+        'rfc',
+        'cfdi',
+        'regimen_fiscal',
+        'codigo_postal',
+        'colonia',
+        'ciudad',
+        'municipio',
+        'direccion_cliente',
     ];
 
     public function User()
