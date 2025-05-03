@@ -135,16 +135,14 @@ Route::get('/facturacion/cursos', [App\Http\Controllers\FacturasController::clas
 Route::get('/facturacion/search/cosmica', action: [App\Http\Controllers\FacturasController::class, 'searchFolio'])->name('facturacion.search');
 Route::get('/facturacion/search/nas', action: [App\Http\Controllers\FacturasController::class, 'searchFolioNas'])->name('facturacionNAS.search');
 Route::get('/facturacion/search/tiendita', action: [App\Http\Controllers\FacturasController::class, 'searchFolioTiendita'])->name('facturacionTiendita.search');
+Route::get('/facturacion/search/cursos', action: [App\Http\Controllers\FacturasController::class, 'searchFolioCursos'])->name('facturacionCurso.search');
 
 Route::get('/buscar-cp', action: [App\Http\Controllers\FacturasController::class, 'buscarCP'])->name('buscarCP');
 
-// Para Cosmica
 Route::post('/facturacion/emitir-factura-cosmica/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaCosmica'])->name('emisionfacturaCosmica');
-
 Route::post('/facturacion/emitir-factura-nas/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaNas'])->name('emisionfacturaNas');
-
 Route::post('/facturacion/emitir-factura-tiendita/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaTiendita'])->name('emisionfacturaTiendita');
-
+Route::post('/facturacion/emitir-factura-curso/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaCurso'])->name('emisionfacturaCurso');
 
 // =============== E C O M M E C E   N A S===============================
 

@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ $nota->folio }}</td>
+          <td>{{ $nota->folio  ?? '—' }}</td>
           <td>{{ optional($nota->User)->name ?? '—' }}</td>
           <td>{{ \Carbon\Carbon::parse($nota->fecha)->format('d-m-Y') }}</td>
           <td>${{ number_format($nota->total, 2) }}</td>
