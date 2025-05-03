@@ -12,6 +12,7 @@ use App\Models\Cam\CamNombramiento;
 use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamVideosUser;
 use App\Models\Cam\CamVideos;
+use App\Models\Cam\CamDocumentosUsers;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -77,6 +78,20 @@ class CamClientesController extends Controller
         $expediente = CamNotas::where('id_cliente', auth()->user()->id)->first();
 
         return view('cam.usuario.expediente', compact('expediente'));
+    }
+
+    public function index_docgenerales($code){
+
+        $usuario = auth()->user();
+
+        $notas_cam = CamNotas::where('id_cliente', $usuario->id)->first();
+
+        $expediente = CamCitas::where('id_nota', $notas_cam->id)->first();
+
+        $documentos = CamDocumentosUsers::where('id_nota', $notas_cam->id)->firstOrFail();
+
+
+        return view('cam.usuario.doc_generales', compact('documentos','expediente','usuario'));
     }
 
     public function crear_certificado(Request $request){

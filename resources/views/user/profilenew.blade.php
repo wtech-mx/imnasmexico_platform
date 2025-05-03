@@ -46,7 +46,8 @@ Mi perfil- {{$cliente->name}}
                     </div>
 
                     <div class="row space_laaterales_profile">
-                        <a href="{{ route('dashboard.videos', $cliente->code) }}">
+                        <a href="{{ route('cam.index', $cliente->code) }}">
+
                             @if($cliente->user_cam == '4')
                                 <h3 class="title_curso mb-3">Bienvenido Centro  Evaluador - Ver videos de CAM</h3>
                             @else

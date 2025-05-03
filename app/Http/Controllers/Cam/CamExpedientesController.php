@@ -324,6 +324,7 @@ class CamExpedientesController extends Controller
     }
 
     public function update_check(Request $request, $id){
+
         $dominio = $request->getHost();
 
         $doc = CamDocumentosUsers::where('id_nota', $id)->first();

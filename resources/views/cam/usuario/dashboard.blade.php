@@ -58,6 +58,20 @@
             </div>
         </div>
 
+        <div class="col-4">
+            <div class="d-flex justify-content-center">
+                <div class="card_user">
+                    <a href="{{ route('centro.index_docgenerales', $usuario->code) }}">
+                        <img src="{{ asset('assets/cam/usuario.png') }}" alt="" width="80px">
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <a href="#">
+                    <h5 class="tittle_border_cam_min">Carga Doc Gerales</h5>
+                </a>
+            </div>
+        </div>
 
     </div>
 </section>
