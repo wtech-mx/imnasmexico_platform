@@ -10,7 +10,7 @@
             </button>
 
             @foreach ($estandaresComprados as $estandar)
-                @if ($estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+                @if ($estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER' || $estandar->nombre == 'EC0046 - Prestación de servicios Cosmetológicos Faciales SEP CONOCER')
                     <button class="nav-link" id="nav-des-ejemplo-tab" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo" type="button" role="tab" aria-controls="nav-des-ejemplo" aria-selected="false">
                         Ejemplos de llenado SEP CONOCER
                     </button>
@@ -30,7 +30,7 @@
             @endforeach
 
             @foreach ($estandar_user as $estandar)
-                @if ($estandar->Estandar && $estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+                @if ($estandar->Estandar && $estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER' || $estandar->nombre == 'EC0046 - Prestación de servicios Cosmetológicos Faciales SEP CONOCER')
                     <button class="nav-link" id="nav-des-ejemplo-extr-tab" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr" type="button" role="tab" aria-controls="nav-des-ejemplo-extr" aria-selected="false">
                         Ejemplos de llenado SEP CONOCER
                     </button>
@@ -67,7 +67,7 @@
     </div>
 
     @foreach ($estandaresComprados as $estandar)
-        @if ($estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+        @if ($estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER' || $estandar->nombre == 'EC0046 - Prestación de servicios Cosmetológicos Faciales SEP CONOCER')
             <div class="tab-pane fade" id="nav-des-ejemplo" role="tabpanel" aria-labelledby="nav-des-ejemplo-tab" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo')
             </div>
@@ -87,7 +87,7 @@
     @endforeach
 
     @foreach ($estandar_user as $estandar)
-        @if ($estandar->Estandar && $estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+        @if ($estandar->Estandar && $estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER'|| $estandar->nombre == 'EC0046 - Prestación de servicios Cosmetológicos Faciales SEP CONOCER')
             <div class="tab-pane fade" id="nav-des-ejemplo-extr" role="tabpanel" aria-labelledby="nav-des-ejemplo-extr-tab" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo')
             </div>
