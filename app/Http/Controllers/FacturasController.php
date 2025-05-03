@@ -34,7 +34,11 @@ class FacturasController extends Controller
 
     }
 
+    public function facturas_userTiendita(){
 
+        return view('user.facturacion.facturacion_tiendita');
+
+    }
 
     public function emisionfacturaCosmica(Request $request,$id)
     {
@@ -66,6 +70,47 @@ class FacturasController extends Controller
         $factura->ciudad = $request->get('ciudad');
         $factura->municipio = $request->get('municipio');
         $factura->direccion_cliente = $request->get('direccion_cliente');
+        $factura->update();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Factura emitida correctamente.'
+        ]);
+
+    }
+
+    public function emisionfacturaTiendita(Request $request,$id)
+    {
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $facturas = base_path('../public_html/plataforma.imnasmexico.com/facturas/');
+        }else{
+            $facturas = public_path() . '/facturas';
+        }
+
+        $factura = Factura::where('id_notas_nas_tiendita', $id)->first();
+
+
+        // if ($request->hasFile("situacion_fiscal")) {
+        //     $file = $request->file('situacion_fiscal');
+        //     $path = $facturas;
+        //     $fileName = uniqid() . $file->getClientOriginalName();
+        //     $file->move($path, $fileName);
+        //     $factura->situacion_fiscal = $fileName;
+        // }
+
+
+        $factura->razon_social = $request->get('razon_cliente');
+        $factura->rfc = $request->get('rfc_cliente');
+        $factura->cfdi = $request->get('cfdi_cliente');
+        $factura->regimen_fiscal = $request->get('regimen_fiscal_cliente');
+        $factura->codigo_postal = $request->get('codigo_postal');
+        $factura->colonia = $request->get('colonia');
+        $factura->ciudad = $request->get('ciudad');
+        $factura->municipio = $request->get('municipio');
+        $factura->direccion_cliente = $request->get('direccion_cliente');
+
         $factura->update();
 
         return response()->json([
@@ -170,6 +215,33 @@ class FacturasController extends Controller
         ]);
     }
 
+    public function searchFolioTiendita(Request $request)
+    {
+        $folio = $request->query('folio');
+        if (! $folio) {
+            return response()->json(['success' => false, 'message' => 'Debes proporcionar un folio.'], 422);
+        }
+
+        $nota = NotasProductos::where('folio', $folio)->first();
+        if (! $nota) {
+            return response()->json(['success' => false, 'message' => 'No existe ninguna nota con ese folio.'], 404);
+        }
+        if ($nota->factura != 1) {
+            return response()->json(['success' => false, 'message' => 'Esta nota no está marcada para facturar.'], 403);
+        }
+
+
+        $html = view('user.facturacion.resultado', [
+            'nota' => $nota,
+            'tipo' => 'tiendita',          // <-- marcamos que viene de NAS
+        ])->render();
+
+        return response()->json([
+            'success' => true,
+            'html'    => $html,
+        ]);
+    }
+
     public function buscarCP(Request $request){
         $codigoPostal = $request->codigo_postal;
 
@@ -194,7 +266,6 @@ class FacturasController extends Controller
 
         return view('admin.facturas.index',compact('facturas'));
     }
-
 
     public function indexfacturasCosmica(){
         // Sólo los que tengan id_notas_cosmica distinto de null Y > 0

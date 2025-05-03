@@ -127,23 +127,23 @@ Route::get('folio', function () {
 Route::get('/facturacion', action: [App\Http\Controllers\FacturasController::class, 'facturascion_index'])->name('facturas_user.index');
 Route::get('/facturacion/cosmica', action: [App\Http\Controllers\FacturasController::class, 'facturas_user'])->name('facturas_userCosmica.index');
 Route::get('/facturacion/nas', [App\Http\Controllers\FacturasController::class, 'facturas_userNAS'])->name('facturas_userNas.index');
+Route::get('/facturacion/tiendita', [App\Http\Controllers\FacturasController::class, 'facturas_userTiendita'])->name('facturas_userTiendita.index');
+Route::get('/facturacion/cursos', [App\Http\Controllers\FacturasController::class, 'facturas_userCursos'])->name('facturas_userCursos.index');
+
 
 // Ruta para buscar un folio vía AJAX
 Route::get('/facturacion/search/cosmica', action: [App\Http\Controllers\FacturasController::class, 'searchFolio'])->name('facturacion.search');
 Route::get('/facturacion/search/nas', action: [App\Http\Controllers\FacturasController::class, 'searchFolioNas'])->name('facturacionNAS.search');
+Route::get('/facturacion/search/tiendita', action: [App\Http\Controllers\FacturasController::class, 'searchFolioTiendita'])->name('facturacionTiendita.search');
 
 Route::get('/buscar-cp', action: [App\Http\Controllers\FacturasController::class, 'buscarCP'])->name('buscarCP');
 
 // Para Cosmica
-Route::post(
-    '/facturacion/emitir-factura-cosmica/{id}',
-    [App\Http\Controllers\FacturasController::class, 'emisionfacturaCosmica']
-)->name('emisionfacturaCosmica');
+Route::post('/facturacion/emitir-factura-cosmica/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaCosmica'])->name('emisionfacturaCosmica');
 
-Route::post(
-    '/facturacion/emitir-factura-nas/{id}',
-    [App\Http\Controllers\FacturasController::class, 'emisionfacturaNas']
-)->name('emisionfacturaNas');
+Route::post('/facturacion/emitir-factura-nas/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaNas'])->name('emisionfacturaNas');
+
+Route::post('/facturacion/emitir-factura-tiendita/{id}',[App\Http\Controllers\FacturasController::class, 'emisionfacturaTiendita'])->name('emisionfacturaTiendita');
 
 
 // =============== E C O M M E C E   N A S===============================

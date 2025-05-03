@@ -10,10 +10,12 @@
 
      <form id="facturaForm" method="POST" action="{{ route('emisionfacturaCosmica', $nota->id) }}" enctype="multipart/form-data" class="row">
 
-    @endif
+    @elseif ($tipo === 'tiendita')
 
+    <form id="facturaForm" method="POST" action="{{ route('emisionfacturaTiendita', $nota->id) }}" enctype="multipart/form-data" class="row">
+
+    @endif
     {{-- <form method="POST" action="{{ route('emisionfacturaCosmica', $nota->id) }}" enctype="multipart/form-data" role="form" class="row"> --}}
-    <form id="facturaForm" method="POST" action="{{ route('emisionfacturaCosmica', $nota->id) }}" enctype="multipart/form-data" class="row">
 
         @csrf
         <input type="hidden" name="_method" value="POST">
