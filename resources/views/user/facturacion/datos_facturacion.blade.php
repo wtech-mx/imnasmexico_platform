@@ -3,6 +3,15 @@
         <h2 class="tiitle_modal_white text-left">Datos de facturación</h2>
     </div>
 
+    @if($tipo === 'nas')
+    <form id="facturaForm" method="POST" action="{{ route('emisionfacturaNas', $nota->id) }}" enctype="multipart/form-data" class="row">
+
+    @elseif ($tipo === 'cosmica')
+
+     <form id="facturaForm" method="POST" action="{{ route('emisionfacturaCosmica', $nota->id) }}" enctype="multipart/form-data" class="row">
+
+    @endif
+
     {{-- <form method="POST" action="{{ route('emisionfacturaCosmica', $nota->id) }}" enctype="multipart/form-data" role="form" class="row"> --}}
     <form id="facturaForm" method="POST" action="{{ route('emisionfacturaCosmica', $nota->id) }}" enctype="multipart/form-data" class="row">
 

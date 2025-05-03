@@ -25,7 +25,9 @@
                  class="btn btn-sm btn-primary">
                 Ver Cotización NAS
               </a>
-            @else
+
+            @elseif ($tipo === 'cosmica')
+
               <a target="_blank"
                  href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}"
                  class="btn btn-sm btn-primary">

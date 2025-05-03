@@ -100,47 +100,47 @@ $(function(){
 
 
 $(function(){
-// Delegamos el submit al document, filtrando por el selector.
-$(document).on('submit', '#facturaForm', function(e){
-  e.preventDefault(); // Detenemos el comportamiento por defecto del formulario
-  const form = this;
-  const url  = $(form).attr('action');
-  const data = new FormData(form);
+    // Delegamos el submit al document, filtrando por el selector.
+    $(document).on('submit', '#facturaForm', function(e){
+    e.preventDefault(); // Detenemos el comportamiento por defecto del formulario
+    const form = this;
+    const url  = $(form).attr('action');
+    const data = new FormData(form);
 
-  $.ajax({
-    url: url,
-    method: 'POST',
-    data: data,
-    processData: false,
-    contentType: false,
-    success(response) {
-      Swal.fire({
-        icon: 'success',
-        title: '¡Listo!',
-        text: response.message || 'Factura emitida correctamente.'
-      });
-      // Opcional: limpiar o esconder el bloque de facturación
-      $('#FacturaContainer').fadeOut();
-    },
-    error(xhr) {
-      let msg = 'Ocurrió un error al emitir la factura.';
-      if (xhr.responseJSON) {
-        if (xhr.responseJSON.errors) {
-          msg = Object.values(xhr.responseJSON.errors)
-                      .flat()
-                      .join('<br>');
-        } else if (xhr.responseJSON.message) {
-          msg = xhr.responseJSON.message;
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        success(response) {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Listo!',
+            text: response.message || 'Factura emitida correctamente.'
+        });
+        // Opcional: limpiar o esconder el bloque de facturación
+        $('#FacturaContainer').fadeOut();
+        },
+        error(xhr) {
+        let msg = 'Ocurrió un error al emitir la factura.';
+        if (xhr.responseJSON) {
+            if (xhr.responseJSON.errors) {
+            msg = Object.values(xhr.responseJSON.errors)
+                        .flat()
+                        .join('<br>');
+            } else if (xhr.responseJSON.message) {
+            msg = xhr.responseJSON.message;
+            }
         }
-      }
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        html: msg
-      });
-    }
-  });
-});
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            html: msg
+        });
+        }
+    });
+    });
 });
 
 </script>

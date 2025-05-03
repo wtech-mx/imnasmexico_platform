@@ -111,4 +111,14 @@ class NotasProductos extends Model
     {
         return $this->belongsTo(Products::class, 'id_kit6');
     }
+
+    public function factura()
+    {
+        return $this->hasOne(Factura::class, 'id_notas_nas');
+    }
+
+    public function facturatiendita()
+    {
+        return $this->hasOne(Factura::class, 'id_notas_nas_tiendita');
+    }
 }
