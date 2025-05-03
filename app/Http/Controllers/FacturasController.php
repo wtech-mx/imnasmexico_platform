@@ -206,18 +206,34 @@ class FacturasController extends Controller
     public function searchFolioNas(Request $request)
     {
         $folio = $request->query('folio');
+        $telefono = $request->query('telefono');
+
         if (! $folio) {
-            return response()->json(['success' => false, 'message' => 'Debes proporcionar un folio.'], 422);
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un folio.'], 422);
+        }
+        if (! $telefono || ! preg_match('/^\d{10}$/', $telefono)) {
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un teléfono válido de 10 dígitos.'], 422);
         }
 
-        $nota = NotasProductos::where('folio', $folio)->first();
+        $nota = NotasProductos::with('User')
+        ->where('folio', $folio)
+        ->whereHas('User', function($q) use($telefono) {
+            $q->where('telefono', $telefono);
+        })
+        ->first();
+
         if (! $nota) {
-            return response()->json(['success' => false, 'message' => 'No existe ninguna nota con ese folio.'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'No existe ninguna nota con ese folio y teléfono.'
+            ], 404);
         }
         if ($nota->factura != 1) {
-            return response()->json(['success' => false, 'message' => 'Esta nota no está marcada para facturar.'], 403);
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota no está marcada para facturar.'
+            ], 403);
         }
-
 
         $html = view('user.facturacion.resultado', [
             'nota' => $nota,
@@ -232,20 +248,35 @@ class FacturasController extends Controller
 
     public function searchFolio(Request $request)
     {
+
         $folio = $request->query('folio');
+        $telefono = $request->query('telefono');
+
         if (! $folio) {
-            return response()->json(['success' => false, 'message' => 'Debes proporcionar un folio.'], 422);
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un folio.'], 422);
+        }
+        if (! $telefono || ! preg_match('/^\d{10}$/', $telefono)) {
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un teléfono válido de 10 dígitos.'], 422);
         }
 
-        $nota = NotasProductosCosmica::with('factura')
+        $nota = NotasProductosCosmica::with('User')
         ->where('folio', $folio)
+        ->whereHas('User', function($q) use($telefono) {
+            $q->where('telefono', $telefono);
+        })
         ->first();
 
         if (! $nota) {
-            return response()->json(['success' => false, 'message' => 'No existe ninguna nota con ese folio.'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'No existe ninguna nota con ese folio y teléfono.'
+            ], 404);
         }
         if ($nota->factura != 1) {
-            return response()->json(['success' => false, 'message' => 'Esta nota no está marcada para facturar.'], 403);
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota no está marcada para facturar.'
+            ], 403);
         }
 
         // Renderizamos el partial con Blade
@@ -263,16 +294,33 @@ class FacturasController extends Controller
     public function searchFolioTiendita(Request $request)
     {
         $folio = $request->query('folio');
+        $telefono = $request->query('telefono');
+
         if (! $folio) {
-            return response()->json(['success' => false, 'message' => 'Debes proporcionar un folio.'], 422);
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un folio.'], 422);
+        }
+        if (! $telefono || ! preg_match('/^\d{10}$/', $telefono)) {
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un teléfono válido de 10 dígitos.'], 422);
         }
 
-        $nota = NotasProductos::where('folio', $folio)->first();
+        $nota = NotasProductos::with('User')
+        ->where('folio', $folio)
+        ->whereHas('User', function($q) use($telefono) {
+            $q->where('telefono', $telefono);
+        })
+        ->first();
+
         if (! $nota) {
-            return response()->json(['success' => false, 'message' => 'No existe ninguna nota con ese folio.'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'No existe ninguna nota con ese folio y teléfono.'
+            ], 404);
         }
         if ($nota->factura != 1) {
-            return response()->json(['success' => false, 'message' => 'Esta nota no está marcada para facturar.'], 403);
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota no está marcada para facturar.'
+            ], 403);
         }
 
 
@@ -290,18 +338,35 @@ class FacturasController extends Controller
     public function searchFolioCursos(Request $request)
     {
         $folio = $request->query('folio');
+        $telefono = $request->query('telefono');
+
         if (! $folio) {
-            return response()->json(['success' => false, 'message' => 'Debes proporcionar un folio.'], 422);
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un folio.'], 422);
+        }
+        if (! $telefono || ! preg_match('/^\d{10}$/', $telefono)) {
+            return response()->json(['success'=>false,'message'=>'Debes proporcionar un teléfono válido de 10 dígitos.'], 422);
         }
 
-        $nota = NotasCursos::where('id', $folio)->first();
+
+        $nota = NotasCursos::with('User')
+        ->where('id', $folio)
+        ->whereHas('User', function($q) use($telefono) {
+            $q->where('telefono', $telefono);
+        })
+        ->first();
+
         if (! $nota) {
-            return response()->json(['success' => false, 'message' => 'No existe ninguna nota con ese folio.'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'No existe ninguna nota con ese folio y teléfono.'
+            ], 404);
         }
         if ($nota->factura != 1) {
-            return response()->json(['success' => false, 'message' => 'Esta nota no está marcada para facturar.'], 403);
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota no está marcada para facturar.'
+            ], 403);
         }
-
         $html = view('user.facturacion.resultado_cursos', [
             'nota' => $nota,
             'tipo' => 'cursos',          // <-- marcamos que viene de NAS
@@ -312,7 +377,6 @@ class FacturasController extends Controller
             'html'    => $html,
         ]);
     }
-
 
     public function buscarCP(Request $request){
         $codigoPostal = $request->codigo_postal;

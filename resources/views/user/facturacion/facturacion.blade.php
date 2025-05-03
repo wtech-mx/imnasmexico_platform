@@ -16,6 +16,7 @@
 <section class="primario bg_overley margin_home_nav" style="background-color:#F5ECE4;" id="cafeteria">
     <div class="row">
 
+        @include('user.facturacion.botones_facturacion')
 
         <div class="col-12 col-md-12  m-auto">
             <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Facturacion Cosmica</h1>
@@ -25,17 +26,39 @@
 
             <div class="container py-4">
                 <div class="row justify-content-center mb-4">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" id="inputFolio" class="form-control" placeholder="Ingresa tu folio" />
-                      <button class="btn btn-primary" id="btnBuscarFolio">Buscar</button>
-                    </div>
+                        <input
+                          type="text"
+                          id="inputFolio"
+                          name="folio"
+                          class="form-control"
+                          placeholder="Ingresa tu folio"
+                          required
+                        />
+
+                        <input
+                          type="tel"
+                          id="inputTelefono"
+                          name="telefono"
+                          class="form-control"
+                          placeholder="Ingresa tu teléfono (10 dígitos)"
+                          pattern="\d{10}"
+                          minlength="10"
+                          maxlength="10"
+                          inputmode="numeric"
+                          required
+                        />
+
+                        <button class="btn btn-primary" id="btnBuscarFolio">Buscar</button>
+                      </div>
+
                   </div>
                 </div>
 
                 <!-- Aquí inyectaremos el partial completo -->
                 <div id="resultadoFolio" style="display: none;"></div>
-              </div>
+            </div>
 
         </div>
 
@@ -50,13 +73,24 @@
 $(function(){
   $('#btnBuscarFolio').on('click', function(){
     const folio = $('#inputFolio').val().trim();
-    if (!folio) {
-      return Swal.fire('Oops','Ingresa un folio para buscar','warning');
-    }
+    const telefono = $('#inputTelefono').val().trim();
+
+  // Validar folio
+  if (!folio) {
+    return Swal.fire('Oops','Ingresa un folio para buscar','warning');
+  }
+
+  // Validar teléfono
+  if (!telefono) {
+    return Swal.fire('Oops','Ingresa tu teléfono','warning');
+  }
+  if (!/^\d{10}$/.test(telefono)) {
+    return Swal.fire('Oops','El teléfono debe tener exactamente 10 dígitos','warning');
+  }
 
     $.ajax({
       url: '{{ route("facturacion.search") }}',
-      data: { folio },
+      data: { folio,telefono },
       success(response) {
         // Inyecta el HTML que vino del servidor
         $('#resultadoFolio').html(response.html).fadeIn();

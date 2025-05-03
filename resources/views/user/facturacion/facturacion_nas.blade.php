@@ -18,25 +18,49 @@
 
 
         <div class="col-12 col-md-12  m-auto">
+
+            @include('user.facturacion.botones_facturacion')
+
             <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Facturacion NAS</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
                 Realiza tu facuracion dentro del mes que hiciste tu compra.
             </p>
 
-
             <div class="container py-4">
                 <div class="row justify-content-center mb-4">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" id="inputFolio" class="form-control" placeholder="Ingresa tu folio" />
-                      <button class="btn btn-primary" id="btnBuscarFolio">Buscar</button>
-                    </div>
+                        <input
+                          type="text"
+                          id="inputFolio"
+                          name="folio"
+                          class="form-control"
+                          placeholder="Ingresa tu folio"
+                          required
+                        />
+
+                        <input
+                          type="tel"
+                          id="inputTelefono"
+                          name="telefono"
+                          class="form-control"
+                          placeholder="Ingresa tu teléfono (10 dígitos)"
+                          pattern="\d{10}"
+                          minlength="10"
+                          maxlength="10"
+                          inputmode="numeric"
+                          required
+                        />
+
+                        <button class="btn btn-primary" id="btnBuscarFolio">Buscar</button>
+                      </div>
+
                   </div>
                 </div>
 
                 <!-- Aquí inyectaremos el partial completo -->
                 <div id="resultadoFolio" style="display: none;"></div>
-              </div>
+            </div>
 
         </div>
 
@@ -51,13 +75,24 @@
 $(function(){
   $('#btnBuscarFolio').on('click', function(){
     const folio = $('#inputFolio').val().trim();
-    if (!folio) {
-      return Swal.fire('Oops','Ingresa un folio para buscar','warning');
-    }
+    const telefono = $('#inputTelefono').val().trim();
+
+  // Validar folio
+  if (!folio) {
+    return Swal.fire('Oops','Ingresa un folio para buscar','warning');
+  }
+
+  // Validar teléfono
+  if (!telefono) {
+    return Swal.fire('Oops','Ingresa tu teléfono','warning');
+  }
+  if (!/^\d{10}$/.test(telefono)) {
+    return Swal.fire('Oops','El teléfono debe tener exactamente 10 dígitos','warning');
+  }
 
     $.ajax({
       url: '{{ route("facturacionNAS.search") }}',
-      data: { folio },
+      data: { folio,telefono },
       success(response) {
         // Inyecta el HTML que vino del servidor
         $('#resultadoFolio').html(response.html).fadeIn();
