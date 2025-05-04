@@ -1137,6 +1137,7 @@ class OrderController extends Controller
     public function aplicarCupon(Request $request){
 
         $coupon = Cupon::where('nombre', $request->coupon)
+        ->where('tipo', 'cursos')
         ->first();
 
         $cart = session('cart');
