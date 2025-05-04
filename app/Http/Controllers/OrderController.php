@@ -270,10 +270,10 @@ class OrderController extends Controller
             return Redirect::back()->withErrors(['message' => $e->getMessage()]);
         }
     }
+
     public function aplicarCuponNas(Request $request){
 
-        $coupon = Cupon::where('nombre', $request->coupon)
-        ->first();
+        $coupon = Cupon::where('nombre', $request->coupon)->where('tipo', 'nas')->first();
 
         $cart = session('cart_productos');
         $containsDiplomado = false;
@@ -333,6 +333,7 @@ class OrderController extends Controller
         Session::flash('modal_checkout', 'Se ha Abierto el checkout');
         return redirect()->back()->with('success', 'Cupón aplicado con éxito');
     }
+
     public function pagar_registro(Request $request)
     {
         // Configurar el SDK de Mercado Pago con las credenciales de API
