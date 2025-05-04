@@ -208,7 +208,25 @@ Carrito
 @endsection
 
 @section('js_custom')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if(session('swal'))
+    <script>
+        const swalData = @json(session('swal'));
+        Swal.fire({
+            icon:    swalData.icon,       // 'success', 'error', 'warning', 'info', ...
+            title:   swalData.title,      // texto principal
+            text:    swalData.text,       // subtítulo
+            @if(isset($swal['timer']))
+            timer:   swalData.timer,      // auto-cierre (ms)
+            @endif
+            @if(isset($swal['confirm']) && swalData.confirm === false)
+            showConfirmButton: false,
+            @endif
+            allowOutsideClick: false
+        });
+    </script>
+@endif
 <script>
 $(document).ready(function () {
     let envio = 'pickup'; // Valor predeterminado para el método de envío

@@ -279,6 +279,17 @@ class OrderController extends Controller
         $containsDiplomado = false;
         $totalCartPrice = 0;
 
+        if (! $coupon) {
+            return redirect()->back()
+            ->with('swal', [
+                'icon'    => 'error',
+                'title'   => 'Cupón inválido',
+                'text'    => 'El cupón que ingresaste no existe.',
+                'timer'   => 3000,      // opcional: cierra tras 3s
+                'confirm' => false      // opcional: sin botón "Aceptar"
+            ]);
+        }
+
         foreach ($cart as $id => $details) {
             $totalCartPrice += $details['precio'] * $details['cantidad'];
         }
