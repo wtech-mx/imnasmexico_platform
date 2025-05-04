@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="checkout_modal" tabindex="-1" aria-labelledby="checkout_modalLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered modal-lg modalblur">
@@ -330,7 +331,7 @@
                                                 <div class="col-12">
                                                     <div class="col-12">
                                                         <div class="d-flex justify-content-center">
-                                                            <button class="btn_pagar_checkout " type="submit">Pagar</button>
+                                                            <button class="btn_pagar_checkout comprarBtnCheck" id="comprarBtnCheck" type="submit">Pagar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -442,7 +443,7 @@
                                                 <div class="col-12">
                                                     <div class="col-12">
                                                         <div class="d-flex justify-content-center">
-                                                            <button class="btn_pagar_checkout " type="submit">Pagar</button>
+                                                            <button class="btn_pagar_checkout " id="comprarBtnCheck" type="submit">Pagar</button>
                                                         </div>
                                                     </div>
                                                 </div>

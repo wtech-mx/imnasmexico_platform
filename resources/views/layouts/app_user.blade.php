@@ -70,6 +70,16 @@
     <script type="text/javascript" src="{{asset('assets/user/custom/preloader.js')}}"></script>
 
     <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+            var registroBtn = document.getElementById("comprarBtnCheck");
+            var formulario = document.getElementById("payment-form"); // Reemplaza "miFormulario" con el ID de tu formulario
+console.log(formulario);
+            registroBtn.addEventListener("click", function () {
+                registroBtn.disabled = true; // Deshabilita el botón después de hacer clic
+                registroBtn.textContent = "Cargando..."; // Cambia el texto del botón
+                formulario.submit(); // Envía el formulario
+            });
+        });
 
         $(function() {
 
