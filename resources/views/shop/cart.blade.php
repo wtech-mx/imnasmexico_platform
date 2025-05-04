@@ -65,16 +65,19 @@ Carrito
                 <p id="envio-gratis" style="color: green; display: none;">¡Envío Gratis!</p>
                 <h4 class="mt-0 mb-3 total_cart">Total:  <span id="total-carrito">${{ number_format($subtotal, 0, '.', ',') }}</span></h4>
 
-                <div class="input-group">
-                    <span class="input-group-text input_cupon_cart" id="">
-                        <i class="bi bi-ticket"></i>
-                    </span>
-                    <input type="text" class="form-control input_bg_cart" placeholder="Codigo de Cupon">
-                </div>
+                <form action="{{ route('cupon.aplicar_nas') }}" method="POST">
+                    @csrf
+                    <div class="input-group">
+                        <span class="input-group-text input_cupon_cart" id="">
+                            <i class="bi bi-ticket"></i>
+                        </span>
+                        <input type="text"name="coupon" id="coupon" class="form-control input_bg_cart" placeholder="Codigo de Cupon">
+                    </div>
 
-                <p class="text-end">
-                    <button class="btn btn_cupon_cart text-white mt-4">Aplicar Cupon</button>
-                </p>
+                    <p class="text-end">
+                        <button class="btn btn_cupon_cart text-white mt-4">Aplicar Cupon</button>
+                    </p>
+                </form>
 
             </div>
 

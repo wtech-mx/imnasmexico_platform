@@ -270,7 +270,69 @@ class OrderController extends Controller
             return Redirect::back()->withErrors(['message' => $e->getMessage()]);
         }
     }
+    public function aplicarCuponNas(Request $request){
 
+        $coupon = Cupon::where('nombre', $request->coupon)
+        ->first();
+
+        $cart = session('cart_productos');
+        $containsDiplomado = false;
+        $totalCartPrice = 0;
+
+        foreach ($cart as $id => $details) {
+            $totalCartPrice += $details['precio'] * $details['cantidad'];
+        }
+
+        if ($coupon->estado == 'desactivado') {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'Cupón caducado');
+        }
+
+        // Verificar el gasto mínimo requerido por el cupón
+        if ($totalCartPrice < $coupon->gasto_min) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'No puedes aplicar este cupón ya que el gasto mínimo requerido no se ha alcanzado.');
+        }
+
+        if (!$coupon) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'Cupón inválido');
+        }
+
+        if ($coupon->fecha_inicio && $coupon->fecha_fin < now()) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'Cupón caducado');
+        }
+
+        if (session()->has('coupon_applied')) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'Cupón ya aplicado');
+        }
+
+        // Verificar di existe un Diplomado
+        if ($containsDiplomado) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'No puedes aplicar este cupón a productos tipo "Diplomado" en tu carrito.');
+        }
+
+        foreach (session('cart_productos') as $id => $details) {
+            if ($coupon->tiene_limite) {
+                // Restar 1 al contador de usos restantes solo si el cupón tiene límite
+                $coupon->decrement('usos_restantes', 1);
+            }
+            // Aplicar descuento al precio del producto
+            $discountedPrice = $details['precio'] - ($details['precio'] * $coupon->importe / 100);
+
+            // Actualizar precio del producto en la sesión del carrito
+            session()->put("cart_productos.{$id}.precio", $discountedPrice);
+        }
+        $cart = session('cart_productos');
+        // Almacenar que el cupón ya se ha aplicado en la sesión
+        session()->put('coupon_applied', true);
+
+        Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+        return redirect()->back()->with('success', 'Cupón aplicado con éxito');
+    }
     public function pagar_registro(Request $request)
     {
         // Configurar el SDK de Mercado Pago con las credenciales de API

@@ -162,7 +162,7 @@ Route::get('/tienda/nas/tienda/cart', [App\Http\Controllers\TiendaController::cl
 Route::get('/tienda/nas/tienda/buscador', [App\Http\Controllers\TiendaController::class, 'buscador'])->name('tienda_online.buscador');
 Route::get('/tienda/nas/filtrar-productos', [App\Http\Controllers\TiendaController::class, 'filtrarPorCategoria'])->name('productos.filtrar');
 Route::get('/tienda/nas/buscar-productos', [App\Http\Controllers\TiendaController::class, 'buscar'])->name('productos.buscarNas');
-
+Route::post('/cupon/nas', [OrderController::class, 'aplicarCuponNas'])->name('cupon.aplicar_nas');
 Route::post('/cart/nas/process-payment', [App\Http\Controllers\TiendaController::class, 'processPayment_nas'])->name('process-payment_nas');
 Route::get('/cart/nas/orders/pay', [App\Http\Controllers\TiendaController::class, 'pay'])->name('order_nas.pay');
 Route::get('/cart/nas/orders/{code}/show', [App\Http\Controllers\TiendaController::class, 'thankyou'])->name('order_nas.show');
