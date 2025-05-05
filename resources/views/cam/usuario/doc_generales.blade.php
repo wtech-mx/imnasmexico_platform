@@ -74,6 +74,41 @@
                         @endif
                     </div>
 
+
+                    @if($usuario->user_cam == '4')
+
+                    @else
+
+                        <h6 class="" for="solicitud_acreditacion">Solicitud acreditacion </h6>
+                        <div class="col-6">
+                            <div class="input-group mb-4">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets\cam\solicitud.png') }}" alt="" width="35px">
+                                </span>
+                                <input id="solicitud_acreditacion" name="solicitud_acreditacion" type="file" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            @if ($documentos->solicitud_acreditacion != NULL)
+                                @if (pathinfo($documentos->solicitud_acreditacion, PATHINFO_EXTENSION) == 'pdf')
+                                    <iframe class="mt-2" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->solicitud_acreditacion)}}" style="width: 60%; height: 60px;"></iframe>
+                                    <p class="text-center ">
+                                        <a class="btn btn-sm text-dark" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->solicitud_acreditacion) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                        ">Ver archivo</a>
+                                    </p>
+                                @else
+                                    <p class="text-center mt-2">
+                                        <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->solicitud_acreditacion) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                        <a class="text-center text-dark btn btn-sm" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->solicitud_acreditacion) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                        ">Ver Imagen</a>
+                                    </p>
+                                @endif
+                            @endif
+                        </div>
+
+                    @endif
+
+
                     <h6 for="carta_compromiso">Carta compromiso</h6>
                     <div class="col-6 mb-3">
                         <div class="input-group mb-3">
@@ -209,7 +244,14 @@
                         @endif
                     </div>
 
-                    <h6 for="logo">Logo centro evaluador</h6>
+                    @if($usuario->user_cam == '4')
+                        <h6 for="logo">Logo centro evaluador</h6>
+
+                    @else
+                        <h6 for="logo">Evaluador independiente</h6>
+
+                    @endif
+
                     <div class="col-6 mb-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
@@ -371,32 +413,66 @@
                     @endif
                 </div>
 
-                <h6 class="" for="rfc">RFC</h6>
-                <div class="col-6 mb-3">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">
-                            <img src="{{ asset('assets\user\icons\qr.png') }}" alt="" width="35px">
-                        </span>
-                        <input id="rfc" name="rfc" type="file" class="form-control" >
+
+                @if($usuario->user_cam == '4')
+                    <h6 class="" for="rfc">RFC</h6>
+                    <div class="col-6 mb-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets\user\icons\qr.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="rfc" name="rfc" type="file" class="form-control" >
+                        </div>
                     </div>
-                </div>
-                <div class="col-6">
-                    @if ($documentos->rfc != NULL)
-                        @if (pathinfo($documentos->rfc, PATHINFO_EXTENSION) == 'pdf')
-                            <iframe class="mt-2" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc)}}" style="width: 60%; height: 60px;"></iframe>
-                            <p class="text-center ">
-                                <a class="btn btn-sm text-dark" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" target="_blank" style="background: #836262; color: #ffff!important
-                                ">Ver archivo</a>
-                            </p>
-                        @else
-                            <p class="text-center mt-2">
-                                <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                <a class="text-center text-dark btn btn-sm" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" target="_blank" style="background: #836262; color: #ffff!important
-                                ">Ver Imagen</a>
-                            </p>
+                    <div class="col-6">
+                        @if ($documentos->rfc != NULL)
+                            @if (pathinfo($documentos->rfc, PATHINFO_EXTENSION) == 'pdf')
+                                <iframe class="mt-2" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc)}}" style="width: 60%; height: 60px;"></iframe>
+                                <p class="text-center ">
+                                    <a class="btn btn-sm text-dark" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                    ">Ver archivo</a>
+                                </p>
+                            @else
+                                <p class="text-center mt-2">
+                                    <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                    <a class="text-center text-dark btn btn-sm" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                    ">Ver Imagen</a>
+                                </p>
+                            @endif
                         @endif
-                    @endif
-                </div>
+                    </div>
+                @else
+
+                    <h6 class="" for="acuerdo_confidencialidad">Nombramiento</h6>
+                    <div class="col-6">
+                        <div class="input-group mb-4">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets\user\icons\stamp.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="nombramiento" name="nombramiento" type="file" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        @if ($documentos->nombramiento != NULL)
+                            @if (pathinfo($documentos->nombramiento, PATHINFO_EXTENSION) == 'pdf')
+                                <iframe class="mt-2" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->nombramiento)}}" style="width: 60%; height: 60px;"></iframe>
+                                <p class="text-center ">
+                                    <a class="btn btn-sm text-dark" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->nombramiento) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                    ">Ver archivo</a>
+                                </p>
+                            @else
+                                <p class="text-center mt-2">
+                                    <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->nombramiento) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                    <a class="text-center text-dark btn btn-sm" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->nombramiento) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                    ">Ver Imagen</a>
+                                </p>
+                            @endif
+                        @endif
+                    </div>
+
+                @endif
+
+
 
             </div>
         </div>

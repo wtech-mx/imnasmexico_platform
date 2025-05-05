@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <a href="#">
+                <a href="{{ route('centro.index_docgenerales', $usuario->code) }}">
                     <h5 class="tittle_border_cam_min">Carga Doc Gerales</h5>
                 </a>
             </div>
