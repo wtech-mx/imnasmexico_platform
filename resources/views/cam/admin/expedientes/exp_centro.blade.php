@@ -247,10 +247,10 @@ Expediente {{$expediente->id}}
         $('#contenedorSubirArchivos').hide();
         $('#formularioCarga').hide();
         $('#contenedorArchivos').empty();
-
+        //const notaId = {{ $expediente->Nota->id }};
         // Establece el valor del campo "categoria" con la categoría seleccionada
         $('#categoria').val(categoria);
-
+        console.log('Clicfdg: ' + expedienteId);
         // Limpia el contenedor de carpetas (estándares)
         $('#contenedorCarpetas').empty();
 
@@ -258,7 +258,7 @@ Expediente {{$expediente->id}}
             mostrarCarpetasCompradas(expedienteId);
         } else if (categoria === 'cedula' || categoria === '11' || categoria === '12' || categoria === '13' || categoria === '14' || categoria === '15'  || categoria === '16'  || categoria === '17'  || categoria === '18'  || categoria === '19'  || categoria === '20') {
             // Muestra las imágenes o documentos con el número '2' en la columna 'tipo'
-            mostrarArchivosSubidos(categoria);
+            mostrarArchivosSubidos(categoria, expedienteId);
         }
 
         $.ajax({
@@ -395,8 +395,9 @@ Expediente {{$expediente->id}}
         });
     }
 
-    function mostrarArchivosSubidos(categoria) {
+    function mostrarArchivosSubidos(categoria, expedienteId) {
         console.log('Clic en mostrarArchivos: ' + categoria);
+        console.log('Clic: ' + expedienteId);
         // Oculta el formulario de carga y muestra el contenedor de archivos
         $('#formularioCarga').show();
         $('#contenedorArchivos').show();
@@ -405,10 +406,10 @@ Expediente {{$expediente->id}}
         $.ajax({
             url: '{{ route("obtener.docexp") }}', // Cambia a la ruta correcta en tu aplicación
             method: 'GET',
-            data: { categoria: categoria },
+            data: { categoria: categoria,  expediente_id: expedienteId },
             success: function (data) {
                 var archivosHTML = '';
-
+                $('#contenedorArchivos').empty();
                 if (data.length > 0) {
                     data.forEach(function(archivo) {
                         var extension = obtenerExtension(archivo.nombre);

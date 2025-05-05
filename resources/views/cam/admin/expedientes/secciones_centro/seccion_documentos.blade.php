@@ -8,13 +8,13 @@
                 <div class="card-body p-2">
                     <div class="row">
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos1" onclick="mostrarArchivos('1')">
+                            <button class="btn btn-sm" id="btnArchivos1" onclick="mostrarArchivos('1', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/manual.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>1. Manuales Digitales CONOCER</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('11')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('11', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/information.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for="">2. Reglamento Y Manuales De Procedimientos D_N Servicios</p>
                             </button>
@@ -26,13 +26,13 @@
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('3')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('3', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/logotipos/sepconocer.png')}}" class="img-fluid" style="width: 65%;">
                                 <p for=""><br>4. Logo Conocer Centro de Evaluación</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('4')">
+                            <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('4', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/book.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>5. Formatos Resolucion De Quejas</p>
                             </button>
@@ -44,79 +44,79 @@
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('5')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('5', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Acreditación CE o EI</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('12')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('12', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/cheque-de-pago.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Acta Constitutiva</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('13')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('13', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/picture.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Caratulas</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('15')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('15', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/monetary-policy.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Constancia de situacion fiscal</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('16')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('16', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/contract.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Contrato de arrendamiento</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('17')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('17', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/satisfaction.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Encuestas de Calidad</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('18')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('18', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/stamp.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Formato Sol. de acreditación</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('6')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('6', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/perfil.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Especificaciónes Fotografia</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('7')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('7', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/aprender-en-linea-1.webp')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br> Operación CE</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('8')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('8', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/clase.webp')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br> Presentación</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('20')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('20', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/certificacion.webp')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br> Solicitud de acreditación</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('9')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('9', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/consent.png')}}" class="img-fluid" style="width: 40%;"><br>
                                 <p for=""><br>Triptico</p>
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('10')">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('10', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/stack-of-books.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Tutoriales de apoyo</p>
                             </button>
@@ -155,8 +155,8 @@
                             @csrf
                             <input type="file" name="archivos[]" multiple>
                             <input type="hidden" id="categoria" name="categoria" value="">
-                            <input id="id_nota" name="id_nota" type="number" value="{{ $expediente->Nota->id }}" style="display: none">
-                            <input id="id_cliente" name="id_cliente" type="number" value="{{ $expediente->Nota->id_cliente }}" style="display: none">
+                            <input id="id_nota" name="id_nota" type="hidden" value="{{ $expediente->Nota->id }}">
+                            <input id="id_cliente" name="id_cliente" type="hidden" value="{{ $expediente->Nota->id_cliente }}">
                             <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                         </form>
                     </div>

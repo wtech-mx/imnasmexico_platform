@@ -587,7 +587,11 @@ class CamExpedientesController extends Controller
 
     public function obtenerArchivosPorCategoria(Request $request){
         $categoria = $request->input('categoria');
-        $expedienteId = intval($request->input('expediente_id'));
+        $expedienteId = $request->input('expediente_id');
+        if (!$categoria || !$expedienteId) {
+            return response()->json([], 200); // evitar traer todo por accidente
+        }
+
         if($categoria == 'certificado'){
             $archivos = CamCertificados::where('id_nota', $expedienteId)->get();
         }elseif($categoria == 'cedula'){
@@ -597,7 +601,8 @@ class CamExpedientesController extends Controller
         }elseif($categoria == 'diplomas'){
             $archivos = CamDiplomas::where('id_nota', $expedienteId)->get();
         }else{
-            $archivos = CamDocuemntos::where('id_carpdoc', $categoria)->get();
+            
+            $archivos = CamDocExp::where('tipo', '=', $categoria)->where('id_nota', '=', $expedienteId)->get();
         }
 
         return response()->json($archivos);
@@ -861,9 +866,9 @@ class CamExpedientesController extends Controller
             }else{
 
                 if($dominio == 'plataforma.imnasmexico.com'){
-                    $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp/');
+                    $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_general/');
                 }else{
-                    $ruta_recursos = public_path() . '/cam_doc_exp/';
+                    $ruta_recursos = public_path() . '/cam_doc_general/';
                 }
                 $id_nota = $request->get('id_nota');
                 $id_cliente = $request->get('id_cliente');
