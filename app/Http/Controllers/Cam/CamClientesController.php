@@ -80,6 +80,11 @@ class CamClientesController extends Controller
         return view('cam.usuario.expediente', compact('expediente'));
     }
 
+    public function index_expedienteCentro($code){
+        $expediente = CamNotas::where('id_cliente', auth()->user()->id)->first();
+        return view('cam.usuario.expediente_centro', compact('expediente'));
+    }
+
     public function index_docgenerales($code){
 
         $usuario = auth()->user();

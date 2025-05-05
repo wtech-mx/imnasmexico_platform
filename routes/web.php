@@ -1023,6 +1023,8 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
         // =============== M O D U L O   E X P E D I E N T E S ( C L I E N T E S)===============================
         Route::get('evaluador/expediente/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index_expediente'])->name('evaluador.index_expediente');
 
+        Route::get('centro/expediente/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index_expedienteCentro'])->name('evaluador.index_expedienteCentro');
+
         Route::get('centro/docgenerales/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index_docgenerales'])->name('centro.index_docgenerales');
 
         Route::get('/evaluador/ruta/para/obtener/archivos', [App\Http\Controllers\Cam\CamClientesController::class, 'obtenerArchivosPorCategoria'])->name('evaluador.obtener.archivos');

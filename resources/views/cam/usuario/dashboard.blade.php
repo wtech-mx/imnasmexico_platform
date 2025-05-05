@@ -46,15 +46,40 @@
         <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
-                    <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
-                        <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
-                    </a>
+
+
+                    @if($expediente->tipo = 'Centro Evaluación')
+
+                        <a href="{{ route('evaluador.index_expedienteCentro', $usuario->code) }}">
+                            <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
+                        </a>
+
+                    @else
+
+                        <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
+                            <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
+                        </a>
+
+                    @endif
+
+
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
+
+            @if($expediente->tipo = 'Centro Evaluación')
+                <a href="{{ route('evaluador.index_expedienteCentro', $usuario->code) }}">
+                    <h5 class="tittle_border_cam_min">Expediente</h5>
+                </a>
+            @else
                 <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
                     <h5 class="tittle_border_cam_min">Expediente</h5>
                 </a>
+            @endif
+
+
+
+
             </div>
         </div>
 

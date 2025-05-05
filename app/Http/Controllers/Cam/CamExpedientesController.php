@@ -601,7 +601,7 @@ class CamExpedientesController extends Controller
         }elseif($categoria == 'diplomas'){
             $archivos = CamDiplomas::where('id_nota', $expedienteId)->get();
         }else{
-            
+
             $archivos = CamDocExp::where('tipo', '=', $categoria)->where('id_nota', '=', $expedienteId)->get();
         }
 
