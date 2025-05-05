@@ -48,7 +48,7 @@
                 <div class="card_user">
 
 
-                    @if($expediente->tipo = 'Centro Evaluación')
+                    @if($usuario->user_cam == '4')
 
                         <a href="{{ route('evaluador.index_expedienteCentro', $usuario->code) }}">
                             <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
@@ -66,19 +66,15 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
-
-            @if($expediente->tipo = 'Centro Evaluación')
-                <a href="{{ route('evaluador.index_expedienteCentro', $usuario->code) }}">
-                    <h5 class="tittle_border_cam_min">Expediente</h5>
-                </a>
-            @else
-                <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
-                    <h5 class="tittle_border_cam_min">Expediente</h5>
-                </a>
-            @endif
-
-
-
+                @if($usuario->user_cam == '4')
+                    <a href="{{ route('evaluador.index_expedienteCentro', $usuario->code) }}">
+                        <h5 class="tittle_border_cam_min">Expediente</h5>
+                    </a>
+                @else
+                    <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
+                        <h5 class="tittle_border_cam_min">Expediente</h5>
+                    </a>
+                @endif
 
             </div>
         </div>
