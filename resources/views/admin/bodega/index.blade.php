@@ -242,118 +242,118 @@
 
                                             @foreach ($notas_cosmica_preparacion as $item)
 
-                                            @php
-                                            $status = $item->meli_data['status'] ?? null;
-                                            $dateCreated = $item->meli_data['date_created'] ?? null;
-                                            $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
-                                            $isDelayed = false;
+                                                @php
+                                                    $status = $item->meli_data['status'] ?? null;
+                                                    $dateCreated = $item->meli_data['date_created'] ?? null;
+                                                    $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                                    $isDelayed = false;
 
-                                            if ($isReadyOrPrepared && $dateCreated) {
-                                                $shipmentDate = new DateTime($dateCreated);
-                                                $currentDate = new DateTime();
-                                                $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
-                                            }
+                                                    if ($isReadyOrPrepared && $dateCreated) {
+                                                        $shipmentDate = new DateTime($dateCreated);
+                                                        $currentDate = new DateTime();
+                                                        $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
+                                                    }
 
-                                            $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
-                                            @endphp
+                                                    $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
+                                                @endphp
 
 
-                                            <tr class="{{ $borderClass }}" style="background: #d486d6">
-                                                <td>
-                                                    @if ($item->item_id_meli && !$item->estadociudad)
-                                                        <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">
-                                                    @endif
-                                                    <h5>
-                                                        @if ($item->folio == null)
-                                                            {{ $item->id }}
-                                                        @else
-                                                            {{ $item->folio }}
-                                                        @endif
-                                                    </h5>
-                                                </td>
+                                                <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                     <td>
+                                                        @if ($item->item_id_meli && !$item->estadociudad)
+                                                            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">
+                                                        @endif
                                                         <h5>
-                                                            @if ($item->id_usuario == NULL)
-                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
                                                             @else
-                                                                {{ $item->User->name }}
+                                                                {{ $item->folio }}
                                                             @endif
                                                         </h5>
                                                     </td>
-
-                                                    <td>
-
-                                                        @if($item->shippingId_meli && is_array($item->meli_data))
-                                                        @php
-                                                            $meliData = $item->meli_data; // Asegúrate de que esta variable contiene los datos de meli
-                                                            // Obtener el color correspondiente al estado actual
-                                                            $statusColor = $statusColors[$meliData['status']] ?? 'text-muted'; // Color predeterminado si no se encuentra el estado
-                                                            $status = $meliData['status'] ?? 'N/A';
-                                                            $dateCreated = $meliData['date_created'] ?? 'N/A';
-                                                            $substatus = $meliData['substatus'] ?? null;
-                                                            $statusHistory = $meliData['status_history'] ?? [];
-                                                            $shipmentDate = new DateTime($dateCreated);
-                                                            $currentDate = new DateTime();
-                                                            $shipmentDateFormatted = $shipmentDate->format('Y-m-d');
-                                                            $currentDateFormatted = $currentDate->format('Y-m-d');
-                                                            $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
-                                                            $isDelayed = $isReadyOrPrepared && $shipmentDateFormatted < $currentDateFormatted;
-                                                            $substatusDroppedOff = in_array($substatus, ['dropped_off', 'in_hub']);
-                                                            $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
-                                                        @endphp
-
-                                                        <p>
-
-                                                            @if ($isLabelNotPrinted)
-
-                                                            @else
-                                                                @if ($isDelayed)
-                                                                    <br><br>
-                                                                    <strong style="color:red">Estás con demora</strong><br>
-                                                                    Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                        <td>
+                                                            <h5>
+                                                                @if ($item->id_usuario == NULL)
+                                                                    {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                                @else
+                                                                    {{ $item->User->name }}
                                                                 @endif
-                                                            @endif
-                                                        </p>
-                                                    @endif
+                                                            </h5>
+                                                        </td>
 
-                                                            En preparación
-                                                    </td>
+                                                        <td>
 
-                                                    <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
-                                                    </td>
-                                                    <td><h5>${{ $item->total }}</h5></td>
-                                                    <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
-                                                            <i class="fa fa-list-alt"></i>
-                                                        </a>
+                                                            @if($item->shippingId_meli && is_array($item->meli_data))
+                                                            @php
+                                                                $meliData = $item->meli_data; // Asegúrate de que esta variable contiene los datos de meli
+                                                                // Obtener el color correspondiente al estado actual
+                                                                $statusColor = $statusColors[$meliData['status']] ?? 'text-muted'; // Color predeterminado si no se encuentra el estado
+                                                                $status = $meliData['status'] ?? 'N/A';
+                                                                $dateCreated = $meliData['date_created'] ?? 'N/A';
+                                                                $substatus = $meliData['substatus'] ?? null;
+                                                                $statusHistory = $meliData['status_history'] ?? [];
+                                                                $shipmentDate = new DateTime($dateCreated);
+                                                                $currentDate = new DateTime();
+                                                                $shipmentDateFormatted = $shipmentDate->format('Y-m-d');
+                                                                $currentDateFormatted = $currentDate->format('Y-m-d');
+                                                                $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                                                $isDelayed = $isReadyOrPrepared && $shipmentDateFormatted < $currentDateFormatted;
+                                                                $substatusDroppedOff = in_array($substatus, ['dropped_off', 'in_hub']);
+                                                                $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
+                                                            @endphp
 
-                                                        <a class="text-center text-white btn btn-sm"
-                                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_cosmica_productos', 'id' => $item->id]) }}"
-                                                            style="background: #7d2de6;">
-                                                            <i class="fa fa-qrcode"></i>
-                                                        </a>
+                                                            <p>
 
-                                                        @if ($item->metodo_pago == 'Contra Entrega')
-                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
-                                                                <i class="fa fa-truck"></i>
-                                                            </a>
-                                                        @else
-                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                                <i class="fa fa-truck"></i>
-                                                            </a>
+                                                                @if ($isLabelNotPrinted)
+
+                                                                @else
+                                                                    @if ($isDelayed)
+                                                                        <br><br>
+                                                                        <strong style="color:red">Estás con demora</strong><br>
+                                                                        Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                                    @endif
+                                                                @endif
+                                                            </p>
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
+                                                                En preparación
+                                                        </td>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
-                                                    </td>
+                                                        <td>
+                                                            <h5>
+                                                                {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                            </h5>
+                                                        </td>
+                                                        <td><h5>${{ $item->total }}</h5></td>
+                                                        <td>
+                                                            <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
+                                                                <i class="fa fa-list-alt"></i>
+                                                            </a>
+
+                                                            <a class="text-center text-white btn btn-sm"
+                                                                href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_cosmica_productos', 'id' => $item->id]) }}"
+                                                                style="background: #7d2de6;">
+                                                                <i class="fa fa-qrcode"></i>
+                                                            </a>
+
+                                                            @if ($item->metodo_pago == 'Contra Entrega')
+                                                                <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+                                                            @endif
+
+                                                            <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                                <i class="fa fa-info"></i>
+                                                            </a>
+
+                                                            <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
+                                                                <i class="fa fa-barcode"></i>
+                                                            </a>
+                                                        </td>
                                                 </tr>
                                                 @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_cosmica_estatus')
@@ -523,6 +523,126 @@
                                                     </td>
                                                 </tr>
                                                 @include('admin.cosmica_ecommerce.modal_direccion')
+                                            @endforeach
+
+                                            @foreach ($notas_cosmica_preparacion as $item)
+
+                                                @php
+                                                    $status = $item->meli_data['status'] ?? null;
+                                                    $dateCreated = $item->meli_data['date_created'] ?? null;
+                                                    $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                                    $isDelayed = false;
+
+                                                    if ($isReadyOrPrepared && $dateCreated) {
+                                                        $shipmentDate = new DateTime($dateCreated);
+                                                        $currentDate = new DateTime();
+                                                        $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
+                                                    }
+
+                                                    $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
+                                                @endphp
+
+
+                                                <tr class="{{ $borderClass }}" style="background: #cad686">
+                                                    <td>
+                                                        @if ($item->item_id_meli && !$item->estadociudad)
+                                                            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">
+                                                        @endif
+                                                        <h5>
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
+                                                            @else
+                                                                {{ $item->folio }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                        <td>
+                                                            <h5>
+                                                                @if ($item->id_usuario == NULL)
+                                                                    {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                                @else
+                                                                    {{ $item->User->name }}
+                                                                @endif
+                                                            </h5>
+                                                        </td>
+
+                                                        <td>
+
+                                                            @if($item->shippingId_meli && is_array($item->meli_data))
+                                                            @php
+                                                                $meliData = $item->meli_data; // Asegúrate de que esta variable contiene los datos de meli
+                                                                // Obtener el color correspondiente al estado actual
+                                                                $statusColor = $statusColors[$meliData['status']] ?? 'text-muted'; // Color predeterminado si no se encuentra el estado
+                                                                $status = $meliData['status'] ?? 'N/A';
+                                                                $dateCreated = $meliData['date_created'] ?? 'N/A';
+                                                                $substatus = $meliData['substatus'] ?? null;
+                                                                $statusHistory = $meliData['status_history'] ?? [];
+                                                                $shipmentDate = new DateTime($dateCreated);
+                                                                $currentDate = new DateTime();
+                                                                $shipmentDateFormatted = $shipmentDate->format('Y-m-d');
+                                                                $currentDateFormatted = $currentDate->format('Y-m-d');
+                                                                $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                                                $isDelayed = $isReadyOrPrepared && $shipmentDateFormatted < $currentDateFormatted;
+                                                                $substatusDroppedOff = in_array($substatus, ['dropped_off', 'in_hub']);
+                                                                $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
+                                                            @endphp
+
+                                                            <p>
+
+                                                                @if ($isLabelNotPrinted)
+
+                                                                @else
+                                                                    @if ($isDelayed)
+                                                                        <br><br>
+                                                                        <strong style="color:red">Estás con demora</strong><br>
+                                                                        Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                                    @endif
+                                                                @endif
+                                                            </p>
+                                                        @endif
+
+                                                                En preparación
+                                                        </td>
+
+                                                        <td>
+                                                            <h5>
+                                                                {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                            </h5>
+                                                        </td>
+                                                        <td><h5>${{ $item->total }}</h5></td>
+                                                        <td>
+                                                            <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
+                                                                <i class="fa fa-list-alt"></i>
+                                                            </a>
+
+                                                            <a class="text-center text-white btn btn-sm"
+                                                                href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_cosmica_productos', 'id' => $item->id]) }}"
+                                                                style="background: #7d2de6;">
+                                                                <i class="fa fa-qrcode"></i>
+                                                            </a>
+
+                                                            @if ($item->metodo_pago == 'Contra Entrega')
+                                                                <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+                                                            @endif
+
+                                                            <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                                <i class="fa fa-info"></i>
+                                                            </a>
+
+                                                            <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
+                                                                <i class="fa fa-barcode"></i>
+                                                            </a>
+                                                        </td>
+                                                </tr>
+                                                @include('admin.cotizacion.guia')
+                                                @include('admin.bodega.modal_cosmica_estatus')
+                                                @include('admin.bodega.modal_fechas')
                                             @endforeach
                                             </tbody>
                                 </table>

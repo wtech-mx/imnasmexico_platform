@@ -985,7 +985,13 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Se ha actualizado con exito');
+        if($request->get('estatus_cotizacion') == 'Preparado'){
+            return redirect()->route('index_preparacion.bodega')
+            ->with('success', 'Se ha actualizado con exito');
+         } else {
+            return redirect()->back()->with('success', 'Se ha actualizado con exito');
+        }
+
     }
 
     public function update_guia(Request $request, $id){

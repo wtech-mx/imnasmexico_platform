@@ -31,4 +31,9 @@ class OrdersCosmica extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function productos()
+    {
+        return $this->hasMany(ProductosNotasCosmica::class, 'id_notas_productos', 'id');
+    }
 }

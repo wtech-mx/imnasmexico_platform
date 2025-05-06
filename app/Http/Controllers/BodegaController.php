@@ -111,7 +111,20 @@ class BodegaController extends Controller
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $oreders_cosmica_ecommerce = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
+        $oreders_cosmica_ecommerce = OrdersCosmica::where('estatus_bodega', 'En preparacion')
+            ->whereDoesntHave('productos', function ($query) {
+                $query->where('id_producto', 2080);
+            })
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        $ordenes_con_producto_2080 = OrdersCosmica::where('estatus_bodega', 'En preparacion')
+        ->whereHas('productos', function ($query) {
+            $query->where('id_producto', 2080);
+        })
+        ->orderBy('id', 'DESC')
+        ->get();
+
         $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
 
         // Unir los datos de la API con los registros de la base de datos
@@ -139,7 +152,8 @@ class BodegaController extends Controller
             'ApiFiltradaCollectAprobado',
             'ApiFiltradaCollectAprobadoreposicion',
             'oreders_cosmica_ecommerce',
-            'orders_nas_ecommerce'));
+            'orders_nas_ecommerce',
+        'ordenes_con_producto_2080'));
     }
 
     public function generarEtiqueta($tabla, $id){
@@ -865,7 +879,7 @@ class BodegaController extends Controller
             return $producto->estatus === 1;
         });
 
-        return view('index_preparacion.bodega', compact('nota_scaner', 'productos_scaner', 'allChecked'));
+        return view('admin.bodega.scaner.show_cosmica', compact('nota_scaner', 'productos_scaner', 'allChecked'));
     }
 
     public function checkProduct_cosmica(Request $request){
