@@ -865,7 +865,7 @@ class BodegaController extends Controller
             return $producto->estatus === 1;
         });
 
-        return view('admin.bodega.scaner.show_cosmica', compact('nota_scaner', 'productos_scaner', 'allChecked'));
+        return view('index_preparacion.bodega', compact('nota_scaner', 'productos_scaner', 'allChecked'));
     }
 
     public function checkProduct_cosmica(Request $request){
