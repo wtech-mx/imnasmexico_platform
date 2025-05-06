@@ -318,6 +318,7 @@ class NotasProductosController extends Controller
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = $nuevosCampos4[$index];
                         $notas_inscripcion->estatus = 1;
+                        $notas_inscripcion->escaneados = $nuevosCampos3[$index];
                         $notas_inscripcion->save();
                     }else{
                         $notas_inscripcion = new ProductosNotasId;
