@@ -525,7 +525,7 @@
                                                 @include('admin.cosmica_ecommerce.modal_direccion')
                                             @endforeach
 
-                                            @foreach ($notas_cosmica_preparacion as $item)
+                                            @foreach ($ordenes_con_producto_2080 as $item)
 
                                                 @php
                                                     $status = $item->meli_data['status'] ?? null;
