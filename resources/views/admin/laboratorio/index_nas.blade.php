@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav-item" role="presentation" style="margin-left: 1rem">
-                    <button class="btn btn-danger text-white" id="pills-pendientes-tab" data-bs-toggle="pill" data-bs-target="#pills-pendientes" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
+                    <button class="btn btn-info text-white" id="pills-pendientes-tab" data-bs-toggle="pill" data-bs-target="#pills-pendientes" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
                      Pendientes
                     </button>
                 </li>
@@ -39,6 +39,12 @@
                 <li class="nav-item" role="presentation" style="margin-left: 1rem">
                     <button class="btn btn-secundary  " id="pills-confirmados-tab" data-bs-toggle="pill" data-bs-target="#pills-confirmados" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
                       Pedidos Finalizados
+                    </button>
+                </li>
+
+                <li class="nav-item" role="presentation" style="margin-left: 1rem">
+                    <button class="btn btn-danger text-white" id="pills-cancelada-tab" data-bs-toggle="pill" data-bs-target="#pills-cancelada" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
+                     Cancelado
                     </button>
                 </li>
 
@@ -181,6 +187,40 @@
                     </div>
                 </div>
 
+                <div class="tab-pane fade" id="pills-cancelada" role="tabpanel" aria-labelledby="pills-cancelada-tab" tabindex="0">
+                    <div class="table-responsive">
+                        <table class="table table-flush" id="datatable-search6">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Fecha de pedido</th>
+                                    <th>Estatus</th>
+                                    <th>Aciones</th>
+                                </tr>
+                            </thead>
+                            @foreach ($bodegaPedidoCancelado as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
+                                    <td>{{ $item->estatus_lab }}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
+                                            <i class="fa fa-file"></i> Ver
+                                        </a>
+
+                                        @if ($item->estatus != 'Realizado')
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
+                                                <i class="fa fa-file"></i> Descargar PDF
+                                            </a>
+                                        @endif
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+
               </div>
 
           </div>
@@ -206,6 +246,12 @@
     });
 
     const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
+        deferRender:true,
+        paging: true,
+        pageLength: 10
+    });
+
+    const dataTableSearch6 = new simpleDatatables.DataTable("#datatable-search6", {
         deferRender:true,
         paging: true,
         pageLength: 10

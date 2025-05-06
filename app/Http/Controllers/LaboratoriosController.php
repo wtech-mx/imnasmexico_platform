@@ -18,8 +18,9 @@ class LaboratoriosController extends Controller
         $bodegaPedidoRealizado = BodegaPedidos::where('estatus_lab','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoPendiente = BodegaPedidos::where('estatus_lab','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidos::where('estatus_lab','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoCancelado = BodegaPedidos::where('estatus_lab','=','Cancelada')->orderBy('fecha_pedido','DESC')->get();
 
-        return view('admin.laboratorio.index_nas', compact('bodegaPedidoRealizado','bodegaPedidoConfirmado','bodegaPedidoPendiente'));
+        return view('admin.laboratorio.index_nas', compact('bodegaPedidoRealizado','bodegaPedidoConfirmado','bodegaPedidoPendiente', 'bodegaPedidoCancelado'));
     }
 
     public function show($id){
