@@ -110,20 +110,22 @@ class BodegaController extends Controller
         $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $oreders_cosmica_ecommerce = OrdersCosmica::where('estatus_bodega', 'En preparacion')
-            ->whereDoesntHave('productos', function ($query) {
+        $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', 'Aprobada')->where('fecha_preparacion', '!=', NULL)
+        ->whereDoesntHave('productos', function ($query) {
+            $query->where('id_producto', 2080);
+        })
+        ->orderBy('id', 'DESC')
+        ->get();
+
+        $ordenes_con_producto_2080 = NotasProductosCosmica::where('estatus_cotizacion', 'Aprobada')
+        ->where('fecha_preparacion', '!=', NULL)
+            ->whereHas('productos', function ($query) {
                 $query->where('id_producto', 2080);
             })
             ->orderBy('id', 'DESC')
             ->get();
 
-        $ordenes_con_producto_2080 = OrdersCosmica::where('estatus_bodega', 'En preparacion')
-        ->whereHas('productos', function ($query) {
-            $query->where('id_producto', 2080);
-        })
-        ->orderBy('id', 'DESC')
-        ->get();
+        $oreders_cosmica_ecommerce = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
 
         $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
 
@@ -153,7 +155,7 @@ class BodegaController extends Controller
             'ApiFiltradaCollectAprobadoreposicion',
             'oreders_cosmica_ecommerce',
             'orders_nas_ecommerce',
-        'ordenes_con_producto_2080'));
+            'ordenes_con_producto_2080'));
     }
 
     public function generarEtiqueta($tabla, $id){
