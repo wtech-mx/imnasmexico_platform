@@ -25,7 +25,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>#</th>
-                                        {{-- <th>Seleccionar</th> --}}
+                                        <th><input type="checkbox" id="selectAllProducts"></th>
                                         <th>Foto</th>
                                         <th>Nombre</th>
                                         <th>Precio Normal</th>
@@ -39,7 +39,8 @@
                                     $precio_normal = number_format($product->precio_normal, 0, '.', ',');
                                 @endphp
                                 <tr id="productRow{{ $product->id }}">
-                                    <td>{{ $product->id }} <br>
+                                    <td>{{ $product->id }}</td>
+                                    <td>
                                         <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
                                     </td>
 
@@ -133,12 +134,26 @@
     $(document).ready(function() {
         var activeTab;
 
-        $('#generateBarcodeBtn').on('click', function(e) {
+        let table = $('#datatable-search').DataTable();
+
+        // Seleccionar/Deseleccionar todos
+        $('#selectAllProducts').on('click', function () {
+            let isChecked = $(this).is(':checked');
+
+            // Usa el API de DataTables para marcar todos los checkboxes en todas las páginas
+            table.rows().every(function () {
+                $(this.node()).find('input[name="selected_products[]"]').prop('checked', isChecked);
+            });
+        });
+
+        // Generar códigos de barra (como antes, pero mejorado)
+        $('#generateBarcodeBtn').on('click', function (e) {
             e.preventDefault();
 
-            // Obtener los productos seleccionados
             let selectedProducts = [];
-            $('input[name="selected_products[]"]:checked').each(function() {
+
+            // Recorre TODAS las filas (incluso no visibles)
+            table.$('input[name="selected_products[]"]:checked').each(function () {
                 selectedProducts.push($(this).val());
             });
 
@@ -147,31 +162,30 @@
                 return;
             }
 
-            // Enviar los productos seleccionados al backend
             $.ajax({
-                url: "{{ route('generateBarcodes') }}",  // La ruta hacia el controlador de Laravel
+                url: "{{ route('generateBarcodes') }}",
                 type: 'POST',
                 data: {
                     selected_products: selectedProducts,
-                    _token: '{{ csrf_token() }}'  // Token CSRF para seguridad
+                    _token: '{{ csrf_token() }}'
                 },
                 xhrFields: {
-                    responseType: 'blob'  // Esto es para manejar el PDF como un archivo binario
+                    responseType: 'blob'
                 },
-                success: function(response) {
-                    // Crear un enlace temporal para descargar el PDF
+                success: function (response) {
                     let blob = new Blob([response], { type: 'application/pdf' });
                     let link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
                     link.download = 'codigos_barras.pdf';
                     link.click();
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Error al generar el PDF:', error);
                     alert('Error al generar el PDF.');
                 }
             });
         });
+
 
       // Función para abrir el modal y llenar los datos del producto
       $(document).on('click', '.editProductBtn', function() {
