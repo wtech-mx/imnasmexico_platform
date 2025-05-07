@@ -519,7 +519,7 @@ class TiendaController extends Controller
                 $producto = Products::where('id', $details['id_producto'])->first();
 
                 if ($producto) {
-                    if ($producto && $producto->subcategoria == 'Kit') {
+                    if ($producto && $producto->subcategoria == 'Kit' || $producto->subcategoria == 'kit') {
                         $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
                         foreach ($productos_bundle as $producto_bundle) {
