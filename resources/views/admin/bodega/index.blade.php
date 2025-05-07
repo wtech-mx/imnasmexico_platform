@@ -257,8 +257,12 @@
                                                     $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
                                                 @endphp
 
+                                                @if ($item->metodo_pago == 'Envio MELI')
+                                                    <tr class="border-yellow" style="background: #d486d6">
+                                                @else
+                                                    <tr class="{{ $borderClass }}" style="background: #d486d6">
+                                                @endif
 
-                                                <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                     <td>
                                                         @if ($item->item_id_meli && !$item->estadociudad)
                                                             <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">

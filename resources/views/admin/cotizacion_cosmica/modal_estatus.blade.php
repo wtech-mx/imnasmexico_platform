@@ -95,6 +95,7 @@
                                 <option value="Envio">Envio</option>
                                 <option value="Contra Entrega">Contra Entrega</option>
                                 <option value="Reposicion">Reposicion</option>
+                                <option value="Envio MELI">Envio MELI</option>
                             </select>
                         </div>
                     </div>
@@ -240,6 +241,25 @@ $(document).ready(function() {
 
                 // Hacer los campos de imagen requeridos
                 $modal.find('#foto_pago').attr('required', true);
+                $modal.find('#doc_guia').attr('required', true);
+
+                // Remover el atributo required de los campos de "Contra Entrega"
+                $modal.find('#fecha_entrega').removeAttr('required');
+                $modal.find('#direccion_entrega').removeAttr('required');
+                $modal.find('#guia_rep').removeAttr('required');
+                $modal.find('#comentario_rep').removeAttr('required');
+
+                // Limpiar los valores de los campos de "Contra Entrega"
+                $modal.find('#fecha_entrega, #direccion_entrega, #guia_rep, #comentario_rep').val('');
+
+            } else if (selectedValue === 'Envio MELI') {
+                // Mostrar los campos relacionados con el envío
+                $modal.find('.metodo-pago-select').show();
+                $modal.find('.metodo-pago-entrega-select').hide();
+                $modal.find('.metodo-pago-rep-select').hide();
+
+                // Hacer los campos de imagen requeridos
+                $modal.find('#foto_pago').attr('required', false);
                 $modal.find('#doc_guia').attr('required', true);
 
                 // Remover el atributo required de los campos de "Contra Entrega"
