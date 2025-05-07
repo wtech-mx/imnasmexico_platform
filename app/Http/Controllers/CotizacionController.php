@@ -632,7 +632,14 @@ class CotizacionController extends Controller
 
         $nota->save();
 
-        return redirect()->back()->with('success', 'Se ha actualizado');
+        if($request->get('estatus_cotizacion') == 'Preparado' || $request->get('estatus_cotizacion') == 'Enviado'){
+            return redirect()->route('index_preparacion.bodega')
+            ->with('success', 'actualizada exitosamente.');
+        }else{
+            return redirect()->back()->with('success', 'Se ha actualizado');
+        }
+
+
     }
 
     public function update_t_cosmica(Request $request, $id){
