@@ -449,20 +449,22 @@ class TiendaController extends Controller
         if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
-                $user->postcode = $request->get('postcode');
+                $user->postcode = $request->get('codigo_postal');
                 $user->state = $request->get('state');
-                $user->country = $request->get('country');
-                $user->direccion = $request->get('direccion');
-                $user->city = $request->get('city');
+                $user->country = $request->get('colonia');
+                $user->direccion = $request->get('calle_numero');
+                $user->city = $request->get('estado');
+                $user->alcaldia = $request->get('alcaldia');
                 $user->referencia = $request->get('referencia');
                 $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
-                $user->postcode = $request->get('postcode');
+                $user->postcode = $request->get('codigo_postal');
                 $user->state = $request->get('state');
-                $user->country = $request->get('country');
-                $user->direccion = $request->get('direccion');
-                $user->city = $request->get('city');
+                $user->country = $request->get('colonia');
+                $user->direccion = $request->get('calle_numero');
+                $user->city = $request->get('estado');
+                $user->alcaldia = $request->get('alcaldia');
                 $user->referencia = $request->get('referencia');
                 $user->update();
             }
@@ -477,11 +479,12 @@ class TiendaController extends Controller
             $payer->cliente = '1';
             $payer->password = Hash::make($request->get('telefono'));
 
-            $payer->postcode = $request->get('postcode');
+            $payer->postcode = $request->get('codigo_postal');
             $payer->state = $request->get('state');
-            $payer->country = $request->get('country');
-            $payer->direccion = $request->get('direccion');
-            $payer->city = $request->get('city');
+            $payer->country = $request->get('colonia');
+            $payer->direccion = $request->get('calle_numero');
+            $payer->city = $request->get('estado');
+            $payer->alcaldia = $request->get('alcaldia');
             $payer->referencia = $request->get('referencia');
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
@@ -506,7 +509,7 @@ class TiendaController extends Controller
             $order_cosmica->estatus = 0;
             $order_cosmica->code = $code;
             $order_cosmica->external_reference = $code;
-            if($request->get('postcode') != NULL ){
+            if($request->get('codigo_postal') != NULL ){
                 $order_cosmica->forma_envio = 'envio';
             }
             $order_cosmica->save();
