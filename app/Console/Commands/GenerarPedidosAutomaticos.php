@@ -70,33 +70,10 @@ class GenerarPedidosAutomaticos extends Command
 
     private function generarPedidoCosmica()
     {
-        // Obtener productos que estén por debajo del umbral considerando stock + stock_salon
+        // 1) Selecciona productos por debajo de su min_stock
         $productosBajoStock = Products::where('categoria', 'Cosmica')
             ->where('subcategoria', 'Producto')
-            ->where(function ($query) {
-                $query->whereRaw('(stock + COALESCE(stock_salon, 0)) < 60')
-                    ->where(function ($subQuery) {
-                        $subQuery->where('nombre', 'LIKE', '%Hydrabooster%')
-                                 ->orWhere('nombre', 'LIKE', '%Hydraboosters%')
-                                 ->orWhereIn('sku', ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230']);
-                    })
-                    ->orWhere(function ($subQuery) {
-                        $subQuery->whereRaw('(stock + COALESCE(stock_salon, 0)) < 20')
-                                 ->orWhereIn('sku', ['638320']);
-                    })
-                    ->orWhere(function ($subQuery) {
-                        $subQuery->whereRaw('(stock + COALESCE(stock_salon, 0)) < 10')
-                                 ->orWhereIn('sku', ['551406', '995323', '319895', '604407', '478898']);
-                    })
-                    ->orWhere(function ($subQuery) {
-                        $subQuery->whereRaw('(stock + COALESCE(stock_salon, 0)) < 30')
-                                 ->where('nombre', 'NOT LIKE', '%Hydrabooster%')
-                                 ->where('nombre', 'NOT LIKE', '%Hydraboosters%')
-                                 ->where('nombre', 'NOT LIKE', '%Shampoo%')
-                                 ->where('nombre', 'NOT LIKE', '%Micelar%')
-                                 ->whereNotIn('sku', ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230','638320', '551406', '995323', '319895', '604407', '478898']);
-                    });
-            })
+            ->whereRaw('(stock + COALESCE(stock_salon, 0)) < min_stock')
             ->get();
 
         if ($productosBajoStock->isEmpty()) {
@@ -104,42 +81,28 @@ class GenerarPedidosAutomaticos extends Command
             return;
         }
 
-        // Crear nuevo pedido
+        // 2) Crea el pedido padre
         $pedido = BodegaPedidosCosmica::create([
-            'estatus' => 'Aprobada',
-            'estatus_lab' => 'Aprobada',
-            'fecha_pedido' => now(),
+            'estatus'        => 'Aprobada',
+            'estatus_lab'    => 'Aprobada',
+            'fecha_pedido'   => now(),
             'fecha_aprovado' => now(),
-            'id_user' => 2474,
+            'id_user'        => 2474,
         ]);
 
+        // 3) Recorre y calcula cantidad a pedir
         foreach ($productosBajoStock as $producto) {
-            $totalStock = $producto->stock + ($producto->stock_salon ?? 0);
-
-            // Asignar el umbral según SKU o nombre
-            if (in_array($producto->sku, ['551406', '995323', '319895', '604407', '478898'])) {
-                $umbral = 10;
-            } elseif (in_array($producto->sku, ['638320'])) {
-                $umbral = 20;
-            } elseif (
-                stripos($producto->nombre, 'Hydrabooster') !== false ||
-                stripos($producto->nombre, 'Hydraboosters') !== false ||
-                in_array($producto->sku, ['324191', '197263', '116862', '902417', '631363', '868760', '631091', '362230'])
-            ) {
-                $umbral = 60;
-            } else {
-                $umbral = 30;
-            }
-
+            $totalStock    = $producto->stock + ($producto->stock_salon ?? 0);
+            $umbral        = (int) $producto->min_stock;
             $cantidadNecesaria = max(0, $umbral - $totalStock);
 
             if ($cantidadNecesaria > 0) {
                 BodegaPedidosProductosCosmica::create([
-                    'id_pedido' => $pedido->id,
-                    'id_producto' => $producto->id,
-                    'cantidad_pedido' => $cantidadNecesaria,
-                    'stock_anterior' => $producto->stock,
-                    'cantidad_restante' => $cantidadNecesaria,
+                    'id_pedido'           => $pedido->id,
+                    'id_producto'         => $producto->id,
+                    'cantidad_pedido'     => $cantidadNecesaria,
+                    'stock_anterior'      => $producto->stock,
+                    'cantidad_restante'   => $cantidadNecesaria,
                     'cantidad_entregada_lab' => $cantidadNecesaria,
                 ]);
             }
@@ -150,82 +113,45 @@ class GenerarPedidosAutomaticos extends Command
 
     private function generarPedidoNAS()
     {
+        // 1) Selecciona productos por debajo de su min_stock
         $productosBajoStock = Products::where('categoria', 'NAS')
             ->where('subcategoria', 'Producto')
-            ->where(function ($query) {
-                $query->where(function ($q) {
-                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 15')
-                      ->where(function ($q2) {
-                          $q2->where('nombre', 'LIKE', '%1.3 kg%')
-                             ->orWhere('nombre', 'LIKE', '%1300 g%');
-                      });
-                })
-                ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 30')
-                      ->where('nombre', 'LIKE', '%125ml%');
-                })
-                ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 15')
-                      ->where('nombre', 'LIKE', '%500 g%');
-                })
-                ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 10')
-                      ->whereIn('sku', ['392959', '771609', '753403']);
-                })
-                ->orWhere(function ($q) {
-                    $q->whereRaw('(stock + COALESCE(stock_salon, 0)) < 20')
-                      ->where('nombre', 'NOT LIKE', '%1.3 kg%')
-                      ->where('nombre', 'NOT LIKE', '%1300 g%')
-                      ->where('nombre', 'NOT LIKE', '%125ml%')
-                      ->where('nombre', 'NOT LIKE', '%500 g%')
-                      ->whereNotIn('sku', ['392959', '771609', '753403']);
-                });
-            })
+            ->whereRaw('(stock + COALESCE(stock_salon, 0)) < min_stock')
             ->get();
 
         if ($productosBajoStock->isEmpty()) {
-            $this->info('No hay productos con bajo stock en BodegaPedidos.');
+            $this->info('No hay productos con bajo stock en BodegaPedidosNas.');
             return;
         }
 
+        // 2) Crea el pedido padre
         $pedido = BodegaPedidos::create([
-            'estatus' => 'Aprobada',
-            'estatus_lab' => 'Aprobada',
-            'fecha_pedido' => now(),
+            'estatus'        => 'Aprobada',
+            'estatus_lab'    => 'Aprobada',
+            'fecha_pedido'   => now(),
             'fecha_aprovado' => now(),
-            'id_user' => 2474,
+            'id_user'        => 2474,
         ]);
 
+        // 3) Recorre y calcula cantidad a pedir
         foreach ($productosBajoStock as $producto) {
-            $stockTotal = $producto->stock + ($producto->stock_salon ?? 0);
-
-            $umbral = 20;
-
-            if (stripos($producto->nombre, '1.3 kg') !== false || stripos($producto->nombre, '1300 g') !== false) {
-                $umbral = 15;
-            } elseif (stripos($producto->nombre, '125ml') !== false) {
-                $umbral = 30;
-            } elseif (stripos($producto->nombre, '500 g') !== false) {
-                $umbral = 15;
-            } elseif (in_array($producto->sku, ['392959', '771609', '753403'])) {
-                $umbral = 10;
-            }
-
-            $cantidadNecesaria = max(0, $umbral - $stockTotal);
+            $totalStock    = $producto->stock + ($producto->stock_salon ?? 0);
+            $umbral        = (int) $producto->min_stock;
+            $cantidadNecesaria = max(0, $umbral - $totalStock);
 
             if ($cantidadNecesaria > 0) {
                 BodegaPedidosProductos::create([
-                    'id_pedido' => $pedido->id,
-                    'id_producto' => $producto->id,
-                    'cantidad_pedido' => $cantidadNecesaria,
-                    'stock_anterior' => $producto->stock,
-                    'cantidad_restante' => $cantidadNecesaria,
+                    'id_pedido'           => $pedido->id,
+                    'id_producto'         => $producto->id,
+                    'cantidad_pedido'     => $cantidadNecesaria,
+                    'stock_anterior'      => $producto->stock,
+                    'cantidad_restante'   => $cantidadNecesaria,
                     'cantidad_entregada_lab' => $cantidadNecesaria,
                 ]);
             }
         }
 
-        $this->info('Nuevo pedido generado con éxito en BodegaPedidos.');
+        $this->info('Nuevo pedido generado con éxito en BodegaPedidosnas.');
     }
 
 }
