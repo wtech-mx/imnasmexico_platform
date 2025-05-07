@@ -260,9 +260,7 @@
                   <h3 class="h3_nomre_firmas_dire">{{ $director }}</h3>
                   <h5 class="texto_emosires_dire">{{ $firma_directora }}</h5>
                 </div>
-              </div>
-
-
+            </div>
         </div>
 
     </div>

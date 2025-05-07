@@ -108,21 +108,53 @@
         }
 
         .img_logo {
-            width: 330px;  /* Tamaño máximo permitido */
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 0px;
-            padding: 0;
-        }
+            /* dimensiones fijas para contener el logo */
+            width: 290px;
+            height: 290px;
+            margin: 10px auto 0;    /* 70px de separación arriba, centrado horizontal */
+            overflow: hidden;       /* recorta todo lo que sobresalga */
+            display: flex;
+            align-items: center;    /* centra vertical */
+            justify-content: center;/* centra horizontal */
+            }
 
-        .img_logo img {
-            max-width: 90%;  /* Tamaño máximo permitido */
-            max-height: 90%;
-            object-fit: contain; /* Mantiene la proporción sin cortar */
-            padding: 0;
-            margin: 0;
-        }
+            .img_logo img {
+            /* que la imagen ocupe todo el contenedor manteniendo proporción */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            }
+
+            /* contenedor principal: columna, centrado horizontal */
+            .firma-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;  /* centra todo el contenido */
+            }
+
+            /* cuadro fijo para la firma, igual que antes */
+            .firma-container {
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+            }
+
+            /* imagen escalada y centrada */
+            .firma-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            }
+
+            /* aseguramos que los títulos estén pegados y centrados */
+            .h3_nomre_firmas_dire,
+            .texto_emosires_dire {
+            margin: 4px 0 0;
+            text-align: center;
+            }
 
 
     </style>
@@ -131,33 +163,32 @@
 
     <div class="container">
 
+
         <div class="row">
-            <div class="col-2 text-center border" style="margin-top: 70px">
+            <div class="col-2 text-center border" style="margin-top: 0px">
             </div>
 
-            <div class="col-8 text-center border" style="margin-top: 70px">
-
+            <div class="col-8 text-center border" style="margin-top: 0px">
                 <div class="img_logo">
-                    <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
+                  <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                 </div>
-
             </div>
 
-            <div class="col-2 text-center border" style="margin-top: 70px">
+            <div class="col-2 text-center border" style="margin-top: 0px">
             </div>
         </div>
 
         <div class="row">
-            <div class="col-2 text-center border p-2">
+            <div class="col-2 text-center border ">
             </div>
 
-            <div class="col-8 text-center border p-2">
+            <div class="col-8 text-center border ">
                 <h1 class="titulo">
                     El Registro Nacional Instituto Mexicano Naturales Ain Spa  en conjunto con {{ $user->escuela }}
                 </h1>
             </div>
 
-            <div class="col-2 text-center border p-2">
+            <div class="col-2 text-center border ">
             </div>
         </div>
 
@@ -214,7 +245,7 @@
             </div>
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-4 text-center border" style="margin-top: 20px">
                 <img src="{{ $basePath . 'sello-stps-reconocimiento.png'}}" style="width: 120px;">
             </div>
@@ -228,7 +259,31 @@
                 <p>{{ $user->name}}</p>
                 <p class=""> {{ $registro?->texto_firma_personalizada ?? 'Firma del Director'  }}</p>
             </div>
+        </div> --}}
+
+        <div class="row">
+            <div class="col-4 text-center border" style="margin-top:20px">
+                <img src="{{ $basePath . 'sello-stps-reconocimiento.png'}}" style="width: 120px;">
+            </div>
+
+            <div class="col-4 text-center border"  style="margin-top:20px">
+                <img src="{{ $basePath . 'sello-reconocimiento.webp'}}" style="width: 120px;" alt="{{ $basePath . 'sello-reconocimiento.webp'}}">
+            </div>
+
+            <div class="col-4" style="margin-top:20px">
+                <div class="firma-wrapper">
+                  <div class="firma-container">
+                    <img
+                      src="{{$basePathLogo . $user->telefono . '/'. $escuela->firma}}"
+                      class="firma-img"
+                      alt="Firma del director">
+                  </div>
+                  <h3 class="h3_nomre_firmas_dire">{{ $user->name}}</h3>
+                  <h5 class="texto_emosires_dire">{{ $registro?->texto_firma_personalizada ?? 'Firma del Director'  }}</h5>
+                </div>
+            </div>
         </div>
+
 
     </div>
 
