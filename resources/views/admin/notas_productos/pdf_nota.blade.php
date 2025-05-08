@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+    <title>#{{ $nota->folio }}</title>
 <head>
   <style>
         body{
