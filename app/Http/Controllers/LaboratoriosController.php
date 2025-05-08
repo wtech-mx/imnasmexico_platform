@@ -128,7 +128,7 @@ class LaboratoriosController extends Controller
             ->first();
 
             $pedido->estatus = 'Confirmado';
-            $pedido->save();
+            // $pedido->save();
 
             $producto = Products::where('id', $ids_producto[$index])->first();
                 // Verifica si hay datos previos en la cantidad entregada
@@ -142,9 +142,9 @@ class LaboratoriosController extends Controller
                     $pedidoProducto->cantidad_entregada_lab = $restantes;
                     $pedidoProducto->save();
 
-                    // $producto->stock_cosmica = $stock_actualizado;
+                    $producto->stock_cosmica = $stock_actualizado;
                     // $producto->stock += $cantidades_recibido[$index];
-                    // $producto->save();
+                    $producto->save();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
                     ->where('cantidad_entregada_lab', '>', 0) // Busca productos con cantidad restante mayor a 0
