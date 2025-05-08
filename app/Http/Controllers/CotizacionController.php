@@ -492,6 +492,7 @@ class CotizacionController extends Controller
 
         $nota = NotasProductos::findOrFail($id);
         $nota->subtotal = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
+        $nota->tipo = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
         $nota->total = floatval(str_replace(['$', ','], '', $request->get('total_final')));
         $nota->envio = $request->get('envio');
         $nota->dinero_recibido = $request->get('costo_envio');
