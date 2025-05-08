@@ -378,8 +378,8 @@ class PedidosWooController extends Controller
     public function update_estatus_ecommerce(Request $request, $id){
         $nota = OrdersNas::findOrFail($id);
         $nota->estatus_bodega  = $request->get('estatus_cotizacion');
-
-            if($request->get('estatus_bodega') == 'Preparado'){
+  
+            if($request->get('estatus_cotizacion') == 'Preparado'){
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $producto_pedido = OrdersNasOnline::where('id_order', $id)->get();
 
