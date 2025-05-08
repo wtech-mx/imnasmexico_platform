@@ -500,9 +500,9 @@
 
                                             @foreach ($oreders_cosmica_ecommerce as $item)
                                                 @if ($item->forma_envio == 'envio')
-                                                    <tr style="background: #3f7bd6a3">
-                                                @else
                                                     <tr style="background: #80486B;color:#fff">
+                                                @else
+                                                    <tr style="background: #3f7bd6a3">
                                                 @endif
                                                     <td>
                                                         <h5>
