@@ -594,6 +594,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/admin/pedidos/cosmika/guia/{id}', [App\Http\Controllers\PedidosWooController::class, 'update_guia_ecommerce'])->name('notas_cosmica.update_guia_ecommerce');
     Route::get('cosmica/admin/bodega/preparacion/scaner/{id}', [App\Http\Controllers\PedidosWooController::class, 'preparacion_scaner'])->name('preparacion_scaner.bodega_cosmica');
     Route::patch('cosmica/admin/bodega/estatus/{id}', [App\Http\Controllers\PedidosWooController::class, 'update_estatus'])->name('ecommerce_cosmica.update_estatus');
+
+    Route::patch('nas/tn/admin/bodega/estatus/{id}', [App\Http\Controllers\PedidosWooController::class, 'update_estatus_ecommerce'])->name('update_estatus_ecommerce.update_estatus');
     Route::post('cosmica/admin/bodega/check-product', [App\Http\Controllers\PedidosWooController::class, 'checkProduct'])->name('check_cosmica_eco.product');
     // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
