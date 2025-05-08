@@ -96,6 +96,7 @@
                                 <option value="Contra Entrega">Contra Entrega</option>
                                 <option value="Reposicion">Reposicion</option>
                                 <option value="Envio MELI">Envio MELI</option>
+                                <option value="Recoger en Tienda">Recoger en Tienda</option>
                             </select>
                         </div>
                     </div>
@@ -169,6 +170,28 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-12 metodo-pago-tienda-select" style="display: none;">
+                        <div class="form-group col-12">
+                            <label for="name">fecha entrega</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                </span>
+                                <input class="form-control" type="date" id="fecha_entrega" name="fecha_entrega">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="name">Foto Pago</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                </span>
+                                <input class="form-control" type="file" id="foto_pago2" name="foto_pago2">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group col-12 metodo-pago-rep-select" style="display: none;">
                         <div class="form-group col-12">
                             <label for="name">Doc Guia</label>
@@ -238,6 +261,7 @@ $(document).ready(function() {
                 $modal.find('.metodo-pago-select').show();
                 $modal.find('.metodo-pago-entrega-select').hide();
                 $modal.find('.metodo-pago-rep-select').hide();
+                $modal.find('.metodo-pago-tienda-select').hide();
 
                 // Hacer los campos de imagen requeridos
                 $modal.find('#foto_pago').attr('required', true);
@@ -252,11 +276,31 @@ $(document).ready(function() {
                 // Limpiar los valores de los campos de "Contra Entrega"
                 $modal.find('#fecha_entrega, #direccion_entrega, #guia_rep, #comentario_rep').val('');
 
-            } else if (selectedValue === 'Envio MELI') {
+            } else if (selectedValue === 'Recoger en Tienda') {
+                    // Mostrar los campos relacionados con la entrega contra entrega
+                    $modal.find('.metodo-pago-tienda-select').show();
+                    $modal.find('.metodo-pago-select').hide();
+                    $modal.find('.metodo-pago-rep-select').hide();
+                    $modal.find('.metodo-pago-entrega-select').hide();
+
+                    // Hacer los campos de fecha y dirección requeridos
+                    $modal.find('#fecha_entrega').attr('required', true);
+                    $modal.find('#foto_pago').attr('required', true);
+
+                    // Remover el atributo required de los campos de imagen
+                    $modal.find('#foto_pago').removeAttr('required');
+                    $modal.find('#doc_guia').removeAttr('required');
+                    $modal.find('#guia_rep').removeAttr('required');
+                    $modal.find('#comentario_rep').removeAttr('required');
+
+                    // Limpiar los valores de los campos de "Envio"
+                    $modal.find('#foto_pago, #doc_guia, #guia_rep, #comentario_rep').val('');
+            }else if (selectedValue === 'Envio MELI') {
                 // Mostrar los campos relacionados con el envío
                 $modal.find('.metodo-pago-select').show();
                 $modal.find('.metodo-pago-entrega-select').hide();
                 $modal.find('.metodo-pago-rep-select').hide();
+                $modal.find('.metodo-pago-tienda-select').hide();
 
                 // Hacer los campos de imagen requeridos
                 $modal.find('#foto_pago').attr('required', false);
@@ -276,6 +320,7 @@ $(document).ready(function() {
                 $modal.find('.metodo-pago-entrega-select').show();
                 $modal.find('.metodo-pago-select').hide();
                 $modal.find('.metodo-pago-rep-select').hide();
+                $modal.find('.metodo-pago-tienda-select').hide();
 
                 // Hacer los campos de fecha y dirección requeridos
                 $modal.find('#fecha_entrega').attr('required', true);
@@ -294,6 +339,7 @@ $(document).ready(function() {
                 $modal.find('.metodo-pago-rep-select').show();
                 $modal.find('.metodo-pago-entrega-select').hide();
                 $modal.find('.metodo-pago-select').hide();
+                $modal.find('.metodo-pago-tienda-select').hide();
 
                 // Hacer los campos de fecha y dirección requeridos
                 $modal.find('#guia_rep').attr('required', true);
