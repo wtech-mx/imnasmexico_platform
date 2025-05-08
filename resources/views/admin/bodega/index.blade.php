@@ -173,7 +173,7 @@
                                             @endforeach
 
                                             @foreach ($notas_preparacion as $item)
-                                                @if ($item->metodo_pago == 'Contra Entrega')
+                                                @if ($item->metodo_pago == 'Recoger en Tienda')
                                                     <tr style="background: #3f7bd6a3">
                                                 @else
                                                     <tr style="background: #836262a3">
@@ -199,7 +199,7 @@
 
                                                     <td>
                                                         En preparación <br>
-                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                        @if ($item->metodo_pago == 'Recoger en Tienda')
                                                             <b style="color: #000;">Recoge en tienda</b>
                                                         @else
                                                             NAS Cotizaciones Aprobadas
@@ -224,7 +224,7 @@
                                                             <i class="fa fa-qrcode"></i>
                                                         </a>
 
-                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                        @if ($item->metodo_pago == 'Recoger en Tienda')
                                                             <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
                                                                 <i class="fa fa-truck"></i>
                                                             </a>
@@ -268,7 +268,7 @@
 
                                                 @if ($item->metodo_pago == 'Envio MELI')
                                                     <tr class="border-yellow" style="background: #d486d6">
-                                                @elseif ($item->metodo_pago == 'Contra Entrega')
+                                                @elseif ($item->metodo_pago == 'Recoger en Tienda')
                                                     <tr style="background: #3f7bd6a3">
                                                 @else
                                                     <tr class="{{ $borderClass }}" style="background: #d486d6">
@@ -332,7 +332,7 @@
                                                         @endif
 
                                                                 En preparación
-                                                                @if ($item->metodo_pago == 'Contra Entrega')
+                                                                @if ($item->metodo_pago == 'Recoger en Tienda')
                                                                     <b style="color: #000;">Recoge en tienda</b>
                                                                 @endif
                                                         </td>
@@ -354,7 +354,7 @@
                                                                 <i class="fa fa-qrcode"></i>
                                                             </a>
 
-                                                            @if ($item->metodo_pago == 'Contra Entrega')
+                                                            @if ($item->metodo_pago == 'Recoger en Tienda')
                                                                 <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
                                                                     <i class="fa fa-truck"></i>
                                                                 </a>
@@ -656,7 +656,7 @@
                                                                 <i class="fa fa-qrcode"></i>
                                                             </a>
 
-                                                            @if ($item->metodo_pago == 'Contra Entrega')
+                                                            @if ($item->metodo_pago == 'Recoger en Tienda')
                                                                 <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
                                                                     <i class="fa fa-truck"></i>
                                                                 </a>
