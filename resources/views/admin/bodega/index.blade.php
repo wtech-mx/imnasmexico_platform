@@ -268,6 +268,8 @@
 
                                                 @if ($item->metodo_pago == 'Envio MELI')
                                                     <tr class="border-yellow" style="background: #d486d6">
+                                                @elseif ($item->metodo_pago == 'Contra Entrega')
+                                                    <tr style="background: #3f7bd6a3">
                                                 @else
                                                     <tr class="{{ $borderClass }}" style="background: #d486d6">
                                                 @endif
@@ -330,6 +332,9 @@
                                                         @endif
 
                                                                 En preparación
+                                                                @if ($item->metodo_pago == 'Contra Entrega')
+                                                                    <b style="color: #000;">Recoge en tienda</b>
+                                                                @endif
                                                         </td>
 
                                                         <td>
@@ -374,7 +379,11 @@
                                             @endforeach
 
                                             @foreach ($orders_nas_ecommerce as $item)
-                                                <tr style="background: #F5ECE4;color:#070707">
+                                                @if ($item->forma_envio == 'envio')
+                                                    <tr style="background: #F5ECE4;color:#070707">
+                                                @else
+                                                    <tr style="background: #3f7bd6a3">
+                                                @endif
                                                     <td>
                                                         <h5>
                                                             TN{{ $item->id }}
@@ -389,7 +398,12 @@
 
                                                     <td>
                                                         En preparación <br>
-                                                        Ecommerce NAS
+                                                        @if ($item->forma_envio == 'envio')
+                                                            Ecommerce NAS
+                                                        @else
+                                                            <b style="color: #000;">Recoge en tienda</b>
+                                                        @endif
+
                                                     </td>
 
                                                     <td>
@@ -485,7 +499,11 @@
                                             @endforeach
 
                                             @foreach ($oreders_cosmica_ecommerce as $item)
-                                                <tr style="background: #80486B;color:#fff">
+                                                @if ($item->forma_envio == 'envio')
+                                                    <tr style="background: #3f7bd6a3">
+                                                @else
+                                                    <tr style="background: #80486B;color:#fff">
+                                                @endif
                                                     <td>
                                                         <h5>
                                                             TC{{ $item->id }}
@@ -500,7 +518,11 @@
 
                                                     <td>
                                                         En preparación <br>
-                                                        Ecommerce Cosmica
+                                                        @if ($item->forma_envio == 'envio')
+                                                            Ecommerce Cosmica
+                                                        @else
+                                                            <b style="color: #000;">Recoge en tienda</b>
+                                                        @endif
                                                     </td>
 
                                                     <td>
