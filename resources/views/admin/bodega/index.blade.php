@@ -173,7 +173,11 @@
                                             @endforeach
 
                                             @foreach ($notas_preparacion as $item)
-                                                <tr style="background: #836262a3">
+                                                @if ($item->metodo_pago == 'Contra Entrega')
+                                                    <tr style="background: #3f7bd6a3">
+                                                @else
+                                                    <tr style="background: #836262a3">
+                                                @endif
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -195,7 +199,12 @@
 
                                                     <td>
                                                         En preparación <br>
-                                                        NAS Cotizaciones Aprobadas
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <b style="color: #000;">Recoge en tienda</b>
+                                                        @else
+                                                            NAS Cotizaciones Aprobadas
+                                                        @endif
+
                                                     </td>
 
                                                     <td>
