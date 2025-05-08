@@ -184,6 +184,7 @@
                                                 <div class="col-3">
                                                     <label for="">Nombre</label>
                                                     <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
+                                                    <p>Precio Catalogo ${{ $originalPrecioUnitario }}.0</p>
                                                 </div>
 
                                                 <div class="form-group col-2">
@@ -207,7 +208,7 @@
                                                 </div>
 
                                                 <div class="form-group col-3">
-                                                    <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
+                                                    <label for="subtotal_{{ $productos->id }}">Subtotal * </label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="25px">

@@ -122,6 +122,7 @@
                                             <div class="col-3">
                                                 <label for="">Nombre</label>
                                                 <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
+                                                <p>Precio Catalogo ${{ $originalPrecioUnitario }}.0</p>
                                             </div>
 
                                             <div class="form-group col-3">
@@ -163,7 +164,6 @@
                                             <!-- Campo oculto para el precio unitario -->
                                             {{-- <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}"> --}}
                                             <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $originalPrecioUnitario }}">
-
 
                                             @php
                                                 $subtotal = $productos->price;
