@@ -177,6 +177,8 @@
                         $subtotal = $unit * $cantidad;
                     @endphp
                     <tr>
+
+
                         <td>
                             @if ($kit->imagenes == NULL)
                                 <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
@@ -220,11 +222,13 @@
             @foreach ($nota_productos->where('kit', 0) as $producto)
                 <tr>
                     <td>
-                        <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
                     </td>
 
                     <td>
-                        {{ $producto->producto }}
+                        {{ $producto->producto }} <br>
+                        <p style="font-size:13px">Precio Real Catalogo: ${{ $producto->Productos->precio_normal }}.0</p>
+
                     </td>
                     <td>
                         {{ $producto->cantidad }}
@@ -258,6 +262,7 @@
                 <td>{{ $nota->restante }}%</td>
                 </tr>
             @endif
+
             @if ($nota->envio == 'Si')
                 <tr style="background-color: #ffffff;">
                     <td></td>

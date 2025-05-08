@@ -103,12 +103,20 @@
 
                                     @foreach ($cotizacion_productos as  $productos)
                                         <div class="row campo3" data-id="{{ $productos->id }}">
-                                            @php
+                                            {{-- @php
                                                 if($productos->cantidad != NULL){
                                                     $precio_unitario = $productos->price / $productos->cantidad;
                                                     $precio_format = number_format($productos->price, 0, '.', ',');
                                                     $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
                                                 }
+                                            @endphp --}}
+
+                                            @php
+                                            // Saca el precio unitario original desde el producto “padre”
+                                            $originalPrecioUnitario = optional($productos->Productos)->precio_normal
+                                                                    ?? ($productos->price / $productos->cantidad);
+                                            // Sigue mostrando el subtotal con descuento (si quieres mostrarlo igual)
+                                            $precio_format = number_format($productos->price, 2, '.', ',');
                                             @endphp
 
                                             <div class="col-3">
@@ -130,7 +138,7 @@
                                                 <label for="descuento_{{ $productos->id }}">Descuento *</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                        <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
                                                     </span>
                                                     <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
                                                 </div>
@@ -153,7 +161,9 @@
                                                 </div>
                                             </div> --}}
                                             <!-- Campo oculto para el precio unitario -->
-                                            <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
+                                            {{-- <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}"> --}}
+                                            <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $originalPrecioUnitario }}">
+
 
                                             @php
                                                 $subtotal = $productos->price;
