@@ -184,16 +184,23 @@
                                 <img id="blah" src="{{asset('products/'.$kit->imagenes) }}" alt="Imagen" style="width: 50px; height: 50px;"/>
                             @endif
                         </td>
+
                         <td>
                             {{ $kit->nombre }}
                         </td>
+
                         <td>
                             {{ $cantidad }}
                         </td>
 
                         <td>
+                            {{ $kit->descuento }}
+                        </td>
+
+                        <td>
                             ${{ $unit }}
                         </td>
+
                         <td>
                             ${{ $subtotal }}
                         </td>

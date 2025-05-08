@@ -180,7 +180,7 @@
                     <td>
                         <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
                         {{ $nota_producto->Productos->nombre }} <br>
-                        <p style="text-decoration: line-through;">Precio: ${{ $nota_producto->Productos->precio_normal }}.0</p>
+                        <p style="text-decoration: line-through;">Precio Real Catalogo: ${{ $nota_producto->Productos->precio_normal }}.0</p>
                     </td>
                     <td>
                         {{ $nota_producto->cantidad }}
