@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+    <title>{{ $nota->folio }}</title>
 <head>
   <style>
         body{
@@ -155,8 +156,9 @@
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
                 <th>Imagen</th>
-                <th>Cantidad</th>
                 <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Descuento</th>
                 <th>P.Unit</th>
                 <th>Importe</th>
             </tr>
@@ -183,11 +185,12 @@
                             @endif
                         </td>
                         <td>
-                            {{ $cantidad }}
-                        </td>
-                        <td>
                             {{ $kit->nombre }}
                         </td>
+                        <td>
+                            {{ $cantidad }}
+                        </td>
+
                         <td>
                             ${{ $unit }}
                         </td>
@@ -212,11 +215,15 @@
                     <td>
                         <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
                     </td>
+
+                    <td>
+                        {{ $producto->producto }}
+                    </td>
                     <td>
                         {{ $producto->cantidad }}
                     </td>
                     <td>
-                        {{ $producto->producto }}
+                        {{ $producto->descuento }}%
                     </td>
                     <td>
                         ${{$producto->Productos->precio_normal}}

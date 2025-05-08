@@ -164,12 +164,20 @@
                                     @foreach ($cotizacion_productos as  $productos)
                                         @if($productos->num_kit == $kit['id'])
                                             <div class="row campo3" data-id="{{ $productos->id }}">
-                                                @php
+                                                {{-- @php
                                                     if($productos->cantidad != NULL){
                                                         $precio_unitario = $productos->price / $productos->cantidad;
                                                         $precio_format = number_format($productos->price, 0, '.', ',');
                                                         $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
                                                     }
+                                                @endphp --}}
+
+                                                @php
+                                                // Saca el precio unitario original desde el producto “padre”
+                                                $originalPrecioUnitario = optional($productos->Productos)->precio_normal
+                                                                        ?? ($productos->price / $productos->cantidad);
+                                                // Sigue mostrando el subtotal con descuento (si quieres mostrarlo igual)
+                                                $precio_format = number_format($productos->price, 2, '.', ',');
                                                 @endphp
 
                                                 <div class="col-3">
@@ -215,7 +223,10 @@
                                                 </div>
 
                                                 <!-- Campo oculto para el precio unitario -->
-                                                <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
+                                                {{-- <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}"> --}}
+
+                                                <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $originalPrecioUnitario }}">
+
 
                                                 @php
                                                     $subtotal = $productos->price;
