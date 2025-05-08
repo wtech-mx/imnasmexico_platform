@@ -26,7 +26,7 @@ NAS Ecommerce TN{{$nota_scaner->id}}
 
                     <div class="card-body">
                         <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
-                        <form method="POST" action="{{ route('ecommerce_cosmica.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('update_estatus_ecommerce.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <input type="hidden" name="estatus_cotizacion" value="Preparado">
