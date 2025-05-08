@@ -7,6 +7,8 @@ use App\Models\OrderOnlineCosmica;
 use App\Models\OrderOnlineNas;
 use App\Models\OrdersCosmica;
 use App\Models\OrdersCosmicaOnline;
+use App\Models\OrdersNas;
+use App\Models\OrdersNasOnline;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
@@ -349,6 +351,57 @@ class PedidosWooController extends Controller
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
                 $nota->fecha_aprobada  = date("Y-m-d");
                 $producto_pedido = OrdersCosmicaOnline::where('id_notas_productos', $id)->get();
+                foreach ($producto_pedido as $campo) {
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                    if ($product_first && $campo->cantidad > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $campo->cantidad;
+                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                        $producto_historial->id_venta_nas = $id;
+                        $producto_historial->save();
+
+                        $product_first->stock -= $campo->cantidad;
+                        $product_first->save();
+                    }
+                }
+            }
+
+        $nota->save();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('index_preparacion.bodega')
+        ->with('success', 'Creado exitosamente.');
+    }
+
+    public function update_estatus_ecommerce(Request $request, $id){
+        $nota = OrdersNas::findOrFail($id);
+        $nota->estatus_bodega  = $request->get('estatus_cotizacion');
+
+            if($request->get('estatus_bodega') == 'Preparado'){
+                $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                $producto_pedido = OrdersNasOnline::where('id_order', $id)->get();
+
+                foreach ($producto_pedido as $campo) {
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                    if ($product_first && $campo->cantidad > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $campo->cantidad;
+                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                        $producto_historial->id_nas_online = $id;
+                        $producto_historial->save();
+
+                        $product_first->stock -= $campo->cantidad;
+                        $product_first->save();
+                    }
+                }
+            }else if($request->get('estatus_cotizacion') == 'Enviado'){
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
+                $nota->fecha_aprobada  = date("Y-m-d");
+                $producto_pedido = OrdersNas::where('id_notas_productos', $id)->get();
                 foreach ($producto_pedido as $campo) {
                     $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
                     if ($product_first && $campo->cantidad > 0) {
