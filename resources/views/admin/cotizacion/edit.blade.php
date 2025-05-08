@@ -445,7 +445,7 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
                         costoEnvio = total >= 2500 ? 0 : 90;
                     }
                 } else {
-                    costoEnvio = 180; // Si el cliente no tiene membresía o no está activa, el costo de envío es 180
+                    costoEnvio = 250; // Si el cliente no tiene membresía o no está activa, el costo de envío es 180
                 }
             }
 

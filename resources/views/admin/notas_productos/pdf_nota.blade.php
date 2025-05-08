@@ -166,8 +166,9 @@
     <table class="table table-bordered border-primary">
         <thead class="text-center" style="background-color: #836262; color: #fff">
             <tr>
-                <th>Cantidad</th>
                 <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Descuento</th>
                 <th>P.Unit</th>
                 <th>Importe</th>
             </tr>
@@ -176,11 +177,15 @@
             @foreach ($nota_productos as $nota_producto)
                 <tr>
                     <td>
+                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
+                        {{ $nota_producto->Productos->nombre }} <br>
+                        <p style="text-decoration: line-through;">Precio: ${{ $nota_producto->Productos->precio_normal }}.0</p>
+                    </td>
+                    <td>
                         {{ $nota_producto->cantidad }}
                     </td>
                     <td>
-                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
-                        {{ $nota_producto->Productos->nombre }}
+                        {{ $nota_producto->descuento }}%
                     </td>
                     @php
                         if($nota_producto->producto == NULL){
