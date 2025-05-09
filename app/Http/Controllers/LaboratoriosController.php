@@ -60,7 +60,7 @@ class LaboratoriosController extends Controller
                     $pedidoProducto->save();
 
                     $producto->stock_nas = $stock_actualizado;
-                    // $producto->stock += $cantidades_recibido[$index];// Aumentar el stock con la cantidad recibida
+                    $producto->stock += $cantidades_recibido[$index];// Aumentar el stock con la cantidad recibida
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductos::where('id_pedido', $id_pedido)
@@ -143,7 +143,7 @@ class LaboratoriosController extends Controller
                     $pedidoProducto->save();
 
                     $producto->stock_cosmica = $stock_actualizado;
-                    // $producto->stock += $cantidades_recibido[$index];
+                    $producto->stock += $cantidades_recibido[$index];
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
