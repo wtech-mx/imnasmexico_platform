@@ -124,7 +124,7 @@ class CotizacionController extends Controller
         ->orderBy('nombre', 'ASC')
         ->get();
 
-        return view('admin.cotizacion.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
+        return view('admin.cotizindex_cosmicaacion.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
 
     public function store(request $request){

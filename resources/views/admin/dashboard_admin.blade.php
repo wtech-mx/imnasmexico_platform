@@ -52,12 +52,14 @@
             <div class="card-body p-3">
                 <div class="row">
                 <div class="col-8">
-                    <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Facturas Pendientes</p>
-                    <h5 class="font-weight-bolder">
-                        {{ $contadorfacturas }}
-                    </h5>
-                    </div>
+                    <a href="{{ route('facturas.index') }}">
+                        <div class="numbers">
+                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Facturas Pendientes</p>
+                        <h5 class="font-weight-bolder">
+                            {{ $contadorfacturas }}
+                        </h5>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-4 text-end">
                     <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
