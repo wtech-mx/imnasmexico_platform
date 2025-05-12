@@ -9,6 +9,9 @@
     .border-yellow {
         background: #fff61a!important;
     }
+    .dataTable-wrapper .dataTable-container .table tbody tr td {
+    padding: 0!important;
+}
 </style>
     <div class="container-fluid">
         <div class="row">
@@ -33,17 +36,17 @@
                                     <h5>Ventas del dia</h5>
                                         <div class="row">
 
-                                            <div class="col-3">
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                                 <label for="user_id">Fecha Inicio:</label>
                                                 <input type="date" class="form-control" name="fecha_inicio" value="{{ date('Y-m-d') }}">
                                             </div>
 
-                                            <div class="col-3">
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                                 <label for="user_id">Fecha Fin:</label>
                                                 <input type="date" class="form-control" name="fecha_fin" value="{{ date('Y-m-d') }}">
                                             </div>
 
-                                            <div class="col-3">
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                                 <label for="user_id">Tipo:</label>
                                                 <select class="form-control" id="tipo" name="tipo">
                                                     <option value="General">General</option>
@@ -53,8 +56,8 @@
                                             </div>
 
 
-                                            <div class="col-3 align-self-end">
-                                                <button type="submit" name="action" value="Generar PDF" class="btn btn-success">Generar PDF</button>
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 align-self-end">
+                                                <button type="submit" name="action" value="Generar PDF" class="btn btn-success my-auto">Generar PDF</button>
                                             </div>
                                         </div>
                                 </div>
@@ -62,24 +65,38 @@
                         </div>
                     @endcan
 
-                    <div class="row">
-                        <div class="col-12 mt-3">
-                            <div class="d-flex justify-content-around">
-                                <span class="badge rounded-pill text-dark" style="background: #F5ECE4">NAS Tienda Online</span>
-                                <span class="badge rounded-pill text-white" style="background: #6ec7d1a3">NAS Tiendita</span>
-                                <span class="badge rounded-pill text-white" style="background: #836262a3">NAS Cotizaciones Aprobadas</span>
-                                <span class="badge rounded-pill text-white" style="background: #D486D6">Cosmica Cotizaciones Aprobadas</span>
-                                <span class="badge rounded-pill text-white" style="background: #80486B">Cosmica Tienda Online</span>
-                                <span class="badge rounded-pill text-white" style="background: #EE96BA">Paradisus</span>
-                            </div>
+                    <div class="row p-3">
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-dark" style="background: #F5ECE4">NAS Online</span>
+                         </div>
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #6ec7d1a3">NAS Tiendita</span>
+                         </div>
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #836262a3">NAS  </span>
+                         </div>
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #D486D6">Cosmica  </span>
+                         </div>
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #80486B">Cosmica Online</span>
+                         </div>
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #EE96BA">Paradisus</span>
+                         </div>
+
+                         <div class="col-12 col-sm-4 col-md-3 col-lg-2 ">
+                            <form class="row mt-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
+                                <button class="btn btn-dark btn-xs" type="submit" style=""><i class="fa fa-file-pdf"></i> PDF productos faltantes</button>
+                            </form>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-around">
-                                <form class="row mt-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
-                                    <button class="btn btn-dark btn-sm" type="submit" style=""><i class="fa fa-file-pdf"></i> PDF productos faltantes</button>
-                                </form>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="card-body">
@@ -148,9 +165,13 @@
                                                     </td>
 
                                                     <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('DD/MM/YY') }}
+                                                        <br>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('hh:mm a') }}
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
@@ -202,15 +223,19 @@
                                                         @if ($item->metodo_pago == 'Recoger en Tienda' || $item->metodo_pago == 'Contra Entrega')
                                                             <b style="color: #000;">Recoge en tienda</b>
                                                         @else
-                                                            NAS Cotizaciones Aprobadas
+                                                            NAS
                                                         @endif
 
                                                     </td>
 
                                                     <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('DD/MM/YY') }}
+                                                        <br>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('hh:mm a') }}
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
@@ -232,7 +257,7 @@
                                                             <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
                                                                 <i class="fa fa-truck"></i>
                                                             </a>
-                                                        @endif
+                                                        @endif <br>
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
@@ -331,17 +356,21 @@
                                                             </p>
                                                         @endif
 
-                                                                En preparación
+                                                                En preparación <br>
                                                                 @if ($item->metodo_pago == 'Recoger en Tienda' || $item->metodo_pago == 'Contra Entrega')
                                                                     <b style="color: #000;">Recoge en tienda</b>
                                                                 @endif
                                                         </td>
 
-                                                        <td>
-                                                            <h5>
-                                                                {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                            </h5>
-                                                        </td>
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('DD/MM/YY') }}
+                                                        <br>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('hh:mm a') }}
+                                                    </td>
                                                         <td><h5>${{ $item->total }}</h5></td>
                                                         <td>
                                                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
@@ -362,7 +391,7 @@
                                                                 <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
                                                                     <i class="fa fa-truck"></i>
                                                                 </a>
-                                                            @endif
+                                                            @endif <br>
 
                                                             <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                                 <i class="fa fa-info"></i>
@@ -407,9 +436,13 @@
                                                     </td>
 
                                                     <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('DD/MM/YY') }}
+                                                        <br>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('hh:mm a') }}
                                                     </td>
                                                     <td><h5>${{ $item->pago }}</h5></td>
                                                     <td>
@@ -431,7 +464,7 @@
                                                             <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->guia_doc) }}" download="{{asset('pago_fuera/'.$item->guia_doc) }}" style="background: #e6ab2d;">
                                                                 <i class="fa fa-truck"></i>
                                                             </a>
-                                                        @endif
+                                                        @endif <br>
 
                                                         <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.nas', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
@@ -526,9 +559,13 @@
                                                     </td>
 
                                                     <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('DD/MM/YY') }}
+                                                        <br>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('hh:mm a') }}
                                                     </td>
                                                     <td><h5>${{ $item->pago }}</h5></td>
                                                     <td>
@@ -550,7 +587,7 @@
                                                             <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->guia_doc) }}" download="{{asset('pago_fuera/'.$item->guia_doc) }}" style="background: #e6ab2d;">
                                                                 <i class="fa fa-truck"></i>
                                                             </a>
-                                                        @endif
+                                                        @endif <br>
 
                                                         <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega_cosmica', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
@@ -639,11 +676,15 @@
                                                                 En preparación
                                                         </td>
 
-                                                        <td>
-                                                            <h5>
-                                                                {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                            </h5>
-                                                        </td>
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('DD/MM/YY') }}
+                                                        <br>
+                                                        {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                                ->locale('es')
+                                                                ->isoFormat('hh:mm a') }}
+                                                    </td>
                                                         <td><h5>${{ $item->total }}</h5></td>
                                                         <td>
                                                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
@@ -664,7 +705,7 @@
                                                                 <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
                                                                     <i class="fa fa-truck"></i>
                                                                 </a>
-                                                            @endif
+                                                            @endif <br>
 
                                                             <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                                 <i class="fa fa-info"></i>

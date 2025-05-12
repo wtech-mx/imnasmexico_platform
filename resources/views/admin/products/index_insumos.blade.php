@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Products Insumos
+    Bodega Insumos
 @endsection
 
 @section('css')

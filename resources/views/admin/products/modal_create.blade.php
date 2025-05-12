@@ -28,36 +28,43 @@
                         <input id="stock" name="stock" type="number" class="form-control" >
                     </div>
 
-                    <div class="form-group col-6">
-                        <label for="name">Categoria</label>
-                        <select class="form-control" id="categoria" name="categoria" required>
-                            <option value="">Seleciona una opcion</option>
-                            <option value="NAS">NAS</option>
-                            <option value="Cosmica">Cosmica</option>
-                            <option value="Insumos Bodega">Insumos Bodega</option>
-                        </select>
-                    </div>
+                    @if(request()->routeIs('products_insumos_castilla.index'))
 
-                    <div class="form-group col-6">
-                        <label for="name">Subcategoria</label>
-                        <select class="form-control" id="subcategoria" name="subcategoria" required>
-                            <option value="">Seleciona una opcion</option>
-                            <option value="Tiendita">Tiendita</option>
-                            <option value="Producto">Producto</option>
-                            <option value="Muestras">Muestras</option>
-                        </select>
-                    </div>
+                    @else
+                        <div class="form-group col-6">
+                            <label for="name">Categoria</label>
+                            <select class="form-control" id="categoria" name="categoria" required>
+                                <option value="">Seleciona una opcion</option>
+                                <option value="NAS">NAS</option>
+                                <option value="Cosmica">Cosmica</option>
+                                <option value="Insumos Bodega">Insumos Bodega</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group col-12">
-                        <label for="num_estandar">descripcion</label>
-                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control">
-                        </textarea>
-                    </div>
+                        <div class="form-group col-6">
+                            <label for="name">Subcategoria</label>
+                            <select class="form-control" id="subcategoria" name="subcategoria" required>
+                                <option value="">Seleciona una opcion</option>
+                                <option value="Tiendita">Tiendita</option>
+                                <option value="Producto">Producto</option>
+                                <option value="Muestras">Muestras</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group col-12">
-                        <label for="imagenes">Link drive img</label>
-                        <input id="imagenes" name="imagenes" type="text" class="form-control" >
-                    </div>
+                        <div class="form-group col-12">
+                            <label for="num_estandar">descripcion</label>
+                            <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control">
+                            </textarea>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="imagenes">Link drive img</label>
+                            <input id="imagenes" name="imagenes" type="text" class="form-control" >
+                        </div>
+                    @endif
+
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>

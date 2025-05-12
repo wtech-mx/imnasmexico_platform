@@ -105,7 +105,7 @@ Cosmica
                 <tr>
                     <td>{{ $producto->linea }}</td>
                     <td><img src="{{ $producto->imagenes }}" alt="" style="width: 45px"> {{ $producto->nombre }}</td>
-                    <td>{{ Str::limit($producto->descripcion, 50) }}</td>
+                    <td>{{ Str::limit($producto->descripcion, 180) }}</td>
                     <td>
                         <input
                             type="number"
