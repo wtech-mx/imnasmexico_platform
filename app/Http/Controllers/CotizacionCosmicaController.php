@@ -753,8 +753,8 @@ class CotizacionCosmicaController extends Controller
         }else{
             $folio = $nota->folio;
         }
-        // return $pdf->stream();
-        return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+         return $pdf->stream();
+       // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
 
     public function update_estatus(Request $request, $id){
