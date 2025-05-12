@@ -267,7 +267,7 @@
                     $modal.find('.metodo-pago-rep-select').hide();
 
                     // Hacer los campos de fecha y dirección requeridos
-                    $modal.find('#fecha_entrega').attr('required', true);
+                    $modal.find('#fecha_entrega').attr('required', false);
                     $modal.find('#foto_pago').attr('required', true);
 
                     // Remover el atributo required de los campos de imagen
