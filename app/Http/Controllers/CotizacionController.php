@@ -703,8 +703,8 @@ class CotizacionController extends Controller
         }else{
             $folio = $nota->folio;
         }
-        return $pdf->stream();
-         //return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
+        //return $pdf->stream();
+         return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
     }
 
     public function delete($id)
@@ -1377,7 +1377,7 @@ class CotizacionController extends Controller
         }else{
             $folio = $nota->folio;
         }
-        return $pdf->stream();
-         //return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
+        //return $pdf->stream();
+         return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
     }
 }
