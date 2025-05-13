@@ -6,7 +6,7 @@ Cosmica
 
 <style>
     .img_header{
-        widows: 150px;
+        width: 250px;
     }
 
     .h3_subtitulos{
@@ -50,9 +50,31 @@ Cosmica
         border-bottom-width: var(--bs-border-width);
         box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
     }
+
+    @media only screen and (max-width: 760px) {
+        .img_header{
+            width: 150px;
+        }
+    }
+
+    /* Por defecto en móvil (<760px): preview activo, full oculto */
+    @media (max-width: 759px) {
+    .descripcion-cell .preview { display: block; }
+    .descripcion-cell .full    { display: none; }
+    .toggle-desc               { display: inline; }
+    }
+
+    /* En escritorio (>=760px): full siempre visible, preview oculto y sin toggles */
+    @media (min-width: 760px) {
+    .descripcion-cell .preview { display: none !important; }
+    .descripcion-cell .full    { display: block !important; }
+    .toggle-desc               { display: none !important; }
+    }
+
 </style>
 
 @section('cotizador')
+    <link rel="icon" type="image/x-icon" href="https://plataforma.imnasmexico.com/cosmika/menu/logo.png">
 
 <div class="container-xxl">
 <form id="cotizaForm">
@@ -72,14 +94,14 @@ Cosmica
     </div>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
             <p class="d-inline mr-5" style="color:#C45584;font-weight: 600;margin-right: 2rem;">
                 Nombre :
             </p>
             <input value="" type="text" name="name" class="form-control" style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #C45584;border-radius: 0;" >
         </div>
 
-        <div class="col-6">
+        <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
             <p class="d-inline mr-5" style="color:#C45584;font-weight: 600;margin-right: 2rem;">
                 WhatasApp :
             </p>
@@ -91,7 +113,7 @@ Cosmica
     <table class="table table-custom mt-4">
         <thead>
             <tr>
-                <th>Línea</th>
+                {{-- <th>Línea</th> --}}
                 <th>Producto</th>
                 <th>Precio</th>
                 <th>Descripción</th>
@@ -100,21 +122,59 @@ Cosmica
             </tr>
         </thead>
         <tbody>
+
         @foreach($productosPorSublinea as $sublinea => $lista)
+
             <tr class="sublinea-row">
                 <td colspan="6">{{ $sublinea ?: 'Sin sublínea' }}</td>
             </tr>
+
             @foreach($lista as $producto)
             <tr data-precio="{{ $producto->precio_normal }}">
-                <td>{{ $producto->linea }}</td>
+                {{-- <td>{{ $producto->linea }}</td> --}}
                 <td>
                     <img src="{{ $producto->imagenes }}" alt="" style="width:45px">
-                    {{ $producto->nombre }}
+                    {{ $producto->nombre }} /
+                    {{ $producto->linea }}
                 </td>
                 <td class="unit-price">
                     ${{ number_format($producto->precio_normal,2,'.',',') }}
                 </td>
-                <td>{{ Str::limit($producto->descripcion,180) }}</td>
+
+                <td class="descripcion-cell">
+                @php
+                    // 1) Partimos todas las palabras
+                    $descWords    = explode(' ', trim($producto->descripcion ?? ''));
+                    // 2) Preview: primeras 30 palabras, en tramos de 8
+                    $previewWords = array_slice($descWords, 0, 5);
+                    $previewChunks= array_chunk($previewWords, 8);
+                    // 3) Full: todo en tramos de 8
+                    $fullChunks   = array_chunk($descWords, 8);
+                @endphp
+
+                {{-- Vista previa --}}
+                <div class="preview">
+                    @foreach($previewChunks as $chunk)
+                    {{ implode(' ', $chunk) }}<br>
+                    @endforeach
+
+                    @if(count($descWords) > 5)
+                    <a href="#" class="toggle-desc">Ver más</a>
+                    @endif
+                </div>
+
+                {{-- Texto completo, oculto --}}
+                @if(count($descWords) > 5)
+                <div class="full" style="display: none;">
+                    @foreach($fullChunks as $chunk)
+                    {{ implode(' ', $chunk) }}<br>
+                    @endforeach
+                    <a href="#" class="toggle-desc">Ver menos</a>
+                </div>
+                @endif
+                </td>
+
+
                 <td>
                     <input
                     type="number"
@@ -126,6 +186,7 @@ Cosmica
                 </td>
                 <td class="row-total">$0.00</td>
             </tr>
+
             @endforeach
         @endforeach
         </tbody>
@@ -146,7 +207,17 @@ Cosmica
 
 
 @section('js_custom')
+
+
 <script>
+  $(document).on('click', '.toggle-desc', function(e) {
+    e.preventDefault();
+    // buscamos el td contenedor
+    const $cell = $(this).closest('td.descripcion-cell');
+    // alternamos preview/full
+    $cell.find('.preview, .full').toggle();
+  });
+
 $(function(){
   // 1) Preparamos el token para todas las llamadas AJAX
   $.ajaxSetup({
