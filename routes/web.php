@@ -35,6 +35,8 @@ Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController:
 Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index_nas.cotizador');
 Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
 Route::get('/admin/cotizador/new/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica_new'])->name('index_cosmica_new.cotizador');
+Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
+Route::post('cotizacion-cosmica', [App\Http\Controllers\CotizadorController::class, 'store'])->name('cotizacion.store');
 
 
 Route::get('/cotizador/categoria/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoriaCosmica'])->name('cotizador.productos_categoriaCosmica');
@@ -800,9 +802,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/cotizacion/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
     Route::get('cosmica/cotizacion/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
     Route::post('cosmica/cotizacion/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
-    Route::post('cotizacion-cosmica', [App\Http\Controllers\CotizadorController::class, 'store'])->name('cotizacion.store');
-
-
 
     Route::get('cosmica/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
     // Route::get('cosmica/cotizacion/meli/show/{id}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');
@@ -813,7 +812,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/cotizacion/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
     Route::post('cosmica/cotizacion/meli/publish/{id}', [App\Http\Controllers\MeliController::class, 'publishToMeli'])->name('meli.publish');
 
-    Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
     // Route::get('nas/woo/imprimir/{id}', [App\Http\Controllers\BodegaController::class, 'imprimir'])->name('nas_woo.imprimir');
     Route::get('nas/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooNasPDF'])->name('woo_nas_orders.pdf');
     Route::get('cosmica/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooCosmicaPDF'])->name('woo_cosmica_orders.pdf');
