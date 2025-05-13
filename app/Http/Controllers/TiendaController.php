@@ -471,7 +471,7 @@ class TiendaController extends Controller
             $payer = $user;
         } else {
             $payer = new User;
-            $payer->name = $request->get('name') . ' ' . $request->get('ape_paterno') . ' ' . $request->get('ape_materno');
+            $payer->name = $request->get('nombre');
             $payer->email = $request->get('email');
             $payer->username = $request->get('telefono');
             $payer->code = $code;
