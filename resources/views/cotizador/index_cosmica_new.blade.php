@@ -115,7 +115,7 @@ Cosmica
             <tr>
                 {{-- <th>Línea</th> --}}
                 <th>Producto</th>
-                <th>Precio</th>
+                {{-- <th>Precio</th> --}}
                 <th>Descripción</th>
                 <th>Cantidad deseada</th>
                 <th>Total</th> {{-- nueva columna --}}
@@ -135,12 +135,12 @@ Cosmica
                 <td>
                     <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
                     {{ $producto->nombre }} /
-                    {{ $producto->linea }}
+                    {{ $producto->linea }} <br>
+                    Precio en Catalogo ${{ number_format($producto->precio_normal,2,'.',',') }}
                 </td>
-                <td class="unit-price">
+                {{-- <td class="unit-price">
                     ${{ number_format($producto->precio_normal,2,'.',',') }}
-                </td>
-
+                </td> --}}
                 <td class="descripcion-cell">
                 @php
                     // 1) Partimos todas las palabras
