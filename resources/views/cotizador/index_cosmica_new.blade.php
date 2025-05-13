@@ -135,8 +135,8 @@ Cosmica
                 <td>
                     <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
                     {{ $producto->nombre }} /
-                    {{ $producto->linea }} <br>
-                    Precio en Catalogo ${{ number_format($producto->precio_normal,2,'.',',') }}
+                    {{ $producto->linea }} <br> <br>
+                    <p class="text-muted">Precio ${{ number_format($producto->precio_normal,2,'.',',') }}</p>
                 </td>
                 {{-- <td class="unit-price">
                     ${{ number_format($producto->precio_normal,2,'.',',') }}
