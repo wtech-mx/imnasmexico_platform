@@ -125,7 +125,7 @@
                                                 <p>Precio Catalogo ${{ $originalPrecioUnitario }}.0</p>
                                             </div>
 
-                                            <div class="form-group col-3">
+                                            <div class="form-group col-2">
                                                 <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -155,12 +155,16 @@
                                                 </div>
                                             </div>
 
-                                            {{-- <div class="form-group col-2">
-                                                <h4 for="name">Quitar</h4>
+                                            <div class="form-group col-2">
+                                                <label>&nbsp;</label>
                                                 <div class="input-group mb-3">
-                                                    <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <button type="button"
+                                                            class="btn btn-danger btn-sm eliminarCampo3"
+                                                            data-id="{{ $productos->id }}">
+                                                    <i class="fa fa-trash"></i>
+                                                    </button>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                             <!-- Campo oculto para el precio unitario -->
                                             {{-- <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}"> --}}
                                             <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $originalPrecioUnitario }}">
@@ -359,6 +363,7 @@
                                 </div>
 
                             </div>
+                            <div id="deletedInputs"></div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                             </div>
@@ -417,12 +422,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para eliminar producto
     function eliminarProducto(productoId) {
-        const productoDiv = document.querySelector(`.campo3[data-id="${productoId}"]`);
+        // 1) Agrega un input oculto dentro de #deletedInputs
+        const input = document.createElement('input');
+        input.type  = 'hidden';
+        input.name  = 'deleted_productos[]';
+        input.value = productoId;
+        document.getElementById('deletedInputs').appendChild(input);
 
-        if (productoDiv) {
-            productoDiv.remove();
-        }
-        updateTotal(); // Actualizar total tras eliminar
+        // 2) Remueve la fila del DOM
+        const fila = document.querySelector(`.campo3[data-id="${productoId}"]`);
+        if (fila) fila.remove();
+
+        // 3) Recalcula totales
+        updateTotal();
     }
 });
 </script>
@@ -545,6 +557,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Llamar a la función para calcular inicialmente
     updateTotal();
+
+    document.querySelectorAll('.eliminarCampo3').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            eliminarProducto(id);
+        });
+    });
 </script>
 
 

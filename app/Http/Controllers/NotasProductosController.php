@@ -371,6 +371,10 @@ class NotasProductosController extends Controller
         $total = 0;
         $resta = 0;
         $suma = 0;
+        if ($request->filled('deleted_productos')) {
+            // modelo que representa productos_notas_id
+            ProductosNotasID::destroy($request->input('deleted_productos'));
+        }
         // Obtener los productos actuales de la base de datos para esa cotización
         $productosExistentes = ProductosNotasId::where('id_notas_productos', $id)->get();
 
