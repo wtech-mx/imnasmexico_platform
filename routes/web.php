@@ -800,6 +800,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/cotizacion/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
     Route::get('cosmica/cotizacion/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
     Route::post('cosmica/cotizacion/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
+    Route::post('cotizacion-cosmica', [App\Http\Controllers\CotizadorController::class, 'store'])->name('cotizacion.store');
+
+
+
     Route::get('cosmica/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
     // Route::get('cosmica/cotizacion/meli/show/{id}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');
     // Route::get('cosmica/cotizacion/meli/show/{id}/{order_id}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');

@@ -8,6 +8,10 @@ use App\Models\Categorias;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
+use App\Models\NotasProductos;
+use App\Models\NotasProductosCosmica;
+use App\Models\ProductosNotasCosmica;
 
 class CotizadorController extends Controller
 {
@@ -97,6 +101,78 @@ class CotizadorController extends Controller
 
         // 3) Pasarlos a la vista
         return view('cotizador.index_cosmica_new', compact('productosPorSublinea'));
+    }
+
+    public function store(Request $request)
+    {
+        // 1) Validar
+        $data = $request->validate([
+            'name'        => 'required|string|max:255',
+            'telefono'    => 'required|string|max:50',
+            'cantidad'    => 'required|array',
+            'cantidad.*'  => 'integer|min:0',
+        ]);
+
+        // 2) Buscar o crear usuario
+        $user = User::where('telefono', $data['telefono'])
+                    ->orWhere('email', $data['telefono'].'@example.com')
+                    ->first();
+
+        $notas = new NotasProductosCosmica;
+        if ($user) {
+            $notas->id_usuario = $user->id;
+        } else {
+            $notas->nombre   = $data['name'];
+            $notas->telefono = $data['telefono'];
+        }
+
+        // 3) Generar folio “E” + padding 3 dígitos
+        $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion')
+        ->where('folio','like','E%')->pluck('folio')->map(fn($f)=> intval(substr($f,1)));
+        $next = ($numeros->max() ?: 0) + 1;
+        $notas->tipo_nota = 'Cotizacion';
+        $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
+
+        $notas->fecha = now();
+        $notas->nota  = '';
+        $notas->save();
+
+        // 4) Recorrer cantidades, calcular totales de línea y acumular gran total
+        $grandTotal = 0;
+        foreach ($data['cantidad'] as $prodId => $qty) {
+
+
+            if ($qty <= 0) continue;
+            $prod = Products::find($prodId);
+
+            if (! $prod) continue;
+
+            // precio unitario desde stock
+            $precio = $prod->precio_normal;
+            $lineTotal = $precio * $qty;
+            $grandTotal += $lineTotal;
+
+            ProductosNotasCosmica::create([
+                'id_notas_productos' => $notas->id,
+                'id_producto'        => $prod->id,
+                'producto'           => $prod->nombre,
+                'price'              => $precio,
+                'cantidad'           => $qty,
+                'descuento'          => 0,
+                'total'              => $lineTotal,
+                'estatus'            => 1,
+            ]);
+        }
+
+        // 5) Guardar el total general en la nota (si tienes esa columna)
+        $notas->total = $grandTotal;
+        $notas->save();
+
+        return response()->json([
+            'id'    => $notas->id,
+            'folio' => $notas->folio,
+            'total' => $grandTotal,
+        ], 200);
     }
 
     public function mostrarProductosCategoria($id)

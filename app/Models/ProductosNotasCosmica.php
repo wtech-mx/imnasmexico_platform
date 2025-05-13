@@ -13,13 +13,19 @@ class ProductosNotasCosmica extends Model
     protected $fillable = [
         'id_notas_productos',
         'id_producto',
+        'asistencia',
+        'confirmacion',
         'producto',
         'price',
         'cantidad',
+        'escaneados',
         'descuento',
         'total',
-        'id_reposicion_producto',
+        'estatus',
+        'kit',
         'num_kit',
+        'id_reposicion_producto',
+        'id_reposicion_producto',
     ];
 
     public function Nota()

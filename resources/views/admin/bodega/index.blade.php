@@ -91,6 +91,14 @@
                             <span class="badge rounded-pill text-white" style="background: #EE96BA">Paradisus</span>
                          </div>
 
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #fff701">MELI</span>
+                         </div>
+
+                         <div class="col-4 col-sm-4 col-md-3 col-lg-2 ">
+                            <span class="badge rounded-pill text-white" style="background: #84ABE5">Recojer en Tienda</span>
+                         </div>
+
                          <div class="col-12 col-sm-4 col-md-3 col-lg-2 ">
                             <form class="row mt-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
                                 <button class="btn btn-dark btn-xs" type="submit" style=""><i class="fa fa-file-pdf"></i> PDF productos faltantes</button>
