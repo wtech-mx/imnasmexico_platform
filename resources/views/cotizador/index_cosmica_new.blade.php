@@ -133,7 +133,7 @@ Cosmica
             <tr data-precio="{{ $producto->precio_normal }}">
                 {{-- <td>{{ $producto->linea }}</td> --}}
                 <td>
-                    <img src="{{ $producto->imagenes }}" alt="" style="width:45px">
+                    <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
                     {{ $producto->nombre }} /
                     {{ $producto->linea }}
                 </td>
