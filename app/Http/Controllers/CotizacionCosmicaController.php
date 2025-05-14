@@ -527,6 +527,7 @@ class CotizacionCosmicaController extends Controller
                         $notas_inscripcion->id_producto = $producto->id;
                         $notas_inscripcion->price = $nuevosCampos2[$index];
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->escaneados = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
                         $notas_inscripcion->estatus = 1;
                         $notas_inscripcion->save();
