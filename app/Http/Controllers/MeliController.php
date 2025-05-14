@@ -68,7 +68,7 @@ class MeliController extends Controller
                 'autorizacion' => $data['access_token'],
                 'accesstoken' => $data['refresh_token'],
             ]);
-
+         
             return response()->json([
                 'message' => 'Token actualizado exitosamente',
                 'autorizacion' => $data['access_token'],
@@ -95,29 +95,14 @@ class MeliController extends Controller
          // Buscar el primer registro (o ajustar según tus necesidades)
          $meli = Meli::first();
 
-         $url = 'https://api.mercadolibre.com/oauth/token';
+         if ($meli) {
+             // Actualizar el campo 'accesstoken'
+             $meli->update([
+                 'accesstoken' => $request->input('accesstoken'),
+             ]);
 
-         $params = [
-             'grant_type'    => 'refresh_token',
-             'client_id'     => $meli->app_id,
-             'client_secret' => $meli->client_secret,
-             'refresh_token' => $request->input('accesstoken'), // Token actual para renovarlo
-         ];
-
-         // Hacer la solicitud a la API
-         $response = Http::asForm()->post($url, $params);
-
-         if ($response->successful()) {
-            $data = $response->json();
-
-            // Guardar el nuevo token en la base de datos
-            $meli->update([
-                'autorizacion' => $data['access_token'],
-                'accesstoken' => $data['refresh_token'],
-            ]);
-            
-            return redirect()->back()->with('success', 'Access Token actualizado correctamente.');
-        }
+             return redirect()->back()->with('success', 'Access Token actualizado correctamente.');
+         }
 
          return redirect()->back()->with('error', 'No se encontró ningún registro para actualizar.');
      }
