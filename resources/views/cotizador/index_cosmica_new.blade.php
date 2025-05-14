@@ -70,6 +70,17 @@ Cosmica
     .descripcion-cell .full    { display: block !important; }
     .toggle-desc               { display: none !important; }
     }
+/* ----------------------------------------------------
+   Sticky footer dentro del container
+----------------------------------------------------- */
+.footer-sticky {
+  position: sticky;    /* se “pega” al hacer scroll */
+  bottom: 0;           /* en el fondo del contenedor */
+  background: #fff;    /* fondo blanco para cubrir la tabla */
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+  z-index: 10;
+}
 
 </style>
 
@@ -192,13 +203,14 @@ Cosmica
         </tbody>
     </table>
 
-    {{-- debajo de la tabla, mostramos el Total Global --}}
-    <div class="text-end mt-3">
-        <strong>Total General: </strong>
-        <span id="grandTotal">$0.00</span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Guardar Cotización</button>
+<!-- Sticky footer -->
+<div class="footer-sticky d-flex justify-content-between align-items-center">
+  <div>
+    <strong>Total General: </strong>
+    <span id="grandTotal">$0.00</span>
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar Cotización</button>
+</div>
 </form>
 
 </div>
