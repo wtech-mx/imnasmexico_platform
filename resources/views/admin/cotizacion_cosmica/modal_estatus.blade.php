@@ -285,7 +285,7 @@ $(document).ready(function() {
 
                     // Hacer los campos de fecha y dirección requeridos
                     $modal.find('#fecha_entrega').attr('required', true);
-                    $modal.find('#foto_pago').attr('required', true);
+                    $modal.find('#foto_pago').attr('required', false);
 
                     // Remover el atributo required de los campos de imagen
                     $modal.find('#foto_pago').removeAttr('required');
