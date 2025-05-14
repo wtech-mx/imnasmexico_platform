@@ -736,7 +736,7 @@ class PagosFueraController extends Controller
         // Fechas para el filtro
         $today = date('Y-m-d');
         $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
-        $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
+        $lastMonthStartDate = date('Y-m-01', strtotime('-4 month'));
 
         // Filtros para la búsqueda de pagos
         $filters = array(
