@@ -191,7 +191,7 @@
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
@@ -271,7 +271,7 @@
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
@@ -405,7 +405,7 @@
                                                                 <i class="fa fa-info"></i>
                                                             </a>
 
-                                                            <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
+                                                            <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
                                                                 <i class="fa fa-barcode"></i>
                                                             </a>
                                                         </td>
@@ -474,7 +474,7 @@
                                                             </a>
                                                         @endif <br>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.nas', $item->id) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner.nas', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
@@ -505,7 +505,7 @@
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_paradisus.bodega', $order['id']) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner_paradisus.bodega', $order['id']) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
@@ -532,7 +532,7 @@
                                                     </td>
                                                     <td>$0</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_paradisus_repo.bodega', $order['id']) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner_paradisus_repo.bodega', $order['id']) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
@@ -597,7 +597,7 @@
                                                             </a>
                                                         @endif <br>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega_cosmica', $item->id) }}">
+                                                        <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner.bodega_cosmica', $item->id) }}">
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
@@ -719,7 +719,7 @@
                                                                 <i class="fa fa-info"></i>
                                                             </a>
 
-                                                            <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
+                                                            <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
                                                                 <i class="fa fa-barcode"></i>
                                                             </a>
                                                         </td>
