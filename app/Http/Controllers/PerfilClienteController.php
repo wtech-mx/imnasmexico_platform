@@ -395,7 +395,7 @@ class PerfilClienteController extends Controller
 
     public function getProductosByNota($notaId)
     {
-        $productos = ProductosNotasCosmica::where('id_notas_productos', $notaId)->get();
+        $productos = ProductosNotasId::where('id_notas_productos', $notaId)->get();
         return response()->json($productos);
     }
 
