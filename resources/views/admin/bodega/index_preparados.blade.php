@@ -211,22 +211,20 @@
                                     @endphp
 
                                     @foreach ($notas_cosmica_preparado as $item)
+                                        @php
+                                        $status = $item->meli_data['status'] ?? null;
+                                        $dateCreated = $item->meli_data['date_created'] ?? null;
+                                        $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
+                                        $isDelayed = false;
 
+                                        if ($isReadyOrPrepared && $dateCreated) {
+                                            $shipmentDate = new DateTime($dateCreated);
+                                            $currentDate = new DateTime();
+                                            $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
+                                        }
 
-                                    @php
-                                    $status = $item->meli_data['status'] ?? null;
-                                    $dateCreated = $item->meli_data['date_created'] ?? null;
-                                    $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
-                                    $isDelayed = false;
-
-                                    if ($isReadyOrPrepared && $dateCreated) {
-                                        $shipmentDate = new DateTime($dateCreated);
-                                        $currentDate = new DateTime();
-                                        $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
-                                    }
-
-                                    $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
-                                    @endphp
+                                        $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
+                                        @endphp
 
 
                                         <tr class="{{ $borderClass }}" style="background: #d486d6">
@@ -463,6 +461,73 @@
 
                                         @include('admin.bodega.modal_cosmi')
                                         @include('admin.cosmica_ecommerce.modal_direccion')
+                                    @endforeach
+
+                                    @foreach ($orders_nas_ecommerce as $item)
+                                        @if ($item->forma_envio == 'envio')
+                                            <tr style="background: #F5ECE4;color:#070707">
+                                        @else
+                                            <tr style="background: #3f7bd6a3">
+                                        @endif
+                                            <td>
+                                                <h5>
+                                                    TN{{ $item->id }}
+                                                </h5>
+                                            </td>
+                                            <td>
+                                                <h5>
+                                                    {{ $item->User->name }}
+                                                    {{ $item->User->telefono }}
+                                                </h5>
+                                            </td>
+
+                                            <td>
+                                                En preparación <br>
+                                                @if ($item->forma_envio == 'envio')
+                                                    Ecommerce NAS
+                                                @else
+                                                    <b style="color: #000;">Recoge en tienda</b>
+                                                @endif
+
+                                            </td>
+
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                        ->locale('es')
+                                                        ->isoFormat('DD/MM/YY') }}
+                                                <br>
+                                                {{ \Carbon\Carbon::parse($item->fecha_preparacion)
+                                                        ->locale('es')
+                                                        ->isoFormat('hh:mm a') }}
+                                            </td>
+                                            <td><h5>${{ $item->pago }}</h5></td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('imprimir_admin.nas', ['id' => $item->id]) }}">
+                                                    <i class="fa fa-list-alt"></i>
+                                                </a>
+
+                                                <a class="text-center text-white btn btn-sm"
+                                                    href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $item->id]) }}"
+                                                    style="background: #7d2de6;">
+                                                    <i class="fa fa-qrcode"></i>
+                                                </a>
+
+                                                @if ($item->forma_envio == NULL)
+                                                    <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                        <i class="fa fa-truck"></i>
+                                                    </a>
+                                                @else
+                                                    <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->guia_doc) }}" download="{{asset('pago_fuera/'.$item->guia_doc) }}" style="background: #e6ab2d;">
+                                                        <i class="fa fa-truck"></i>
+                                                    </a>
+                                                @endif <br>
+
+                                                {{-- <a class="btn btn-sm btn-dark text-white" href="{{ route('preparacion_scaner.nas', $item->id) }}">
+                                                    <i class="fa fa-barcode"></i>
+                                                </a> --}}
+                                            </td>
+                                        </tr>
+                                        @include('admin.notas_productos.modal_direccion')
                                     @endforeach
 
                                 </tbody>
