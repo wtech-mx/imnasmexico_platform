@@ -90,17 +90,27 @@ class CotizadorController extends Controller
 
     public function index_cosmica_new(Request $request)
     {
-        // 1) Filtrar los products con categoria = 'Cosmica' y subcategoria = 'Producto'
+        // 1) Productos “normales”
         $productos = Products::query()
             ->where('categoria', 'Cosmica')
             ->where('subcategoria', 'Producto')
             ->get();
 
-        // 2) Agruparlos por la columna 'sublinea'
+        // 2) Agruparlos por sublínea
         $productosPorSublinea = $productos->groupBy('sublinea');
 
-        // 3) Pasarlos a la vista
-        return view('cotizador.index_cosmica_new', compact('productosPorSublinea'));
+        // 3) Ahora traemos los kits
+        $kits = Products::query()
+            ->where('categoria', 'Cosmica')
+            ->where('subcategoria', operator: 'Kit')
+            ->where('estatus', 'publicado')
+            ->orderBy('nombre', 'asc')
+            ->with('bundleItems')   // <-- cargar la relación
+            ->get();
+
+
+        // 4) Pasar todo a la vista
+        return view('cotizador.index_cosmica_new', compact('productosPorSublinea', 'kits'));
     }
 
     public function store(Request $request)

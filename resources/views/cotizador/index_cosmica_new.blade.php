@@ -11,7 +11,7 @@ Cosmica
 
     .h3_subtitulos{
         font-size: 10px;
-        color: #BB2E32;
+        color: #2D2432;
     }
         /* color de fondo de toda la tabla */
     .table-custom {
@@ -24,7 +24,7 @@ Cosmica
     /* bordes rojos y redondeados en cada celda */
     .table-custom th,
     .table-custom td {
-        border: 1px solid #C2393B;
+        border: 1px solid #2D2432;
         border-radius: 9px;
         vertical-align: middle;
     }
@@ -82,6 +82,19 @@ Cosmica
   z-index: 10;
 }
 
+.container_footer{
+    background: #FADACF;
+    border-radius: 13px;
+    border: solid 2px #3F303E;
+}
+
+.btn_guardar{
+    background: #3F303E;
+    border: solid 1px #3F303E;
+    color: #fff;
+    border-radius: 13px;
+}
+
 </style>
 
 @section('cotizador')
@@ -91,32 +104,29 @@ Cosmica
 <form id="cotizaForm">
         @csrf
     <div class="row mt-5">
-        <div class="col-4">
-            <img class="img_header" src="{{ asset('cosmika/logo_cosmica_cotizador.png') }}" alt="">
+        <div class="col-6">
+            <img class="img_header" src="https://plataforma.imnasmexico.com/cosmika/menu/logo.png" alt="">
         </div>
 
-        <div class="col-4">
-            <img class="img_header" src="{{ asset('cosmika/lista_img.png') }}" alt="">
+        <div class="col-6">
+            <img class="img_header" src="{{ asset('cosmika/lista_img_negativa.png') }}" alt="">
         </div>
 
-        <div class="col-4">
-            <img class="img_header" src="{{ asset('cosmika/duo_amor.png') }}" alt="">
-        </div>
     </div>
 
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
-            <p class="d-inline mr-5" style="color:#C45584;font-weight: 600;margin-right: 2rem;">
+            <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
                 Nombre :
             </p>
-            <input value="" type="text" name="name" class="form-control" style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #C45584;border-radius: 0;" >
+            <input value="" type="text" name="name" class="form-control" required style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
         </div>
 
         <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
-            <p class="d-inline mr-5" style="color:#C45584;font-weight: 600;margin-right: 2rem;">
+            <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
                 WhatasApp :
             </p>
-            <input value="" type="number" name="telefono" class="form-control" style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #C45584;border-radius: 0;" >
+            <input value="" type="number" name="telefono" class="form-control"required  style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
         </div>
     </div>
 
@@ -200,16 +210,76 @@ Cosmica
 
             @endforeach
         @endforeach
+
+
+        {{-- --- Sección de Kits --- --}}
+        @if($kits->isNotEmpty())
+            <tr class="sublinea-row">
+                <td colspan="6">Kits</td>
+            </tr>
+            @foreach($kits as $kit)
+            <tr data-precio="{{ $kit->precio_normal }}">
+                <td>
+                    <img src="{{ $kit->imagenes }}" alt="" style="width:40px"><br>
+                    {{ $kit->nombre }} / {{ $kit->linea }}<br><br>
+                    <p class="text-muted">Precio ${{ number_format($kit->precio_normal,2,'.',',') }}</p>
+                </td>
+                {{-- <-- AÑADIMOS LA CLASE descripcion-cell AQUÍ --}}
+                <td class="descripcion-cell">
+                    @php
+                        $items = $kit->bundleItems->toArray();
+                    @endphp
+
+                    {{-- Vista previa (móvil) --}}
+                    <div class="preview">
+                        <ul style="list-style:none; margin:0; padding:0;">
+                            @foreach(array_slice($items, 0, 3) as $item)
+                                <li>
+                                {{ $item['cantidad'] }} × {{ $item['producto'] }}
+                                </li>
+                            @endforeach
+                        </ul>
+                        @if(count($items) > 3)
+                        <a href="#" class="toggle-desc">Ver más</a>
+                        @endif
+                    </div>
+
+                    {{-- Texto completo (desktop siempre, móvil oculto hasta hacer click) --}}
+                    @if(count($items) > 3)
+                    <div class="full" style="display: none;">
+                        <ul style="list-style:none; margin:0; padding:0;">
+                            @foreach($items as $item)
+                                <li>
+                                {{ $item['cantidad'] }} × {{ $item['producto'] }}
+                                </li>
+                            @endforeach
+                        </ul>
+                        <a href="#" class="toggle-desc">Ver menos</a>
+                    </div>
+                    @endif
+                </td>
+                <td>
+                    <input type="number"
+                        name="cantidad[{{ $kit->id }}]"
+                        class="form-control qty-input"
+                        min="0"
+                        value="0"/>
+                </td>
+                <td class="row-total">$0.00</td>
+            </tr>
+            @endforeach
+        @endif
+
         </tbody>
     </table>
 
 <!-- Sticky footer -->
-<div class="footer-sticky d-flex justify-content-between align-items-center">
+<div class="footer-sticky d-flex justify-content-between align-items-center container_footer">
   <div>
-    <strong>Total General: </strong>
+    <strong class="text-dark">Total General: </strong>
     <span id="grandTotal">$0.00</span>
   </div>
-  <button type="submit" class="btn btn-primary">Guardar Cotización</button>
+  <button type="submit" class="btn" style="background: #3F303E;border: solid 1px #3F303E;color: #fff;border-radius: 13px;">Guardar Cotización</button>
 </div>
 </form>
 

@@ -54,6 +54,12 @@ class Products extends Model
         return $this->hasMany(ProductosBundleId::class, 'id_bundle_productos');
     }
 
+    public function bundleItems()
+    {
+        // el segundo parámetro 'id_product' es la FK en products_bundle_id que apunta a products.id
+        return $this->hasMany(ProductosBundleId::class, 'id_product');
+    }
+
     public function getNombreAttribute($value)
     {
         return trim($value);
