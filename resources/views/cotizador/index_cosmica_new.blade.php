@@ -220,7 +220,7 @@ Cosmica
             @foreach($kits as $kit)
             <tr data-precio="{{ $kit->precio_normal }}">
                 <td>
-                    <img src="{{ $kit->imagenes }}" alt="" style="width:40px"><br>
+                    <img src="{{asset('products/'.$kit->imagenes) }}" alt="" style="width:40px"><br>
                     {{ $kit->nombre }} / {{ $kit->linea }}<br><br>
                     <p class="text-muted">Precio ${{ number_format($kit->precio_normal,2,'.',',') }}</p>
                 </td>
