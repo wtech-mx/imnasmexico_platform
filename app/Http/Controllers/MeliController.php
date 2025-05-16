@@ -43,32 +43,25 @@ class MeliController extends Controller
 
         // URL y parámetros para la solicitud
         $url = 'https://api.mercadolibre.com/oauth/token';
-        // $params = [
-        //     'grant_type'    => 'refresh_token',
-        //     'client_id'     => '4791982421745244',
-        //     'client_secret' => 'QDjLYIwGbfAYnq6kgJeVO93pYTRyMuP8',
-        //     'refresh_token' => 'TG-673553c6e63ca60001ff0d79-2084225921', // Token actual para renovarlo
-        // ];
+
 
         $params = [
             'grant_type'    => 'refresh_token',
             'client_id'     => $meliData->app_id,
             'client_secret' => $meliData->client_secret,
-            'refresh_token' => $meliData->refresh_token, // Token actual para renovarlo
+            'refresh_token' => $meliData->accesstoken, // Token actual para renovarlo
         ];
-
         // Hacer la solicitud a la API
         $response = Http::asForm()->post($url, $params);
 
         if ($response->successful()) {
             $data = $response->json();
-
             // Guardar el nuevo token en la base de datos
             $meliData->update([
                 'autorizacion' => $data['access_token'],
                 'accesstoken' => $data['refresh_token'],
             ]);
-         
+
             return response()->json([
                 'message' => 'Token actualizado exitosamente',
                 'autorizacion' => $data['access_token'],
