@@ -637,8 +637,8 @@ Mi perfil- {{$cliente->name}}
                                                                             @endif
                                                                         </div>
                                                                     @endif
+                                                                    @break
                                                                 @endif
-                                                                @break
                                                             @endforeach
                                                         @else
                                                             @foreach($clase_grabada as $user_video)
@@ -728,6 +728,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @endif
                                                             @endforeach
                                                             @foreach($usuario_video as $user_video)
+
                                                                 @if ($video->Cursos->id == $user_video->id_curso)
 
                                                                     <div class="col-12 col-sm-12 col-md-6 col-lg-4">
