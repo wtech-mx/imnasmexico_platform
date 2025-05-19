@@ -42,7 +42,7 @@
                                 <tr id="productRow{{ $product->id }}">
                                     <td>{{ $product->id }}
                                     </td>
-                                    
+
                                     <td>
                                         <input type="checkbox" name="selected_products[]" value="{{ $product->id }}" class="form-check-input">
                                     </td>
@@ -215,8 +215,8 @@
             $('#ingredientes').val(product.ingredientes);
             $('#precauciones').val(product.precauciones);
             $('#favorito').val(product.favorito);
-
             $('#precio_normal').val(product.precio_normal);
+            $('#fecha_fin').val(product.fecha_fin);
             $('#stock').val(product.stock);
             $('#stock_cosmica').val(product.stock_cosmica);
             $('#stock_salon').val(product.stock_salon);
@@ -316,13 +316,14 @@
           let data = {
               nombre: $('#nombre').val(),
               precio_normal: $('#precio_normal').val(),
+              precio_rebajado: $('#precio_rebajado').val(),
+              fecha_fin: $('#fecha_fin').val(),
               categoria: $('#categoria').val(),
               stock_cosmica: $('#stock_cosmica').val(),
               stock_nas: $('#stock_nas').val(),
               stock_salon: $('#stock_salon').val(),
               stock: $('#stock').val(),
               descripcion: $('#descripcion').val(),
-
               linea: $('#linea').val(),
               sublinea: $('#sublinea').val(),
               modo_empleo: $('#modo_empleo').val(),

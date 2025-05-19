@@ -48,10 +48,21 @@
                                     </div>
 
                                     @can('productos-menu')
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-4">
                                             <label for="name">Precio normal</label>
                                             <input id="precio_normal" name="precio_normal" type="number" class="form-control" value="{{ $product->precio_normal }}" >
                                         </div>
+
+                                        <div class="form-group col-4">
+                                            <label for="name">Precio Promocion</label>
+                                            <input id="precio_rebajado" name="precio_rebajado" type="number" class="form-control" value="{{ $product->precio_rebajado }}" >
+                                        </div>
+
+                                        <div class="form-group col-4">
+                                            <label for="name">Fecha de fin dre precio Promo</label>
+                                            <input id="fecha_fin" name="fecha_fin" type="date" class="form-control" value="{{ $product->fecha_fin }}" >
+                                        </div>
+
 
                                     @if(request()->routeIs('products_insumos_castilla.index'))
 

@@ -484,6 +484,7 @@ class ProductsController extends Controller
             'user' => $user->name,
             'precio_normal' => $product->precio_normal,
             'precio_rebajado' => $product->precio_rebajado,
+            'fecha_fin' => $product->fecha_fin,
             'sku' => $product->sku,
             'stock' => "Antes: " . $product->stock . " -> Ahora: " . $request->get('stock'),
             'stock_nas' => "Antes: " . $product->stock_nas . " -> Ahora: " . $suma_nas,
@@ -507,6 +508,7 @@ class ProductsController extends Controller
         $product->descripcion = $request->get('descripcion');
         $product->precio_rebajado = $request->get('precio_rebajado');
         $product->precio_normal = $request->get('precio_normal');
+        $product->fecha_fin = $request->get('fecha_fin');
         $product->imagenes = $request->get('imagenes');
         $product->stock = $request->get('stock');
         $product->stock_salon = $request->get('stock_salon');
@@ -555,6 +557,8 @@ class ProductsController extends Controller
             'imagenes' => $product->imagenes,
             'nombre' => $product->nombre,
             'precio_normal' => $product->precio_normal,
+            'precio_rebajado' => $product->precio_rebajado,
+            'fecha_fin' => $product->fecha_fin,
             'stock' => $product->stock,
             'stock_nas' => $product->stock_nas,
             'stock_cosmica' => $product->stock_cosmica,
