@@ -51,9 +51,29 @@ Cosmica
         box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
     }
 
+    .ul_estilos{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
     @media only screen and (max-width: 760px) {
         .img_header{
             width: 150px;
+        }
+    }
+
+    @media only screen and (max-width: 400px) {
+        .ul_estilos{
+            font-size: 11px
+        }
+
+        .descripcion-cell{
+            font-size: 11px
+        }
+
+        .name_producto{
+            font-size: 11px
         }
     }
 
@@ -174,8 +194,11 @@ Cosmica
                         {{-- <td>{{ $producto->linea }}</td> --}}
                         <td>
                             <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
-                            {{ $producto->nombre }} /
-                            {{ $producto->linea }} <br> <br>
+                            <p class="name_producto">
+                                {{ $producto->nombre }} /
+                                {{ $producto->linea }} <br> <br>
+                            </p>
+
 
                             @if($hasDiscount)
                                 {{-- precio normal tachado --}}
@@ -271,7 +294,7 @@ Cosmica
 
                         {{-- Vista previa (móvil) --}}
                         <div class="preview">
-                            <ul style="list-style:none; margin:0; padding:0;">
+                            <ul style="" class="ul_estilos">
                                 @foreach(array_slice($items, 0, 3) as $item)
                                     <li>
                                     {{ $item['cantidad'] }} × {{ $item['producto'] }}
@@ -286,7 +309,7 @@ Cosmica
                         {{-- Texto completo (desktop siempre, móvil oculto hasta hacer click) --}}
                         @if(count($items) > 3)
                         <div class="full" style="display: none;">
-                            <ul style="list-style:none; margin:0; padding:0;">
+                            <ul style="" class="ul_estilos">
                                 @foreach($items as $item)
                                     <li>
                                     {{ $item['cantidad'] }} × {{ $item['producto'] }}
