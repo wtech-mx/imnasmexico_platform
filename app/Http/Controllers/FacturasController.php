@@ -9,6 +9,7 @@ use Wafto\Sepomex\Models\Sepomex;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\NotasCursos;
+use App\Models\Orders;
 use Session;
 use Hash;
 
@@ -131,12 +132,12 @@ class FacturasController extends Controller
 
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
-            $facturas = base_path('../public_html/plataforma.imnasmexico.com/facturas/');
+            $facturas = base_path('../public_html/plataforma.imnasmexico.com/facturas_pdf/');
         }else{
-            $facturas = public_path() . '/facturas';
+            $facturas = public_path() . '/facturas_pdf';
         }
 
-        $factura = Factura::where('id_notas_cursos', $id)->first();
+        $factura = Factura::where('id_orders', $id)->first();
 
         // if ($request->hasFile("situacion_fiscal")) {
         //     $file = $request->file('situacion_fiscal');
@@ -145,7 +146,6 @@ class FacturasController extends Controller
         //     $file->move($path, $fileName);
         //     $factura->situacion_fiscal = $fileName;
         // }
-
         $factura->razon_social = $request->get('razon_cliente');
         $factura->rfc = $request->get('rfc_cliente');
         $factura->cfdi = $request->get('cfdi_cliente');
@@ -155,14 +155,31 @@ class FacturasController extends Controller
         $factura->ciudad = $request->get('ciudad');
         $factura->municipio = $request->get('municipio');
         $factura->direccion_cliente = $request->get('direccion_cliente');
-
         $factura->update();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Factura emitida correctamente.'
-        ]);
+        $facturacionController = new MultiFacturaController();
+        $response = $facturacionController->CFDI_facturaDeContado($factura->id_orders);
 
+        if (!is_array($response) || !$response['success']) {
+            return response()->json([
+                'success' => false,
+                'message' => $response['error'] ?? 'Error desconocido'
+            ], 403);
+        }else{
+            $uuid = $response['uuid']; // ✅ Este es el UUID correcto del CFDI
+            $nombreArchivo = 'factura_cfdi_' . $uuid . '.pdf';
+            $rutaArchivo = asset('facturas_pdf/' . $nombreArchivo);
+
+            // ← **Aquí guardamos el nombre de archivo** en la orden, justo después de conocerlo
+            $factura->archivo_factura = $nombreArchivo;
+            $factura->estatus = 'Facturado';
+            $factura->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Factura emitida correctamente.'
+            ]);
+        }
     }
 
     public function emisionfacturaNas(Request $request,$id)
@@ -347,7 +364,6 @@ class FacturasController extends Controller
             return response()->json(['success'=>false,'message'=>'Debes proporcionar un teléfono válido de 10 dígitos.'], 422);
         }
 
-
         $nota = NotasCursos::with('User')
         ->where('id', $folio)
         ->whereHas('User', function($q) use($telefono) {
@@ -355,18 +371,43 @@ class FacturasController extends Controller
         })
         ->first();
 
+        if($nota == NULL){
+            $nota = Orders::with('User')
+            ->where('id', $folio)
+            ->whereHas('User', function($q) use($telefono) {
+                $q->where('telefono', $telefono);
+            })
+            ->first();
+
+            if ($nota->forma_pago !== 'STRIPE') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Esta nota no está marcada para facturar.'
+                ], 403);
+            }
+
+            if ($nota->estatus == '0') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Esta nota no está marcada para facturar.'
+                ], 403);
+            }
+        }else{
+            if ($nota->factura != 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Esta nota no está marcada para facturar.'
+                ], 403);
+            }
+        }
+
         if (! $nota) {
             return response()->json([
                 'success' => false,
                 'message' => 'No existe ninguna nota con ese folio y teléfono.'
             ], 404);
         }
-        if ($nota->factura != 1) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Esta nota no está marcada para facturar.'
-            ], 403);
-        }
+
         $html = view('user.facturacion.resultado_cursos', [
             'nota' => $nota,
             'tipo' => 'cursos',          // <-- marcamos que viene de NAS
