@@ -381,40 +381,61 @@ $(function(){
     success: function(response){
         $btn.prop('disabled', false).text('Guardar Cotización');
 
-        Swal.fire({
-        title: '¡Cotización guardada!',
-        text: '¿Qué quieres hacer ahora?',
-        icon: 'success',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Generar PDF',
-        denyButtonText: 'Contactar agente',
-        cancelButtonText: 'Otra Cotización',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
+Swal.fire({
+  title: '¡Cotización guardada!',
+  text: '¿Qué quieres hacer ahora?',
+  icon: 'success',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Generar PDF',
+  denyButtonText: 'Contactar agente',
+  cancelButtonText: 'Otra Cotización',
+  allowOutsideClick: false,
+  allowEscapeKey: false,
+  preConfirm: () => {
+    window.open(`{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`, '_blank');
+    return false;
+  },
+  preDeny: () => {
+    const pdfUrl = `{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`;
+    const msg = encodeURIComponent(
+      `Hola, realicé una cotización (Folio: ${response.folio}). Puedes verla aquí: ${pdfUrl}`
+    );
+    window.open(
+      `https://api.whatsapp.com/send/?phone=525637540093&text=${msg}&type=phone_number&app_absent=0`,
+      '_blank'
+    );
+    return false;
+  }
+}).then((result) => {
+  if (result.dismiss === Swal.DismissReason.cancel) {
+    const pdfUrl = `{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`;
 
-        preConfirm: () => {
-            window.open(`{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`, '_blank');
-            return false; // mantiene la alerta abierta
-        },
+    // 1) Mostrar preloader
+    Swal.fire({
+      title: 'Descargando PDF…',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+        // 2) Disparar la descarga
+        const a = document.createElement('a');
+        a.href = pdfUrl;
+        a.download = `Cotizacion-${response.id}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        // 3) Tras un pequeño retraso, cerrar el preloader y recargar
+        setTimeout(() => {
+          Swal.close();
+          window.location.reload();
+        }, 1500);
+      }
+    });
+  }
+});
 
-        preDeny: () => {
-            const msg = encodeURIComponent(
-            `Hola, realicé una cotización con el Folio: ${response.folio}`
-            );
-            // abre WhatsApp en pestaña nueva
-            window.open(
-            `https://api.whatsapp.com/send/?phone=525637540093&text=${msg}&type=phone_number&app_absent=0`,
-            '_blank'
-            );
-            return false; // mantiene la alerta abierta
-        }
 
-        }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = '{{ route("index_cosmica_new.cotizador") }}';
-        }
-        });
     },
     error: function(xhr){
         $btn.prop('disabled', false).text('Guardar Cotización');
