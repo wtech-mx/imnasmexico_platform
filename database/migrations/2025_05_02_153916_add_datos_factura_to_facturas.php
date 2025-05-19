@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::table('facturas', function (Blueprint $table) {
 
-            $table->unsignedBigInteger(column: 'id_notas_cosmica');
+            $table->unsignedBigInteger(column: 'id_notas_cosmica')->nullable();
             $table->foreign('id_notas_cosmica')
                 ->references('id')->on('notas_productos_cosmica')
                 ->inDelete('set null');
 
-            $table->unsignedBigInteger('id_notas_nas');
+            $table->unsignedBigInteger('id_notas_nas')->nullable();
             $table->foreign('id_notas_nas')
                 ->references('id')->on('notas_productos')
                 ->inDelete('set null');
 
-            $table->unsignedBigInteger('id_notas_nas_tiendita');
+            $table->unsignedBigInteger('id_notas_nas_tiendita')->nullable();
             $table->foreign('id_notas_nas_tiendita')
                 ->references('id')->on('notas_productos')
                 ->inDelete('set null');
 
-            $table->unsignedBigInteger('id_notas_cursos');
+            $table->unsignedBigInteger('id_notas_cursos')->nullable();
             $table->foreign('id_notas_cursos')
                 ->references('id')->on('notas_curso')
                 ->inDelete('set null');
@@ -43,7 +43,7 @@ return new class extends Migration
             $table->text('ciudad')->nullable();
             $table->text('municipio')->nullable();
             $table->text('direccion_cliente')->nullable();
-
+            $table->text('archivo_factura')->nullable();
         });
     }
 

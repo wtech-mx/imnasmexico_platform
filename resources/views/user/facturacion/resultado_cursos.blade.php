@@ -16,8 +16,21 @@
           <td>{{ $nota->id  ?? '—' }}</td>
           <td>{{ optional($nota->User)->name ?? '—' }}</td>
           <td>{{ \Carbon\Carbon::parse($nota->fecha)->format('d-m-Y') }}</td>
-          <td>${{ number_format($nota->total, 2) }}</td>
-          <td>{{ $nota->estatus_cotizacion }}</td>
+          <td>
+           @if ($nota->total == NULL)
+            ${{ number_format($nota->pago, 2) }}
+           @else
+            ${{ number_format($nota->total, 2) }}
+           @endif
+          </td>
+          <td>
+            @if ($nota->estatus_cotizacion == NULL)
+                {{$nota->FacturaOrders->estatus}}
+            @else
+                {{ $nota->estatus_cotizacion }}
+            @endif
+
+          </td>
           <td>
             @if($tipo === 'nas')
               <a target="_blank"

@@ -61,7 +61,14 @@
                                         @endphp
                                         {{$fecha_formateada}}
                                     </td>
-                                    <td><span class="badge" style="color: #355002; background-color: #a2f70465;">Pagado</span></td>
+                                    <td>
+                                        @if ($nota->Order->estatus == '1')
+                                            <span class="badge" style="color: #355002; background-color: #a2f70465;">Pagado</span>
+                                        @else
+                                            <span class="badge" style="color: #502c02; background-color: #a2f70465;">Pendiente</span>
+                                        @endif
+
+                                    </td>
                                     <td>
                                         @if ($nota->paquete != NULL)
                                             <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$nota->paquete) }}" target="_blank">Ver orden</a>

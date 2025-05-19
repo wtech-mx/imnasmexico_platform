@@ -40,6 +40,11 @@ class Orders extends Model
         return $this->hasOne('App\Models\OrdersTickets', 'id_order', 'id');
     }
 
+    public function FacturaOrders()
+    {
+        return $this->hasOne('App\Models\Factura', 'id_orders', 'id');
+    }
+
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');
@@ -61,7 +66,7 @@ class Orders extends Model
     }
 
     public function orderTickets()
-{
-    return $this->hasMany('App\Models\OrdersTickets', 'id_order', 'id');
-}
+    {
+        return $this->hasMany('App\Models\OrdersTickets', 'id_order', 'id');
+    }
 }
