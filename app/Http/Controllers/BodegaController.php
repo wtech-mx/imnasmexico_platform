@@ -41,38 +41,6 @@ class BodegaController extends Controller
     }
 
     public function index_preparacion(Request $request) {
-        $hoy = Carbon::now();
-            // 1) Cotizaciones estándar
-    NotasProductos::where('tipo_nota', 'Cotizacion')
-    ->where('estatus_cotizacion', 'Preparado')
-    ->update([
-        'estatus_cotizacion' => 'Enviado',
-        'fecha_envio'        => $hoy,
-    ]);
-
-// 2) Cotizaciones Cósmica
-NotasProductosCosmica::where('tipo_nota', 'Cotizacion')
-    ->where('estatus_cotizacion', 'Preparado')
-    ->update([
-        'estatus_cotizacion' => 'Enviado',
-        'fecha_envio'        => $hoy,
-    ]);
-
-// 3) Pedidos e-commerce Cosmica
-OrdersCosmica::where('estatus_bodega', 'Preparado')
-    ->update([
-        'estatus_bodega' => 'Enviado',
-        'fecha_envio'    => $hoy,
-    ]);
-
-// 4) Pedidos e-commerce Nas
-OrdersNas::where('estatus_bodega', 'Preparado')
-    ->update([
-        'estatus_bodega' => 'Enviado',
-        'fecha_envio'    => $hoy,
-    ]);
-
-
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
         // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
