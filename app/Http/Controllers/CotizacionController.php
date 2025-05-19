@@ -520,8 +520,6 @@ class CotizacionController extends Controller
         }
 
         $nota = NotasProductos::findOrFail($id);
-        $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
-        $nota->estadociudad  = $request->get('estado');
 
             if($request->get('estatus_cotizacion') == 'Preparado'){
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
@@ -547,22 +545,24 @@ class CotizacionController extends Controller
                     }
                 }
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
-                $nota->fecha_envio  = date("Y-m-d H:i:s");
-                $nota->fecha_aprobada  = date("Y-m-d");
-                $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
-                foreach ($producto_pedido as $campo) {
-                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
-                    if ($product_first && $campo->cantidad > 0) {
-                        $producto_historial = new HistorialVendidos;
-                        $producto_historial->id_producto = $product_first->id;
-                        $producto_historial->stock_viejo = $product_first->stock;
-                        $producto_historial->cantidad_restado = $campo->cantidad;
-                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
-                        $producto_historial->id_venta_nas = $id;
-                        $producto_historial->save();
+                if($nota->estatus_cotizacion == 'Aprobada'){
+                    $nota->fecha_envio  = date("Y-m-d H:i:s");
+                    $nota->fecha_aprobada  = date("Y-m-d");
+                    $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
+                    foreach ($producto_pedido as $campo) {
+                        $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                        if ($product_first && $campo->cantidad > 0) {
+                            $producto_historial = new HistorialVendidos;
+                            $producto_historial->id_producto = $product_first->id;
+                            $producto_historial->stock_viejo = $product_first->stock;
+                            $producto_historial->cantidad_restado = $campo->cantidad;
+                            $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                            $producto_historial->id_venta_nas = $id;
+                            $producto_historial->save();
 
-                        $product_first->stock -= $campo->cantidad;
-                        $product_first->save();
+                            $product_first->stock -= $campo->cantidad;
+                            $product_first->save();
+                        }
                     }
                 }
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){
@@ -630,7 +630,9 @@ class CotizacionController extends Controller
                 // Asignar el nuevo folio al objeto
                 $nota->folio = $folio;
             }
-
+            
+        $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
+        $nota->estadociudad  = $request->get('estado');
         $nota->save();
 
         if($request->get('estatus_cotizacion') == 'Preparado' || $request->get('estatus_cotizacion') == 'Enviado'){

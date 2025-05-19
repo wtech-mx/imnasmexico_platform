@@ -710,45 +710,50 @@ class BodegaController extends Controller
                 return back()->with('error', 'El pedido no fue encontrado en la API de Paradisus.');
             }
 
-                $datosActualizados = [
-                    'estatus' => $request->input('estatus_cotizacion'),
-                    'preparado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
-                ];
+            if($pedido['estatus'] == 'Aprobada'){
+                    $datosActualizados = [
+                        'estatus' => $request->input('estatus_cotizacion'),
+                        'preparado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
+                    ];
 
-                foreach ($pedido['pedidos'] as $campo) {
-                    $productName = trim($campo['concepto']); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
-                    $quantity = $campo['cantidad'];
-                    $product_first = Products::where('nombre', $productName)->first();
-                    if ($product_first && $quantity > 0) {
-                        $producto_historial = new HistorialVendidos;
-                        $producto_historial->id_producto = $product_first->id;
-                        $producto_historial->stock_viejo = $product_first->stock;
-                        $producto_historial->cantidad_restado = $quantity;
-                        $producto_historial->stock_actual = $product_first->stock - $quantity;
-                        $producto_historial->id_paradisus = $id;
-                        $producto_historial->save();
+                    foreach ($pedido['pedidos'] as $campo) {
+                        $productName = trim($campo['concepto']); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
+                        $quantity = $campo['cantidad'];
+                        $product_first = Products::where('nombre', $productName)->first();
+                        if ($product_first && $quantity > 0) {
+                            $producto_historial = new HistorialVendidos;
+                            $producto_historial->id_producto = $product_first->id;
+                            $producto_historial->stock_viejo = $product_first->stock;
+                            $producto_historial->cantidad_restado = $quantity;
+                            $producto_historial->stock_actual = $product_first->stock - $quantity;
+                            $producto_historial->id_paradisus = $id;
+                            $producto_historial->save();
 
-                        $product_first->stock -= $quantity;
-                        $product_first->save();
-                    } else {
+                            $product_first->stock -= $quantity;
+                            $product_first->save();
+                        } else {
 
-                        return back()->with('error', "El producto '{$productName}' no se encontró en el inventario interno.");
+                            return back()->with('error', "El producto '{$productName}' no se encontró en el inventario interno.");
+                        }
                     }
+
+                // Actualizar el pedido en la API de Paradisus
+                if ($dominio == 'plataforma.imnasmexico.com') {
+                    $respuesta = Http::patch('https://paradisus.mx/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
+                } else {
+                    $respuesta = Http::patch('http://paradisus.test/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
                 }
 
-            // Actualizar el pedido en la API de Paradisus
-            if ($dominio == 'plataforma.imnasmexico.com') {
-                $respuesta = Http::patch('https://paradisus.mx/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
-            } else {
-                $respuesta = Http::patch('http://paradisus.test/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
-            }
-
-            // Manejar la respuesta de la API
-            if ($respuesta->successful()) {
+                // Manejar la respuesta de la API
+                if ($respuesta->successful()) {
+                    return redirect()->route('index_preparacion.bodega')
+                    ->with('success', 'Actualizado exitosamente.');
+                } else {
+                    return back()->with('error', 'No se pudo actualizar el pedido en Paradisus.');
+                }
+            }else{
                 return redirect()->route('index_preparacion.bodega')
-                ->with('success', 'Creado exitosamente.');
-            } else {
-                return back()->with('error', 'No se pudo actualizar el pedido en Paradisus.');
+                    ->with('success', 'Actualizado exitosamente.');
             }
         } else {
             return back()->with('error', 'No se pudo obtener los pedidos de la API de Paradisus.');

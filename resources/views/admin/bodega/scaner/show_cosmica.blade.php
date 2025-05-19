@@ -24,7 +24,7 @@ Escaner #{{ $nota_scaner->id }} cosmica
 
                     <div class="card-body">
                         <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
-                        <form method="POST" action="{{ route('distribuidoras.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('distribuidoras.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form" id="pedidoForm">
                             @csrf
                             <input type="hidden" name="estatus_cotizacion" value="Preparado">
                             <input type="hidden" name="_method" value="PATCH">
@@ -34,7 +34,7 @@ Escaner #{{ $nota_scaner->id }} cosmica
 
                                 @can('guardar-folio-bodega')
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar Admin</button>
                                     </div>
                                 @endcan
 
@@ -45,7 +45,9 @@ Escaner #{{ $nota_scaner->id }} cosmica
                                 </a>
 
                                 <div class="modal-footer">
-                                    <button type="submit" id="guardarBtn" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                    <button type="submit" id="guardarBtn" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">
+                                      Guardar
+                                    </button>
                                 </div>
                         </form>
                     </div>
@@ -122,6 +124,12 @@ $(document).ready(function () {
         }
     });
 
+    $('#pedidoForm').on('submit', function(){
+        const $btn = $('#guardarBtn');
+
+        // Deshabilita el botón y cambia el texto
+        $btn.prop('disabled', true).text('Guardando…');
+    });
     // Verifica los productos escaneados al cargar la página
     checkAllProductsChecked();
 });

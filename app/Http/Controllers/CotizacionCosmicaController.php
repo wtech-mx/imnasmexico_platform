@@ -759,7 +759,6 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function update_estatus(Request $request, $id){
-
         $nota = NotasProductosCosmica::find($id);
 
         if ($request->estatus_cotizacion == 'Cancelada') {
@@ -797,9 +796,8 @@ class CotizacionCosmicaController extends Controller
             $pago_fuera = public_path() . '/pago_fuera/';
         }
 
-        $nota->estatus_cotizacion =  $request->get('estatus_cotizacion');
-        $nota->estadociudad =  $request->get('estado');
-            if($request->get('estatus_cotizacion') == 'Preparado'){
+        if($request->get('estatus_cotizacion') == 'Preparado'){
+            if($nota->estatus_cotizacion == 'Aprobada'){
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $producto_bodega = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
 
@@ -818,155 +816,158 @@ class CotizacionCosmicaController extends Controller
                         $product_first->save();
                     }
                 }
-            }else if($request->get('estatus_cotizacion') == 'Enviado'){
-                $nota->fecha_envio  = date("Y-m-d H:i:s");
-            }else if($request->get('estatus_cotizacion') == 'Aprobada'){
-                $nota->fecha_aprobada  = date("Y-m-d");
+            }
+        }else if($request->get('estatus_cotizacion') == 'Enviado'){
+            $nota->fecha_envio  = date("Y-m-d H:i:s");
+        }else if($request->get('estatus_cotizacion') == 'Aprobada'){
+            $nota->fecha_aprobada  = date("Y-m-d");
 
-                if ($request->hasFile("foto_pago")) {
-                    $file = $request->file('foto_pago');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->foto_pago = $fileName;
-                }
-
-                if ($request->hasFile("doc_guia")) {
-                    $file = $request->file('doc_guia');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->doc_guia = $fileName;
-                }
-
-                if ($request->hasFile("guia_rep")) {
-                    $file = $request->file('guia_rep');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->doc_guia = $fileName;
-                }
-
-                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
-                $nota->metodo_pago  = $request->get('metodo_pago');
-
-                $nota->fecha_entrega  = $request->get('fecha_entrega');
-                $nota->direccion_entrega  = $request->get('direccion_entrega');
-                $nota->comentario_rep  = $request->get('comentario_rep');
-                $nota->id_admin_venta  = auth()->user()->id;
-            }else if($request->get('estatus_cotizacion') == 'Aprobar Linea Lumina'){
-                $nota->estatus_cotizacion  = 'Enviado';
-                if ($request->hasFile("foto_pago")) {
-                    $file = $request->file('foto_pago');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->foto_pago = $fileName;
-                }
-
-                if ($request->hasFile("doc_guia")) {
-                    $file = $request->file('doc_guia');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->doc_guia = $fileName;
-                }
-
-                if ($request->hasFile("guia_rep")) {
-                    $file = $request->file('guia_rep');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->doc_guia = $fileName;
-                }
-                $nota->fecha_aprobada  = date("Y-m-d");
-                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
-                $nota->fecha_preparado  = date("Y-m-d H:i:s");
-                $nota->fecha_envio  = date("Y-m-d H:i:s");
-            }else if($request->get('estatus_cotizacion') == 'Aprobada Workshop'){
-                $nota->estatus_cotizacion  = 'Aprobada';
-
-                if ($request->hasFile("foto_pago")) {
-                    $file = $request->file('foto_pago');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->foto_pago = $fileName;
-                }
-
-                if ($request->hasFile("doc_guia")) {
-                    $file = $request->file('doc_guia');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->doc_guia = $fileName;
-                }
-
-                if ($request->hasFile("guia_rep")) {
-                    $file = $request->file('guia_rep');
-                    $path = $pago_fuera;
-                    $fileName = uniqid() . $file->getClientOriginalName();
-                    $file->move($path, $fileName);
-                    $nota->doc_guia = $fileName;
-                }
-
-                $nota->fecha_aprobada  = date("Y-m-d");
-                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
-                $nota->fecha_preparado  = date("Y-m-d H:i:s");
-                $nota->fecha_envio  = date("Y-m-d H:i:s");
-            }else if($request->get('estatus_cotizacion') == 'Aprobada Expo'){
-                $nota->estatus_cotizacion  = 'Enviado';
-                $nota->fecha_aprobada  = date("Y-m-d");
-                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
-                $nota->fecha_preparado  = date("Y-m-d H:i:s");
-                $nota->fecha_envio  = date("Y-m-d H:i:s");
-            } else if($request->get('estatus_cotizacion') == 'Aprobado por tiendita'){
-                // Copiar datos a NotasProductos
-                $nuevaNota = new NotasProductos();
-                $nuevaNota->fill($nota->toArray());
-                $nuevaNota->tipo_nota = 'Venta Presencial';
-                $nuevaNota->estatus_cotizacion = 'Aprobada';
-                $nuevaNota->id_admin = auth()->user()->id;
-                $nuevaNota->metodo_pago = $request->get('metodo_pago2');
-                $nuevaNota->foto_pago = $request->get('foto_pago2');
-
-                // Obtener todos los folios del tipo de nota específico
-                $folios = NotasProductos::where('tipo_nota', 'Venta Presencial')->pluck('folio');
-
-                // Extraer los números de los folios y encontrar el máximo
-                $maxNumero = $folios->map(function ($folio) {
-                    return intval(substr($folio, strlen('V')));
-                })->max();
-
-                // Si hay un folio existente, sumarle 1 al máximo número
-                if ($maxNumero) {
-                    $numeroFolio = $maxNumero + 1;
-                } else {
-                    // Si no hay un folio existente, empezar desde 1
-                    $numeroFolio = 1;
-                }
-
-                // Crear el nuevo folio con el tipo de nota y el número
-                $folio = 'V' . $numeroFolio;
-
-                // Asignar el nuevo folio al objeto
-                $nuevaNota->folio = $folio;
-                $nuevaNota->save();
-
-                // Copiar productos a ProductosNotasCosmica
-                $productosCosmica = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
-                foreach ($productosCosmica as $productoCosmica) {
-                    $nuevoProducto = new ProductosNotasCosmica();
-                    $nuevoProducto->fill($productoCosmica->toArray());
-                    $nuevoProducto->id_notas_productos = $nuevaNota->id;
-                    $nuevoProducto->save();
-                }
-
-                // Eliminar la nota y productos originales si es necesario
-                ProductosNotasCosmica::where('id_notas_productos', $id)->delete();
-                $nota->delete();
+            if ($request->hasFile("foto_pago")) {
+                $file = $request->file('foto_pago');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->foto_pago = $fileName;
             }
 
+            if ($request->hasFile("doc_guia")) {
+                $file = $request->file('doc_guia');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->doc_guia = $fileName;
+            }
+
+            if ($request->hasFile("guia_rep")) {
+                $file = $request->file('guia_rep');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->doc_guia = $fileName;
+            }
+
+            $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+            $nota->metodo_pago  = $request->get('metodo_pago');
+
+            $nota->fecha_entrega  = $request->get('fecha_entrega');
+            $nota->direccion_entrega  = $request->get('direccion_entrega');
+            $nota->comentario_rep  = $request->get('comentario_rep');
+            $nota->id_admin_venta  = auth()->user()->id;
+        }else if($request->get('estatus_cotizacion') == 'Aprobar Linea Lumina'){
+            $nota->estatus_cotizacion  = 'Enviado';
+            if ($request->hasFile("foto_pago")) {
+                $file = $request->file('foto_pago');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->foto_pago = $fileName;
+            }
+
+            if ($request->hasFile("doc_guia")) {
+                $file = $request->file('doc_guia');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->doc_guia = $fileName;
+            }
+
+            if ($request->hasFile("guia_rep")) {
+                $file = $request->file('guia_rep');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->doc_guia = $fileName;
+            }
+            $nota->fecha_aprobada  = date("Y-m-d");
+            $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+            $nota->fecha_preparado  = date("Y-m-d H:i:s");
+            $nota->fecha_envio  = date("Y-m-d H:i:s");
+        }else if($request->get('estatus_cotizacion') == 'Aprobada Workshop'){
+            $nota->estatus_cotizacion  = 'Aprobada';
+
+            if ($request->hasFile("foto_pago")) {
+                $file = $request->file('foto_pago');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->foto_pago = $fileName;
+            }
+
+            if ($request->hasFile("doc_guia")) {
+                $file = $request->file('doc_guia');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->doc_guia = $fileName;
+            }
+
+            if ($request->hasFile("guia_rep")) {
+                $file = $request->file('guia_rep');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $nota->doc_guia = $fileName;
+            }
+
+            $nota->fecha_aprobada  = date("Y-m-d");
+            $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+            $nota->fecha_preparado  = date("Y-m-d H:i:s");
+            $nota->fecha_envio  = date("Y-m-d H:i:s");
+        }else if($request->get('estatus_cotizacion') == 'Aprobada Expo'){
+            $nota->estatus_cotizacion  = 'Enviado';
+            $nota->fecha_aprobada  = date("Y-m-d");
+            $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+            $nota->fecha_preparado  = date("Y-m-d H:i:s");
+            $nota->fecha_envio  = date("Y-m-d H:i:s");
+        } else if($request->get('estatus_cotizacion') == 'Aprobado por tiendita'){
+            // Copiar datos a NotasProductos
+            $nuevaNota = new NotasProductos();
+            $nuevaNota->fill($nota->toArray());
+            $nuevaNota->tipo_nota = 'Venta Presencial';
+            $nuevaNota->estatus_cotizacion = 'Aprobada';
+            $nuevaNota->id_admin = auth()->user()->id;
+            $nuevaNota->metodo_pago = $request->get('metodo_pago2');
+            $nuevaNota->foto_pago = $request->get('foto_pago2');
+
+            // Obtener todos los folios del tipo de nota específico
+            $folios = NotasProductos::where('tipo_nota', 'Venta Presencial')->pluck('folio');
+
+            // Extraer los números de los folios y encontrar el máximo
+            $maxNumero = $folios->map(function ($folio) {
+                return intval(substr($folio, strlen('V')));
+            })->max();
+
+            // Si hay un folio existente, sumarle 1 al máximo número
+            if ($maxNumero) {
+                $numeroFolio = $maxNumero + 1;
+            } else {
+                // Si no hay un folio existente, empezar desde 1
+                $numeroFolio = 1;
+            }
+
+            // Crear el nuevo folio con el tipo de nota y el número
+            $folio = 'V' . $numeroFolio;
+
+            // Asignar el nuevo folio al objeto
+            $nuevaNota->folio = $folio;
+            $nuevaNota->save();
+
+            // Copiar productos a ProductosNotasCosmica
+            $productosCosmica = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
+            foreach ($productosCosmica as $productoCosmica) {
+                $nuevoProducto = new ProductosNotasCosmica();
+                $nuevoProducto->fill($productoCosmica->toArray());
+                $nuevoProducto->id_notas_productos = $nuevaNota->id;
+                $nuevoProducto->save();
+            }
+
+            // Eliminar la nota y productos originales si es necesario
+            ProductosNotasCosmica::where('id_notas_productos', $id)->delete();
+            $nota->delete();
+        }
+
+        $nota->estatus_cotizacion =  $request->get('estatus_cotizacion');
+        $nota->estadociudad =  $request->get('estado');
         $nota->update();
 
         if($nota->id_usuario){

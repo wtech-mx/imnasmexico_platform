@@ -326,25 +326,25 @@ class PedidosWooController extends Controller
 
     public function update_estatus(Request $request, $id){
         $nota = OrdersCosmica::findOrFail($id);
-        $nota->estatus_bodega  = $request->get('estatus_cotizacion');
-
             if($request->get('estatus_cotizacion') == 'Preparado'){
-                $nota->fecha_preparado  = date("Y-m-d H:i:s");
-                $producto_pedido = OrdersCosmicaOnline::where('id_order', $id)->get();
+                if($nota->estatus_bodega == 'En preparacion'){
+                    $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                    $producto_pedido = OrdersCosmicaOnline::where('id_order', $id)->get();
 
-                foreach ($producto_pedido as $campo) {
-                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
-                    if ($product_first && $campo->cantidad > 0) {
-                        $producto_historial = new HistorialVendidos;
-                        $producto_historial->id_producto = $product_first->id;
-                        $producto_historial->stock_viejo = $product_first->stock;
-                        $producto_historial->cantidad_restado = $campo->cantidad;
-                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
-                        $producto_historial->id_cosmica_online = $id;
-                        $producto_historial->save();
+                    foreach ($producto_pedido as $campo) {
+                        $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                        if ($product_first && $campo->cantidad > 0) {
+                            $producto_historial = new HistorialVendidos;
+                            $producto_historial->id_producto = $product_first->id;
+                            $producto_historial->stock_viejo = $product_first->stock;
+                            $producto_historial->cantidad_restado = $campo->cantidad;
+                            $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                            $producto_historial->id_cosmica_online = $id;
+                            $producto_historial->save();
 
-                        $product_first->stock -= $campo->cantidad;
-                        $product_first->save();
+                            $product_first->stock -= $campo->cantidad;
+                            $product_first->save();
+                        }
                     }
                 }
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
@@ -367,7 +367,7 @@ class PedidosWooController extends Controller
                     }
                 }
             }
-
+        $nota->estatus_bodega  = $request->get('estatus_cotizacion');
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
@@ -377,25 +377,25 @@ class PedidosWooController extends Controller
 
     public function update_estatus_ecommerce(Request $request, $id){
         $nota = OrdersNas::findOrFail($id);
-        $nota->estatus_bodega  = $request->get('estatus_cotizacion');
-
             if($request->get('estatus_cotizacion') == 'Preparado'){
-                $nota->fecha_preparado  = date("Y-m-d H:i:s");
-                $producto_pedido = OrdersNasOnline::where('id_order', $id)->get();
+                if($nota->estatus_bodega == 'En preparacion'){
+                    $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                    $producto_pedido = OrdersNasOnline::where('id_order', $id)->get();
 
-                foreach ($producto_pedido as $campo) {
-                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
-                    if ($product_first && $campo->cantidad > 0) {
-                        $producto_historial = new HistorialVendidos;
-                        $producto_historial->id_producto = $product_first->id;
-                        $producto_historial->stock_viejo = $product_first->stock;
-                        $producto_historial->cantidad_restado = $campo->cantidad;
-                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
-                        $producto_historial->id_nas_online = $id;
-                        $producto_historial->save();
+                    foreach ($producto_pedido as $campo) {
+                        $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                        if ($product_first && $campo->cantidad > 0) {
+                            $producto_historial = new HistorialVendidos;
+                            $producto_historial->id_producto = $product_first->id;
+                            $producto_historial->stock_viejo = $product_first->stock;
+                            $producto_historial->cantidad_restado = $campo->cantidad;
+                            $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                            $producto_historial->id_nas_online = $id;
+                            $producto_historial->save();
 
-                        $product_first->stock -= $campo->cantidad;
-                        $product_first->save();
+                            $product_first->stock -= $campo->cantidad;
+                            $product_first->save();
+                        }
                     }
                 }
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
@@ -418,7 +418,7 @@ class PedidosWooController extends Controller
                     }
                 }
             }
-
+        $nota->estatus_bodega  = $request->get('estatus_cotizacion');
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

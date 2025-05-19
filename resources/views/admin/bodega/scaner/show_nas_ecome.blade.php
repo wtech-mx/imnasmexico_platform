@@ -26,7 +26,7 @@ NAS Ecommerce TN{{$nota_scaner->id}}
 
                     <div class="card-body">
                         <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
-                        <form method="POST" action="{{ route('update_estatus_ecommerce.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('update_estatus_ecommerce.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form" id="pedidoForm">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <input type="hidden" name="estatus_cotizacion" value="Preparado">
@@ -46,7 +46,27 @@ NAS Ecommerce TN{{$nota_scaner->id}}
                                                 <tr data-id="{{ $nota_producto->id_order }}"
                                                     style="background-color: {{ $nota_producto->cantidad > 0 ? '#d4edda' : '#f8d7da' }};"> <!-- Verde si >0, naranja si 0 -->
                                                     <td>
-                                                        {{ $nota_producto->cantidad }}
+                                                        <b></b> {{ $nota_producto->cantidad }}</b> <br> <br>
+                                                        @if ($nota_producto->Producto->sku == NULL)
+                                                            <b>SKU no disponible</b>
+                                                        @else
+                                                            @php
+                                                                // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                                                $codigo = $nota_producto->Producto->sku;
+                                                            @endphp
+                                                            <img
+                                                                src="data:image/png;base64,{{
+                                                                DNS1D::getBarcodePNG(
+                                                                    $codigo,
+                                                                    'C128',
+                                                                    1.6,
+                                                                    35,
+                                                                    [0,0,0],
+                                                                    true
+                                                                )
+                                                                }}"
+                                                                alt="Barcode de {{ $codigo }}">
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <img src="{{ $nota_producto->Producto->imagenes }}" alt="" style="width: 60px"><br>
@@ -69,7 +89,7 @@ NAS Ecommerce TN{{$nota_scaner->id}}
 
                                 @can('guardar-folio-bodega')
                                     <div class="modal-footer" >
-                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar Admin</button>
                                     </div>
                                 @endcan
 
@@ -80,7 +100,9 @@ NAS Ecommerce TN{{$nota_scaner->id}}
                                 </a>
 
                                 <div class="modal-footer">
-                                    <button type="submit" id="guardarBtn" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                    <button type="submit" id="guardarBtn" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">
+                                      Guardar
+                                    </button>
                                 </div>
                         </form>
                     </div>
@@ -189,6 +211,12 @@ $(document).ready(function () {
         }
     });
 
+    $('#pedidoForm').on('submit', function(){
+        const $btn = $('#guardarBtn');
+
+        // Deshabilita el botón y cambia el texto
+        $btn.prop('disabled', true).text('Guardando…');
+    });
     // Verifica los productos escaneados al cargar la página
     checkAllProductsChecked();
 });

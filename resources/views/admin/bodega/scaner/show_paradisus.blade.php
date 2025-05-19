@@ -22,7 +22,7 @@ Productos solicitados Paradisus
 
                         <div class="card-body">
                             <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
-                                <form method="POST" action="{{ route('actualizar.pedido.paradisus', $ApiFiltradaCollectAprobado['id']) }}" enctype="multipart/form-data" role="form">
+                                <form method="POST" action="{{ route('actualizar.pedido.paradisus', $ApiFiltradaCollectAprobado['id']) }}" enctype="multipart/form-data" role="form" id="pedidoForm">
                                     @csrf
                                     <input type="hidden" name="_method" value="PATCH">
                                     <input  id="estatus_cotizacion" name="estatus_cotizacion" value="Enviado" style="display: none">
@@ -67,12 +67,12 @@ Productos solicitados Paradisus
 
                                         @can('guardar-folio-bodega')
                                             <div class="modal-footer" >
-                                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar Admin</button>
                                             </div>
                                         @endcan
 
                                         <div class="modal-footer" id="guardarBtnContainer" style="display: none;">
-                                            <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                            <button type="submit"  id="guardarBtn" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                         </div>
                                 </form>
                         </div>
@@ -195,6 +195,12 @@ $(document).ready(function () {
         }
     });
 
+    $('#pedidoForm').on('submit', function(){
+        const $btn = $('#guardarBtn');
+
+        // Deshabilita el botón y cambia el texto
+        $btn.prop('disabled', true).text('Guardando…');
+    });
     // Verifica los productos escaneados al cargar la página
     checkAllProductsChecked();
 });
