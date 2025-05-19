@@ -70,30 +70,30 @@ Cosmica
     .descripcion-cell .full    { display: block !important; }
     .toggle-desc               { display: none !important; }
     }
-/* ----------------------------------------------------
-   Sticky footer dentro del container
------------------------------------------------------ */
-.footer-sticky {
-  position: sticky;    /* se “pega” al hacer scroll */
-  bottom: 0;           /* en el fondo del contenedor */
-  background: #fff;    /* fondo blanco para cubrir la tabla */
-  padding: 1rem;
-  border-top: 1px solid #ddd;
-  z-index: 10;
-}
+    /* ----------------------------------------------------
+    Sticky footer dentro del container
+    ----------------------------------------------------- */
+    .footer-sticky {
+    position: sticky;    /* se “pega” al hacer scroll */
+    bottom: 0;           /* en el fondo del contenedor */
+    background: #fff;    /* fondo blanco para cubrir la tabla */
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+    z-index: 10;
+    }
 
-.container_footer{
-    background: #FADACF;
-    border-radius: 13px;
-    border: solid 2px #3F303E;
-}
+    .container_footer{
+        background: #FADACF;
+        border-radius: 13px;
+        border: solid 2px #3F303E;
+    }
 
-.btn_guardar{
-    background: #3F303E;
-    border: solid 1px #3F303E;
-    color: #fff;
-    border-radius: 13px;
-}
+    .btn_guardar{
+        background: #3F303E;
+        border: solid 1px #3F303E;
+        color: #fff;
+        border-radius: 13px;
+    }
 
 </style>
 
@@ -101,192 +101,229 @@ Cosmica
     <link rel="icon" type="image/x-icon" href="https://plataforma.imnasmexico.com/cosmika/menu/logo.png">
 
 <div class="container-xxl">
-<form id="cotizaForm">
-        @csrf
-    <div class="row mt-5">
-        <div class="col-6">
-            <img class="img_header" src="https://plataforma.imnasmexico.com/cosmika/menu/logo.png" alt="">
+    <form id="cotizaForm">
+            @csrf
+        <div class="row mt-5">
+            <div class="col-6">
+                <img class="img_header" src="https://plataforma.imnasmexico.com/cosmika/menu/logo.png" alt="">
+            </div>
+
+            <div class="col-6">
+                <img class="img_header" src="{{ asset('cosmika/lista_img_negativa.png') }}" alt="">
+            </div>
+
         </div>
 
-        <div class="col-6">
-            <img class="img_header" src="{{ asset('cosmika/lista_img_negativa.png') }}" alt="">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
+                <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
+                    Nombre :
+                </p>
+                <input value="" type="text" name="name" class="form-control" required style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
+                <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
+                    WhatasApp :
+                </p>
+                <input value="" type="number" name="telefono" class="form-control"required  style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
+            </div>
         </div>
 
-    </div>
+        {{-- Una sola tabla para todos los grupos --}}
+        <table class="table table-custom mt-4">
+            <thead>
+                <tr>
+                    {{-- <th>Línea</th> --}}
+                    <th>Producto</th>
+                    {{-- <th>Precio</th> --}}
+                    <th>Descripción</th>
+                    <th>Cantidad deseada</th>
+                    <th>Total</th> {{-- nueva columna --}}
+                </tr>
+            </thead>
+            <tbody>
 
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
-            <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
-                Nombre :
-            </p>
-            <input value="" type="text" name="name" class="form-control" required style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
-        </div>
+            @php
+                use Carbon\Carbon;
+                // define fecha de inicio fija o dinámica
+                $discountStart = Carbon::parse('2025-05-19');
+                $today = Carbon::today();
+            @endphp
 
-        <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
-            <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
-                WhatasApp :
-            </p>
-            <input value="" type="number" name="telefono" class="form-control"required  style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
-        </div>
-    </div>
+            @foreach($productosPorSublinea as $sublinea => $lista)
 
-    {{-- Una sola tabla para todos los grupos --}}
-    <table class="table table-custom mt-4">
-        <thead>
-            <tr>
-                {{-- <th>Línea</th> --}}
-                <th>Producto</th>
-                {{-- <th>Precio</th> --}}
-                <th>Descripción</th>
-                <th>Cantidad deseada</th>
-                <th>Total</th> {{-- nueva columna --}}
-            </tr>
-        </thead>
-        <tbody>
+                <tr class="sublinea-row">
+                    <td colspan="6">{{ $sublinea ?: 'Sin sublínea' }}</td>
+                </tr>
 
-        @foreach($productosPorSublinea as $sublinea => $lista)
-
-            <tr class="sublinea-row">
-                <td colspan="6">{{ $sublinea ?: 'Sin sublínea' }}</td>
-            </tr>
-
-            @foreach($lista as $producto)
-            <tr data-precio="{{ $producto->precio_normal }}">
-                {{-- <td>{{ $producto->linea }}</td> --}}
-                <td>
-                    <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
-                    {{ $producto->nombre }} /
-                    {{ $producto->linea }} <br> <br>
-                    <p class="text-muted">Precio ${{ number_format($producto->precio_normal,2,'.',',') }}</p>
-                </td>
-                {{-- <td class="unit-price">
-                    ${{ number_format($producto->precio_normal,2,'.',',') }}
-                </td> --}}
-                <td class="descripcion-cell">
+                @foreach($lista as $producto)
                 @php
-                    // 1) Partimos todas las palabras
-                    $descWords    = explode(' ', trim($producto->descripcion ?? ''));
-                    // 2) Preview: primeras 30 palabras, en tramos de 8
-                    $previewWords = array_slice($descWords, 0, 5);
-                    $previewChunks= array_chunk($previewWords, 8);
-                    // 3) Full: todo en tramos de 8
-                    $fullChunks   = array_chunk($descWords, 8);
+                    // calculamos si aplica descuento
+                    $hasDiscount = $producto->fecha_fin
+                        && $producto->precio_rebajado
+                        && $today->between($discountStart, Carbon::parse($producto->fecha_fin));
+
+                    // escogemos el precio que usaremos en los cálculos
+                    $applicablePrice = $hasDiscount
+                        ? $producto->precio_rebajado
+                        : $producto->precio_normal;
                 @endphp
 
-                {{-- Vista previa --}}
-                <div class="preview">
-                    @foreach($previewChunks as $chunk)
-                    {{ implode(' ', $chunk) }}<br>
+                    <tr data-precio="{{ $applicablePrice }}">
+                        {{-- <td>{{ $producto->linea }}</td> --}}
+                        <td>
+                            <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
+                            {{ $producto->nombre }} /
+                            {{ $producto->linea }} <br> <br>
+
+                            @if($hasDiscount)
+                                {{-- precio normal tachado --}}
+                                <small class="text-muted">
+                                    <s>${{ number_format($producto->precio_normal, 2, '.', ',') }}</s>
+                                </small>
+                                {{-- precio rebajado --}}
+                                <span class="text-danger fw-bold">
+                                    ${{ number_format($producto->precio_rebajado, 2, '.', ',') }}
+                                </span>
+                                <br>
+                                {{-- fecha fin descuento --}}
+                                <small class="text-secondary">
+                                    hasta {{ Carbon::parse($producto->fecha_fin)->format('d/m/y') }}
+                                </small>
+                            @else
+                                <p class="text-muted">
+                                    Precio ${{ number_format($producto->precio_normal, 2, '.', ',') }}
+                                </p>
+                            @endif
+
+                        </td>
+                        {{-- <td class="unit-price">
+                            ${{ number_format($producto->precio_normal,2,'.',',') }}
+                        </td> --}}
+                        <td class="descripcion-cell">
+                            @php
+                                // 1) Partimos todas las palabras
+                                $descWords    = explode(' ', trim($producto->descripcion ?? ''));
+                                // 2) Preview: primeras 30 palabras, en tramos de 8
+                                $previewWords = array_slice($descWords, 0, 5);
+                                $previewChunks= array_chunk($previewWords, 8);
+                                // 3) Full: todo en tramos de 8
+                                $fullChunks   = array_chunk($descWords, 8);
+                            @endphp
+
+                            {{-- Vista previa --}}
+                            <div class="preview">
+                                @foreach($previewChunks as $chunk)
+                                {{ implode(' ', $chunk) }}<br>
+                                @endforeach
+
+                                @if(count($descWords) > 5)
+                                <a href="#" class="toggle-desc">Ver más</a>
+                                @endif
+                            </div>
+
+                            {{-- Texto completo, oculto --}}
+                            @if(count($descWords) > 5)
+                            <div class="full" style="display: none;">
+                                @foreach($fullChunks as $chunk)
+                                {{ implode(' ', $chunk) }}<br>
+                                @endforeach
+                                <a href="#" class="toggle-desc">Ver menos</a>
+                            </div>
+                            @endif
+                        </td>
+
+                        <td>
+                            <input
+                            type="number"
+                            name="cantidad[{{ $producto->id }}]"
+                            class="form-control qty-input"
+                            min="0"
+                            value="0"
+                            />
+                        </td>
+
+                        <td class="row-total">$0.00</td>
+                    </tr>
+
                     @endforeach
-
-                    @if(count($descWords) > 5)
-                    <a href="#" class="toggle-desc">Ver más</a>
-                    @endif
-                </div>
-
-                {{-- Texto completo, oculto --}}
-                @if(count($descWords) > 5)
-                <div class="full" style="display: none;">
-                    @foreach($fullChunks as $chunk)
-                    {{ implode(' ', $chunk) }}<br>
-                    @endforeach
-                    <a href="#" class="toggle-desc">Ver menos</a>
-                </div>
-                @endif
-                </td>
+                @endforeach
 
 
-                <td>
-                    <input
-                    type="number"
-                    name="cantidad[{{ $producto->id }}]"
-                    class="form-control qty-input"
-                    min="0"
-                    value="0"
-                    />
-                </td>
-                <td class="row-total">$0.00</td>
-            </tr>
+            {{-- --- Sección de Kits --- --}}
+            @if($kits->isNotEmpty())
+                <tr class="sublinea-row">
+                    <td colspan="6">Kits</td>
+                </tr>
+                @foreach($kits as $kit)
+                <tr data-precio="{{ $kit->precio_normal }}">
+                    <td>
+                        <img src="{{asset('products/'.$kit->imagenes) }}" alt="" style="width:40px"><br>
+                        {{ $kit->nombre }} / {{ $kit->linea }}<br><br>
+                        <p class="text-muted">Precio ${{ number_format($kit->precio_normal,2,'.',',') }}</p>
+                    </td>
+                    {{-- <-- AÑADIMOS LA CLASE descripcion-cell AQUÍ --}}
+                    <td class="descripcion-cell">
+                        @php
+                            $items = $kit->bundleItems->toArray();
+                        @endphp
 
-            @endforeach
-        @endforeach
+                        {{-- Vista previa (móvil) --}}
+                        <div class="preview">
+                            <ul style="list-style:none; margin:0; padding:0;">
+                                @foreach(array_slice($items, 0, 3) as $item)
+                                    <li>
+                                    {{ $item['cantidad'] }} × {{ $item['producto'] }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                            @if(count($items) > 3)
+                            <a href="#" class="toggle-desc">Ver más</a>
+                            @endif
+                        </div>
 
-
-        {{-- --- Sección de Kits --- --}}
-        @if($kits->isNotEmpty())
-            <tr class="sublinea-row">
-                <td colspan="6">Kits</td>
-            </tr>
-            @foreach($kits as $kit)
-            <tr data-precio="{{ $kit->precio_normal }}">
-                <td>
-                    <img src="{{asset('products/'.$kit->imagenes) }}" alt="" style="width:40px"><br>
-                    {{ $kit->nombre }} / {{ $kit->linea }}<br><br>
-                    <p class="text-muted">Precio ${{ number_format($kit->precio_normal,2,'.',',') }}</p>
-                </td>
-                {{-- <-- AÑADIMOS LA CLASE descripcion-cell AQUÍ --}}
-                <td class="descripcion-cell">
-                    @php
-                        $items = $kit->bundleItems->toArray();
-                    @endphp
-
-                    {{-- Vista previa (móvil) --}}
-                    <div class="preview">
-                        <ul style="list-style:none; margin:0; padding:0;">
-                            @foreach(array_slice($items, 0, 3) as $item)
-                                <li>
-                                {{ $item['cantidad'] }} × {{ $item['producto'] }}
-                                </li>
-                            @endforeach
-                        </ul>
+                        {{-- Texto completo (desktop siempre, móvil oculto hasta hacer click) --}}
                         @if(count($items) > 3)
-                        <a href="#" class="toggle-desc">Ver más</a>
+                        <div class="full" style="display: none;">
+                            <ul style="list-style:none; margin:0; padding:0;">
+                                @foreach($items as $item)
+                                    <li>
+                                    {{ $item['cantidad'] }} × {{ $item['producto'] }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <a href="#" class="toggle-desc">Ver menos</a>
+                        </div>
                         @endif
-                    </div>
+                    </td>
+                    <td>
+                        <input type="number"
+                            name="cantidad[{{ $kit->id }}]"
+                            class="form-control qty-input"
+                            min="0"
+                            value="0"/>
+                    </td>
+                    <td class="row-total">$0.00</td>
+                </tr>
+                @endforeach
+            @endif
 
-                    {{-- Texto completo (desktop siempre, móvil oculto hasta hacer click) --}}
-                    @if(count($items) > 3)
-                    <div class="full" style="display: none;">
-                        <ul style="list-style:none; margin:0; padding:0;">
-                            @foreach($items as $item)
-                                <li>
-                                {{ $item['cantidad'] }} × {{ $item['producto'] }}
-                                </li>
-                            @endforeach
-                        </ul>
-                        <a href="#" class="toggle-desc">Ver menos</a>
-                    </div>
-                    @endif
-                </td>
-                <td>
-                    <input type="number"
-                        name="cantidad[{{ $kit->id }}]"
-                        class="form-control qty-input"
-                        min="0"
-                        value="0"/>
-                </td>
-                <td class="row-total">$0.00</td>
-            </tr>
-            @endforeach
-        @endif
+            </tbody>
+        </table>
 
-        </tbody>
-    </table>
-
-<!-- Sticky footer -->
-<div class="footer-sticky d-flex justify-content-between align-items-center container_footer">
-  <div>
-    <strong class="text-dark">Total General: </strong>
-    <span id="grandTotal">$0.00</span>
-  </div>
-  <button type="submit" class="btn" style="background: #3F303E;border: solid 1px #3F303E;color: #fff;border-radius: 13px;">Guardar Cotización</button>
-</div>
-</form>
-
+        <!-- Sticky footer -->
+        <div class="footer-sticky d-flex justify-content-between align-items-center container_footer">
+        <div>
+            <strong class="text-dark">Total General: </strong>
+            <span id="grandTotal">$0.00</span>
+        </div>
+            <button type="submit" class="btn" style="background: #3F303E;border: solid 1px #3F303E;color: #fff;border-radius: 13px;">Guardar Cotización</button>
+        </div>
+    </form>
 </div>
 
 @endsection
-
 
 @section('js_custom')
 
