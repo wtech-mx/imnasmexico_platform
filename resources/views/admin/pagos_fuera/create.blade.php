@@ -355,81 +355,40 @@
 
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
+<script>
+$(document).ready(function(){
+    // 1) Inicializar Select2
+    $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').select2();
 
-        // Inicializa tus select2
-        $('.curso, .curso2, .curso3, .curso4').select2();
-
-        // Función que recorre cada select + su qty y acumula
-        function calcularTotal(){
-            let total = 0;
-
-            // Curso 1
-            let precio1 = parseFloat($('.curso option:selected').data('precio')) || 0;
-            let cant1   = parseInt($('#cantidad').val()) || 1;
-            total += precio1 * cant1;
-
-            // Curso 2
-            let precio2 = parseFloat($('.curso2 option:selected').data('precio')) || 0;
-            let cant2   = parseInt($('#cantidad2').val()) || 1;
-            total += precio2 * cant2;
-
-            // Curso 3
-            let precio3 = parseFloat($('.curso3 option:selected').data('precio')) || 0;
-            let cant3   = parseInt($('#cantidad3').val()) || 1;
-            total += precio3 * cant3;
-
-            // Curso 4
-            let precio4 = parseFloat($('.curso4 option:selected').data('precio')) || 0;
-            let cant4   = parseInt($('#cantidad4').val()) || 1;
-            total += precio4 * cant4;
-
-            // Clase grabada (qty siempre 1)
-            let precioG = parseFloat($('[name="clase_grabada"] option:selected').data('precio')) || 0;
-            total += precioG;
-
-            // Ponlo en el input de pago (número puro, dos decimales)
-            $('#pago').val(total.toFixed(2));
+    // 2) Función que calcula el subtotal (sin IVA)
+    function calcularSubtotal(){
+        let total = 0;
+        // Curso 1…4
+        for(let i=1; i<=4; i++){
+            let precio = parseFloat($(`.curso${i>1?i:''} option:selected`).data('precio')) || 0;
+            let qty    = parseInt($(`#cantidad${i>1?i:''}`).val()) || 1;
+            total += precio * qty;
         }
+        // Clase grabada
+        total += parseFloat($('[name="clase_grabada"] option:selected').data('precio'))||0;
+        return total;
+    }
 
-        // Guardamos el total "base" sin IVA
-        let baseTotal = parseFloat($('#pago').val()) || 0;
+    // 3) Función que recalcula y muestra el total, con o sin IVA
+    function calcularTotalConIVA(){
+        const subtotal = calcularSubtotal();
+        const aplicaIVA = $('#toggleFactura').is(':checked');
+        const total = aplicaIVA ? subtotal * 1.16 : subtotal;
+        $('#pago').val(total.toFixed(2));
+    }
 
-        // Función que actualiza el campo #pago aplicando IVA si toca
-        function actualizarConIVA(){
-            let pago = baseTotal;
-            if ($('#toggleFactura').is(':checked')) {
-            pago = baseTotal * 1.16;  // suma 16%
-            }
-            $('#pago').val(pago.toFixed(2));
-        }
+    // 4) Enlazar TODOS los inputs/selects al mismo recalculo
+    $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').on('change', calcularTotalConIVA);
+    $('#cantidad, #cantidad2, #cantidad3, #cantidad4').on('input', calcularTotalConIVA);
+    $('#toggleFactura').on('change', calcularTotalConIVA);
 
-        // Cada vez que recalculamos Total (selects o cantidades), actualizamos baseTotal y luego el campo:
-        function calcularTotalConIVA(){
-            // tu calcularTotal original, pero haciendo esto al final:
-            calcularTotal();               // recalcula y pone base en #pago
-            baseTotal = parseFloat($('#pago').val()) || 0;
-            actualizarConIVA();            // rehace #pago con o sin IVA
-        }
-
-        // Reemplaza los bindings de antes por usar esta nueva función:
-        $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]')
-        .off('change')
-        .on('change', calcularTotalConIVA);
-
-        $('#cantidad, #cantidad2, #cantidad3, #cantidad4')
-            .off('input')
-            .on('input', calcularTotalConIVA);
-
-        // Listener en el checkbox
-        $('#toggleFactura').on('change', actualizarConIVA);
-
-        // Y al cargar:
-        calcularTotalConIVA();
-
-    });
-
-
-    </script>
+    // 5) Recalcular al cargar la página
+    calcularTotalConIVA();
+});
+</script>
 @endsection
