@@ -30,27 +30,12 @@
 
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-2 text-center">
-                                        <label>Acompañante: </label>
-                                        <h5>{{$multi + $multi_nas}}</h5>
-                                    </div>
-
-                                    <div class="col-2 text-center">
-                                        <label>Sin Acompañante: </label>
-                                        <h5>{{$ordenes_sin_acompañante + $ordenes_nas_sin_acompañante}}</h5>
-                                    </div>
-
-                                    <div class="col-2 text-center">
-                                        <label>Basico: </label>
-                                        <h5>{{$ordenes_basico + $ordenes_nas_basico}}</h5>
-                                    </div>
-
-                                    <div class="col-3 text-center">
+                                    <div class="col-6 text-center">
                                         <label>Total de Registros: </label>
                                         <h5>{{$totalRegistros}}</h5>
                                     </div>
 
-                                    <div class="col-3 text-center">
+                                    <div class="col-6 text-center">
                                         <label>Total de Personas: </label>
                                         <h5>{{$totalPersonas}}</h5>
                                     </div>
@@ -79,7 +64,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($ordenes as $item)
+                                            @foreach ($ordenes_basico as $item)
                                                 <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
                                                     <td>{{ $item->Nota->folio ?? 'Sin folio' }}</td>
                                                     <td>
@@ -123,7 +108,7 @@
                                                 </tr>
                                             @endforeach
 
-                                            @foreach ($ordenes_nas as $item)
+                                            @foreach ($ordenes_nas_basico as $item)
                                                 <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
                                                     <td>{{ $item->Nota->folio ?? 'Sin folio' }}</td>
 

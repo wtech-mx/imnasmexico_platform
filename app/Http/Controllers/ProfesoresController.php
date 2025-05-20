@@ -127,124 +127,67 @@ class ProfesoresController extends Controller
 
 
     public function asistencia_expo() {
-        $ordenes = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])
+
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2080)
+        ->whereHas('Nota', function($query) {
+            $query->whereNotNull('fecha_aprobada');
+        })
+        ->get();
+
+        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
-            ->with('Nota') // Cargar la relación Nota
+            ->sum('cantidad');
+
+        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2080)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
             ->get();
 
-        $ordenes_acompañante = ProductosNotasCosmica::where('id_producto', 1881)
+        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->sum('cantidad');
 
-        $ordenes_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->sum('cantidad');
+        $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
+        $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
 
-        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 1952)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->sum('cantidad');
-
-        $multi = $ordenes_acompañante * 2;
-
-        $ordenes_nas = ProductosNotasId::whereIn('id_producto', [1952, 1881, 1882])
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->with('Nota') // Cargar la relación Nota
-            ->get();
-
-        $ordenes_nas_acompañante = ProductosNotasId::where('id_producto', 1881)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->sum('cantidad');
-
-        $ordenes_nas_sin_acompañante = ProductosNotasId::where('id_producto', 1882)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->sum('cantidad');
-
-        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 1952)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->sum('cantidad');
-
-        $multi_nas = $ordenes_nas_acompañante * 2;
-
-        $totalPersonas = $multi_nas + $ordenes_nas_sin_acompañante + $ordenes_nas_basico + $multi + $ordenes_sin_acompañante + $ordenes_basico;
-        $totalRegistros = $ordenes->count() + $ordenes_nas->count();
-
-        $asistencia = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])
+        $asistencia = ProductosNotasCosmica::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '!=', NULL)
             ->sum('asistencia');
 
-        $asistencia_nas = ProductosNotasId::whereIn('id_producto', [1952, 1881, 1882])
+        $asistencia_nas = ProductosNotasId::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '!=', NULL)
             ->sum('asistencia');
 
-        $inasistencia_acompañante = ProductosNotasCosmica::where('id_producto', 1881)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->where('asistencia', '=', NULL)
-            ->sum('cantidad') * 2;
-
-        $inasistencia_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)
+        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '=', NULL)
             ->sum('cantidad');
 
-        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 1952)
+        $inasistencia_nas_basico = ProductosNotasId::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '=', NULL)
             ->sum('cantidad');
 
-        $inasistencia_nas_acompañante = ProductosNotasId::where('id_producto', 1881)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->where('asistencia', '=', NULL)
-            ->sum('cantidad') * 2;
+        $inasistencia = $inasistencia_basico + $inasistencia_nas_basico;
 
-        $inasistencia_nas_sin_acompañante = ProductosNotasId::where('id_producto', 1882)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->where('asistencia', '=', NULL)
-            ->sum('cantidad');
-
-        $inasistencia_nas_basico = ProductosNotasId::where('id_producto', 1952)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->where('asistencia', '=', NULL)
-            ->sum('cantidad');
-
-        $inasistencia = $inasistencia_acompañante + $inasistencia_sin_acompañante + $inasistencia_basico + $inasistencia_nas_acompañante + $inasistencia_nas_sin_acompañante + $inasistencia_nas_basico;
-
-        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes', 'totalPersonas', 'multi', 'ordenes_sin_acompañante',
-            'ordenes_basico', 'totalRegistros', 'asistencia', 'inasistencia',
-            'ordenes_nas', 'ordenes_nas_acompañante', 'ordenes_nas_sin_acompañante', 'ordenes_nas_basico', 'multi_nas', 'asistencia_nas'));
+        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes_basico',
+            'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'asistencia', 'asistencia_nas', 'inasistencia_basico',
+            'inasistencia_nas_basico', 'inasistencia'));
     }
 
     public function updateAsistencia(Request $request)
