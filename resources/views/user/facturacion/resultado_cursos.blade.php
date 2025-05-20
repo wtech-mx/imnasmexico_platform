@@ -24,17 +24,12 @@
            @endif
           </td>
           <td>
-            @if ($nota->estatus_cotizacion == NULL)
-                {{$nota->FacturaOrders->estatus}}
-            @else
-                {{ $nota->estatus_cotizacion }}
-            @endif
-
+            {{$nota->FacturaOrders->estatus}}
           </td>
           <td>
             @if($tipo === 'nas')
               <a target="_blank"
-                 href="{{ route('notas_cotizacion.imprimir', ['id' => $nota->id]) }}"
+                 href="{{ route('notas_cotizacion.imprimir', ['id' => $id]) }}"
                  class="btn btn-sm btn-primary">
                 Ver Cotización NAS
               </a>
@@ -42,7 +37,7 @@
             @elseif ($tipo === 'cosmica')
 
               <a target="_blank"
-                 href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}"
+                 href="{{ route('cotizacion_cosmica.imprimir', ['id' => $id]) }}"
                  class="btn btn-sm btn-primary">
                 Ver Cotización Cosmica
               </a>
@@ -59,7 +54,7 @@
     </div>
 
 
-    <form id="facturaForm" method="POST" action="{{ route('emisionfacturaCurso', $nota->id) }}" enctype="multipart/form-data" class="row">
+    <form id="facturaForm" method="POST" action="{{ route('emisionfacturaCurso', $id) }}" enctype="multipart/form-data" class="row">
 
         @csrf
         <input type="hidden" name="_method" value="POST">

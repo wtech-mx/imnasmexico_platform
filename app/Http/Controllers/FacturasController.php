@@ -138,14 +138,6 @@ class FacturasController extends Controller
         }
 
         $factura = Factura::where('id_orders', $id)->first();
-
-        // if ($request->hasFile("situacion_fiscal")) {
-        //     $file = $request->file('situacion_fiscal');
-        //     $path = $facturas;
-        //     $fileName = uniqid() . $file->getClientOriginalName();
-        //     $file->move($path, $fileName);
-        //     $factura->situacion_fiscal = $fileName;
-        // }
         $factura->razon_social = $request->get('razon_cliente');
         $factura->rfc = $request->get('rfc_cliente');
         $factura->cfdi = $request->get('cfdi_cliente');
@@ -370,7 +362,8 @@ class FacturasController extends Controller
             $q->where('telefono', $telefono);
         })
         ->first();
-
+        
+        $id = $nota->paquete;
         if($nota == NULL){
             $nota = Orders::with('User')
             ->where('id', $folio)
@@ -392,6 +385,8 @@ class FacturasController extends Controller
                     'message' => 'Esta nota no está marcada para facturar.'
                 ], 403);
             }
+
+            $id = $nota->id;
         }else{
             if ($nota->factura != 1) {
                 return response()->json([
@@ -410,6 +405,7 @@ class FacturasController extends Controller
 
         $html = view('user.facturacion.resultado_cursos', [
             'nota' => $nota,
+            'id' => $id,
             'tipo' => 'cursos',          // <-- marcamos que viene de NAS
         ])->render();
 

@@ -50,4 +50,9 @@ class NotasCursos extends Model
     {
         return $this->hasOne(Factura::class, 'id_notas_cursos');
     }
+
+    public function FacturaOrders()
+    {
+        return $this->hasOne('App\Models\Factura', 'id_orders', 'paquete');
+    }
 }
