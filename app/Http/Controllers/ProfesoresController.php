@@ -128,25 +128,25 @@ class ProfesoresController extends Controller
 
     public function asistencia_expo() {
 
-        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2080)
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2079)
         ->whereHas('Nota', function($query) {
             $query->whereNotNull('fecha_aprobada');
         })
         ->get();
 
-        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2080)
+        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2079)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->sum('cantidad');
 
-        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2080)
+        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2079)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->get();
 
-        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2080)
+        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2079)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
