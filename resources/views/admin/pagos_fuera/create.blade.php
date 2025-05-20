@@ -414,7 +414,9 @@
         }
 
         // Reemplaza los bindings de antes por usar esta nueva función:
-        $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').on('change', calcularTotal);
+        $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]')
+        .off('change')
+        .on('change', calcularTotalConIVA);
 
         $('#cantidad, #cantidad2, #cantidad3, #cantidad4')
             .off('input')
