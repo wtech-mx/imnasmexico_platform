@@ -98,6 +98,7 @@ class PagosFueraController extends Controller
         $pagos_fuera->telefono = $request->get('telefono');
         $pagos_fuera->curso = $curso;
         $pagos_fuera->inscripcion = '1';
+        $pagos_fuera->factura = '1';
         $pagos_fuera->pendiente = '0';
         $pagos_fuera->modalidad = $request->get('forma_pago');
         $pagos_fuera->deudor = $request->get('deudor');

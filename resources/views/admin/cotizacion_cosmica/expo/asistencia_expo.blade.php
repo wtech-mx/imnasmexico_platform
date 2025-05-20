@@ -32,10 +32,10 @@
                                 <div class="row">
                                     <div class="col-6 text-center">
                                         <label>Total de Registros: </label>
-                                        <h5>{{$totalRegistros}}</h5>
+                                        <h5>{{$total}}</h5>
                                     </div>
 
-                                    <div class="col-6 text-center">
+                                    {{-- <div class="col-6 text-center">
                                         <label>Total de Personas: </label>
                                         <h5>{{$totalPersonas}}</h5>
                                     </div>
@@ -48,10 +48,10 @@
                                     <div class="col-6 text-center" style="background-color: #9b1ee357">
                                         <label>Inasistencia: </label>
                                         <h5>{{$inasistencia}}</h5>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
-                                <div class="table-responsive">
+                                {{-- <div class="table-responsive">
                                     <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">
                                             <tr>
@@ -159,7 +159,7 @@
                                         </tbody>
                                     </table>
 
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
