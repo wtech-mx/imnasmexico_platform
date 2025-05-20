@@ -14,6 +14,7 @@ use Session;
 use Hash;
 use Str;
 use Auth;
+use DB;
 use Carbon\Carbon;
 
 class ProfesoresController extends Controller
@@ -127,33 +128,57 @@ class ProfesoresController extends Controller
 
 
     public function asistencia_expo() {
+        $id = 2079;
 
-        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2079)
-        ->whereHas('Nota', function($query) {
-            $query->whereNotNull('fecha_aprobada');
-        })
-        ->get();
-
-        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2079)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
+        $total = DB::table('notas_productos_cosmica')
+            // opcional: filtrar filas que realmente contengan ese kit
+            ->where(function($q) use ($id) {
+                $q->where('id_kit',  $id)
+                  ->orWhere('id_kit2', $id)
+                  ->orWhere('id_kit3', $id)
+                  ->orWhere('id_kit4', $id)
+                  ->orWhere('id_kit5', $id)
+                  ->orWhere('id_kit6', $id);
             })
-            ->sum('cantidad');
+            // sumar con CASE WHEN
+            ->selectRaw("
+                COALESCE(SUM(CASE WHEN id_kit  = ? THEN cantidad_kit  END),0)
+              + COALESCE(SUM(CASE WHEN id_kit2 = ? THEN cantidad_kit2 END),0)
+              + COALESCE(SUM(CASE WHEN id_kit3 = ? THEN cantidad_kit3 END),0)
+              + COALESCE(SUM(CASE WHEN id_kit4 = ? THEN cantidad_kit4 END),0)
+              + COALESCE(SUM(CASE WHEN id_kit5 = ? THEN cantidad_kit5 END),0)
+              + COALESCE(SUM(CASE WHEN id_kit6 = ? THEN cantidad_kit6 END),0)
+              AS total",
+              // El mismo placeholder seis veces
+              [$id, $id, $id, $id, $id, $id]
+            )
+            ->value('total');
+        // $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2080)
+        // ->whereHas('Nota', function($query) {
+        //     $query->whereNotNull('fecha_aprobada');
+        // })
+        // ->get();
 
-        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2079)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->get();
+        // $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2080)
+        //     ->whereHas('Nota', function($query) {
+        //         $query->whereNotNull('fecha_aprobada');
+        //     })
+        //     ->sum('cantidad');
 
-        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2079)
-            ->whereHas('Nota', function($query) {
-                $query->whereNotNull('fecha_aprobada');
-            })
-            ->sum('cantidad');
+        // $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2080)
+        //     ->whereHas('Nota', function($query) {
+        //         $query->whereNotNull('fecha_aprobada');
+        //     })
+        //     ->get();
 
-        $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
-        $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
+        // $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2080)
+        //     ->whereHas('Nota', function($query) {
+        //         $query->whereNotNull('fecha_aprobada');
+        //     })
+        //     ->sum('cantidad');
+
+        // $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
+        // $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
 
         $asistencia = ProductosNotasCosmica::where('id_producto', 2080)
             ->whereHas('Nota', function($query) {
@@ -185,8 +210,11 @@ class ProfesoresController extends Controller
 
         $inasistencia = $inasistencia_basico + $inasistencia_nas_basico;
 
-        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes_basico',
-            'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'asistencia', 'asistencia_nas', 'inasistencia_basico',
+        // return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes_basico',
+        //     'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'asistencia', 'asistencia_nas', 'inasistencia_basico',
+        //     'inasistencia_nas_basico', 'inasistencia'));
+
+        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('total','asistencia', 'asistencia_nas', 'inasistencia_basico',
             'inasistencia_nas_basico', 'inasistencia'));
     }
 

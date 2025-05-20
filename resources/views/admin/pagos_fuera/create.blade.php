@@ -130,9 +130,9 @@
                                             <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                             @foreach ($cursos as $curso)
                                                 @if ($curso->Cursos->id == 647)
-                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
                                                 @else
-                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -161,9 +161,9 @@
                                                             <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                                             @foreach ($cursos as $curso)
                                                                 @if ($curso->Cursos->id == 647)
-                                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
                                                                 @else
-                                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -183,9 +183,9 @@
                                                             <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                                             @foreach ($cursos as $curso)
                                                                 @if ($curso->Cursos->id == 647)
-                                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
                                                                 @else
-                                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -205,9 +205,9 @@
                                                             <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                                             @foreach ($cursos as $curso)
                                                                 @if ($curso->Cursos->id == 647)
-                                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
                                                                 @else
-                                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                                    <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -228,12 +228,21 @@
                                         <select name="clase_grabada" class="form-select d-inline-block curso" style="width: 70%!important;">
                                             <option value="">Seleccione Curso</option>
                                             @foreach ($clases_grabadas as $clase_grabada)
-                                            <option value="{{ $clase_grabada->id }}">{{ $clase_grabada->nombre }} - {{ $clase_grabada->Cursos->modalidad }} / {{ $clase_grabada->Cursos->fecha_inicial }}</option>
+                                            <option value="{{ $clase_grabada->id }}" data-precio="{{ $clase_grabada->precio }}">{{ $clase_grabada->nombre }} - {{ $clase_grabada->Cursos->modalidad }} / {{ $clase_grabada->Cursos->fecha_inicial }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-6 mt-3">
+                                    <div class="col-4 mt-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="toggleFactura" name="factura" value="1">
+                                            <h4 class="form-check-h4" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4 mt-3">
                                         <label for="name">Método de Pago *</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
@@ -257,7 +266,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6 mt-3">
+                                    <div class="form-group col-4 mt-3">
                                         <label for="name">Foto (Comprobante) *</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
@@ -283,7 +292,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">
                                             </span>
-                                            <input class="form-control" type="number" id="pago" name="pago" placeholder="Ingresa el total del/de cursos" required>
+                                            <input class="form-control" type="number" id="pago" name="pago" required>
                                         </div>
                                     </div>
 
@@ -305,7 +314,6 @@
 
                                     </div>
 
-
                                     <div class="form-group col-1 mt-3">
                                         <label>Deudor</label>
                                         <div class="form-check">
@@ -322,7 +330,6 @@
                                             <input id="abono" name="abono" type="number" class="form-control" placeholder="Abono">@error('abono') <span class="error text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
-
 
                                     <div class="col-12">
                                         <div class="form-group">
@@ -349,54 +356,78 @@
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
     <script type="text/javascript">
+    $(document).ready(function(){
 
-        $(document).ready(function() {
+        // Inicializa tus select2
+        $('.curso, .curso2, .curso3, .curso4').select2();
 
-            $('.curso').select2();
-            $('.curso4').select2();
-            $('.curso2').select2();
-            $('.curso3').select2();
+        // Función que recorre cada select + su qty y acumula
+        function calcularTotal(){
+            let total = 0;
 
-            const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-                searchable: true,
-                fixedHeight: false
-            });
+            // Curso 1
+            let precio1 = parseFloat($('.curso option:selected').data('precio')) || 0;
+            let cant1   = parseInt($('#cantidad').val()) || 1;
+            total += precio1 * cant1;
 
-                    // Esconde el contenedor del campo "Abono" inicialmente
-                    $('#abono-container').hide();
+            // Curso 2
+            let precio2 = parseFloat($('.curso2 option:selected').data('precio')) || 0;
+            let cant2   = parseInt($('#cantidad2').val()) || 1;
+            total += precio2 * cant2;
 
-                    // Escucha el evento 'change' del checkbox 'Deudor'
-                    $('#deudor').change(function() {
-                        // Si el checkbox 'Deudor' está seleccionado, muestra el contenedor del campo "Abono"
-                        if ($(this).is(':checked')) {
-                        $('#abono-container').show();
-                        } else {
-                        // Si el checkbox 'Deudor' está deseleccionado, oculta el contenedor del campo "Abono" y borra el valor ingresado
-                        $('#abono-container').hide();
-                        $('#abono').val('');
-                        }
-                    });
+            // Curso 3
+            let precio3 = parseFloat($('.curso3 option:selected').data('precio')) || 0;
+            let cant3   = parseInt($('#cantidad3').val()) || 1;
+            total += precio3 * cant3;
 
-                    var table = $('#datatable-search').DataTable();
+            // Curso 4
+            let precio4 = parseFloat($('.curso4 option:selected').data('precio')) || 0;
+            let cant4   = parseInt($('#cantidad4').val()) || 1;
+            total += precio4 * cant4;
 
-                    // Manejar el clic en las filas
-                    $('#datatable-search tbody').on('click', 'tr', function () {
-                        // Remover la clase 'selected-row' de cualquier fila previamente seleccionada
-                        $('#datatable-search tbody tr').removeClass('selected-row');
+            // Clase grabada (qty siempre 1)
+            let precioG = parseFloat($('[name="clase_grabada"] option:selected').data('precio')) || 0;
+            total += precioG;
 
-                        // Agregar la clase 'selected-row' a la fila seleccionada
-                        $(this).addClass('selected-row');
-                    });
+            // Ponlo en el input de pago (número puro, dos decimales)
+            $('#pago').val(total.toFixed(2));
+        }
 
-        });
+        // Guardamos el total "base" sin IVA
+        let baseTotal = parseFloat($('#pago').val()) || 0;
 
-            function openRightPanel() {
-                document.getElementById("rightPanel").style.right = "0";
+        // Función que actualiza el campo #pago aplicando IVA si toca
+        function actualizarConIVA(){
+            let pago = baseTotal;
+            if ($('#toggleFactura').is(':checked')) {
+            pago = baseTotal * 1.16;  // suma 16%
             }
+            $('#pago').val(pago.toFixed(2));
+        }
 
-            function closeRightPanel() {
-                document.getElementById("rightPanel").style.right = "-600px";
-            }
+        // Cada vez que recalculamos Total (selects o cantidades), actualizamos baseTotal y luego el campo:
+        function calcularTotalConIVA(){
+            // tu calcularTotal original, pero haciendo esto al final:
+            calcularTotal();               // recalcula y pone base en #pago
+            baseTotal = parseFloat($('#pago').val()) || 0;
+            actualizarConIVA();            // rehace #pago con o sin IVA
+        }
+
+        // Reemplaza los bindings de antes por usar esta nueva función:
+        $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').on('change', calcularTotal);
+
+        $('#cantidad, #cantidad2, #cantidad3, #cantidad4')
+            .off('input')
+            .on('input', calcularTotalConIVA);
+
+        // Listener en el checkbox
+        $('#toggleFactura').on('change', actualizarConIVA);
+
+        // Y al cargar:
+        calcularTotalConIVA();
+
+    });
+
 
     </script>
 @endsection
