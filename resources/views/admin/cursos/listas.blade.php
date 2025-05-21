@@ -30,22 +30,18 @@
                                 Crear  <i class="fas fa-plus"></i>
                             </a>
                         </div>
-                        <p class="text-sm">{{$curso->nombre}} / {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat('l j \\de F \\de Y')) }} al {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat('l j \\de F \\de Y')) }} - ( {{ $curso->modalidad }} )
-                            <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        <p class="text-sm">
+                        {{ $curso->nombre }} /
+                        {{ $rangoFechas }}
+                        ( {{ $curso->modalidad }} )
+                        <a class="btn btn-sm btn-info"
+                            href="{{ route('cursos.show', $curso->slug) }}"
+                            target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                         </p>
-                        <h4>Inscritos :
-                            @php
-                                $contador = 0;
-                            @endphp
-                            @foreach ($ordenes as $order)
-                                @if ($order->Orders->estatus == '1')
-                                    @php
-                                        $contador++;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $contador }}
-                        </h4>
+
+                        <h4>Inscritos: {{ $inscritos }}</h4>
                     </div>
 
                     <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
