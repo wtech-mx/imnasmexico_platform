@@ -101,6 +101,7 @@ class CotizacionCosmicaController extends Controller
             ]);
         }
 
+
         return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores', 'fechaInicio', 'fechaFin'));
     }
 
@@ -854,7 +855,7 @@ class CotizacionCosmicaController extends Controller
             $nota->comentario_rep  = $request->get('comentario_rep');
             $nota->id_admin_venta  = auth()->user()->id;
         }else if($request->get('estatus_cotizacion') == 'Aprobar Linea Lumina'){
-            $nota->estatus_cotizacion  = 'Enviado';
+            $nota->estatus_cotizacion  = 'Aprobar Linea Lumina';
             if ($request->hasFile("foto_pago")) {
                 $file = $request->file('foto_pago');
                 $path = $pago_fuera;
@@ -879,9 +880,8 @@ class CotizacionCosmicaController extends Controller
                 $nota->doc_guia = $fileName;
             }
             $nota->fecha_aprobada  = date("Y-m-d");
-            $nota->fecha_preparacion  = date("Y-m-d H:i:s");
-            $nota->fecha_preparado  = date("Y-m-d H:i:s");
-            $nota->fecha_envio  = date("Y-m-d H:i:s");
+            $nota->id_admin_venta  = auth()->user()->id;
+            $nota->metodo_pago  = $request->get('metodo_pago');
         }else if($request->get('estatus_cotizacion') == 'Aprobada Workshop'){
             $nota->estatus_cotizacion  = 'Aprobada';
 
