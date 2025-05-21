@@ -844,9 +844,9 @@ class PagosFueraController extends Controller
 
         $nota = Orders::find($id);
         $orden_ticket = OrdersTickets::where('id_order', '=', $id)->get();
-dd($orden_ticket);
+
         $pdf = \PDF::loadView('admin.pagos_fuera.pdf', compact('today', 'nota', 'orden_ticket'));
-       return $pdf->stream();
-       //return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
+      // return $pdf->stream();
+      return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
      }
 }
