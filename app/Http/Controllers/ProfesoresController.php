@@ -15,6 +15,7 @@ use Hash;
 use Str;
 use Auth;
 use Carbon\Carbon;
+use DB;
 
 class ProfesoresController extends Controller
 {
@@ -127,7 +128,22 @@ class ProfesoresController extends Controller
 
 
     public function asistencia_expo() {
+        $id = 2079;
 
+        $total = DB::table('notas_productos_cosmica')
+        ->whereNotNull('fecha_aprobada')
+        ->where(function($q) use ($id) {
+            $q->where('id_kit',  $id)
+                ->orWhere('id_kit2', $id)
+                ->orWhere('id_kit3', $id)
+                ->orWhere('id_kit4', $id)
+                ->orWhere('id_kit5', $id)
+                ->orWhere('id_kit6', $id);
+            })
+            ->get();
+
+              dd($total);
+              
         $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2080)
         ->whereHas('Nota', function($query) {
             $query->whereNotNull('fecha_aprobada');
