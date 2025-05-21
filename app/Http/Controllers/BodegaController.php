@@ -110,7 +110,7 @@ class BodegaController extends Controller
         $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', 'Aprobada')->where('fecha_preparacion', '!=', NULL)
+        $notas_cosmica_preparacion = NotasProductosCosmica::where('estatus_cotizacion', 'Aprobada')
         ->whereDoesntHave('productos', function ($query) {
             $query->where('id_producto', 2080);
         })
