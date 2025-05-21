@@ -449,6 +449,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\PagosFueraController::class, 'store'])->name('pagos.store');
     Route::patch('/admin/pagos-por-fuera/inscripcion/edit/{id}', [App\Http\Controllers\PagosFueraController::class, 'update_deudores'])->name('pagos.update_deudores');;
 
+    Route::get('/admin/pagos-por-fuera/inscripcion/pdf/{id}', [App\Http\Controllers\PagosFueraController::class, 'pdf'])->name('pagos.pdf');
 
     Route::get('/changeStatus', [App\Http\Controllers\PagosFueraController::class, 'ChangeInscripcionStatus'])->name('ChangeInscripcionStatus.pagos');
     Route::get('/changeStatus/pago', [App\Http\Controllers\PagosFueraController::class, 'ChangePendienteStatus'])->name('ChangePendienteStatus.pagos');

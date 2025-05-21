@@ -129,29 +129,29 @@ class PagosFueraController extends Controller
         }
         $pagos_fuera->save();
 
-            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-                if (User::where('telefono', $request->telefono)->exists()) {
-                    $user = User::where('telefono', $request->telefono)->first();
-                    $user->name = $request->get('name') . " " . $request->get('apellido');
-                    $user->update();
-                } else {
-                    $user = User::where('email', $request->email)->first();
-                    $user->name = $request->get('name') . " " . $request->get('apellido');
-                    $user->update();
-                }
-                $payer = $user;
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
+                $user = User::where('telefono', $request->telefono)->first();
+                $user->name = $request->get('name') . " " . $request->get('apellido');
+                $user->update();
             } else {
-                $payer = new User();
-                $payer->name = $request->get('name') . " " . $request->get('apellido');
-                $payer->email = $request->get('email');
-                $payer->username = $request->get('telefono');
-                $payer->code = $code;
-                $payer->telefono = $request->get('telefono');
-                $payer->cliente = '1';
-                $payer->password = Hash::make($request->get('telefono'));
-                $payer->save();
-                $datos = User::where('id', '=', $payer->id)->first();
+                $user = User::where('email', $request->email)->first();
+                $user->name = $request->get('name') . " " . $request->get('apellido');
+                $user->update();
             }
+            $payer = $user;
+        } else {
+            $payer = new User();
+            $payer->name = $request->get('name') . " " . $request->get('apellido');
+            $payer->email = $request->get('email');
+            $payer->username = $request->get('telefono');
+            $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('telefono'));
+            $payer->save();
+            $datos = User::where('id', '=', $payer->id)->first();
+        }
 
         if($request->get('deudor') != '1'){
             $order = new Orders;
@@ -165,6 +165,7 @@ class PagosFueraController extends Controller
             }
             $order->code = $code;
             $order->id_externo = $pagos_fuera->id;
+            $order->factura = '1';
             $order->save();
 
             $order_ticket = new OrdersTickets;
@@ -591,8 +592,12 @@ class PagosFueraController extends Controller
             }
         }
 
-        Session::flash('success', 'Se ha subido el pago correctamente');
-        return redirect()->back()->with('success', 'Se ha subido el pago correctamente');
+        $pdfUrl = route('pagos.pdf', $order->id);
+
+        // Flash éxito y la URL del PDF
+        return redirect()->back()
+                ->with('success', 'Se ha subido el pago correctamente')
+                ->with('pdf_url', $pdfUrl);
     }
 
     public function update_deudores(Request $request, $id){
@@ -833,4 +838,15 @@ class PagosFueraController extends Controller
         return redirect()->back()
         ->with('success', 'Usuario cambiado con exito.');
     }
+
+    public function pdf($id){
+        $today = date('Y-m-d');
+
+        $nota = Orders::find($id);
+        $orden_ticket = OrdersTickets::where('id_order', '=', $id)->get();
+dd($orden_ticket);
+        $pdf = \PDF::loadView('admin.pagos_fuera.pdf', compact('today', 'nota', 'orden_ticket'));
+       return $pdf->stream();
+       //return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
+     }
 }
