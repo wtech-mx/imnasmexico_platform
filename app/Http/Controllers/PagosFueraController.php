@@ -171,6 +171,7 @@ class PagosFueraController extends Controller
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
             $order_ticket->id_usuario = $payer->id;
+            $order_ticket->cantidad = $request->get('cantidad');
             if($request->get('clase_grabada') != NULL){
                 $order_ticket->id_tickets = $request->get('clase_grabada');
                 $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
@@ -227,6 +228,7 @@ class PagosFueraController extends Controller
                 $order_ticket2->id_order = $order->id;
                 $order_ticket2->id_usuario = $payer->id;
                 $order_ticket2->id_tickets = $request->get('campo2');
+                $order_ticket2->cantidad = $request->get('cantidad2');
                 $cursos2 = CursosTickets::where('id','=', $order_ticket2->id_tickets)->first();
                 $order_ticket2->id_curso = $cursos2->id_curso;
                 $order_ticket2->save();
@@ -276,6 +278,7 @@ class PagosFueraController extends Controller
                 $order_ticket3 = new OrdersTickets;
                 $order_ticket3->id_order = $order->id;
                 $order_ticket3->id_usuario = $payer->id;
+                $order_ticket3->cantidad = $request->get('cantidad3');
                 $order_ticket3->id_tickets = $request->get('campo3');
                 $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
                 $order_ticket3->id_curso = $cursos3->id_curso;
@@ -326,6 +329,7 @@ class PagosFueraController extends Controller
                 $order_ticket4 = new OrdersTickets;
                 $order_ticket4->id_order = $order->id;
                 $order_ticket4->id_usuario = $payer->id;
+                $order_ticket4->cantidad = $request->get('cantidad4');
                 $order_ticket4->id_tickets = $request->get('campo4');
                 $cursos4 = CursosTickets::where('id','=', $order_ticket4->id_tickets)->first();
                 $order_ticket4->id_curso = $cursos4->id_curso;
@@ -467,6 +471,7 @@ class PagosFueraController extends Controller
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
             $order_ticket->id_usuario = $payer->id;
+            $order_ticket->cantidad = $request->get('cantidad');
             if($request->get('clase_grabada') != NULL){
                 $order_ticket->id_tickets = $request->get('clase_grabada');
                 $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
@@ -489,6 +494,7 @@ class PagosFueraController extends Controller
                 $order_ticket2 = new OrdersTickets;
                 $order_ticket2->id_order = $order->id;
                 $order_ticket2->id_usuario = $payer->id;
+                $order_ticket2->cantidad = $request->get('cantidad2');
                 $order_ticket2->id_tickets = $request->get('campo2');
                 $cursos2 = CursosTickets::where('id','=', $order_ticket2->id_tickets)->first();
                 $order_ticket2->id_curso = $cursos2->id_curso;
@@ -499,6 +505,7 @@ class PagosFueraController extends Controller
                 $order_ticket3 = new OrdersTickets;
                 $order_ticket3->id_order = $order->id;
                 $order_ticket3->id_usuario = $payer->id;
+                $order_ticket3->cantidad = $request->get('cantidad3');
                 $order_ticket3->id_tickets = $request->get('campo3');
                 $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
                 $order_ticket3->id_curso = $cursos3->id_curso;
@@ -509,6 +516,7 @@ class PagosFueraController extends Controller
                 $order_ticket4 = new OrdersTickets;
                 $order_ticket4->id_order = $order->id;
                 $order_ticket4->id_usuario = $payer->id;
+                $order_ticket4->cantidad = $request->get('cantidad4');
                 $order_ticket4->id_tickets = $request->get('campo4');
                 $cursos4 = CursosTickets::where('id','=', $order_ticket4->id_tickets)->first();
                 $order_ticket4->id_curso = $cursos4->id_curso;
@@ -846,7 +854,7 @@ class PagosFueraController extends Controller
         $orden_ticket = OrdersTickets::where('id_order', '=', $id)->get();
 
         $pdf = \PDF::loadView('admin.pagos_fuera.pdf', compact('today', 'nota', 'orden_ticket'));
-      // return $pdf->stream();
-      return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
+       return $pdf->stream();
+       //return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
      }
 }

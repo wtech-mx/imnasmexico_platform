@@ -27,7 +27,7 @@
                                 <option value="">Seleccionar Estatus</option>
                                 @if ($nota->tipo_nota ==  'Cotizacion')
                                     <option value="Aprobada">Aprobada</option>
-                                    <option value="Aprobar Linea Lumina">Aprobar Linea Lumina</option>
+                                    {{-- <option value="Aprobar Linea Lumina">Aprobar Linea Lumina</option> --}}
                                     {{-- @if ($nota->estatus_cotizacion ==  'Aprobada' || $nota->estatus_cotizacion ==  NULL)
                                         <option value="Cancelada">Cancelada</option>
                                     @endif --}}

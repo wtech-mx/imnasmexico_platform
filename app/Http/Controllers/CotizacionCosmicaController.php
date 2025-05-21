@@ -854,34 +854,35 @@ class CotizacionCosmicaController extends Controller
             $nota->direccion_entrega  = $request->get('direccion_entrega');
             $nota->comentario_rep  = $request->get('comentario_rep');
             $nota->id_admin_venta  = auth()->user()->id;
-        }else if($request->get('estatus_cotizacion') == 'Aprobar Linea Lumina'){
-            $nota->estatus_cotizacion  = 'Aprobar Linea Lumina';
-            if ($request->hasFile("foto_pago")) {
-                $file = $request->file('foto_pago');
-                $path = $pago_fuera;
-                $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $nota->foto_pago = $fileName;
-            }
+        // }else if($request->get('estatus_cotizacion') == 'Aprobar Linea Lumina'){
+        //     $nota->estatus_cotizacion  = 'Aprobada';
+        //     if ($request->hasFile("foto_pago")) {
+        //         $file = $request->file('foto_pago');
+        //         $path = $pago_fuera;
+        //         $fileName = uniqid() . $file->getClientOriginalName();
+        //         $file->move($path, $fileName);
+        //         $nota->foto_pago = $fileName;
+        //     }
 
-            if ($request->hasFile("doc_guia")) {
-                $file = $request->file('doc_guia');
-                $path = $pago_fuera;
-                $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $nota->doc_guia = $fileName;
-            }
+        //     if ($request->hasFile("doc_guia")) {
+        //         $file = $request->file('doc_guia');
+        //         $path = $pago_fuera;
+        //         $fileName = uniqid() . $file->getClientOriginalName();
+        //         $file->move($path, $fileName);
+        //         $nota->doc_guia = $fileName;
+        //     }
 
-            if ($request->hasFile("guia_rep")) {
-                $file = $request->file('guia_rep');
-                $path = $pago_fuera;
-                $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $nota->doc_guia = $fileName;
-            }
-            $nota->fecha_aprobada  = date("Y-m-d");
-            $nota->id_admin_venta  = auth()->user()->id;
-            $nota->metodo_pago  = $request->get('metodo_pago');
+        //     if ($request->hasFile("guia_rep")) {
+        //         $file = $request->file('guia_rep');
+        //         $path = $pago_fuera;
+        //         $fileName = uniqid() . $file->getClientOriginalName();
+        //         $file->move($path, $fileName);
+        //         $nota->doc_guia = $fileName;
+        //     }
+        //     $nota->fecha_aprobada  = date("Y-m-d");
+        //     $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+        //     $nota->id_admin_venta  = auth()->user()->id;
+        //     $nota->metodo_pago  = $request->get('metodo_pago');
         }else if($request->get('estatus_cotizacion') == 'Aprobada Workshop'){
             $nota->estatus_cotizacion  = 'Aprobada';
 
