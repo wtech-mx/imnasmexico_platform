@@ -98,7 +98,7 @@ class PagosFueraController extends Controller
         $pagos_fuera->telefono = $request->get('telefono');
         $pagos_fuera->curso = $curso;
         $pagos_fuera->inscripcion = '1';
-        $pagos_fuera->factura = '1';
+        $pagos_fuera->factura = $request->get('factura');
         $pagos_fuera->pendiente = '0';
         $pagos_fuera->modalidad = $request->get('forma_pago');
         $pagos_fuera->deudor = $request->get('deudor');
@@ -165,7 +165,7 @@ class PagosFueraController extends Controller
             }
             $order->code = $code;
             $order->id_externo = $pagos_fuera->id;
-            $order->factura = '1';
+            $order->factura = $request->get('factura');
             $order->save();
 
             $order_ticket = new OrdersTickets;
@@ -460,6 +460,7 @@ class PagosFueraController extends Controller
             $order->pago = $request->get('pago');
             $order->forma_pago = $request->get('forma_pago');
             $order->fecha = $fechaActual;
+            $order->factura = $request->get('factura');
             $order->estatus = 0;
             if($request->get('clase_grabada') != NULL){
                 $order->clase_grabada_orden = '1';
@@ -600,12 +601,23 @@ class PagosFueraController extends Controller
             }
         }
 
-        $pdfUrl = route('pagos.pdf', $order->id);
 
-        // Flash éxito y la URL del PDF
-        return redirect()->back()
-                ->with('success', 'Se ha subido el pago correctamente')
-                ->with('pdf_url', $pdfUrl);
+
+
+        // Si la orden tiene factura = 1, flashea también la URL
+
+        if ($order->factura == "1") {
+            $pdfUrl = route('pagos.pdf', $order->id);
+
+            return redirect()->back()
+                    ->with('success_pdf', 'Se ha subido el pago correctamente')
+                    ->with('pdf_url', $pdfUrl);
+        }else{
+            Session::flash('success','Se ha subido el pago correctamente');
+            return redirect()->back();
+        }
+
+
     }
 
     public function update_deudores(Request $request, $id){
@@ -854,7 +866,7 @@ class PagosFueraController extends Controller
         $orden_ticket = OrdersTickets::where('id_order', '=', $id)->get();
 
         $pdf = \PDF::loadView('admin.pagos_fuera.pdf', compact('today', 'nota', 'orden_ticket'));
-       return $pdf->stream();
-       //return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
+      // return $pdf->stream();
+       return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
      }
 }

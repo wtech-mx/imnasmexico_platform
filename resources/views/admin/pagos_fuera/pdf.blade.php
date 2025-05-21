@@ -119,17 +119,27 @@
                 <th>Nombre</th>
                 <th>Modalidad</th>
                 <th>Fecha Curso</th>
-                <th>Importe</th>
+                <th>P. Unitario</th>
+                <th>Subtotal</th>
             </tr>
         </thead>
         <tbody class="text-center">
             @foreach ($orden_ticket as $nota_producto)
                 <tr>
                     <td>
+                        @if ($nota_producto->cantidad == NULL)
+                            <b> 1</b>
+                        @else
+                            <b> {{$nota_producto->cantidad}}</b>
+                        @endif
                         {{ $nota_producto->CursosTickets->nombre }}
                     </td>
                     <td>
-                        {{ $nota_producto->CursosTickets->Cursos->modalidad }}
+                        @if ($nota_producto->id_curso == 647)
+                            -
+                        @else
+                            {{ $nota_producto->CursosTickets->Cursos->modalidad }}
+                        @endif
                     </td>
                     <td>
                         @php
@@ -137,28 +147,45 @@
                         $fecha_timestamp = strtotime($fecha);
                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                         @endphp
-                        {{$fecha_formateada}}
+                        @if ($nota_producto->id_curso == 647)
+                            -
+                        @else
+                            {{$fecha_formateada}}
+                        @endif
                     </td>
                     <td>
                         ${{ $nota_producto->CursosTickets->precio }}
+                    </td>
+                    <td>
+                        @php
+                            if ($nota_producto->cantidad == NULL) {
+                                $cantidad = 1;
+                            }else{
+                                $cantidad = $nota_producto->cantidad;
+                            }
+
+                            $subtotal = $nota_producto->CursosTickets->precio * $cantidad;
+                        @endphp
+                        ${{ $subtotal }}
                     </td>
                 </tr>
            @endforeach
         </tbody>
         <tfoot >
             @php
-                // 1) Suma de todos los precios de los cursos
+                // 1) Subtotal: precio × cantidad de cada línea
                 $subtotal = $orden_ticket->sum(function($item){
-                    return $item->CursosTickets->precio;
+                    return $item->CursosTickets->precio * $item->cantidad;
                 });
 
                 // 2) IVA al 16%
-                $iva       = $subtotal * 0.16;
+                $iva = $subtotal * 0.16;
 
-                // 3) Total más IVA
-                $totalIva  = $subtotal + $iva;
+                // 3) Total con IVA
+                $totalIva = $subtotal + $iva;
             @endphp
             <tr style="background-color: #ffffff;">
+                <td></td>
                 <td></td>
                 <td></td>
                 <td style="text-align: right"><b>Subtotal</b> </td>
@@ -168,19 +195,13 @@
                 @if ($nota->factura == 1)
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td style="text-align: right"><b>IVA</b> </td>
                     <td>${{ number_format($iva, 2) }}</td>
                 @endif
             </tr>
-          {{--   @if ($nota->descuento != NULL)
-                <tr style="background-color: #ffffff;">
-                    <td></td>
-                    <td></td>
-                    <td style="text-align: right"><b>Descuento</b> </td>
-                    <td>${{ $nota->descuento }}%</td>
-                </tr>
-            @endif --}}
             <tr style="background-color: #ffffff;">
+                <td></td>
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Total</b> </td>

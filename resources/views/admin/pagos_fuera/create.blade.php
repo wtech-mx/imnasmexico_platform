@@ -391,7 +391,7 @@
         calcularTotalConIVA();
     });
 </script>
-@if(session('success'))
+@if(session('success_pdf'))
   <script>
     document.addEventListener('DOMContentLoaded', function(){
       Swal.fire({
