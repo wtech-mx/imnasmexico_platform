@@ -568,6 +568,15 @@ class CursosController extends Controller
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $tipo_documentos = Tipodocumentos::get();
 
+        // Cuenta cuántos tienen estatus = '1'
+        $inscritos = $ordenes->where('Orders.estatus', '1')->count();
+
+        $fechaIni = ucfirst(Carbon::parse($curso->fecha_inicial)
+            ->translatedFormat('l j \d\e F \d\e Y'));
+
+        $fechaFin = ucfirst(Carbon::parse($curso->fecha_final)
+            ->translatedFormat('l j \d\e F \d\e Y'));
+
         $estados = [
             'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
             'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
@@ -579,7 +588,7 @@ class CursosController extends Controller
         if($curso->precio == NULL){
             return view('admin.cursos.lista_gratis', compact('ordenes', 'curso'));
         }else{
-            return view('admin.cursos.listas', compact('ordenes', 'curso','tipo_documentos','estados', 'tickets'));
+            return view('admin.cursos.listas', compact('ordenes', 'curso','tipo_documentos','estados', 'tickets','inscritos','fechaIni','fechaFin'));
         }
 
     }

@@ -30,22 +30,20 @@
                                 Crear  <i class="fas fa-plus"></i>
                             </a>
                         </div>
-                        <p class="text-sm">{{$curso->nombre}} / {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat('l j \\de F \\de Y')) }} al {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat('l j \\de F \\de Y')) }} - ( {{ $curso->modalidad }} )
-                            <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+
+                        <p class="text-sm">
+                            {{ $curso->nombre }} /
+                            {{ $fechaIni }} al {{ $fechaFin }}
+                            ({{ $curso->modalidad }})
+                            <a class="btn btn-sm btn-info"
+                                href="{{ route('cursos.show', $curso->slug) }}"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
                         </p>
-                        <h4>Inscritos :
-                            @php
-                                $contador = 0;
-                            @endphp
-                            @foreach ($ordenes as $order)
-                                @if ($order->Orders->estatus == '1')
-                                    @php
-                                        $contador++;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $contador }}
-                        </h4>
+
+                        <h4>Inscritos: {{ $inscritos }}</h4>
+
                     </div>
 
                     <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
@@ -62,9 +60,12 @@
                             </li>
                         @endforeach
                     </ul>
+
                     <div class="tab-content" id="pills-tabContent">
                         @foreach ($tickets as $ticket)
+
                         @include('admin.cursos.add_lista')
+
                             <div class="tab-pane fade show active" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
                                 <div class="card-body">
 
@@ -362,72 +363,67 @@
 
 
 <script>
-@foreach ($tickets as $ticket)
-    $(document).ready(function() {
-        // Prepara un array de nombres de estándares
-        var estandares = @json(
+    // 1) Generar en línea el array de configuraciones
+    const tablaConfigs = [
+      @foreach($tickets as $ticket)
+        {
+          id: {{ $ticket->id }},
+          // Extraemos los nombres de estándar
+          estandares: {!! json_encode(
             $ticket->Cursos->CursosEstandares
-                ->map(fn($ce) => $ce->CarpetasEstandares->nombre)
-                ->toArray()
-        );
-        // Indica si este curso tiene redconocer==1
-        var redConocer = {{ $ticket->Cursos->redconocer === 1 ? 'false' : 'true' }};
+              ->pluck('CarpetasEstandares.nombre')
+              ->toArray()
+          ) !!},
+          // true si debe mostrarse messageTop
+          redConocer: {{ $ticket->Cursos->redconocer !== 1 ? 'true' : 'false' }},
+          // construimos el título completo
+          titulo: {!! json_encode(
+            'Lista de ' . $curso->nombre .
+            ' / ' . ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)
+                               ->translatedFormat('l j \\de F \\de Y')) .
+            ' al ' . ucfirst(\Carbon\Carbon::parse($curso->fecha_final)
+                               ->translatedFormat('l j \\de F \\de Y')) .
+            ' - (' . $curso->modalidad . ')'
+          ) !!}
+        }@if (! $loop->last),@endif
+      @endforeach
+    ];
 
-        $('#orden_servicio-{{ $ticket->id }}').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    title: function() {
-                        var titulo = 'Lista de {{ $curso->nombre }} / ' +
-                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat("l j \\de F \\de Y")) }}' +
-                            ' al ' +
-                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat("l j \\de F \\de Y")) }}' +
-                            ' - ( {{ $curso->modalidad }} )';
-                        return titulo;
-                    }
-                },
-                'excel',
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF',
-                    title: function() {
-                        // Dejamos el título igual que en print
-                        return 'Lista de {{ $curso->nombre }} / ' +
-                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat("l j \\de F \\de Y")) }}' +
-                            ' al ' +
-                            '{{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat("l j \\de F \\de Y")) }}' +
-                            ' - ( {{ $curso->modalidad }} )';
-                    },
-                    // Este texto sale **antes** de la tabla en el PDF
-                    messageTop: function() {
-                        if (!redConocer) return '';
-
-                        // Une con salto de línea cada estándar
-                        return estandares.join('\n');
-                    },
-                    customize: function(doc) {
-                        // Ajustes de tamaño de fuente…
-                        doc.defaultStyle.fontSize = 14;
-                        doc.content[0].fontSize = 20;
-                    }
-                },
-                'colvis'
-            ],
-            responsive: false,
-            stateSave: true,
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+    // 2) Un único bloque de inicialización
+    $(function(){
+      tablaConfigs.forEach(cfg => {
+        $('#orden_servicio-' + cfg.id).DataTable({
+          dom: 'Bfrtip',
+          buttons: [
+            {
+              extend: 'print',
+              text: 'Imprimir',
+              title: cfg.titulo
             },
-            columnDefs: [
-                { type: 'num', targets: 0 }
-            ]
+            'excel',
+            {
+              extend: 'pdfHtml5',
+              text: 'PDF',
+              title: cfg.titulo,
+              messageTop: cfg.redConocer ? cfg.estandares.join('\n') : '',
+              customize: function(doc) {
+                doc.defaultStyle.fontSize = 14;
+                doc.content[0].fontSize    = 20;
+              }
+            },
+            'colvis'
+          ],
+          responsive: false,
+          stateSave: true,
+          language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+          },
+          columnDefs: [
+            { type: 'num', targets: 0 }
+          ]
         });
+      });
     });
-@endforeach
-</script>
-
-
+  </script>
 
 @endsection
