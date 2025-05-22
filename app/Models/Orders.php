@@ -69,4 +69,25 @@ class Orders extends Model
     {
         return $this->hasMany('App\Models\OrdersTickets', 'id_order', 'id');
     }
+
+    // ¿Quién subió?
+    public function getUploaderNameAttribute()
+    {
+        if ($this->id_externo) {
+            return $this->PagosFuera->usuario;
+        }
+        if ($this->id_admin) {
+            return $this->Admin->name;
+        }
+        return 'Pago por página';
+    }
+
+    // ¿Es deudor?
+    public function getIsDeudorAttribute()
+    {
+        // asumo que esa bandera viene de PagosFuera
+        return optional($this->PagosFuera)->deudor == 1;
+    }
+
+
 }
