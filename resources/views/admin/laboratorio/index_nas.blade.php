@@ -92,6 +92,13 @@
                                         <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
                                             <i class="fa fa-file"></i> Descargar PDF
                                         </a>
+
+                                        <a class="text-center text-white btn btn-sm"
+                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'bodega_pedidos', 'id' => $item->id]) }}"
+                                            style="background: #7d2de6;">
+                                            <i class="fa fa-qrcode"></i>
+                                        </a>
+
                                     </td>
                                 </tr>
                                 @include('admin.laboratorio.modal_finalizar')
@@ -141,6 +148,12 @@
 
                                         <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
                                             <i class="fa fa-file"></i> Descargar PDF
+                                        </a>
+
+                                        <a class="text-center text-white btn btn-sm"
+                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'bodega_pedidos', 'id' => $item->id]) }}"
+                                            style="background: #7d2de6;">
+                                            <i class="fa fa-qrcode"></i>
                                         </a>
 
                                     </td>

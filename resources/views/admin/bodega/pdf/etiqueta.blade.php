@@ -51,6 +51,12 @@
                 @elseif ($tipo == 'cosmica')
                     <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('NC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
                     <p>{{$tipo}}</p>
+                @elseif ($tipo == 'pedidos_lab_nas')
+                    <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('NC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
+                    <p>{{$tipo}}</p>
+                @elseif ($tipo == 'pedidos_lab_cosmica')
+                    <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('NC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
+                    <p>{{$tipo}}</p>
                 @else
                     <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('EC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
                     <p>{{$tipo}}</p>
@@ -65,8 +71,6 @@
                 @else
                     <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">Folio: {{ Str::limit($registro->folio, 75) }}</p>
                 @endif
-
-                <p style="font-size: 9px;padding:1px;margin-top:2px;margin-left:8px;">¿Problemas con tu pedido? Contactanos <b>56 3754 0093</b></p>
 
             </div>
     </body>

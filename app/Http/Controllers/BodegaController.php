@@ -11,6 +11,8 @@ use App\Models\OrdersCosmica;
 use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
 use App\Models\Products;
+use App\Models\BodegaPedidosCosmica;
+use App\Models\BodegaPedidos;
 use Illuminate\Http\Request;
 use App\Models\Meli;
 use App\Models\OrdersNas;
@@ -182,6 +184,16 @@ class BodegaController extends Controller
                 $registro = OrdersCosmica::where('id', '=', $id)->first();
                 $tipo = 'cosmica_ecommerce';
                 break;
+
+            case 'bodega_pedidos':
+                $registro = BodegaPedidos::where('id', '=', $id)->first();
+                $tipo = 'pedidos_lab_nas';
+                break;
+
+            case 'bodega_pedidos_cosmica':
+                $registro = BodegaPedidosCosmica::where('id', '=', $id)->first();
+                $tipo = 'pedidos_lab_cosmica';
+                break;
             default:
                 return abort(404, 'Tabla no válida');
         }
@@ -189,6 +201,7 @@ class BodegaController extends Controller
         if (!$registro) {
             return abort(404, 'Registro no encontrado');
         }
+
 
         $pdf = PDF::loadView('admin.bodega.pdf.etiqueta',compact('registro', 'tipo'));
 

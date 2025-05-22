@@ -65,6 +65,11 @@
                                         <a class="btn btn-xs btn-primary text-white" target="_blank" href="{{ route('productos_autorizado.show_cosmica', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver Pedido
                                         </a>
+                                        <a class="text-center text-white btn btn-sm"
+                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'bodega_pedidos_cosmica', 'id' => $item->id]) }}"
+                                            style="background: #7d2de6;">
+                                            <i class="fa fa-qrcode"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -94,6 +99,11 @@
                                         </a>
                                         <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $item->id) }}">
                                             <i class="fa fa-file"></i> Descargar PDF
+                                        </a>
+                                        <a class="text-center text-white btn btn-sm"
+                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'bodega_pedidos_cosmica', 'id' => $item->id]) }}"
+                                            style="background: #7d2de6;">
+                                            <i class="fa fa-qrcode"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -130,7 +140,11 @@
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
                                         @endif
-
+                                        <a class="text-center text-white btn btn-sm"
+                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'bodega_pedidos_cosmica', 'id' => $item->id]) }}"
+                                            style="background: #7d2de6;">
+                                            <i class="fa fa-qrcode"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
