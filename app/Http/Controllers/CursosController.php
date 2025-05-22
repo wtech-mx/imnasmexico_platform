@@ -563,9 +563,9 @@ class CursosController extends Controller
     public function listas($id)
     {
         $fechaActual = date('Y-m-d');
-        $curso = Cursos::find($id);
-        $ordenes = OrdersTickets::where('id_curso', $id)->get();
-        $tickets = CursosTickets::where('id_curso', '=', $id)->get();
+        $curso = Cursos::with('CursosEstandares.CarpetasEstandares')->findOrFail($id);
+        $ordenes = OrdersTickets::where('id_curso', $id)->with('orders')->get();
+        $tickets = $curso->CursosTickets; // asumes la relación cargada
         $tipo_documentos = Tipodocumentos::get();
 
         // Cuenta cuántos tienen estatus = '1'
@@ -577,6 +577,32 @@ class CursosController extends Controller
         $fechaFin = ucfirst(Carbon::parse($curso->fecha_final)
             ->translatedFormat('l j \d\e F \d\e Y'));
 
+        // Prepara el array de configs que necesita la vista
+        $tablaConfigs = $tickets->map(function($ticket) use ($curso) {
+            $estandares = $ticket
+                ->Cursos
+                ->CursosEstandares
+                ->pluck('CarpetasEstandares.nombre')
+                ->toArray();
+
+            $titulo = sprintf(
+                'Lista de %s / %s al %s - (%s)',
+                $curso->nombre,
+                ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)
+                    ->translatedFormat('l j \\de F \\de Y')),
+                ucfirst(\Carbon\Carbon::parse($curso->fecha_final)
+                    ->translatedFormat('l j \\de F \\de Y')),
+                $curso->modalidad
+            );
+
+            return [
+                'id'         => $ticket->id,
+                'estandares' => $estandares,
+                'redConocer' => $ticket->Cursos->redconocer !== 1,
+                'titulo'     => $titulo,
+            ];
+        });
+
         $estados = [
             'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
             'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
@@ -586,9 +612,9 @@ class CursosController extends Controller
         ];
 
         if($curso->precio == NULL){
-            return view('admin.cursos.lista_gratis', compact('ordenes', 'curso'));
+            return view('admin.cursos.lista_gratis', compact('ordenes', 'curso','tipo_documentos','estados', 'tickets','inscritos','fechaIni','fechaFin','tablaConfigs'));
         }else{
-            return view('admin.cursos.listas', compact('ordenes', 'curso','tipo_documentos','estados', 'tickets','inscritos','fechaIni','fechaFin'));
+            return view('admin.cursos.listas', compact('ordenes', 'curso','tipo_documentos','estados', 'tickets','inscritos','fechaIni','fechaFin','tablaConfigs'));
         }
 
     }

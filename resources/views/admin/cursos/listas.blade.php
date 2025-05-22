@@ -361,35 +361,10 @@
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
 
-
 <script>
-    // 1) Generar en línea el array de configuraciones
-    const tablaConfigs = [
-      @foreach($tickets as $ticket)
-        {
-          id: {{ $ticket->id }},
-          // Extraemos los nombres de estándar
-          estandares: {!! json_encode(
-            $ticket->Cursos->CursosEstandares
-              ->pluck('CarpetasEstandares.nombre')
-              ->toArray()
-          ) !!},
-          // true si debe mostrarse messageTop
-          redConocer: {{ $ticket->Cursos->redconocer !== 1 ? 'true' : 'false' }},
-          // construimos el título completo
-          titulo: {!! json_encode(
-            'Lista de ' . $curso->nombre .
-            ' / ' . ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)
-                               ->translatedFormat('l j \\de F \\de Y')) .
-            ' al ' . ucfirst(\Carbon\Carbon::parse($curso->fecha_final)
-                               ->translatedFormat('l j \\de F \\de Y')) .
-            ' - (' . $curso->modalidad . ')'
-          ) !!}
-        }@if (! $loop->last),@endif
-      @endforeach
-    ];
+    // Volcamos de golpe la configuración que armamos en el controller
+    const tablaConfigs = @json($tablaConfigs);
 
-    // 2) Un único bloque de inicialización
     $(function(){
       tablaConfigs.forEach(cfg => {
         $('#orden_servicio-' + cfg.id).DataTable({
@@ -406,9 +381,9 @@
               text: 'PDF',
               title: cfg.titulo,
               messageTop: cfg.redConocer ? cfg.estandares.join('\n') : '',
-              customize: function(doc) {
+              customize(doc) {
                 doc.defaultStyle.fontSize = 14;
-                doc.content[0].fontSize    = 20;
+                doc.content[0].fontSize = 20;
               }
             },
             'colvis'
