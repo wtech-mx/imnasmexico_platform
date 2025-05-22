@@ -10,6 +10,7 @@ use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\NotasCursos;
 use App\Models\Orders;
+use Carbon\Carbon;
 use Session;
 use Hash;
 
@@ -167,9 +168,13 @@ class FacturasController extends Controller
             $factura->estatus = 'Facturado';
             $factura->save();
 
+            $pdfUrl = asset('facturas_pdf/' . $nombreArchivo);
+
             return response()->json([
-                'success' => true,
-                'message' => 'Factura emitida correctamente.'
+                'success'  => true,
+                'message'  => 'Factura emitida correctamente.',
+                'pdf_url'  => $pdfUrl,
+                'order_id' => $id,
             ]);
         }
     }
@@ -362,8 +367,7 @@ class FacturasController extends Controller
             $q->where('telefono', $telefono);
         })
         ->first();
-        
-        $id = $nota->paquete;
+
         if($nota == NULL){
             $nota = Orders::with('User')
             ->where('id', $folio)
@@ -372,14 +376,14 @@ class FacturasController extends Controller
             })
             ->first();
 
-            if ($nota->forma_pago !== 'STRIPE') {
+            if ($nota->estatus == '0') {
                 return response()->json([
                     'success' => false,
                     'message' => 'Esta nota no está marcada para facturar.'
                 ], 403);
             }
 
-            if ($nota->estatus == '0') {
+            if ($nota->factura !== '1') {
                 return response()->json([
                     'success' => false,
                     'message' => 'Esta nota no está marcada para facturar.'
@@ -392,6 +396,18 @@ class FacturasController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Esta nota no está marcada para facturar.'
+                ], 403);
+            }
+            $id = $nota->paquete;
+        }
+
+        if ($nota) {
+            $fechaDoc = Carbon::parse($nota->fecha);
+
+            if ($fechaDoc->format('Y-m') !== Carbon::now()->format('Y-m')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Esta nota no se puede facturar porque no corresponde al mes en curso.'
                 ], 403);
             }
         }
@@ -515,4 +531,13 @@ class FacturasController extends Controller
         return redirect()->back()->with('success', 'Actualziado con exito');
 
     }
+
+    public function pdf_cursos($id){
+        $today = date('Y-m-d');
+        $nota = Factura::find($id);
+
+        $pdf = \PDF::loadView('admin.pagos_fuera.pdf', compact('today', 'nota'));
+      return $pdf->stream();
+      //  return $pdf->download('Comprobante curso'.'/'.$nota->id.'.pdf');
+     }
 }

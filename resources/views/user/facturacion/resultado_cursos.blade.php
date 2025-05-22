@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr id="nota-row-{{ $nota->id }}">
           <td>{{ $nota->id  ?? '—' }}</td>
           <td>{{ optional($nota->User)->name ?? '—' }}</td>
           <td>{{ \Carbon\Carbon::parse($nota->fecha)->format('d-m-Y') }}</td>
@@ -23,10 +23,10 @@
             ${{ number_format($nota->total, 2) }}
            @endif
           </td>
-          <td>
+          <td class="status-col">
             {{$nota->FacturaOrders->estatus}}
           </td>
-          <td>
+          <td class="actions-col">
             @if($tipo === 'nas')
               <a target="_blank"
                  href="{{ route('notas_cotizacion.imprimir', ['id' => $id]) }}"
@@ -41,6 +41,10 @@
                  class="btn btn-sm btn-primary">
                 Ver Cotización Cosmica
               </a>
+            @elseif ($tipo === 'cursos')
+              @if ($nota->FacturaOrders->archivo_factura !== NULL)
+                <a href="{{ asset('facturas_pdf/' . $nota->FacturaOrders->archivo_factura) }}" download="Factura_{{$nota->id}}.pdf">Descargar Factura</a>
+              @endif
             @endif
           </td>
         </tr>

@@ -353,61 +353,61 @@
 @endsection
 
 @section('datatable')
-<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    $(document).ready(function(){
-        // 1) Inicializar Select2
-        $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').select2();
+    <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function(){
+            // 1) Inicializar Select2
+            $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').select2();
 
-        // 2) Función que calcula el subtotal (sin IVA)
-        function calcularSubtotal(){
-            let total = 0;
-            // Curso 1…4
-            for(let i=1; i<=4; i++){
-                let precio = parseFloat($(`.curso${i>1?i:''} option:selected`).data('precio')) || 0;
-                let qty    = parseInt($(`#cantidad${i>1?i:''}`).val()) || 1;
-                total += precio * qty;
+            // 2) Función que calcula el subtotal (sin IVA)
+            function calcularSubtotal(){
+                let total = 0;
+                // Curso 1…4
+                for(let i=1; i<=4; i++){
+                    let precio = parseFloat($(`.curso${i>1?i:''} option:selected`).data('precio')) || 0;
+                    let qty    = parseInt($(`#cantidad${i>1?i:''}`).val()) || 1;
+                    total += precio * qty;
+                }
+                // Clase grabada
+                total += parseFloat($('[name="clase_grabada"] option:selected').data('precio'))||0;
+                return total;
             }
-            // Clase grabada
-            total += parseFloat($('[name="clase_grabada"] option:selected').data('precio'))||0;
-            return total;
-        }
 
-        // 3) Función que recalcula y muestra el total, con o sin IVA
-        function calcularTotalConIVA(){
-            const subtotal = calcularSubtotal();
-            const aplicaIVA = $('#toggleFactura').is(':checked');
-            const total = aplicaIVA ? subtotal * 1.16 : subtotal;
-            $('#pago').val(total.toFixed(0));
-        }
+            // 3) Función que recalcula y muestra el total, con o sin IVA
+            function calcularTotalConIVA(){
+                const subtotal = calcularSubtotal();
+                const aplicaIVA = $('#toggleFactura').is(':checked');
+                const total = aplicaIVA ? subtotal * 1.16 : subtotal;
+                $('#pago').val(total.toFixed(0));
+            }
 
-        // 4) Enlazar TODOS los inputs/selects al mismo recalculo
-        $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').on('change', calcularTotalConIVA);
-        $('#cantidad, #cantidad2, #cantidad3, #cantidad4').on('input', calcularTotalConIVA);
-        $('#toggleFactura').on('change', calcularTotalConIVA);
+            // 4) Enlazar TODOS los inputs/selects al mismo recalculo
+            $('.curso, .curso2, .curso3, .curso4, [name="clase_grabada"]').on('change', calcularTotalConIVA);
+            $('#cantidad, #cantidad2, #cantidad3, #cantidad4').on('input', calcularTotalConIVA);
+            $('#toggleFactura').on('change', calcularTotalConIVA);
 
-        // 5) Recalcular al cargar la página
-        calcularTotalConIVA();
-    });
-</script>
-@if(session('success_pdf'))
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      Swal.fire({
-        title: '¡Éxito!',
-        text: '{{ session("success") }}',
-        icon: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Descargar PDF',
-        cancelButtonText: 'Cerrar'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Redirige a la URL que guardaste en la sesión
-          window.location.href = '{{ session("pdf_url") }}';
-        }
-      });
-    });
-  </script>
-@endif
+            // 5) Recalcular al cargar la página
+            calcularTotalConIVA();
+        });
+    </script>
+    @if(session('success_pdf'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+            Swal.fire({
+                title: '¡Éxito!',
+                text: '{{ session("success") }}',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Descargar PDF',
+                cancelButtonText: 'Cerrar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                // Redirige a la URL que guardaste en la sesión
+                window.location.href = '{{ session("pdf_url") }}';
+                }
+            });
+            });
+        </script>
+    @endif
 @endsection

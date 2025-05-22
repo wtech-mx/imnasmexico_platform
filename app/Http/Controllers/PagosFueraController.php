@@ -22,6 +22,7 @@ use App\Models\WebPage;
 use Hash;
 use App\Mail\PlantillaNuevoUser;
 use App\Models\Cursos;
+use App\Models\Factura;
 use App\Models\RegistroImnas;
 use Illuminate\Support\Str;
 use DB;
@@ -376,6 +377,14 @@ class PagosFueraController extends Controller
                 }
             }
 
+            if($order->factura == '1'){
+                $facturas = new Factura;
+                $facturas->id_usuario = auth()->user()->id;
+                $facturas->id_orders = $order->id;
+                $facturas->estatus = 'En Espera';
+                $facturas->save();
+            }
+
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
            $email_diplomas = 'imnascenter@naturalesainspa.com';
@@ -524,6 +533,14 @@ class PagosFueraController extends Controller
                 $order_ticket4->save();
             }
 
+            if($order->factura == '1'){
+                $facturas = new Factura;
+                $facturas->id_usuario = auth()->user()->id;
+                $facturas->id_orders = $order->id;
+                $facturas->estatus = 'En Espera';
+                $facturas->save();
+            }
+
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
             if($request->get('name2') != NULL){
@@ -600,9 +617,6 @@ class PagosFueraController extends Controller
                 $orden_ticket2 = OrdersTickets::where('id_order', '=', $order2->id)->get();
             }
         }
-
-
-
 
         // Si la orden tiene factura = 1, flashea también la URL
 
