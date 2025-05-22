@@ -50,7 +50,6 @@ class FacturasController extends Controller
 
     public function emisionfacturaCosmica(Request $request,$id)
     {
-
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
             $facturas = base_path('../public_html/plataforma.imnasmexico.com/facturas/');
@@ -59,16 +58,6 @@ class FacturasController extends Controller
         }
 
         $factura = Factura::where('id_notas_cosmica', $id)->first();
-
-
-        // if ($request->hasFile("situacion_fiscal")) {
-        //     $file = $request->file('situacion_fiscal');
-        //     $path = $facturas;
-        //     $fileName = uniqid() . $file->getClientOriginalName();
-        //     $file->move($path, $fileName);
-        //     $factura->situacion_fiscal = $fileName;
-        // }
-
         $factura->razon_social = $request->get('razon_cliente');
         $factura->rfc = $request->get('rfc_cliente');
         $factura->cfdi = $request->get('cfdi_cliente');
@@ -80,10 +69,33 @@ class FacturasController extends Controller
         $factura->direccion_cliente = $request->get('direccion_cliente');
         $factura->update();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Factura emitida correctamente.'
-        ]);
+        $facturacionController = new MultiFacturaCosmicaController();
+        $response = $facturacionController->CFDI_facturaDeContado($factura->id_notas_cosmica);
+
+        if (!is_array($response) || !$response['success']) {
+            return response()->json([
+                'success' => false,
+                'message' => $response['error'] ?? 'Error desconocido'
+            ], 403);
+        }else{
+            $uuid = $response['uuid']; // ✅ Este es el UUID correcto del CFDI
+            $nombreArchivo = 'factura_cfdi_' . $uuid . '.pdf';
+            $rutaArchivo = asset('facturas_pdf/' . $nombreArchivo);
+
+            // ← **Aquí guardamos el nombre de archivo** en la orden, justo después de conocerlo
+            $factura->archivo_factura = $nombreArchivo;
+            $factura->estatus = 'Facturado';
+            $factura->save();
+
+            $pdfUrl = asset('facturas_pdf/' . $nombreArchivo);
+
+            return response()->json([
+                'success'  => true,
+                'message'  => 'Factura emitida correctamente.',
+                'pdf_url'  => $pdfUrl,
+                'order_id' => $id,
+            ]);
+        }
 
     }
 
@@ -286,6 +298,16 @@ class FacturasController extends Controller
                 'message' => 'No existe ninguna nota con ese folio y teléfono.'
             ], 404);
         }
+
+        $fechaDoc = Carbon::parse($nota->fecha_aprobada);
+
+        if ($fechaDoc->format('Y-m') !== Carbon::now()->format('Y-m')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota no se puede facturar porque no corresponde al mes en curso.'
+            ], 403);
+        }
+
         if ($nota->factura != 1) {
             return response()->json([
                 'success' => false,
