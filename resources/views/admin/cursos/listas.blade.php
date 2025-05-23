@@ -177,7 +177,7 @@ $(function(){
         title: cfg.titulo,
         exportOptions: {
             modifier: { page: 'all' },
-            columns: [1,2,3,4,5,6]
+            columns: [0,1,2,3,4,5,6]
         },
         customize: function (doc) {
             doc.pageMargins = [10,10,10,10];
@@ -185,7 +185,8 @@ $(function(){
             doc.styles.tableHeader.fontSize = 12;
             var table = doc.content.find(d => d.table).table;
             table.widths = [
-            '30%',  // Nombre
+            '5%',  // Nombre
+            '25%',  // Nombre
             '20%',  // Método de Pago
             '10%',  // Abono
             '10%',  // Deudor
