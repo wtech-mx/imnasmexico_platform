@@ -2,6 +2,7 @@
                && $order->estatus_diploma && $order->estatus_credencial && $order->estatus_tira)
                ? 'estatus-doc-green' : 'estatus-doc-red' }}">
   <td>{{ $counter }}</td>
+
   <td>
     <a href="{{ route('perfil.show', $order->User->id) }}"
        target="_blank"
@@ -11,10 +12,10 @@
     {{ $order->User->telefono }}<br>
     {{ $order->User->email }}
   </td>
+
   <td>
     {{ $order->orders->forma_pago }}<br>
-    <small>
-      Subido por:
+      Subido por: <br>
       @if($order->orders->id_externo)
         {{ $order->orders->PagosFuera->usuario }}
       @elseif($order->orders->id_admin)
@@ -22,17 +23,15 @@
       @else
         Pago por página
       @endif
-    </small>
   </td>
+
   <td>
     ${{ number_format($order->orders->pago,2) }}<br>
     <small>{{ $order->orders->fecha }}</small>
   </td>
-  <td>
-    @if(optional($order->orders->PagosFuera)->deudor)
-      <span class="badge bg-danger">DEUDOR</span>
-    @endif
-  </td>
+
+  <td>{{ $order->orders->id_externo ?? '' }}</td>
+
   <td>
     {{-- Documentación resumida --}}
     @switch($ticket->descripcion)
@@ -46,7 +45,16 @@
         @if($ticket->Cursos->unam) UNAM @endif
     @endswitch
   </td>
-  <td>{{ $order->orders->id_externo ?? '' }}</td>
+
+
+  <td>
+    @if(optional($order->orders->PagosFuera)->deudor)
+      <span class="badge bg-danger">DEUDOR</span>
+    @else
+    No
+    @endif
+  </td>
+
   {{-- Aquí incluimos nuestros botones --}}
   <td>
     @include('admin.cursos.partials.buttons', ['order' => $order, 'ticket' => $ticket])
@@ -54,4 +62,5 @@
                                                         @include('admin.cursos.modal_documentos')
                                                         @include('admin.cursos.modal_guia')
   </td>
+
 </tr>

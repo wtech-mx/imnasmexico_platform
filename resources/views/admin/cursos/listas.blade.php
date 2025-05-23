@@ -104,9 +104,9 @@
                                             <th>Nombre</th>
                                             <th>Metodo de Pago</th>
                                             <th>Abono</th>
-                                            <th>Deudor</th>
-                                            <th>Documentacion</th>
                                             <th>Nota</th>
+                                            <th>Documentacion</th>
+                                            <th>Deudor</th>
                                             <th>Acciones</th>
                                         </tr>
                                         </thead>
@@ -159,40 +159,52 @@
     // Volcamos de golpe la configuración que armamos en el controller
     const tablaConfigs = @json($tablaConfigs);
 
-    $(function(){
-      tablaConfigs.forEach(cfg => {
-        $('#orden_servicio-' + cfg.id).DataTable({
-          dom: 'Bfrtip',
-          buttons: [
-            {
-              extend: 'print',
-              text: 'Imprimir',
-              title: cfg.titulo
-            },
-            'excel',
-            {
-              extend: 'pdfHtml5',
-              text: 'PDF',
-              title: cfg.titulo,
-              messageTop: cfg.redConocer ? cfg.estandares.join('\n') : '',
-              customize(doc) {
-                doc.defaultStyle.fontSize = 14;
-                doc.content[0].fontSize = 20;
-              }
-            },
-            'colvis'
-          ],
-          responsive: false,
-          stateSave: true,
-          language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-          },
-          columnDefs: [
-            { type: 'num', targets: 0 }
-          ]
-        });
-      });
+$(function(){
+  tablaConfigs.forEach(cfg => {
+    $('#orden_servicio-' + cfg.id).DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'print',
+          text: 'Imprimir',
+          title: cfg.titulo,
+          exportOptions: { modifier: { page: 'all' } }
+        },
+        'excel',
+        {
+        extend: 'pdfHtml5',
+        text: 'PDF',
+        title: cfg.titulo,
+        exportOptions: {
+            modifier: { page: 'all' },
+            columns: [1,2,3,4,5,6]
+        },
+        customize: function (doc) {
+            doc.pageMargins = [10,10,10,10];
+            doc.defaultStyle.fontSize = 10;
+            doc.styles.tableHeader.fontSize = 12;
+            var table = doc.content.find(d => d.table).table;
+            table.widths = [
+            '30%',  // Nombre
+            '20%',  // Método de Pago
+            '10%',  // Abono
+            '10%',  // Deudor
+            '20%',  // Documentación
+            '10%'   // Nota
+            ];
+        }
+        },
+
+        'colvis'
+      ],
+      responsive: false,
+      stateSave: true,
+      language: { url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json' },
+      columnDefs: [{ type: 'num', targets: 0 }]
     });
+  });
+});
+
   </script>
 
 @endsection

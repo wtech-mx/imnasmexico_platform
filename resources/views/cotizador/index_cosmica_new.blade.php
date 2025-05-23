@@ -11,7 +11,7 @@ Cosmica
 
     .h3_subtitulos{
         font-size: 10px;
-        color: #2D2432;
+        color: #E3B6A1;
     }
         /* color de fondo de toda la tabla */
     .table-custom {
@@ -24,7 +24,7 @@ Cosmica
     /* bordes rojos y redondeados en cada celda */
     .table-custom th,
     .table-custom td {
-        border: 1px solid #2D2432;
+        border: 1px solid #E3B6A1;
         border-radius: 9px;
         vertical-align: middle;
     }
@@ -139,14 +139,14 @@ Cosmica
                 <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
                     Nombre :
                 </p>
-                <input value="" type="text" name="name" class="form-control" required style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
+                <input value="" type="text" name="name" class="form-control" required style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #E3B6A1;border-radius: 0;" >
             </div>
 
             <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
                 <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
                     WhatasApp :
                 </p>
-                <input value="" type="number" name="telefono" class="form-control"required  style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #2D2432;border-radius: 0;" >
+                <input value="" type="number" name="telefono" class="form-control"required  style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #E3B6A1;border-radius: 0;" >
             </div>
         </div>
 

@@ -56,10 +56,10 @@
                     <p>{{$tipo}}</p>
                 @elseif ($tipo == 'pedidos_lab_cosmica')
                     <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('NC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
-                    <p>{{$tipo}}</p>
+                    <p style="font-size: 8px;margin-top:8px;margin-left:8px;">{{$tipo}}</p>
                 @else
                     <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('EC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
-                    <p>{{$tipo}}</p>
+                    <p >{{$tipo}}</p>
                 @endif
                 {{-- <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">{{ explode('_', $notas_preparacion->id)[0] }}</p> --}}
 
@@ -71,7 +71,6 @@
                 @else
                     <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">Folio: {{ Str::limit($registro->folio, 75) }}</p>
                 @endif
-
             </div>
     </body>
 </html>
