@@ -125,11 +125,7 @@ class BodegaController extends Controller
 
         $notas_cosmica_preparacion = NotasProductosCosmica::query()
         ->where('estatus_cotizacion', 'Aprobada Workshop')
-        // excluye NULL y “0000-00-00 00:00:00” de un plumazo:
         ->where('fecha_preparacion', '>=', '0000-00-00 00:00:00')
-        ->whereDoesntHave('productos', function ($q) {
-            $q->where('id_producto', 2080);
-        })
         ->orderBy('id', 'DESC')
         ->get();
 
