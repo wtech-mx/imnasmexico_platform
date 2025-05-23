@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosNotasCosmica;
+use Carbon\Carbon;
 
 class CotizadorController extends Controller
 {
@@ -88,6 +89,23 @@ class CotizadorController extends Controller
         return view('cotizador.index_cosmica', compact('categoriasFacial', 'categoriasCorporal'));
     }
 
+    public function index_cotizaciones_cosmica_expo(Request $request){
+
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $now = Carbon::now();
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->where('estatus_cotizacion','=' , null)->get();
+
+        $products = Products::orderBy('nombre','ASC')->get();
+
+        return view('admin.cotizacion_cosmica.index_cotizaciones_expo', compact('notas', 'products', 'clientes', 'administradores'));
+    }
+
     public function index_cosmica_new(Request $request)
     {
         // 1) Productos “normales”
@@ -140,7 +158,7 @@ class CotizadorController extends Controller
         $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion')
         ->where('folio','like','E%')->pluck('folio')->map(fn($f)=> intval(substr($f,1)));
         $next = ($numeros->max() ?: 0) + 1;
-        $notas->tipo_nota = 'Cotizacion';
+        $notas->tipo_nota = 'Cotizacion_Expo';
         $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
 
         $notas->fecha = now();
