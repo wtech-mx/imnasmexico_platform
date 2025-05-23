@@ -180,9 +180,9 @@ $(function(){
             columns: [0,1,2,3,4,5,6]
         },
         customize: function (doc) {
-            doc.pageMargins = [10,10,10,10];
-            doc.defaultStyle.fontSize = 10;
-            doc.styles.tableHeader.fontSize = 12;
+            doc.pageMargins = [20,20,20,20];
+            doc.defaultStyle.fontSize = 12;
+            doc.styles.tableHeader.fontSize = 13;
             var table = doc.content.find(d => d.table).table;
             table.widths = [
             '5%',  // Nombre
