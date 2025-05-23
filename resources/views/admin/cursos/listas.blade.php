@@ -181,17 +181,17 @@ $(function(){
         },
         customize: function (doc) {
             doc.pageMargins = [20,20,20,20];
-            doc.defaultStyle.fontSize = 12;
+            doc.defaultStyle.fontSize = 13;
             doc.styles.tableHeader.fontSize = 13;
             var table = doc.content.find(d => d.table).table;
             table.widths = [
             '5%',  // Nombre
             '25%',  // Nombre
             '20%',  // Método de Pago
-            '10%',  // Abono
+            '15%',  // Abono
             '10%',  // Deudor
             '20%',  // Documentación
-            '10%'   // Nota
+            '5%'   // Nota
             ];
         }
         },
