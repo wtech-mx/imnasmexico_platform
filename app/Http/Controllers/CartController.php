@@ -303,7 +303,18 @@ class CartController extends Controller
                 $total += $details['precio'] * $details['cantidad'];
             }
 
-            $tituloMeli = 'Kit De Productos Cosmica Meli #'.$code;
+            $order_cosmica = new OrdersCosmica;
+            $order_cosmica->id_usuario = $payer->id;
+            $order_cosmica->pago = $total;
+            $order_cosmica->forma_pago = 'Mercado Libre';
+            $order_cosmica->forma_envio = 'Mercado Libre';
+            $order_cosmica->fecha = $fechaActual;
+            $order_cosmica->estatus = 0;
+            $order_cosmica->code = $code;
+            $order_cosmica->external_reference = $code;
+            $order_cosmica->save();
+
+            $tituloMeli = 'Kit De Productos Cosmica Meli #TC'.$order_cosmica->id;
 
             $endpoint = 'https://api.mercadolibre.com/items';
             $payload = [
@@ -357,19 +368,11 @@ class CartController extends Controller
                     $itemId = $responseData['id'];
                     $permalink = $responseData['permalink'];
 
-                    $order_cosmica = new OrdersCosmica;
-                    $order_cosmica->id_usuario = $payer->id;
-                    $order_cosmica->pago = $total;
-                    $order_cosmica->forma_pago = 'Mercado Libre';
-                    $order_cosmica->fecha = $fechaActual;
-                    $order_cosmica->estatus = 0;
-                    $order_cosmica->code = $code;
-                    $order_cosmica->external_reference = $code;
                     $order_cosmica->item_id_meli = $itemId;
                     $order_cosmica->item_title_meli = $tituloMeli;
                     $order_cosmica->item_descripcion_meli = $descripcionFinal;
                     $order_cosmica->item_descripcion_permalink = $permalink;
-                    $order_cosmica->save();
+                    $order_cosmica->update();
 
                     foreach (session('cart_productos') as $id => $details) {
                         $order_ticket = new OrdersCosmicaOnline;
