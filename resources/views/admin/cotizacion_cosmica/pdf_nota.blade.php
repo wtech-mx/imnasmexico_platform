@@ -155,6 +155,7 @@
     <table class="table table-bordered border-primary">
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
+                <th>Codigo Barras</th>
                 <th>Imagen</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
@@ -177,8 +178,28 @@
                         $subtotal = $unit * $cantidad;
                     @endphp
                     <tr>
-
-
+                        <td>
+                                @if ($kit->sku == NULL)
+                                    <b></b>
+                                @else
+                                    @php
+                                        // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                        $codigo = $kit->sku;
+                                    @endphp
+                                    <img
+                                        src="data:image/png;base64,{{
+                                        DNS1D::getBarcodePNG(
+                                            $codigo,
+                                            'C128',
+                                            1.6,
+                                            35,
+                                            [0,0,0],
+                                            true
+                                        )
+                                        }}"
+                                        alt="Barcode de {{ $codigo }}">
+                                @endif
+                        </td>
                         <td>
                             @if ($kit->imagenes == NULL)
                                 <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
@@ -211,7 +232,9 @@
                         <td colspan="5" style="text-align: left;">
                             <ul>
                                 @foreach ($nota_productos->where('kit', 1)->where('num_kit', $nota->$kitId) as $producto)
-                                    <li>{{ $producto->cantidad }} {{ $producto->producto }}</li>
+                                    <li>
+                                        {{ $producto->cantidad }} {{ $producto->producto }}
+                                    </li>
                                 @endforeach
                             </ul>
                         </td>
@@ -221,6 +244,29 @@
 
             @foreach ($nota_productos->where('kit', 0) as $producto)
                 <tr>
+
+                    <td>
+                            @if ($producto->Productos->sku == NULL)
+                                <b>SKU no disponible</b>
+                            @else
+                                @php
+                                    // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                    $codigo = $producto->Productos->sku;
+                                @endphp
+                                <img
+                                    src="data:image/png;base64,{{
+                                    DNS1D::getBarcodePNG(
+                                        $codigo,
+                                        'C128',
+                                        1.6,
+                                        35,
+                                        [0,0,0],
+                                        true
+                                    )
+                                    }}"
+                                    alt="Barcode de {{ $codigo }}">
+                            @endif
+                    </td>
                     <td>
                         <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
                     </td>

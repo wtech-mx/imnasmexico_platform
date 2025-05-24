@@ -133,6 +133,7 @@
     <table class="table table-bordered border-primary">
         <thead class="text-center table-cotizacion">
             <tr>
+                <th>Codigo Barras</th>
                 <th>Imagen</th>
                 <th>Cantidad</th>
                 <th>Producto</th>
@@ -143,6 +144,28 @@
         <tbody class="text-center">
             @foreach ($nota_productos as $nota_producto)
                 <tr>
+                    <td>
+                            @if ($nota_producto->Producto->sku == NULL)
+                                <b>SKU no disponible</b>
+                            @else
+                                @php
+                                    // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                    $codigo = $nota_producto->Producto->sku;
+                                @endphp
+                                <img
+                                    src="data:image/png;base64,{{
+                                    DNS1D::getBarcodePNG(
+                                        $codigo,
+                                        'C128',
+                                        1.6,
+                                        35,
+                                        [0,0,0],
+                                        true
+                                    )
+                                    }}"
+                                    alt="Barcode de {{ $codigo }}">
+                            @endif
+                    </td>
                     <td>
                         <img src="{{ $nota_producto->Producto->imagenes }}" alt="" style="width: 60px">
                      </td>
