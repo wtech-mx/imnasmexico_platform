@@ -123,7 +123,7 @@ class BodegaController extends Controller
         ->orderBy('id', 'DESC')
         ->get();
 
-        $notas_cosmica_preparacion = NotasProductosCosmica::query()
+        $notas_cosmica_preparacion_work = NotasProductosCosmica::query()
         ->where('estatus_cotizacion', 'Aprobada Workshop')
         ->where('fecha_preparacion', '>=', '0000-00-00 00:00:00')
         ->orderBy('id', 'DESC')
@@ -167,7 +167,8 @@ class BodegaController extends Controller
             'ApiFiltradaCollectAprobadoreposicion',
             'oreders_cosmica_ecommerce',
             'orders_nas_ecommerce',
-            'ordenes_con_producto_2080'));
+            'ordenes_con_producto_2080',
+            'notas_cosmica_preparacion_work'));
     }
 
     public function generarEtiqueta($tabla, $id){
