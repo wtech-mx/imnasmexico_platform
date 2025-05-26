@@ -87,8 +87,9 @@ Cosmica
     /* En escritorio (>=760px): full siempre visible, preview oculto y sin toggles */
     @media (min-width: 760px) {
     .descripcion-cell .preview { display: none !important; }
-    .descripcion-cell .full    { display: block !important; }
+    .descripcion-cell .full    { display: block !important;font-size: 14px; }
     .toggle-desc               { display: none !important; }
+
     }
     /* ----------------------------------------------------
     Sticky footer dentro del container
@@ -106,6 +107,7 @@ Cosmica
         background: #FADACF;
         border-radius: 13px;
         border: solid 2px #3F303E;
+        padding: 10px;
     }
 
     .btn_guardar{
@@ -196,9 +198,8 @@ Cosmica
                             <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
                             <p class="name_producto">
                                 {{ $producto->nombre }} /
-                                {{ $producto->linea }} <br> <br>
+                                {{ $producto->linea }}
                             </p>
-
 
                             @if($hasDiscount)
                                 {{-- precio normal tachado --}}
@@ -340,6 +341,12 @@ Cosmica
         <div>
             <strong class="text-dark">Total General: </strong>
             <span id="grandTotal">$0.00</span>
+
+            {{-- Aquí irá la lista de productos seleccionados --}}
+            <div id="selected-list" class="mt-0">
+            <strong>Tu selección:</strong>
+            <ul id="selectedProducts" class="mb-0 ps-3" style="font-size: 12px;"></ul>
+            </div>
         </div>
             <button type="submit" class="btn" style="background: #3F303E;border: solid 1px #3F303E;color: #fff;border-radius: 13px;">Guardar Cotización</button>
         </div>
@@ -480,32 +487,67 @@ $(function(){
     // inicializa al cargar
     .ready(updateTotals);
 
-  function updateTotals(){
-    let grand = 0;
-    $('tr[data-precio]').each(function(){
-      const precio = parseFloat($(this).data('precio')) || 0;
-      const qty    = parseFloat($(this).find('.qty-input').val()) || 0;
-      const total  = precio * qty;
-      // actualiza la celda de total de línea
-      $(this).find('.row-total').text(
-        new Intl.NumberFormat('es-MX',{
-          style: 'currency',
-          currency: 'MXN',
-          minimumFractionDigits: 2
-        }).format(total)
-      );
-      grand += total;
+        function updateTotals(){
+        let grand = 0;
+        // Array para ir guardando los productos con qty>0
+        const selected = [];
+
+        $('tr[data-precio]').each(function(){
+            const $row  = $(this);
+            const precio = parseFloat($row.data('precio')) || 0;
+            const qty    = parseFloat($row.find('.qty-input').val()) || 0;
+            const total  = precio * qty;
+
+            // actualiza la celda de total de línea
+            $row.find('.row-total').text(
+            new Intl.NumberFormat('es-MX',{
+                style: 'currency',
+                currency: 'MXN',
+                minimumFractionDigits: 2
+            }).format(total)
+            );
+
+            // si qty > 0, lo añadimos al array con el nombre
+        if (qty > 0) {
+            // 1) Intentamos pillar el <p.name_producto>
+            let $p = $row.find('p.name_producto');
+            let nombre;
+            if ($p.length) {
+            // fila de producto normal
+            nombre = $p.text().split('/')[0].trim();
+            } else {
+            // fila de kit: sacamos el texto del primer td (antes del /)
+            let text = $row.children('td').first().text().trim();
+            nombre = text.split('/')[0].trim();
+            }
+            selected.push({ nombre, qty });
+        }
+
+
+            grand += total;
+        });
+
+        // actualiza el total general
+        $('#grandTotal').text(
+            new Intl.NumberFormat('es-MX',{
+            style: 'currency',
+            currency: 'MXN',
+            minimumFractionDigits: 2
+            }).format(grand)
+        );
+
+        // Rellenar la lista de productos seleccionados
+        const $list = $('#selectedProducts').empty();
+        if (selected.length === 0) {
+            $list.append('<li>(Sin productos seleccionados)</li>');
+        } else {
+            selected.forEach(item => {
+            $list.append(`<li>${item.nombre} × ${item.qty}</li>`);
+            });
+        }
+        }
+
     });
-    // actualiza el total general
-    $('#grandTotal').text(
-      new Intl.NumberFormat('es-MX',{
-        style: 'currency',
-        currency: 'MXN',
-        minimumFractionDigits: 2
-      }).format(grand)
-    );
-  }
-});
 </script>
 @endsection
 
