@@ -155,12 +155,12 @@ class CotizadorController extends Controller
         }
 
         // 3) Generar folio “E” + padding 3 dígitos
-        $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion')
+        $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion_Expo')
         ->where('folio','like','E%')->pluck('folio')->map(fn($f)=> intval(substr($f,1)));
         $next = ($numeros->max() ?: 0) + 1;
         $notas->tipo_nota = 'Cotizacion_Expo';
         $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
-
+        $notas->id_admin = auth()->user()->id;
         $notas->fecha = now();
         $notas->nota  = '';
         $notas->save();
@@ -176,7 +176,7 @@ class CotizadorController extends Controller
             if (! $prod) continue;
 
             // precio unitario desde stock
-            $precio = $prod->precio_normal;
+            $precio = $prod->precio_rebajado;
             $lineTotal = $precio * $qty;
             $grandTotal += $lineTotal;
 

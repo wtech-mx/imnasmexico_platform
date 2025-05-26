@@ -383,18 +383,43 @@ $(function(){
 
 Swal.fire({
   title: '¡Cotización guardada!',
-  text: '¿Qué quieres hacer ahora?',
+  text: `Folio: ${response.folio}`,
   icon: 'success',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'Generar PDF',
-  denyButtonText: 'Contactar agente',
-  cancelButtonText: 'Otra Cotización',
+  showDenyButton: false,
+  showCancelButton: false,
+ confirmButtonText: 'Generar y Otra Cotización',
+ // denyButtonText: 'Contactar agente',
+  // cancelButtonText: 'Otra Cotización',
   allowOutsideClick: false,
   allowEscapeKey: false,
   preConfirm: () => {
-    window.open(`{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`, '_blank');
-    return false;
+   /* window.open(`{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`, '_blank');
+    return false; */
+
+        const pdfUrl = `{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`;
+
+        // 1) Mostrar preloader
+        Swal.fire({
+        title: 'Descargando PDF…',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading();
+            // 2) Disparar la descarga
+            const a = document.createElement('a');
+            a.href = pdfUrl;
+            a.download = `Cotizacion-${response.id}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            // 3) Tras un pequeño retraso, cerrar el preloader y recargar
+            setTimeout(() => {
+            Swal.close();
+            window.location.reload();
+            }, 1500);
+        }
+        });
+
   },
   preDeny: () => {
     const pdfUrl = `{{ url('cosmica/cotizacion/imprimir') }}/${response.id}`;

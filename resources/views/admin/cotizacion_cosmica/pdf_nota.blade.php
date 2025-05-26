@@ -246,26 +246,26 @@
                 <tr>
 
                     <td>
-                            @if ($producto->Productos->sku == NULL)
-                                <b>SKU no disponible</b>
-                            @else
-                                @php
-                                    // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
-                                    $codigo = $producto->Productos->sku;
-                                @endphp
-                                <img
-                                    src="data:image/png;base64,{{
-                                    DNS1D::getBarcodePNG(
-                                        $codigo,
-                                        'C128',
-                                        1.6,
-                                        35,
-                                        [0,0,0],
-                                        true
-                                    )
-                                    }}"
-                                    alt="Barcode de {{ $codigo }}">
-                            @endif
+                        @if ($producto->Productos->sku == NULL)
+                            <b>SKU no disponible</b>
+                        @else
+                            @php
+                                // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                $codigo = $producto->Productos->sku;
+                            @endphp
+                            <img
+                                src="data:image/png;base64,{{
+                                DNS1D::getBarcodePNG(
+                                    $codigo,
+                                    'C128',
+                                    1.6,
+                                    35,
+                                    [0,0,0],
+                                    true
+                                )
+                                }}"
+                                alt="Barcode de {{ $codigo }}">
+                        @endif
                     </td>
                     <td>
                         <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
@@ -283,10 +283,18 @@
                         {{ $producto->descuento }}%
                     </td>
                     <td>
-                        ${{$producto->Productos->precio_normal}}
+                        @if ($producto->total == NULL)
+                            ${{$producto->Productos->precio_normal}}
+                        @else
+                            ${{$producto->price}}
+                        @endif
                     </td>
                     <td>
-                        ${{$producto->price}}
+                        @if ($producto->total == NULL)
+                            ${{$producto->price}}
+                        @else
+                            ${{$producto->total}}
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -296,11 +304,15 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
               <td style="text-align: right"><b>Subtotal</b> </td>
               <td>${{ $nota->subtotal }}</td>
             </tr>
             @if ($nota->restante > 0)
                 <tr style="background-color: #ffffff;">
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -314,6 +326,8 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
                 <td>${{$nota->dinero_recibido}}</td>
                 </tr>
@@ -323,11 +337,15 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                 <td style="text-align: right"><b>IVA por Factura</b> </td>
                 <td>16%</td>
                 </tr>
             @endif
             <tr style="background-color: #ffffff;">
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
