@@ -41,7 +41,19 @@
 
                         <div class="table-responsive">
 
-                              <table class="table table-flush" id="datatable-search4">
+                            <nav>
+                                <div class="nav nav-tabs" >
+                                    <a class="nav-link active" href="{{ route('index_cotizaciones_cosmica_expo.cotizador') }}">
+                                        Cotizaciones <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
+                                    </a>
+
+                                    <a class="nav-link" href="{{ route('index_recepcion_cosmica_expo.cotizador') }}">
+                                        Recepción <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    </a>
+                                </div>
+                            </nav>
+
+                            <table class="table table-flush" id="datatable-search4">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>

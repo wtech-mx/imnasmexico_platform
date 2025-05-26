@@ -263,7 +263,6 @@ class CotizadorController extends Controller
         return view('cotizador.productos_categoria', compact('productos'));
     }
 
-
     private function removeAccents($string)
     {
         return strtr($string, [
@@ -272,6 +271,7 @@ class CotizadorController extends Controller
             'ñ'=>'n', 'Ñ'=>'N', 'ü'=>'u', 'Ü'=>'U'
         ]);
     }
+
     private function generarVariantesSingularPlural($palabra)
     {
         $variantes = [$palabra];
@@ -298,5 +298,29 @@ class CotizadorController extends Controller
         return view('cotizador.item_carrito', compact('producto'))->render();
     }
 
+    public function index_recepcion_cosmica_expo(Request $request){
+
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $now = Carbon::now();
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->where('estatus_cotizacion','=' , null)->get();
+
+        return view('admin.cotizacion_cosmica.recepcion_expo', compact('notas', 'clientes', 'administradores'));
+    }
+
+    public function index_recepcion_update_expo(Request $request, $id) {
+
+        $nota = NotasProductosCosmica::findOrFail($id);
+        $nota->estatus_cotizacion = $request->get('estatus_cotizacion');
+        $nota->save();
+
+        return redirect()->route('index_recepcion_cosmica_expo.cotizador')
+        ->with('success', 'Se ha actualizado su cotizacion con exito');
+    }
 
 }

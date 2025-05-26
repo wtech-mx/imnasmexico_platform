@@ -38,7 +38,8 @@ Route::get('/admin/cotizador/new/cosmica', [App\Http\Controllers\CotizadorContro
 Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
 Route::post('cotizacion-cosmica', [App\Http\Controllers\CotizadorController::class, 'store'])->name('cotizacion.store');
 Route::get('/admin/cotizador/cosmica/expo', [App\Http\Controllers\CotizadorController::class, 'index_cotizaciones_cosmica_expo'])->name('index_cotizaciones_cosmica_expo.cotizador');
-
+Route::get('/admin/recepcion/cosmica/expo', [App\Http\Controllers\CotizadorController::class, 'index_recepcion_cosmica_expo'])->name('index_recepcion_cosmica_expo.cotizador');
+Route::patch('/admin/recepcion/cosmica/expo/update/{id}', [App\Http\Controllers\CotizadorController::class, 'index_recepcion_update_expo'])->name('index_recepcion_update_expo.cotizador');
 
 Route::get('/cotizador/categoria/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoriaCosmica'])->name('cotizador.productos_categoriaCosmica');
 Route::get('/cotizador/categoria/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoria'])->name('cotizador.productos_categoria');
