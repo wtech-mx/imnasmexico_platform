@@ -43,16 +43,16 @@
 
                             <nav>
                                 <div class="nav nav-tabs" >
-                                    <a class="nav-link active" href="{{ route('index_cotizaciones_cosmica_expo.cotizador') }}">
+                                    <a class="nav-link" href="{{ route('index_cotizaciones_cosmica_expo.cotizador') }}">
                                         Cotizaciones <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                     </a>
 
-                                    <a class="nav-link" href="{{ route('index_pagos_cosmica_expo.cotizador') }}">
-                                        Pago <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    <a class="nav-link active" href="{{ route('index_pagos_cosmica_expo.cotizador') }}">
+                                        Pago <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                     </a>
 
                                     <a class="nav-link" href="{{ route('index_recepcion_cosmica_expo.cotizador') }}">
-                                        Recepción <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                        Recepción <img src="{{ asset('assets/cam/package.png') }}" alt="" width="35px">
                                     </a>
                                 </div>
                             </nav>
