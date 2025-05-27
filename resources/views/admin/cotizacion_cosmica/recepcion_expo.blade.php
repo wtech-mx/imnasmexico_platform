@@ -46,6 +46,10 @@
                                         Cotizaciones <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                     </a>
 
+                                    <a class="nav-link" href="{{ route('index_pagos_cosmica_expo.cotizador') }}">
+                                        Pago <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    </a>
+
                                     <a class="nav-link" href="{{ route('index_recepcion_cosmica_expo.cotizador') }}">
                                         Recepción <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
                                     </a>
@@ -65,7 +69,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($notas as $item)
-                                            <tr style="background: #d486d6">
+                                            <tr id="nota-{{ $item->id }}" class="{{ $item->pago ? 'table-success' : '' }}">
                                                 <td>
                                                     <h5>
                                                         {{ $item->folio }}
@@ -77,13 +81,17 @@
                                                         @if ($item->id_usuario == NULL)
                                                             {{ $item->nombre }} <br> {{ $item->telefono }}
                                                         @else
-                                                            {{ $item->User->name }}
+                                                            {{ $item->User->name }} <br>  {{ $item->User->telefono }}
                                                         @endif
                                                     </h5>
                                                 </td>
 
                                                 <td>
-                                                    En preparación
+                                                    @if ($item->estatus_cotizacion == 'Entregado')
+                                                        <span class="badge bg-success">Empaquetado</span>
+                                                    @else
+                                                        <span class="badge bg-warning">Pendiente</span>
+                                                    @endif
                                                 </td>
 
                                                 <td>
@@ -134,14 +142,31 @@
         fixedHeight: false
     });
 
-    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
-        searchable: true,
-        fixedHeight: false
-    });
+    document.addEventListener('DOMContentLoaded', function(){
 
-    const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
-        searchable: true,
-        fixedHeight: false
+        function refrescarEstatus() {
+            const ids = Array.from(document.querySelectorAll('tr[id^="nota-"]'))
+                            .map(tr => tr.id.replace('nota-',''));
+            if (!ids.length) return;
+
+            fetch('{{ route("notas.estatus") }}?ids=' + ids.join(','))
+            .then(res => res.json())
+            .then(data => {
+                console.log('estatus recibidos', data);
+                data.forEach(item => {
+                const tr = document.getElementById(`nota-${item.id}`);
+                if (!tr) return;
+                tr.classList.toggle('table-success', item.pago === 1);
+                });
+            })
+            .catch(console.error);
+        }
+
+        // Ejecuta al cargar…
+        refrescarEstatus();
+        // …y cada 30s:
+        setInterval(refrescarEstatus, 10000);
+
     });
 
 </script>

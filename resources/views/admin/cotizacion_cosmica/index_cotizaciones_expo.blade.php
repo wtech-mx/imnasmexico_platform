@@ -47,6 +47,10 @@
                                         Cotizaciones <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                     </a>
 
+                                    <a class="nav-link" href="{{ route('index_pagos_cosmica_expo.cotizador') }}">
+                                        Pago <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    </a>
+
                                     <a class="nav-link" href="{{ route('index_recepcion_cosmica_expo.cotizador') }}">
                                         Recepción <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
                                     </a>

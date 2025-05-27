@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
+use App\Models\ProductosBundleId;
 use App\Models\ProductosNotasCosmica;
 use Carbon\Carbon;
 
@@ -308,7 +309,7 @@ class CotizadorController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->where('estatus_cotizacion','=' , null)->get();
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
 
         return view('admin.cotizacion_cosmica.recepcion_expo', compact('notas', 'clientes', 'administradores'));
     }
@@ -323,4 +324,35 @@ class CotizadorController extends Controller
         ->with('success', 'Se ha actualizado su cotizacion con exito');
     }
 
+    public function index_pagos_cosmica_expo(Request $request){
+
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $now = Carbon::now();
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->where('estatus_cotizacion','=' , null)->get();
+
+        return view('admin.cotizacion_cosmica.pagos_expo', compact('notas', 'clientes', 'administradores'));
+    }
+
+    public function togglePago(Request $request){
+        $servicio = NotasProductosCosmica::find($request->id);
+        $servicio->pago = $request->abono;
+        $servicio->save();
+
+        return response()->json(['success' => 'Se cambio el estado exitosamente.']);
+    }
+
+    public function apiEstatus(Request $r){
+        $ids = explode(',', $r->query('ids',''));
+        $notas = NotasProductosCosmica::whereIn('id',$ids)
+            ->pluck('pago','id')
+            ->map(fn($pago,$id) => ['id'=>$id,'pago'=>(int)$pago])
+            ->values();
+        return response()->json($notas);
+    }
 }

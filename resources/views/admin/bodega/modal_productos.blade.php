@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_productos_{{ $item->id }}" tabindex="-1" aria-labelledby="modal_productosLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="modal_productosLabel">Productos de la orden {{ $item->folio }}</h1>
@@ -15,7 +15,16 @@
                         <ul class="">
                             @foreach ($item->ProductosNotasId as $item)
                             <li class="">
-                            <b>{{ $item->cantidad }}</b> - {{ $item->producto }}
+                                @if ($item->Productos->subcategoria == 'Kit' || $item->Productos->subcategoria == 'kit')
+                                    <b>{{ $item->cantidad }}</b> - {{ $item->producto }}
+                                    <ul>
+                                        @foreach ($item->Productos->bundleItems as $producto)
+                                            <li>{{ $producto->cantidad }} - {{ $producto->producto }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <b>{{ $item->cantidad }}</b> - {{ $item->producto }}
+                                @endif
                             </li>
                             @endforeach
                         </ul>
