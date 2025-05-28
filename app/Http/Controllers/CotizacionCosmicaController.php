@@ -759,6 +759,21 @@ class CotizacionCosmicaController extends Controller
        // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
 
+    public function link_pago($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = NotasProductosCosmica::find($id);
+
+        $nota_productos = ProductosNotasCosmica::where('id_notas_productos', $nota->id)->get();
+
+        $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
+
+        return view('admin.cotizacion_cosmica.link_pago',compact('nota', 'today', 'nota_productos', 'usercosmika'));
+
+    }
+
+
     public function update_estatus(Request $request, $id){
         $nota = NotasProductosCosmica::find($id);
 
@@ -1722,6 +1737,7 @@ class CotizacionCosmicaController extends Controller
 
         return view('admin.cotizacion_cosmica.index_filtro', compact('notas', 'administradores', 'fechaInicio', 'fechaFin', 'fechaInicioFormatted', 'fechaFinFormatted'));
     }
+
     public function index_expo(Request $request) {
         $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
         $fechaFin = $request->input('fecha_fin', date('Y-m-t'));

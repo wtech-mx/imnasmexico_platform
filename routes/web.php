@@ -141,6 +141,7 @@ Route::get('/facturacion/cosmica', action: [App\Http\Controllers\FacturasControl
 Route::get('/facturacion/nas', [App\Http\Controllers\FacturasController::class, 'facturas_userNAS'])->name('facturas_userNas.index');
 Route::get('/facturacion/tiendita', [App\Http\Controllers\FacturasController::class, 'facturas_userTiendita'])->name('facturas_userTiendita.index');
 Route::get('/facturacion/cursos', [App\Http\Controllers\FacturasController::class, 'facturas_userCursos'])->name('facturas_userCursos.index');
+Route::get('/link_pago/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'link_pago'])->name('cotizacion_cosmica.link_pago');
 
 
 // Ruta para buscar un folio vía AJAX

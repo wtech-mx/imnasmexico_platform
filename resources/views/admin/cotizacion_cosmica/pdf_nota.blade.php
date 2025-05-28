@@ -151,7 +151,6 @@
         <label style="font-size: 20px"><b>Numero de cliente: </b>A{{ $nota->User->id }}</label>
     @endif
 
-
     <table class="table table-bordered border-primary">
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
