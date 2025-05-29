@@ -23,7 +23,10 @@ use Session;
 use App\Models\Meli;
 use Illuminate\Support\Facades\Http;
 use App\Models\Factura;
-
+use App\Models\OrdersCosmica;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Redirect;
+use MercadoPago\{Exception, SDK, Preference, Item};
 
 class CotizacionCosmicaController extends Controller
 {
@@ -772,7 +775,6 @@ class CotizacionCosmicaController extends Controller
         return view('admin.cotizacion_cosmica.link_pago',compact('nota', 'today', 'nota_productos', 'usercosmika'));
 
     }
-
 
     public function update_estatus(Request $request, $id){
         $nota = NotasProductosCosmica::find($id);
@@ -1796,5 +1798,77 @@ class CotizacionCosmicaController extends Controller
         $pdf = \PDF::loadView('admin.cotizacion_cosmica.expo.pdf_expo', compact('notas', 'today', 'total'));
         return $pdf->stream();
        //  return $pdf->download('Etiquetas bajo stock nas / '.$today.'.pdf');
+    }
+
+    public function processPayment(Request $request){
+        // Configurar el SDK de Mercado Pago con las credenciales de API
+       SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Crear un objeto de preferencia de pago
+        $preference = new Preference();
+        $code = Str::random(8);
+
+        $item = new Item();
+        $item->title = 'Link de pago para la orden: '.$request->get('folio');
+        $item->quantity = 1;
+        $item->unit_price = $request->get('total');
+        $ticketss = array($item);
+
+        // Crear un objeto de preferencias de pago
+        $preference = new \MercadoPago\Preference();
+
+        $preference->back_urls = array(
+            "success" => route('link_pago.pay'),
+            "pending" => route('link_pago.pay'),
+            "failure" => "https://plataforma.imnasmexico.com/",
+        );
+
+        $preference->auto_return = "approved";
+        $preference->external_reference = $code;
+        $preference->items = $ticketss;
+
+
+        try {
+            // Crear la preferencia en Mercado Pago
+            $preference->save();
+
+            // Redirigir al usuario al proceso de pago de Mercado Pago
+            return Redirect::to($preference->init_point);
+        } catch (Exception $e) {
+            // Manejar errores de Mercado Pago
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        } catch (Throwable $e) {
+            // Manejar errores de PHP
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function pay(OrdersCosmica $order, Request $request)
+    {
+        $payment_id = $request->get('payment_id');
+        $external_reference = $request->get('external_reference');
+
+        $dominio = $request->getHost();
+        $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+
+        $response = json_decode($response);
+        if (isset($response->error)) {
+            return redirect()->route('return.link_pago')->with('error', 'Hubo un problema al verificar el pago.');
+        }
+        $status = $response->status ?? null;
+        $external_reference_api = $response->external_reference ?? null;
+        $external_reference = $external_reference_api ?: $external_reference;
+
+        // Si no se encuentra el external_reference, redirige con error
+        if (!$external_reference) {
+            return redirect()->route('return.link_pago')->with('error', 'No se pudo verificar el pago. Falta external_reference.');
+        }
+
+        return redirect()->route('return.link_pago');
+    }
+
+    public function return(){
+
+        return view('admin.cotizacion_cosmica.link_pago_success');
     }
 }
