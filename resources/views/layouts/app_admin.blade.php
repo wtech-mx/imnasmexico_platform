@@ -110,12 +110,12 @@
         document.getElementById('regresar_btn').addEventListener('click', function() {
             history.back();
         });
-        $(function() {
-            $('form').on('submit', function() {
-                // Deshabilitar el botón de envío al hacer clic
-                $(this).find('button[type="submit"]').prop('disabled', true);
-            });
-        });
+        // $(function() {
+        //     $('form').on('submit', function() {
+        //         // Deshabilitar el botón de envío al hacer clic
+        //         $(this).find('button[type="submit"]').prop('disabled', true);
+        //     });
+        // });
 
         const formContainer = document.getElementById('form-container');
         const openFormButton = document.getElementById('open-form');

@@ -628,7 +628,7 @@
 
 
                                     <div class="col-12">
-                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> <i class="fa fa-send" title="Ver Orden"></i>Enviar</button>
+                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> <i class="fa fa-send" title="Ver Orden"></i>Generar Doc</button>
                                     </div>
 
                             </div>
