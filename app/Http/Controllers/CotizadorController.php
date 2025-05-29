@@ -127,9 +127,9 @@ class CotizadorController extends Controller
             ->with('bundleItems')   // <-- cargar la relación
             ->get();
 
+        $personal = User::where('cliente','=' , null)->where('visibilidad', '!=', '0')->orderBy('name','ASC')->get();
 
-        // 4) Pasar todo a la vista
-        return view('cotizador.index_cosmica_new', compact('productosPorSublinea', 'kits'));
+        return view('cotizador.index_cosmica_new', compact('productosPorSublinea', 'kits', 'personal'));
     }
 
     public function store(Request $request)
@@ -162,6 +162,8 @@ class CotizadorController extends Controller
         $notas->tipo_nota = 'Cotizacion_Expo';
         $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
         $notas->id_admin = auth()->user()->id;
+        $notas->id_admin_venta = $request->input('id_cosme');
+        $notas->metodo_pago = $request->input('metodo_pago');
         $notas->fecha = now();
         $notas->nota  = '';
         $notas->save();
@@ -306,7 +308,7 @@ class CotizadorController extends Controller
 
         $now = Carbon::now();
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
-        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $clientes = User::where('cliente','=' , null)->orderBy('id','DESC')->get();
 
         $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->get();

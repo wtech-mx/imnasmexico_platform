@@ -150,6 +150,32 @@ Cosmica
                 </p>
                 <input value="" type="number" name="telefono" class="form-control"required  style="display: inline-block;width: 50%;border: 0px solid;border-bottom: 1px dotted #E3B6A1;border-radius: 0;" >
             </div>
+
+            <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
+                <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
+                    ¿Quien lo vendio?
+                </p>
+                <div class="input-group mb-3">
+                    <select name="id_cosme" id="id_cosme" class="form-select d-inline-block" required>
+                        <option value="">Selecciona personal</option>
+                        @foreach ($personal as $profesor)
+                            <option value="{{ $profesor->id }}">{{ $profesor->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3">
+                <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
+                    Metodo de pago
+                </p>
+                <div class="input-group mb-3">
+                    <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block" required>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         {{-- Una sola tabla para todos los grupos --}}
