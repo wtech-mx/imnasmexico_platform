@@ -113,7 +113,7 @@
                                         <tbody>
                                             @php $counter = 1; @endphp
                                             @foreach($ordenes as $order)
-                                                @if($order->id_tickets == $ticket->id && $order->orders->estatus == '1')
+                                                @if($order->id_tickets == $ticket->id)
                                                     @include('admin.cursos.partials.row', [
                                                         'order'   => $order,
                                                         'ticket'  => $ticket,

@@ -563,12 +563,37 @@ class CursosController extends Controller
     {
         $fechaActual = date('Y-m-d');
         $curso = Cursos::with('CursosEstandares.CarpetasEstandares')->findOrFail($id);
-        $ordenes = OrdersTickets::where('id_curso', $id)->with('orders')->get();
         $tickets = $curso->CursosTickets; // asumes la relación cargada
         $tipo_documentos = Tipodocumentos::get();
 
+        $ordenes = OrdersTickets::where('id_curso', $id)
+        ->whereHas('Orders', function($q){
+            $q->where('estatus', 1)
+            ->orWhere(function($q2){
+                // O bien estatus = 0 pero su pago_fuera.deudor = 1
+                $q2->where('estatus', 0)
+                    ->whereHas('PagosFuera', function($q3){
+                        $q3->where('deudor', 1);
+                    });
+            });
+        })
+        ->with(['Orders.PagosFuera', 'Orders'])  // para no disparar N+1
+        ->get();
+
         // Cuenta cuántos tienen estatus = '1'
-        $inscritos = $ordenes->where('Orders.estatus', '1')->count();
+        $inscritos = OrdersTickets::where('id_curso', $id)
+        ->whereHas('Orders', function($q){
+            $q->where('estatus', 1)
+            ->orWhere(function($q2){
+                // O bien estatus = 0 pero su pago_fuera.deudor = 1
+                $q2->where('estatus', 0)
+                    ->whereHas('PagosFuera', function($q3){
+                        $q3->where('deudor', 1);
+                    });
+            });
+        })
+        ->with(['Orders.PagosFuera', 'Orders'])  // para no disparar N+1
+        ->count();
 
         $fechaIni = ucfirst(Carbon::parse($curso->fecha_inicial)
             ->translatedFormat('l j \d\e F \d\e Y'));
