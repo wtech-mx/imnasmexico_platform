@@ -145,14 +145,16 @@
             <h2>${{ number_format($nota->total,2) }}</h2>
             </div>
 
-            <form method="POST" action="{{ route('link_pago.process-payment') }}">
-                @csrf
-                <input type="text" name="total" value="{{ $nota->total }}" hidden>
-                <input type="text" name="folio" value="{{ $nota->folio }}" hidden>
-                <button type="submit" class="btn btn-success btn_compra mb-4" style="background-color:#3483fa; border:none;">
-                    <i class="bi bi-cart"></i> Comprar ahora
-                </button>
-            </form>
+            <div class="d-flex justify-content-center" >
+                <form method="POST" action="{{ route('link_pago.process-payment') }}">
+                    @csrf
+                    <input type="text" name="total" value="{{ $nota->total }}" hidden>
+                    <input type="text" name="folio" value="{{ $nota->folio }}" hidden>
+                    <button type="submit" class="btn btn-success btn_compra mb-4" style="background-color:#3483fa; border:none;">
+                        <i class="bi bi-cart"></i> Comprar ahora
+                    </button>
+                </form>
+            </div>
             {{-- — Productos por Kit — --}}
             @foreach(range(1,6) as $i)
             @php

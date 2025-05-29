@@ -121,8 +121,9 @@
             </div>
 
             {{-- — Resumen de Totales — --}}
-            <div class="border-top pt-2">
-                <h5>Para continuar con tu proceso, por favor envía el comprobante de pago emitido por tu banco a tu asesor de ventas para validar la transacción. </h5>
+            <div class="border-top pt-2 text-center">
+                <p>Para continuar con tu proceso, por favor envía el <strong>comprobante de pago</strong> a tu asesor de ventas para validar la transacción. </p>
+                <p class="text-muted mt-4">Esta imagen no es un comprobante de pago</p>
             </div>
 
         </div>
