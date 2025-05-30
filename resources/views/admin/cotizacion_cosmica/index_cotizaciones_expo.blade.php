@@ -122,24 +122,15 @@
                                             </td>
                                             <td><h5>${{ $item->total }}</h5></td>
                                             <td>
-                                                
+
                                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
                                                 <i class="fa fa-file"></i>
                                             </a>
-                                            @php
-                                                $total = 0;$totalCantidad = 0;
-                                            @endphp
-                                            @can('nota-productos-editar')
-                                                <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $item->id) }}">
-                                                    <i class="fa fa-fw fa-edit"></i>
-                                                </a>
-                                            @endcan
 
 
                                             </td>
                                         </tr>
                                         @include('admin.cotizacion.modal_estatus')
-                                        @include('admin.cotizacion.modal_products')
                                     @endforeach
                                 </tbody>
                             </table>
