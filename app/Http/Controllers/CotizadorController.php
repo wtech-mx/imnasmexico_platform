@@ -333,7 +333,7 @@ class CotizadorController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->where('estatus_cotizacion','=' , null)->get();
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
 
         return view('admin.cotizacion_cosmica.pagos_expo', compact('notas', 'clientes', 'administradores'));
     }
@@ -352,6 +352,29 @@ class CotizadorController extends Controller
             ->pluck('pago','id')
             ->map(fn($pago,$id) => ['id'=>$id,'pago'=>(int)$pago])
             ->values();
+        return response()->json($notas);
+    }
+
+    public function streamPagos(Request $r)
+    {
+        $primerDia = date('Y-m-01');
+        $ultimoDia = date('Y-m-t');
+        $notas = NotasProductosCosmica::with('User')
+            ->where('tipo_nota', '=', 'Cotizacion_Expo')
+            ->whereBetween('fecha', [$primerDia, $ultimoDia])
+            ->get()
+            ->map(function($n){
+                return [
+                    'id'             => $n->id,
+                    'folio'          => $n->folio ?? $n->id,
+                    'id_usuario'     => $n->id_usuario,
+                    'nombre'         => $n->id_usuario ? null : $n->nombre,
+                    'user_name'      => optional($n->User)->name,
+                    'user_telefono'  => optional($n->User)->telefono,
+                    'fecha'          => $n->fecha,
+                    'total'          => $n->total,
+                ];
+            });
         return response()->json($notas);
     }
 }
