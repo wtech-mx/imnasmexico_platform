@@ -59,60 +59,76 @@
 
 
                             <div class="table-responsive">
-                                <table class="table table-flush" id="datatable-search4">
+                                <table class="table table-flush table-responsive" id="datatable-search4">
                                     <thead class="thead">
                                         <tr>
-                                            <th>No</th>
-                                            <th>Cliente</th>
-                                            <th>fecha</th>
-                                            <th>Total</th>
-                                            <th>Acciones</th>
+                                        <th>No</th>
+                                        <th>Cliente</th>
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                        <th>Recibido</th>
+                                        <th>Cambio</th>
+                                        <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($notas as $item)
-                                            <tr id="nota-{{ $item->id }}" class="{{ $item->pago ? 'table-success' : '' }}">
-                                                <td>
-                                                    <h5>
-                                                        @if ($item->folio == null)
-                                                            {{ $item->id }}
-                                                        @else
-                                                            {{ $item->folio }}
-                                                        @endif
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5>
-                                                        @if ($item->id_usuario == NULL)
-                                                            {{ $item->nombre }}
-                                                        @else
-                                                            {{ $item->User->name }} <br> {{ $item->User->telefono }}
-                                                        @endif
-                                                    </h5>
-                                                </td>
+                                        <tr id="nota-{{ $item->id }}" class="{{ $item->pago ? 'table-success' : '' }}">
+                                            <td><h5>{{ $item->folio ?? $item->id }}</h5></td>
+                                            <td>
+                                            <h5>
+                                                @if ($item->id_usuario)
+                                                {{ $item->User->name }}<br>{{ $item->User->telefono }}
+                                                @else
+                                                {{ $item->nombre }}
+                                                @endif
+                                            </h5>
+                                            </td>
+                                            <td>
+                                            @php
+                                                $ts = strtotime($item->fecha);
+                                                $fmt = date('d \d\e F \d\e\l Y', $ts);
+                                            @endphp
+                                            <h5>{{ $fmt }}</h5>
+                                            </td>
+                                            <td>
+                                            <h5 class="total" data-total="{{ $item->total }}">
+                                                ${{ number_format($item->total, 2) }}
+                                            </h5>
+                                            </td>
 
-                                                <td>
-                                                    @php
-                                                    $fecha = $item->fecha;
-                                                    $fecha_timestamp = strtotime($fecha);
-                                                    $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
-                                                    @endphp
-                                                    <h5>
-                                                        {{$fecha_formateada}}
-                                                    </h5>
-                                                </td>
-                                                <td><h5>${{ $item->total }}</h5></td>
-                                                <td>
+                                            {{-- Input Recibido --}}
+                                            <td>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                step="0.01"
+                                                class="form-control recibido-input"
+                                                placeholder="0.00"
+                                            >
+                                            </td>
 
-                                                    {{-- <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
-                                                        <i class="fa fa-file"></i>
-                                                    </a> --}}
+                                            {{-- Cambio calculado --}}
+                                            <td class="cambio-cell">
+                                            $0.00
+                                            </td>
 
-                                                    <input data-id="{{ $item->id }}" data-folio="{{ $item->folio }}" class="toggle-class" type="checkbox"
-                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                    data-on="Active" data-off="InActive" {{ $item->pago ? 'checked disabled' : '' }}>
-                                                </td>
-                                            </tr>
+                                            {{-- Toggle de pago --}}
+                                            <td>
+                                            <input
+                                                data-id="{{ $item->id }}"
+                                                data-folio="{{ $item->folio }}"
+                                                class="toggle-class"
+                                                type="checkbox"
+                                                data-onstyle="success"
+                                                data-offstyle="danger"
+                                                data-toggle="toggle"
+                                                data-on="Active"
+                                                data-off="InActive"
+                                                {{ $item->pago ? 'checked disabled' : '' }}
+                                            >
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -130,95 +146,119 @@
 
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 
-
 <script type="text/javascript">
+  // inicializa DataTable
+  const dataTableSearch = new simpleDatatables.DataTable("#datatable-search4", {
+    searchable: true,
+    fixedHeight: false
+  });
 
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search4", {
-        searchable: true,
-        fixedHeight: false
+  $(function(){
+
+    // 1) Listener delegado para recalcular el cambio
+    $('#datatable-search4').on('input', '.recibido-input', function() {
+      const $row     = $(this).closest('tr');
+      const total    = parseFloat($row.find('.total').data('total')) || 0;
+      const recibido = parseFloat($(this).val()) || 0;
+      const cambio   = recibido - total;
+      $row.find('.cambio-cell').text('$' + cambio.toFixed(2));
     });
 
-    $(function(){
-        function refrescarPagos(){
-            $.getJSON('{{ route("notas.pagos.stream") }}', function(notas){
-            notas.forEach(function(n){
-                var tr = $('#nota-' + n.id);
-                // 1) Si ya existe la fila, solo actualiza estado y checkbox
-                if (tr.length) {
-                tr.toggleClass('table-success', n.pago === 1);
-                if (n.pago === 1) {
-                    tr.find('.toggle-class')
-                    .prop('checked', true)
-                    .prop('disabled', true);
-                }
-                }
-                // 2) Si es nueva, la inserta al principio
-                else {
-                var clienteHtml = n.id_usuario
-                    ? (n.user_name + '<br>' + n.user_telefono)
-                    : n.nombre;
-                var fila =
-                    '<tr id="nota-' + n.id + '"' +
-                    (n.pago === 1 ? ' class="table-success"' : '') +
-                    '>' +
-                    '<td><h5>' + (n.folio||n.id) + '</h5></td>' +
-                    '<td><h5>' + clienteHtml + '</h5></td>' +
-                    '<td><h5>' +
-                        new Date(n.fecha).toLocaleDateString('es-MX', {
-                        day: '2-digit', month: 'long', year: 'numeric'
-                        }) +
-                    '</h5></td>' +
-                    '<td><h5>$' + parseFloat(n.total).toFixed(2) + '</h5></td>' +
-                    '<td>' +
-                        '<input data-id="'     + n.id    + '"' +
-                            ' data-folio="'  + (n.folio||n.id) + '"' +
-                            ' class="toggle-class" type="checkbox" ' +
-                            (n.pago===1?'checked disabled':'') +
-                        '>' +
-                    '</td>' +
-                    '</tr>';
-                $('#datatable-search4 tbody').prepend(fila);
-                }
-            });
-            });
-        }
+    // 2) Refrescar cada 10s: actualiza filas existentes o inserta nuevas con las 7 columnas
+    function refrescarPagos(){
+      $.getJSON('{{ route("notas.pagos.stream") }}', function(notas){
+        notas.forEach(function(n){
+          const tr = $('#nota-' + n.id);
 
-        refrescarPagos();
-        setInterval(refrescarPagos, 10000);
-
-        $('.table-responsive').on('change', '.toggle-class', function(){
-            var $chk   = $(this);
-            var newVal = $chk.prop('checked');
-            var oldVal = !newVal;
-            var abono  = newVal ? 1 : 0;
-            var id     = $chk.data('id');
-            var folio  = $chk.data('folio');
-
-            if (!confirm('¿Seguro que quieres marcar la nota ' + folio + ' como pagada?')) {
-            $chk.prop('checked', oldVal);
-            return;
+          // fila ya existe → solo actualiza estado y checkbox
+          if (tr.length) {
+            tr.toggleClass('table-success', n.pago === 1);
+            if (n.pago === 1) {
+              tr.find('.toggle-class')
+                .prop('checked', true)
+                .prop('disabled', true);
             }
+          }
+          // nueva fila → la inserta al principio con las columnas Recibido/Cambio
+          else {
+            const clienteHtml = n.id_usuario
+              ? (n.user_name + '<br>' + n.user_telefono)
+              : n.nombre;
+            const totalFixed = parseFloat(n.total).toFixed(2);
 
-            $.getJSON('{{ route("notas.pago.toggle") }}', { abono: abono, id: id })
-            .done(function(data){
-                if (data.success) {
-                $('#nota-' + id).toggleClass('table-success', abono === 1);
-                if (abono === 1) {
-                    $chk.prop('disabled', true);
-                }
-                } else {
-                $chk.prop('checked', oldVal);
-                alert('No se pudo actualizar el pago');
-                }
-            })
-            .fail(function(){
-                $chk.prop('checked', oldVal);
-                alert('Error al comunicarse con el servidor');
-            });
+            const fila =
+              '<tr id="nota-' + n.id + '"' +
+                (n.pago === 1 ? ' class="table-success"' : '') +
+              '>' +
+                '<td><h5>' + (n.folio || n.id) + '</h5></td>' +
+                '<td><h5>' + clienteHtml + '</h5></td>' +
+                '<td><h5>' +
+                  new Date(n.fecha).toLocaleDateString('es-MX', {
+                    day: '2-digit', month: 'long', year: 'numeric'
+                  }) +
+                '</h5></td>' +
+                '<td><h5 class="total" data-total="' + totalFixed + '">' +
+                  '$' + totalFixed +
+                '</h5></td>' +
+                '<td>' +
+                  '<input type="number" min="0" step="0.01" ' +
+                         'class="form-control recibido-input" ' +
+                         'placeholder="0.00">' +
+                '</td>' +
+                '<td class="cambio-cell">$0.00</td>' +
+                '<td>' +
+                  '<input data-id="'    + n.id    + '"' +
+                         ' data-folio="' + (n.folio||n.id) + '"' +
+                         ' class="toggle-class" type="checkbox" ' +
+                         (n.pago===1 ? 'checked disabled' : '') +
+                         ' data-onstyle="success" ' +
+                         ' data-offstyle="danger" ' +
+                         ' data-toggle="toggle" ' +
+                         ' data-on="Active" ' +
+                         ' data-off="InActive">' +
+                '</td>' +
+              '</tr>';
+
+            $('#datatable-search4 tbody').prepend(fila);
+          }
         });
+      });
+    }
+
+    refrescarPagos();
+    setInterval(refrescarPagos, 10000);
+
+    // 3) Toggle de pago (igual que tú lo tenías)
+    $('.table-responsive').on('change', '.toggle-class', function(){
+      const $chk   = $(this);
+      const folio  = $chk.data('folio');
+      const newVal = $chk.prop('checked');
+      const oldVal = !newVal;
+      const abono  = newVal ? 1 : 0;
+      const id     = $chk.data('id');
+
+      if (!confirm(`¿Seguro que quieres marcar la nota ${folio} como pagada?`)) {
+        $chk.prop('checked', oldVal);
+        return;
+      }
+
+      $.getJSON('{{ route("notas.pago.toggle") }}', { abono, id })
+       .done(function(data){
+         if (data.success) {
+           $('#nota-' + id).toggleClass('table-success', abono === 1);
+           if (abono === 1) $chk.prop('disabled', true);
+         } else {
+           $chk.prop('checked', oldVal);
+           alert('No se pudo actualizar el pago');
+         }
+       })
+       .fail(function(){
+         $chk.prop('checked', oldVal);
+         alert('Error al comunicarse con el servidor');
+       });
     });
 
-
+  });
 </script>
 
 @endsection
