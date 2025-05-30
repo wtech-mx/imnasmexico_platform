@@ -62,7 +62,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Cliente</th>
-                                        <th>Estatus</th>
                                         <th>fecha</th>
                                         <th>Total</th>
                                         <th>Recibido</th>
@@ -90,26 +89,6 @@
                                                         {{ $item->User->name }} <br> {{ $item->User->telefono }}
                                                     @endif
                                                 </h5>
-                                            </td>
-
-                                            <td>
-                                                @if($item->estatus_cotizacion == null)
-                                                    <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
-                                                        Cotizacion
-                                                    </a>
-                                                @elseif($item->estatus_cotizacion == 'Pendiente')
-                                                    <a type="button" class="btn btn-xs btn-warning" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
-                                                        Pendiene
-                                                    </a>
-                                                @elseif($item->estatus_cotizacion == 'Aprobada')
-                                                    <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
-                                                        Aprobada
-                                                    </a>
-                                                @elseif($item->estatus_cotizacion == 'Cancelada')
-                                                    <a type="button" class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
-                                                        Cencelada
-                                                    </a>
-                                                @endif
                                             </td>
 
                                             <td>
