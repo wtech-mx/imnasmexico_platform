@@ -108,9 +108,9 @@
                                                         <i class="fa fa-file"></i>
                                                     </a> --}}
 
-                                                    <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
+                                                    <input data-id="{{ $item->id }}" data-folio="{{ $item->folio }}" class="toggle-class" type="checkbox"
                                                     data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                    data-on="Active" data-off="InActive" {{ $item->pago ? 'checked' : '' }}>
+                                                    data-on="Active" data-off="InActive" {{ $item->pago ? 'checked disabled' : '' }}>
                                                 </td>
                                             </tr>
                                             @include('admin.cotizacion.modal_estatus')
@@ -142,33 +142,44 @@
 
     $(function() {
         $('.table-responsive').on('change', '.toggle-class', function() {
-            const $chk = $(this);
-            const abono = $chk.prop('checked') ? 1 : 0;
-            const id    = $chk.data('id');
-            console.log(abono);
+            const $chk    = $(this);
+            const folio   = $chk.data('folio');
+            const newVal  = $chk.prop('checked');
+            const oldVal  = !newVal;
+            const abono   = newVal ? 1 : 0;
+            const id      = $chk.data('id');
+
+            if (!confirm(`¿Seguro que quieres marcar la nota ${folio} como pagada?`)) {
+            $chk.prop('checked', oldVal);
+            return;
+            }
+
             $.ajax({
             type: "GET",
             dataType: "json",
             url: '{{ route("notas.pago.toggle") }}',
             data: { abono, id },
-            success: function(data) {
+            success(data) {
                 if (data.success) {
-                // aquí aplicamos o quitamos la clase según el valor de abono
+                // pinta la fila y, si es pago, deshabilita el checkbox
                 $(`#nota-${id}`).toggleClass('table-success', abono === 1);
+                if (abono === 1) {
+                    $chk.prop('disabled', true);
+                }
                 } else {
-                // si algo falla, revertimos el checkbox
-                $chk.prop('checked', !abono);
+                $chk.prop('checked', oldVal);
                 alert('No se pudo actualizar el pago');
                 }
             },
-            error: function() {
-                // en caso de error de red o servidor, también revertimos el checkbox
-                $chk.prop('checked', !abono);
+            error() {
+                $chk.prop('checked', oldVal);
                 alert('Error al comunicarse con el servidor');
             }
             });
         });
     });
+
+
 </script>
 
 @endsection
