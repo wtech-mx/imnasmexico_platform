@@ -160,6 +160,7 @@ class CotizadorController extends Controller
         $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
         $notas->id_admin = auth()->user()->id;
         $notas->id_admin_venta = $request->input('id_cosme');
+        $notas->envio = $request->input('envio');
         $notas->metodo_pago = $request->input('metodo_pago');
         $notas->fecha = now();
         $notas->nota  = '';

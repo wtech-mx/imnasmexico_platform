@@ -176,6 +176,18 @@ Cosmica
                     </select>
                 </div>
             </div>
+
+            <div class="col-12 col-md-6 col-lg-6 mb-3">
+                <p class="d-inline mr-5" style="color:#2D2432;font-weight: 600;margin-right: 2rem;">
+                    Envio
+                </p>
+                <div class="input-group mb-3">
+                    <select name="envio" id="envio" class="form-select d-inline-block">
+                        <option value="No">No</option>
+                        <option value="Si">Si</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         {{-- Una sola tabla para todos los grupos --}}
