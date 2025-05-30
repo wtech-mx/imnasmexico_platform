@@ -89,6 +89,8 @@
                                                 <td>
                                                     @if ($item->estatus_cotizacion == 'Entregado')
                                                         <span class="badge bg-success">Empaquetado</span>
+                                                    @elseif ($item->envio == 'Si')
+                                                        <span class="badge bg-info">Para enviar</span>
                                                     @else
                                                         <span class="badge bg-warning">Pendiente</span>
                                                     @endif
