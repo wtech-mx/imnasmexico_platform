@@ -113,8 +113,6 @@
                                                     data-on="Active" data-off="InActive" {{ $item->pago ? 'checked disabled' : '' }}>
                                                 </td>
                                             </tr>
-                                            @include('admin.cotizacion.modal_estatus')
-                                            @include('admin.cotizacion.modal_products')
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -140,29 +138,71 @@
         fixedHeight: false
     });
 
-    $(function() {
-        $('.table-responsive').on('change', '.toggle-class', function() {
-            const $chk    = $(this);
-            const folio   = $chk.data('folio');
-            const newVal  = $chk.prop('checked');
-            const oldVal  = !newVal;
-            const abono   = newVal ? 1 : 0;
-            const id      = $chk.data('id');
+    $(function(){
+        function refrescarPagos(){
+            $.getJSON('{{ route("notas.pagos.stream") }}', function(notas){
+            notas.forEach(function(n){
+                var tr = $('#nota-' + n.id);
+                // 1) Si ya existe la fila, solo actualiza estado y checkbox
+                if (tr.length) {
+                tr.toggleClass('table-success', n.pago === 1);
+                if (n.pago === 1) {
+                    tr.find('.toggle-class')
+                    .prop('checked', true)
+                    .prop('disabled', true);
+                }
+                }
+                // 2) Si es nueva, la inserta al principio
+                else {
+                var clienteHtml = n.id_usuario
+                    ? (n.user_name + '<br>' + n.user_telefono)
+                    : n.nombre;
+                var fila =
+                    '<tr id="nota-' + n.id + '"' +
+                    (n.pago === 1 ? ' class="table-success"' : '') +
+                    '>' +
+                    '<td><h5>' + (n.folio||n.id) + '</h5></td>' +
+                    '<td><h5>' + clienteHtml + '</h5></td>' +
+                    '<td><h5>' +
+                        new Date(n.fecha).toLocaleDateString('es-MX', {
+                        day: '2-digit', month: 'long', year: 'numeric'
+                        }) +
+                    '</h5></td>' +
+                    '<td><h5>$' + parseFloat(n.total).toFixed(2) + '</h5></td>' +
+                    '<td>' +
+                        '<input data-id="'     + n.id    + '"' +
+                            ' data-folio="'  + (n.folio||n.id) + '"' +
+                            ' class="toggle-class" type="checkbox" ' +
+                            (n.pago===1?'checked disabled':'') +
+                        '>' +
+                    '</td>' +
+                    '</tr>';
+                $('#datatable-search4 tbody').prepend(fila);
+                }
+            });
+            });
+        }
 
-            if (!confirm(`¿Seguro que quieres marcar la nota ${folio} como pagada?`)) {
+        refrescarPagos();
+        setInterval(refrescarPagos, 10000);
+
+        $('.table-responsive').on('change', '.toggle-class', function(){
+            var $chk   = $(this);
+            var newVal = $chk.prop('checked');
+            var oldVal = !newVal;
+            var abono  = newVal ? 1 : 0;
+            var id     = $chk.data('id');
+            var folio  = $chk.data('folio');
+
+            if (!confirm('¿Seguro que quieres marcar la nota ' + folio + ' como pagada?')) {
             $chk.prop('checked', oldVal);
             return;
             }
 
-            $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '{{ route("notas.pago.toggle") }}',
-            data: { abono, id },
-            success(data) {
+            $.getJSON('{{ route("notas.pago.toggle") }}', { abono: abono, id: id })
+            .done(function(data){
                 if (data.success) {
-                // pinta la fila y, si es pago, deshabilita el checkbox
-                $(`#nota-${id}`).toggleClass('table-success', abono === 1);
+                $('#nota-' + id).toggleClass('table-success', abono === 1);
                 if (abono === 1) {
                     $chk.prop('disabled', true);
                 }
@@ -170,11 +210,10 @@
                 $chk.prop('checked', oldVal);
                 alert('No se pudo actualizar el pago');
                 }
-            },
-            error() {
+            })
+            .fail(function(){
                 $chk.prop('checked', oldVal);
                 alert('Error al comunicarse con el servidor');
-            }
             });
         });
     });

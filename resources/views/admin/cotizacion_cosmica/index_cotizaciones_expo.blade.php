@@ -127,7 +127,9 @@
                                                 <i class="fa fa-file"></i>
                                             </a>
 
-
+                                            <input data-id="{{ $item->id }}" data-folio="{{ $item->folio }}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-on="Active" data-off="InActive" {{ $item->pago ? 'checked disabled' : '' }}>
                                             </td>
                                         </tr>
                                         @include('admin.cotizacion.modal_estatus')
@@ -170,6 +172,45 @@
     const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
         searchable: true,
         fixedHeight: false
+    });
+
+    $(function() {
+        $('.table-responsive').on('change', '.toggle-class', function() {
+            const $chk    = $(this);
+            const folio   = $chk.data('folio');
+            const newVal  = $chk.prop('checked');
+            const oldVal  = !newVal;
+            const abono   = newVal ? 1 : 0;
+            const id      = $chk.data('id');
+
+            if (!confirm(`¿Seguro que quieres marcar la nota ${folio} como pagada?`)) {
+            $chk.prop('checked', oldVal);
+            return;
+            }
+
+            $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route("notas.pago.toggle") }}',
+            data: { abono, id },
+            success(data) {
+                if (data.success) {
+                // pinta la fila y, si es pago, deshabilita el checkbox
+                $(`#nota-${id}`).toggleClass('table-success', abono === 1);
+                if (abono === 1) {
+                    $chk.prop('disabled', true);
+                }
+                } else {
+                $chk.prop('checked', oldVal);
+                alert('No se pudo actualizar el pago');
+                }
+            },
+            error() {
+                $chk.prop('checked', oldVal);
+                alert('Error al comunicarse con el servidor');
+            }
+            });
+        });
     });
 
 </script>
