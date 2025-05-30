@@ -99,7 +99,7 @@ class CotizadorController extends Controller
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
 
         $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->where('estatus_cotizacion','=' , null)->get();
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
 
         return view('admin.cotizacion_cosmica.index_cotizaciones_expo', compact('notas', 'administradores'));
     }
