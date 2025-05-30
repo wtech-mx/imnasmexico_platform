@@ -65,6 +65,8 @@
                                         <th>Estatus</th>
                                         <th>fecha</th>
                                         <th>Total</th>
+                                        <th>Recibido</th>
+                                        <th>Cambio</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -120,7 +122,23 @@
                                                     {{$fecha_formateada}}
                                                 </h5>
                                             </td>
-                                            <td><h5>${{ $item->total }}</h5></td>
+                                            <td>
+                                                <h5 class="total" data-total="{{ $item->total }}">
+                                                    ${{ number_format($item->total, 2) }}
+                                                </h5>
+                                            </td>
+                                            <td>
+                                                <input
+                                                type="number"
+                                                min="0"
+                                                step="0.01"
+                                                class="form-control recibido-input"
+                                                placeholder="0.00"
+                                                >
+                                            </td>
+                                            <td class="cambio-cell">
+                                                $0.00
+                                            </td>
                                             <td>
 
                                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
@@ -153,65 +171,62 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        $('.cliente').select2();
-        $('.phone').select2();
-        $('.administradores').select2();
-    });
+  $(document).ready(function() {
+    // select2
+    $('.cliente, .phone, .administradores').select2();
 
+    // DataTable
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search4", {
-        searchable: true,
-        fixedHeight: false
+      searchable: true,
+      fixedHeight: false
     });
 
-    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
-        searchable: true,
-        fixedHeight: false
+    // Cálculo instantáneo de cambio
+    $('#datatable-search4').on('input', '.recibido-input', function() {
+      const $row     = $(this).closest('tr');
+      const total    = parseFloat($row.find('.total').data('total')) || 0;
+      const recibido = parseFloat($(this).val()) || 0;
+      const cambio   = recibido - total;
+      $row.find('.cambio-cell').text('$' + cambio.toFixed(2));
     });
 
-    const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
-        searchable: true,
-        fixedHeight: false
-    });
+    // Toggle de pago
+    $('.table-responsive').on('change', '.toggle-class', function() {
+      const $chk   = $(this);
+      const folio  = $chk.data('folio');
+      const newVal = $chk.prop('checked');
+      const oldVal = !newVal;
+      const abono  = newVal ? 1 : 0;
+      const id     = $chk.data('id');
 
-    $(function() {
-        $('.table-responsive').on('change', '.toggle-class', function() {
-            const $chk    = $(this);
-            const folio   = $chk.data('folio');
-            const newVal  = $chk.prop('checked');
-            const oldVal  = !newVal;
-            const abono   = newVal ? 1 : 0;
-            const id      = $chk.data('id');
+      if (!confirm(`¿Seguro que quieres marcar la nota ${folio} como pagada?`)) {
+        $chk.prop('checked', oldVal);
+        return;
+      }
 
-            if (!confirm(`¿Seguro que quieres marcar la nota ${folio} como pagada?`)) {
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: '{{ route("notas.pago.toggle") }}',
+        data: { abono, id },
+        success(data) {
+          if (data.success) {
+            $('#nota-' + id).toggleClass('table-success', abono === 1);
+            if (abono === 1) {
+              $chk.prop('disabled', true);
+            }
+          } else {
             $chk.prop('checked', oldVal);
-            return;
-            }
-
-            $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: '{{ route("notas.pago.toggle") }}',
-            data: { abono, id },
-            success(data) {
-                if (data.success) {
-                // pinta la fila y, si es pago, deshabilita el checkbox
-                $(`#nota-${id}`).toggleClass('table-success', abono === 1);
-                if (abono === 1) {
-                    $chk.prop('disabled', true);
-                }
-                } else {
-                $chk.prop('checked', oldVal);
-                alert('No se pudo actualizar el pago');
-                }
-            },
-            error() {
-                $chk.prop('checked', oldVal);
-                alert('Error al comunicarse con el servidor');
-            }
-            });
-        });
+            alert('No se pudo actualizar el pago');
+          }
+        },
+        error() {
+          $chk.prop('checked', oldVal);
+          alert('Error al comunicarse con el servidor');
+        }
+      });
     });
+  });
 
 </script>
 
