@@ -41,6 +41,7 @@ Route::get('/admin/cotizador/cosmica/expo', [App\Http\Controllers\CotizadorContr
 Route::get('/admin/recepcion/cosmica/expo', [App\Http\Controllers\CotizadorController::class, 'index_recepcion_cosmica_expo'])->name('index_recepcion_cosmica_expo.cotizador');
 Route::patch('/admin/recepcion/cosmica/expo/update/{id}', [App\Http\Controllers\CotizadorController::class, 'index_recepcion_update_expo'])->name('index_recepcion_update_expo.cotizador');
 Route::get('/notas/estatus', [App\Http\Controllers\CotizadorController::class, 'apiEstatus'])->name('notas.estatus');
+Route::get('/reportes/ventas-expo', [App\Http\Controllers\CotizadorController::class, 'ventasExpo'])->name('reportes.ventasExpo');
 
 Route::get('/notas/pagos/stream', [App\Http\Controllers\CotizadorController::class, 'streamPagos'])
      ->name('notas.pagos.stream');

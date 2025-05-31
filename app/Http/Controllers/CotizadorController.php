@@ -14,6 +14,7 @@ use App\Models\NotasProductosCosmica;
 use App\Models\ProductosBundleId;
 use App\Models\ProductosNotasCosmica;
 use Carbon\Carbon;
+use DB;
 
 class CotizadorController extends Controller
 {
@@ -377,5 +378,55 @@ class CotizadorController extends Controller
                 ];
             });
         return response()->json($notas);
+    }
+
+        public function ventasExpo(Request $request)
+    {
+        // 1) Validación básica de fechas
+        $request->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin'    => 'required|date|after_or_equal:fecha_inicio',
+        ]);
+
+        // 2) Capturamos las fechas en formato 'Y-m-d'
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin    = $request->input('fecha_fin');
+
+        $queryBase = NotasProductosCosmica::query()
+            ->where('tipo_nota', 'Cotizacion_Expo')
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+
+        // 4) Total general de todas las ventas en ese rango
+        $totalVentas = $queryBase->sum('total');
+
+        // 5) Total en Efectivo → volvemos a filtrar por metodo_pago
+        $totalEfectivo = NotasProductosCosmica::query()
+            ->where('tipo_nota', 'Cotizacion_Expo')
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('metodo_pago', 'Efectivo')
+            ->sum('total');
+
+        // 6) Total con Tarjeta
+        $totalTarjeta = NotasProductosCosmica::query()
+            ->where('tipo_nota', 'Cotizacion_Expo')
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('metodo_pago', 'Tarjeta')
+            ->sum('total');
+
+        $ventasPorAdmin = NotasProductosCosmica::select(
+                'users.id AS admin_id',
+                'users.name AS admin_name',
+                DB::raw('SUM(notas_productos_cosmica.total) AS total_ventas')
+            )
+            ->join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
+            ->where('notas_productos_cosmica.tipo_nota', 'Cotizacion_Expo')
+            ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])
+            ->groupBy('users.id', 'users.name')
+            ->orderBy('total_ventas', 'desc')
+            ->get();
+
+        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_expo', compact('totalVentas', 'totalEfectivo', 'totalTarjeta', 'fechaInicio', 'fechaFin', 'ventasPorAdmin'));
+         return $pdf->stream();
+       // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
 }

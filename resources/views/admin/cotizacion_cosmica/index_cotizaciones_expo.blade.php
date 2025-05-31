@@ -28,10 +28,37 @@
                                 Cotizador
                             </a>
 
-                            <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
-                                ¿Como funciona?
-                            </a>
-
+                            @can('roles-permisos')
+                                <form action="{{ route('reportes.ventasExpo') }}" method="GET" class="row g-3 mb-4">
+                                    <div class="col-md-4">
+                                        <label for="fecha_inicio" class="form-label">Fecha inicio</label>
+                                        <input
+                                            type="date"
+                                            id="fecha_inicio"
+                                            name="fecha_inicio"
+                                            class="form-control"
+                                            value="{{ request('fecha_inicio') }}"
+                                            required
+                                        >
+                                        </div>
+                                        <div class="col-md-4">
+                                        <label for="fecha_fin" class="form-label">Fecha fin</label>
+                                        <input
+                                            type="date"
+                                            id="fecha_fin"
+                                            name="fecha_fin"
+                                            class="form-control"
+                                            value="{{ request('fecha_fin') }}"
+                                            required
+                                        >
+                                        </div>
+                                        <div class="col-md-4 align-self-end">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            Filtrar
+                                        </button>
+                                    </div>
+                                </form>
+                            @endcan
 
                         </div>
                     </div>
