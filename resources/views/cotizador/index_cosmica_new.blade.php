@@ -117,6 +117,11 @@ Cosmica
         border-radius: 13px;
     }
 
+    .highlighted-row {
+    background-color: rgba(255, 255, 0, 0.5);
+    }
+
+
 </style>
 
 @section('cotizador')
@@ -188,6 +193,7 @@ Cosmica
                     </select>
                 </div>
             </div>
+
         </div>
 
         {{-- Una sola tabla para todos los grupos --}}
@@ -377,6 +383,7 @@ Cosmica
         <!-- Sticky footer -->
         <div class="footer-sticky d-flex justify-content-between align-items-center container_footer">
         <div>
+            <input type="text" id="buscarProducto"  class="form-control" placeholder="Buscar Producto">
             <strong class="text-dark">Total General: </strong>
             <span id="grandTotal">$0.00</span>
 
@@ -586,6 +593,49 @@ $(function(){
         }
 
     });
+
+const buscador = document.getElementById('buscarProducto');
+let ultimaFilaResaltada = null;
+
+buscador.addEventListener('input', function() {
+  const termino = this.value.trim().toLowerCase();
+
+  // Si el campo está vacío, quitamos resaltado y no scroll
+  if (termino === '') {
+    if (ultimaFilaResaltada) {
+      ultimaFilaResaltada.classList.remove('highlighted-row');
+      ultimaFilaResaltada = null;
+    }
+    return;
+  }
+
+  // Quitamos resaltado anterior
+  if (ultimaFilaResaltada) {
+    ultimaFilaResaltada.classList.remove('highlighted-row');
+    ultimaFilaResaltada = null;
+  }
+
+  // Recorremos cada fila <tr data-precio="...">
+  const filas = document.querySelectorAll('tr[data-precio]');
+  for (const fila of filas) {
+    const etiquetaNombre = fila.querySelector('p.name_producto');
+    if (!etiquetaNombre) continue;
+
+    const textoCompleto  = etiquetaNombre.textContent.trim().toLowerCase();
+    const nombreProducto = textoCompleto.split('/')[0].trim();
+
+    if (nombreProducto.includes(termino)) {
+      // 1) Scroll suave hasta esa fila
+      fila.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // 2) Aplicar resaltado
+      fila.classList.add('highlighted-row');
+      ultimaFilaResaltada = fila;
+      break; // Primer match
+    }
+  }
+});
+
+
 </script>
 @endsection
 
