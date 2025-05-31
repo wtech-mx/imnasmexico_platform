@@ -24,6 +24,10 @@
 
                             <h2 class="mb-3">Cotizacion Expo Cosmica</h2>
 
+                            <a href="{{ route('index_cosmica_new.cotizador') }}" target="_blank" class="btn bg-success text-white" >
+                                Cotizador
+                            </a>
+
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
