@@ -118,7 +118,14 @@ Cosmica
     }
 
     .highlighted-row {
-    background-color: rgba(255, 255, 0, 0.5);
+        background-color: rgba(255, 255, 0, 0.5);
+    }
+
+    .footer-sticky {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    /* …otros estilos… */
     }
 
 
@@ -382,17 +389,17 @@ Cosmica
 
         <!-- Sticky footer -->
         <div class="footer-sticky d-flex justify-content-between align-items-center container_footer">
-        <div>
-            <input type="text" id="buscarProducto"  class="form-control" placeholder="Buscar Producto">
-            <strong class="text-dark">Total General: </strong>
-            <span id="grandTotal">$0.00</span>
+            <div>
+                <input type="text" id="buscarProducto"  class="form-control" placeholder="Buscar Producto">
+                <strong class="text-dark">Total General: </strong>
+                <span id="grandTotal">$0.00</span>
 
-            {{-- Aquí irá la lista de productos seleccionados --}}
-            <div id="selected-list" class="mt-0">
-            <strong>Tu selección:</strong>
-            <ul id="selectedProducts" class="mb-0 ps-3" style="font-size: 12px;"></ul>
+                {{-- Aquí irá la lista de productos seleccionados --}}
+                <div id="selected-list" class="mt-0">
+                <strong>Tu selección:</strong>
+                <ul id="selectedProducts" class="mb-0 ps-3" style="font-size: 12px;"></ul>
+                </div>
             </div>
-        </div>
             <button type="submit" class="btn" style="background: #3F303E;border: solid 1px #3F303E;color: #fff;border-radius: 13px;">Guardar Cotización</button>
         </div>
     </form>
@@ -590,11 +597,27 @@ $(function(){
             $list.append(`<li>${item.nombre} × ${item.qty}</li>`);
             });
         }
+
+        // ——————————————————————————————————
+        // 5) NUEVA LÓGICA para quitar sticky si hay > 13 ítems
+        // ——————————————————————————————————
+        const footer = document.querySelector('.footer-sticky');
+        if (!footer) return; // por si algo no existe
+
+        // Contamos cuántos <li> hay en #selectedProducts:
+        const numItemsSeleccionados = selected.length;
+
+        if (numItemsSeleccionados > 15) {
+          // Cambiamos position a static para “despegar” el footer
+          footer.style.position = 'static';
+          footer.style.bottom = 'auto';
+        } else {
+          // Volvemos a ponerlo sticky si hay 13 o menos
+          footer.style.position = 'sticky';
+          footer.style.bottom = '0';
         }
 
-    });
-
-const buscador = document.getElementById('buscarProducto');
+        const buscador = document.getElementById('buscarProducto');
 let ultimaFilaResaltada = null;
 
 buscador.addEventListener('input', function() {
@@ -634,6 +657,12 @@ buscador.addEventListener('input', function() {
     }
   }
 });
+
+        }
+
+    });
+
+
 
 
 </script>
