@@ -34,7 +34,8 @@
                                     <option value="Aprobado por tiendita">Aprobado por tiendita</option>
                                     <option value="Aprobada Workshop">Aprobada Workshop</option>
                                 @else
-                                    <option value="Aprobada Expo">Aprobada Expo</option>
+                                    {{-- <option value="Aprobada Expo">Aprobada Expo</option> --}}
+                                    <option value="Aprobada">Aprobada</option>
                                 @endif
                                 <option value="Cancelada">Cancelada</option>
                             </select>

@@ -99,8 +99,7 @@ class CotizadorController extends Controller
         $now = Carbon::now();
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
 
-        $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
+        $notas = NotasProductosCosmica::orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
 
         return view('admin.cotizacion_cosmica.index_cotizaciones_expo', compact('notas', 'administradores'));
     }

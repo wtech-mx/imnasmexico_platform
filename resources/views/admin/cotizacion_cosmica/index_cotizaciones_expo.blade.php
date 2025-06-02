@@ -95,36 +95,27 @@
                                         <th>Cliente</th>
                                         <th>fecha</th>
                                         <th>Total</th>
-                                        <th>Recibido</th>
-                                        <th>Cambio</th>
+                                        <th>Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($notas as $item)
+                                    @foreach ($notas as $nota)
                                         <tr>
                                             <td>
-                                                <h5>
-                                                    @if ($item->folio == null)
-                                                        {{ $item->id }}
-                                                    @else
-                                                        {{ $item->folio }}
-                                                    @endif
-                                                </h5>
+                                                {{ $nota->folio }}
                                             </td>
                                             <td>
-                                                <h5>
-                                                    @if ($item->id_usuario == NULL)
-                                                        {{ $item->nombre }}
-                                                    @else
-                                                        {{ $item->User->name }} <br> {{ $item->User->telefono }}
-                                                    @endif
-                                                </h5>
+                                                @if ($nota->id_usuario == NULL)
+                                                    {{ $nota->nombre }}
+                                                @else
+                                                    {{ $nota->User->name }} <br> {{ $nota->User->telefono }}
+                                                @endif
                                             </td>
 
                                             <td>
                                                 @php
-                                                $fecha = $item->fecha;
+                                                $fecha = $nota->fecha;
                                                 $fecha_timestamp = strtotime($fecha);
                                                 $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                 @endphp
@@ -132,35 +123,34 @@
                                                     {{$fecha_formateada}}
                                                 </h5>
                                             </td>
-                                            <td>
-                                                <h5 class="total" data-total="{{ $item->total }}">
-                                                    ${{ number_format($item->total, 2) }}
-                                                </h5>
-                                            </td>
-                                            <td>
-                                                <input
-                                                type="number"
-                                                min="0"
-                                                step="0.01"
-                                                class="form-control recibido-input"
-                                                placeholder="0.00"
-                                                >
-                                            </td>
-                                            <td class="cambio-cell">
-                                                $0.00
-                                            </td>
-                                            <td>
 
-                                            <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
-                                                <i class="fa fa-file"></i>
-                                            </a>
+                                            <td>
+                                                ${{ number_format($nota->total, 2) }}
+                                            </td>
 
-                                            <input data-id="{{ $item->id }}" data-folio="{{ $item->folio }}" class="toggle-class" type="checkbox"
-                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                            data-on="Active" data-off="InActive" {{ $item->pago ? 'checked disabled' : '' }}>
+                                            <td>
+                                                @if ($nota->estatus_cotizacion == 'Entregado')
+                                                    <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}">
+                                                        Empaquetado
+                                                    </a>
+                                                @elseif ($nota->envio == 'Si')
+                                                    <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}">
+                                                        Para enviar
+                                                    </a>
+                                                @else
+                                                    <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}">
+                                                        Pendiente
+                                                    </a>
+                                                @endif
+                                            </td>
+
+                                            <td>
+                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
                                             </td>
                                         </tr>
-                                        @include('admin.cotizacion.modal_estatus')
+                                        @include('admin.cotizacion_cosmica.modal_estatus', ['nota' => $nota])
                                     @endforeach
                                 </tbody>
                             </table>
