@@ -245,7 +245,12 @@
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Subtotal</b> </td>
-              <td>${{ number_format($nota->tipo, 1, '.', ',') }}</td>
+              @if ($nota->subtotal == NULL)
+                <td>${{ number_format($nota->tipo, 1, '.', ',') }}</td>
+              @else
+                <td>${{ number_format($nota->subtotal, 1, '.', ',') }}</td>
+              @endif
+
             </tr>
             @if ($nota->restante > 0)
                 <tr style="background-color: #ffffff;">
