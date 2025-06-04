@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LinkPago;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
+use MercadoPago\{Exception, SDK, Preference, Item};
 class LinkPagoController extends Controller
 {
     /**
@@ -107,5 +107,48 @@ class LinkPagoController extends Controller
             'success' => true,
             'message' => 'Link de pago eliminado correctamente.'
         ]);
+    }
+
+    public function processPayment_custom(Request $request){
+        // Configurar el SDK de Mercado Pago con las credenciales de API
+       SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Crear un objeto de preferencia de pago
+        $preference = new Preference();
+        $code = Str::random(8);
+
+        $item = new Item();
+        $item->title = $request->get('titulo').' #'.$request->get('folio');
+        $item->quantity = 1;
+        $item->unit_price = $request->get('total');
+        $ticketss = array($item);
+
+        // Crear un objeto de preferencias de pago
+        $preference = new \MercadoPago\Preference();
+
+        $preference->back_urls = array(
+            "success" => route('link_pago.pay'),
+            "pending" => route('link_pago.pay'),
+            "failure" => "https://plataforma.imnasmexico.com/",
+        );
+
+        $preference->auto_return = "approved";
+        $preference->external_reference = $code;
+        $preference->items = $ticketss;
+
+
+        try {
+            // Crear la preferencia en Mercado Pago
+            $preference->save();
+
+            // Redirigir al usuario al proceso de pago de Mercado Pago
+            return Redirect::to($preference->init_point);
+        } catch (Exception $e) {
+            // Manejar errores de Mercado Pago
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        } catch (Throwable $e) {
+            // Manejar errores de PHP
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 }

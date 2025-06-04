@@ -149,10 +149,12 @@
             </div>
 
             <div class="d-flex justify-content-center" >
-                <form method="POST" action="{{ route('link_pago.process-payment') }}">
+                <form method="POST" action="{{ route('link_pago.payment_custom') }}">
                     @csrf
                     <input type="text" name="total" value="{{ $linkPago->monto }}" hidden>
                     <input type="text" name="folio" value="{{ $linkPago->id }}" hidden>
+                    <input type="text" name="titulo" value="{{ $linkPago->titulo }}" hidden>
+                    <input type="text" name="descripcion" value="{{ $linkPago->descripcion }}" hidden>
                     <button type="submit" class="btn btn-success btn_compra mb-4" style="background-color:#3483fa; border:none;">
                         <i class="bi bi-cart"></i> Pagar ahora
                     </button>

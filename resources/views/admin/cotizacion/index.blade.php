@@ -156,6 +156,7 @@
                                                 @endcan
 
                                                 <a class="btn btn-sm btn-dark" target="_blank" href="{{ route('cotizacion_nas.link_pago', $item->id) }}">
+                                                    <i class="fa fa-fw fa-share"></i>
                                                 </a>
 
                                                 {{-- <form action="{{ route('notas_cotizacion.eliminar', ['id' => $item->id]) }}" method="POST">

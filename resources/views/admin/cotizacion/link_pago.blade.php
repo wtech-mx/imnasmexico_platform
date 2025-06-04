@@ -146,7 +146,7 @@
             </div>
 
             <div class="d-flex justify-content-center" >
-                <form method="POST" action="{{ route('link_pago.process-payment') }}">
+                <form method="POST" action="{{ route('link_pago.payment_nas') }}">
                     @csrf
                     <input type="text" name="total" value="{{ $nota->total }}" hidden>
                     <input type="text" name="folio" value="{{ $nota->folio }}" hidden>

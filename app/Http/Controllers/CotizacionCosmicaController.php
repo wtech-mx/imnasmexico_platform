@@ -1809,7 +1809,7 @@ class CotizacionCosmicaController extends Controller
         $code = Str::random(8);
 
         $item = new Item();
-        $item->title = 'Link de pago para la orden: '.$request->get('folio');
+        $item->title = 'Link de pago cosmica '.$request->get('folio');
         $item->quantity = 1;
         $item->unit_price = $request->get('total');
         $ticketss = array($item);
