@@ -486,6 +486,27 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/pagos/mercado', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago'])->name('mercado.pago');
     Route::get('/admin/pagos/mercado/recibo/{id}', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago_recibo'])->name('mercado.pago_recibo');
 
+    // Index + listado
+    Route::get('/admin/link/pagos/mercado', [App\Http\Controllers\LinkPagoController::class, 'index'])
+        ->name('link_pago.index');
+
+    // Almacenar nuevo
+    Route::post('/admin/link/pagos/mercado', [App\Http\Controllers\LinkPagoController::class, 'store'])
+        ->name('link_pago.store');
+
+    // Obtener datos de un registro (para editar)
+    Route::get('/admin/link/pagos/mercado/{id}/edit', [App\Http\Controllers\LinkPagoController::class, 'edit'])
+        ->name('link_pago.edit');
+
+    // Actualizar registro
+    Route::put('/admin/link/pagos/mercado/{id}', [App\Http\Controllers\LinkPagoController::class, 'update'])
+        ->name('link_pago.update');
+
+    // Eliminar registro
+    Route::delete('/admin/link/pagos/mercado/{id}', [App\Http\Controllers\LinkPagoController::class, 'destroy'])
+        ->name('link_pago.destroy');
+
+
     Route::patch('/cursos/cambio/{id}', [App\Http\Controllers\PagosFueraController::class, 'cambio'])->name('cursos.cambio');
     Route::get('/admin/pagos/edit/cambio/{id}',  [App\Http\Controllers\PagosFueraController::class, 'getTicketsByCurso']);
 
