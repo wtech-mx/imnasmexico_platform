@@ -630,7 +630,7 @@ class CotizacionController extends Controller
                 // Asignar el nuevo folio al objeto
                 $nota->folio = $folio;
             }
-            
+
         $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
         $nota->estadociudad  = $request->get('estado');
         $nota->save();
@@ -1382,4 +1382,18 @@ class CotizacionController extends Controller
         return $pdf->stream();
        //  return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
     }
+
+    public function link_pago_nas($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = NotasProductos::find($id);
+
+        $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
+
+        return view('admin.cotizacion.link_pago',compact('nota', 'today', 'nota_productos'));
+
+    }
+
+
 }

@@ -146,6 +146,7 @@ Route::get('/facturacion/tiendita', [App\Http\Controllers\FacturasController::cl
 Route::get('/facturacion/cursos', [App\Http\Controllers\FacturasController::class, 'facturas_userCursos'])->name('facturas_userCursos.index');
 Route::get('/link_pago/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'link_pago'])->name('cotizacion_cosmica.link_pago');
 Route::get('/link_pago/return/pago', [App\Http\Controllers\CotizacionCosmicaController::class, 'return'])->name('return.link_pago');
+Route::get('/link_pago/nas/{id}', [App\Http\Controllers\CotizacionController::class, 'link_pago_nas'])->name('cotizacion_nas.link_pago');
 
 Route::post('/link-pago/process-payment', [App\Http\Controllers\CotizacionCosmicaController::class, 'processPayment'])->name('link_pago.process-payment');
 Route::get('/link-pago/orders/pay', [App\Http\Controllers\CotizacionCosmicaController::class, 'pay'])->name('link_pago.pay');

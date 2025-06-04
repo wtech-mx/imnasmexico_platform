@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        Link de Pago Cosmica #{{ $nota->folio }}
+        Link de Pago NAS #{{ $nota->folio }}
     </title>
 
     <!-- Fonts -->
@@ -134,7 +134,7 @@
             <div class="text-center mb-2">
             <div class="row">
                 <div class="col-12">
-                    <img src="https://plataforma.imnasmexico.com/cosmika/menu/logo.png" style="width: 90px">
+                    <img src="{{ asset('ecommerce/logo_nas.png') }}" style="width: 90px">
                     <img src="https://plataforma.imnasmexico.com/utilidades/logo_mp.png" style="width: 130px">
                 </div>
             </div>
