@@ -20,6 +20,15 @@ class LinkPagoController extends Controller
         return view('admin.link_pago.index', compact('linkPagos'));
     }
 
+    public function custom_link_pago($id)
+    {
+        // Obtiene todos los registros para la tabla
+        // (en AJAX usaremos JSON solo para store/update/destroy,
+        //  index devolverá la vista completa con $linkPagos).
+        $linkPago = LinkPago::find($id);
+        return view('admin.link_pago.customlinkpago', compact('linkPago'));
+    }
+
     /**
      * Almacenar nuevo LinkPago (store vía AJAX).
      */

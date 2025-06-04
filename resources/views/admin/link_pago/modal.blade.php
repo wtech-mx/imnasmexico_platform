@@ -52,9 +52,7 @@
                     <div class="mb-3">
                         <label for="estatus" class="form-label">Estatus</label>
                         <select class="form-select" id="estatus" name="estatus" required>
-                            <option value="">-- Seleccionar estatus --</option>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
+                            <option value="Activo" selected>Activo</option>
                         </select>
                     </div>
 

@@ -65,6 +65,9 @@
                                                 data-id="{{ $item->id }}">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+                                            <a class="btn btn-sm btn-dark" target="_blank" href="{{ route('custom_link_pago', ['id' => $item->id]) }}">
+                                                <i class="fa fa-fw fa-share"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -267,6 +270,7 @@
                                 <button class="btn btn-sm btn-danger btn-eliminar" data-id="${lp.id}">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
+
                             </td>
                         `);
                     }
