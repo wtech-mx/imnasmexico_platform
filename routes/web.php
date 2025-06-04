@@ -155,7 +155,7 @@ Route::post('/link-pago/process-payment', [App\Http\Controllers\CotizacionCosmic
 Route::get('/link-pago/orders/pay', [App\Http\Controllers\CotizacionCosmicaController::class, 'pay'])->name('link_pago.pay');
 
 Route::post('/link-pago/custom/process-payment', [App\Http\Controllers\CotizacionCosmicaController::class, 'processPayment_custom'])->name('link_pago.payment_custom');
-Route::post('/link-pago/nas/process-payment', [App\Http\Controllers\CotizacionCosmicaController::class, 'processPayment'])->name('link_pago.payment_nas');
+Route::post('/link-pago/nas/process-payment', [App\Http\Controllers\CotizacionController::class, 'processPayment'])->name('link_pago.payment_nas');
 // Ruta para buscar un folio vía AJAX
 Route::get('/facturacion/search/cosmica', action: [App\Http\Controllers\FacturasController::class, 'searchFolio'])->name('facturacion.search');
 Route::get('/facturacion/search/nas', action: [App\Http\Controllers\FacturasController::class, 'searchFolioNas'])->name('facturacionNAS.search');
