@@ -19,6 +19,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Factura;
 use MercadoPago\{Exception, SDK, Preference, Item};
+use Illuminate\Support\Facades\Redirect;
 
 class CotizacionController extends Controller
 {

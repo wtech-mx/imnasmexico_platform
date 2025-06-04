@@ -6,6 +6,7 @@ use App\Models\LinkPago;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use MercadoPago\{Exception, SDK, Preference, Item};
+use Illuminate\Support\Facades\Redirect;
 class LinkPagoController extends Controller
 {
     /**
