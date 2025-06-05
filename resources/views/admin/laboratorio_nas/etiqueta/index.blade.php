@@ -32,9 +32,9 @@ Conteo de Etiquetas NAS
             <div class="row">
                 <div class="col-12 mt-3">
                     <div class="d-flex justify-content-around">
-                        <span class="badge rounded-pill text-white" style="background: #e74c3c">Bajo stock: 0 - 150</span>
-                        <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 151 - 200</span>
-                        <span class="badge rounded-pill text-dark" style="background: #72e73c">Alto stock: +201</span>
+                        <span class="badge rounded-pill text-white" style="background: #e74c3c">Bajo stock: 0 - 50</span>
+                        <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 51 - 150</span>
+                        <span class="badge rounded-pill text-dark" style="background: #72e73c">Alto stock: +151</span>
                     </div>
                 </div>
             </div>
@@ -62,11 +62,11 @@ Conteo de Etiquetas NAS
                             <td>{{ $product->nombre }}</td>
                             <td>
                                 @if ($product->estatus_lateral == 1)
-                                    @if ($product->etiqueta_lateral <= 150)
+                                    @if ($product->etiqueta_lateral <= 50)
                                         <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_lateral }}</p>
-                                    @elseif ($product->etiqueta_lateral > 150 && $product->etiqueta_lateral <= 200)
+                                    @elseif ($product->etiqueta_lateral > 51 && $product->etiqueta_lateral <= 150)
                                         <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_lateral }}</p>
-                                    @elseif ($product->etiqueta_lateral > 200)
+                                    @elseif ($product->etiqueta_lateral > 151)
                                         <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_lateral }}</p>
                                     @endif
                                 @else
@@ -75,11 +75,11 @@ Conteo de Etiquetas NAS
                             </td>
                             <td>
                                 @if ($product->estatus_tapa == 1)
-                                    @if ($product->etiqueta_tapa <= 150)
+                                    @if ($product->etiqueta_tapa <= 50)
                                         <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_tapa }}</p>
-                                    @elseif ($product->etiqueta_tapa > 150 && $product->etiqueta_tapa <= 200)
+                                    @elseif ($product->etiqueta_tapa > 51 && $product->etiqueta_tapa <= 150)
                                         <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_tapa }}</p>
-                                    @elseif ($product->etiqueta_tapa > 200)
+                                    @elseif ($product->etiqueta_tapa > 151)
                                         <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_tapa }}</p>
                                     @endif
                                 @else
@@ -88,11 +88,11 @@ Conteo de Etiquetas NAS
                             </td>
                             <td>
                                 @if ($product->estatus_frente == 1)
-                                    @if ($product->etiqueta_frente <= 150)
+                                    @if ($product->etiqueta_frente <= 50)
                                         <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_frente }}</p>
-                                    @elseif ($product->etiqueta_frente > 150 && $product->etiqueta_frente <= 200)
+                                    @elseif ($product->etiqueta_frente > 51 && $product->etiqueta_frente <= 150)
                                         <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_frente }}</p>
-                                    @elseif ($product->etiqueta_frente > 200)
+                                    @elseif ($product->etiqueta_frente > 151)
                                         <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_frente }}</p>
                                     @endif
                                 @else
@@ -101,11 +101,11 @@ Conteo de Etiquetas NAS
                             </td>
                             <td>
                                 @if ($product->estatus_reversa == 1)
-                                    @if ($product->etiqueta_reversa <= 150)
+                                    @if ($product->etiqueta_reversa <= 50)
                                         <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_reversa }}</p>
-                                    @elseif ($product->etiqueta_reversa > 150 && $product->etiqueta_reversa <= 200)
+                                    @elseif ($product->etiqueta_reversa > 51 && $product->etiqueta_reversa <= 150)
                                         <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_reversa }}</p>
-                                    @elseif ($product->etiqueta_reversa > 200)
+                                    @elseif ($product->etiqueta_reversa > 151)
                                         <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_reversa }}</p>
                                     @endif
                                 @else
