@@ -208,7 +208,8 @@ class CotizacionController extends Controller
                 $factura = 0;
                 $totalConDescuento = $totalDesc;
             }else{
-                $factura = $totalDesc * .16;
+                // $factura = $totalDesc * .16;
+                $factura = 0;
                 $totalConDescuento = $totalDesc + $factura;
             }
         } else {
@@ -218,7 +219,8 @@ class CotizacionController extends Controller
                 $factura = 0;
                 $totalConDescuento = $totalDesc;
             }else{
-                $factura = $totalDesc * .16;
+                // $factura = $totalDesc * .16;
+                $factura = 0;
                 $totalConDescuento = $totalDesc + $factura;
             }
         }

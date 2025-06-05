@@ -122,7 +122,7 @@ class NotasProductos extends Model
     //     return $this->hasOne(Factura::class, 'id_notas_nas_tiendita');
     // }
 
-    public function factura(){
+    public function FacturaOrders(){
     return $this->hasOne(Factura::class, 'id_notas_nas', 'id')
                 ->orWhere('facturas.id_notas_nas_tiendita', $this->id);
     }

@@ -244,6 +244,8 @@
             <tr style="background-color: #ffffff;">
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
               <td style="text-align: right"><b>Subtotal</b> </td>
               @if ($nota->subtotal == NULL)
                 <td>${{ number_format($nota->tipo, 1, '.', ',') }}</td>
@@ -256,6 +258,8 @@
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                 <td style="text-align: right"><b>Descuento</b> </td>
                 <td>{{ $nota->restante }}%</td>
                 </tr>
@@ -264,19 +268,23 @@
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
                 <td>$250</td>
                 </tr>
             @endif
-            @if ($nota->factura == '1')
+            {{-- @if ($nota->factura == '1')
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>IVA por Factura</b> </td>
                 <td>16%</td>
                 </tr>
-            @endif
+            @endif --}}
             <tr style="background-color: #ffffff;">
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Total</b> </td>
@@ -300,17 +308,6 @@
         <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago2 }} <br>
         <b for="">Monto:</b> ${{ number_format($nota->monto2, 1, '.', ',') }} <br>
     @endif
-
-    @if ($nota->factura == '1')
-        <h2>Datos de Factura</h2>
-        <b for="">Razon Social:</b> {{ $nota->razon_social }} <br>
-        <b for="">RFC:</b> {{ $nota->rfc }} <br>
-        <b for="">CFDI:</b> {{ $nota->cfdi }} <br>
-        <b for="">Correo Factura:</b> {{ $nota->correo_fac }} <br>
-        <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
-        <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
-    @endif
-
 
   </div>
 </body>
