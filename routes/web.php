@@ -1042,6 +1042,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/asistencia/expo/index', [App\Http\Controllers\ProfesoresController::class, 'asistencia_expo'])->name('asistencia_expo.index');
         Route::post('/update-asistencia', [App\Http\Controllers\ProfesoresController::class, 'updateAsistencia'])->name('updateAsistencia');
         Route::post('/update-confirmacion', [App\Http\Controllers\ProfesoresController::class, 'updateConfirmacion'])->name('updateConfirmacion');
+
+        Route::get('cosmica/cotizacion/imprimir/fangos', [App\Http\Controllers\CotizacionCosmicaController::class, 'fangos'])->name('cotizacion.imprimir_fangos');
 });
 
 // Route::get('registro/login', function () {
