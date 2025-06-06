@@ -443,7 +443,7 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
 
             const facturaCheckbox = document.getElementById('toggleFacturaSi');
             if (facturaCheckbox.checked) {
-                totalConDescuento += totalConDescuento * 0.16;
+                totalConDescuento += totalConDescuento * 0;
             }
 
             const envioCheckbox = document.querySelector('input[name="envio"]:checked');

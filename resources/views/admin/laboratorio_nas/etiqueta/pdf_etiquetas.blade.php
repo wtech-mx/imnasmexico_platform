@@ -87,8 +87,8 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-around">
-                <span class="badge rounded-pill" style="background: #e74c3c; color: #f8f8f8">Bajo stock: 0 - 150</span>
-                <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 151 - 200</span>
+                <span class="badge rounded-pill" style="background: #e74c3c; color: #f8f8f8">Bajo stock: 0 - 50</span>
+                <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 51 - 150</span>
             </div>
         </div>
     </div>
@@ -110,34 +110,34 @@
                 @endphp
 
                 @if (
-                    ($producto->estatus_lateral == '1' && $producto->etiqueta_lateral <= 200) ||
-                    ($producto->estatus_tapa == '1' && $producto->etiqueta_tapa <= 200) ||
-                    ($producto->estatus_frente == '1' && $producto->etiqueta_frente <= 200) ||
-                    ($producto->estatus_reversa == '1' && $producto->etiqueta_reversa <= 200)
+                    ($producto->estatus_lateral == '1' && $producto->etiqueta_lateral <= 150) ||
+                    ($producto->estatus_tapa == '1' && $producto->etiqueta_tapa <= 150) ||
+                    ($producto->estatus_frente == '1' && $producto->etiqueta_frente <= 150) ||
+                    ($producto->estatus_reversa == '1' && $producto->etiqueta_reversa <= 150)
                 )
                     <tr>
                         <td class="col-6">
                             <b> {{ $producto->nombre }} </b>
                         </td>
-                        @if ($producto->estatus_lateral == '1' && $producto->etiqueta_lateral <= 200)
+                        @if ($producto->estatus_lateral == '1' && $producto->etiqueta_lateral <= 150)
                                 @php $cantidad = $producto->etiqueta_lateral; @endphp
                             <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
                                 {{ $cantidad }}
                             </td>
                         @endif
-                        @if ($producto->estatus_tapa == '1' && $producto->etiqueta_tapa <= 200)
+                        @if ($producto->estatus_tapa == '1' && $producto->etiqueta_tapa <= 150)
                                 @php $cantidad = $producto->etiqueta_tapa; @endphp
                             <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
                                 {{ $cantidad }}
                             </td>
                         @endif
-                        @if ($producto->estatus_frente == '1' && $producto->etiqueta_frente <= 200)
+                        @if ($producto->estatus_frente == '1' && $producto->etiqueta_frente <= 150)
                                 @php $cantidad = $producto->etiqueta_frente; @endphp
                             <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
                                 {{ $cantidad }}
                             </td>
                         @endif
-                        @if ($producto->estatus_reversa == '1' && $producto->etiqueta_reversa <= 200)
+                        @if ($producto->estatus_reversa == '1' && $producto->etiqueta_reversa <= 150)
                                 @php $cantidad = $producto->etiqueta_reversa; @endphp
                             <td style="background-color: {{ $cantidad <= 150 ? '#e74c3c' : '#e7dc3c' }}; color:#fff">
                                 {{ $cantidad }}

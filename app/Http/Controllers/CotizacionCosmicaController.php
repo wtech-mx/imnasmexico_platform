@@ -550,7 +550,7 @@ class CotizacionCosmicaController extends Controller
                         $notas_inscripcion->save();
                 }
             }
-            $notas_productos->save();
+
         }
 
         if($request->get('tipo_cotizacion') == 'Perfil Alumno'){
@@ -711,8 +711,6 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-
-
         $nota = NotasProductosCosmica::findOrFail($id);
 
         $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
@@ -736,7 +734,20 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-        $nota->save();
+        if($request->get('factura') != NULL){
+            $nota->factura = '1';
+            $nota->save();
+            $facturas = new Factura;
+            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_notas_cosmica = $nota->id;
+            $estado = 'Por Facturar';
+            $facturas->estatus = $estado;
+            $facturas->save();
+        }else{
+            $nota->save();
+        }
+
+
 
         return redirect()->route('cotizacion_cosmica.index')
         ->with('success', 'Se ha actualizado su cotizacion con exito');

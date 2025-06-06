@@ -512,10 +512,10 @@
             var totalConEnvio = totalDescuento + costoEnvio;
 
             // Sumar el 16% si el checkbox de factura está marcado
-            var toggleFactura = document.getElementById('toggleFactura');
-            if (toggleFactura.checked) {
-                totalConEnvio *= 1.16;
-            }
+            // var toggleFactura = document.getElementById('toggleFactura');
+            // if (toggleFactura.checked) {
+            //     totalConEnvio *= 1.16;
+            // }
 
             // Actualizar el valor en el input
             totalDescuentoInput.value = totalConEnvio.toFixed(2);

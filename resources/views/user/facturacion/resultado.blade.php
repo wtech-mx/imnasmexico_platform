@@ -25,7 +25,9 @@
                  class="btn btn-sm btn-primary">
                 Ver Cotización NAS
               </a>
-
+              @if ($nota->FacturaOrders->archivo_factura !== NULL)
+                <a href="{{ asset('facturas_pdf/' . $nota->FacturaOrders->archivo_factura) }}" download="Factura_{{$nota->id}}.pdf">Descargar Factura</a>
+              @endif
             @elseif ($tipo === 'cosmica')
 
               <a target="_blank"

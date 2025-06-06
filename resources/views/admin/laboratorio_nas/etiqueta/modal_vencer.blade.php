@@ -25,11 +25,11 @@
                            <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            @if ($item->etiqueta_lateral <= 150)
+                            @if ($item->etiqueta_lateral <= 50)
                                 <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_lateral }}</p>
-                            @elseif ($item->etiqueta_lateral > 150 && $item->etiqueta_lateral <= 200)
+                            @elseif ($item->etiqueta_lateral > 51 && $item->etiqueta_lateral <= 150)
                                 <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_lateral }}</p>
-                            @elseif ($item->etiqueta_lateral > 200)
+                            @elseif ($item->etiqueta_lateral > 151)
                                 <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_lateral }}</p>
                             @endif
                         </div>
@@ -45,11 +45,11 @@
                         <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            @if ($item->etiqueta_tapa <= 150)
+                            @if ($item->etiqueta_tapa <= 50)
                                 <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_tapa }}</p>
-                            @elseif ($item->etiqueta_tapa > 150 && $item->etiqueta_tapa <= 200)
+                            @elseif ($item->etiqueta_tapa > 51 && $item->etiqueta_tapa <= 150)
                                 <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_tapa }}</p>
-                            @elseif ($item->etiqueta_tapa > 200)
+                            @elseif ($item->etiqueta_tapa > 151)
                                 <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_tapa }}</p>
                             @endif
                         </div>
@@ -65,11 +65,11 @@
                         <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            @if ($item->etiqueta_frente <= 150)
+                            @if ($item->etiqueta_frente <= 50)
                                 <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_frente }}</p>
-                            @elseif ($item->etiqueta_frente > 150 && $item->etiqueta_frente <= 200)
+                            @elseif ($item->etiqueta_frente > 51 && $item->etiqueta_frente <= 150)
                                 <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_frente }}</p>
-                            @elseif ($item->etiqueta_frente > 200)
+                            @elseif ($item->etiqueta_frente > 151)
                                 <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_frente }}</p>
                             @endif
                         </div>
@@ -85,11 +85,11 @@
                         <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            @if ($item->etiqueta_reversa <= 150)
+                            @if ($item->etiqueta_reversa <= 50)
                                 <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_reversa }}</p>
-                            @elseif ($item->etiqueta_reversa > 150 && $item->etiqueta_reversa <= 200)
+                            @elseif ($item->etiqueta_reversa > 51 && $item->etiqueta_reversa <= 150)
                                 <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_reversa }}</p>
-                            @elseif ($item->etiqueta_reversa > 200)
+                            @elseif ($item->etiqueta_reversa > 151)
                                 <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_reversa }}</p>
                             @endif
                         </div>
