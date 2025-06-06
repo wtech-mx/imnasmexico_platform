@@ -70,6 +70,9 @@
                             </div>
                         @endif
 
+                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('imprimir_fangos') }}">
+                                    <i class="fa fa-file"></i>hola
+                              </a>
                         <div class="table-responsive">
 
                             <nav>
@@ -87,10 +90,7 @@
                                     </a>
                                 </div>
                             </nav>
-                            
-                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion.imprimir_fangos') }}">
-                                    <i class="fa fa-file"></i>hola
-                              </a>
+
 
                             <table class="table table-flush" id="datatable-search4">
                                 <thead class="thead">

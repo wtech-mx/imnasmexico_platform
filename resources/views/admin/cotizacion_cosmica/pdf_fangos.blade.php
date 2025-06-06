@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-    <title>{{ $nota->folio }}</title>
 <head>
   <style>
         body{
@@ -76,10 +75,7 @@
         }
   </style>
 <body>
-  <header class="{{ $usercosmika == NULL ? 'header-cotizacion' : 'header-distribuidora' }}">
-    <h1>@if ($usercosmika == NULL) Cotización @else Distribuidora @endif
-        Cosmica #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
-    <h3>Que tu piel brille, como las Estrellas en el Cosmos.</h3>
+  <header >
 
   </header>
 
@@ -87,9 +83,7 @@
     <table>
       <tr>
         <td>
-            <p class="izq">
-               Fecha: {{ date('d/n/y', strtotime($today)) }}
-            </p>
+   
         </td>
         <td>
           <p class="page">

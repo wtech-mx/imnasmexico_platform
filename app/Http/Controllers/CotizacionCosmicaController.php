@@ -1884,21 +1884,21 @@ class CotizacionCosmicaController extends Controller
     }
          public function fangos(Request $request)
     {
-$idsProductos = [1666, 1668, 1670, 1672, 1675];
+        $idsProductos = [1666, 1668, 1670, 1672, 1675];
 
-// Si además quieres filtrar por rango de fecha, por ejemplo:
-$fechaInicio = '2025-05-30';
-$fechaFin    = '2025-06-01';
+        // Si además quieres filtrar por rango de fecha, por ejemplo:
+        $fechaInicio = '2025-05-30';
+        $fechaFin    = '2025-06-01';
 
-$notas = NotasProductosCosmica::select('notas_productos_cosmica.*')
-    ->join('productos_notas_cosmica', 'notas_productos_cosmica.id', '=', 'productos_notas_cosmica.id_notas_productos')
-    ->whereIn('productos_notas_cosmica.id_producto', $idsProductos)
-    ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])  // si aplica
-    ->distinct()    // para evitar duplicados si una nota tiene varios de esos productos
-    ->get();
+        $notas = NotasProductosCosmica::select('notas_productos_cosmica.*')
+            ->join('productos_notas_cosmica', 'notas_productos_cosmica.id', '=', 'productos_notas_cosmica.id_notas_productos')
+            ->whereIn('productos_notas_cosmica.id_producto', $idsProductos)
+            ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])  // si aplica
+            ->distinct()    // para evitar duplicados si una nota tiene varios de esos productos
+            ->get();
 
-        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_fangos', compact( 'notas'));
-         return $pdf->stream();
-       // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+                $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_fangos', compact( 'notas'));
+                return $pdf->stream();
+            // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
 }
