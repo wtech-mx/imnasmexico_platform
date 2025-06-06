@@ -510,6 +510,23 @@ class CotizacionController extends Controller
                 $nota->$cantidadKitCampo = $kits_cantidades[$i - 1];
             }
         }
+
+        if($request->get('factura') != NULL){
+
+            $nota->factura = '1';
+            $nota->save();
+
+            $facturas = new Factura;
+            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_notas_nas = $nota->id;
+            $estado = 'Por Facturar';
+            $facturas->estatus = $estado;
+            $facturas->save();
+
+        }else{
+            $nota->save();
+        }
+
         $nota->save();
 
         return redirect()->route('notas_cotizacion.index')
