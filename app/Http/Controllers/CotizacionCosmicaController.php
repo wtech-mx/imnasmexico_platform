@@ -1482,8 +1482,8 @@ class CotizacionCosmicaController extends Controller
             //  return $pdf->stream();
             return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
         }else if($request->input('action') === 'Generar PDF Global'){
-            $fechaInicioAnio = '2024-06-30';
-            $fechaFinAnio = '2025-04-21';
+            $fechaInicioAnio = $fechaInicio;
+            $fechaFinAnio =  $fechaFin;
 
             // Query
             $productosVendidos = DB::table('notas_productos_cosmica')
