@@ -245,7 +245,7 @@
                         @if ($cotizacion->id_usuario == NULL)
                             {{ $cotizacion->nombre }} <br> {{ $cotizacion->telefono }}
                         @else
-                            {{ $cotizacion->User->name }} <br> {{ $cotizacion->User->telefono }}
+                            {{ $cotizacion->User->name ?? 'sn' }} <br> {{ $cotizacion->User->telefono ?? 'sn' }}
                         @endif
                     </th>
                     <th>{{$cotizacion->restante}}%</th>
