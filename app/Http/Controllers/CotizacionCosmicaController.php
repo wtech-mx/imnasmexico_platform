@@ -516,7 +516,7 @@ class CotizacionCosmicaController extends Controller
                             $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
                             $notas_productos->$columnaCantidadKit = $cantidadCampo;
                         }
-
+                        $notas_productos->save();
                         $contadorKits++;
                     }
                 } elseif ($producto->subcategoria == 'Tiendita') {
