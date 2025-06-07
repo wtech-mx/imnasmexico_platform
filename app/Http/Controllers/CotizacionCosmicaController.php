@@ -484,7 +484,7 @@ class CotizacionCosmicaController extends Controller
             $contadorKits = 1;
             foreach ($nuevosCampos as $index => $campo) {
                 $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
-                if ($producto && $producto->subcategoria == 'Kit') {
+                if ($producto && $producto->subcategoria == 'Kit' || $producto->subcategoria == 'kit') {
                     $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
                     for ($i = 1; $i <= $nuevosCampos3[$index]; $i++) {
