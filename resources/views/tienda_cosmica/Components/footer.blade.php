@@ -82,7 +82,7 @@
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a target="_blank" href="{{ route('tienda.aviso') }}" class="text-white nav-link p-0">Aviso de Provacidad</a>
+                            <a target="_blank" href="{{ route('tienda.aviso') }}" class="text-white nav-link p-0">Aviso de Privacidad</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="col-12">
-                    <h5 class="text-center mb-3 text-white">Salud es belleza <br>Aviso Cofepris 2409142000D00040</h5>
+                    <h5 class="text-center mb-3 text-white" style="text-transform: uppercase;">Salud es belleza <br>Aviso Cofepris 2409142000D00040</h5>
                 </div>
 
             </div>

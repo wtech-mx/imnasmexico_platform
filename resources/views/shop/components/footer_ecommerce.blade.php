@@ -50,7 +50,7 @@
                 <h5 class="text-center mb-3">Acerca de NAS</h5>
                 <ul class="nav flex-column" style="align-items: center;">
                 <li class="nav-item mb-2"><a href="{{ route('terminos.index') }}" class="navl  ink p-0 text-body-secondary">Terminos y Condiciones</a></li>
-                <li class="nav-item mb-2"><a href="{{ route('aviso.index') }}" class="na  -link p-0 text-body-secondary">Aviso de Provacidad</a></li>
+                <li class="nav-item mb-2"><a href="{{ route('aviso.index') }}" class="na  -link p-0 text-body-secondary">Aviso de Privacidad</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Centro de Ayuda</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Sobre Nosotros</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQS</a></li>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="col-12">
-                <h5 class="text-center mb-3">Salud es belleza <br>Aviso Cofepris 2409142000D00040</h5>
+                <h5 class="text-center mb-3" style="text-transform: uppercase;">Salud es belleza <br>Aviso Cofepris 2409142000D00040</h5>
             </div>
         </div>
     </div>
