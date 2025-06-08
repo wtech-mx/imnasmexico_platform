@@ -142,7 +142,13 @@
                     </div>
 
                 </div>
+
+                <div class="col-12">
+                    <h5 class="text-center mb-3 text-white">Salud es belleza <br>Aviso Cofepris 2409142000D00040</h5>
+                </div>
+
             </div>
+
         </div>
 
         <div class="col">

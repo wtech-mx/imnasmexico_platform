@@ -66,6 +66,10 @@
                     <img src="{{ asset('ecommerce/ssl.png') }}" alt="" style="width: 80%">
                 </p>
             </div>
+
+            <div class="col-12">
+                <h5 class="text-center mb-3">Salud es belleza <br>Aviso Cofepris 2409142000D00040</h5>
+            </div>
         </div>
     </div>
 
