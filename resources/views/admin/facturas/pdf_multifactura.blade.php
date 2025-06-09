@@ -159,6 +159,7 @@
                             <th>Unidad</th>
                             <th>Descripción</th>
                             <th class="right">P. Unitario</th>
+                            <th>Descuento</th>
                             <th class="right">Importe</th>
                         </tr>
                     </thead>
@@ -168,9 +169,16 @@
                             <td>{{ $concepto['ClaveProdServ'] }}</td>
                             <td>{{ $concepto['ClaveUnidad'] }}</td>
                             <td class="right">{{ $concepto['cantidad'] }}</td>
-                            <td>{{ $concepto['unidad'] }}</td>
+                            <td>PZA</td>
                             <td>{{ $concepto['descripcion'] }}</td>
                             <td class="right">${{ number_format($concepto['valorunitario'], 2) }}</td>
+                            <td>
+                                @if(! empty($concepto['Descuento']) && $concepto['Descuento'] > 0)
+                                    ${{ number_format($concepto['Descuento'], 2) }}
+                                @else
+                                    $0.00
+                                @endif
+                            </td>
                             <td class="right">${{number_format($concepto['importe'], 2)}}</td>
                         </tr>
                         @endforeach
@@ -209,6 +217,7 @@
             <div class="col-3 text-left">
                 <p>
                     <strong>Subtotal: </strong> ${{ number_format($factura['subtotal'], 2) }}<br>
+                    <strong>Descuento: </strong> ${{ number_format($factura['descuento'], 2) }}<br>
                     <strong>IVA: </strong> ${{ number_format($factura['sumaIva'], 2) }}<br>
                     <strong>Total: </strong> ${{ number_format($factura['total'], 2) }}
                 </p>

@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ordenes;
+use App\Models\Productos;
+use App\Models\OrdenesProductos;
+use App\Models\Facturas;
 use App\Models\NotasProductos;
+use DOMDocument;
 use Illuminate\Http\Request;
+use Milon\Barcode\DNS2D;
+use Milon\Barcode\QRcode;
+use Fpdf\Fpdf;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class MultiFacturaNasController extends Controller
 {
+
     protected string $usuario;
     protected string $pass;
     protected string $passRfc;
@@ -27,26 +36,26 @@ class MultiFacturaNasController extends Controller
     {
         $host = request()->getHost();
 
-        if (Str::contains($host, 'zocofresh.com')) {
-            // —— Credenciales de ZocoFresh (producción) ——
-            $this->usuario    = 'ZFR2306262N7';
-            $this->pass       = 'ZFR2306262N7';
-            $this->passRfc    = 'Tonatico1+';
-            $this->b64Cer     = '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';  // tu cert
-            $this->b64Key     = 'MIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIAgEAAoIBAQACAggAMBQGCCqGSIb3DQMHBAgwggS+AgEAMASCBMggwSL87OPirKEM4ZbjtQ/YOTkWxY6nBGBsF8ym5FDhr7DaXJ+VZEvVAutCsw+4EFQ+A4BfaBf4cYIZ5/FcIzmcj3rdhwCYCtSCN50bnt3+74FGEwxxa/cHpiqQyK70Gu8N/3g2iZF0NvwxN7LzsgbA4QD3NJ3SGxNJJeeidQs9zI5DcJ8+zJyjoWC7mbskqujRKNLiWvzw/g7Xiis+GsVzvVSp1hIBrlmYiwJ6+wLgG8xKpR5uA72qWo6d0iUSROD9GxJ08P38nxHhX2atmGD1fqTUwxV/W7Hj8vWDBoWbunhYn0uNQokxairL/yz+pK4G4zje+xlF8U8vTxZ3CXHkeLEIeTbojcwFDHPSYVzKmICZE+JMBDdUFe626WbPrrDchM5bMJU2myPF26JaGHasu0vBlWTHfgZ38FuVYwzJBr8h3YiC/oM1jEWPO52faVa29rOlxsAPd7OtpJJjQRzh4FkS0WRXqv7BfwdPzyyS95/RbVkWiFoiX9kaXHF/Z26Hn8kiKBeN16lgiRhfuWBnQTUIYAP47cPnVpOe+YZUR34Fd6aS0kj84wN8peu7HfATeIgzRFd5H42OqXxuO/F9rCk3aNB6kC9D4BQdKeFw8oRyzQhKn8fOKwSu8n0T1UQG4W+v8TunWRh7ecCf5VTmiv1U/CHXw3yJZzBweumEmrD27ZSbGnINKvXGd3LOcv9WaiOWZj+gHlDdaf1oEdyjT73JJphlgmcLRL8TrfN15X8l1pVUatHyx/YwsE579B4YbXLXgjuuvT7O0y/yl4nJ92PzmLZgoEL5vXJAOmbZFYCYthSSMo6kpUj8V0WXYOKpfzDUrMaD94pZBfRKDOxSOC6+igZucddi8NV/GgY5sdPL2iRA6KyOC26+L5w/avxQHujW9dMXnXr1zXICaUG1+Ro2BmdZ+a9SHO0MF2HSeGvKlDNLubqik3V84QpMtP5YFZGg0wJbujsEsp5bn81KXmxalKVlCmKIXN7qbjKcBhi8dNZCguCXoL4zEJI0ky0/1ZDpycUwHWDdswj0AOufB4/uxU3SbkLdV50/L8PQHR0eWZushjZPpBoKrz8flvXAdGdwG/0CPQVE72EcNulv9+6G1iHII4aZjaJbjX6DsoHEye1VxF1S/SVFpHfoYROcKV8b6dRDK8t2iCKGWMrwxK6kEQJ2Q4S1/Jg7hUPXWkGe+OA2HrYdS0h7UzNmo7X2hp9Ow5O1ZXwTWHGHCI00uyP4FgwN6mI3c9WniozBN7KH+zA/RTsPLK7O3L6U3jn6Lck7IWbCjFC1ofhG7qXYWjciQFLPbi3AhKrqWB6NS/OGFttURYWP1GUxbY/kjCH71xIgEdzOGFO6jGock9Ypi6RJrFKm60xENHOKBp11RFaSfK+oDKS0Xenhe0AZOR+kiaTkSWis/kTM9A56ezCZu8Thn4bBnkPwXpHcqu9aA1Y1LtCR9cZPUJl8F/YMBbFsW/kgq7+OTGlFfEyl2R5X4QtZJZ+hQuNJ1F5ujCPKPh7m1GdVpjKOxfFKuGsPpsrR6Jg0mDVnWkUPDQbm4A2ebgmg5H1cfT+EncwKdBxo5Kxsx7WBynSpx82oxDbshVdqsouYe9nWtMytpTa/KZuV+XbCCvO7pGg=';  // tu key
-            $this->produccion = 'SI';
+        // if (Str::contains($host, 'zocofresh.com')) {
+        //     // —— Credenciales de ZocoFresh (producción) ——
+        //     $this->usuario    = 'ZFR2306262N7';
+        //     $this->pass       = 'ZFR2306262N7';
+        //     $this->passRfc    = 'Tonatico1+';
+        //     $this->b64Cer     = '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';  // tu cert
+        //     $this->b64Key     = 'MIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIAgEAAoIBAQACAggAMBQGCCqGSIb3DQMHBAgwggS+AgEAMASCBMggwSL87OPirKEM4ZbjtQ/YOTkWxY6nBGBsF8ym5FDhr7DaXJ+VZEvVAutCsw+4EFQ+A4BfaBf4cYIZ5/FcIzmcj3rdhwCYCtSCN50bnt3+74FGEwxxa/cHpiqQyK70Gu8N/3g2iZF0NvwxN7LzsgbA4QD3NJ3SGxNJJeeidQs9zI5DcJ8+zJyjoWC7mbskqujRKNLiWvzw/g7Xiis+GsVzvVSp1hIBrlmYiwJ6+wLgG8xKpR5uA72qWo6d0iUSROD9GxJ08P38nxHhX2atmGD1fqTUwxV/W7Hj8vWDBoWbunhYn0uNQokxairL/yz+pK4G4zje+xlF8U8vTxZ3CXHkeLEIeTbojcwFDHPSYVzKmICZE+JMBDdUFe626WbPrrDchM5bMJU2myPF26JaGHasu0vBlWTHfgZ38FuVYwzJBr8h3YiC/oM1jEWPO52faVa29rOlxsAPd7OtpJJjQRzh4FkS0WRXqv7BfwdPzyyS95/RbVkWiFoiX9kaXHF/Z26Hn8kiKBeN16lgiRhfuWBnQTUIYAP47cPnVpOe+YZUR34Fd6aS0kj84wN8peu7HfATeIgzRFd5H42OqXxuO/F9rCk3aNB6kC9D4BQdKeFw8oRyzQhKn8fOKwSu8n0T1UQG4W+v8TunWRh7ecCf5VTmiv1U/CHXw3yJZzBweumEmrD27ZSbGnINKvXGd3LOcv9WaiOWZj+gHlDdaf1oEdyjT73JJphlgmcLRL8TrfN15X8l1pVUatHyx/YwsE579B4YbXLXgjuuvT7O0y/yl4nJ92PzmLZgoEL5vXJAOmbZFYCYthSSMo6kpUj8V0WXYOKpfzDUrMaD94pZBfRKDOxSOC6+igZucddi8NV/GgY5sdPL2iRA6KyOC26+L5w/avxQHujW9dMXnXr1zXICaUG1+Ro2BmdZ+a9SHO0MF2HSeGvKlDNLubqik3V84QpMtP5YFZGg0wJbujsEsp5bn81KXmxalKVlCmKIXN7qbjKcBhi8dNZCguCXoL4zEJI0ky0/1ZDpycUwHWDdswj0AOufB4/uxU3SbkLdV50/L8PQHR0eWZushjZPpBoKrz8flvXAdGdwG/0CPQVE72EcNulv9+6G1iHII4aZjaJbjX6DsoHEye1VxF1S/SVFpHfoYROcKV8b6dRDK8t2iCKGWMrwxK6kEQJ2Q4S1/Jg7hUPXWkGe+OA2HrYdS0h7UzNmo7X2hp9Ow5O1ZXwTWHGHCI00uyP4FgwN6mI3c9WniozBN7KH+zA/RTsPLK7O3L6U3jn6Lck7IWbCjFC1ofhG7qXYWjciQFLPbi3AhKrqWB6NS/OGFttURYWP1GUxbY/kjCH71xIgEdzOGFO6jGock9Ypi6RJrFKm60xENHOKBp11RFaSfK+oDKS0Xenhe0AZOR+kiaTkSWis/kTM9A56ezCZu8Thn4bBnkPwXpHcqu9aA1Y1LtCR9cZPUJl8F/YMBbFsW/kgq7+OTGlFfEyl2R5X4QtZJZ+hQuNJ1F5ujCPKPh7m1GdVpjKOxfFKuGsPpsrR6Jg0mDVnWkUPDQbm4A2ebgmg5H1cfT+EncwKdBxo5Kxsx7WBynSpx82oxDbshVdqsouYe9nWtMytpTa/KZuV+XbCCvO7pGg=';  // tu key
+        //     $this->produccion = 'SI';
 
-            $this->rfc_receptor = 'XAXX010101000';
-            $this->nombreRazonReceptor = 'PUBLICO GENERAL';
+        //     $this->rfc_receptor = 'XAXX010101000';
+        //     $this->nombreRazonReceptor = 'PUBLICO GENERAL';
 
-            $this->DomicilioFiscalReceptor = '06700';
-            $this->RegimenFiscalReceptor = '616';
-            $this->UsoCFDI = 'S01';
+        //     $this->DomicilioFiscalReceptor = '06700';
+        //     $this->RegimenFiscalReceptor = '616';
+        //     $this->UsoCFDI = 'S01';
 
-            $this->rfc_emisor = 'ZFR2306262N7';
-            $this->nombreRazonEmisor = 'ZOCO FRESH';
+        //     $this->rfc_emisor = 'ZFR2306262N7';
+        //     $this->nombreRazonEmisor = 'ZOCO FRESH';
 
-        } else {
+        // } else {
             // —— Credenciales de DEMO (entorno local/pruebas) ——
             $this->usuario    = 'DEMO700101XXX';
             $this->pass       = 'DEMO700101XXX';
@@ -66,10 +75,11 @@ class MultiFacturaNasController extends Controller
             $this->rfc_emisor = 'EKU9003173C9';
             $this->nombreRazonEmisor = 'ESCUELA KEMPER URGATE';
 
-        }
+        // }
     }
 
-    public function CFDI_facturaDeContado($id_orden){
+    public function CFDI_facturaDeContado($id_orden)
+    {
 
         $orden = NotasProductos::with(['User', 'ProductosNotasId.Productos'])->find($id_orden);
 
@@ -78,52 +88,92 @@ class MultiFacturaNasController extends Controller
         }
 
         $conceptos = [];
-        $subtotalFactura = 0;
-        $totalImpuestos = 0;
+        $subtotalFactura = 0.00;
+        $totalImpuestos = 0.00;
         $impuestosGlobales = [];
         $mapaTraslados = [];
         $sumaIva = 0;
-        $totalDescuento   = 0;
+        $totalDescuentos = 0;
 
         // Recorrer los productos de la orden
         foreach ($orden->ProductosNotasId as $op) {
-            if($op->cantidad == NULL){
-                $canti = 1;
+            $producto           = $op->Productos;
+            $precioConImpuesto  = (float) $producto->precio_normal;
+            if ($op->Productos->categoria == 'NAS') {
+                $ivaPct = 0;
             }else{
-               $canti = $op->cantidad;
+                $ivaPct = 16;
             }
-            $descuentoPorcentaje  = (float) $op->descuento;
-            $producto = $op->Productos;
-            $cantidad = $canti;
-            $precio = (float) $op->Productos->precio_normal;
-            $importe = round($precio * $cantidad, 2);
-            $ivaPorcentaje = 16;
-            $ivaTasa = number_format($ivaPorcentaje / 100, 6, '.', '');
-            $ivaImporte = round($importe * $ivaPorcentaje / 100, 2);
-            $sumaIva       += $ivaImporte;
-            $subtotalFactura += $importe;
-            $totalImpuestos += $ivaImporte;
+            $descPct = (float) ($op->descuento ?? 0);
 
-            $conceptos[] = [
-                "cantidad" => $cantidad,
-                "unidad" => 'NA',
-                "ID" => $producto->id,
-                "descripcion" => $producto->nombre,
-                "valorunitario" => $precio,
-                "importe" => $importe,
-                "ClaveProdServ" => '01010101',
-                "ClaveUnidad" => 'H87',
-                "ObjetoImp" => "02",
-                "Impuestos" => [
-                    "Traslados" => [[
-                        "Base" => $importe,
-                        "Impuesto" => "002",
-                        "TasaOCuota" => $ivaTasa,
-                        "TipoFactor" => "Tasa",
-                        "Importe" => $ivaImporte,
-                    ]]
-                ]
+            // 1) Extraer neto de impuestos
+            $totalPct = $ivaPct;
+            if ($op->descuento != NULL && $op->descuento > 0) {
+                $factor     = 1 / (1 + $totalPct/100);
+                $precioNeto = round($precioConImpuesto * $factor, 2);
+            } else {
+                $precioNeto = $precioConImpuesto;
+            }
+
+            $cantidad       = (float) $op->cantidad;
+            // 2) Base antes de descuento
+            $importeBruto   = round($precioNeto * $cantidad, 2);
+            // 3) Monto del descuento
+            $montoDescuento = round($importeBruto * ($descPct/100), 2);
+            $totalDescuentos += $montoDescuento;
+            // 4) Importe NETO ya con descuento
+            $importeNeto   = round($importeBruto - $montoDescuento, 2);
+
+            // 5) Acumular netos en subtotal
+            $subtotalFactura += $importeBruto;
+
+            // 6) Impuestos sobre el neto
+            $ivaImporte   = round($importeNeto * $ivaPct  / 100, 2);
+            $totalImpuestos += $ivaImporte;
+            $sumaIva       += $ivaImporte;
+
+            // 7) Construir traslados
+            $traslados = [];
+            if ($ivaImporte  > 0) $traslados[] = [
+                "Base"       => $importeNeto,
+                "Impuesto"   => "002",
+                "TipoFactor" => "Tasa",
+                "TasaOCuota" => number_format($ivaPct/100, 6, '.', ''),
+                "Importe"    => $ivaImporte,
             ];
+            if (count($traslados) === 0) {
+                $traslados[] = [
+                    "Base"       => $importeNeto,
+                    "Impuesto"   => "002",
+                    "TipoFactor" => "Tasa",
+                    "TasaOCuota" => "0.000000",
+                    "Importe"    => 0.00,
+                ];
+            }
+
+            // 8) Formateos finales
+            $montoDescuentoFormateado = number_format($montoDescuento, 2, '.', '');
+            $importeFormateado        = number_format($importeBruto,   2, '.', '');
+
+            // 9) Agregar concepto
+            $concepto = [
+                "cantidad"      => $cantidad,
+                "unidad"        => $producto->unidad_venta   ?? 'NA',
+                "ID"            => $producto->id,
+                "descripcion"   => $producto->nombre,
+                "valorunitario" => $producto->precio_normal,
+                "importe"       => $importeFormateado,
+                "ClaveProdServ" => '53131619',
+                "ClaveUnidad"   => 'H87',
+                "ObjetoImp"     => "02",
+                "Impuestos"     => ["Traslados" => $traslados],
+            ];
+
+            if ($montoDescuento > 0) {
+                $concepto["Descuento"] = number_format($montoDescuentoFormateado, 2, '.', '');
+            }
+
+            $conceptos[] = $concepto;
         }
 
         // Agrupamos por combinación: impuesto|tasa
@@ -159,16 +209,32 @@ class MultiFacturaNasController extends Controller
             ];
         }
 
+        $totalDescuentosFormateado = number_format($totalDescuentos, 2, '.', '');
+        // ⚙️ Armar el JSON completo
+
         $rfc_emisor = $this->rfc_emisor;
         $nombreRazonEmisor = $this->nombreRazonEmisor;
 
-        // Datos de MODO PRUEBAS
-        $rfc_receptor = $this->rfc_receptor;
-        $nombreRazonReceptor = $this->nombreRazonReceptor;
 
-        $DomicilioFiscalReceptor = $this->DomicilioFiscalReceptor;
-        $RegimenFiscalReceptor = $this->RegimenFiscalReceptor;
-        $UsoCFDI = $this->UsoCFDI;
+        // if($orden->factura == 'No'){
+
+            // Datos de MODO PRUEBAS
+            $rfc_receptor = $this->rfc_receptor;
+            $nombreRazonReceptor = $this->nombreRazonReceptor;
+
+            $DomicilioFiscalReceptor = $this->DomicilioFiscalReceptor;
+            $RegimenFiscalReceptor = $this->RegimenFiscalReceptor;
+            $UsoCFDI = $this->UsoCFDI;
+
+        // }else{
+        //     $rfc_receptor = $orden->Factura->rfc;
+        //     $nombreRazonReceptor = $orden->Factura->razon_social;
+
+        //     $DomicilioFiscalReceptor = $orden->Factura->codigo_postal;
+        //     $RegimenFiscalReceptor = $orden->Factura->regimen_fiscal;
+        //     $UsoCFDI = $orden->Factura->cfdi;
+        // }
+
 
         $json_factura = [
             "version_cfdi" => "4.0",
@@ -192,9 +258,9 @@ class MultiFacturaNasController extends Controller
                 "metodo_pago" => "PUE",
                 "moneda" => "MXN",
                 "serie" => "A",
-                "subtotal" => round($subtotalFactura, 2),
-                // "descuento" => number_format($totalDescuentos,  2, '.', ''),
-                "total" => round($subtotalFactura + $totalImpuestos, 2),
+                "subtotal"  => number_format($subtotalFactura,   2, '.', ''),
+                "descuento" => number_format($totalDescuentos,  2, '.', ''),
+                "total" => number_format($subtotalFactura - $totalDescuentos + $totalImpuestos, 2, '.', ''),
                 "tipocambio" => 1,
                 "tipocomprobante" => "E",
                 "Exportacion" => "01"
@@ -244,8 +310,9 @@ class MultiFacturaNasController extends Controller
                 'receptor' => $json_factura['receptor'],
                 'emisor' => $json_factura['emisor'],
                 'uso_cfdi' => $json_factura['receptor']['UsoCFDI'] ?? '',
-                'cadena_original' => $data['mensaje_original_pac_json']['data']['cadenaOriginalSAT'] ?? '',
+                'cadena_original' => $data['representacion_impresa_cadena'] ?? '',
                 'sumaIva' => $sumaIva,
+                'descuento' => $totalDescuentos,
             ];
 
              $pdf = \PDF::loadView('admin.facturas.pdf_multifactura', compact('factura'));
@@ -273,9 +340,17 @@ class MultiFacturaNasController extends Controller
 
     public function cancelCFDI(Request $request, $id_orden)
     {
-        $orden = NotasProductos::findOrFail($id_orden);
+        $factura = Facturas::findOrFail($id_orden);
+        $orden = Ordenes::findOrFail($factura->id_orden);
 
-        $uuid   = '4aeb5510-00c9-4e32-9460-18ba01bc8e31'; // de donde guardes el UUID
+        // Extraer UUID desde archivo_factura
+        $archivo = $factura->archivo_factura;
+
+        if (!$archivo || !Str::startsWith($archivo, 'factura_cfdi_') || !Str::endsWith($archivo, '.pdf')) {
+            return back()->withErrors('No se pudo obtener el UUID desde el nombre del archivo.');
+        }
+
+        $uuid = str_replace(['factura_cfdi_', '.pdf'], '', $archivo);
 
         $payload = [
             "PAC" => [
@@ -315,9 +390,13 @@ class MultiFacturaNasController extends Controller
         }
 
         // 3) Marcar la orden como cancelada en la BD
+        $factura->estatus = 'Cancelado';
+        $factura->save();
+
         $orden->cancelada = 'SI';
         $orden->save();
 
         return back()->with('success', 'Factura cancelada correctamente.');
     }
+
 }

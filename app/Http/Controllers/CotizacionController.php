@@ -189,45 +189,58 @@ class CotizacionController extends Controller
             $pago_fuera = public_path() . '/pagos';
         }
 
-        if($request->get('envio') == NULL){
-            $envio = 0;
-        }else{
-            $envio = 250;
-        }
-
         $descuento = floatval($request->get('descuento', 0));
 
-        $nuevosCampos4 = $request->input('campo4', []);
-        $nuevosCampos4 = array_map('floatval', $nuevosCampos4); // Convierte a números
-        $sumaCampo4 = array_sum($nuevosCampos4);
-        // Aplicar descuento si $descuento es mayor que 0
-        if ($descuento > 0) {
-            $descuentoAplicado = $sumaCampo4 * ($descuento / 100);
-            $totalDesc = ($envio + $sumaCampo4) - $descuentoAplicado;
-            if($request->get('factura') == NULL){
-                $factura = 0;
-                $totalConDescuento = $totalDesc;
-            }else{
-                // $factura = $totalDesc * .16;
-                $factura = 0;
-                $totalConDescuento = $totalDesc + $factura;
-            }
-        } else {
-            $descuentoAplicado = 0;
-            $totalDesc = $envio + $sumaCampo4;
-            if($request->get('factura') == NULL){
-                $factura = 0;
-                $totalConDescuento = $totalDesc;
-            }else{
-                // $factura = $totalDesc * .16;
-                $factura = 0;
-                $totalConDescuento = $totalDesc + $factura;
+        // 1) Recuperar arrays de tu request
+        $nuevosCampos     = $request->input('campo', []);   // IDs de productos
+        $nuevosCampos4    = $request->input('campo4', []);  // precios “raw”
+        $envio           = floatval($request->input('envio', 0));
+        $descuentoPct    = floatval($descuento);            // tu porcentaje de descuento global
+
+        // 2) Cargar en un solo query las categorías de esos productos
+        $categorias = Products::whereIn('id', $nuevosCampos)
+            ->pluck('categoria', 'id'); // nos da [ id => categoria, ... ]
+
+        // 3) Inicializar acumuladores
+        $subtotalRaw    = 0.0;  // suma pura de campo4
+        $totalWithIva   = 0.0;  // suma donde cosmica → *1.16
+        $facturaFlag    = $request->get('factura') != NULL;
+
+        // 4) Recorrer cada línea para armar los totales
+        foreach ($nuevosCampos4 as $idx => $raw) {
+            $precio = floatval($raw);
+            $subtotalRaw += $precio;
+
+            // Si facturación activa y este producto es Cosmica, sumamos con IVA
+            $categoria = $categorias[$nuevosCampos[$idx]] ?? null;
+            if ($facturaFlag && strtolower($categoria) === 'cosmica') {
+                $totalWithIva += $precio * 1.16;
+            } else {
+                $totalWithIva += $precio;
             }
         }
+
+        // 6) Aplicar envío
+        $totalWithEnvio    = $totalWithIva + $envio;
+        $subtotalConEnvio  = $subtotalRaw + $envio;
+
+        // 7) Aplicar descuento global si hay
+        if ($descuentoPct > 0) {
+            $montoDescGlobal   = $totalWithEnvio * ($descuentoPct/100);
+            $totalConDescuento = $totalWithEnvio - $montoDescGlobal;
+        } else {
+            $montoDescGlobal   = 0;
+            $totalConDescuento = $totalWithEnvio;
+        }
+
+        // 8) Asignar a tu modelo
+       // $notas_productos->envio    = round($envio, 2);           // si guardas envío aparte
+      //  $notas_productos->descuento= round($montoDescGlobal, 2); // descuento global en moneda
 
         $notas_productos->metodo_pago = $request->get('metodo_pago');
         $notas_productos->fecha = $request->get('fecha');
-        $notas_productos->tipo = $sumaCampo4;
+        $notas_productos->tipo = $subtotalRaw;
+        $notas_productos->subtotal = $subtotalRaw;
         $notas_productos->restante = $request->get('descuento');
         $notas_productos->total = $totalConDescuento;
         $notas_productos->nota = $request->get('nota');
@@ -362,6 +375,10 @@ class CotizacionController extends Controller
                         $notas_inscripcion->price = $nuevosCampos2[$index];
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
+
+                        if ($request->get('factura') != NULL && $producto->categoria === 'Cosmica') {
+                            $notas_inscripcion->precio_iva = round($notas_inscripcion->price * 1.16);
+                        }
                         $notas_inscripcion->save();
                 }
             }

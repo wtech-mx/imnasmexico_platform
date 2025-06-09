@@ -235,7 +235,12 @@
                         $subtotal = $unit * $nota_producto->cantidad;
                     @endphp
                     <td>
-                        ${{ number_format($subtotal, 1, '.', ',') }}
+                        @if ($nota_producto->precio_iva == NULL)
+                            ${{ number_format($subtotal, 1, '.', ',') }}
+                        @else
+                            <p style="font-size:13px">Sin iva: ${{ number_format($subtotal, 1, '.', ',') }} </p>
+                            ${{ number_format($nota_producto->precio_iva, 1, '.', ',') }}
+                        @endif
                     </td>
                 </tr>
            @endforeach
