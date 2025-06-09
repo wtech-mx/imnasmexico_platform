@@ -164,10 +164,14 @@
             </tr>
         </thead>
         <tbody class="text-center">
+            @php
+                $subtotalDescuento = 0; // Inicializar subtotalDescuento con el subtotal de la nota
+            @endphp
             @foreach (range(1, 6) as $i)
                 @php
                     $kitId = 'id_kit' . ($i == 1 ? '' : $i);
                     $kitCantidad = 'cantidad_kit' . ($i == 1 ? '' : $i);
+                    $kitDescuento = 'descuento_kit' . ($i == 1 ? '' : $i);
                 @endphp
                 @if ($nota->$kitId != NULL)
                     @php
@@ -175,6 +179,9 @@
                         $cantidad = $nota->$kitCantidad;
                         $unit = $kit->precio_normal;
                         $subtotal = $unit * $cantidad;
+
+                        $Descuento = ($subtotal * $nota->$kitDescuento) / 100; // Aplicar descuento
+                        $subtotalDescuento = $subtotal - $Descuento; // Calcular subtotal con descuento
                     @endphp
                     <tr>
                         <td>
@@ -216,7 +223,7 @@
                         </td>
 
                         <td>
-                            {{ $kit->descuento }}
+                            {{ $nota->$kitDescuento }}%
                         </td>
 
                         <td>
@@ -224,7 +231,7 @@
                         </td>
 
                         <td>
-                            ${{ $subtotal }}
+                            ${{ $subtotalDescuento }}
                         </td>
                     </tr>
                     <tr>
