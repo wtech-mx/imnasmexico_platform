@@ -1131,11 +1131,8 @@ class ClientsController extends Controller
         $duracion_hrs = '24';
         $sello = 'Si';
 
-        $pdf = PDF::loadView('admin.pdf.cosmica_workshop',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
-
-        // Configuración personalizada de tamaño
-        $customPaper = [0, 0, 1279.5, 904.5]; // [x, y, ancho, alto] en puntos
-        $pdf->setPaper($customPaper, 'portrait');
+        $pdf = PDF::loadView('admin.pdf.cosmica_workshop_lumina',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
+        $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('diploma_cosmica_'.$nombre.'.pdf');
     }
