@@ -252,10 +252,10 @@ class CotizadorController extends Controller
         }
 
         // 3) Generar folio “E” + padding 3 dígitos
-        $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion_Expo')
+        $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion')
         ->where('folio','like','E%')->pluck('folio')->map(fn($f)=> intval(substr($f,1)));
         $next = ($numeros->max() ?: 0) + 1;
-        $notas->tipo_nota = 'Cotizacion_Expo';
+        $notas->tipo_nota = 'Cotizacion';
         $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
         $notas->id_admin_venta = $request->input('id_cosme');
         $notas->envio = $request->input('envio');

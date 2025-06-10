@@ -55,12 +55,18 @@
     @php
         $nombre_formateado = ucwords(strtolower($nombre));
         $cantidad_palabras = str_word_count($nombre_formateado);
-        $top_valor = ($cantidad_palabras > 4) ? '31%' : '35%';
     @endphp
 
-    <div class="container" style="top: {{ $top_valor }}; left: 15%; text-align: left;">
+    @if ($cantidad_palabras <= 4)
+        @php $top_valor = '35%'; @endphp
+    @elseif ($cantidad_palabras <= 5)
+        @php $top_valor = '31%'; @endphp
+    @endif
+
+    <div class="container" style="top: {{ $top_valor }} !important; left: 15%; text-align: left;">
         <h4 class="nombre">{{ $nombre_formateado }}</h4>
     </div>
+
 
 
     {{-- <h4 class="fecha">
