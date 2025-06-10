@@ -129,6 +129,30 @@ class CotizadorController extends Controller
         return view('cotizador.index_cosmica_new', compact('productosPorSublinea', 'kits', 'personal'));
     }
 
+    public function cotizador_cosmica(Request $request){
+        // 1) Productos “normales”
+        $productos = Products::query()
+            ->where('categoria', 'Cosmica')
+            ->where('subcategoria', 'Producto')
+            ->get();
+
+        // 2) Agruparlos por sublínea
+        $productosPorSublinea = $productos->groupBy('sublinea');
+
+        // 3) Ahora traemos los kits
+        $kits = Products::query()
+            ->where('categoria', 'Cosmica')
+            ->where('subcategoria', operator: 'Kit')
+            ->where('estatus', 'publicado')
+            ->orderBy('nombre', 'asc')
+            ->with('bundleItems')   // <-- cargar la relación
+            ->get();
+
+        $personal = User::where('cliente','=' , null)->where('visibilidad', '!=', '0')->orderBy('name','ASC')->get();
+
+        return view('cotizador.index_cosmica_cotizador', compact('productosPorSublinea', 'kits', 'personal'));
+    }
+
     public function store(Request $request)
     {
         // 1) Validar
@@ -159,6 +183,80 @@ class CotizadorController extends Controller
         $notas->tipo_nota = 'Cotizacion_Expo';
         $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
         $notas->id_admin = auth()->user()->id;
+        $notas->id_admin_venta = $request->input('id_cosme');
+        $notas->envio = $request->input('envio');
+        $notas->metodo_pago = $request->input('metodo_pago');
+        $notas->fecha = now();
+        $notas->nota  = '';
+        $notas->save();
+
+        // 4) Recorrer cantidades, calcular totales de línea y acumular gran total
+        $grandTotal = 0;
+        foreach ($data['cantidad'] as $prodId => $qty) {
+
+
+            if ($qty <= 0) continue;
+            $prod = Products::find($prodId);
+
+            if (! $prod) continue;
+
+            // precio unitario desde stock
+            $precio = $prod->precio_rebajado;
+            $lineTotal = $precio * $qty;
+            $grandTotal += $lineTotal;
+
+            ProductosNotasCosmica::create([
+                'id_notas_productos' => $notas->id,
+                'id_producto'        => $prod->id,
+                'producto'           => $prod->nombre,
+                'price'              => $precio,
+                'cantidad'           => $qty,
+                'descuento'          => 0,
+                'total'              => $lineTotal,
+                'estatus'            => 1,
+            ]);
+        }
+
+        // 5) Guardar el total general en la nota (si tienes esa columna)
+        $notas->total = $grandTotal;
+        $notas->save();
+
+        return response()->json([
+            'id'    => $notas->id,
+            'folio' => $notas->folio,
+            'total' => $grandTotal,
+        ], 200);
+    }
+
+    public function store_cosmica_cotizacion(Request $request)
+    {
+        // 1) Validar
+        $data = $request->validate([
+            'name'        => 'required|string|max:255',
+            'telefono'    => 'required|string|max:50',
+            'cantidad'    => 'required|array',
+            'cantidad.*'  => 'integer|min:0',
+        ]);
+
+        // 2) Buscar o crear usuario
+        $user = User::where('telefono', $data['telefono'])
+                    ->orWhere('email', $data['telefono'].'@example.com')
+                    ->first();
+
+        $notas = new NotasProductosCosmica;
+        if ($user) {
+            $notas->id_usuario = $user->id;
+        } else {
+            $notas->nombre   = $data['name'];
+            $notas->telefono = $data['telefono'];
+        }
+
+        // 3) Generar folio “E” + padding 3 dígitos
+        $numeros = NotasProductosCosmica::where('tipo_nota','Cotizacion_Expo')
+        ->where('folio','like','E%')->pluck('folio')->map(fn($f)=> intval(substr($f,1)));
+        $next = ($numeros->max() ?: 0) + 1;
+        $notas->tipo_nota = 'Cotizacion_Expo';
+        $notas->folio     = 'E'.str_pad($next, 3, '0', STR_PAD_LEFT);
         $notas->id_admin_venta = $request->input('id_cosme');
         $notas->envio = $request->input('envio');
         $notas->metodo_pago = $request->input('metodo_pago');
