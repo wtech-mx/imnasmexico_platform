@@ -266,6 +266,7 @@ class CotizadorController extends Controller
 
         // 4) Recorrer cantidades, calcular totales de línea y acumular gran total
         $grandTotal = 0;
+        $subtotal = 0;
         foreach ($data['cantidad'] as $prodId => $qty) {
 
 
@@ -275,8 +276,9 @@ class CotizadorController extends Controller
             if (! $prod) continue;
 
             // precio unitario desde stock
-            $precio = $prod->precio_rebajado;
+            $precio = $prod->precio_normal;
             $lineTotal = $precio * $qty;
+            $subtotal += $lineTotal; // este es el subtotal
             $grandTotal += $lineTotal;
 
             ProductosNotasCosmica::create([
@@ -293,6 +295,7 @@ class CotizadorController extends Controller
 
         // 5) Guardar el total general en la nota (si tienes esa columna)
         $notas->total = $grandTotal;
+        $notas->subtotal = $subtotal; // nuevo campo
         $notas->save();
 
         return response()->json([
