@@ -345,6 +345,12 @@ class CotizacionController extends Controller
                             $notas_productos->$columnaCantidadKit = $cantidadCampo;
                         }
 
+                        $descuentoCampo = $request->input('descuento_prod')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                        if ($descuentoCampo) {
+                            $columnaDescuentoKit = "descuento_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaDescuentoKit = $descuentoCampo;
+                        }
+
                         $contadorKits++;
                     }
                 } elseif ($producto->subcategoria == 'Tiendita') {
@@ -398,10 +404,14 @@ class CotizacionController extends Controller
         $price = $request->input('price');
         $cantidad = $request->input('cantidad');
         $descuento = $request->input('descuento');
+        $total = 0;
 
         $productosIdsEnviados = [];
 
-        if ($producto !== null) {
+        if($producto == NULL){
+
+        }else{
+
             foreach ($producto as $nombreProducto) {
                 $productoModelo = Products::where('nombre', $nombreProducto)->first();
                 if ($productoModelo) {
@@ -416,18 +426,27 @@ class CotizacionController extends Controller
                   ->whereNull('num_kit'); // <--- Evita borrar los que pertenecen a un kit
         })->delete();
 
-        if ($producto !== null) {
+        if($producto == NULL){
+
+        }else{
             for ($count = 0; $count < count($producto); $count++) {
+                // Buscar el producto en tabla Products
                 $producto_first = Products::where('nombre', $producto[$count])
-                    ->where('categoria', '!=', 'Ocultar')->first();
+                    ->where('categoria', '!=', 'Ocultar')
+                    ->first();
 
-                if (!$producto_first) continue;
+                if (!$producto_first) {
+                    continue; // Si no existe el producto, saltamos
+                }
 
+                // Buscar el producto ya asociado a la cotización
                 $producto_nota = ProductosNotasId::where('id_notas_productos', $id)
-                    ->where('id_producto', $producto_first->id)->first();
+                    ->where('id_producto', $producto_first->id)
+                    ->first();
 
                 $cleanPrice = floatval(str_replace(['$', ','], '', $price[$count]));
 
+                // Si ya existe, lo actualizamos
                 if ($producto_nota) {
                     $producto_nota->update([
                         'price' => $cleanPrice,
@@ -439,7 +458,9 @@ class CotizacionController extends Controller
         }
 
         $campo = $request->input('campo');
+
         if (!empty(array_filter($campo))) {
+
             $campo4 = $request->input('campo4');
             $campo3 = $request->input('campo3');
             $descuento_prod = $request->input('descuento_prod');
@@ -490,13 +511,13 @@ class CotizacionController extends Controller
                             $slot = array_shift($kit_slots_disponibles); // Toma el primer slot disponible
                             $columnaKit = "id_kit" . ($slot == 1 ? '' : $slot);
                             $columnaCantidadKit = "cantidad_kit" . ($slot == 1 ? '' : $slot);
+                            $columnaDescuentoKit = "descuento_kit" . ($slot == 1 ? '' : $slot);
 
                             $nota->$columnaKit = $producto_first->id;
                             $nota->$columnaCantidadKit = $campo3[$count];
+                            $nota->$columnaDescuentoKit = $descuento_prod[$count];
                             $nota->save();
                         }
-
-
                     }
                 }
                  else {
@@ -513,41 +534,47 @@ class CotizacionController extends Controller
         }
 
         $nota = NotasProductos::findOrFail($id);
-        $nota->subtotal = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
-        $nota->tipo = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
-        $nota->total = floatval(str_replace(['$', ','], '', $request->get('total_final')));
+
+        $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
+        $cleanPriceTotal = floatval(str_replace(['$', ','], '', $request->get('total_final')));
+        $nota->subtotal = $cleanPrice4;
+        $nota->total = $cleanPriceTotal;
         $nota->envio = $request->get('envio');
         $nota->dinero_recibido = $request->get('costo_envio');
 
         $kits_cantidades = $request->input('cantidad_kit');
+        $descuento_prod = $request->input('descuento_kit');
         for ($i = 1; $i <= 6; $i++) {
-            $idKitCampo = "id_kit" . ($i == 1 ? '' : $i);
-            $cantidadKitCampo = "cantidad_kit" . ($i == 1 ? '' : $i);
-            if (!empty($nota->$idKitCampo) && isset($kits_cantidades[$i - 1])) {
-                $nota->$cantidadKitCampo = $kits_cantidades[$i - 1];
+            $idKitCampo = "id_kit" . ($i == 1 ? '' : $i); // id_kit, id_kit2, ..., id_kit6
+            $cantidadKitCampo = "cantidad_kit" . ($i == 1 ? '' : $i); // cantidad_kit, cantidad_kit2, ...
+            $columnaDescuentoKit = "descuento_kit" . ($i == 1 ? '' : $i);
+
+            if (!empty($nota->$idKitCampo)) {
+                // Si existe el kit, actualizamos su cantidad con la correspondiente del array
+                $index = $i - 1; // los arrays empiezan en 0
+                if (isset($kits_cantidades[$index])) {
+                    $nota->$cantidadKitCampo = $kits_cantidades[$index];
+                    $nota->$columnaDescuentoKit = $descuento_prod[$index];
+                }
             }
         }
 
         if($request->get('factura') != NULL){
-
             $nota->factura = '1';
             $nota->save();
-
             $facturas = new Factura;
             $facturas->id_usuario = auth()->user()->id;
             $facturas->id_notas_nas = $nota->id;
             $estado = 'Por Facturar';
             $facturas->estatus = $estado;
             $facturas->save();
-
         }else{
             $nota->save();
         }
 
-        $nota->save();
 
         return redirect()->route('notas_cotizacion.index')
-            ->with('success', 'actualizada exitosamente.');
+        ->with('success', 'Se ha actualizado su cotizacion con exito');
     }
 
     public function update_estatus(Request $request, $id){

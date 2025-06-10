@@ -103,24 +103,36 @@
                                         $total_kits = 0;
 
                                         $kits = [
-                                            ['id' => $cotizacion->id_kit, 'cantidad' => $cotizacion->cantidad_kit],
-                                            ['id' => $cotizacion->id_kit2, 'cantidad' => $cotizacion->cantidad_kit2],
-                                            ['id' => $cotizacion->id_kit3, 'cantidad' => $cotizacion->cantidad_kit3],
-                                            ['id' => $cotizacion->id_kit4, 'cantidad' => $cotizacion->cantidad_kit4],
-                                            ['id' => $cotizacion->id_kit5, 'cantidad' => $cotizacion->cantidad_kit5],
-                                            ['id' => $cotizacion->id_kit6, 'cantidad' => $cotizacion->cantidad_kit6],
+                                            ['id' => $cotizacion->id_kit, 'cantidad' => $cotizacion->cantidad_kit, 'descuento' => $cotizacion->descuento_kit],
+                                            ['id' => $cotizacion->id_kit2, 'cantidad' => $cotizacion->cantidad_kit2, 'descuento' => $cotizacion->descuento_kit2],
+                                            ['id' => $cotizacion->id_kit3, 'cantidad' => $cotizacion->cantidad_kit3, 'descuento' => $cotizacion->descuento_kit3],
+                                            ['id' => $cotizacion->id_kit4, 'cantidad' => $cotizacion->cantidad_kit4, 'descuento' => $cotizacion->descuento_kit4],
+                                            ['id' => $cotizacion->id_kit5, 'cantidad' => $cotizacion->cantidad_kit5, 'descuento' => $cotizacion->descuento_kit5],
+                                            ['id' => $cotizacion->id_kit6, 'cantidad' => $cotizacion->cantidad_kit6, 'descuento' => $cotizacion->descuento_kit6],
                                         ];
+                                        $precio_kit = 0;
                                     @endphp
 
                                     @foreach($kits as $index => $kit)
                                         @if($kit['id'])
-                                        @php
+                                            @php
                                             $kit_producto = \App\Models\Products::find($kit['id']);
                                             $componentes = $cotizacion_productos->where('num_kit', $kit['id']);
-                                            $precio_kit = ($kit_producto->precio_normal ?? 0) * $kit['cantidad'];
-                                            $total_kits += $precio_kit;
-                                            $precio = $total_kits;
-                                        @endphp
+                                            $precioBase = $kit_producto->precio_normal ?? 0;
+                                            $cantKit   = $kit['cantidad'] ?? 1;
+                                            $desctoPct = $kit['descuento'] ?? 0;
+                                            // 5) Cálculo del precio total **sin descuento**
+                                            $subTotalKit = $precioBase * $cantKit;
+                                            // 6) Aplicar el descuento: precio * (1 - descuento/100)
+                                            $precioKitConDescuento = round(
+                                                $subTotalKit * (1 - $desctoPct / 100),
+                                                2
+                                            );
+                                            // 7) Acumular el total de kits
+                                            $precio_kit += $precioKitConDescuento;
+                                            // 8) Para usar en la vista si lo necesitas
+                                            $precio = $precio_kit;
+                                            @endphp
 
                                             <div class="row campo_kit" data-kit-id="{{ $kit['id'] }}">
                                                 <div class="col-3">
@@ -135,7 +147,7 @@
 
                                                 <div class="form-group col-2">
                                                     <label>Descuento *</label>
-                                                    <input type="number" name="descuento_kit[]" class="form-control descuento_kit" value="0" readonly>
+                                                   <input type="number" name="descuento_kit[]" class="form-control descuento_kit" value="{{ $kit['descuento'] }}" >
                                                 </div>
 
                                                 <div class="form-group col-3">

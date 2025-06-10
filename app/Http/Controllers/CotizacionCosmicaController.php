@@ -694,13 +694,13 @@ class CotizacionCosmicaController extends Controller
                             $slot = array_shift($kit_slots_disponibles); // Toma el primer slot disponible
                             $columnaKit = "id_kit" . ($slot == 1 ? '' : $slot);
                             $columnaCantidadKit = "cantidad_kit" . ($slot == 1 ? '' : $slot);
+                            $columnaDescuentoKit = "descuento_kit" . ($slot == 1 ? '' : $slot);
 
                             $nota->$columnaKit = $producto_first->id;
                             $nota->$columnaCantidadKit = $campo3[$count];
+                            $nota->$columnaDescuentoKit = $descuento_prod[$count];
                             $nota->save();
                         }
-
-
                     }
                 }
                  else {
@@ -726,15 +726,18 @@ class CotizacionCosmicaController extends Controller
         $nota->dinero_recibido = $request->get('costo_envio');
 
         $kits_cantidades = $request->input('cantidad_kit');
+        $descuento_prod = $request->input('descuento_kit');
         for ($i = 1; $i <= 6; $i++) {
             $idKitCampo = "id_kit" . ($i == 1 ? '' : $i); // id_kit, id_kit2, ..., id_kit6
             $cantidadKitCampo = "cantidad_kit" . ($i == 1 ? '' : $i); // cantidad_kit, cantidad_kit2, ...
+            $columnaDescuentoKit = "descuento_kit" . ($i == 1 ? '' : $i);
 
             if (!empty($nota->$idKitCampo)) {
                 // Si existe el kit, actualizamos su cantidad con la correspondiente del array
                 $index = $i - 1; // los arrays empiezan en 0
                 if (isset($kits_cantidades[$index])) {
                     $nota->$cantidadKitCampo = $kits_cantidades[$index];
+                    $nota->$columnaDescuentoKit = $descuento_prod[$index];
                 }
             }
         }
