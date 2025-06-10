@@ -6,6 +6,8 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
+        <!-- Sweetalert2 -->
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}">
  @endsection
 
 @php
@@ -104,7 +106,7 @@
                                         $totalCantidad = 0;
                                         $total_kits = 0;
                                         $precio_kit = 0;
-                                        
+
                                         $kits = [
                                             ['id' => $cotizacion->id_kit, 'cantidad' => $cotizacion->cantidad_kit, 'descuento' => $cotizacion->descuento_kit],
                                             ['id' => $cotizacion->id_kit2, 'cantidad' => $cotizacion->cantidad_kit2, 'descuento' => $cotizacion->descuento_kit2],
@@ -155,6 +157,15 @@
                                                 <div class="form-group col-3">
                                                     <label>Subtotal *</label>
                                                     <input type="text" class="form-control subtotal_kit" value="${{ number_format($precio_kit, 2) }}" readonly>
+                                                </div>
+
+                                                <div class="form-group col-2">
+                                                    <h4 for="name">Quitar</h4>
+                                                    <div class="input-group mb-3">
+                                                        <button type="button" class="btn btn-danger btn-sm eliminarKit" data-kit-id="{{ $kit['id'] }}">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-12 mt-2">
@@ -399,6 +410,8 @@
 
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<!-- Sweetalert2 -->
+<script type="text/javascript" src="{{ asset('assets/ecommerce/js/sweetalert2.all.min.js') }}"></script>
 <script>
 document.getElementById('formulario-cotizacion').addEventListener('submit', function(e) {
     const productosSeleccionados = document.querySelectorAll('.producto2'); // Productos nuevos seleccionados
@@ -633,6 +646,50 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
                 }
             });
         }
+
+        document.querySelectorAll('.eliminarKit').forEach(button => {
+            button.addEventListener('click', function () {
+                const kitId = this.dataset.kitId;
+                const notaId = {{ $cotizacion->id }};
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Se eliminará el kit de la cotización.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#783E5D',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/admin/cotizacion/kit/${kitId}/nota/${notaId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.querySelector(`.campo_kit[data-kit-id="${kitId}"]`)?.remove();
+
+                                document.querySelectorAll(`.campo3[data-id]`).forEach(producto => {
+                                    const productoDataId = producto.dataset.id;
+                                    const productoObj = productos.find(p => p.id == productoDataId);
+                                    if (productoObj && productoObj.num_kit == kitId) {
+                                        producto.remove();
+                                    }
+                                });
+
+                                updateTotal();
+                                Swal.fire('¡Eliminado!', 'El kit fue eliminado.', 'success');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
     });
 </script>
 @endsection

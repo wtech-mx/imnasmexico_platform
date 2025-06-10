@@ -577,6 +577,29 @@ class CotizacionController extends Controller
         ->with('success', 'Se ha actualizado su cotizacion con exito');
     }
 
+    public function eliminarKit($kitId, $notaId)
+    {
+        // Elimina productos del kit
+        ProductosNotasId::where('id_notas_productos', $notaId)
+            ->where('num_kit', $kitId)
+            ->delete();
+
+        // Limpia campos del kit en la tabla notas
+        $nota = NotasProductos::findOrFail($notaId);
+        for ($i = 1; $i <= 6; $i++) {
+            $colKit = 'id_kit' . ($i == 1 ? '' : $i);
+            if ($nota->$colKit == $kitId) {
+                $nota->$colKit = null;
+                $nota->{'cantidad_kit' . ($i == 1 ? '' : $i)} = null;
+                $nota->{'descuento_kit' . ($i == 1 ? '' : $i)} = null;
+            }
+        }
+        $nota->save();
+
+        return response()->json(['success' => true]);
+    }
+
+
     public function update_estatus(Request $request, $id){
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){

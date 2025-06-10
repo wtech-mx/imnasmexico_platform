@@ -784,8 +784,6 @@ class CotizacionCosmicaController extends Controller
         return response()->json(['success' => true]);
     }
 
-
-
     public function imprimir($id){
         $diaActual = date('Y-m-d');
         $today =  date('d-m-Y');
