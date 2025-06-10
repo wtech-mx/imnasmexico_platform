@@ -742,6 +742,7 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
+
         if($request->get('factura') != NULL){
             $nota->factura = '1';
             $nota->save();
@@ -760,6 +761,30 @@ class CotizacionCosmicaController extends Controller
         return redirect()->route('cotizacion_cosmica.index')
         ->with('success', 'Se ha actualizado su cotizacion con exito');
     }
+
+    public function eliminarKit($kitId, $notaId)
+    {
+        // Elimina productos del kit
+        ProductosNotasCosmica::where('id_notas_productos', $notaId)
+            ->where('num_kit', $kitId)
+            ->delete();
+
+        // Limpia campos del kit en la tabla notas
+        $nota = NotasProductosCosmica::findOrFail($notaId);
+        for ($i = 1; $i <= 6; $i++) {
+            $colKit = 'id_kit' . ($i == 1 ? '' : $i);
+            if ($nota->$colKit == $kitId) {
+                $nota->$colKit = null;
+                $nota->{'cantidad_kit' . ($i == 1 ? '' : $i)} = null;
+                $nota->{'descuento_kit' . ($i == 1 ? '' : $i)} = null;
+            }
+        }
+        $nota->save();
+
+        return response()->json(['success' => true]);
+    }
+
+
 
     public function imprimir($id){
         $diaActual = date('Y-m-d');
@@ -1890,8 +1915,7 @@ class CotizacionCosmicaController extends Controller
 
         return view('admin.cotizacion_cosmica.link_pago_success');
     }
-         public function fangos(Request $request)
-    {
+    public function fangos(Request $request){
         $idsProductos = [1666, 1668, 1670, 1672, 1675];
 
         // Si además quieres filtrar por rango de fecha, por ejemplo:
