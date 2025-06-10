@@ -29,26 +29,39 @@
                 Descarga tu reconocimiento
             </h1>
 
-            <form role="form" action="{{ route('reconocimiento_store.webinar') }}" method="post" enctype="multipart/form-data" style="">
+            <form id="diplomaForm" role="form" action="{{ route('reconocimiento_store.webinar') }}" method="POST">
                 @csrf
                 <input type="hidden" name="tipo_documento" value="Diploma Cosmica">
-                <div class="row">
 
-                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                        <label class="text-white" for="basic-url" class="form-label mt-2 mb-2">Nombre completo *</label>
+                <div class="row">
+                    <div class="col-12">
+                        <label class="text-white" for="nombre">Nombre completo *</label>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/mujer.png')}}" style="width: 40px">
-                            </span>
+                            <span class="input-group-text"><img src="{{asset('assets/user/icons/mujer.png')}}" style="width: 40px"></span>
                             <input class="form-control" type="text" id="nombre" name="nombre" required>
                         </div>
                     </div>
 
                     <div class="col-2">
-                        <button type="submit mt-5" class="btn btn-success w-100">Descargar</button>
+                        <button type="submit" id="btnDescargar" class="btn btn-success w-100">Descargar</button>
                     </div>
                 </div>
-
             </form>
+
+            {{-- iframe oculto para descargar sin salir --}}
+            <iframe id="iframeDescarga" style="display:none;"></iframe>
+
+            {{-- preloader --}}
+            <div id="preloader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999; background:rgba(0,0,0,0.7); text-align:center;">
+                <div style="position:relative; top:45%;">
+                    <div class="spinner-border text-light" role="status" style="width: 3rem; height: 3rem;">
+                        <span class="visually-hidden">Cargando…</span>
+                    </div>
+                    <h5 class="text-white mt-3">Generando tu diploma, espera un momento…</h5>
+                </div>
+            </div>
+
+
         </div>
 
     </div>
@@ -57,6 +70,55 @@
 @endsection
 
 @section('js')
+<script>
+document.getElementById('diplomaForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
+    const nombre = document.getElementById('nombre').value.trim();
+    if (!nombre) {
+        alert('Por favor ingresa un nombre');
+        return;
+    }
+
+    // Mostrar preloader
+    document.getElementById('preloader').style.display = 'block';
+    document.getElementById('btnDescargar').disabled = true;
+
+    // Construir la URL con datos del formulario
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        return response.blob();
+    })
+    .then(blob => {
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'diploma_cosmica_' + nombre.replace(/\s+/g, '_') + '.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // Retraso para que dé tiempo de descargar y luego recargar
+        setTimeout(() => {
+            document.getElementById('preloader').style.display = 'none';
+            window.location.reload();
+        }, 1500);
+    })
+    .catch(err => {
+        document.getElementById('preloader').style.display = 'none';
+        document.getElementById('btnDescargar').disabled = false;
+        alert('Hubo un error al generar el diploma. Intenta nuevamente.');
+        console.error(err);
+    });
+});
+</script>
 @endsection
+
+
 
