@@ -108,7 +108,7 @@ document.getElementById('diplomaForm').addEventListener('submit', function(e) {
         setTimeout(() => {
             document.getElementById('preloader').style.display = 'none';
             window.location.reload();
-        }, 1500);
+        }, 5000);
     })
     .catch(err => {
         document.getElementById('preloader').style.display = 'none';

@@ -1132,9 +1132,8 @@ class ClientsController extends Controller
         $sello = 'Si';
 
         $pdf = PDF::loadView('admin.pdf.cosmica_workshop_lumina',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
-        $pdf->setPaper('A4', 'portrait');
-
-        return $pdf->download('diploma_cosmica_'.$nombre.'.pdf');
+        $nombre_sanitizado = preg_replace('/[^a-zA-Z0-9_\-]/', '_', strtolower($nombre));
+        return $pdf->download("Diploma_{$nombre_sanitizado}.pdf");
     }
     // =============== A D M I N ===============================
 
