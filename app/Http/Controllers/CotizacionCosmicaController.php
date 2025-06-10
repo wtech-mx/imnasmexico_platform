@@ -516,6 +516,11 @@ class CotizacionCosmicaController extends Controller
                             $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
                             $notas_productos->$columnaCantidadKit = $cantidadCampo;
                         }
+                        $descuentoCampo = $request->input('descuento_prod')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                        if ($descuentoCampo) {
+                            $columnaDescuentoKit = "descuento_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaDescuentoKit = $descuentoCampo;
+                        }
                         $notas_productos->save();
                         $contadorKits++;
                     }
