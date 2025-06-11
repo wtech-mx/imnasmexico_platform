@@ -136,6 +136,7 @@
 
                                             // 4) Acumula para el total general
                                             $total_kits += $precioKitConDescuento;
+                                            $precio = $precio_kit;
                                         @endphp
 
                                             <div class="row campo_kit" data-kit-id="{{ $kit['id'] }}">
