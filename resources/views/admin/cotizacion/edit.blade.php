@@ -120,21 +120,24 @@
                                     @foreach($kits as $index => $kit)
                                     @if($kit['id'])
                                         @php
-                                            $kit_producto = \App\Models\Products::find($kit['id']);
+                                            // 1) Carga el producto-kit
                                             $componentes = $cotizacion_productos->where('num_kit', $kit['id']);
-                                            $precioBase = $kit_producto->precio_normal ?? 0;
-                                            $cantKit   = $kit['cantidad'] ?? 1;
-                                            $desctoPct = $kit['descuento'] ?? 0;
-                                            // 5) Cálculo del precio total **sin descuento**
+                                            $kit_producto = \App\Models\Products::find($kit['id']);
+                                            $precioBase   = $kit_producto->precio_normal ?? 0;
+                                            $cantKit      = $kit['cantidad'] ?? 1;
+                                            $desctoPct    = $kit['descuento'] ?? 0;
+
+                                            // 2) Subtotal SIN descuento
                                             $subTotalKit = $precioBase * $cantKit;
-                                            // 6) Aplicar el descuento: precio * (1 - descuento/100)
+
+                                            // 3) Aplica descuento y redondea
                                             $precioKitConDescuento = round(
                                                 $subTotalKit * (1 - $desctoPct / 100),
                                                 2
                                             );
-                                            // 7) Acumular el total de kits
-                                            $precio_kit += $precioKitConDescuento;
-                                            // 8) Para usar en la vista si lo necesitas
+
+                                            // 4) Acumula para el total general
+                                            $total_kits += $precioKitConDescuento;
                                             $precio = $precio_kit;
                                         @endphp
 
@@ -156,7 +159,7 @@
 
                                                 <div class="form-group col-3">
                                                     <label>Subtotal *</label>
-                                                    <input type="text" class="form-control subtotal_kit" value="${{ number_format($precio_kit, 2) }}" readonly>
+                                                    <input type="text" class="form-control subtotal_kit" value="${{ number_format($precioKitConDescuento, 2) }}" readonly>
                                                 </div>
 
                                                 <div class="form-group col-2">

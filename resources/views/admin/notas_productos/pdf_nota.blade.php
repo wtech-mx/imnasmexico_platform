@@ -279,14 +279,7 @@
                 <td>$250</td>
                 </tr>
             @endif
-            {{-- @if ($nota->factura == '1')
-                <tr style="background-color: #ffffff;">
-                    <td></td>
-                    <td></td>
-                <td style="text-align: right"><b>IVA por Factura</b> </td>
-                <td>16%</td>
-                </tr>
-            @endif --}}
+
             <tr style="background-color: #ffffff;">
                 <td></td>
                 <td></td>
