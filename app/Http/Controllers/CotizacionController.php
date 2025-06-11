@@ -519,8 +519,7 @@ class CotizacionController extends Controller
                             $nota->save();
                         }
                     }
-                }
-                 else {
+                }else {
                     ProductosNotasId::create([
                         'id_notas_productos' => $id,
                         'producto' => $producto_first->nombre,
@@ -571,7 +570,6 @@ class CotizacionController extends Controller
         }else{
             $nota->save();
         }
-
 
         return redirect()->route('notas_cotizacion.index')
         ->with('success', 'Se ha actualizado su cotizacion con exito');

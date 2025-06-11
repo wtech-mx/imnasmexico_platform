@@ -278,61 +278,82 @@ class NotasProductosController extends Controller
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo4');
             $nuevosCampos3 = $request->input('campo3');
-            $nuevosCampos4 = $request->input('descuento_prod');
-
+            $descuento_prod = $request->input('descuento_prod');
             foreach ($nuevosCampos as $index => $campo) {
-                if (!$campo) {
-                    // Si no se seleccionó un producto (campo vacío), omitir este ciclo.
-                    continue;
-                }
 
                 $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
 
-                if ($producto) {
-                    if ($producto && $producto->subcategoria == 'Kit' || $producto->subcategoria == 'kit') {
-                        $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                if ($producto && $producto->subcategoria == 'Kit') {
+                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                    foreach ($productos_bundle as $producto_bundle) {
+                        $notas_inscripcion = ProductosNotasId::where('id_notas_productos', $notas_productos->id)
+                            ->where('id_producto', $producto_bundle->id_producto)
+                            ->first();
 
-                        foreach ($productos_bundle as $producto_bundle) {
-                            $notas_inscripcion = new ProductosNotasId;
-                            $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                            $notas_inscripcion->producto = $producto_bundle->producto;
-                            $notas_inscripcion->id_producto = $producto_bundle->id_producto;
-                            $notas_inscripcion->price = '0';
-                            $notas_inscripcion->cantidad = $producto_bundle->cantidad;
-                            $notas_inscripcion->save();
-
-                        }
-
-                        // Asignar el ID del kit en la columna correspondiente
-                        if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
-                            $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
-                            $notas_productos->$columnaKit = $producto->id;
-                            $contadorKits++;
-                        }
-                    }elseif($producto->subcategoria == 'Tiendita'){
+                        // Si no existe, crea un nuevo registro
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $producto->nombre;
-                        $notas_inscripcion->id_producto = $producto->id;
-                        $notas_inscripcion->price = $nuevosCampos2[$index];
-                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                        $notas_inscripcion->descuento = $nuevosCampos4[$index];
-                        $notas_inscripcion->estatus = 1;
-                        $notas_inscripcion->escaneados = $nuevosCampos3[$index];
-                        $notas_inscripcion->save();
-                    }else{
-                        $notas_inscripcion = new ProductosNotasId;
-                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $producto->nombre;
-                        $notas_inscripcion->id_producto = $producto->id;
-                        $notas_inscripcion->price = $nuevosCampos2[$index];
-                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                        $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                        $notas_inscripcion->producto = $producto_bundle->producto;
+                        $notas_inscripcion->id_producto = $producto_bundle->id_producto;
+                        $notas_inscripcion->price = '0';
+                        $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                        $notas_inscripcion->num_kit = $producto_bundle->id_product;
                         $notas_inscripcion->save();
                     }
+
+                    // Asignar el ID del kit en la columna correspondiente
+                    if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
+                        $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                        $notas_productos->$columnaKit = $producto->id;
+
+                        // Asignar la cantidad correspondiente al kit
+                        $cantidadCampo = $request->input('campo3')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                        if ($cantidadCampo) {
+                            $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaCantidadKit = $cantidadCampo;
+                        }
+
+                        $descuentoCampo = $request->input('descuento_prod')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                        if ($descuentoCampo) {
+                            $columnaDescuentoKit = "descuento_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaDescuentoKit = $descuentoCampo;
+                        }
+
+                        $contadorKits++;
+                    }
+                } elseif ($producto->subcategoria == 'Tiendita') {
+                    $notas_inscripcion = ProductosNotasId::where('id_notas_productos', $notas_productos->id)
+                        ->where('id_producto', $producto->id)
+                        ->first();
+
+                        // Si no existe, crea un nuevo registro
+                        $notas_inscripcion = new ProductosNotasId;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
+                        $notas_inscripcion->price = $nuevosCampos2[$index];
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento = isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
+                        $notas_inscripcion->estatus = 1;
+                        $notas_inscripcion->save();
                 } else {
-                    // Si el producto no existe, puedes omitir este ciclo o manejar el error según tu lógica.
-                    continue;
+                    $notas_inscripcion = ProductosNotasId::where('id_notas_productos', $notas_productos->id)
+                        ->where('id_producto', $producto->id)
+                        ->first();
+
+                        // Si no existe, crea un nuevo registro
+                        $notas_inscripcion = new ProductosNotasId;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
+                        $notas_inscripcion->price = $nuevosCampos2[$index];
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento = isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
+
+                        if ($request->get('factura') != NULL && $producto->categoria === 'Cosmica') {
+                            $notas_inscripcion->precio_iva = round($notas_inscripcion->price * 1.16);
+                        }
+                        $notas_inscripcion->save();
                 }
             }
             $notas_productos->save();
@@ -342,8 +363,8 @@ class NotasProductosController extends Controller
             return redirect()->back()->with('success', 'Se ha creado su cotizacion con exito');
         }else{
             Session::flash('success', 'Se ha guardado sus datos con exito');
-            return redirect()->route('notas_productos.index')
-            ->with('success', 'Creado exitosamente.');
+            return redirect()->back()->with('success', 'Se ha creado su cotizacion con exito');
+
         }
     }
 
@@ -362,122 +383,187 @@ class NotasProductosController extends Controller
         return view('admin.notas_productos.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
 
-    public function update(Request $request, $id){
-
+    public function update(Request $request, $id) {
         $producto = $request->input('productos');
         $price = $request->input('price');
         $cantidad = $request->input('cantidad');
         $descuento = $request->input('descuento');
         $total = 0;
-        $resta = 0;
-        $suma = 0;
-        if ($request->filled('deleted_productos')) {
-            // modelo que representa productos_notas_id
-            ProductosNotasID::destroy($request->input('deleted_productos'));
-        }
-        // Obtener los productos actuales de la base de datos para esa cotización
-        $productosExistentes = ProductosNotasId::where('id_notas_productos', $id)->get();
 
-        // Crear un array para almacenar los IDs de los productos enviados
         $productosIdsEnviados = [];
 
-        // Actualizar productos existentes
-        for ($count = 0; $count < count($producto); $count++) {
-            // Buscar el producto en la base de datos
-            $productos = ProductosNotasId::where('producto', $producto[$count])
-                ->where('id_notas_productos', $id)
-                ->firstOrFail();
+        if($producto == NULL){
 
+        }else{
 
-            $producto_db = Products::where('nombre', $producto[$count])->where('categoria', '!=', 'Ocultar')->first();
-            $producto_cot = ProductosNotasId::where('producto', $producto[$count])->where('id_notas_productos', $id)->first();
-
-            if ($producto_db && $producto_cot) {
-                if ($producto_cot->cantidad != $cantidad[$count]) {
-                    $suma = $producto_db->stock + $producto_cot->cantidad;
-                    $resta = $suma - $cantidad[$count];
-                    $producto_db->stock = $resta;
-                    $producto_db->update();
+            foreach ($producto as $nombreProducto) {
+                $productoModelo = Products::where('nombre', $nombreProducto)->first();
+                if ($productoModelo) {
+                    $productosIdsEnviados[] = $productoModelo->id;
                 }
             }
-
-            // Guardar el ID del producto en el array de productos enviados
-            $productosIdsEnviados[] = $productos->id;
-
-            // Limpiar el precio y preparar los datos para la actualización
-            $precio = $price[$count];
-            $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
-            $data = array(
-                'price' => $cleanPrice2,
-                'cantidad' => $cantidad[$count],
-                'descuento' => $descuento[$count],
-            );
-
-            // Actualizar el producto en la base de datos
-            $productos->update($data);
-            $total += $cleanPrice2;
         }
 
-        // Eliminar los productos que ya no están en la solicitud
-        foreach ($productosExistentes as $productoExistente) {
-            if (!in_array($productoExistente->id, $productosIdsEnviados)) {
-                $productoExistente->delete();
+        ProductosNotasId::where('id_notas_productos', $id)
+        ->where(function ($query) use ($productosIdsEnviados) {
+            $query->whereNotIn('id_producto', $productosIdsEnviados)
+                  ->whereNull('num_kit'); // <--- Evita borrar los que pertenecen a un kit
+        })->delete();
+
+        if($producto == NULL){
+
+        }else{
+            for ($count = 0; $count < count($producto); $count++) {
+                // Buscar el producto en tabla Products
+                $producto_first = Products::where('nombre', $producto[$count])
+                    ->where('categoria', '!=', 'Ocultar')
+                    ->first();
+
+                if (!$producto_first) {
+                    continue; // Si no existe el producto, saltamos
+                }
+
+                // Buscar el producto ya asociado a la cotización
+                $producto_nota = ProductosNotasId::where('id_notas_productos', $id)
+                    ->where('id_producto', $producto_first->id)
+                    ->first();
+
+                $cleanPrice = floatval(str_replace(['$', ','], '', $price[$count]));
+
+                // Si ya existe, lo actualizamos
+                if ($producto_nota) {
+                    $producto_nota->update([
+                        'price' => $cleanPrice,
+                        'cantidad' => $cantidad[$count],
+                        'descuento' => $descuento[$count],
+                    ]);
+                }
             }
         }
 
         $campo = $request->input('campo');
-        if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {
+
+        if (!empty(array_filter($campo))) {
+
             $campo4 = $request->input('campo4');
             $campo3 = $request->input('campo3');
             $descuento_prod = $request->input('descuento_prod');
-            $resta = 0;
-            // Agregar nuevos productos
-            for ($count = 0; $count < count($campo); $count++) {
-                $producto = Products::where('nombre', $campo[$count])->where('categoria', '!=', 'Ocultar')->first();
-                $resta = $producto->stock - $campo3[$count];
-                $producto->stock = $resta;
-                $producto->update();
 
-                $price = $campo4[$count];
-                $cleanPrice = floatval(str_replace(['$', ','], '', $price));
-                $data = array(
-                    'id_notas_productos' => $id,
-                    'producto' => $campo[$count],
-                    'id_producto' => $producto->id, // Agregar id_producto
-                    'price' => $cleanPrice,
-                    'cantidad' => $campo3[$count],
-                    'descuento' => $descuento_prod[$count],
-                );
-                ProductosNotasId::create($data);
-                $total += $cleanPrice;
+            $contadorKits = 1;
+
+            $nota = NotasProductos::findOrFail($id);
+
+            // Detectar en qué columna `id_kit` hay espacio disponible
+            $kit_slots_disponibles = [];
+            for ($i = 1; $i <= 6; $i++) {
+                $columnaKit = "id_kit" . ($i == 1 ? '' : $i);
+                if (empty($nota->$columnaKit)) {
+                    $kit_slots_disponibles[] = $i;
+                }
+            }
+
+
+            for ($count = 0; $count < count($campo); $count++) {
+                $producto_first = Products::where('id', $campo[$count])
+                    ->where('categoria', '!=', 'Ocultar')->first();
+
+                if (!$producto_first) continue;
+
+                if ($producto_first->subcategoria == 'Kit') {
+                    // Verifica si ya existen productos con ese num_kit
+                    $ya_existe_kit = ProductosNotasId::where('id_notas_productos', $id)
+                        ->where('num_kit', $producto_first->id)
+                        ->exists();
+
+                    if (!$ya_existe_kit) {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto_first->id)->get();
+
+                        foreach ($productos_bundle as $producto_bundle) {
+                            ProductosNotasId::create([
+                                'id_notas_productos' => $id,
+                                'producto' => $producto_bundle->producto,
+                                'id_producto' => $producto_bundle->id_producto,
+                                'price' => 0,
+                                'cantidad' => $producto_bundle->cantidad,
+                                'kit' => 1,
+                                'num_kit' => $producto_first->id
+                            ]);
+                        }
+
+                        // Guardar el kit y su cantidad en la nota
+                        if (!empty($kit_slots_disponibles)) {
+                            $slot = array_shift($kit_slots_disponibles); // Toma el primer slot disponible
+                            $columnaKit = "id_kit" . ($slot == 1 ? '' : $slot);
+                            $columnaCantidadKit = "cantidad_kit" . ($slot == 1 ? '' : $slot);
+                            $columnaDescuentoKit = "descuento_kit" . ($slot == 1 ? '' : $slot);
+
+                            $nota->$columnaKit = $producto_first->id;
+                            $nota->$columnaCantidadKit = $campo3[$count];
+                            $nota->$columnaDescuentoKit = $descuento_prod[$count];
+                            $nota->save();
+                        }
+                    }
+                }else {
+                    ProductosNotasId::create([
+                        'id_notas_productos' => $id,
+                        'producto' => $producto_first->nombre,
+                        'id_producto' => $producto_first->id,
+                        'price' => floatval(str_replace(['$', ','], '', $campo4[$count])),
+                        'cantidad' => $campo3[$count],
+                        'descuento' => $descuento_prod[$count] ?? 0,
+                    ]);
+                }
             }
         }
 
         $nota = NotasProductos::findOrFail($id);
 
-        if($request->get('envio') == 'No'){
-            $envio = 0;
-            $envio_check = 'No';
-        }else{
-            $envio = 250;
-            $envio_check = 'Si';
+        $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
+        $cleanPriceTotal = floatval(str_replace(['$', ','], '', $request->get('total_final')));
+        $nota->subtotal = $cleanPrice4;
+        $nota->total = $cleanPriceTotal;
+        $nota->envio = $request->get('envio');
+        $nota->dinero_recibido = $request->get('costo_envio');
+
+        $nota->metodo_pago = $request->get('metodo_pago');
+        // $nota->restante = $request->get('descuento');
+        // $nota->total = $totalConDescuento;
+        $nota->nota = $request->get('nota');
+        $nota->metodo_pago2 = $request->get('metodo_pago2');
+        $nota->monto = $request->get('monto');
+        $nota->monto2 = $request->get('monto2');
+
+        $kits_cantidades = $request->input('cantidad_kit');
+        $descuento_prod = $request->input('descuento_kit');
+        for ($i = 1; $i <= 6; $i++) {
+            $idKitCampo = "id_kit" . ($i == 1 ? '' : $i); // id_kit, id_kit2, ..., id_kit6
+            $cantidadKitCampo = "cantidad_kit" . ($i == 1 ? '' : $i); // cantidad_kit, cantidad_kit2, ...
+            $columnaDescuentoKit = "descuento_kit" . ($i == 1 ? '' : $i);
+
+            if (!empty($nota->$idKitCampo)) {
+                // Si existe el kit, actualizamos su cantidad con la correspondiente del array
+                $index = $i - 1; // los arrays empiezan en 0
+                if (isset($kits_cantidades[$index])) {
+                    $nota->$cantidadKitCampo = $kits_cantidades[$index];
+                    $nota->$columnaDescuentoKit = $descuento_prod[$index];
+                }
+            }
         }
 
-        $total_envio = $total + $envio;
+        if($request->get('factura') != NULL){
+            $nota->factura = '1';
+            $nota->save();
+            $facturas = new Factura;
+            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_notas_nas = $nota->id;
+            $estado = 'Por Facturar';
+            $facturas->estatus = $estado;
+            $facturas->save();
+        }else{
+            $nota->save();
+        }
 
-        $nota->tipo = str_replace(['$', ','], '', $request->input('subtotal_final'));
-        $nota->total = str_replace(['$', ','], '', $request->input('total_final'));
-        $nota->envio = $envio_check;
-        $nota->restante = $request->input('descuento_total');
-
-        $nota->monto = $request->input('monto');
-        $nota->metodo_pago2 = $request->input('metodo_pago2');
-        $nota->monto2 = $request->input('monto2');
-        $nota->metodo_pago = $request->input('metodo_pago');
-        $nota->save();
-
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Se ha actualizada');
+        return redirect()->back()->with('success', 'Actualizado');
     }
 
     public function imprimir($id){
