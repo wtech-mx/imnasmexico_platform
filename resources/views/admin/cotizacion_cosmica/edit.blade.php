@@ -157,7 +157,7 @@
 
                                                 <div class="form-group col-3">
                                                     <label>Subtotal *</label>
-                                                    <input type="text" class="form-control subtotal_kit" value="${{ number_format($precio_kit, 2) }}" readonly>
+                                                    <input type="text" class="form-control subtotal_kit" value="${{ number_format($precioKitConDescuento, 2) }}" readonly>
                                                 </div>
 
                                                 <div class="form-group col-2">
