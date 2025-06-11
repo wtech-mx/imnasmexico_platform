@@ -283,7 +283,7 @@
                                                             <select id="producto" name="campo[]" class="form-select d-inline-block producto2">
                                                                 <option value="">Seleccione productos</option>
                                                                 @foreach ($products as $product)
-                                                                <option value="{{ $product->id }}" data-precio_normal2="{{ $product->precio_normal }}">{{ $product->nombre }}</option>
+                                                                <option value="{{ $product->id }}" data-precio_normal2="{{ $product->precio_normal }}" data-imagen="{{ $product->imagenes }}">{{ $product->nombre }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -513,10 +513,30 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
 
 
     document.addEventListener('DOMContentLoaded', function () {
-        $('.producto2').select2();
+        // $('.producto2').select2();
         const productos = @json($cotizacion_productos);
         let clienteData = null;
+            function formatProduct(producto) {
+                if (!producto.id) {
+                    return producto.text;
+                }
 
+                // Obtener la URL de la imagen desde el atributo data-imagen
+                var imgUrl = $(producto.element).data('imagen');
+
+                // Crear la estructura HTML para mostrar la imagen junto con el nombre del producto
+                var $producto = $(
+                    '<span><img src="' + imgUrl + '" class="img-thumbnail" style="width: 40px; height: 40px; margin-right: 5px;" />' + producto.text + '</span>'
+                );
+                return $producto;
+            }
+
+            // Inicializar Select2 con plantillas personalizadas
+            $('.producto2').select2({
+                templateResult: formatProduct,  // Formateo del producto con imagen
+                templateSelection: formatProduct,
+                escapeMarkup: function(m) { return m; }
+            });
         function updateTotal() {
             let total = 0;
 
