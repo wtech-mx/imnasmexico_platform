@@ -600,7 +600,29 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
             const cantidadInput = campo.querySelector('.cantidad2');
             const descuentoInput = campo.querySelector('.descuento_prod');
 
-            productSelect.addEventListener('change', function () {
+            $(productSelect).on('select2:select', function (e) {
+                const selectedValue = e.params.data.id;
+
+                let duplicado = false;
+
+                document.querySelectorAll('.producto2').forEach(select => {
+                    if (select !== productSelect && select.value === selectedValue) {
+                        duplicado = true;
+                    }
+                });
+
+                if (duplicado) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Producto duplicado',
+                        text: 'Este producto ya ha sido seleccionado.',
+                    });
+                    $(productSelect).val('').trigger('change');
+                    campo.querySelector('.subtotal2').value = '';
+                    return;
+                }
+
+                // Calcular subtotal si no es duplicado
                 const selectedOption = productSelect.options[productSelect.selectedIndex];
                 const precio = parseFloat(selectedOption.dataset.precio_normal2) || 0;
                 cantidadInput.value = 1;
@@ -609,6 +631,7 @@ document.getElementById('formulario-cotizacion').addEventListener('submit', func
                 campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
                 updateTotal();
             });
+
 
             const eliminarCampoBtn = campo.querySelector('.eliminarCampo');
             eliminarCampoBtn.addEventListener('click', function() {
