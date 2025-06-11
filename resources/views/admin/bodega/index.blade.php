@@ -679,6 +679,8 @@
                                             @foreach ($oreders_cosmica_ecommerce as $item)
                                                 @if ($item->forma_envio == 'envio')
                                                     <tr style="background: #80486B;color:#fff">
+                                                @elseif ($item->forma_envio == 'Mercado Libre')
+                                                    <tr style="background: #fff701;color:#060606">
                                                 @else
                                                     <tr style="background: #3f7bd6a3">
                                                 @endif
@@ -698,6 +700,8 @@
                                                         En preparación <br>
                                                         @if ($item->forma_envio == 'envio')
                                                             Ecommerce Cosmica
+                                                        @elseif ($item->forma_envio == 'Mercado Libre')
+                                                            Meli
                                                         @else
                                                             <b style="color: #000;">Recoge en tienda</b>
                                                         @endif
