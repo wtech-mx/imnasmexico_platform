@@ -12,9 +12,19 @@ use App\Models\RegistroImnasEscuela;
 use App\Models\RegistroImnasEspecialidad;
 use App\Models\RegistroImnasTemario;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class FoliosController extends Controller
 {
+
+    function normalize($string) {
+        // Elimina acentos y convierte a minúsculas
+        $normalized = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+        return strtolower(preg_replace('/[^a-zA-Z0-9 ]/', '', $normalized));
+    }
+
     public function index(){
 
         $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
@@ -46,8 +56,13 @@ class FoliosController extends Controller
     }
 
     public function buscador(Request $request){
-
+        function normalize($string) {
+            // Elimina acentos y convierte a minúsculas
+            $normalized = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+            return strtolower(preg_replace('/[^a-zA-Z0-9 ]/', '', $normalized));
+        }
         $folio = $request->get('folio');
+        $nombre = $request->get('nombre');
 
             if($folio == 'EFDFGVOA-16620'){
 
@@ -82,7 +97,48 @@ class FoliosController extends Controller
 
                 // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
                 if (!$tickets_generador) {
-                    $tickets_externo = DocumenotsGenerador::where('folio', $folio)->first();
+
+
+                    // $tickets_externo = DocumenotsGenerador::where('folio', $folio)->first();
+                    if ($folio === 'FCDCE-6012') {
+
+                        // Si aún no ha ingresado nombre, muestra formulario en la vista
+                        if (!$nombre) {
+                            return view('user.folio_nombre', compact('folio'));
+                        }
+
+                        $nombreNormalizado = normalize($nombre);
+
+                        // Diccionario con nombres asociados a IDs
+                        $alumnos = [
+                            'ana cristina ferrusca rivera' => [4032, 4033, 4034, 4035, 4036],
+                            'michelle garcia zamilpa' => [5527, 5528, 5529, 5530, 5531],
+                        ];
+
+                        // Buscar si el nombre contiene alguna parte clave
+                        $coincidencia = null;
+
+                        foreach ($alumnos as $nombreCompleto => $ids) {
+                            $nombreBase = normalize($nombreCompleto);
+
+                            if (Str::contains($nombreNormalizado, explode(' ', $nombreBase))) {
+                                $coincidencia = $ids;
+                                break;
+                            }
+                        }
+
+                        if ($coincidencia) {
+                            $tickets_externo = DocumenotsGenerador::whereIn('id', $coincidencia)->first();
+                        } else {
+                            return back()->withErrors(['nombre' => 'No se encontró coincidencia con ese nombre.']);
+                        }
+
+                    } else {
+                        // Si no es el folio conflictivo, seguimos como antes
+                        $tickets_externo = DocumenotsGenerador::where('folio', $folio)->first();
+                    }
+
+
                 }else{
                     $tickets_externo = '';
                 }

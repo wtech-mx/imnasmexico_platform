@@ -79,7 +79,7 @@
 
             </div>
             <div class="d-flex justify-content-center">
-                <a href="{{ route('folio.index') }}" class="preguntas_freceuntas">
+                <a href="{{ route('folio_registro.index') }}" class="preguntas_freceuntas">
                     Buscar Documentos
                 </a>
             </div>

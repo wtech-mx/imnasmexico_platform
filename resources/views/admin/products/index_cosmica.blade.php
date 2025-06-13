@@ -191,6 +191,7 @@
             });
         });
 
+
       // Función para abrir el modal y llenar los datos del producto
       $(document).on('click', '.editProductBtn', function() {
           let productId = $(this).data('id');

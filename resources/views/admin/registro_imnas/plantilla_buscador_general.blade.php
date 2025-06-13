@@ -161,7 +161,7 @@
 @endif
 
 @if($tickets_externo != "")
-
+{{-- Externos --}}
 <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : {{ $folio}}</strong></h5>
 
 <div class="row card card-body card_colapsable_comprar">
@@ -210,6 +210,12 @@
                     requeridos respecto al plan de estudios vigente.
                 </p>
             </div>
+
+            @php
+                if($tickets_externo->cliente == 'Ana Cristina Ferrusca Rivera'){
+                    $tickets_externo->folio = 'FCDCE-6012-F';
+                }
+            @endphp
 
             <div class="col-12 col-md-6 col-lg-6 my-auto">
                 @if(in_array($tickets_externo->curso, [
