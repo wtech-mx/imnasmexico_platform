@@ -214,6 +214,8 @@
             @php
                 if($tickets_externo->cliente == 'Ana Cristina Ferrusca Rivera'){
                     $tickets_externo->folio = 'FCDCE-6012-F';
+                }elseif($tickets_externo->cliente == 'michelle garcia zamilpa'){
+                     $tickets_externo->folio = 'FCDCE-6012-FC';
                 }
             @endphp
 
