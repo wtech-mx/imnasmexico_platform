@@ -6,6 +6,8 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
+    <!-- Sweetalert2 -->
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}">
  @endsection
 
 @php
@@ -338,6 +340,8 @@
 @endsection
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<!-- Sweetalert2 -->
+<script type="text/javascript" src="{{ asset('assets/ecommerce/js/sweetalert2.all.min.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
@@ -389,24 +393,46 @@
 
 
 
-            // Función para asociar eventos al campo de cantidad y descuento
-            function asociarEventosCampos(cantidadInput, descuentoInput, productoInput) {
-                cantidadInput.addEventListener('input', function() {
-                    actualizarSubtotal();
+        function asociarEventosCampos(cantidadInput, descuentoInput, productoInput) {
+            cantidadInput.addEventListener('input', actualizarSubtotal);
+            cantidadInput.addEventListener('blur', actualizarSubtotal);
+            descuentoInput.addEventListener('input', actualizarSubtotal);
+
+            // Usa el evento especial de Select2
+        $(productoInput).on('select2:select', function (e) {
+            const selectedValue = e.params.data.id;
+            let duplicado = false;
+
+            $('.producto').each(function () {
+                if (this !== productoInput && $(this).val() === selectedValue) {
+                    duplicado = true;
+                }
+            });
+
+            if (duplicado) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Producto duplicado',
+                    text: 'Este producto ya ha sido seleccionado.'
                 });
 
-                cantidadInput.addEventListener('blur', function() {
-                    actualizarSubtotal();
-                });
-
-                descuentoInput.addEventListener('input', function() {
-                    actualizarSubtotal();
-                });
-
-                productoInput.addEventListener('change', function () {
-                    actualizarSubtotal();
-                });
+                $(productoInput).val('').trigger('change');
+                productoInput.closest('.campo').querySelector('.subtotal').value = '';
+                return;
             }
+
+            // ✅ Establecer cantidad en 1 si es válida
+            const campoPadre = productoInput.closest('.campo');
+            const cantidadInput = campoPadre.querySelector('.cantidad');
+
+            if (cantidadInput && (!cantidadInput.value || parseInt(cantidadInput.value) === 0)) {
+                cantidadInput.value = 1;
+            }
+
+            actualizarSubtotal();
+        });
+
+        }
 
             // Función para eliminar un campo
             function eliminarCampo(campo) {
