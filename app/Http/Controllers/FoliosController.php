@@ -100,7 +100,7 @@ class FoliosController extends Controller
 
 
                     // $tickets_externo = DocumenotsGenerador::where('folio', $folio)->first();
-                    if ($folio === 'FCDCE-6012') {
+                    if ($folio === 'FCDCE-6012-CAMBIARFOLIO') {
 
                         // Si aún no ha ingresado nombre, muestra formulario en la vista
                         if (!$nombre) {
