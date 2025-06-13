@@ -165,22 +165,22 @@
                     </thead>
                     <tbody>
                         @foreach ($factura['conceptos'] as $concepto)
-                        <tr>
-                            <td>{{ $concepto['ClaveProdServ'] }}</td>
-                            <td>{{ $concepto['ClaveUnidad'] }}</td>
-                            <td class="right">{{ $concepto['cantidad'] }}</td>
-                            <td>PZA</td>
-                            <td>{{ $concepto['descripcion'] }}</td>
-                            <td class="right">${{ number_format($concepto['valorunitario'], 2) }}</td>
-                            <td>
-                                @if(! empty($concepto['Descuento']) && $concepto['Descuento'] > 0)
-                                    ${{ number_format($concepto['Descuento'], 2) }}
-                                @else
-                                    $0.00
-                                @endif
-                            </td>
-                            <td class="right">${{number_format($concepto['importe'], 2)}}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ $concepto['ClaveProdServ'] }}</td>
+                                <td>{{ $concepto['ClaveUnidad'] }}</td>
+                                <td class="right">{{ $concepto['cantidad'] }}</td>
+                                <td>PZA</td>
+                                <td>{{ $concepto['descripcion'] }}</td>
+                                <td class="right">${{ number_format($concepto['valorunitario'], 2) }}</td>
+                                <td>
+                                    @if(! empty($concepto['Descuento']) && $concepto['Descuento'] > 0)
+                                        ${{ number_format($concepto['Descuento'], 2) }}
+                                    @else
+                                        $0.00
+                                    @endif
+                                </td>
+                                <td class="right">${{number_format($concepto['importe'], 2)}}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

@@ -95,8 +95,70 @@ class MultiFacturaNasController extends Controller
         $sumaIva = 0;
         $totalDescuentos = 0;
 
+        for ($i = 1; $i <= 6; $i++) {
+            $slot           = $i === 1 ? '' : $i;
+            $kitIdCol       = "id_kit{$slot}";
+            $kitCantCol     = "cantidad_kit{$slot}";
+            $kitDescCol     = "descuento_kit{$slot}";
+
+            $kitId     = $orden->$kitIdCol;
+            $kitCant   = $orden->$kitCantCol ?: 1;
+            $kitDesc   = (float) ($orden->$kitDescCol ?? 0);
+
+            if (! $kitId) {
+                continue;
+            }
+
+            $kitProduct = \App\Models\Products::find($kitId);
+            $unitPrice  = (float) $kitProduct->precio_normal;
+            $bruto      = round($unitPrice * $kitCant, 2);
+            $montoDesc  = round($bruto * ($kitDesc / 100), 2);
+            $neto       = round($bruto - $montoDesc, 2);
+
+            // IVA
+            $ivaPct     = $kitProduct->categoria === 'NAS' ? 0 : 16;
+            $ivaMonto   = round($neto * $ivaPct / 100, 2);
+
+            // acumula totales (igual que hacías)
+            $subtotalFactura += $bruto;
+            $totalDescuentos += $montoDesc;
+            $totalImpuestos += $ivaMonto;
+            $sumaIva        += $ivaMonto;
+
+            // construye el traslado
+            $tras = [[
+              'Base'       => $neto,
+              'Impuesto'   => '002',
+              'TipoFactor' => 'Tasa',
+              'TasaOCuota' => number_format($ivaPct/100, 6, '.', ''),
+              'Importe'    => $ivaMonto,
+            ]];
+
+            // formatea monto y descuento
+            $concepto = [
+              'cantidad'      => $kitCant,
+              'unidad'        => $kitProduct->unidad_venta ?? 'NA',
+              'ID'            => $kitProduct->id,
+              'descripcion'   => $kitProduct->nombre,    // aquí va el nombre del kit
+              'valorunitario' => number_format($unitPrice, 2, '.', ''),
+              'importe'       => number_format($bruto,   2, '.', ''),
+              'ClaveProdServ' => '53131619',
+              'ClaveUnidad'   => 'H87',
+              'ObjetoImp'     => '02',
+              'Impuestos'     => ['Traslados' => $tras],
+            ];
+            if ($montoDesc > 0) {
+              $concepto['Descuento'] = number_format($montoDesc, 2, '.', '');
+            }
+
+            $conceptos[] = $concepto;
+        }
+
         // Recorrer los productos de la orden
         foreach ($orden->ProductosNotasId as $op) {
+            if ($op->num_kit !== null) {
+                continue;  // saltamos todos los componentes de kit
+            }
             $producto           = $op->Productos;
             $precioConImpuesto  = (float) $producto->precio_normal;
             if ($op->Productos->categoria == 'NAS') {
