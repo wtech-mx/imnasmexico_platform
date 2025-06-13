@@ -330,6 +330,7 @@ class CotizacionController extends Controller
                         $notas_inscripcion->price = '0';
                         $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                         $notas_inscripcion->num_kit = $producto_bundle->id_product;
+                        $notas_inscripcion->kit = 1;
                         $notas_inscripcion->save();
                     }
 
@@ -477,7 +478,6 @@ class CotizacionController extends Controller
                     $kit_slots_disponibles[] = $i;
                 }
             }
-
 
             for ($count = 0; $count < count($campo); $count++) {
                 $producto_first = Products::where('id', $campo[$count])

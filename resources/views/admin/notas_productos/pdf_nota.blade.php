@@ -137,37 +137,11 @@
         <label style="font-size: 20px"><b>Numero de cliente: </b>A{{ $nota->User->id }}</label>
     @endif
 
-    <div class="text-center">
-        @if ($nota->id_kit != NULL && $nota->id_kit2 == NULL)
-            <h3>{{$nota->Kit->nombre}}</h3>
-        @endif
-        @if ($nota->id_kit2 != NULL)
-            <h3>Compra de kits:</h3>
-            <ul>
-                <li>{{$nota->Kit->nombre}}</li>
-                @if ($nota->id_kit2 != NULL)
-                    <li>{{$nota->Kit2->nombre}}</li>
-                @endif
-                @if ($nota->id_kit3 != NULL)
-                    <li>{{$nota->Kit3->nombre}}</li>
-                @endif
-                @if ($nota->id_kit4 != NULL)
-                    <li>{{$nota->Kit4->nombre}}</li>
-                @endif
-                @if ($nota->id_kit5 != NULL)
-                    <li>{{$nota->Kit5->nombre}}</li>
-                @endif
-                @if ($nota->id_kit6 != NULL)
-                    <li>{{$nota->Kit6->nombre}}</li>
-                @endif
-            </ul>
-        @endif
-    </div>
-
     <table class="table table-bordered border-primary">
         <thead class="text-center" style="background-color: #836262; color: #fff">
             <tr>
                 <th>Codigo Barras</th>
+                <th>Imagen</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Descuento</th>
@@ -176,74 +150,154 @@
             </tr>
         </thead>
         <tbody class="text-center">
-            @foreach ($nota_productos as $nota_producto)
-                <tr>
-                <td>
-                    @if ($nota_producto->Productos->sku == NULL)
-                        <b>SKU no disponible</b>
-                    @else
-                        @php
-                            // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
-                            $codigo = $nota_producto->Productos->sku;
-                        @endphp
-                        <img
-                            src="data:image/png;base64,{{
-                            DNS1D::getBarcodePNG(
-                                $codigo,
-                                'C128',
-                                1.6,
-                                35,
-                                [0,0,0],
-                                true
-                            )
-                            }}"
-                            alt="Barcode de {{ $codigo }}">
-                    @endif
-                    </td>
-                    <td>
-                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
-                        {{ $nota_producto->Productos->nombre }} <br>
-                        <p style="font-size:13px">Precio Real Catalogo: ${{ $nota_producto->Productos->precio_normal }}.0</p>
-                    </td>
-                    <td>
-                        {{ $nota_producto->cantidad }}
-                    </td>
-                    <td>
-                        {{ $nota_producto->descuento }}%
-                    </td>
+            @php
+                $subtotalDescuento = 0; // Inicializar subtotalDescuento con el subtotal de la nota
+            @endphp
+            @foreach (range(1, 6) as $i)
+                @php
+                    $kitId = 'id_kit' . ($i == 1 ? '' : $i);
+                    $kitCantidad = 'cantidad_kit' . ($i == 1 ? '' : $i);
+                    $kitDescuento = 'descuento_kit' . ($i == 1 ? '' : $i);
+                @endphp
+                @if ($nota->$kitId != NULL)
                     @php
-                        if($nota_producto->producto == NULL){
-                            $unit = 0;
-                        }elseif($nota_producto->cantidad == NULL){
-                            $unit = 0;
-                        }else{
-                            $unit = $nota_producto->price / $nota_producto->cantidad;
+                        $kit = \App\Models\Products::find($nota->$kitId);
+                        $cantidad = $nota->$kitCantidad;
+                        $unit = $kit->precio_normal;
+                        $subtotal = $unit * $cantidad;
+
+                        $Descuento = ($subtotal * $nota->$kitDescuento) / 100; // Aplicar descuento
+                        $subtotalDescuento = $subtotal - $Descuento; // Calcular subtotal con descuento
+
+                        // 2) Si la nota está facturada, añade 16% de IVA
+                        if ($nota->factura == '1' && $kit->categoria == 'Cosmica') {
+                            $subtotalDescuento = round($subtotalDescuento * 1.16, 2);
+                            $texto = 'Con iva';
+                        }else {
+                            $texto = '';
                         }
                     @endphp
-                    <td>
-                        @if($nota_producto->restante == '0' || $nota_producto->restante == NULL)
-                            ${{ $unit }}
-                        @else
-                            Descuento {{ $nota_producto->restante }}% <br>
-                           <del> ${{ $nota_producto->Productos->precio_normal }} </del> <br>
-                           <b> ${{ $unit }} </b>
+                    <tr>
+                        <td>
+                            @if ($kit->sku == NULL)
+                                <b></b>
+                            @else
+                                @php
+                                    // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                    $codigo = $kit->sku;
+                                @endphp
+                                <img
+                                    src="data:image/png;base64,{{
+                                    DNS1D::getBarcodePNG(
+                                        $codigo,
+                                        'C128',
+                                        1.6,
+                                        35,
+                                        [0,0,0],
+                                        true
+                                    )
+                                    }}"
+                                    alt="Barcode de {{ $codigo }}">
+                            @endif
+                        </td>
+                        <td>
+                            @if ($kit->imagenes == NULL)
+                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @else
+                                <img id="blah" src="{{asset('products/'.$kit->imagenes) }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @endif
+                        </td>
 
+                        <td>
+                            {{ $kit->nombre }}
+                        </td>
+
+                        <td>
+                            {{ $cantidad }}
+                        </td>
+
+                        <td>
+                            {{ $nota->$kitDescuento }}%
+                        </td>
+
+                        <td>
+                            ${{ $unit }}
+                        </td>
+
+                        <td>
+                            {{$texto}} ${{ $subtotalDescuento }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: left;">
+                            <ul>
+                                @foreach ($nota_productos->where('kit', 1)->where('num_kit', $nota->$kitId) as $producto)
+                                    <li>
+                                        {{ $producto->cantidad }} {{ $producto->producto }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+
+            @foreach ($nota_productos->where('kit', 0) as $producto)
+                <tr>
+
+                    <td>
+                        @if ($producto->Productos->sku == NULL)
+                            <b>SKU no disponible</b>
+                        @else
+                            @php
+                                // Si tu SKU viene con guiones bajos y sólo quieres la parte antes del primero:
+                                $codigo = $producto->Productos->sku;
+                            @endphp
+                            <img
+                                src="data:image/png;base64,{{
+                                DNS1D::getBarcodePNG(
+                                    $codigo,
+                                    'C128',
+                                    1.6,
+                                    35,
+                                    [0,0,0],
+                                    true
+                                )
+                                }}"
+                                alt="Barcode de {{ $codigo }}">
                         @endif
+                    </td>
+                    <td>
+                        <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
+                    </td>
+
+                    <td>
+                        {{ $producto->producto }} <br>
+                        <p style="font-size:13px">Precio Real Catalogo: ${{ $producto->Productos->precio_normal }}.0</p>
 
                     </td>
-                    @php
-                        $subtotal = $unit * $nota_producto->cantidad;
-                    @endphp
                     <td>
-                        @if ($nota_producto->precio_iva == NULL)
-                            ${{ number_format($subtotal, 1, '.', ',') }}
+                        {{ $producto->cantidad }}
+                    </td>
+                    <td>
+                        {{ $producto->descuento }}%
+                    </td>
+                    <td>
+                        @if ($producto->total == NULL)
+                            ${{$producto->Productos->precio_normal}}
                         @else
-                            <p style="font-size:13px">Sin iva: ${{ number_format($subtotal, 1, '.', ',') }} </p>
-                            ${{ number_format($nota_producto->precio_iva, 1, '.', ',') }}
+                            ${{$producto->price}}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($producto->precio_iva == NULL)
+                            ${{$producto->price}}
+                        @else
+                           Con iva ${{$producto->precio_iva}}
                         @endif
                     </td>
                 </tr>
-           @endforeach
+            @endforeach
         </tbody>
         <tfoot >
             <tr style="background-color: #ffffff;">

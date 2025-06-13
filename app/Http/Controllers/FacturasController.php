@@ -274,6 +274,26 @@ class FacturasController extends Controller
                 'message' => 'Esta nota no está marcada para facturar.'
             ], 403);
         }
+        if ($nota->estatus_cotizacion == NULL) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota esta pendiente de ser aprobada.'
+            ], 403);
+        }
+        if ($nota->estatus_cotizacion == 'Cancelada') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota esta cancelada.'
+            ], 403);
+        }
+        $fechaDoc = Carbon::parse($nota->fecha_aprobada);
+
+        if ($fechaDoc->format('Y-m') !== Carbon::now()->format('Y-m')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Esta nota no se puede facturar porque no corresponde al mes en curso.'
+            ], 403);
+        }
 
         $html = view('user.facturacion.resultado', [
             'nota' => $nota,
