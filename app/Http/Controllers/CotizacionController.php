@@ -519,7 +519,8 @@ class CotizacionController extends Controller
                             $nota->save();
                         }
                     }
-                }else {
+                }
+                 else {
                     ProductosNotasId::create([
                         'id_notas_productos' => $id,
                         'producto' => $producto_first->nombre,
@@ -558,18 +559,90 @@ class CotizacionController extends Controller
             }
         }
 
-        if($request->get('factura') != NULL){
+        if ($request->get('factura')) {
             $nota->factura = '1';
             $nota->save();
-            $facturas = new Factura;
-            $facturas->id_usuario = auth()->user()->id;
-            $facturas->id_notas_nas = $nota->id;
-            $estado = 'Por Facturar';
-            $facturas->estatus = $estado;
-            $facturas->save();
-        }else{
+
+            $ivaRate = 0.16;
+            $nuevoSubtotal = 0;
+            $Subtotalconiva = 0;
+            // Trae los ítems de la nota
+            $detalles = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
+
+            for ($i = 1; $i <= 6; $i++) {
+                $kitCantidades[$nota->{'id_kit'.($i == 1 ? '' : $i)}] = $nota->{'cantidad_kit'.($i == 1 ? '' : $i)} ?? 1;
+            }
+
+            foreach ($detalles as $item) {
+                // Supongamos que todos los productos "Cosmica" tienen id_empresa = 123
+                $esCosmica = $item->Productos->categoria === 'Cosmica';
+
+                if ($esCosmica) {
+                    $precioBase = (float)$item->Productos->precio_normal;
+                    $precioCantidad = $precioBase * $item->cantidad;
+                    $desctoPct = (float) $item->descuento ?? 0;
+                    $precioConDescuento = round($precioCantidad * (1 - $desctoPct/100), 2);
+
+                    $precioWithIva = round($precioConDescuento * (1 + $ivaRate), 2);
+
+                    $item->precio_iva = $precioWithIva;
+                    $item->save();
+
+                    $nuevoSubtotal += $precioWithIva;
+                } else {
+                    // Al resto los dejamos tal cual
+                    $nuevoSubtotal += $item->Productos->precio_normal * $item->cantidad;
+                }
+            }
+
+            // Reasigna totales (ahora ya sólo Cosmica trae IVA)
+            $nota->subtotal = $nuevoSubtotal;
+            $nota->total    = $nuevoSubtotal;
             $nota->save();
+
+            $factura = Factura::where('id_notas_nas', $id)->first();
+            if($factura == NULL){
+                // Crea el registro de factura como antes…
+                $factura_new = new Factura;
+                $factura_new->id_usuario   = auth()->id();
+                $factura_new->id_notas_nas = $nota->id;
+                $factura_new->estatus      = 'Por Facturar';
+                $factura_new->save();
+            }else{
+                $factura->estatus = 'Por Facturar';
+                $factura->save();
+            }
+
+        } else {
+            $nota->factura = null;
+            $nota->save();
+
+            // 1) Cancelar el registro en facturas
+            $factura = Factura::where('id_notas_nas', $nota->id)->first();
+            if ($factura) {
+                $factura->estatus = 'Cancelada';
+                $factura->save();
+            }
+
+            // 2) Quitar precio_iva y recalcular totales sin IVA
+            $nuevoSubtotal = 0;
+            $detalles = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
+            foreach ($detalles as $item) {
+                // Eliminamos price_iva
+                $item->precio_iva = null;
+                $item->save();
+
+                // Sumamos price(base) * cantidad
+                $nuevoSubtotal += $item->Productos->precio_normal * $item->cantidad;
+            }
+
+            // 3) Guardar subtotales en la nota
+            $nota->update([
+                'subtotal' => $nuevoSubtotal,
+                'total'    => $nuevoSubtotal,
+            ]);
         }
+
 
         return redirect()->route('notas_cotizacion.index')
         ->with('success', 'Se ha actualizado su cotizacion con exito');
