@@ -570,25 +570,56 @@ class CotizacionController extends Controller
             $detalles = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
             for ($i = 1; $i <= 6; $i++) {
-                $kitCantidades[$nota->{'id_kit'.($i == 1 ? '' : $i)}] = $nota->{'cantidad_kit'.($i == 1 ? '' : $i)} ?? 1;
+                $slot        = $i === 1 ? '' : $i;
+                $colId       = "id_kit{$slot}";
+                $colCant     = "cantidad_kit{$slot}";
+                $colDesc     = "descuento_kit{$slot}";
+
+                $kitId       = $nota->$colId;
+                if (! $kitId) {
+                    continue;
+                }
+
+                $kitQty      = (float) ($nota->$colCant  ?? 1);
+                $kitDescPct  = (float) ($nota->$colDesc ?? 0);
+                $kitProduct  = \App\Models\Products::find($kitId);
+                $unitPrice   = (float) $kitProduct->precio_normal;
+
+                // 1) Importe bruto
+                $bruto       = round($unitPrice * $kitQty, 2);
+                // 2) Descuento
+                $montoDesc   = round($bruto * $kitDescPct/100, 2);
+                $netoKit     = $bruto - $montoDesc;
+                // 3) IVA
+                $ivaKit      = round($netoKit * $ivaRate, 2);
+                // 4) Suma al subtotal
+                $nuevoSubtotal += $netoKit + $ivaKit;
             }
+
+            $detalles = ProductosNotasId::where('id_notas_productos', $nota->id)
+            ->whereNull('num_kit')
+            ->get();
 
             foreach ($detalles as $item) {
                 // Supongamos que todos los productos "Cosmica" tienen id_empresa = 123
                 $esCosmica = $item->Productos->categoria === 'Cosmica';
 
                 if ($esCosmica) {
-                    $precioBase = (float)$item->Productos->precio_normal;
-                    $precioCantidad = $precioBase * $item->cantidad;
-                    $desctoPct = (float) $item->descuento ?? 0;
-                    $precioConDescuento = round($precioCantidad * (1 - $desctoPct/100), 2);
+                    $precioBase = (float) $item->Productos->precio_normal;
+                    $qty        = (float) $item->cantidad;
+                    $descPct    = (float) ($item->descuento ?? 0);
 
-                    $precioWithIva = round($precioConDescuento * (1 + $ivaRate), 2);
+                    // 1) Neto antes de descuento (ya libre de IVA si tus precios incluyen impuesto)
+                    //    o si necesitas extraer neto de IVA, hazlo aquí como antes.
+                    $bruto      = round($precioBase * $qty, 2);
+                    // 2) Descuento
+                    $montoDesc  = round($bruto * $descPct/100, 2);
+                    $neto       = $bruto - $montoDesc;
+                    // 3) IVA si no es NAS
+                    $ivaPct     = $item->Productos->categoria === 'NAS' ? 0 : 16;
+                    $ivaItem    = round($neto * $ivaPct/100, 2);
 
-                    $item->precio_iva = $precioWithIva;
-                    $item->save();
-
-                    $nuevoSubtotal += $precioWithIva;
+                    $nuevoSubtotal += $neto + $ivaItem;
                 } else {
                     // Al resto los dejamos tal cual
                     $nuevoSubtotal += $item->Productos->precio_normal * $item->cantidad;
