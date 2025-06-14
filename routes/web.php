@@ -141,6 +141,9 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
+
+
 // =============== F A C T U R A C I O N===============================
 Route::get('/facturacion', action: [App\Http\Controllers\FacturasController::class, 'facturascion_index'])->name('facturas_user.index');
 Route::get('/facturacion/cosmica', action: [App\Http\Controllers\FacturasController::class, 'facturas_user'])->name('facturas_userCosmica.index');
