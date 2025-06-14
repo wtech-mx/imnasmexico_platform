@@ -243,6 +243,13 @@
                     <a href="{{ route('folio.index_crednecial',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
                     <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma de Profesionalización</a>
                     <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Título Honorífico</a>
+
+                    @if($tickets_externo->curso === 'Cosmiatria Estética' or 'Cosmiatría Estética')
+                    <a href="{{ route('folio.index_tira_externo', $tickets_externo->folio) }}?curso={{ urlencode($tickets_externo->curso) }}"
+                    class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias
+                    </a>
+                    @endif
+
                 @endif
 
 

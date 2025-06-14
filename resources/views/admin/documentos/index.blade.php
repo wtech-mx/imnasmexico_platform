@@ -401,24 +401,30 @@ Reporte de Documentos
             var cursoSelect = document.getElementById('curso');
             var cursoNombre = cursoSelect.options[cursoSelect.selectedIndex].text.toUpperCase();
 
-            // Obtener las iniciales de cada palabra en el nombre del curso (limitado a 5 letras)
+            // Obtener las iniciales de cada palabra en el nombre del curso (limitado a 4 letras)
             var cursoIniciales = cursoNombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 4);
 
-            // Obtener el último número base utilizado o establecerlo en 6000 si es la primera vez
-            var ultimoNumeroBase = parseInt(localStorage.getItem('ultimoNumeroBase')) || 6000;
+            // Obtener fecha y hora actual
+            var ahora = new Date();
 
-            // Incrementar el número base para el próximo folio
-            var siguienteNumeroBase = ultimoNumeroBase + 1;
+            // Formatear cada componente de la fecha y hora con ceros a la izquierda si es necesario
+            var dia     = String(ahora.getDate()).padStart(2, '0');
+            var mes     = String(ahora.getMonth() + 1).padStart(2, '0'); // +1 porque enero es 0
+            var anio    = String(ahora.getFullYear()).slice(-2);         // Solo los últimos 2 dígitos
+            var hora    = String(ahora.getHours()).padStart(2, '0');
+            var minuto  = String(ahora.getMinutes()).padStart(2, '0');
+            var segundo = String(ahora.getSeconds()).padStart(2, '0');
 
-            // Guardar el nuevo número base para el próximo folio
-            localStorage.setItem('ultimoNumeroBase', siguienteNumeroBase);
+            // Crear número basado en fecha y hora
+            var numeroFechaHora = dia + mes + anio + hora + minuto + segundo;
 
             // Construir el folio
-            var folio = 'F' + cursoIniciales + '-' + siguienteNumeroBase;
+            var folio = 'F' + cursoIniciales + '-' + numeroFechaHora;
 
             // Asignar el folio al input correspondiente
             document.getElementById('folio').value = folio;
         }
+
 
         //mostrar img automaticamente
         //foto

@@ -393,6 +393,23 @@ class FoliosController extends Controller
 
     }
 
+    public function index_tira_externo(Request $request, $id){
+
+        $curso = $request->query('curso'); // o $request->get('curso');
+
+        if($curso == 'Cosmiatria Estética'){
+            $tipo_documentos = Tipodocumentos::find(9)->first();
+
+        }else{
+            $tipo_documentos = Tipodocumentos::find(8)->first();
+        }
+
+        $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+
+        return view('user.components.documentos_imnas.index_tira_externa', compact('tickets_externo','tipo_documentos'));
+
+    }
+
 }
 
 

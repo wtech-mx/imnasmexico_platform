@@ -251,6 +251,7 @@ Route::get('/docmuento/titulo/{id}', [App\Http\Controllers\FoliosController::cla
 Route::get('/docmuento/diploma/{id}', [App\Http\Controllers\FoliosController::class, 'index_diploma'])->name('folio.index_diploma');
 Route::get('/docmuento/crednecial/{id}', [App\Http\Controllers\FoliosController::class, 'index_crednecial'])->name('folio.index_crednecial');
 Route::get('/docmuento/tira/{id}', [App\Http\Controllers\FoliosController::class, 'index_tira'])->name('folio.index_tira');
+Route::get('/docmuento/tira/externo/{id}', [App\Http\Controllers\FoliosController::class, 'index_tira_externo'])->name('folio.index_tira_externo');
 
 
 // =============== M O D U L O   C A M D O C U M E N T O S D I G I T A L E S ===============================
