@@ -242,11 +242,24 @@
         </div>
 
             @php
-                use Illuminate\Support\Str;
-                $cursoNormalizado = Str::of($tickets_externo->curso)->lower()->ascii();
+                $curso = $tickets_externo->curso;
+
+                $variantesValidas = [
+                    'Cosmiatría Estética',
+                    'Cosmiatria Estética',
+                    'Cosmiatria Estetica',
+                    'COSMIATRIA ESTETICA',
+                    'cosmiatria estetica',
+                    'COSMIATRÍA ESTÉTICA',
+                    'cosmiatría estética',
+                    'cosmiatria estética',
+                    'Cosmiatría Estética',
+                    'Cosmiatría estetica',
+                    // Agrega aquí cualquier otra variante que quieras cubrir
+                ];
             @endphp
 
-            @if($cursoNormalizado == 'Cosmiatría Estética')
+            @if(in_array($curso, $variantesValidas))
             <div class="container_texto_tira">
                 <ul>
                         <li>Anatomía </li>
