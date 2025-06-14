@@ -246,7 +246,7 @@
                 $cursoNormalizado = Str::of($tickets_externo->curso)->lower()->ascii();
             @endphp
 
-            @if($cursoNormalizado == 'carrera de cosmiatria estetica')
+            @if($cursoNormalizado == 'Cosmiatría Estética')
             <div class="container_texto_tira">
                 <ul>
                         <li>Anatomía </li>
