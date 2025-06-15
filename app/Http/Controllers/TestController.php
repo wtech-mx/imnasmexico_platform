@@ -10,7 +10,16 @@ class TestController extends Controller
         return view('user.test.index');
     }
 
-        public function index_especializado(){
+    public function index_medio(){
+
+        return view('user.test.test_medio');
+    }
+
+    public function index_avanzado(){
+        return view('user.test.test_avanzado');
+    }
+
+    public function index_especializado(){
         return view('user.test.test_especializado');
     }
 }

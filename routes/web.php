@@ -142,7 +142,10 @@ Route::get('folio', function () {
 });
 
 Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
-Route::get('/test/cosmica/avanzado', [App\Http\Controllers\TestController::class, 'index_especializado'])->name('test.index_especializado');
+Route::get('/test/cosmica/medio', [App\Http\Controllers\TestController::class, 'index_medio'])->name('test.index_medio');
+Route::get('/test/cosmica/avanzado', [App\Http\Controllers\TestController::class, 'index_avanzado'])->name('test.index_avanzado');
+
+Route::get('/test/cosmica/especializado', [App\Http\Controllers\TestController::class, 'index_especializado'])->name('test.index_especializado');
 
 
 // =============== F A C T U R A C I O N===============================
