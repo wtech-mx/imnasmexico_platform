@@ -142,6 +142,7 @@ Route::get('folio', function () {
 });
 
 Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
+Route::get('/test/cosmica/avanzado', [App\Http\Controllers\TestController::class, 'index_especializado'])->name('test.index_especializado');
 
 
 // =============== F A C T U R A C I O N===============================
