@@ -20,6 +20,14 @@ class TestController extends Controller
     }
 
     public function index_especializado(){
-        return view('user.test.test_especializado');
+        return view('user.test.espezializado.basico1');
+    }
+
+    public function index_especializadomedio(){
+        return view('user.test.espezializado.medio1');
+    }
+
+    public function index_especializadoavanzado(){
+        return view('user.test.espezializado.avanzado1');
     }
 }

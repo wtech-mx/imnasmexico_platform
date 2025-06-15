@@ -78,7 +78,7 @@
     document.getElementById('form-cuestionario').addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const nivelActual = document.getElementById('form-cuestionario').dataset.nivel; // "basico", "medio", "avanzado"
+        const nivelActual = document.getElementById('form-cuestionario').dataset.nivel;
 
         console.log(nivelActual);
 
@@ -173,7 +173,7 @@
         }
 
         if (nivelActual === 'avanzado') {
-            if (correctas >= 8) {
+            if (correctas >= 4 ) {
                 icono = 'success';
                 mensaje = `¡Gran nivel! Obtuviste ${correctas}/10. Puedes optar por un caso real o test especializado.`;
             } else if (correctas >= 5) {
@@ -202,6 +202,129 @@
             showConfirmButton: false
         });
     });
+
+
+   document.getElementById('form-cuestionario-espezializado').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nivelActual = document.getElementById('form-cuestionario-espezializado').dataset.nivel;
+
+        console.log(nivelActual);
+
+        const respuestasCorrectas = {
+            basico: {
+                pregunta_1: 'b', pregunta_2: 'c', pregunta_3: 'b', pregunta_4: 'a', pregunta_5: 'b',
+                pregunta_6: 'a', pregunta_7: 'b', pregunta_8: 'a', pregunta_9: 'a', pregunta_10: 'c'
+            },
+            medio: {
+                pregunta_1: 'd', pregunta_2: 'b', pregunta_3: 'b', pregunta_4: 'b', pregunta_5: 'b',
+                pregunta_6: 'b', pregunta_7: 'a', pregunta_8: 'b', pregunta_9: 'a', pregunta_10: 'c'
+            },
+            avanzado: {
+                pregunta_1: 'a', pregunta_2: 'b', pregunta_3: 'b', pregunta_4: 'a', pregunta_5: 'b',
+                pregunta_6: 'a', pregunta_7: 'a', pregunta_8: 'a', pregunta_9: 'b', pregunta_10: 'a'
+            }
+        };
+
+        const rutasInternas = {
+            basico: '/test/cosmica/medio',
+            medio: '/test/cosmica/avanzado',
+            avanzado: '/test/cosmica/especializado' // o deja vacío si aún no existe
+        };
+
+        const respuestasNivel = respuestasCorrectas[nivelActual];
+        console.log(respuestasNivel);
+
+        if (!respuestasNivel) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `No se encontraron respuestas para el nivel "${nivelActual}"`,
+            });
+            return;
+        }
+
+        let correctas = 0;
+
+        for (const [pregunta, respuestaCorrecta] of Object.entries(respuestasNivel)) {
+            const seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
+            if (seleccionada && seleccionada.value === respuestaCorrecta) {
+                correctas++;
+            }
+        }
+
+        let mensaje = '';
+        let icono = '';
+        let textoBoton = 'Ir al grupo';
+        let linkGrupo = linksWhats[nivelActual];
+        let botonExtra = null;
+
+        if (nivelActual === 'basico') {
+            if (correctas >= 8) {
+                icono = 'success';
+                mensaje = `¡Excelente! Obtuviste ${correctas}/10. Puedes avanzar al Nivel Medio.`;
+                botonExtra = {
+                    texto: 'Ir al Test Nivel Medio',
+                    link: rutasInternas.basico
+                };
+            } else if (correctas >= 5) {
+                icono = 'warning';
+                mensaje = `Obtuviste ${correctas}/10. Mantente reforzando el Nivel Básico.`;
+            } else {
+                icono = 'error';
+                mensaje = `Obtuviste solo ${correctas}/10. Es necesario repasar contenidos básicos.`;
+            }
+        }
+
+        if (nivelActual === 'medio') {
+            console.log(nivelActual);
+            if (correctas >= 7) {
+                icono = 'success';
+                mensaje = `¡Muy bien! Obtuviste ${correctas}/10. Puedes avanzar al Nivel Avanzado.`;
+                botonExtra = {
+                    texto: 'Ir al Test Nivel Avanzado',
+                    link: rutasInternas.medio
+                };
+            } else if (correctas >= 5) {
+                icono = 'warning';
+                mensaje = `Obtuviste ${correctas}/10. Recomendamos seguir profundizando en este nivel.`;
+            } else {
+                icono = 'error';
+                mensaje = `Obtuviste ${correctas}/10. Sería útil volver al Nivel Básico.`;
+            }
+        }
+
+        if (nivelActual === 'avanzado') {
+            if (correctas >= 4 ) {
+                icono = 'success';
+                mensaje = `¡Gran nivel! Obtuviste ${correctas}/10. Puedes optar por un caso real o test especializado.`;
+            } else if (correctas >= 5) {
+                icono = 'warning';
+                mensaje = `Obtuviste ${correctas}/10. Mantente en el Nivel Avanzado para afianzar conocimientos.`;
+            } else {
+                icono = 'error';
+                mensaje = `Obtuviste ${correctas}/10. Te recomendamos volver al Nivel Medio.`;
+                botonExtra = {
+                    texto: 'Volver al Nivel Medio',
+                    link: '/test/cosmica/medio'
+                };
+            }
+        }
+
+        let html = `<p>${mensaje}</p><a href="${linkGrupo}" class="swal2-confirm swal2-styled" style="background-color:#3085d6" target="_blank">Unirme al grupo de WhatsApp</a>`;
+
+        if (botonExtra) {
+            html += `<br><br><a href="${botonExtra.link}" class="swal2-confirm swal2-styled" style="background-color:#5cb85c"> ${botonExtra.texto}</a>`;
+        }
+
+        Swal.fire({
+            icon: icono,
+            title: 'Resultado del Test',
+            html: html,
+            showConfirmButton: false
+        });
+    });
+
     </script>
 
   </body>

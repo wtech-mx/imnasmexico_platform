@@ -145,7 +145,9 @@ Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'
 Route::get('/test/cosmica/medio', [App\Http\Controllers\TestController::class, 'index_medio'])->name('test.index_medio');
 Route::get('/test/cosmica/avanzado', [App\Http\Controllers\TestController::class, 'index_avanzado'])->name('test.index_avanzado');
 
-Route::get('/test/cosmica/especializado', [App\Http\Controllers\TestController::class, 'index_especializado'])->name('test.index_especializado');
+Route::get('/test/cosmica/especializado/basico', [App\Http\Controllers\TestController::class, 'index_especializadobasico'])->name('test.index_especializadobasico');
+Route::get('/test/cosmica/especializado/medio', [App\Http\Controllers\TestController::class, 'index_especializadomedio'])->name('test.index_especializadomedio');
+Route::get('/test/cosmica/especializad/avanzado', [App\Http\Controllers\TestController::class, 'index_especializadoavanzado'])->name('test.index_especializadoavanzado');
 
 
 // =============== F A C T U R A C I O N===============================
