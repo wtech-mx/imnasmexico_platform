@@ -27,7 +27,7 @@
                                 <option value="">Seleccionar Estatus</option>
                                 @if ($nota->tipo_nota ==  'Cotizacion')
                                     <option value="Aprobada">Aprobada</option>
-                                    {{-- <option value="Aprobar Linea Lumina">Aprobar Linea Lumina</option> --}}
+                                    <option value="Aprobar Party">Aprobar Party</option>
                                     {{-- @if ($nota->estatus_cotizacion ==  'Aprobada' || $nota->estatus_cotizacion ==  NULL)
                                         <option value="Cancelada">Cancelada</option>
                                     @endif --}}
@@ -236,13 +236,19 @@ $(document).ready(function() {
 
         $modal.find('.estatus-cotizacion').change(function() {
             var selectedValue = $(this).val();
-            if (selectedValue === 'Aprobada' || selectedValue === 'Aprobar Linea Lumina' || selectedValue === 'Aprobada Workshop') {
+            if (selectedValue === 'Aprobada' || selectedValue === 'Aprobada Workshop') {
                 $modal.find('.estado-select').show();
                 $modal.find('.tiendita-select').hide();
 
                 $modal.find('#estado').attr('required', true);
                 $modal.find('#metodo_pago').attr('required', true);
             } else if (selectedValue === 'Aprobado por tiendita') {
+                $modal.find('.tiendita-select').show();
+                $modal.find('.estado-select').hide();
+
+                $modal.find('#estado').attr('required', false);
+                $modal.find('#metodo_pago').attr('required', false);
+            } else if (selectedValue === 'Aprobar Party') {
                 $modal.find('.tiendita-select').show();
                 $modal.find('.estado-select').hide();
 
