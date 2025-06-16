@@ -128,7 +128,7 @@ class ProfesoresController extends Controller
 
 
     public function asistencia_expo() {
-        $id = 2079;
+        $id = 2111;
 
         $total = DB::table('notas_productos_cosmica')
         ->whereNotNull('fecha_aprobada')
@@ -142,27 +142,25 @@ class ProfesoresController extends Controller
             })
             ->get();
 
-              dd($total);
-              
-        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2080)
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2111)
         ->whereHas('Nota', function($query) {
             $query->whereNotNull('fecha_aprobada');
         })
         ->get();
 
-        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2080)
+        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->sum('cantidad');
 
-        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2080)
+        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->get();
 
-        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2080)
+        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
@@ -171,28 +169,28 @@ class ProfesoresController extends Controller
         $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
         $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
 
-        $asistencia = ProductosNotasCosmica::where('id_producto', 2080)
+        $asistencia = ProductosNotasCosmica::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '!=', NULL)
             ->sum('asistencia');
 
-        $asistencia_nas = ProductosNotasId::where('id_producto', 2080)
+        $asistencia_nas = ProductosNotasId::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '!=', NULL)
             ->sum('asistencia');
 
-        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 2080)
+        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })
             ->where('asistencia', '=', NULL)
             ->sum('cantidad');
 
-        $inasistencia_nas_basico = ProductosNotasId::where('id_producto', 2080)
+        $inasistencia_nas_basico = ProductosNotasId::where('id_producto', 2111)
             ->whereHas('Nota', function($query) {
                 $query->whereNotNull('fecha_aprobada');
             })

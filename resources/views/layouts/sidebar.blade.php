@@ -42,7 +42,7 @@
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-gift text-sm opacity-10" style="color: #673467"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Asisencia Expo</span>
+                    <span class="nav-link-text ms-1">Asisencia Party</span>
                 </a>
             </li>
 
