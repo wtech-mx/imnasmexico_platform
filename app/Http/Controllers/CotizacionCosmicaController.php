@@ -47,6 +47,12 @@ class CotizacionCosmicaController extends Controller
         }
     }
 
+    public function index_brunch(Request $request){
+
+        return view('admin.cotizacion_cosmica.ticker_brunch');
+
+    }
+
     public function index(Request $request) {
         $this->checkMembresia();
 
@@ -922,7 +928,7 @@ class CotizacionCosmicaController extends Controller
                 $file->move($path, $fileName);
                 $nota->foto_pago = $fileName;
             }
-            
+
             $nota->fecha_aprobada  = date("Y-m-d");
             $nota->fecha_preparacion  = date("Y-m-d H:i:s");
             $nota->id_admin_venta  = auth()->user()->id;

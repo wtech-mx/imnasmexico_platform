@@ -141,6 +141,8 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+Route::get('/ticket/brunch', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_brunch'])->name('index_brunch');
+
 Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
 Route::get('/test/cosmica/medio', [App\Http\Controllers\TestController::class, 'index_medio'])->name('test.index_medio');
 Route::get('/test/cosmica/avanzado', [App\Http\Controllers\TestController::class, 'index_avanzado'])->name('test.index_avanzado');
