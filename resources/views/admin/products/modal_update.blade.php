@@ -164,6 +164,8 @@
                                                     <option value="Pluton">Linea Facial - Pluton</option>
                                                     <option value="Solar">Linea Facial - Solar</option>
                                                     <option value="Venus">Linea Facial - Venus</option>
+                                                    <option value="Lumina">Linea Facial - Lumina</option>
+
                                                 </select>
                                             </div>
 

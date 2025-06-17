@@ -79,6 +79,13 @@
                         Lips Glow
                     </button>
                 </li>
+
+                <li class="nav-item p-2" role="presentation">
+                    <button class="nav-link btn_product_nav" id="pills-lumina-tab" data-bs-toggle="pill" data-bs-target="#pills-lumina" type="button" role="tab" aria-controls="pills-lumina" aria-selected="false">
+                        Lumina
+                    </button>
+                </li>
+
             </ul>
 
               <div class="tab-content" id="pills-tabContent">
@@ -155,6 +162,13 @@
                     </div>
                 </div>
 
+                <div class="tab-pane fade" id="pills-lumina" role="tabpanel" aria-labelledby="pills-lumina-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_lips as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
+                </div>
               </div>
 
         </div>

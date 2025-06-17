@@ -231,6 +231,20 @@
                     </a>
                 </div>
 
+                <div class="item">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-lumina">
+                        <div class="container_lineas_slide">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/lumina.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir text-white color_2 title_linea m-0">Línea</h4>
+                                <h5 class="text-center Quinsi text-white color_2 subtitle_linea m-0">Lumina</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
         </div>
         <button class="btn-next-facial"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
@@ -426,11 +440,12 @@
   </div>
 </div>
 
+
 <div id="carouselPure" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <a href="{{ route('tienda.productos_faciales') }}#pills-pure" rel="noopener noreferrer">
-            <img src="{{ asset('cosmika/inicio/banner/banner-10.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/linea_lumina.png') }}" class="d-block w-100" alt="">
         </a>
       </div>
     </div>
