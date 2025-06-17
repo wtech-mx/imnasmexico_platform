@@ -164,7 +164,7 @@
 
                 <div class="tab-pane fade" id="pills-lumina" role="tabpanel" aria-labelledby="pills-lumina-tab" tabindex="0">
                     <div class="row">
-                        @foreach ($products_lips as $product)
+                        @foreach ($products_lumina as $product)
                             @include('tienda_cosmica.Components.item_categorias')
                         @endforeach
                     </div>

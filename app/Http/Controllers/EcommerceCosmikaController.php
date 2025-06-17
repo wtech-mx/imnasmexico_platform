@@ -169,7 +169,14 @@ class EcommerceCosmikaController extends Controller
         ->orderBy('nombre','ASC')
         ->get();
 
-        return view('tienda_cosmica.productos_faciales', compact('products_lips','products_constelacion', 'products_espectro', 'products_lunar', 'products_mascarillas', 'products_nebulosa', 'products_pluton', 'products_solar', 'products_venus'));
+        $products_lumina = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Lumina')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        return view('tienda_cosmica.productos_faciales', compact('products_lumina','products_lips','products_constelacion', 'products_espectro', 'products_lunar', 'products_mascarillas', 'products_nebulosa', 'products_pluton', 'products_solar', 'products_venus'));
     }
 
     public function productos_corporales(){

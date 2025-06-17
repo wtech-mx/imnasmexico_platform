@@ -441,10 +441,10 @@
 </div>
 
 
-<div id="carouselPure" class="carousel slide">
+<div id="carouselLumina" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="{{ route('tienda.productos_faciales') }}#pills-pure" rel="noopener noreferrer">
+        <a href="{{ route('tienda.productos_faciales') }}#pills-lumina" rel="noopener noreferrer">
             <img src="{{ asset('cosmika/inicio/banner/linea_lumina.png') }}" class="d-block w-100" alt="">
         </a>
       </div>
