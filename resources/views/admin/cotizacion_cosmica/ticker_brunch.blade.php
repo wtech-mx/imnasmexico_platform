@@ -47,6 +47,42 @@
             width: 900px;
         }
 
+        @media screen and (max-width: 900px) {
+            img {
+                width: 600px;
+            }
+            .nombre {
+                left: 450px;
+                top: 79px;
+                font-size: 9px;
+                line-height: 30px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            img {
+                width: 450px;
+            }
+            .nombre {
+                left: 336px;
+                top: 56px;
+                font-size: 7px;
+                line-height: 30px;
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            img {
+                width: 350px;
+            }
+            .nombre {
+                left: 261px;
+                top: 47px;
+                font-size: 7px;
+                line-height: 15px;
+            }
+        }
+
   </style>
 
 </head>
