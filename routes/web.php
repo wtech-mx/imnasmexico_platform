@@ -142,6 +142,7 @@ Route::get('folio', function () {
 });
 
 Route::get('/ticket/brunch', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_brunch'])->name('index_brunch');
+Route::get('/ticket/brunch/cosmica/{nombre}', [App\Http\Controllers\ProfesoresController::class, 'ticket_brunch'])->name('ticket_brunch.index');
 
 Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
 Route::get('/test/cosmica/medio', [App\Http\Controllers\TestController::class, 'index_medio'])->name('test.index_medio');

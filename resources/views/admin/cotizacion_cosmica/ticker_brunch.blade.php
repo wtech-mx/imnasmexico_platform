@@ -54,7 +54,8 @@
 
         <div class="ticket" style="position: relative">
             <img class="img" src="{{ asset('cosmika/elementos/entrada.png') }}" alt="">
-            <p class="nombre">Juana de arco de alarcon Vega lopez mega allende</p>
+            <p class="nombre">{{ ucwords(str_replace('-', ' ', $nombre ?? 'SIN NOMBRE' )) }}</p>
+
         </div>
 
     </body>

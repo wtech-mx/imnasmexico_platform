@@ -104,6 +104,15 @@
                                                         <a class="btn btn-xs btn-success text-white whatsapp-btn" data-id="{{ $item->id }}" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
                                                             <i class="fa fa-whatsapp"></i>
                                                         </a>
+
+                                                        @if(isset($item->Nota->User->name))
+                                                                <a href="{{ route('ticket_brunch.index', ['nombre' => Str::slug($item->Nota->User->name)]) }}" target="_blank" class="btn btn-xs btn-primary text-white">
+                                                                    <i class="fa fa-share"></i>
+                                                                </a>
+
+                                                        @endif
+
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -153,6 +162,11 @@
                                                         <a class="btn btn-xs btn-success text-white whatsapp-btn" data-id="{{ $item->id }}" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
                                                             <i class="fa fa-whatsapp"></i>
                                                         </a>
+
+                                                        <a href="{{ route('ticket_brunch.index', ['nombre' => $item->Nota->nombre]) }}" class="btn btn-xs btn-primary text-white whatsapp-btn">
+                                                            <i class="fa fa-share"></i>
+                                                        </a>
+
                                                     </td>
                                                 </tr>
                                             @endforeach

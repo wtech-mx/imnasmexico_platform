@@ -39,8 +39,6 @@ class ProfesoresController extends Controller
         return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount','profesor'));
     }
 
-
-
     public function index_clase(Request $request)
     {
         $id_profesor = auth::user()->id;
@@ -71,7 +69,6 @@ class ProfesoresController extends Controller
 
         return view('profesor.clases', compact('cursos'));
     }
-
 
     public function dashboard(Request $request){
         $id_profesor = auth::user()->id;
@@ -125,7 +122,6 @@ class ProfesoresController extends Controller
 
         return back()->with('success', 'Profesor agregado');
     }
-
 
     public function asistencia_expo() {
         $id = 2111;
@@ -203,6 +199,12 @@ class ProfesoresController extends Controller
             'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'asistencia', 'asistencia_nas', 'inasistencia_basico',
             'inasistencia_nas_basico', 'inasistencia'));
     }
+
+    public function ticket_brunch($nombre)
+    {
+        return view('admin.cotizacion_cosmica.ticker_brunch', compact('nombre'));
+    }
+
 
     public function updateAsistencia(Request $request)
     {
