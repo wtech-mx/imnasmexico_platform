@@ -396,34 +396,50 @@ Reporte de Documentos
         }
 
         // Funcion folio dinamico
-        function generarFolio() {
-            // Obtener el nombre del curso seleccionado
-            var cursoSelect = document.getElementById('curso');
-            var cursoNombre = cursoSelect.options[cursoSelect.selectedIndex].text.toUpperCase();
+function generarFolio() {
+        let cursoNombre = '';
 
-            // Obtener las iniciales de cada palabra en el nombre del curso (limitado a 4 letras)
-            var cursoIniciales = cursoNombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 4);
-
-            // Obtener fecha y hora actual
-            var ahora = new Date();
-
-            // Formatear cada componente de la fecha y hora con ceros a la izquierda si es necesario
-            var dia     = String(ahora.getDate()).padStart(2, '0');
-            var mes     = String(ahora.getMonth() + 1).padStart(2, '0'); // +1 porque enero es 0
-            var anio    = String(ahora.getFullYear()).slice(-2);         // Solo los últimos 2 dígitos
-            var hora    = String(ahora.getHours()).padStart(2, '0');
-            var minuto  = String(ahora.getMinutes()).padStart(2, '0');
-            var segundo = String(ahora.getSeconds()).padStart(2, '0');
-
-            // Crear número basado en fecha y hora
-            var numeroFechaHora = dia + mes + anio + hora + minuto + segundo;
-
-            // Construir el folio
-            var folio = 'F' + cursoIniciales + '-' + numeroFechaHora;
-
-            // Asignar el folio al input correspondiente
-            document.getElementById('folio').value = folio;
+        // Prioridad: si está visible el input manual, usarlo
+        const inputManualVisible = document.getElementById('precioMayoristaContainer').style.display !== 'none';
+        if (inputManualVisible) {
+            cursoNombre = document.getElementById('curso_name').value.toUpperCase();
+        } else {
+            const cursoSelect = document.getElementById('curso');
+            cursoNombre = cursoSelect.options[cursoSelect.selectedIndex].text.toUpperCase();
         }
+
+        // Obtener iniciales del nombre del curso
+        const cursoIniciales = cursoNombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 4);
+
+        const ahora = new Date();
+        const dia = String(ahora.getDate()).padStart(2, '0');
+        const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+        const anio = String(ahora.getFullYear()).slice(-2);
+        const hora = String(ahora.getHours()).padStart(2, '0');
+        const minuto = String(ahora.getMinutes()).padStart(2, '0');
+        const segundo = String(ahora.getSeconds()).padStart(2, '0');
+
+        const numeroFechaHora = dia + mes + anio + hora + minuto + segundo;
+        const folio = 'F' + cursoIniciales + '-' + numeroFechaHora;
+
+        document.getElementById('folio').value = folio;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Detectar cambio en input manual (cuando se escribe)
+        document.getElementById('curso_name').addEventListener('input', generarFolio);
+
+        // Detectar cambio de opción para mostrar u ocultar input manual
+        document.getElementById('radioSiMayo').addEventListener('change', function () {
+            document.getElementById('precioMayoristaContainer').style.display = 'block';
+            generarFolio();
+        });
+
+        document.getElementById('radioNoMayo').addEventListener('change', function () {
+            document.getElementById('precioMayoristaContainer').style.display = 'none';
+            generarFolio();
+        });
+    });
 
 
         //mostrar img automaticamente
