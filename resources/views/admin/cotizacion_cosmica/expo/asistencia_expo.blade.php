@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Asistencia Expo
+    Asistencia Expo Sabado
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <div class="card-header">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                                    <h2 class="mb-3">Asistencia Party</h2>
+                                    <h2 class="mb-3">Asistencia Party Sabado</h2>
 
                                     <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                         ¿Como funciona?
@@ -25,6 +25,19 @@
                                             <i class="fa fa-fw fa-edit"></i> Crear
                                         </a>
                                     @endcan
+                                </div>
+                                <div class="row">
+                                    <div class="col6">
+                                        <a href="{{ route('asistencia_expo.index') }}" class="btn bg-danger text-white" >
+                                            Sabado
+                                        </a>
+                                    </div>
+
+                                    <div class="col6">
+                                        <a href="{{ route('asistencia_expo_domingo.index') }}" class="btn bg-primary text-white" >
+                                            Domingo
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -109,7 +122,6 @@
                                                                 <a href="{{ route('ticket_brunch.index', ['nombre' => Str::slug($item->Nota->User->name)]) }}" target="_blank" class="btn btn-xs btn-primary text-white">
                                                                     <i class="fa fa-share"></i>
                                                                 </a>
-
                                                         @endif
 
 

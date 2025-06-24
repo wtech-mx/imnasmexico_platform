@@ -200,6 +200,84 @@ class ProfesoresController extends Controller
             'inasistencia_nas_basico', 'inasistencia'));
     }
 
+    public function asistencia_expo_domingo() {
+        $id = 2121;
+
+        $total = DB::table('notas_productos_cosmica')
+        ->whereNotNull('fecha_aprobada')
+        ->where(function($q) use ($id) {
+            $q->where('id_kit',  $id)
+                ->orWhere('id_kit2', $id)
+                ->orWhere('id_kit3', $id)
+                ->orWhere('id_kit4', $id)
+                ->orWhere('id_kit5', $id)
+                ->orWhere('id_kit6', $id);
+            })
+            ->get();
+
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 2121)
+        ->whereHas('Nota', function($query) {
+            $query->whereNotNull('fecha_aprobada');
+        })
+        ->get();
+
+        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
+
+        $ordenes_nas_basico = ProductosNotasId::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->get();
+
+        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
+
+        $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
+        $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
+
+        $asistencia = ProductosNotasCosmica::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '!=', NULL)
+            ->sum('asistencia');
+
+        $asistencia_nas = ProductosNotasId::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '!=', NULL)
+            ->sum('asistencia');
+
+        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '=', NULL)
+            ->sum('cantidad');
+
+        $inasistencia_nas_basico = ProductosNotasId::where('id_producto', 2121)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '=', NULL)
+            ->sum('cantidad');
+
+        $inasistencia = $inasistencia_basico + $inasistencia_nas_basico;
+
+        return view('admin.cotizacion_cosmica.expo.asistencia_expo_domingo', compact('ordenes_basico',
+            'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'asistencia', 'asistencia_nas', 'inasistencia_basico',
+            'inasistencia_nas_basico', 'inasistencia'));
+    }
+
+
     public function ticket_brunch($nombre)
     {
         return view('admin.cotizacion_cosmica.ticker_brunch', compact('nombre'));
