@@ -283,6 +283,10 @@ class ProfesoresController extends Controller
         return view('admin.cotizacion_cosmica.ticker_brunch', compact('nombre'));
     }
 
+    public function ticket_brunch_domingo($nombre)
+    {
+        return view('admin.cotizacion_cosmica.ticker_brunch_domingo', compact('nombre'));
+    }
 
     public function updateAsistencia(Request $request)
     {
