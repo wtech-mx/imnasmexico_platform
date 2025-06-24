@@ -534,11 +534,11 @@ class CotizacionController extends Controller
         }
 
         $nota = NotasProductos::findOrFail($id);
-
         $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
         $cleanPriceTotal = floatval(str_replace(['$', ','], '', $request->get('total_final')));
         $nota->subtotal = $cleanPrice4;
         $nota->total = $cleanPriceTotal;
+        $nota->restante = $request->descuento_total;
         $nota->envio = $request->get('envio');
         $nota->dinero_recibido = $request->get('costo_envio');
 
@@ -670,7 +670,7 @@ class CotizacionController extends Controller
             // 3) Guardar subtotales en la nota
             $nota->update([
                 'subtotal' => $nuevoSubtotal,
-                'total'    => $nuevoSubtotal,
+                'total'    => $cleanPriceTotal,
             ]);
         }
 
