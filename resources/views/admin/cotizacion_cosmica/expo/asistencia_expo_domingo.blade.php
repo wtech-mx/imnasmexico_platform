@@ -119,7 +119,7 @@
                                                         </a>
 
                                                         @if(isset($item->Nota->User->name))
-                                                                <a href="{{ route('ticket_brunch.index', ['nombre' => Str::slug($item->Nota->User->name)]) }}" target="_blank" class="btn btn-xs btn-primary text-white">
+                                                                <a href="{{ route('ticket_brunch_domingo.index', ['nombre' => Str::slug($item->Nota->User->name)]) }}" target="_blank" class="btn btn-xs btn-primary text-white">
                                                                     <i class="fa fa-share"></i>
                                                                 </a>
                                                         @endif
