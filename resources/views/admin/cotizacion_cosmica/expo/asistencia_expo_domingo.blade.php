@@ -14,7 +14,7 @@
                             <div class="card-header">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                                    <h2 class="mb-3">Asistencia Party</h2>
+                                    <h2 class="mb-3">Asistencia Party Domingo</h2>
 
                                     <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                         ¿Como funciona?
