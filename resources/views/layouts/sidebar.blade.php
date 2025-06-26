@@ -584,6 +584,16 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('admin/pagos/mercadocosmica*') ? 'active' : '') }}" href="{{ route('mercado_cosmica.pago') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <img src="https://plataforma.imnasmexico.com/utilidades/logo_mp.png" alt="" style="width: 25px">
+
+                    </div>
+                    <span class="nav-link-text ms-1">Mercado Pago Cosmica</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ (Request::is('/admin/link/pagos/mercado*') ? 'active' : '') }}" href="{{ route('link_pago.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                         <img src="https://plataforma.imnasmexico.com/utilidades/logo_mp.png" alt="" style="width: 25px">
@@ -755,7 +765,7 @@
                         </a>
                     </li>
                 @endcan
-{{-- 
+{{--
                 @can('cosmica-cotizaciones')
                     <li class="nav-item">
                         <a class="nav-link {{ (Request::is('admin/cotizador/cosmica/expo/*') ? 'active' : '') }}" href="{{ route('index_cotizaciones_cosmica_expo.cotizador') }}">

@@ -1835,7 +1835,7 @@ class CotizacionCosmicaController extends Controller
 
     public function processPayment(Request $request){
         // Configurar el SDK de Mercado Pago con las credenciales de API
-       SDK::setAccessToken(config('services.mercadopago.token'));
+       SDK::setAccessToken(config('services.mercadopago_secundario.token'));
 
         // Crear un objeto de preferencia de pago
         $preference = new Preference();

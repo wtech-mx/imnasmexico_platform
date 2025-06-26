@@ -768,6 +768,59 @@ class PagosFueraController extends Controller
             ->with('success', 'curso created successfully.');
     }
 
+    public function mercado_pago_cosmica()
+    {
+        // Configuración de la SDK de MercadoPago
+        SDK::setAccessToken(config('services.mercadopago_secundario.token'));
+
+        // Fechas para el filtro
+        $today = date('Y-m-d');
+        $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
+        $lastMonthStartDate = date('Y-m-01', strtotime('-4 month'));
+
+        // Filtros para la búsqueda de pagos
+        $filters = array(
+            "status" => "approved",
+            "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
+            "end_date" => $today."T23:59:59.999-00:00",
+            "limit" => 100,
+            "offset" => 0
+        );
+
+        // Arrays para almacenar pagos
+        $pagos = array();
+        $comprasSinEmail = array();
+
+        do {
+            // Obtener siguiente página de resultados
+            $searchResult = \MercadoPago\Payment::search($filters);
+
+            // Obtener los resultados de la búsqueda
+            $results = $searchResult->getArrayCopy();
+
+            // Clasificar los pagos en función de si el email está vacío o no
+            foreach ($results as $pago) {
+                if (empty($pago->payer->email)) {
+                    // Categorizar como "compras" si el email está vacío
+                    $comprasSinEmail[] = $pago;
+                } else {
+                    // Categorizar como pagos normales si el email no está vacío
+                    $pagos[] = $pago;
+                }
+            }
+
+            // Incrementar el offset para obtener la siguiente página de resultados
+            $filters["offset"] += $filters["limit"];
+
+        } while (count($results) > 0);
+
+        usort($pagos, fn($a, $b) => strtotime($b->date_approved) <=> strtotime($a->date_approved));
+        usort($comprasSinEmail, fn($a, $b) => strtotime($b->date_approved) <=> strtotime($a->date_approved));
+
+        // Pasar los datos a la vista
+        return view('admin.pagos.mercado_pago_cosmica', compact('pagos', 'comprasSinEmail'));
+    }
+
     public function mercado_pago()
     {
         // Configuración de la SDK de MercadoPago

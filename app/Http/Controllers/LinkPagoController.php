@@ -113,7 +113,7 @@ class LinkPagoController extends Controller
 
     public function processPayment_custom(Request $request){
         // Configurar el SDK de Mercado Pago con las credenciales de API
-       SDK::setAccessToken(config('services.mercadopago_secundario.token'));
+       SDK::setAccessToken(config('services.mercadopago.token'));
         // Crear un objeto de preferencia de pago
         $preference = new Preference();
         $code = Str::random(8);
