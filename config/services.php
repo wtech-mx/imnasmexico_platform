@@ -37,7 +37,9 @@ return [
         'token' => env('MP_ACCES_TOKEN'),
     ],
     'mercadopago_secundario' => [
-        'key' => 'TEST-582575fc-f0e7-4e69-aeeb-78c4b303f9bf',
-        'token' => 'TEST-3926055628216617-062614-6f17a8a3be6129d451561b1917f2a5e3-2084225921',
+        // 'key' => 'TEST-582575fc-f0e7-4e69-aeeb-78c4b303f9bf',
+        // 'token' => 'TEST-3926055628216617-062614-6f17a8a3be6129d451561b1917f2a5e3-2084225921',
+         'key' => 'APP_USR-5009f659-13a5-4aa3-8f36-d2bd80e071e8',
+         'token' => 'APP_USR-3926055628216617-062614-106d3ac7dd26f29d980d1927b7dc35ad-2084225921',
     ],
 ];
