@@ -32,9 +32,12 @@ return [
     ],
 
     'mercadopago' => [
-        'base_uri' => 'https://api.mercadopago.com',
+        'mercadopago' => 'https://api.mercadopago.com',
         'key' => env('MP_PUBLIC_KEY'),
         'token' => env('MP_ACCES_TOKEN'),
     ],
-
+    'mercadopago_secundario' => [
+        'key' => 'TEST-582575fc-f0e7-4e69-aeeb-78c4b303f9bf',
+        'token' => 'TEST-3926055628216617-062614-6f17a8a3be6129d451561b1917f2a5e3-2084225921',
+    ],
 ];
