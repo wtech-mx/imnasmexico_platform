@@ -50,6 +50,19 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-4">
+                                        <div id="reconocimiento-upload" style="display:none;">
+                                            <label for="reconocimiento">Sube su reconocimiento:</label>
+                                            <input type="file" name="reconocimiento" id="reconocimiento" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div id="reconocimiento-preview" style="display:none;">
+                                            <!-- Aquí inyectaremos la imagen o el iframe del PDF -->
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-12">
                                         <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
@@ -232,88 +245,6 @@
                                             <input class="form-control" type="text" id="totalDescuento" name="totalDescuento" readonly>
                                         </div>
                                     </div>
-{{--
-                                    <div id="divFactura" style="display: none;">
-                                        <div class="row">
-                                            <h2 style="color: #783E5D">Factura</h2>
-
-                                            <div class="form-group col-4">
-                                                <h4 for="name">Situacion Fiscal</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input class="form-control" type="file" id="situacion_fiscal" name="situacion_fiscal">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-4">
-                                                <h4 for="name">Nombre / Razon Social</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input class="form-control" type="text" id="razon_social" name="razon_social">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-4">
-                                                <h4 for="name">RFC</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/carta.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input class="form-control" type="text" id="rfc" name="rfc">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-4">
-                                                <h4 for="name">CFDI</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/monetary-policy.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <select class="form-select" name="cfdi" id="cfdi">
-                                                        <option value="">Seleccione CFDI</option>
-                                                        <option value="G01 Adquisicion de Mercancias">G01 Adquisicion de Mercancias</option>
-                                                        <option value="G02 Devoluciones, Descuentos o Bonificaciones">G02 Devoluciones, Descuentos o Bonificaciones</option>
-                                                        <option value="G03 Gastos en General">G03 Gastos en General</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-4">
-                                                <h4 for="name">Correo</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input class="form-control" type="text" id="correo_fac" name="correo_fac">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-4">
-                                                <h4 for="name">Telefono</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input class="form-control" type="number" id="telefono_fac" name="telefono_fac">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <h4 for="name">Direccion de Factura</h4>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/cp.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input class="form-control" type="text" id="direccion_fac" name="direccion_fac">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div> --}}
 
                                     <div class="col-12">
                                         <div class="form-group">
@@ -383,9 +314,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var clienteData = null;
 
+
         $('#id_cliente').on('change', function() {
             var clienteId = $(this).val();
-
+            const baseReconocimientosUrl = "{{ asset('reconocimientos/') }}";
             if (clienteId) {
                 $.ajax({
                     url: '/get-descuento/' + clienteId,
@@ -414,6 +346,29 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Actualiza el contenido del h4 con la información de la membresía
                         $('#membresia-info').text(membresiaInfo);
                         actualizarSubtotal();
+
+                        console.log(baseReconocimientosUrl);
+                        if (data.reconocimiento) {
+                            // build de la URL igual que en Blade:
+                            const url = baseReconocimientosUrl + '/' + data.reconocimiento;
+                            console.log(url);
+                            // detección de extensión
+                            const ext = data.reconocimiento.split('.').pop().toLowerCase();
+                            let previewHtml;
+                            if (['jpg','jpeg','png','gif'].includes(ext)) {
+                            previewHtml = `<img src="${url}" class="img-fluid" alt="Reconocimiento" width="50%" height="50px">`;
+                            } else if (ext === 'pdf') {
+                            previewHtml = `<iframe src="${url}" width="120%" height="150px"></iframe>`;
+                            } else {
+                            previewHtml = `<a href="${url}" target="_blank">Ver archivo</a>`;
+                            }
+
+                            $('#reconocimiento-upload').hide();
+                            $('#reconocimiento-preview').html(previewHtml).show();
+                        } else {
+                            $('#reconocimiento-preview').hide();
+                            $('#reconocimiento-upload').show();
+                        }
                     }
                 });
             } else {

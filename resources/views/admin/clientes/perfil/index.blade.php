@@ -171,7 +171,15 @@
                             <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
                                 @if ($tipo == 'Usuario')
                                     @if ($distribuidora == NULL)
-                                        <h4>No tiene membresia</h4>
+                                        <div class="h-100">
+                                            <h4>No tiene membresia</h4>
+
+                                            @if ($cliente->reconocimiento == NULL)
+                                                <h4 style="color: #940f0b">No tiene diploma cargado</h4>
+                                            @else
+                                                <h4 style="color: #7cc00e">Diploma cargado</h4>
+                                            @endif
+                                        </div>
                                     @else
                                         <div class="h-100">
                                             <h5 class="mb-1 font-weight-bolder">
@@ -185,6 +193,11 @@
                                                 <p class="mb-0 font-weight-bold text-sm" style="color: #8a3f13">
                                                     {{$distribuidora->membresia_estatus}}
                                                 </p>
+                                            @endif
+                                            @if ($cliente->reconocimiento == NULL)
+                                                <h4 style="color: #940f0b">No tiene diploma cargado</h4>
+                                            @else
+                                                <h4 style="color: #7cc00e">Diploma cargado</h4>
                                             @endif
                                         </div>
                                     @endif

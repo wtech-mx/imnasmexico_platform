@@ -338,7 +338,37 @@ class CotizacionCosmicaController extends Controller
                 }
             }
         }else{
+            $dominio = $request->getHost();
+            if($dominio == 'plataforma.imnasmexico.com'){
+                $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/reconocimiento');
+            }else{
+                $pago_fuera = public_path() . '/reconocimiento';
+            }
             $notas_productos->id_usuario = $request->get('id_cliente');
+            $user = User::where('id', $request->get('id_cliente'))->first();
+            if ($request->hasFile('reconocimiento')) {
+                $file      = $request->file('reconocimiento');
+                $clienteId = $user->id;  // o $user->id si lo prefieres
+                $timestamp = time();
+                $ext       = $file->getClientOriginalExtension();
+
+                // Construimos un nombre “limpio”:
+                $fileName  = "{$clienteId}_{$timestamp}.{$ext}";
+
+                // Opcional: asegúrate de que la carpeta existe
+                $destPath = public_path('reconocimientos');
+                if (! is_dir($destPath)) {
+                    mkdir($destPath, 0755, true);
+                }
+
+                // Move
+                $file->move($destPath, $fileName);
+
+                // Guarda en la BD
+                $user->reconocimiento = $fileName;
+                $user->save();
+            }
+            $user->update();
         }
 
         $dominio = $request->getHost();
@@ -1156,17 +1186,20 @@ class CotizacionCosmicaController extends Controller
 
     public function getDescuento($id){
         $user = Cosmikausers::where('id_cliente', $id)->first();
+        $user_tabla = User::where('id', $id)->first();
 
-        if ($user && $user->membresia_estatus === 'Activa') {
+        if ($user) {
             return response()->json([
-                'status' => 'activo',
-                'membresia' => $user->membresia,
-            ]);
-        } else {
-            return response()->json([
-                'status' => 'inactivo',
+                'status'         => ($user->membresia_estatus === 'Activa' ? 'activo' : 'inactivo'),
+                'membresia'      => $user->membresia,
+                'reconocimiento' => $user_tabla->reconocimiento, // Ruta o nombre de archivo, o null
             ]);
         }
+
+        return response()->json([
+            'status'         => 'inactivo',
+            'reconocimiento' => $user_tabla->reconocimiento,
+        ]);
     }
 
     public function imprimir_reporte(Request $request)

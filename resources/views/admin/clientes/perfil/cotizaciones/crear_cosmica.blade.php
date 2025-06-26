@@ -42,6 +42,12 @@
                         <input type="number" id="telefono" name="telefono" class="form-control" value="{{$cliente->telefono}}" required>
                     </div>
                 </div>
+
+                <div class="col-12">
+                    <label for="reconocimiento">Sube su reconocimiento:</label>
+                    <input type="file" name="reconocimiento" id="reconocimiento" class="form-control" />
+                </div>
+
             </div>
 
             <div class="col-12">

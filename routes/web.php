@@ -507,7 +507,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/pagos/pendiente', [App\Http\Controllers\PagosFueraController::class, 'index_pago_pendiente'])->name('pagos.index_pago_pendiente');
 
     Route::get('/admin/pagos/mercado', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago'])->name('mercado.pago');
-    Route::get('/admin/pagos/mercado/cosmica', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago_cosmica'])->name('mercado_cosmica.pago');
+    Route::get('cosmica/admin/pagos/mercado', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago_cosmica'])->name('mercado_cosmica.pago');
 
     Route::get('/admin/pagos/mercado/recibo/{id}', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago_recibo'])->name('mercado.pago_recibo');
 
