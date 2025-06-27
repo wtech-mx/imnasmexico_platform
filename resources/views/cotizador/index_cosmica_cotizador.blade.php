@@ -132,14 +132,14 @@ Cosmica
 </style>
 
 @section('cotizador')
-    <link rel="icon" type="image/x-icon" href="https://plataforma.imnasmexico.com/cosmika/menu/logo.png">
+    <link rel="icon" type="image/x-icon" href="{{ asset('cosmika/menu/logo.png') }}">
 
 <div class="container-xxl">
     <form id="cotizaForm">
             @csrf
         <div class="row mt-5">
             <div class="col-6">
-                <img class="img_header" src="https://plataforma.imnasmexico.com/cosmika/menu/logo.png" alt="">
+                <img class="img_header" src="{{ asset('cosmika/menu/logo.png') }}" alt="">
             </div>
 
             <div class="col-6">
@@ -208,7 +208,7 @@ Cosmica
                     <tr data-precio="{{ $applicablePrice }}">
                         {{-- <td>{{ $producto->linea }}</td> --}}
                         <td>
-                            <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
+                            {{-- <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br> --}}
                             <p class="name_producto">
                                 {{ $producto->nombre }} /
                                 {{ $producto->linea }}
