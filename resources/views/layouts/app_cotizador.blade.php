@@ -161,10 +161,10 @@
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/select2.min.js') }}"></script>
 
         <!-- jQuery (necesario para Owl Carousel) -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('assets/ecommerce/dataTables/js/jquery-3.6.0.min.js') }}"></script>
 
         <!-- Owl Carousel JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
 
 
 
