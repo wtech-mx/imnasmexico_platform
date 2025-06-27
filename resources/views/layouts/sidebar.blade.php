@@ -28,14 +28,14 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ (Request::is('cotizacion/expo/*') ? 'active' : '') }}" href="{{ route('corizacion_expo.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-gift text-sm opacity-10" style="color: #673467"></i>
                     </div>
                     <span class="nav-link-text ms-1">Cotizaciones Expo</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a class="nav-link {{ (Request::is('/asistencia/expo/*') ? 'active' : '') }}" href="{{ route('asistencia_expo.index') }}">
@@ -765,7 +765,7 @@
                         </a>
                     </li>
                 @endcan
-{{--
+
                 @can('cosmica-cotizaciones')
                     <li class="nav-item">
                         <a class="nav-link {{ (Request::is('admin/cotizador/cosmica/expo/*') ? 'active' : '') }}" href="{{ route('index_cotizaciones_cosmica_expo.cotizador') }}">
@@ -775,7 +775,7 @@
                         <span class="nav-link-text ms-1">Cotizaciones EXPO Cosmica</span>
                         </a>
                     </li>
-                @endcan --}}
+                @endcan
 
                 @can('cosmica-distribuidora')
                     <li class="nav-item">
