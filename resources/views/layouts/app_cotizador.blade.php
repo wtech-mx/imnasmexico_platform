@@ -21,32 +21,23 @@
     <!-- Bootstrap -->
      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.css') }}">
+    {{-- <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/bootstrap.css"> --}}
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/bootstrap.css">
 
     {{-- <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}"> --}}
 
      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/twitter-bootstrap.css') }}">
-
-    <!-- dataTables -->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/dataTables/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/twitter-bootstrap.css">
 
     <!-- css custom -->
 
     <!-- Sweetalert2 -->
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}">
-
-    <!-- Select2  -->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/select2.css') }}">
-
-    <!-- ligthbox  -->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/lightbox.min.css') }}">
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/sweetalert2.css">
 
     <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
-
-
-    <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css">
 
     @yield('css_custom')
     <style>
@@ -141,31 +132,19 @@
 
         <!-- Bootstrap -->
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/bootstrap_bundle.js') }}"></script>
+        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/bootstrap_bundle.js"></script>
+
 
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/popper.js') }}"></script>
+        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/popper.js"></script>
 
         <!-- jquery -->
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/jquery-3.7.0.js') }}"></script>
-
-        <!-- dataTables -->
-        <script src="{{ asset('assets/ecommerce/dataTables/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/ecommerce/dataTables/js/dataTables.bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('assets/ecommerce/dataTables/js/jquery-ui.min.js') }}"></script>
-
-        <!-- js custom -->
+        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/jquery-3.7.0.js"></script>
 
         <!-- Sweetalert2 -->
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/sweetalert2.all.min.js') }}"></script>
-
-        <!-- Select2  -->
-        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/select2.min.js') }}"></script>
-
-        <!-- jQuery (necesario para Owl Carousel) -->
-        <script src="{{ asset('assets/ecommerce/dataTables/js/jquery-3.6.0.min.js') }}"></script>
-
-        <!-- Owl Carousel JS -->
-        <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
-
+        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/sweetalert2.all.min.js"></script>
 
 
         @yield('js_custom')
