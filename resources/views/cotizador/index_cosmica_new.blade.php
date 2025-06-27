@@ -1,7 +1,7 @@
 @extends('layouts.app_cotizador')
 
 @section('template_title')
-Cosmica
+Cosmica Expo
 @endsection
 
 <style>

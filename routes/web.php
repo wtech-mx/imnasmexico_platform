@@ -34,7 +34,7 @@ Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController:
 
 Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index_nas.cotizador');
 Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
-Route::get('/admin/cotizador/new/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica_new'])->name('index_cosmica_new.cotizador');
+Route::get('/cotizador/expo', [App\Http\Controllers\CotizadorController::class, 'index_cosmica_new'])->name('index_cosmica_new.cotizador');
 Route::get('/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'cotizador_cosmica'])->name('cotizador_cosmica');
 
 Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
