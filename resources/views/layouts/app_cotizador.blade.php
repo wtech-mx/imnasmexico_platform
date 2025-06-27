@@ -18,25 +18,27 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="{{ asset('assets/ecommerce/media/fonts/nunito/nunito.css') }}" rel="stylesheet">
     <meta name="google-site-verification" content="xjOUgezOv03ht4XdfShswB0Hh-49H_WsaM6Cx9GIR6A" />
+
+    @include('layouts.css')
+
     <!-- Bootstrap -->
      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.css') }}">
-    {{-- <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/bootstrap.css"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.css') }}"> --}}
     <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/bootstrap.css">
 
     {{-- <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}"> --}}
 
      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/twitter-bootstrap.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/twitter-bootstrap.css') }}"> --}}
     <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/twitter-bootstrap.css">
 
     <!-- css custom -->
 
     <!-- Sweetalert2 -->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}"> --}}
     <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/sweetalert2.css">
 
-    <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css">
 
     @yield('css_custom')
@@ -130,22 +132,7 @@
 
         @yield('cotizador')
 
-        <!-- Bootstrap -->
-        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/bootstrap_bundle.js') }}"></script>
-        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/bootstrap_bundle.js"></script>
-
-
-        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/popper.js') }}"></script>
-        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/popper.js"></script>
-
-        <!-- jquery -->
-        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/jquery-3.7.0.js') }}"></script>
-        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/jquery-3.7.0.js"></script>
-
-        <!-- Sweetalert2 -->
-        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/sweetalert2.all.min.js') }}"></script>
-        <script type="text/javascript" src="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/js/sweetalert2.all.min.js"></script>
-
+        @include('layouts.js')
 
         @yield('js_custom')
 
