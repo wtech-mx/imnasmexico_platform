@@ -172,7 +172,13 @@
                 @foreach ($notasAprobadasCosmicaComision as $notas)
                     <tr >
                         <td>{{$notas->folio}}</td>
-                        <td>{{$notas->Vendido->name}}</td>
+                        <td>
+                            @if ($notas->Vendido)
+                                {{$notas->Vendido->name}}
+                            @else
+
+                            @endif
+                        </td>
                         <td class="form-group col-3">${{number_format($notas->subtotal, 2)}}</td>
                         <td class="form-group col-3">{{$notas->restante}}%</td>
                         <td class="form-group col-3">${{number_format($notas->total, 2)}}</td>
