@@ -89,7 +89,9 @@ class LabNasController extends Controller
 
         $product->nombre = $request->get('nombre');
         $product->descripcion = $request->get('descripcion');
-        $product->precio_rebajado = $request->get('precio_rebajado');
+        if ($request->filled('precio_rebajado')) {
+            $product->precio_rebajado = $request->get('precio_rebajado');
+        }
         $product->precio_normal = $request->get('precio_normal');
         $product->imagenes = $request->get('imagenes');
         $product->stock = $request->get('stock');

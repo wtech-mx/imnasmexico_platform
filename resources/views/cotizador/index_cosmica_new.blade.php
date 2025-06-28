@@ -246,7 +246,19 @@ Cosmica Expo
                     <tr data-precio="{{ $applicablePrice }}">
                         {{-- <td>{{ $producto->linea }}</td> --}}
                         <td>
-                            <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br>
+                            {{-- <img src="{{ $producto->imagenes }}" alt="" style="width:40px"> <br> --}}
+                            @php
+                                $local = public_path($producto->local_img);
+                            @endphp
+
+                            <img
+                            src="{{ file_exists($local)
+                                    ? asset($producto->local_img)
+                                    : $producto->imagenes }}"
+                            alt="{{ $producto->nombre }}"
+                            style="width:40px"
+                            />
+
                             <p class="name_producto">
                                 {{ $producto->nombre }} /
                                 {{ $producto->linea }}
@@ -334,7 +346,10 @@ Cosmica Expo
                 @foreach($kits as $kit)
                 <tr data-precio="{{ $kit->precio_normal }}">
                     <td>
-                        <img src="{{asset('products/'.$kit->imagenes) }}" alt="" style="width:40px"><br>
+                        {{-- <img src="{{asset('products/'.$kit->imagenes) }}" alt="" style="width:40px"> --}}
+                        <img src="{{ file_exists(public_path($kit->local_img))? asset($kit->local_img) : $kit->imagenes }}" alt="{{ $kit->nombre }}" style="width:40px"/>
+
+                        <br>
                         {{ $kit->nombre }} / {{ $kit->linea }}<br><br>
                         <p class="text-muted">Precio ${{ number_format($kit->precio_normal,2,'.',',') }}</p>
                     </td>

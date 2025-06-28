@@ -110,24 +110,39 @@ class CotizadorController extends Controller
         $productos = Products::query()
             ->where('categoria', 'Cosmica')
             ->where('subcategoria', 'Producto')
-            ->get();
+            ->get()
+            ->map(function($producto) {
+                // Determinamos extensión
+                $ext = pathinfo($producto->imagenes, PATHINFO_EXTENSION) ?: 'jpg';
+                $producto->local_img = "storage/productos/{$producto->id}.{$ext}";
+                return $producto;
+            });
 
         // 2) Agruparlos por sublínea
         $productosPorSublinea = $productos->groupBy('sublinea');
 
-        // 3) Ahora traemos los kits
+        // 3) Kits
         $kits = Products::query()
             ->where('categoria', 'Cosmica')
-            ->where('subcategoria', operator: 'Kit')
+            ->where('subcategoria', 'Kit')
             ->where('estatus', 'publicado')
             ->orderBy('nombre', 'asc')
-            ->with('bundleItems')   // <-- cargar la relación
-            ->get();
+            ->with('bundleItems')
+            ->get()
+            ->map(function($kit) {
+                $ext = pathinfo($kit->imagenes, PATHINFO_EXTENSION) ?: 'jpg';
+                $kit->local_img = "storage/productos/{$kit->id}.{$ext}";
+                return $kit;
+            });
 
-        $personal = User::where('cliente','=' , null)->where('visibilidad', '!=', '0')->orderBy('name','ASC')->get();
+        $personal = User::whereNull('cliente')
+            ->where('visibilidad', '!=', '0')
+            ->orderBy('name','ASC')
+            ->get();
 
         return view('cotizador.index_cosmica_new', compact('productosPorSublinea', 'kits', 'personal'));
     }
+
 
     public function cotizador_cosmica(Request $request){
         // 1) Productos “normales”
