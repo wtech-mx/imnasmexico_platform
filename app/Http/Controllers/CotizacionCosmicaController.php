@@ -1948,7 +1948,7 @@ class CotizacionCosmicaController extends Controller
             ->join('productos_notas_cosmica', 'notas_productos_cosmica.id', '=', 'productos_notas_cosmica.id_notas_productos')
             ->whereIn('productos_notas_cosmica.id_producto', $idsProductos)
             ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])  // si aplica
-            ->whereBetween('notas_productos_cosmica.fecha_aprobada', '!=', NULL)
+            ->where('notas_productos_cosmica.fecha_aprobada', '!=', NULL)
             ->distinct()    // para evitar duplicados si una nota tiene varios de esos productos
             ->get();
 
