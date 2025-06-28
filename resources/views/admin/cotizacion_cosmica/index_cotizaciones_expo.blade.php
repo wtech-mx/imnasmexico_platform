@@ -70,9 +70,9 @@
                             </div>
                         @endif
 
-                             <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('imprimir_fangos') }}">
+                             {{-- <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('imprimir_fangos') }}">
                                     <i class="fa fa-file"></i>hola
-                              </a>
+                              </a> --}}
                         <div class="table-responsive">
 
                             <nav>
