@@ -346,9 +346,19 @@ Cosmica Expo
                 @foreach($kits as $kit)
                 <tr data-precio="{{ $kit->precio_normal }}">
                     <td>
-                        {{-- <img src="{{asset('products/'.$kit->imagenes) }}" alt="" style="width:40px"> --}}
-                        <img src="{{ file_exists(public_path($kit->local_img))? asset($kit->local_img) : $kit->imagenes }}" alt="{{ $kit->nombre }}" style="width:40px"/>
+                        @php
+                        // Ruta al archivo en public/products
+                        $localPath = public_path('products/'.$kit->local_img);
+                        // ¿Existe la imagen local?
+                        if (file_exists($localPath) && $kit->local_img) {
+                            $url = asset('products/'.$kit->local_img);
+                        } else {
+                            // Si no existe, igualmente la tratamos con asset()
+                            $url = asset('products/'.$kit->imagenes);
+                        }
+                        @endphp
 
+                        <img src="{{ $url }}" alt="{{ $kit->nombre }}" style="width:40px;">
                         <br>
                         {{ $kit->nombre }} / {{ $kit->linea }}<br><br>
                         <p class="text-muted">Precio ${{ number_format($kit->precio_normal,2,'.',',') }}</p>
