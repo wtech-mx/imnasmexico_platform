@@ -171,7 +171,7 @@
                 </li>
             @endcan
 
-            @can('reportes-ventas')
+            {{-- @can('reportes-ventas')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('reporte_ventas.index') }}">
                         <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -180,7 +180,7 @@
                         <span class="nav-link-text ms-1">Ventas Gloabales</span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             @can('envia-menu')
                 <li class="nav-item">
@@ -328,7 +328,7 @@
                 </li>
             @endcan
 
-            @can('certificacion-webinar')
+            {{-- @can('certificacion-webinar')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('/admin/certificaciones/webinar/*') ? 'active' : '') }}" href="{{ route('index.certificados_wbinar') }}" target="">
                         <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -359,7 +359,7 @@
                     <span class="nav-link-text ms-1">Panel de Profesor</span>
                 </a>
             </li>
-            @endcan
+            @endcan --}}
 
             @can('cursos-menu')
                 <li class="nav-item">
@@ -627,7 +627,7 @@
                 </li>
             @endcan
 
-            {{-- @can('factura-show')
+             @can('factura-show')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/facturas*') ? 'active' : '') }}" href="{{ route('facturas.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -636,9 +636,9 @@
                     <span class="nav-link-text ms-1">Facturas</span>
                     </a>
                 </li>
-            @endcan --}}
+            @endcan
 
-            @can('profesores-show')
+           {{-- @can('profesores-show')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/profesores*') ? 'active' : '') }}" href="{{ route('profesores.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -647,7 +647,7 @@
                     <span class="nav-link-text ms-1">Profesores</span>
                     </a>
                 </li>
-            @endcan
+            @endcan--}}
 
             {{-- @can('caja')
                 <li class="nav-item">
@@ -671,7 +671,7 @@
                 </li>
             @endcan
 
-            @can('registros-form-menu')
+            {{-- @can('registros-form-menu')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/registro/compras*') ? 'active' : '') }}" href="{{ route('registro_compras.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -689,7 +689,7 @@
                     <span class="nav-link-text ms-1">Registros Bienvenida</span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             @can('documentos-menu')
                 <li class="nav-item">

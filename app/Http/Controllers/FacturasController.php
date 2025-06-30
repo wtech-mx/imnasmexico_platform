@@ -507,14 +507,20 @@ class FacturasController extends Controller
     }
 
     public function index(){
-        $facturas = Factura::where('id_orders', '>', 0)->get();
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $facturas = Factura::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->where('id_orders', '>', 0)->get();
 
         return view('admin.facturas.index',compact('facturas'));
     }
 
     public function indexfacturasCosmica(){
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
         // Sólo los que tengan id_notas_cosmica distinto de null Y > 0
         $facturas = Factura::with(['User','NotasCosmica'])
+            ->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
             ->where('id_notas_cosmica', '>', 0)
             ->get();
 
@@ -525,11 +531,13 @@ class FacturasController extends Controller
 
     public function indexfacturasNas(){
         // Sólo los que tengan id_notas_cosmica distinto de null Y > 0
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
 
         $facturas = Factura::with(['User','NotasNas'])
             ->where('id_notas_nas', '>', 0)
+            ->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
             ->get();
-
 
         return view('admin.facturas.indexfacturasNas', compact(
             'facturas',
@@ -537,12 +545,14 @@ class FacturasController extends Controller
     }
 
     public function indexfacturasNasTiendita(){
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
 
         // Sólo los que tengan id_notas_nas distinto de null Y > 0
         $facturas = Factura::with('User')
             ->where('id_notas_nas_tiendita', '>', 0)
+            ->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
             ->get();
-
 
         return view('admin.facturas.indexfacturasNasTiendita', compact(
             'facturas',
@@ -550,9 +560,12 @@ class FacturasController extends Controller
     }
 
     public function indexfacturasCursos(){
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
 
         $facturas = Factura::with(['User','NotasCursos'])
             ->where('id_notas_cursos', '>', 0)
+            ->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
             ->get();
 
         return view('admin.facturas.indexfacturasCursos', compact(

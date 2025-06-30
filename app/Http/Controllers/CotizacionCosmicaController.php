@@ -495,7 +495,8 @@ class CotizacionCosmicaController extends Controller
             $notas_productos->save();
             $facturas = new Factura;
 
-            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_usuario = $notas_productos->id_usuario;
+            $facturas->fecha = $request->get('fecha');
             $facturas->id_notas_cosmica = $notas_productos->id;
             $estado = 'Por Facturar';
             $facturas->estatus = $estado;
@@ -783,8 +784,9 @@ class CotizacionCosmicaController extends Controller
             $nota->factura = '1';
             $nota->save();
             $facturas = new Factura;
-            $facturas->id_usuario = auth()->user()->id;
+            $facturas->id_usuario = $nota->id_usuario;
             $facturas->id_notas_cosmica = $nota->id;
+            $facturas->fecha = $request->get('fecha');
             $estado = 'Por Facturar';
             $facturas->estatus = $estado;
             $facturas->save();

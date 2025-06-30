@@ -16,22 +16,16 @@
 
                     <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                    <h3 class="mb-3">Facturas</h3>
+                    <h3 class="mb-3">Facturas Cursos</h3>
 
                     <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como funciona?
-                    </a>
-                </div>
+                    </a>
+              </div>
 
             </div>
 
-            <div class="col-12 p-2">
-                <a href="{{ route(name: 'facturas.index') }}" class="btn btn-primary">Cursos Pag</a>
-                <a href="{{ route(name: 'facturas.indexfacturasCosmica') }}" class="btn btn-success">Cosmica</a>
-                <a href="{{ route(name: 'facturas.indexfacturasNas') }}" class="btn btn-dark">NAS</a>
-                <a href="{{ route(name: 'facturas.indexfacturasNasTiendita') }}" class="btn btn-secondary">Tiendita</a>
-                <a href="{{ route(name: 'facturas.indexfacturasCursos') }}" class="btn btn-info">Cursos por Fuera</a>
-            </div>
+            @include('admin.facturas.componentes.menu')
 
             <div class="table-responsive">
                 <table class="table table-flush" id="datatable-search">

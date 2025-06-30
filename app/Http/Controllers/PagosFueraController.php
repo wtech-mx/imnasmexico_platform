@@ -379,7 +379,8 @@ class PagosFueraController extends Controller
 
             if($order->factura == '1'){
                 $facturas = new Factura;
-                $facturas->id_usuario = auth()->user()->id;
+                $facturas->id_usuario = $payer->id;
+                $facturas->fecha = $fechaActual;
                 $facturas->id_orders = $order->id;
                 $facturas->estatus = 'En Espera';
                 $facturas->save();
