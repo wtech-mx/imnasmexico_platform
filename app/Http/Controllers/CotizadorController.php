@@ -418,7 +418,7 @@ class CotizadorController extends Controller
 
     public function index_recepcion_cosmica_expo(Request $request){
 
-        $primerDiaDelMes = date('Y-m-01');
+        $primerDiaDelMes = '2025-06-30';
         $ultimoDiaDelMes = date('Y-m-t');
 
         $now = Carbon::now();
