@@ -7,7 +7,7 @@
             font-family: sans-serif;
         }
         @page {
-            margin: 160px 50px;
+            margin: 160px 30px;
         }
         header {
             position: fixed;
@@ -26,17 +26,17 @@
             background-color: #783E5D;
         }
         header h1{
-            margin: 10px 0;
+            margin: 5px 0;
         }
         header h2{
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0;
         }
         footer {
             position: fixed;
             left: 0px;
-            bottom: -50px;
+            bottom: 20px;
             right: 0px;
-            height: 40px;
+            height: 20px;
             border-bottom: 2px solid #322338;
         }
         footer .page:after {
@@ -59,7 +59,7 @@
 
         td, th {
             text-align: center;
-            padding: 8px;
+            padding: 2px;
         }
 
         tr:nth-child(even) {
@@ -197,8 +197,8 @@
                                         DNS1D::getBarcodePNG(
                                             $codigo,
                                             'C128',
-                                            1.6,
-                                            35,
+                                            1.1,
+                                            30  ,
                                             [0,0,0],
                                             true
                                         )
@@ -208,9 +208,9 @@
                         </td>
                         <td>
                             @if ($kit->imagenes == NULL)
-                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" style="width:30px; height:30px;"/>
                             @else
-                                <img id="blah" src="{{asset('products/'.$kit->imagenes) }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                                <img id="blah" src="{{asset('products/'.$kit->imagenes) }}" style="width:30px; height:30px;"/>
                             @endif
                         </td>
 
@@ -264,8 +264,8 @@
                                 DNS1D::getBarcodePNG(
                                     $codigo,
                                     'C128',
-                                    1.6,
-                                    35,
+                                    1.1,
+                                    30,
                                     [0,0,0],
                                     true
                                 )
@@ -274,33 +274,38 @@
                         @endif
                     </td>
                     <td>
-                        <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
+                        <img id="blah" src="{{$producto->Productos->imagenes}}"  style="width: 60px; height: 60px;"/> <br>
                     </td>
 
                     <td>
-                        {{ $producto->producto }} <br>
-                        <p style="font-size:13px">Precio Real Catalogo: ${{ $producto->Productos->precio_normal }}.0</p>
+                        <p style="font-size: 12px">{{ $producto->producto }} </p>
+                        <p style="font-size:10px">Precio Real Catalogo: ${{ $producto->Productos->precio_normal }}.0</p>
 
                     </td>
                     <td>
-                        {{ $producto->cantidad }}
+                        <p style="font-size: 12px">{{ $producto->cantidad }}</p>
+
                     </td>
                     <td>
-                        {{ $producto->descuento }}%
+                        <p style="font-size: 12px">{{ $producto->descuento }}%</p>
                     </td>
                     <td>
-                        @if ($producto->total == NULL)
-                            ${{$producto->Productos->precio_normal}}
-                        @else
-                            ${{$producto->price}}
-                        @endif
+                        <p style="font-size: 12px">
+                            @if ($producto->total == NULL)
+                                ${{$producto->Productos->precio_normal}}
+                            @else
+                                ${{$producto->price}}
+                            @endif
+                        </p>
                     </td>
                     <td>
-                        @if ($producto->total == NULL)
-                            ${{$producto->price}}
-                        @else
-                            ${{$producto->total}}
-                        @endif
+                       <p style="font-size: 12px">
+                         @if ($producto->total == NULL)
+                                ${{$producto->price}}
+                            @else
+                                ${{$producto->total}}
+                            @endif
+                       </p>
                     </td>
                 </tr>
             @endforeach
