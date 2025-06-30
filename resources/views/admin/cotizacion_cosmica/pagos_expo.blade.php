@@ -169,68 +169,8 @@
     });
 
     // 2) Refrescar cada 10s: actualiza filas existentes o inserta nuevas con las 7 columnas
-    function refrescarPagos(){
-      $.getJSON('{{ route("notas.pagos.stream") }}', function(notas){
-        notas.forEach(function(n){
-          const tr = $('#nota-' + n.id);
 
-          // fila ya existe → solo actualiza estado y checkbox
-          if (tr.length) {
-            tr.toggleClass('table-success', n.pago === 1);
-            if (n.pago === 1) {
-              tr.find('.toggle-class')
-                .prop('checked', true)
-                .prop('disabled', true);
-            }
-          }
-          // nueva fila → la inserta al principio con las columnas Recibido/Cambio
-          else {
-            const clienteHtml = n.id_usuario
-              ? (n.user_name + '<br>' + n.user_telefono)
-              : n.nombre;
-            const totalFixed = parseFloat(n.total).toFixed(2);
 
-            const fila =
-              '<tr id="nota-' + n.id + '"' +
-                (n.pago === 1 ? ' class="table-success"' : '') +
-              '>' +
-                '<td><h5>' + (n.folio || n.id) + '</h5></td>' +
-                '<td><h5>' + clienteHtml + '</h5></td>' +
-                '<td><h5>' +
-                  new Date(n.fecha).toLocaleDateString('es-MX', {
-                    day: '2-digit', month: 'long', year: 'numeric'
-                  }) +
-                '</h5></td>' +
-                '<td><h5 class="total" data-total="' + totalFixed + '">' +
-                  '$' + totalFixed +
-                '</h5></td>' +
-                '<td>' +
-                  '<input type="number" min="0" step="0.01" ' +
-                         'class="form-control recibido-input" ' +
-                         'placeholder="0.00">' +
-                '</td>' +
-                '<td class="cambio-cell">$0.00</td>' +
-                '<td>' +
-                  '<input data-id="'    + n.id    + '"' +
-                         ' data-folio="' + (n.folio||n.id) + '"' +
-                         ' class="toggle-class" type="checkbox" ' +
-                         (n.pago===1 ? 'checked disabled' : '') +
-                         ' data-onstyle="success" ' +
-                         ' data-offstyle="danger" ' +
-                         ' data-toggle="toggle" ' +
-                         ' data-on="Active" ' +
-                         ' data-off="InActive">' +
-                '</td>' +
-              '</tr>';
-
-            $('#datatable-search4 tbody').prepend(fila);
-          }
-        });
-      });
-    }
-
-    refrescarPagos();
-    setInterval(refrescarPagos, 10000);
 
     // 3) Toggle de pago (igual que tú lo tenías)
     $('.table-responsive').on('change', '.toggle-class', function(){
