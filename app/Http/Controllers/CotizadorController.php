@@ -201,6 +201,7 @@ class CotizadorController extends Controller
         $notas->id_admin_venta = $request->input('id_cosme');
         $notas->envio = $request->input('envio');
         $notas->metodo_pago = $request->input('metodo_pago');
+        $notas->reposicion = $request->input('reposicion');
         $notas->fecha = now();
         $notas->nota  = '';
         $notas->save();
