@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Factura;
 use App\Models\NotasExpo;
 use App\Models\OrdersCosmica;
+use App\Models\ProductosNotasExpo;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Redirect;
 use MercadoPago\{Exception, SDK, Preference, Item};
