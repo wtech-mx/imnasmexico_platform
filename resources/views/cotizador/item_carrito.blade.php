@@ -22,7 +22,10 @@
     <div class="text-end mt-2">
         <div class="d-flex justify-content-around align-items-center">
             <div class="content">
-                 <input type="number" placeholder="Ingresa Descuento %" style="border: 1px solid #0b0b0b;border-width: 0px 0px 1px 0px;">
+                <div style="position: relative; width: 120px;">
+                    <input id="descuento-input" type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start;">
+                    <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
+                </div>
             </div>
             <span class="total ">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
         </div>

@@ -57,6 +57,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
             padding: 5px;
             text-align: center;
+            min-height: 170px;
         }
 
         .product-card img {
@@ -71,6 +72,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
             padding: 10px;
             text-align: left;
+            min-height: 190px;
         }
 
         .product_category img {
