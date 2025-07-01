@@ -34,6 +34,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/select2.css') }}">
 
     @yield('css_custom')
 
@@ -135,6 +136,7 @@
         <!-- Owl Carousel JS -->
         <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/select2.min.js') }}"></script>
 
         <script>
 

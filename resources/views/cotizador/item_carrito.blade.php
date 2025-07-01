@@ -12,6 +12,7 @@
                 <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, -1)">-</button>
                 <span class="mx-2 cantidad">{{ $producto['cantidad'] }}</span>
                 <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, 1)">+</button>
+
                 <button class="btn btn-sm ms-2" onclick="eliminarDelCarrito({{ $producto['id'] }})">
                     <i class="bi bi-trash3"></i>
                 </button>
@@ -19,7 +20,13 @@
         </div>
     </div>
     <div class="text-end mt-2">
-        <span class="total">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
+        <div class="d-flex justify-content-around align-items-center">
+            <div class="content">
+                 <input type="number" placeholder="Ingresa Descuento %" style="border: 1px solid #0b0b0b;border-width: 0px 0px 1px 0px;">
+            </div>
+            <span class="total ">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
+        </div>
+
     </div>
     <hr>
 </li>

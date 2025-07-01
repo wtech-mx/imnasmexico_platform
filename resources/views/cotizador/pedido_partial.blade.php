@@ -10,6 +10,12 @@
 
                 <!-- Totales -->
                 <div class="mb-2 d-flex justify-content-between">
+                    <span>Descuento:</span>
+                    <input type="number" placeholder="Ingresa Descuento %" style="border: 1px solid #0b0b0b;border-width: 0px 0px 1px 0px;text-align: end;">
+                </div>
+
+                <!-- Totales -->
+                <div class="mb-2 d-flex justify-content-between">
                     <span>Subtotal:</span>
                     <span id="subtotal">$0.00</span>
                 </div>
