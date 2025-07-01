@@ -1,4 +1,4 @@
-@extends('layouts.app_cotizador')
+@extends('layouts.app_cotizador_ofline')
 
 @section('template_title')
 Cosmica Expo

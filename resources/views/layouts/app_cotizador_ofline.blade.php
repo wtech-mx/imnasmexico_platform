@@ -19,24 +19,29 @@
     <link href="{{ asset('assets/ecommerce/media/fonts/nunito/nunito.css') }}" rel="stylesheet">
     <meta name="google-site-verification" content="xjOUgezOv03ht4XdfShswB0Hh-49H_WsaM6Cx9GIR6A" />
 
+    @include('layouts.css')
+
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}">
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/twitter-bootstrap.css') }}">
-    <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
+     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.css') }}"> --}}
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/bootstrap.css">
+
+    {{-- <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}"> --}}
+
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">-->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/twitter-bootstrap.css') }}"> --}}
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/twitter-bootstrap.css">
 
     <!-- css custom -->
 
     <!-- Sweetalert2 -->
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/sweetalert2.css') }}"> --}}
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/css/sweetalert2.css">
 
-    <!-- Owl Carousel CSS -->
-
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/owl.theme.default.min.css') }}">
+    {{-- <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://192.168.1.143/imnasmexico_platform/public/assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css">
 
     @yield('css_custom')
-
     <style>
         body {
             background: #f8f9fa;
@@ -122,16 +127,12 @@
 
 </head>
 
-<body style="background:#f9f4f4">
+    <body style="background:#f9f4f4">
+
 
         @yield('cotizador')
 
-        <!-- jQuery (necesario para Owl Carousel) -->
-        <script src="{{ asset('assets/ecommerce/dataTables/js/jquery-3.6.0.min.js') }}"></script>
-
-        <!-- Owl Carousel JS -->
-        <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
+        @include('layouts.js')
 
         @yield('js_custom')
 
