@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Categorias;
+use App\Models\NotasExpo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -99,7 +100,7 @@ class CotizadorController extends Controller
         $now = Carbon::now();
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
 
-        $notas = NotasProductosCosmica::orderBy('id','DESC')->where('fecha', '=', $primerDiaDelMes)->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
+        $notas = NotasExpo::orderBy('id','DESC')->where('fecha', '=', $primerDiaDelMes)->where('tipo_nota', '=', 'Cotizacion_Expo')->get();
 
         return view('admin.cotizacion_cosmica.index_cotizaciones_expo', compact('notas', 'administradores'));
     }
