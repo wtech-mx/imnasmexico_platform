@@ -1032,6 +1032,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/perfil/cliente/compras/tiendita/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'compras_tiendita'])->name('peril_cliente.compras_tiendita');
         Route::get('/perfil/cliente/cotizaciones/nas/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_nas'])->name('peril_cliente.cotizaciones_nas');
         Route::get('/perfil/cliente/cotizaciones/cosmica/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_cosmica'])->name('peril_cliente.cotizaciones_cosmica');
+        Route::get('/perfil/cliente/compras/expo/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'compras_expos'])->name('peril_cliente.compras_expos');
         Route::get('/perfil/cliente/reposicion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'reposicion'])->name('peril_cliente.reposicion');
         Route::get('/perfil/cliente/membresia/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'membresia_cosmica'])->name('peril_cliente.membresia_cosmica');
         Route::get('/perfil/cliente/estandares/{id}', [App\Http\Controllers\PerfilClienteController::class, 'estandares'])->name('peril_cliente.estandares');

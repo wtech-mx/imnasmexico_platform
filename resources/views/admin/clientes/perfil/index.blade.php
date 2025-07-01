@@ -96,14 +96,22 @@
                                 </a>
                                 </li>
                                 <li class="nav-item pt-2">
-                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.cotizaciones_cosmica', $cliente->telefono)}}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <img src="{{ asset('/cosmika/menu/logo.png') }}"width="50px" >
-                                    </div>
-                                    <span class="text-sm">Cotizaciones Cosmica</span>
-                                </a>
+                                    <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.cotizaciones_cosmica', $cliente->telefono)}}">
+                                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                            <img src="{{ asset('/cosmika/menu/logo.png') }}"width="50px" >
+                                        </div>
+                                        <span class="text-sm">Cotizaciones Cosmica</span>
+                                    </a>
                                 </li>
                                 @if ($tipo == 'Usuario')
+                                    <li class="nav-item pt-2">
+                                        <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.compras_expos', $cliente->telefono)}}">
+                                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                                <img src="{{ asset('/assets/cam/delivery.png') }}"width="40px" >
+                                            </div>
+                                            <span class="text-sm">Compras expos</span>
+                                        </a>
+                                    </li>
                                     <li class="nav-item pt-2">
                                         <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.reposicion', $cliente->id)}}">
                                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -224,6 +232,9 @@
                     @endif
                     @if(Route::currentRouteName() == 'peril_cliente.cotizaciones_cosmica')
                         @include('admin.clientes.perfil.cotizacion_cosmica')
+                    @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.compras_expos')
+                        @include('admin.clientes.perfil.compras_expos')
                     @endif
                     @if(Route::currentRouteName() == 'peril_cliente.reposicion')
                         @include('admin.clientes.perfil.reposicion')

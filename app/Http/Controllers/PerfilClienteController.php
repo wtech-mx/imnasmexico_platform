@@ -236,6 +236,50 @@ class PerfilClienteController extends Controller
         return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cotizaciones', 'tipo', 'reportes', 'reportes_archivos', 'mensajesPorCotizacion', 'products', 'fechaPerfil'));
     }
 
+    public function compras_expos(Request $request, $phone){
+
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
+        $cliente = User::where('cliente','=' ,'1')->where('telefono', '=', $phone)->first();
+        if ($cliente) {
+            $distribuidora = Cosmikausers::where('id_cliente', $cliente->id)->orderBy('id', 'DESC')->first();
+            $tipo = 'Usuario';
+            // Si el cliente no es null, busca por id_usuario y telefono
+            $cotizaciones_cosmica = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion_Expo')
+                ->where('id_usuario', $cliente->id)
+                ->orderBy('id','DESC')
+                ->get();
+        } else {
+            $distribuidora = null;
+            $tipo = 'Nota';
+            $cliente = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion_Expo')->where('telefono', '=', $phone)->first();
+            if (!$cliente) {
+                $cliente = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion_Expo')->where('telefono', '=', $phone)->first();
+            }
+            // Si el cliente es null, busca solo por telefono
+            $cotizaciones_cosmica = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion_Expo')->where('telefono', '=', $phone)->get();
+        }
+
+        $cotizacionIds = $cotizaciones_cosmica->pluck('id');
+        $reportes = ReportesCotizaciones::whereIn('id_cotizacion_cosmica', $cotizacionIds)->get();
+        $reporteIds = $reportes->pluck('id');
+        $reportes_archivos = ReportesCotizacionesMensajes::whereIn('id_reporte', $reporteIds)->get();
+
+        // Formatear la fecha de los reportes
+        foreach ($reportes as $reporte) {
+            $reporte->fecha = Carbon::parse($reporte->fecha)->format('d F Y h:i a');
+        }
+
+        // Contar los mensajes para cada cotización
+        $mensajesPorCotizacion = ReportesCotizaciones::whereIn('id_cotizacion_cosmica', $cotizacionIds)
+            ->select('id_cotizacion_cosmica', DB::raw('count(*) as total'))
+            ->groupBy('id_cotizacion_cosmica')
+            ->pluck('total', 'id_cotizacion_cosmica');
+
+        $fechaPerfil = date('Y-m-d');
+            return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cotizaciones_cosmica', 'tipo', 'reportes', 'reportes_archivos', 'mensajesPorCotizacion', 'fechaPerfil'));
+    }
+
     public function cotizaciones_cosmica(Request $request, $phone){
 
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
@@ -245,19 +289,19 @@ class PerfilClienteController extends Controller
             $distribuidora = Cosmikausers::where('id_cliente', $cliente->id)->orderBy('id', 'DESC')->first();
             $tipo = 'Usuario';
             // Si el cliente no es null, busca por id_usuario y telefono
-            $cotizaciones_cosmica = NotasProductosCosmica::where('id_usuario', $cliente->id)
+            $cotizaciones_cosmica = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('id_usuario', $cliente->id)
                 ->orWhere('telefono', $phone)
                 ->orderBy('id','DESC')
                 ->get();
         } else {
             $distribuidora = null;
             $tipo = 'Nota';
-            $cliente = NotasProductos::where('telefono', '=', $phone)->first();
+            $cliente = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('telefono', '=', $phone)->first();
             if (!$cliente) {
-                $cliente = NotasProductosCosmica::where('telefono', '=', $phone)->first();
+                $cliente = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('telefono', '=', $phone)->first();
             }
             // Si el cliente es null, busca solo por telefono
-            $cotizaciones_cosmica = NotasProductosCosmica::where('telefono', $phone)->get();
+            $cotizaciones_cosmica = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('telefono', '=', $phone)->get();
         }
 
         $cotizacionIds = $cotizaciones_cosmica->pluck('id');
