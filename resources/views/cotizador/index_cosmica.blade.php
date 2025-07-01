@@ -112,14 +112,9 @@ Cosmica
 @section('js_custom')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const chkFact = document.getElementById('chkFacturacion');
-        const factFields = document.getElementById('facturacionFields');
         const chkEnv = document.getElementById('chkEnvio');
         const envFields = document.getElementById('envioFields');
 
-        chkFact.addEventListener('change', () => {
-            factFields.style.display = chkFact.checked ? 'block' : 'none';
-        });
         chkEnv.addEventListener('change', () => {
             envFields.style.display = chkEnv.checked ? 'block' : 'none';
         });

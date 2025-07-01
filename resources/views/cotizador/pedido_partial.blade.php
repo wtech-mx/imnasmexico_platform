@@ -17,14 +17,6 @@
                         Facturación
                     </label>
                 </div>
-                <!-- Campos de facturación (oculto por defecto) -->
-                <div id="facturacionFields" style="display: none; padding-left: 1rem; margin-bottom: 1rem;">
-                    <div class="mb-2">
-                        <label for="fact_codigo_postal" class="form-label">Código Postal:</label>
-                        <input type="text" id="fact_codigo_postal" name="fact_codigo_postal" class="form-control" placeholder="CP">
-                    </div>
-                    <!-- aquí podrías añadir más campos de facturación -->
-                </div>
 
                 <!-- Checkbox Envío -->
                 <div class="form-check mb-2">
@@ -33,20 +25,9 @@
                         Agregar envío
                     </label>
                 </div>
-                <!-- Campos de envío (oculto por defecto) -->
-                <div id="envioFields" style="display: none; padding-left: 1rem; margin-bottom: 1rem;">
-                    <div class="mb-2">
-                        <label for="envio_codigo_postal" class="form-label">Código Postal de Envío:</label>
-                        <input type="text" id="envio_codigo_postal" name="envio_codigo_postal" class="form-control" placeholder="CP">
-                    </div>
-                    <!-- aquí podrías añadir más campos de envío -->
-                </div>
 
-                <!-- Observaciones -->
-                <div class="mb-3">
-                    <label for="observaciones" class="form-label">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" rows="3" class="form-control" placeholder="Alguna nota…"></textarea>
-                </div>
+                <!-- Campos de envío (oculto por defecto) -->
+                @include('cotizador.datos_direcion')
 
                 <!-- Método de pago -->
                 <div class="mb-3">
@@ -59,6 +40,12 @@
                         <option value="Mercado Pago">Mercado Pago</option>
                         <option value="Contraentrega">Contraentrega</option>
                     </select>
+                </div>
+
+                <!-- Observaciones -->
+                <div class="mb-3">
+                    <label for="observaciones" class="form-label">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" rows="3" class="form-control" placeholder="Alguna nota…"></textarea>
                 </div>
 
                 <!-- Totales -->
