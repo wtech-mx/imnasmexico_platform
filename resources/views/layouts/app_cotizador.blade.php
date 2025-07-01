@@ -94,10 +94,10 @@
         }
         .btn-counter {
             border: 1px solid #ccc;
-            padding: 0.25rem 0.5rem;
+            padding: 0rem 0rem;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 22px;
+            height: 22px;
             line-height: 1;
         }
 

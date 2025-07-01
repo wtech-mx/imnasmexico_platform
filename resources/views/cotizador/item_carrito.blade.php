@@ -1,12 +1,12 @@
 <li class="list-group-item" data-id="{{ $producto['id'] }}" style="padding: 0!important;border: 0!important;">
     <div class="d-flex">
         <div class="me-3">
-            <img src="{{ $producto['imagen'] }}" alt="{{ $producto['nombre'] }}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
+            <img src="{{ $producto['imagen'] }}" alt="{{ $producto['nombre'] }}" class="rounded" style="width: 35px; height: 35px; object-fit: cover;">
         </div>
         <div class="flex-grow-1 d-flex flex-column justify-content-between" style="position: relative">
             <div>
-                <div class="fw-semibold">{{ $producto['nombre'] }}</div>
-                <small class="text-muted">${{ number_format($producto['precio'], 2) }}</small>
+                <div class="fw-semibold" style="color: #6d6d6d;font-size: 15px;">{{ $producto['nombre'] }}</div>
+                <small class="text-muted" style="font-size: 11px;">${{ number_format($producto['precio'], 2) }}</small>
             </div>
             <div class="d-flex justify-content-end align-items-center mt-2 btns_flotantes">
                 <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, -1)">-</button>
@@ -19,17 +19,17 @@
             </div>
         </div>
     </div>
-    <div class="text-end mt-2">
+    <div class="text-end mt-1">
         <div class="d-flex justify-content-around align-items-center">
             <div class="content">
                 <div style="position: relative; width: 120px;">
-                    <input id="descuento-input" type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start;">
+                    <input id="descuento-input" type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start;    font-size: 13px;">
                     <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
                 </div>
             </div>
-            <span class="total ">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
+            <span class="total " style="font-size: 13px;">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
         </div>
 
     </div>
-    <hr>
+    <hr style="margin: 0.5rem 0!important">
 </li>

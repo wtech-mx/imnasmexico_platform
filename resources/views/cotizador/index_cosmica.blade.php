@@ -16,9 +16,13 @@ Cosmica
 
                 @include('cotizador.barr_superior')
 
-                <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
-                <!-- Hidden para guardar el id seleccionado -->
-                <input type="hidden" name="id_usuario" id="idUsuario">
+                <div class="col-12">
+                    <h5 class="p-2">Cliente</h5>
+
+                    <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
+                    <!-- Hidden para guardar el id seleccionado -->
+                    <input type="hidden" name="id_usuario" id="idUsuario">
+                </div>
 
                 <div class="col-12">
                     <h5 class="p-2">Categorías</h5>
@@ -106,7 +110,21 @@ Cosmica
 
 
 @section('js_custom')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chkFact = document.getElementById('chkFacturacion');
+        const factFields = document.getElementById('facturacionFields');
+        const chkEnv = document.getElementById('chkEnvio');
+        const envFields = document.getElementById('envioFields');
 
+        chkFact.addEventListener('change', () => {
+            factFields.style.display = chkFact.checked ? 'block' : 'none';
+        });
+        chkEnv.addEventListener('change', () => {
+            envFields.style.display = chkEnv.checked ? 'block' : 'none';
+        });
+    });
+</script>
 <script>
     let timeout = null;
     let carrito = [];

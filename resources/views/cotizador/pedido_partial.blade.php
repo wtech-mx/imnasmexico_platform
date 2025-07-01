@@ -1,12 +1,65 @@
         <!-- Orden -->
         <div class="col-lg-4 mt-3">
             <div class="sidebar">
-                <h5 class="mb-4 mt-1 text-center">Cotiza tu pedido</h5>
+                <h5 class="mb-2 mt-1 text-center">Cotiza tu pedido</h5>
 
                 <!-- Lista de productos -->
                 <ul class="list-group mb-3" id="contenedor_carrito" style="max-height: 600px; overflow-y: auto;">
                     <!-- Aquí se insertan los productos dinámicamente -->
                 </ul>
+
+                <h5 class="mb-4 mt-1 text-center">Informacion del Cliente</h5>
+
+                <!-- Checkbox Facturación -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="chkFacturacion">
+                    <label class="form-check-label" for="chkFacturacion">
+                        Facturación
+                    </label>
+                </div>
+                <!-- Campos de facturación (oculto por defecto) -->
+                <div id="facturacionFields" style="display: none; padding-left: 1rem; margin-bottom: 1rem;">
+                    <div class="mb-2">
+                        <label for="fact_codigo_postal" class="form-label">Código Postal:</label>
+                        <input type="text" id="fact_codigo_postal" name="fact_codigo_postal" class="form-control" placeholder="CP">
+                    </div>
+                    <!-- aquí podrías añadir más campos de facturación -->
+                </div>
+
+                <!-- Checkbox Envío -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="chkEnvio">
+                    <label class="form-check-label" for="chkEnvio">
+                        Agregar envío
+                    </label>
+                </div>
+                <!-- Campos de envío (oculto por defecto) -->
+                <div id="envioFields" style="display: none; padding-left: 1rem; margin-bottom: 1rem;">
+                    <div class="mb-2">
+                        <label for="envio_codigo_postal" class="form-label">Código Postal de Envío:</label>
+                        <input type="text" id="envio_codigo_postal" name="envio_codigo_postal" class="form-control" placeholder="CP">
+                    </div>
+                    <!-- aquí podrías añadir más campos de envío -->
+                </div>
+
+                <!-- Observaciones -->
+                <div class="mb-3">
+                    <label for="observaciones" class="form-label">Observaciones:</label>
+                    <textarea id="observaciones" name="observaciones" rows="3" class="form-control" placeholder="Alguna nota…"></textarea>
+                </div>
+
+                <!-- Método de pago -->
+                <div class="mb-3">
+                    <label for="metodo_pago_cliente" class="form-label">Método de pago:</label>
+                    <select id="metodo_pago_cliente" name="metodo_pago_cliente" class="form-select">
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta crédito">Tarjeta crédito</option>
+                        <option value="Tarjeta débito">Tarjeta débito</option>
+                        <option value="Transferencia">Transferencia</option>
+                        <option value="Mercado Pago">Mercado Pago</option>
+                        <option value="Contraentrega">Contraentrega</option>
+                    </select>
+                </div>
 
                 <!-- Totales -->
                 <div class="mb-2 d-flex justify-content-between align-items-center">
