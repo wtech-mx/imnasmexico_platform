@@ -23,6 +23,7 @@ use Session;
 use App\Models\Meli;
 use Illuminate\Support\Facades\Http;
 use App\Models\Factura;
+use App\Models\NotasExpo;
 use App\Models\OrdersCosmica;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Redirect;
@@ -829,6 +830,26 @@ class CotizacionCosmicaController extends Controller
         $nota = NotasProductosCosmica::find($id);
 
         $nota_productos = ProductosNotasCosmica::where('id_notas_productos', $nota->id)->get();
+
+        $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
+
+        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_nota', compact('nota', 'today', 'nota_productos', 'usercosmika'));
+        if($nota->folio == null){
+            $folio = $nota->id;
+        }else{
+            $folio = $nota->folio;
+        }
+         return $pdf->stream();
+       // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+    }
+
+    public function imprimir_expo($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = NotasExpo::find($id);
+
+        $nota_productos = ProductosNotasExpo::where('id_notas_productos', $nota->id)->get();
 
         $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
 
