@@ -265,27 +265,40 @@ Cosmica
     // Inicialización de los carouseles corporales y faciales
     $(document).ready(function() {
 
+        function throttle(fn, delay) {
+            let lastCall = 0;
+            return function(...args) {
+                const now = Date.now();
+                if (now - lastCall < delay) return;
+                lastCall = now;
+                return fn.apply(this, args);
+            };
+        }
 
+        // Envuelves tu función de agregar
+        const manejarAgregar = throttle(function(target) {
+            const id = target.dataset.id;
+            const nombre = target.dataset.nombre;
+            const precio = parseFloat(target.dataset.precio);
+            const imagen = target.dataset.img;
 
+            const existente = carrito.find(p => p.id == id);
+            if (existente) {
+                existente.cantidad++;
+                showToast('Cantidad actualizada');
+            } else {
+                carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+                showToast('Producto agregado al carrito');
+            }
+
+            renderizarCarrito();
+        }, 500); // medio segundo
+
+        // Y tu listener queda así:
         document.addEventListener('click', function(e) {
             const target = e.target.closest('.agregar-carrito');
-            if (target) {
-                const id = target.dataset.id;
-                const nombre = target.dataset.nombre;
-                const precio = parseFloat(target.dataset.precio);
-                const imagen = target.dataset.img;
-
-                const existente = carrito.find(p => p.id == id);
-                if (existente) {
-                    existente.cantidad++;
-                    showToast('Cantidad actualizada');
-                } else {
-                    carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
-                    showToast('Producto agregado al carrito');
-                }
-
-                renderizarCarrito();
-            }
+            if (!target) return;
+            manejarAgregar(target);
         });
 
         function agregarAlCarrito(producto) {
