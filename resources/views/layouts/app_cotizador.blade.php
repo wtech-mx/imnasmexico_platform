@@ -130,6 +130,7 @@
         <script src="{{ asset('assets/ecommerce/dataTables/js/jquery-3.6.0.min.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/sweetalert2.all.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/ecommerce/js/bootstrap_bundle.js') }}"></script>
 
         <!-- Owl Carousel JS -->
         <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
