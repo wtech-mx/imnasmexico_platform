@@ -149,7 +149,7 @@
                                             </td>
 
                                             <td>
-                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir_expo', ['id' => $nota->id]) }}">
                                                     <i class="fa fa-file"></i>
                                                 </a>
                                             </td>
