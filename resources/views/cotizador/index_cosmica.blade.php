@@ -268,45 +268,6 @@ Cosmica
 
     // Inicialización de los carouseles corporales y faciales
     $(document).ready(function() {
-        const owlSettings = {
-            loop: true,
-            margin: 15,
-            autoplay: false,
-            dots:false,
-            autoplayTimeout: 9000,
-            autoplayHoverPause: true,
-            nav: true,
-            responsive: {
-                0: { items: 3 },
-                420: { items: 3 },
-                576: { items: 4 },
-                676: { items: 5 },
-                768: { items: 5 },
-                950: { items: 6 },
-                1200: { items: 6 }
-            }
-        };
-
-        $("#loop_categorias_corp").owlCarousel(owlSettings);
-        $("#loop_categorias_facial").owlCarousel(owlSettings);
-
-        function actualizarHora() {
-            const ahora = new Date();
-            let horas = ahora.getHours();
-            const minutos = ahora.getMinutes().toString().padStart(2, '0');
-            const segundos = ahora.getSeconds().toString().padStart(2, '0');
-            const ampm = horas >= 12 ? 'PM' : 'AM';
-
-            horas = horas % 12;
-            horas = horas ? horas : 12; // hora 0 debe ser 12
-
-            const horaFormateada = `${horas}:${minutos}:${segundos} ${ampm}`;
-            document.getElementById('hora-actual').textContent = horaFormateada;
-        }
-
-        // Actualizar al cargar y luego cada segundo
-        actualizarHora();
-        setInterval(actualizarHora, 1000);
 
         document.addEventListener('click', function(e) {
             const target = e.target.closest('.agregar-carrito');
