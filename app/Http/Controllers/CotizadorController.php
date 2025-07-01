@@ -546,4 +546,27 @@ class CotizadorController extends Controller
          return $pdf->stream();
        // return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
+
+    public function search(Request $request){
+        $q = $request->get('q', '');
+
+        $results = User::query()
+            ->where('name', 'like', "%{$q}%")
+            ->orWhere('telefono', 'like', "%{$q}%")
+            ->select('id', 'name', 'telefono')
+            ->limit(10)
+            ->get()
+            ->map(function($u) {
+                return [
+                    'id'    => $u->id,
+                    // lo que mostramos en el desplegable
+                    'label' => "{$u->name} — {$u->telefono}",
+                    // lo que se mete en el input al seleccionar
+                    'value' => $u->name,
+                ];
+            });
+
+        return response()->json($results);
+    }
+
 }

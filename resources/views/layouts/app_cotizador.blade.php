@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/select2.css') }}">
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"/>
     @yield('css_custom')
 
     <style>
@@ -132,7 +133,7 @@
 
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/sweetalert2.all.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/ecommerce/js/bootstrap_bundle.js') }}"></script>
-
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
         <!-- Owl Carousel JS -->
         <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('assets/ecommerce/dataTables/js/owl.carousel.min.js') }}"></script>

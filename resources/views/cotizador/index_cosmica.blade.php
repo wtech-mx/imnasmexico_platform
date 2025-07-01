@@ -16,6 +16,10 @@ Cosmica
 
                 @include('cotizador.barr_superior')
 
+                <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
+                <!-- Hidden para guardar el id seleccionado -->
+                <input type="hidden" name="id_usuario" id="idUsuario">
+
                 <div class="col-12">
                     <h5 class="p-2">Categorías</h5>
 
@@ -293,6 +297,27 @@ Cosmica
             }
         }
 
+    });
+
+    // BUSCADOR CLIENTE
+    $(function(){
+        $('#usuarioInput').autocomplete({
+            source: function(request, response) {
+            $.getJSON("{{ route('usuarios.search') }}", {
+                q: request.term
+            }, response);
+            },
+            minLength: 2,    // empiezo a buscar tras 2 caracteres
+            select: function(event, ui) {
+            // ui.item.value → nombre
+            // ui.item.id    → id real
+            $('#idUsuario').val(ui.item.id);
+            },
+            // opcional: para que al borrarlo limpie el hidden
+            change: function(e, ui) {
+            if (!ui.item) { $('#idUsuario').val(''); }
+            }
+        });
     });
 
 </script>

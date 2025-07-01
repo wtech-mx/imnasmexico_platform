@@ -33,7 +33,6 @@ Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController:
 
 
 Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index_nas.cotizador');
-Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
 Route::get('/cotizador/expo', [App\Http\Controllers\CotizadorController::class, 'index_cosmica_new'])->name('index_cosmica_new.cotizador');
 Route::get('/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'cotizador_cosmica'])->name('cotizador_cosmica');
 
@@ -400,6 +399,10 @@ Route::post('registro/actualizar-estatus', [App\Http\Controllers\RegistroIMNASCo
 Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroIMNASController::class, 'actualizarEstatusEnvio'])->name('actualizar.estatus_envio');
 
 Route::group(['middleware' => ['auth']], function() {
+
+    //================ MODULO COTIZADOR NEW ============================================
+    Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
+    Route::get('/admin/cotizador/usuarios/buscar', [App\Http\Controllers\CotizadorController::class, 'search'])->name('usuarios.search');
 
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
