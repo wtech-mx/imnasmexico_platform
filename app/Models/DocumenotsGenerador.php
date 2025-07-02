@@ -19,6 +19,19 @@ class DocumenotsGenerador extends Model
         'estado',
         'fotografia',
         'folio',
+
+        'folio',
+        'tipo_documento',
+        'cliente',
+        'curso',
+        'fecha_inicial',
+        'fecha_final',
+        'duracion_hrs',
+        'fotografia',
+        'foto',
+        'curp',
+        'firma',
+        'promedio',
     ];
 
     public function Alumno()

@@ -211,6 +211,7 @@ class DocumentosController extends Controller
             $fileName_firma = "fondo_sf.png";
         }
         $bitacora->curp = $request->get('curp');
+        $bitacora->promedio = $request->get('promedio');
         $bitacora->save();
 
         $nombre = $request->get('nombre');

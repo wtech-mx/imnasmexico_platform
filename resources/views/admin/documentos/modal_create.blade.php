@@ -152,8 +152,8 @@
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
             <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                 @csrf
-                <div class="row">
 
+                <div class="row">
                         <div class="form-group col-12 mt-3">
                             <label for="name">Nombre Completo *</label>
                             <div class="input-group">

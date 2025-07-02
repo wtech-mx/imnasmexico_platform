@@ -236,9 +236,8 @@
             <h4 class="folio3">{{ $tickets_externo->folio }}</h4>
         </div>
 
-
         <div class="container_promedio">
-            <h4 class="promedio">10</h4>
+            <h4 class="promedio">{{ $tickets_externo->promedio ?? '9.5'}}</h4>
         </div>
 
             @php

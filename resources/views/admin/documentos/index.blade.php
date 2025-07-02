@@ -359,12 +359,10 @@ Reporte de Documentos
 
         });
 
-
-
     });
 
             // Funcion abrir a la izquierda
-            function openRightPanel() {
+        function openRightPanel() {
             document.getElementById("rightPanel").style.right = "0";
         }
 
@@ -396,50 +394,50 @@ Reporte de Documentos
         }
 
         // Funcion folio dinamico
-function generarFolio() {
-        let cursoNombre = '';
+        function generarFolio() {
+            let cursoNombre = '';
 
-        // Prioridad: si está visible el input manual, usarlo
-        const inputManualVisible = document.getElementById('precioMayoristaContainer').style.display !== 'none';
-        if (inputManualVisible) {
-            cursoNombre = document.getElementById('curso_name').value.toUpperCase();
-        } else {
-            const cursoSelect = document.getElementById('curso');
-            cursoNombre = cursoSelect.options[cursoSelect.selectedIndex].text.toUpperCase();
+            // Prioridad: si está visible el input manual, usarlo
+            const inputManualVisible = document.getElementById('precioMayoristaContainer').style.display !== 'none';
+            if (inputManualVisible) {
+                cursoNombre = document.getElementById('curso_name').value.toUpperCase();
+            } else {
+                const cursoSelect = document.getElementById('curso');
+                cursoNombre = cursoSelect.options[cursoSelect.selectedIndex].text.toUpperCase();
+            }
+
+            // Obtener iniciales del nombre del curso
+            const cursoIniciales = cursoNombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 4);
+
+            const ahora = new Date();
+            const dia = String(ahora.getDate()).padStart(2, '0');
+            const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+            const anio = String(ahora.getFullYear()).slice(-2);
+            const hora = String(ahora.getHours()).padStart(2, '0');
+            const minuto = String(ahora.getMinutes()).padStart(2, '0');
+            const segundo = String(ahora.getSeconds()).padStart(2, '0');
+
+            const numeroFechaHora = dia + mes + anio + hora + minuto + segundo;
+            const folio = 'F' + cursoIniciales + '-' + numeroFechaHora;
+
+            document.getElementById('folio').value = folio;
         }
 
-        // Obtener iniciales del nombre del curso
-        const cursoIniciales = cursoNombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 4);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Detectar cambio en input manual (cuando se escribe)
+            document.getElementById('curso_name').addEventListener('input', generarFolio);
 
-        const ahora = new Date();
-        const dia = String(ahora.getDate()).padStart(2, '0');
-        const mes = String(ahora.getMonth() + 1).padStart(2, '0');
-        const anio = String(ahora.getFullYear()).slice(-2);
-        const hora = String(ahora.getHours()).padStart(2, '0');
-        const minuto = String(ahora.getMinutes()).padStart(2, '0');
-        const segundo = String(ahora.getSeconds()).padStart(2, '0');
+            // Detectar cambio de opción para mostrar u ocultar input manual
+            document.getElementById('radioSiMayo').addEventListener('change', function () {
+                document.getElementById('precioMayoristaContainer').style.display = 'block';
+                generarFolio();
+            });
 
-        const numeroFechaHora = dia + mes + anio + hora + minuto + segundo;
-        const folio = 'F' + cursoIniciales + '-' + numeroFechaHora;
-
-        document.getElementById('folio').value = folio;
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // Detectar cambio en input manual (cuando se escribe)
-        document.getElementById('curso_name').addEventListener('input', generarFolio);
-
-        // Detectar cambio de opción para mostrar u ocultar input manual
-        document.getElementById('radioSiMayo').addEventListener('change', function () {
-            document.getElementById('precioMayoristaContainer').style.display = 'block';
-            generarFolio();
+            document.getElementById('radioNoMayo').addEventListener('change', function () {
+                document.getElementById('precioMayoristaContainer').style.display = 'none';
+                generarFolio();
+            });
         });
-
-        document.getElementById('radioNoMayo').addEventListener('change', function () {
-            document.getElementById('precioMayoristaContainer').style.display = 'none';
-            generarFolio();
-        });
-    });
 
 
         //mostrar img automaticamente
