@@ -72,8 +72,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($notas_presencial_enviados as $item)
-                                                <tr style="background: #6ec7d1a3">
+                                            @foreach ($notas_enviados as $item)
+                                                <tr style="background: #836262a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -95,9 +95,72 @@
 
                                                     <td>
                                                         <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
-                                                            Preparado
-                                                        </a><br>
-                                                        Pedido Tiendita
+                                                            Enviado
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_envio)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-file"></i>
+                                                        </a>
+
+                                                        <a class="text-center text-white btn btn-sm"
+                                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $item->id]) }}"
+                                                            style="background: #7d2de6;">
+                                                            <i class="fa fa-qrcode"></i>
+                                                        </a>
+
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @include('admin.cotizacion.guia')
+                                                @include('admin.bodega.modal_estatus')
+                                                @include('admin.bodega.modal_fechas')
+                                            @endforeach
+
+                                            @foreach ($notas_cosmica_enviados as $item)
+                                                <tr style="background: #d486d6">
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
+                                                            @else
+                                                                {{ $item->folio }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                            @else
+                                                                {{ $item->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
+                                                            En preparación
+                                                        </a>
                                                     </td>
 
                                                     <td>
@@ -107,52 +170,35 @@
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
+
+                                                        <a class="text-center text-white btn btn-sm"
+                                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $item->id]) }}"
+                                                            style="background: #7d2de6;">
+                                                            <i class="fa fa-qrcode"></i>
+                                                        </a>
+
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
+
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
-
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
-                                            @endforeach
-
-                                            @foreach($ApiFiltradaCollectEnviado as $order)
-                                                <tr style="background: #EE96BA;color:#fff">
-                                                    <td>{{ $order['id'] }}</td>
-
-                                                    <td>{{ $order['user']['name'] }}</td>
-
-                                                    <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
-                                                            En preparación
-                                                        </a>
-                                                    </td>
-
-                                                    <td>
-                                                        {{ \Carbon\Carbon::parse($order['created_at'])->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                    </td>
-                                                    <td>${{ $order['total'] }}</td>
-                                                    <td>
-                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_paradisus_{{ $order['id'] }}">
-                                                            <i class="fa fa-list-alt"></i>
-                                                        </a>
-
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_para_{{ $order['id'] }}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
-
-                                                    </td>
-                                                </tr>
-
-                                                @include('admin.bodega.modal_productos_paradisus')
-                                                @include('admin.bodega.modal_estatus_paradisus')
-                                                @include('admin.bodega.modal_estatus_edit_para')
-
                                             @endforeach
                                         </tbody>
                                     </table>

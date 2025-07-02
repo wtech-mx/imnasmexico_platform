@@ -367,43 +367,13 @@ class BodegaController extends Controller
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_enviados', compact(
             'notas_cosmica_enviados',
-            'notas_enviados',
+            'notas_enviados'
         ));
     }
 
     public function index_entregados(Request $request) {
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
-        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
-        $woocommerce = new Client(
-            'https://imnasmexico.com/new/', // URL de la tienda principal
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
-            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-
-        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
-        $orders_tienda_principal = $woocommerce->get('orders', [
-            'status' => 'guia_cargada',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
-            'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
-            'status' => 'enviados',
-            'per_page' => 100,
-        ]);
-
-        // Convertir las órdenes en un solo array combinando las de ambas tiendas
-        $orders_tienda_principal = array_merge($orders_tienda_principal);
         // dd($orders_tienda_principal);
 
         $dominio = $request->getHost();
@@ -415,39 +385,15 @@ class BodegaController extends Controller
             $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
         }
 
-        // Convertir la respuesta a un array
-        $ApiParadisusArray = $api_pedidosParadisus->json();
-
-        // Filtrar los datos con estatus "Aprobada" y limitar a los últimos 100
-        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Aprobada')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
-        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Enviado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
         // Otras consultas de la base de datos
-        $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_enviados = NotasProductos::where('estatus_cotizacion', '=', 'Enviado')->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
-        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
-        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
-        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        $notas_cosmica_enviados = NotasProductosCosmica::where('estatus_cotizacion', '=', 'Enviado')->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
-
-        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_entregados', compact(
-            'notas_presencial_enviados',
-            'ApiFiltradaCollectEnviado',
-            'cantidad_preparacion'
+            'notas_cosmica_enviados',
+            'notas_enviados'
         ));
     }
 
