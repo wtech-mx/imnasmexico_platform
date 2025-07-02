@@ -290,32 +290,6 @@ class BodegaController extends Controller
     public function index_preparados(Request $request) {
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
-        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
-        $woocommerce = new Client(
-            'https://imnasmexico.com/new/', // URL de la tienda principal
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
-            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-
-        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
-        $orders_tienda_principal = $woocommerce->get('orders', [
-            'status' => 'guia_cargada',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
-            'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        // Convertir las órdenes en un solo array combinando las de ambas tiendas
-        $orders_tienda_principal = array_merge($orders_tienda_principal);
-        // dd($orders_tienda_principal);
 
         $dominio = $request->getHost();
 
@@ -345,51 +319,29 @@ class BodegaController extends Controller
 
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
         $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
         // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
         ->get();
 
-        $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')
-        ->where('estatus_cotizacion', '=', 'Preparado')
-        ->get();
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($ApiFiltradaCollectAprobado);
 
+        $notas_cosmica_on = OrdersCosmica::orderBy('id','DESC')->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->where('estatus_bodega', '=' , 'Preparado')->get();
 
-        // Unir los datos de la API con los registros de la base de datos
-        $notas_cosmica_preparado = $notas_cosmica_preparado->map(function ($nota) {
-            if ($nota->shippingId_meli) {
-                // Obtener los datos de la API para este shippingId
-                $meliData = $this->fetchShippingLabelsFromMeli($nota->shippingId_meli);
-                // Agregar los datos de la API al registro
-                if ($meliData) {
-                    $nota->meli_data = $meliData;
-                }
-            }
-
-            return $nota;
-        });
-
-
-
-        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal);
-
-        $notas_cosmica_on = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega', '=' , 'Preparado')->get();
-
-        $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')->where('estatus_bodega','=' , 'Preparado')->get();
+        $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->where('estatus_bodega','=' , 'Preparado')->get();
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_preparados', compact(
             'ApiFiltradaCollectPreparado',
-            'orders_tienda_principal_preparados',
-            'notas_cosmica_preparado',
             'notas_preparado',
             'notas_presencial_preparado',
             'cantidad_preparacion',
             'notas_cosmica_on',
-            'orders_nas_ecommerce'
+            'orders_nas_ecommerce',
+            'notas_cosmica_preparado'
         ));
     }
 

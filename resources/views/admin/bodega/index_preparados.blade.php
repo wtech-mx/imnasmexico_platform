@@ -188,50 +188,9 @@
                                         @include('admin.bodega.modal_fechas')
                                     @endforeach
 
-                                    @php
-                                        // Diccionario de traducciones de estados
-                                        $statusTranslations = [
-                                            'delivered' => 'Entregado',
-                                            'shipped' => 'En camino',
-                                            'ready_to_ship' => 'Listo para enviar',
-                                            'handling' => 'Preparado',
-                                            'cancelled' => 'Cancelado',
-                                        ];
-
-                                        // Diccionario de colores para los estados
-                                        $statusColors = [
-                                            'delivered' => 'text-success', // Verde
-                                            'shipped' => 'text-primary',  // Azul
-                                            'ready_to_ship' => 'text-dark', // Amarillo
-                                            'handling' => 'text-info',    // Cian
-                                            'cancelled' => 'text-danger', // Rojo
-                                        ];
-
-
-                                    @endphp
-
                                     @foreach ($notas_cosmica_preparado as $item)
-                                        @php
-                                        $status = $item->meli_data['status'] ?? null;
-                                        $dateCreated = $item->meli_data['date_created'] ?? null;
-                                        $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
-                                        $isDelayed = false;
-
-                                        if ($isReadyOrPrepared && $dateCreated) {
-                                            $shipmentDate = new DateTime($dateCreated);
-                                            $currentDate = new DateTime();
-                                            $isDelayed = $shipmentDate->format('Y-m-d') < $currentDate->format('Y-m-d');
-                                        }
-
-                                        $borderClass = ($item->item_id_meli && !$item->estadociudad) || $isDelayed ? 'border-yellow' : '';
-                                        @endphp
-
-
-                                        <tr class="{{ $borderClass }}" style="background: #d486d6">
+                                        <tr style="background: #d486d6">
                                             <td>
-                                                @if ($item->item_id_meli && !$item->estadociudad)
-                                                    <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="Mercado Libre" width="60px">
-                                                @endif
                                                 <h5>
                                                     @if ($item->folio == null)
                                                         {{ $item->id }}
@@ -251,38 +210,6 @@
                                             </td>
 
                                             <td>
-                                                @if($item->shippingId_meli)
-                                                    @php
-                                                        $meliData = $item->meli_data; // Asegúrate de que esta variable contiene los datos de meli
-                                                        // Obtener el color correspondiente al estado actual
-                                                        $statusColor = $statusColors[$meliData['status']] ?? 'text-muted'; // Color predeterminado si no se encuentra el estado
-                                                        $status = $meliData['status'] ?? 'N/A';
-                                                        $dateCreated = $meliData['date_created'] ?? 'N/A';
-                                                        $substatus = $meliData['substatus'] ?? null;
-                                                        $statusHistory = $meliData['status_history'] ?? [];
-                                                        $shipmentDate = new DateTime($dateCreated);
-                                                        $currentDate = new DateTime();
-                                                        $shipmentDateFormatted = $shipmentDate->format('Y-m-d');
-                                                        $currentDateFormatted = $currentDate->format('Y-m-d');
-                                                        $isReadyOrPrepared = in_array($status, ['ready_to_ship', 'handling']);
-                                                        $isDelayed = $isReadyOrPrepared && $shipmentDateFormatted < $currentDateFormatted;
-                                                        $substatusDroppedOff = in_array($substatus, ['dropped_off', 'in_hub']);
-                                                        $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
-                                                    @endphp
-
-                                                    <p>
-
-                                                        @if ($isLabelNotPrinted)
-
-                                                        @else
-                                                            @if ($isDelayed)
-                                                                <br><br>
-                                                                <strong style="color:red">Estás con demora</strong><br>
-                                                                Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
-                                                            @endif
-                                                        @endif
-                                                    </p>
-                                                @endif
                                                 <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                     En preparación
                                                 </a>
@@ -323,51 +250,6 @@
                                         {{-- @include('admin.cotizacion_cosmica.guia') --}}
                                         @include('admin.bodega.modal_cosmica_estatus')
                                         @include('admin.bodega.modal_fechas')
-                                    @endforeach
-
-                                    @foreach($orders_tienda_principal_preparados as $order)
-                                        <tr style="background: #F5ECE4">
-                                            <td>{{ $order->id }}</td>
-                                            <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
-                                            <td>
-                                                <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
-                                                    Preparado
-                                                </a>
-                                            </td>
-                                            <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
-                                            <td>${{ $order->total }}</td>
-                                            <td>
-                                                {{-- <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
-                                                    <i class="fa fa-list-alt"></i>
-                                                </a> --}}
-
-                                                <a class="btn btn-sm btn-info text-white" href="{{ route('woo_nas_orders.pdf', $order->id) }}" target="_blank">
-                                                    <i class="fa fa-file-pdf"></i>
-                                            </a>
-
-                                                @if(isset($order->meta_data))
-                                                    @foreach($order->meta_data as $meta)
-                                                        @if($meta->key == 'guia_de_envio')
-
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
-
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-
-                                                <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
-                                                    <i class="fa fa-info"></i>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-
-                                        {{-- @include('admin.bodega.modal_productos') --}}
-                                        @include('admin.bodega.modal_edit_estatus_woo')
-                                        @include('admin.bodega.modal_estatus_woo')
-
                                     @endforeach
 
                                     @foreach($ApiFiltradaCollectPreparado as $order)
