@@ -509,7 +509,7 @@ class CotizadorController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin    = $request->input('fecha_fin');
 
-        $queryBase = NotasProductosCosmica::query()
+        $queryBase = NotasExpo::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin]);
 
@@ -517,27 +517,27 @@ class CotizadorController extends Controller
         $totalVentas = $queryBase->sum('total');
 
         // 5) Total en Efectivo → volvemos a filtrar por metodo_pago
-        $totalEfectivo = NotasProductosCosmica::query()
+        $totalEfectivo = NotasExpo::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('metodo_pago', 'Efectivo')
             ->sum('total');
 
         // 6) Total con Tarjeta
-        $totalTarjeta = NotasProductosCosmica::query()
+        $totalTarjeta = NotasExpo::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('metodo_pago', 'Tarjeta')
             ->sum('total');
 
-        $ventasPorAdmin = NotasProductosCosmica::select(
+        $ventasPorAdmin = NotasExpo::select(
                 'users.id AS admin_id',
                 'users.name AS admin_name',
-                DB::raw('SUM(notas_productos_cosmica.total) AS total_ventas')
+                DB::raw('SUM(notas_expo.total) AS total_ventas')
             )
-            ->join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
-            ->where('notas_productos_cosmica.tipo_nota', 'Cotizacion_Expo')
-            ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])
+            ->join('users', 'notas_expo.id_admin_venta', '=', 'users.id')
+            ->where('notas_expo.tipo_nota', 'Cotizacion_Expo')
+            ->whereBetween('notas_expo.fecha', [$fechaInicio, $fechaFin])
             ->groupBy('users.id', 'users.name')
             ->orderBy('total_ventas', 'desc')
             ->get();
@@ -553,16 +553,15 @@ class CotizadorController extends Controller
         $results = User::query()
             ->where('name', 'like', "%{$q}%")
             ->orWhere('telefono', 'like', "%{$q}%")
-            ->select('id', 'name', 'telefono')
+            ->select('id', 'name', 'telefono', 'reconocimiento')
             ->limit(10)
             ->get()
             ->map(function($u) {
                 return [
                     'id'    => $u->id,
-                    // lo que mostramos en el desplegable
                     'label' => "{$u->name} — {$u->telefono}",
-                    // lo que se mete en el input al seleccionar
                     'value' => $u->name,
+                    'reconocimiento'   => $u->reconocimiento,
                 ];
             });
 

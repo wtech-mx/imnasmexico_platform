@@ -22,6 +22,19 @@ Cosmica
                     <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
                     <!-- Hidden para guardar el id seleccionado -->
                     <input type="hidden" name="id_usuario" id="idUsuario">
+
+                    <div id="reconocimiento-container" class="mt-2">
+                        <!-- Este bloque sólo aparece si NO hay reconocimiento -->
+                        <div id="reconocimiento-upload" class="d-none">
+                            <label for="reconocimiento">Sube tu diploma:</label>
+                            <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control"/>
+                        </div>
+
+                        <!-- Este bloque sólo aparece si YA hay reconocimiento -->
+                        <div id="reconocimiento-message" class="alert alert-info d-none">
+                            📄 Ya tiene un diploma cargado.
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-12">
@@ -217,48 +230,93 @@ Cosmica
         }
     }
 
+    //DESCUENTO
+    document.getElementById('contenedor_carrito')
+    .addEventListener('input', function(e) {
+        if (!e.target.classList.contains('descuento-input')) return;
+
+        const input = e.target;
+        const descuentoPct = parseFloat(input.value) || 0;
+
+        // Fila del producto
+        const fila = input.closest('.list-group-item');
+        const idProducto = parseInt(fila.dataset.id, 10);
+
+        // 1) Actualiza el objeto en carrito
+        const prod = carrito.find(p => p.id === idProducto);
+        if (prod) prod.descuentoPct = descuentoPct;
+
+        // 2) Recalcula el total de esta fila
+        const precioUnitario = parseFloat(
+            fila.querySelector('.precio-unitario').dataset.precio
+        );
+        const cantidad = parseInt(
+            fila.querySelector('.cantidad').textContent, 10
+        );
+        const totalSinDesc = precioUnitario * cantidad;
+        const totalConDesc = totalSinDesc * (1 - descuentoPct / 100);
+        fila.querySelector('.total').textContent = `$${totalConDesc.toFixed(2)}`;
+
+        // 3) Y actualiza el total global
+        actualizarTotales();
+    });
+
+    document.getElementById('descuento-total').addEventListener('input', actualizarTotales);
     function actualizarTotales() {
-            let subtotal = 0;
-
-            carrito.forEach(producto => {
-                subtotal += producto.precio * producto.cantidad;
-            });
-
-            const total = subtotal; // puedes restar descuento si lo usas
-
-            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-    }
-
-    function renderizarCarrito() {
-        carrito.forEach(async producto => {
-            const total = producto.precio * producto.cantidad;
-
-            // Verificar si el producto ya está en el DOM
-            const productoExistente = document.querySelector(`.list-group-item[data-id="${producto.id}"]`);
-
-            if (productoExistente) {
-                // Si ya existe, solo actualizamos la cantidad y el total
-                productoExistente.querySelector('.cantidad').textContent = producto.cantidad;
-                productoExistente.querySelector('.total').textContent = `$${total.toFixed(2)}`;
-            } else {
-                // Si no existe, lo agregamos al carrito
-                const response = await fetch('/cotizador/render-item-carrito', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({ producto })
-                });
-
-                const html = await response.text();
-                document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
-            }
+        // 1) Suma todos los <span class="total"> del carrito
+        let subtotal = 0;
+        document.querySelectorAll('.list-group-item .total').forEach(span => {
+            // quitamos cualquier carácter no numérico (como '$' o comas)
+            const val = parseFloat(
+            span.textContent.replace(/[^0-9.-]+/g, '')
+            ) || 0;
+            subtotal += val;
         });
 
-        // Actualizar los totales después de procesar todos los productos
+        // 2) Actualiza el SUBTOTAL (antes de descuento global)
+        document.getElementById('subtotal-display')
+            .textContent = `$${subtotal.toFixed(2)}`;
+
+        // 3) Lee el descuento global (%) y calcula el TOTAL final
+        const descGlobalPct = parseFloat(
+            document.getElementById('descuento-total').value
+        ) || 0;
+        const totalFinal = subtotal * (1 - descGlobalPct / 100);
+
+        // 4) Actualiza el TOTAL (con descuento global)
+        document.getElementById('total-display')
+            .textContent = `$${totalFinal.toFixed(2)}`;
+    }
+
+    async function renderizarCarrito() {
+    for (const producto of carrito) {
+        const total = producto.precio * producto.cantidad;
+        const productoExistente = document.querySelector(`.list-group-item[data-id="${producto.id}"]`);
+
+        if (productoExistente) {
+        // Actualiza cantidad y total existentes
+        productoExistente.querySelector('.cantidad').textContent = producto.cantidad;
+        productoExistente.querySelector('.total').textContent    = `$${total.toFixed(2)}`;
+
+        // Recalcula totales con la fila ya actualizada
         actualizarTotales();
+        } else {
+        // Inserta la fila nueva
+        const response = await fetch('/cotizador/render-item-carrito', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ producto })
+        });
+        const html = await response.text();
+        document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
+
+        // **Aquí** recalculamos totales ya con la fila nueva en el DOM
+        actualizarTotales();
+        }
+    }
     }
 
     function eliminarDelCarrito(idProducto) {
@@ -349,19 +407,29 @@ Cosmica
     $(function(){
         $('#usuarioInput').autocomplete({
             source: function(request, response) {
-            $.getJSON("{{ route('usuarios.search') }}", {
-                q: request.term
-            }, response);
+                $.getJSON("{{ route('usuarios.search') }}", { q: request.term }, response);
             },
-            minLength: 2,    // empiezo a buscar tras 2 caracteres
+            minLength: 2,
             select: function(event, ui) {
-            // ui.item.value → nombre
-            // ui.item.id    → id real
-            $('#idUsuario').val(ui.item.id);
+                $('#idUsuario').val(ui.item.id);
+
+                // Si no tiene reconocimiento, muestro el upload y oculto el mensaje
+                if (!ui.item.reconocimiento) {
+                    $('#reconocimiento-upload').removeClass('d-none');
+                    $('#reconocimiento-message').addClass('d-none');
+                }
+                // Si ya tiene, muestro el mensaje y oculto el upload
+                else {
+                    $('#reconocimiento-upload').addClass('d-none');
+                    $('#reconocimiento-message').removeClass('d-none');
+                }
             },
-            // opcional: para que al borrarlo limpie el hidden
             change: function(e, ui) {
-            if (!ui.item) { $('#idUsuario').val(''); }
+                if (!ui.item) {
+                    $('#idUsuario').val('');
+                    // Al limpiar, oculto ambos
+                    $('#reconocimiento-upload, #reconocimiento-message').addClass('d-none');
+                }
             }
         });
     });

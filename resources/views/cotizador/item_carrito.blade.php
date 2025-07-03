@@ -6,7 +6,7 @@
         <div class="flex-grow-1 d-flex flex-column justify-content-between" style="position: relative">
             <div>
                 <div class="fw-semibold" style="color: #6d6d6d;font-size: 15px;">{{ $producto['nombre'] }}</div>
-                <small class="text-muted" style="font-size: 11px;">${{ number_format($producto['precio'], 2) }}</small>
+                <small class="text-muted precio-unitario" style="font-size: 11px;" data-precio="{{ $producto['precio'] }}">${{ number_format($producto['precio'], 2) }}</small>
             </div>
             <div class="d-flex justify-content-end align-items-center mt-2 btns_flotantes">
                 <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, -1)">-</button>
@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-around align-items-center">
             <div class="content">
                 <div style="position: relative; width: 120px;">
-                    <input id="descuento-input" type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start;    font-size: 13px;">
+                    <input id="descuento-input" name="descuento[{{ $producto['id'] }}]"  type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start;    font-size: 13px;" class="descuento-input">
                     <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
                 </div>
             </div>
