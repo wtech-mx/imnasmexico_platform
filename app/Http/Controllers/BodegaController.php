@@ -288,8 +288,15 @@ class BodegaController extends Controller
     }
 
     public function index_preparados(Request $request) {
-        $primerDiaDelMes = date('Y-m-01');
-        $ultimoDiaDelMes = date('Y-m-t');
+        $hoy = Carbon::now();
+
+        // Rango del mes actual
+        $inicioMesActual = $hoy->copy()->startOfMonth()->toDateString();
+        $finMesActual    = $hoy->copy()->endOfMonth()->toDateString();
+
+        // Rango del mes pasado
+        $inicioMesPasado = $hoy->copy()->subMonth()->startOfMonth()->toDateString();
+        $finMesPasado    = $hoy->copy()->subMonth()->endOfMonth()->toDateString();
 
         $dominio = $request->getHost();
 
@@ -319,20 +326,41 @@ class BodegaController extends Controller
 
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')
+        ->where(function($q) use ($inicioMesActual, $finMesActual, $inicioMesPasado, $finMesPasado) {
+            $q->whereBetween('fecha_aprobada', [$inicioMesActual, $finMesActual])
+            ->orWhereBetween('fecha_aprobada', [$inicioMesPasado,  $finMesPasado]);
+        })
+        ->get();
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
         $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
         // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
         ->get();
 
-        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')
+        ->where(function($q) use ($inicioMesActual, $finMesActual, $inicioMesPasado, $finMesPasado) {
+            $q->whereBetween('fecha_aprobada', [$inicioMesActual, $finMesActual])
+            ->orWhereBetween('fecha_aprobada', [$inicioMesPasado,  $finMesPasado]);
+        })
+        ->get();
 
         $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($ApiFiltradaCollectAprobado);
 
-        $notas_cosmica_on = OrdersCosmica::orderBy('id','DESC')->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->where('estatus_bodega', '=' , 'Preparado')->get();
+        $notas_cosmica_on = OrdersCosmica::orderBy('id','DESC')
+        ->where(function($q) use ($inicioMesActual, $finMesActual, $inicioMesPasado, $finMesPasado) {
+            $q->whereBetween('fecha', [$inicioMesActual, $finMesActual])
+            ->orWhereBetween('fecha', [$inicioMesPasado,  $finMesPasado]);
+        })
+        ->where('estatus_bodega', '=' , 'Preparado')->get();
 
-        $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')->whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->where('estatus_bodega','=' , 'Preparado')->get();
+        $orders_nas_ecommerce = OrdersNas::orderBy('id','DESC')
+        ->where(function($q) use ($inicioMesActual, $finMesActual, $inicioMesPasado, $finMesPasado) {
+            $q->whereBetween('fecha', [$inicioMesActual, $finMesActual])
+            ->orWhereBetween('fecha', [$inicioMesPasado,  $finMesPasado]);
+        })
+        ->where('estatus_bodega','=' , 'Preparado')->get();
+        
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_preparados', compact(
             'ApiFiltradaCollectPreparado',
