@@ -213,16 +213,55 @@
 
         const respuestasCorrectas = {
             basico: {
-                pregunta_1: 'b', pregunta_2: 'c', pregunta_3: 'b', pregunta_4: 'a', pregunta_5: 'b',
-                pregunta_6: 'a', pregunta_7: 'b', pregunta_8: 'a', pregunta_9: 'a', pregunta_10: 'c'
+                pregunta_1: ['c', 'd'],
+                pregunta_2: ['c', 'd'],
+                pregunta_3: ['c', 'd'],
+                pregunta_4: ['c', 'd'],
+                pregunta_5: ['b', 'c', 'd'],
+                pregunta_6: ['b', 'c', 'd'],
+                pregunta_7: ['c', 'd'],
+                pregunta_8: ['a', 'b'],
+                pregunta_9: ['b', 'c', 'd'],
+                pregunta_10: ['a', 'b', 'd'],
+                pregunta_11: ['c', 'd'],
+                pregunta_12: ['a', 'b'],
+                pregunta_13: ['c', 'd'],
+                pregunta_14: ['d'],
+                pregunta_15: ['b', 'c', 'd']
             },
             medio: {
-                pregunta_1: 'd', pregunta_2: 'b', pregunta_3: 'b', pregunta_4: 'b', pregunta_5: 'b',
-                pregunta_6: 'b', pregunta_7: 'a', pregunta_8: 'b', pregunta_9: 'a', pregunta_10: 'c'
+                pregunta_1: ['b', 'c'],
+                pregunta_2: ['a'],
+                pregunta_3: ['a', 'b'],
+                pregunta_4: ['a'],
+                pregunta_5: ['a', 'c'],
+                pregunta_6: ['b', 'c'],
+                pregunta_7: ['b'],
+                pregunta_8: ['b'],
+                pregunta_9: ['a'],
+                pregunta_10: ['a', 'b', 'c'],
+                pregunta_11: ['a'],
+                pregunta_12: ['b', 'c'],
+                pregunta_13: ['a'],
+                pregunta_14: ['b', 'c'],
+                pregunta_15: ['a', 'b', 'c']
             },
             avanzado: {
-                pregunta_1: 'a', pregunta_2: 'b', pregunta_3: 'b', pregunta_4: 'a', pregunta_5: 'b',
-                pregunta_6: 'a', pregunta_7: 'a', pregunta_8: 'a', pregunta_9: 'b', pregunta_10: 'a'
+                pregunta_1: ['a'],
+                pregunta_2: ['a'],
+                pregunta_3: ['a', 'c'],
+                pregunta_4: ['a'],
+                pregunta_5: ['a'],
+                pregunta_6: ['c', 'd'],
+                pregunta_7: ['a'],
+                pregunta_8: ['a', 'b'],
+                pregunta_9: ['a', 'c'],
+                pregunta_10: ['a', 'c'],
+                pregunta_11: ['a', 'b'],
+                pregunta_12: ['a', 'b'],
+                pregunta_13: ['a', 'b'],
+                pregunta_14: ['a', 'b', 'c'],
+                pregunta_15: ['a', 'b', 'c']
             }
         };
 
