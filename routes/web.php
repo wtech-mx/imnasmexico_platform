@@ -146,6 +146,35 @@ Route::get('folio', function () {
 Route::get  ('/stp/firma', [StpController::class, 'showForm'])->name('stp.firma.form');
 Route::post ('/stp/firma', [StpController::class, 'generateSignature'])->name('stp.firma.generate');
 
+Route::get  ('/stp/operaciones', [StpController::class, 'showOperacionesForm'])
+    ->name('stp.operaciones.form');
+
+Route::post ('/stp/operaciones', [StpController::class, 'consultaOperaciones'])
+    ->name('stp.operaciones.consulta');
+
+Route::get  ('/stp/orden/rastreo', [StpController::class, 'showOrdenRastreoForm'])
+    ->name('stp.orden.rastreo.form');
+
+Route::post ('/stp/orden/rastreo', [StpController::class, 'consultaOrdenRastreo'])
+    ->name('stp.orden.rastreo.consulta');
+
+Route::get  ('/stp/comprobante', [StpController::class, 'showComprobanteForm'])
+    ->name('stp.comprobante.form');
+
+Route::post ('/stp/comprobante', [StpController::class, 'consultaComprobante'])
+    ->name('stp.comprobante.consulta');
+
+Route::get('/stp/conciliacion', [StpController::class, 'showConciliacionForm'])
+    ->name('stp.conciliacion.form');
+
+Route::post('/stp/conciliacion', [StpController::class, 'consultaConciliacion'])
+    ->name('stp.conciliacion.consulta');
+
+Route::get('/stp/instituciones', [StpController::class, 'showInstitucionesForm'])
+    ->name('stp.instituciones.form');
+
+Route::post('/stp/instituciones', [StpController::class, 'consultaInstituciones'])
+    ->name('stp.instituciones.consulta');
 
 Route::get('/ticket/brunch', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_brunch'])->name('index_brunch');
 Route::get('/ticket/brunch/cosmica/{nombre}', [App\Http\Controllers\ProfesoresController::class, 'ticket_brunch'])->name('ticket_brunch.index');

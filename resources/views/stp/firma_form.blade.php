@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.app_admin')
 @section('content')
 <div class="container py-4">
     <h2>Generar Firma STP</h2>
