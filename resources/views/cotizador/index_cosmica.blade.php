@@ -26,13 +26,18 @@ Cosmica
                     <div id="reconocimiento-container" class="mt-2">
                         <!-- Este bloque sólo aparece si NO hay reconocimiento -->
                         <div id="reconocimiento-upload" class="d-none">
-                            <label for="reconocimiento">Sube tu diploma:</label>
+                            <label for="reconocimiento">Sube su diploma:</label>
                             <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control"/>
                         </div>
 
                         <!-- Este bloque sólo aparece si YA hay reconocimiento -->
                         <div id="reconocimiento-message" class="alert alert-info d-none">
                             📄 Ya tiene un diploma cargado.
+                        </div>
+
+                        <!-- Este bloque es para membresía -->
+                        <div id="membership-container" class="mt-2">
+                            <div id="membership-message" class="alert d-none"></div>
                         </div>
                     </div>
                 </div>
@@ -156,6 +161,8 @@ Cosmica
 <script>
     let timeout = null;
     let carrito = [];
+    let membershipType = null;     // ‘Estelar’, ‘Cosmos’ o null
+    let membershipActive = false;  // true si tiene membresía activa
 
     function showToast(mensaje, icono = 'success') {
         Swal.fire({
@@ -281,7 +288,10 @@ Cosmica
         const descGlobalPct = parseFloat(
             document.getElementById('descuento-total').value
         ) || 0;
-        const totalFinal = subtotal * (1 - descGlobalPct / 100);
+        const totalAntesEnvio = subtotal * (1 - descGlobalPct / 100);
+
+        const envio = window.cachedEnvioCost || 0;
+        const totalFinal = totalAntesEnvio + envio;
 
         // 4) Actualiza el TOTAL (con descuento global)
         document.getElementById('total-display')
@@ -403,7 +413,7 @@ Cosmica
 
     });
 
-    // BUSCADOR CLIENTE
+    // BUSCADOR CLIENTE, RECONOCIMIENTO Y DISTRIBUIDORA
     $(function(){
         $('#usuarioInput').autocomplete({
             source: function(request, response) {
@@ -423,16 +433,104 @@ Cosmica
                     $('#reconocimiento-upload').addClass('d-none');
                     $('#reconocimiento-message').removeClass('d-none');
                 }
+
+                // Ahora consultamos membresía
+                $('#membership-message').removeClass('alert-success alert-danger alert-secondary').addClass('d-none').text('Cargando estado de membresía…');
+
+                $.getJSON(`/cosmikausers/${ui.item.id}/membership`).done(function(data) {
+                    if (data.activa) {
+                        // 1) Determina el % según el tipo de membresía
+                        let pct = 0;
+                        membershipActive = true;
+                        membershipType   = data.membresia; // “Estelar” o “Cosmos”
+                        if (data.membresia === 'Estelar') pct = 60;
+                        else if (data.membresia === 'Cosmos') pct = 40;
+
+                        // 2) Aplica al input global de descuento
+                        const descuentoGlobalInput = document.getElementById('descuento-total');
+                        descuentoGlobalInput.value = pct;
+
+                        // 3) Recalcula totales con ese % global
+                        actualizarTotales();
+
+                        $('#membership-message')
+                        .removeClass('d-none alert-secondary')
+                        .addClass('alert-success')
+                        .text(`🎉 Tiene membresía Estatus: ${data.membresia}. Descuento aplicado: ${pct}%`);
+                    }
+                    else {
+                        membershipActive = false;
+                        membershipType   = null;
+                        $('#membership-message')
+                        .removeClass('d-none alert-success')
+                        .addClass('alert-secondary')
+                        .text('ℹ️ No tiene membresía activa');
+                    }
+                        recalcEnvio();
+                        actualizarTotales();
+                })
+                .fail(function() {
+                    membershipActive = false;
+                    membershipType   = null;
+                    $('#membership-message')
+                    .removeClass('d-none')
+                    .addClass('alert-danger')
+                    .text('⚠️ Error al consultar membresía');
+                });
             },
             change: function(e, ui) {
                 if (!ui.item) {
                     $('#idUsuario').val('');
                     // Al limpiar, oculto ambos
-                    $('#reconocimiento-upload, #reconocimiento-message').addClass('d-none');
+                    $('#reconocimiento-upload, #reconocimiento-message, #membership-message').addClass('d-none');
                 }
             }
         });
     });
+
+    //CALCULOS PARA EL ENVIO
+    document.getElementById('chkEnvio')
+    .addEventListener('change', () => {
+        recalcEnvio();
+        // Y luego el total final, que incluye envío
+        actualizarTotales();
+    });
+
+    function recalcEnvio() {
+        const checked = document.getElementById('chkEnvio').checked;
+        const envioDisplay = document.getElementById('envio-display');
+
+        // Si no está seleccionado, tarifa 0
+        if (!checked) {
+            envioDisplay.textContent = '$0.00';
+            return;
+        }
+
+        // Leemos el total SIN envío (descuento global ya aplicado)
+        // Para ello, parseamos el span #total-display antes de modificarlo
+        const totalSinEnvio = parseFloat(
+            document.getElementById('total-display')
+            .textContent.replace(/[^0-9.-]+/g,'')
+        ) || 0;
+
+        let costoEnvio = 0;
+
+        if (!membershipActive) {
+            // Cliente sin membresía
+            costoEnvio = 180;
+        } else if (membershipType === 'Cosmos') {
+            // Membresía Cosmos
+            costoEnvio = totalSinEnvio < 1500 ? 126 : 90;
+        } else if (membershipType === 'Estelar') {
+            // Membresía Estelar
+            costoEnvio = totalSinEnvio < 2500 ? 90 : 0;
+        }
+
+        envioDisplay.textContent = `$${costoEnvio.toFixed(2)}`;
+
+        // Almacena en una variable para sumar en actualizarTotales
+        window.cachedEnvioCost = costoEnvio;
+    }
 
 </script>
 

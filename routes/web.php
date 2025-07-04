@@ -403,6 +403,8 @@ Route::group(['middleware' => ['auth']], function() {
     //================ MODULO COTIZADOR NEW ============================================
     Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
     Route::get('/admin/cotizador/usuarios/buscar', [App\Http\Controllers\CotizadorController::class, 'search'])->name('usuarios.search');
+    Route::get('/cosmikausers/{cliente}/membership', [App\Http\Controllers\CotizadorController::class, 'membershipStatus']);
+
 
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');

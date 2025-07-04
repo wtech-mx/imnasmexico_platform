@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Categorias;
+use App\Models\Cosmikausers;
 use App\Models\NotasExpo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
@@ -566,6 +567,18 @@ class CotizadorController extends Controller
             });
 
         return response()->json($results);
+    }
+
+    public function membershipStatus($cliente){
+        $registro = Cosmikausers::where('id_cliente', $cliente)->first();
+        if ($registro && $registro->membresia_estatus === 'Activa') {
+            return response()->json([
+                'activa'    => true,
+                'membresia' => $registro->membresia,
+            ]);
+        }
+
+        return response()->json(['activa' => false]);
     }
 
 }

@@ -33,5 +33,10 @@
         <label class="text-dark" for="direccion_cliente">Direccion</label>
         <input type="text" id="direccion_cliente" name="direccion_cliente"  class="form-control input_custom_tab_dark">
     </div>
+
+    <div class="form-group col-12 px-1 py-2">
+        <label class="text-dark" for="direccion_cliente">Referencia</label>
+        <input type="text" id="direccion_cliente" name="direccion_cliente"  class="form-control input_custom_tab_dark">
+    </div>
 </div>
 </div>

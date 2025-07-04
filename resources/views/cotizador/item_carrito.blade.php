@@ -27,7 +27,7 @@
                     <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
                 </div>
             </div>
-            <span class="total " style="font-size: 13px;">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
+            <span class="total" style="font-size: 13px;">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
         </div>
 
     </div>
