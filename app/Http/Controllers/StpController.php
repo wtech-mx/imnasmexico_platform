@@ -431,4 +431,67 @@ class StpController extends Controller
         // 5) Mostrar formulario + resultado
         return view('stp.instituciones_form', compact('cadena','firma','payload','resultado'));
     }
+
+    public function showSaldoCuentaForm()
+    {
+        return view('stp.saldo_form');
+    }
+
+    /**
+     * Ejecutar consulta de saldo de cuenta en STP
+     */
+    public function consultaSaldoCuenta(Request $request)
+    {
+        // 1) Validar
+        $data = $request->validate([
+            'empresa'         => 'required|string|max:15',
+            'cuentaOrdenante' => 'required|string|max:18',
+            'fecha'           => 'nullable|digits:8',
+        ]);
+
+        // 2) Construir cadena original
+        if (!empty($data['fecha'])) {
+            $cadena = "||{$data['empresa']}|{$data['cuentaOrdenante']}|{$data['fecha']}||";
+        } else {
+            $cadena = "||{$data['empresa']}|{$data['cuentaOrdenante']}|||";
+        }
+
+        // 3) Firmar con SHA256+RSA
+        $pemPath = public_path('stp_leys/inmas.pem');
+        $pem     = file_get_contents($pemPath);
+        $pass    = 'X}Zl0/RtjuI(=Esz3+Vq';  // tu passphrase
+        $pkey    = openssl_pkey_get_private($pem, $pass);
+        if (!$pkey) {
+            return back()->withErrors('No se pudo cargar la clave privada.');
+        }
+        if (!openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
+            return back()->withErrors('Error al generar la firma.');
+        }
+        $firma = base64_encode($bin);
+
+        // 4) Preparar payload
+        $payload = [
+            'cuentaOrdenante' => $data['cuentaOrdenante'],
+            'empresa'         => $data['empresa'],
+            'firma'           => $firma,
+        ];
+        if (!empty($data['fecha'])) {
+            $payload['fecha'] = (int)$data['fecha'];
+        }
+
+        // 5) Consumir API
+        $endpoint = 'https://efws-dev.stpmex.com/efws/API/consultaSaldoCuenta';
+        $resp = Http::withHeaders(['Content-Type'=>'application/json'])
+            ->post($endpoint, $payload);
+
+        if (! $resp->successful()) {
+            return back()->withErrors("Error HTTP {$resp->status()}: {$resp->body()}");
+        }
+
+        $resultado = $resp->json();
+
+        // 6) Renderizar form + resultados
+        return view('stp.saldo_form', compact('cadena','firma','payload','resultado'));
+    }
+
 }

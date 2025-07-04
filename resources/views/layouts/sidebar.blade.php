@@ -899,6 +899,62 @@
                 </li>
             @endcan
 
+
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6"><img src="{{ asset('stp/stp_logo.jpg') }}" alt="" style="width: 35px"></h6>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#stp" class="nav-link " aria-controls="stp" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                                <i class="fa fa-gear opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">STP Pruebas</span>
+                    </a>
+                    <div class="collapse " id="stp">
+                        <ul class="nav ms-4">
+                            <li class="nav-item ">
+                                <a href="{{ route('stp.firma.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Prueba de firma</span>
+                                </a>
+
+                                <a href="{{ route('stp.saldo.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Saldo de cuenta</span>
+                                </a>
+
+                                <a href="{{ route('stp.comprobante.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Consulta Comprobante STP</span>
+                                </a>
+
+                                <a href="{{ route('stp.conciliacion.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Consulta Conciliación Saldo</span>
+                                </a>
+
+                                <a href="{{ route('stp.instituciones.consulta') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Consulta Instituciones</span>
+                                </a>
+
+                                <a href="{{ route('stp.operaciones.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Consulta de Operaciones STP</span>
+                                </a>
+
+                                <a href="{{ route('stp.orden.rastreo.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Consulta Orden por ClaveRastreo</span>
+                                </a>
+
+
+                            </li>
+                        </ul>
+                    </div>
+                 </li>
+
             @can('pagina-menu')
                 <li class="nav-item mt-3">
                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Web Page</h6>
