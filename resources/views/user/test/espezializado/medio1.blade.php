@@ -1,7 +1,7 @@
 @extends('user.test.layout')
 
 @section('content')
-         <form id="form-cuestionario-espezializado" class="test-container" data-nivel="espezializado_medio">
+         <form id="form-cuestionario" class="test-container" data-nivel="esp_medio">
 
             <h2>Test Medio Casos y protocolos prácticos</h2>
 

@@ -3,7 +3,7 @@
 @section('content')
          <form id="form-cuestionario" class="test-container" data-nivel="basico">
 
-            <h2>Test Nivel Básico</h2>
+            <h2>Test Nivel Básico Teorico</h2>
 
             <div class="test-question">
                 <p>1. ¿Cuál es la función principal del ácido hialurónico en el cuidado de la piel?</p>

@@ -4,7 +4,7 @@
 
          <form id="form-cuestionario" class="test-container" data-nivel="medio">
 
-            <h2>Test Nivel Medio</h2>
+            <h2>Test Nivel Medio Teorico</h2>
 
             <div class="test-question">
                 <p>1. ¿Cuál es el mecanismo principal de acción de los AHA como el ácido glicólico?</p>

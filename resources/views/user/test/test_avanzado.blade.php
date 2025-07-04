@@ -3,7 +3,7 @@
 @section('content')
          <form id="form-cuestionario" class="test-container" data-nivel="avanzado">
 
-            <h2>Test Nivel Avanzado</h2>
+            <h2>Test Nivel Avanzado Teorico</h2>
 
             <div class="test-question">
                 <p>1. ¿Qué ventaja ofrece la tecnología liposomal en la administración tópica de activos en cosmiatría?</p>

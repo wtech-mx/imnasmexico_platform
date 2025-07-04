@@ -146,12 +146,12 @@ Route::get('/ticket/brunch/cosmica/{nombre}', [App\Http\Controllers\ProfesoresCo
 Route::get('/ticket/brunch/cosmica/domingo/{nombre}', [App\Http\Controllers\ProfesoresController::class, 'ticket_brunch_domingo'])->name('ticket_brunch_domingo.index');
 
 Route::get('/test/cosmica', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
-Route::get('/test/cosmica/medio', [App\Http\Controllers\TestController::class, 'index_medio'])->name('test.index_medio');
-Route::get('/test/cosmica/avanzado', [App\Http\Controllers\TestController::class, 'index_avanzado'])->name('test.index_avanzado');
+Route::get('/test/cosmica/teorico/medio', [App\Http\Controllers\TestController::class, 'index_medio'])->name('test.index_medio');
+Route::get('/test/cosmica/teorico/avanzado', [App\Http\Controllers\TestController::class, 'index_avanzado'])->name('test.index_avanzado');
 
-Route::get('/test/cosmica/especializado/basico', [App\Http\Controllers\TestController::class, 'index_especializadobasico'])->name('test.index_especializadobasico');
+Route::get('/test/cosmica/especializado/basico', [App\Http\Controllers\TestController::class, 'index_especializado'])->name('test.index_especializadobasico');
 Route::get('/test/cosmica/especializado/medio', [App\Http\Controllers\TestController::class, 'index_especializadomedio'])->name('test.index_especializadomedio');
-Route::get('/test/cosmica/especializad/avanzado', [App\Http\Controllers\TestController::class, 'index_especializadoavanzado'])->name('test.index_especializadoavanzado');
+Route::get('/test/cosmica/especializado/avanzado', [App\Http\Controllers\TestController::class, 'index_especializadoavanzado'])->name('test.index_especializadoavanzado');
 
 
 // =============== F A C T U R A C I O N===============================
