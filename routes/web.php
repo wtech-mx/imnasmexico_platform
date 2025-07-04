@@ -11,7 +11,7 @@ use App\Http\Controllers\RevoesController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ChatController;
-
+use App\Http\Controllers\StpController;
 use App\Http\Controllers\PruebaApiController;
 use App\Http\Controllers\BreadcrumbController;
 use App\Http\Controllers\WhatsAppWebhookController;
@@ -140,6 +140,12 @@ Route::get('certificado_webinar', function () {
 Route::get('folio', function () {
     return view('user.folio');
 });
+
+
+
+Route::get  ('/stp/firma', [StpController::class, 'showForm'])->name('stp.firma.form');
+Route::post ('/stp/firma', [StpController::class, 'generateSignature'])->name('stp.firma.generate');
+
 
 Route::get('/ticket/brunch', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_brunch'])->name('index_brunch');
 Route::get('/ticket/brunch/cosmica/{nombre}', [App\Http\Controllers\ProfesoresController::class, 'ticket_brunch'])->name('ticket_brunch.index');
