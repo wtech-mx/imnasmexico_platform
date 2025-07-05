@@ -443,6 +443,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/stp/saldo-cuenta', [StpController::class, 'consultaSaldoCuenta'])
         ->name('stp.saldo.consulta');
 
+
+
+    Route::get('/stp/registra-orden', [StpController::class, 'showRegistraForm'])
+        ->name('stp.registra.form');
+
+    Route::put('/stp/registra-orden', [StpController::class, 'registraOrden'])
+        ->name('stp.registra.orden');
+
     //================ MODULO COTIZADOR NEW ============================================
     Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
     Route::get('/admin/cotizador/usuarios/buscar', [App\Http\Controllers\CotizadorController::class, 'search'])->name('usuarios.search');

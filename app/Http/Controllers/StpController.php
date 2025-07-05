@@ -432,66 +432,117 @@ class StpController extends Controller
         return view('stp.instituciones_form', compact('cadena','firma','payload','resultado'));
     }
 
-    public function showSaldoCuentaForm()
+    public function showRegistraForm()
     {
-        return view('stp.saldo_form');
+        return view('stp.registra_form');
     }
 
-    /**
-     * Ejecutar consulta de saldo de cuenta en STP
-     */
-    public function consultaSaldoCuenta(Request $request)
-    {
-        // 1) Validar
-        $data = $request->validate([
-            'empresa'         => 'required|string|max:15',
-            'cuentaOrdenante' => 'required|string|max:18',
-            'fecha'           => 'nullable|digits:8',
-        ]);
+    // Procesa la orden
+public function registraOrden(Request $r)
+{
+    // 1) Validación de sólo los campos que en tu ejemplo envías
+    $f = $r->validate([
+        'institucionContraparte'   => 'required|digits:5',
+        'empresa'                  => 'required|string|max:15',
+        'fechaOperacion'           => 'nullable|digits:8',
+        'folioOrigen'              => 'nullable|string|max:50',
+        'claveRastreo'             => 'required|string|max:30',
+        'institucionOperante'      => 'required|digits:5',
+        'monto'                    => 'required|numeric',
+        'tipoPago'                 => 'required',
+        'tipoCuentaOrdenante'      => 'required|digits:2',
+        'nombreOrdenante'          => 'required|string|max:40',
+        'cuentaOrdenante'          => 'required|string|max:20',
+        'rfcCurpOrdenante'         => 'required|string|max:18',
+        'tipoCuentaBeneficiario'   => 'required|digits:2',
+        'nombreBeneficiario'       => 'required|string|max:40',
+        'cuentaBeneficiario'       => 'required|string|max:20',
+        'rfcCurpBeneficiario'      => 'required|string|max:18',
+        'referenciaNumerica'       => 'required|digits_between:1,7',
+        'latitud'                    => 'required|string|max:30',
+        'longitud'                   => 'required|string|max:30',
+        'conceptoPago'             => 'required|string|max:40',
+    ]);
 
-        // 2) Construir cadena original
-        if (!empty($data['fecha'])) {
-            $cadena = "||{$data['empresa']}|{$data['cuentaOrdenante']}|{$data['fecha']}||";
-        } else {
-            $cadena = "||{$data['empresa']}|{$data['cuentaOrdenante']}|||";
-        }
+    // 2) Montar el arreglo DE 28 elementos en este caso (hasta referenciaNumerica),
+    //    reservando vacío para todos los opcionales intermedios:
+$campos = [
+  /*  1 */ $f['institucionContraparte'],
+  /*  2 */ $f['empresa'],
+  /*  3 */ '',                            // fechaOperacion (vacío)
+  /*  4 */ '',                            // folioOrigen   (vacío)
+  /*  5 */ $f['claveRastreo'],
+  /*  6 */ $f['institucionOperante'],
+  /*  7 */ number_format($f['monto'],2,'.',''),
+  /*  8 */ $f['tipoPago'],
+  /*  9 */ $f['tipoCuentaOrdenante'],
+  /* 10 */ $f['nombreOrdenante'],
+  /* 11 */ $f['cuentaOrdenante'],
+  /* 12 */ $f['rfcCurpOrdenante'],
+  /* 13 */ $f['tipoCuentaBeneficiario'],
+  /* 14 */ $f['nombreBeneficiario'],
+  /* 15 */ $f['cuentaBeneficiario'],
+  /* 16 */ $f['rfcCurpBeneficiario'],
+  /* 17 */ '',   // emailBeneficiario
+  /* 18 */ '',   // tipoCuentaBeneficiario2
+  /* 19 */ '',   // nombreBeneficiario2
+  /* 20 */ '',   // cuentaBeneficiario2
+  /* 21 */ '',   // rfcCurpBeneficiario2
+  /* 22 */ $f['conceptoPago'],
+  /* 23 */ '',   // conceptoPago2
+  /* 24 */ '',   // claveCatUsuario1
+  /* 25 */ '',   // claveCatUsuario2
+  /* 26 */ '',   // clavePago
+  /* 27 */ '',   // referenciaCobranza
+  /* 28 */ $f['referenciaNumerica'],
+  // ahora 6 posiciones vacías más para llegar a 34
+  /* 29 */ '',
+  /* 30 */ '',
+  /* 31 */ '',
+  /* 32 */ '',
+  /* 33 */ '',
+  /* 34 */ '',
+];
 
-        // 3) Firmar con SHA256+RSA
-        $pemPath = public_path('stp_leys/inmas.pem');
-        $pem     = file_get_contents($pemPath);
-        $pass    = 'X}Zl0/RtjuI(=Esz3+Vq';  // tu passphrase
-        $pkey    = openssl_pkey_get_private($pem, $pass);
-        if (!$pkey) {
-            return back()->withErrors('No se pudo cargar la clave privada.');
-        }
-        if (!openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
-            return back()->withErrors('Error al generar la firma.');
-        }
-        $firma = base64_encode($bin);
+// 3) Armas la cadena con doble pipe:
+$cadena = '||'.implode('|', $campos).'||';
 
-        // 4) Preparar payload
-        $payload = [
-            'cuentaOrdenante' => $data['cuentaOrdenante'],
-            'empresa'         => $data['empresa'],
-            'firma'           => $firma,
-        ];
-        if (!empty($data['fecha'])) {
-            $payload['fecha'] = (int)$data['fecha'];
-        }
+    // 3) La firmamos igual que antes
+    $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
+    $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
+    openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
+    $firma = base64_encode($bin);
 
-        // 5) Consumir API
-        $endpoint = 'https://efws-dev.stpmex.com/efws/API/consultaSaldoCuenta';
-        $resp = Http::withHeaders(['Content-Type'=>'application/json'])
-            ->post($endpoint, $payload);
+    // 4) Payload: solo tus campos + firma
+    $payload = [
+      'claveRastreo'           => $f['claveRastreo'],
+      'conceptoPago'           => $f['conceptoPago'],
+      'cuentaOrdenante'        => $f['cuentaOrdenante'],
+      'cuentaBeneficiario'     => $f['cuentaBeneficiario'],
+      'empresa'                => $f['empresa'],
+      'institucionContraparte' => $f['institucionContraparte'],
+      'institucionOperante'    => $f['institucionOperante'],
+      'monto'                  => number_format($f['monto'],2,'.',''),
+      'nombreBeneficiario'     => $f['nombreBeneficiario'],
+      'nombreOrdenante'        => $f['nombreOrdenante'],
+      'referenciaNumerica'     => $f['referenciaNumerica'],
+      'rfcCurpBeneficiario'    => $f['rfcCurpBeneficiario'],
+      'rfcCurpOrdenante'       => $f['rfcCurpOrdenante'],
+      'tipoCuentaBeneficiario' => $f['tipoCuentaBeneficiario'],
+      'tipoCuentaOrdenante'    => $f['tipoCuentaOrdenante'],
+      'tipoPago'               => $f['tipoPago'],
+      'latitud'               => $f['latitud'],
+      'longitud'               => $f['longitud'],
+      'firma'                  => $firma,
+    ];
 
-        if (! $resp->successful()) {
-            return back()->withErrors("Error HTTP {$resp->status()}: {$resp->body()}");
-        }
+    // 5) Envío a STP
+    $resp = Http::withHeaders(['Content-Type'=>'application/json'])
+                ->put('https://demo.stpmex.com:7024/speiws/rest/ordenPago/registra', $payload);
 
-        $resultado = $resp->json();
+    // 6) Mostrar la misma vista con los resultados
+    return view('stp.registra_form', compact('f','cadena','firma','payload','resp'));
+}
 
-        // 6) Renderizar form + resultados
-        return view('stp.saldo_form', compact('cadena','firma','payload','resultado'));
-    }
 
 }
