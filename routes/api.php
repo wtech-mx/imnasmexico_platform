@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Products;
 use App\Models\ProductosBundleId;
+use App\Http\Controllers\StpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,8 @@ Route::get('/enviar-productos/bundle-pack', function () {
     ]);
 });
 
+Route::post('/webhook/stp/estado', [StpController::class, 'webhookEstado'])
+     ->name('stp.webhook.estado');
+
+Route::post('/webhook/stp/abono', [StpController::class, 'webhookAbono'])
+     ->name('stp.webhook.abono');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class StpController extends Controller
 {
@@ -544,5 +545,113 @@ $cadena = '||'.implode('|', $campos).'||';
     return view('stp.registra_form', compact('f','cadena','firma','payload','resp'));
 }
 
+    public function webhookEstado(Request $request)
+    {
+        // 1) Validar la carga mínima
+        $data = $request->validate([
+            'id'               => 'required|integer',
+            'empresa'          => 'required|string|max:15',
+            'claveRastreo'     => 'required|string|max:30',
+            'estado'           => 'required|string|in:LQ,CN,D',
+            'causaDevolucion'  => 'required|string|max:100',
+            'tsLiquidacion'    => 'required|digits:13',
+        ]);
+
+        // 2) Aquí procesas la notificación: por ejemplo, guardar en BD o disparar tu lógica
+        //    Por simplicidad, lo vamos a loggear:
+        Log::info('STP Cambio de Estado recibido:', $data);
+
+        // 3) Respuesta 200 OK
+        return response()->json(['success' => true], 200);
+    }
+
+    public function webhookAbono(Request $request)
+    {
+        // 1) Validar los campos requeridos
+        $data = $request->validate([
+            'id'                    => 'required|integer',
+            'fechaOperacion'        => 'required|digits:8',
+            'institucionOrdenante'  => 'required|digits:5',
+            'institucionBeneficiaria'=> 'required|digits:5',
+            'claveRastreo'          => 'required|string|max:30',
+            'monto'                 => 'required|numeric',
+            'nombreOrdenante'       => 'nullable|string|max:120',
+            'tipoCuentaOrdenante'   => 'nullable|digits:2',
+            'cuentaOrdenante'       => 'nullable|string|max:20',
+            'rfcCurpOrdenante'      => 'nullable|string|max:18',
+            'nombreBeneficiario'    => 'required|string|max:40',
+            'tipoCuentaBeneficiario'=> 'required|digits:2',
+            'cuentaBeneficiario'    => 'required|string|max:20',
+            'nombreBeneficiario2'   => 'nullable|string|max:40',
+            'tipoCuentaBeneficiario2'=> 'nullable|digits:2',
+            'cuentaBeneficiario2'   => 'nullable|string|max:18',
+            'rfcCurpBeneficiario'   => 'required|string|max:18',
+            'conceptoPago'          => 'required|string|max:40',
+            'referenciaNumerica'    => 'required|digits_between:1,7',
+            'empresa'               => 'required|string|max:15',
+            'tipoPago'              => 'required|digits_between:1,2',
+            'tsLiquidacion'         => 'required|digits:13',
+            'folioCodi'             => 'nullable|string|max:20',
+        ]);
+
+        // 2) Procesar el abono: por ejemplo, guardarlo o disparar tu lógica
+        Log::info('STP SendAbono recibido:', $data);
+
+        // 3) Responder rápido (<2500ms) con 200 OK
+        return response()->json(['success' => true], 200);
+    }
+
+        public function showRetornaForm()
+    {
+        return view('stp.retorna_form');
+    }
+
+    /** Procesar el retorno */
+    public function retornaOrden(Request $r)
+    {
+        // 1) validación
+        $f = $r->validate([
+            'fechaOperacion'                => 'required|digits:8',
+            'institucionOperante'           => 'required|digits:5',
+            'claveRastreo'                  => 'required|string|max:30',
+            'claveRastreoDevolucion'        => 'required|string|max:30|different:claveRastreo',
+            'empresa'                       => 'required|string|max:15',
+            'monto'                         => 'required|numeric',
+            'digitoIdentificadorBeneficiario'=> 'required|digits:1',
+            'medioEntrega'                  => 'required|digits:1',
+        ]);
+
+        // 2) montar la cadena original:
+        //    ||fechaOperacion|institucionOperante|claveRastreo|monto|digitoIdentificadorBeneficiario|claveRastreoDevolucion|medioEntrega||
+        $parts = [
+            $f['fechaOperacion'],
+            $f['institucionOperante'],
+            $f['claveRastreo'],
+            number_format($f['monto'],2,'.',''),
+            $f['digitoIdentificadorBeneficiario'],
+            $f['claveRastreoDevolucion'],
+            $f['medioEntrega'],
+        ];
+        $cadena = '||'.implode('|', $parts).'||';
+
+        // 3) firmar
+        $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
+        $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
+        openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
+        $firma = base64_encode($bin);
+
+        // 4) payload y llamada PUT
+        $payload = array_merge($f, ['firma' => $firma]);
+
+        $resp = Http::withHeaders([
+                'Content-Type' => 'application/json'
+            ])->put(
+                'https://demo.stpmex.com:7024/speiws/rest/ordenPago/retornaOrden',
+                $payload
+            );
+
+        // 5) regresar a la vista con todos los datos para debug
+        return view('stp.retorna_form', compact('f','cadena','firma','payload','resp'));
+    }
 
 }
