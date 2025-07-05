@@ -16,8 +16,6 @@ use App\Models\BodegaPedidos;
 use Illuminate\Http\Request;
 use App\Models\Meli;
 use App\Models\OrdersNas;
-use Codexshaper\WooCommerce\Facades\WooCommerce;
-use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -45,27 +43,7 @@ class BodegaController extends Controller
     public function index_preparacion(Request $request) {
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
-        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
-        $woocommerce = new Client(
-            'https://imnasmexico.com/new/', // URL de la tienda principal
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
-            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
 
-
-        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
-        $orders_tienda_principal = $woocommerce->get('orders', [
-            'status' => 'guia_cargada',
-            'per_page' => 100,
-        ]);
-
-        // Convertir las órdenes en un solo array combinando las de ambas tiendas
-        $orders_tienda_principal = array_merge($orders_tienda_principal);
-        // dd($orders_tienda_principal);
 
         $dominio = $request->getHost();
 
@@ -155,13 +133,12 @@ class BodegaController extends Controller
             return $nota;
         });
 
-        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($ApiFiltradaCollectAprobadoreposicion) + count($orders_tienda_principal) + count($oreders_cosmica_ecommerce);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($ApiFiltradaCollectAprobadoreposicion) + count($oreders_cosmica_ecommerce);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index', compact(
             'notas_presencial_preparacion',
             'notas_preparacion',
             'notas_cosmica_preparacion',
-            'orders_tienda_principal',
             'cantidad_preparacion',
             'ApiFiltradaCollectAprobado',
             'ApiFiltradaCollectAprobadoreposicion',
@@ -216,52 +193,6 @@ class BodegaController extends Controller
         //return $pdf->stream();
         return $pdf->download('etiqueta.pdf');
 
-    }
-
-    public function generateOrderWooNasPDF($id)
-    {
-        // Crear instancia del cliente WooCommerce
-        $woocommerce = new Client(
-            'https://imnasmexico.com/new/',
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f',
-            'cs_762a289843cea2a92751f757f351d3522147997b',
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-        // Obtener el pedido por ID
-        $order = $woocommerce->get("orders/{$id}");
-
-        // Generar el PDF usando una vista
-        $pdf = PDF::loadView('admin.bodega.pdf.woo_nas', compact('order'));
-
-        // Descargar el archivo PDF
-        return $pdf->download("Order_NAS_Woo_{$id}.pdf");
-    }
-
-    public function generateOrderWooCosmicaPDF($id)
-    {
-        // Crear instancia del cliente WooCommerce
-        $woocommerce = new Client(
-            'https://cosmicaskin.com', // URL de la tienda secundaria
-            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
-            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-        // Obtener el pedido por ID
-        $order = $woocommerce->get("orders/{$id}");
-
-        // Generar el PDF usando una vista
-        $pdf = PDF::loadView('admin.bodega.pdf.woo_cosmica', compact('order'));
-
-        // Descargar el archivo PDF
-        return $pdf->download("Order_Cosmica_Woo_{$id}.pdf");
     }
 
     public function fetchShippingLabelsFromMeli($shippingId)
@@ -360,7 +291,7 @@ class BodegaController extends Controller
             ->orWhereBetween('fecha', [$inicioMesPasado,  $finMesPasado]);
         })
         ->where('estatus_bodega','=' , 'Preparado')->get();
-        
+
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_preparados', compact(
             'ApiFiltradaCollectPreparado',
@@ -428,27 +359,6 @@ class BodegaController extends Controller
     public function index_canceladas(Request $request) {
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
-        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
-        $woocommerce = new Client(
-            'https://imnasmexico.com/new/', // URL de la tienda principal
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
-            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-
-        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
-        $orders_tienda_principal = $woocommerce->get('orders', [
-            'status' => 'guia_cargada',
-            'per_page' => 100,
-        ]);
-
-        // Convertir las órdenes en un solo array combinando las de ambas tiendas
-        $orders_tienda_principal = array_merge($orders_tienda_principal);
-        // dd($orders_tienda_principal);
 
         $dominio = $request->getHost();
 
@@ -478,96 +388,12 @@ class BodegaController extends Controller
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
 
-        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) ;
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_cancelados', compact(
             'notas_presencial_cancelada',
             'cantidad_preparacion'
         ));
-    }
-
-    public function update_guia_woo(Request $request, $id)
-    {
-
-        $dominio =  $request->get('dominio');
-
-        if($dominio == 'cosmicaskin.com'){
-
-            // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
-            $woocommerceNas = new Client(
-                'https://cosmicaskin.com', // URL de la tienda secundaria
-                'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
-                'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
-                [
-                    'wp_api' => true,
-                    'version' => 'wc/v3',
-                ]
-            );
-
-            $order_online_cosmica = OrderOnlineCosmica::where('id_nota', $id)
-            ->get();
-        }else{
-            // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
-            $woocommerceNas = new Client(
-                'https://imnasmexico.com/new', // URL de la tienda secundaria
-                'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda secundaria
-                'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda secundaria
-                [
-                    'wp_api' => true,
-                    'version' => 'wc/v3',
-                ]
-            );
-
-            $order_online_cosmica = OrderOnlineNas::where('id_nota', $id)
-            ->get();
-        }
-
-        $updatedOrder = $woocommerceNas->put("orders/{$id}", [
-            'status' => $request->get('status'),
-        ]);
-
-        // $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
-        //     'meta_data' => [
-        //         [
-        //             'key' => $request->get('key'),
-        //             'value' => date("Y-m-d H:i:s"),
-        //         ],
-        //     ],
-        // ]);
-
-        // Verificar si la actualización fue exitosa
-        if ($updatedOrder) {
-            // Obtener la orden desde WooCommerce
-            $order = $woocommerceNas->get("orders/$id");
-            // 2. Recorrer los productos en la orden (line_items)
-            foreach ($order_online_cosmica as $item) {
-                $productName = trim($item->nombre); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
-
-                $quantity = $item->cantidad; // Cantidad vendida en WooCommerce
-
-                // 3. Buscar el producto en la tabla interna
-                $productoInterno = Products::where('nombre', $productName)->first();
-
-                $producto_historial = new HistorialVendidos;
-                $producto_historial->id_producto = $productoInterno->id;
-                $producto_historial->stock_viejo = $productoInterno->stock;
-                $producto_historial->cantidad_restado = $quantity;
-                $producto_historial->stock_actual = $productoInterno->stock - $quantity;
-                $producto_historial->id_nas_online = $id;
-                $producto_historial->save();
-
-                if ($productoInterno) {
-                    // 4. Realizar la resta del stock
-                    $nuevoStock = $productoInterno->stock - $quantity;
-                    // 5. Actualizar el stock en la base de datos
-                    $productoInterno->update(['stock' => $nuevoStock]);
-                }
-            }
-
-            return redirect()->back()->with('success', 'Actuazlaido exitosamente.');
-        } else {
-            return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
-        }
     }
 
     public function actualizarPedidoParadisus(Request $request, $id)
@@ -953,22 +779,10 @@ class BodegaController extends Controller
 
     public function preparacion_scaner_nas(Request $request, $id)
     {
-        $woocommerce = new Client(
-            'https://imnasmexico.com/new/', // URL de la tienda principal
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
-            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-        // Obtener un pedido específico usando el ID
-        $order = $woocommerce->get('orders/' . $id);
 
         $order_online_nas = OrderOnlineNas::where('id_nota', $id)->get();
 
-        return view('admin.bodega.scaner.show_nas', compact('order', 'order_online_nas'));
+        return view('admin.bodega.scaner.show_nas', compact( 'order_online_nas'));
     }
 
     public function checkProduct_nas(Request $request)
@@ -1007,25 +821,13 @@ class BodegaController extends Controller
 
     public function preparacion_scaner_online_cosmica(Request $request, $id)
     {
-        $woocommerceCosmika = new Client(
-            'https://cosmicaskin.com',
-            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586',
-            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff',
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
-
-        $order = $woocommerceCosmika->get('orders/' . $id);
-
         $order_online_cosmica = OrderOnlineCosmica::where('id_nota', $id)
             ->get()
             ->each(function ($item) {
                 $item->nombre = trim($item->nombre);
             });
 
-        return view('admin.bodega.scaner.show_online_cosmica', compact('order', 'order_online_cosmica'));
+        return view('admin.bodega.scaner.show_online_cosmica', compact( 'order_online_cosmica'));
     }
 
     public function checkProduct_online_cosmica(Request $request)
