@@ -119,13 +119,13 @@ Cosmica
 
         </div>
 
-        <form action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido">
-            @csrf
-            <div class="row">
+        <div class="col-lg-4 mt-3">
+            <form class="row" action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido">
+                @csrf
                 <input type="hidden" name="tipo" value="cosmica">
                 @include('cotizador.pedido_partial')
-            </div>
-        </form>
+            </form>
+        </div>
 
     </div>
 </div>

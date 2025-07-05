@@ -1,6 +1,6 @@
-        <!-- Orden -->
-        <div class="col-lg-4 mt-3">
-            <div class="sidebar">
+
+
+<div class="sidebar">
                 <h5 class="mb-2 mt-1 text-center">Cotiza tu pedido</h5>
 
                 <!-- Lista de productos -->
@@ -8,22 +8,24 @@
                     <!-- Aquí se insertan los productos dinámicamente -->
                 </ul>
 
-                <h5 class="mb-4 mt-1 text-center">Informacion del Cliente</h5>
+                <h5 class="mb-3 mt-1 text-center">Informacion del Cliente</h5>
 
-                <!-- Checkbox Facturación -->
-                <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="chkFacturacion">
-                    <label class="form-check-label" for="chkFacturacion">
-                        Facturación
-                    </label>
-                </div>
+                <div class="row px-3">
+                    <!-- Checkbox Facturación -->
+                    <div class="form-check mb-2 col-6">
+                        <input class="form-check-input" type="checkbox" id="chkFacturacion">
+                        <label class="form-check-label" for="chkFacturacion">
+                            Facturación
+                        </label>
+                    </div>
 
-                <!-- Checkbox Envío -->
-                <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="chkEnvio">
-                    <label class="form-check-label" for="chkEnvio">
-                        Agregar envío
-                    </label>
+                    <!-- Checkbox Envío -->
+                    <div class="form-check mb-2 col-6">
+                        <input class="form-check-input" type="checkbox" id="chkEnvio">
+                        <label class="form-check-label" for="chkEnvio">
+                            Agregar envío
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Campos de envío (oculto por defecto) -->
@@ -80,5 +82,4 @@
 
                 <!-- Botón -->
                 <button type="submit" class="btn btn-xs btn-success w-100"><i class="bi bi-cart3"></i> Realizar pedido </button>
-            </div>
-        </div>
+</div>
