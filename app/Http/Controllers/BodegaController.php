@@ -943,4 +943,13 @@ class BodegaController extends Controller
           return $pdf->stream();
       //  return $pdf->download('Reporte Ventas / '.$today.' .pdf');
     }
+
+    public function index_pedido_user(Request $request, $id){
+
+
+        $notas_nas = NotasProductos::where('id', '=', $id)->first();
+
+        return view('admin.bodega.index_order_user',compact('notas_nas'));
+
+    }
 }

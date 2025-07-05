@@ -144,6 +144,7 @@ Route::get('folio', function () {
 
 
 
+// =============== Tikcet Brunch ===============================
 
 Route::get('/ticket/brunch', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_brunch'])->name('index_brunch');
 Route::get('/ticket/brunch/cosmica/{nombre}', [App\Http\Controllers\ProfesoresController::class, 'ticket_brunch'])->name('ticket_brunch.index');
@@ -157,6 +158,9 @@ Route::get('/test/cosmica/especializado/basico', [App\Http\Controllers\TestContr
 Route::get('/test/cosmica/especializado/medio', [App\Http\Controllers\TestController::class, 'index_especializadomedio'])->name('test.index_especializadomedio');
 Route::get('/test/cosmica/especializado/avanzado', [App\Http\Controllers\TestController::class, 'index_especializadoavanzado'])->name('test.index_especializadoavanzado');
 
+// =============== Informacion Gernal de pedido ===============================
+
+Route::get('/pedido/estatus/{id}', [App\Http\Controllers\BodegaController::class, 'index_pedido_user'])->name('index_pedido_user');
 
 // =============== F A C T U R A C I O N===============================
 Route::get('/facturacion', action: [App\Http\Controllers\FacturasController::class, 'facturascion_index'])->name('facturas_user.index');
@@ -401,6 +405,7 @@ Route::patch('/contrato/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASC
 
 Route::post('registro/actualizar-estatus', [App\Http\Controllers\RegistroIMNASController::class, 'actualizarEstatus'])->name('actualizar.estatus');
 Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroIMNASController::class, 'actualizarEstatusEnvio'])->name('actualizar.estatus_envio');
+
 
 Route::group(['middleware' => ['auth']], function() {
 

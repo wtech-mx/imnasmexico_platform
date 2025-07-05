@@ -15,12 +15,33 @@ Escaner #{{ $nota_scaner->id }} NAS
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h2 class="mb-3">Cotizacion NAS Folio #{{$nota_scaner->folio}}</h2>
+                            <h2 class="mb-3">Cotizacion NAS Folio #{{ $nota_scaner->folio }}</h2>
+                            <div class="content">
+                                <a target="_blank" href="{{ route('index_pedido_user', $nota_scaner->id) }}">
+                                    <h4>Escanea con tu Teléfono</h4>
+                                </a>
+
+                                    @php
+                                        // Genera la URL basada en el name de la ruta y el ID
+                                        $url = route('index_pedido_user', $nota_scaner->id);
+                                        // Crea el PNG en base64
+                                        $qrcode = DNS2D::getBarcodePNG($url, 'QRCODE', 3.0, 3.0);
+                                    @endphp
+
+                                <img
+                                    class="mx-auto"
+                                    src="data:image/png;base64,{{ $qrcode }}"
+                                    alt="QR para estatus del pedido"
+                                    style="background: transparent; padding: 0;"
+                                />
+                            </div>
+
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
-                                ¿Como funciona?
+                                ¿Cómo funciona?
                             </a>
                         </div>
                     </div>
+
 
                     <div class="card-body">
                         <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
