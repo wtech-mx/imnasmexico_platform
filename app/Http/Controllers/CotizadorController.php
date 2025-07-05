@@ -15,6 +15,7 @@ use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosBundleId;
 use App\Models\ProductosNotasCosmica;
+use App\Models\ProductosNotasId;
 use Carbon\Carbon;
 use DB;
 
@@ -498,8 +499,7 @@ class CotizadorController extends Controller
         return response()->json($notas);
     }
 
-        public function ventasExpo(Request $request)
-    {
+    public function ventasExpo(Request $request){
         // 1) Validación básica de fechas
         $request->validate([
             'fecha_inicio' => 'required|date',
@@ -554,15 +554,32 @@ class CotizadorController extends Controller
         $results = User::query()
             ->where('name', 'like', "%{$q}%")
             ->orWhere('telefono', 'like', "%{$q}%")
-            ->select('id', 'name', 'telefono', 'reconocimiento')
+            ->select(
+                'id',
+                'name',
+                'telefono',
+                'reconocimiento',
+                'postcode',
+                'state',
+                'city',
+                'direccion',
+                'referencia',
+                'country'
+            )
             ->limit(10)
             ->get()
             ->map(function($u) {
                 return [
-                    'id'    => $u->id,
-                    'label' => "{$u->name} — {$u->telefono}",
-                    'value' => $u->name,
-                    'reconocimiento'   => $u->reconocimiento,
+                    'id'             => $u->id,
+                    'label'          => "{$u->name} — {$u->telefono}",
+                    'value'          => $u->name,
+                    'reconocimiento' => $u->reconocimiento,
+                    'postcode'       => $u->postcode,
+                    'state'          => $u->state,
+                    'city'           => $u->city,
+                    'direccion'      => $u->direccion,
+                    'referencia'     => $u->referencia,
+                    'country'        => $u->country,
                 ];
             });
 
@@ -580,5 +597,99 @@ class CotizadorController extends Controller
 
         return response()->json(['activa' => false]);
     }
+
+    public function store_new(Request $request)
+    {
+        dd($request);
+        // 1) Valida lo esencial
+        $data = $request->validate([
+            'tipo'            => 'required|in:cosmica,nas,tiendita',
+            'id_usuario'      => 'required|exists:users,id',
+            'productos'       => 'required|array|min:1',
+            'productos.*.id'  => 'required|integer|exists:productos,id',
+            'productos.*.cantidad'    => 'required|integer|min:1',
+            'productos.*.precio'      => 'required|numeric|min:0',
+            'productos.*.descuentoPct'=> 'nullable|numeric|min:0|max:100',
+            'descuento_total' => 'nullable|numeric|min:0|max:100',
+            'chkEnvio'        => 'nullable|boolean',
+            'chkFacturacion'  => 'nullable|boolean',
+            'postcode'        => 'nullable|string',
+            'state'           => 'nullable|string',
+            'city'            => 'nullable|string',
+            'direccion'       => 'nullable|string',
+            'referencia'      => 'nullable|string',
+            'country'         => 'nullable|string',
+        ]);
+
+        // 2) Selecciona el modelo de cabecera según el tipo
+        switch ($data['tipo']) {
+            case 'cosmica':
+                $OrderModel     = NotasProductosCosmica::class;
+                $OrderItemModel = ProductosNotasCosmica::class;
+                break;
+            case 'nas':
+                $OrderModel     = NotasProductos::class;
+                $OrderItemModel = ProductosNotasId::class;
+                break;
+            case 'tiendita':
+                $OrderModel     = NotasProductos::class;
+                $OrderItemModel = ProductosNotasId::class;
+                break;
+        }
+
+        // 3) Calcula totales (puedes repetir tu lógica JS, o recalcular aquí)
+        $subtotal = 0;
+        foreach ($data['productos'] as $p) {
+            $lineTotal = $p['precio'] * $p['cantidad'] * (1 - ($p['descuentoPct'] ?? 0) / 100);
+            $subtotal += $lineTotal;
+        }
+        $totalAntesEnvio = $subtotal * (1 - ($data['descuento_total'] ?? 0) / 100);
+        $envioCost = $data['chkEnvio']
+                ? /* lógica membresía/total para envío */
+                0
+                : 0;
+        $baseParaIVA = $totalAntesEnvio + $envioCost;
+        $ivaCost = $data['chkFacturacion']
+                ? $baseParaIVA * 0.16
+                : 0;
+        $totalFinal = $baseParaIVA + $ivaCost;
+
+        // 4) Crea la orden
+        $order = new $OrderModel();
+        $order->user_id         = $data['id_usuario'];
+        $order->subtotal        = $subtotal;
+        $order->descuento_pct   = $data['descuento_total'] ?? 0;
+        $order->total_antes_env = $totalAntesEnvio;
+        $order->envio_cost      = $envioCost;
+        $order->iva_cost        = $ivaCost;
+        $order->total_final     = $totalFinal;
+
+        // Campos de dirección
+        $order->postcode   = $data['postcode'];
+        $order->state      = $data['state'];
+        $order->city       = $data['city'];
+        $order->direccion  = $data['direccion'];
+        $order->referencia = $data['referencia'];
+        $order->country    = $data['country'];
+
+        $order->save();
+
+        // 5) Guarda cada ítem
+        foreach ($data['productos'] as $p) {
+            $item = new $OrderItemModel();
+            $item->order_id       = $order->id;
+            $item->producto_id    = $p['id'];
+            $item->cantidad       = $p['cantidad'];
+            $item->precio_unit    = $p['precio'];
+            $item->descuento_pct  = $p['descuentoPct'] ?? 0;
+            $item->total_linea    = $p['precio'] * $p['cantidad'] * (1 - ($p['descuentoPct'] ?? 0) / 100);
+            $item->save();
+        }
+
+        return redirect()
+            ->back()
+            ->with('success', "Pedido {$data['tipo']} guardado correctamente (#{$order->id}).");
+    }
+
 
 }

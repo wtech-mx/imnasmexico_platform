@@ -119,7 +119,13 @@ Cosmica
 
         </div>
 
-        @include('cotizador.pedido_partial')
+        <form action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido">
+            @csrf
+            <div class="row">
+                <input type="hidden" name="tipo" value="cosmica">
+                @include('cotizador.pedido_partial')
+            </div>
+        </form>
 
     </div>
 </div>
@@ -270,33 +276,46 @@ Cosmica
 
     document.getElementById('descuento-total').addEventListener('input', actualizarTotales);
     function actualizarTotales() {
-        // 1) Suma todos los <span class="total"> del carrito
-        let subtotal = 0;
-        document.querySelectorAll('.list-group-item .total').forEach(span => {
-            // quitamos cualquier carácter no numérico (como '$' o comas)
-            const val = parseFloat(
-            span.textContent.replace(/[^0-9.-]+/g, '')
-            ) || 0;
-            subtotal += val;
-        });
+        // 1) Subtotal (items menos descuentos)
+        let subtotal = carrito.reduce((acc, p) => {
+            const totItem = p.precio * p.cantidad * (1 - (p.descuentoPct||0)/100);
+            return acc + totItem;
+        }, 0);
 
-        // 2) Actualiza el SUBTOTAL (antes de descuento global)
+        // 2) Muestra subtotal
         document.getElementById('subtotal-display')
             .textContent = `$${subtotal.toFixed(2)}`;
 
-        // 3) Lee el descuento global (%) y calcula el TOTAL final
+        // 3) Descuento global
         const descGlobalPct = parseFloat(
             document.getElementById('descuento-total').value
         ) || 0;
-        const totalAntesEnvio = subtotal * (1 - descGlobalPct / 100);
+        const totalAntesEnvio = subtotal * (1 - descGlobalPct/100);
 
+        // 4) Envío
         const envio = window.cachedEnvioCost || 0;
-        const totalFinal = totalAntesEnvio + envio;
 
-        // 4) Actualiza el TOTAL (con descuento global)
+        // 5) Base para IVA
+        const baseParaIVA = totalAntesEnvio + envio;
+
+        // 6) IVA si está chequeado
+        const chk = document.getElementById('chkFacturacion').checked;
+        if (chk) {
+            window.cachedIVA = baseParaIVA * 0.16;
+        } else {
+            window.cachedIVA = 0;
+        }
+
+        // Actualiza visual
+        document.getElementById('iva-display')
+            .textContent = `$${window.cachedIVA.toFixed(2)}`;
+
+        // 7) Total final = baseParaIVA + IVA
+        const totalFinal = baseParaIVA + window.cachedIVA;
         document.getElementById('total-display')
             .textContent = `$${totalFinal.toFixed(2)}`;
     }
+
 
     async function renderizarCarrito() {
     for (const producto of carrito) {
@@ -422,7 +441,7 @@ Cosmica
             minLength: 2,
             select: function(event, ui) {
                 $('#idUsuario').val(ui.item.id);
-
+                console.log(ui.item);
                 // Si no tiene reconocimiento, muestro el upload y oculto el mensaje
                 if (!ui.item.reconocimiento) {
                     $('#reconocimiento-upload').removeClass('d-none');
@@ -436,6 +455,13 @@ Cosmica
 
                 // Ahora consultamos membresía
                 $('#membership-message').removeClass('alert-success alert-danger alert-secondary').addClass('d-none').text('Cargando estado de membresía…');
+
+                $('#postcode').val(ui.item.postcode);
+                $('#state').val(ui.item.state);
+                $('#city').val(ui.item.city);
+                $('#direccion').val(ui.item.direccion);
+                $('#referencia').val(ui.item.referencia);
+                $('#country').val(ui.item.country);
 
                 $.getJSON(`/cosmikausers/${ui.item.id}/membership`).done(function(data) {
                     if (data.activa) {
@@ -477,6 +503,7 @@ Cosmica
                     .addClass('alert-danger')
                     .text('⚠️ Error al consultar membresía');
                 });
+
             },
             change: function(e, ui) {
                 if (!ui.item) {
@@ -530,6 +557,45 @@ Cosmica
 
         // Almacena en una variable para sumar en actualizarTotales
         window.cachedEnvioCost = costoEnvio;
+    }
+
+    //CALCULOS PARA FACTURA
+    window.cachedEnvioCost = window.cachedEnvioCost || 0;
+    window.cachedIVA = 0;
+
+    document.getElementById('chkFacturacion')
+        .addEventListener('change', () => {
+            recalcIVA();
+            actualizarTotales();
+        });
+
+        function recalcIVA() {
+        const chk = document.getElementById('chkFacturacion').checked;
+        const ivaDisplay = document.getElementById('iva-display');
+
+        if (!chk) {
+            window.cachedIVA = 0;
+            ivaDisplay.textContent = '$0.00';
+            return;
+        }
+
+        // Total antes de IVA = subtotal con descuento global + envío
+        // Para evitar recursión, calcula directamente:
+        let subtotal = carrito.reduce((acc, p) => {
+            const totItem = p.precio * p.cantidad * (1 - (p.descuentoPct||0)/100);
+            return acc + totItem;
+        }, 0);
+        const descGlobalPct = parseFloat(
+            document.getElementById('descuento-total').value
+        ) || 0;
+        const totalSinEnvio = subtotal * (1 - descGlobalPct/100);
+        const envio = window.cachedEnvioCost || 0;
+        const base = totalSinEnvio + envio;
+
+        // IVA 16%
+        const iva = base * 0.16;
+        window.cachedIVA = iva;
+        ivaDisplay.textContent = `$${iva.toFixed(2)}`;
     }
 
 </script>

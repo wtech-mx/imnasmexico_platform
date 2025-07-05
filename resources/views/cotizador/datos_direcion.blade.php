@@ -6,37 +6,37 @@
 
     <div class="form-group col-6 px-1 py-2">
         <label class="text-dark" for="codigo_postal">CP</label>
-        <input type="text" id="codigo_postal" name="codigo_postal" class="form-control input_custom_tab_dark">
+        <input type="text" id="postcode" name="postcode" class="form-control input_custom_tab_dark">
     </div>
 
     <div class="form-group col-6 px-1 py-2">
         <label class="text-dark">Colonia</label>
-        <select id="colonia" name="colonia"  class="form-control input_custom_tab_dark"></select>
+        <select id="country" name="country"  class="form-control input_custom_tab_dark"></select>
     </div>
 
     <div class="form-group col-6 px-1 py-2">
         <label class="text-dark">Ciudad</label>
-        <input type="text" id="ciudad" name="ciudad"  class="form-control input_custom_tab_dark" readonly>
+        <input type="text" id="city" name="city"  class="form-control input_custom_tab_dark" readonly>
     </div>
 
     <div class="form-group col-6 px-1 py-2">
         <label class="text-dark">Estado</label>
-        <input type="text" id="estado" name="estado"  class="form-control input_custom_tab_dark" readonly>
+        <input type="text" id="state" name="state"  class="form-control input_custom_tab_dark" readonly>
     </div>
 
     <div class="form-group col-12 px-1 py-2">
         <label class="text-dark">Municipio / Alcaldía</label>
-        <input type="text" id="municipio" name="municipio"  class="form-control input_custom_tab_dark" readonly>
+        <input type="text" id="alcaldia" name="alcaldia"  class="form-control input_custom_tab_dark" readonly>
     </div>
 
     <div class="form-group col-12 px-1 py-2">
         <label class="text-dark" for="direccion_cliente">Direccion</label>
-        <input type="text" id="direccion_cliente" name="direccion_cliente"  class="form-control input_custom_tab_dark">
+        <input type="text" id="direccion" name="direccion"  class="form-control input_custom_tab_dark">
     </div>
 
     <div class="form-group col-12 px-1 py-2">
         <label class="text-dark" for="direccion_cliente">Referencia</label>
-        <input type="text" id="direccion_cliente" name="direccion_cliente"  class="form-control input_custom_tab_dark">
+        <input type="text" id="referencia" name="referencia"  class="form-control input_custom_tab_dark">
     </div>
 </div>
 </div>
