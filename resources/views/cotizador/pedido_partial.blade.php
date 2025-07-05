@@ -79,7 +79,10 @@
                     <span>TOTAL:</span>
                     <span id="total-display">$0.00</span>
                 </div>
-
+                <input type="hidden" name="subtotal_final" id="subtotal-final-input">
+                <input type="hidden" name="envio_final"    id="envio-final-input">
+                <input type="hidden" name="iva_final"      id="iva-final-input">
+                <input type="hidden" name="total_final"    id="total-final-input">
                 <!-- Botón -->
                 <button type="submit" class="btn btn-xs btn-success w-100"><i class="bi bi-cart3"></i> Realizar pedido </button>
 </div>

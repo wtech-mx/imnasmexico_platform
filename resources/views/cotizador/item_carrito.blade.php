@@ -32,4 +32,8 @@
 
     </div>
     <hr style="margin: 0.5rem 0!important">
+        <input type="hidden" name="productos[{{ $producto['id'] }}][id]" value="{{ $producto['id'] }}">
+        <input type="hidden" name="productos[{{ $producto['id'] }}][precio]" value="{{ $producto['precio'] }}">
+        <input type="hidden" name="productos[{{ $producto['id'] }}][cantidad]" class="cantidad-input" value="{{ $producto['cantidad'] }}">
+        <input type="hidden" name="productos[{{ $producto['id'] }}][descuentoPct]" class="descuento-input-hidden" value="0">
 </li>

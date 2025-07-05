@@ -20,14 +20,12 @@ Cosmica
                     <h5 class="p-2">Cliente</h5>
 
                     <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
-                    <!-- Hidden para guardar el id seleccionado -->
-                    <input type="hidden" name="id_usuario" id="idUsuario">
 
                     <div id="reconocimiento-container" class="mt-2">
                         <!-- Este bloque sólo aparece si NO hay reconocimiento -->
                         <div id="reconocimiento-upload" class="d-none">
                             <label for="reconocimiento">Sube su diploma:</label>
-                            <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control"/>
+                            <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control" form="formGuardarPedido"/>
                         </div>
 
                         <!-- Este bloque sólo aparece si YA hay reconocimiento -->
@@ -122,7 +120,10 @@ Cosmica
         <div class="col-lg-4 mt-3">
             <form class="row" action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido">
                 @csrf
+                <!-- Hidden para guardar el id seleccionado -->
+                <input type="hidden" name="id_usuario" id="idUsuario">
                 <input type="hidden" name="tipo" value="cosmica">
+                <input type="hidden" name="tipo_nota" value="Cotizacion">
                 @include('cotizador.pedido_partial')
             </form>
         </div>
@@ -253,6 +254,7 @@ Cosmica
 
         // Fila del producto
         const fila = input.closest('.list-group-item');
+        fila.querySelector('.descuento-input-hidden').value = descuentoPct;
         const idProducto = parseInt(fila.dataset.id, 10);
 
         // 1) Actualiza el objeto en carrito
@@ -314,38 +316,44 @@ Cosmica
         const totalFinal = baseParaIVA + window.cachedIVA;
         document.getElementById('total-display')
             .textContent = `$${totalFinal.toFixed(2)}`;
+
+        document.getElementById('subtotal-final-input').value = subtotal.toFixed(2);
+        document.getElementById('envio-final-input').value    = envio.toFixed(2);
+        document.getElementById('iva-final-input').value      = window.cachedIVA.toFixed(2);
+        document.getElementById('total-final-input').value    = totalFinal.toFixed(2);
     }
 
 
     async function renderizarCarrito() {
-    for (const producto of carrito) {
-        const total = producto.precio * producto.cantidad;
-        const productoExistente = document.querySelector(`.list-group-item[data-id="${producto.id}"]`);
+        for (const producto of carrito) {
+            const total = producto.precio * producto.cantidad;
+            const productoExistente = document.querySelector(`.list-group-item[data-id="${producto.id}"]`);
 
-        if (productoExistente) {
-        // Actualiza cantidad y total existentes
-        productoExistente.querySelector('.cantidad').textContent = producto.cantidad;
-        productoExistente.querySelector('.total').textContent    = `$${total.toFixed(2)}`;
+            if (productoExistente) {
+            // Actualiza cantidad y total existentes
+            productoExistente.querySelector('.cantidad').textContent = producto.cantidad;
+            productoExistente.querySelector('.cantidad-input').value = producto.cantidad;
+            productoExistente.querySelector('.total').textContent    = `$${total.toFixed(2)}`;
 
-        // Recalcula totales con la fila ya actualizada
-        actualizarTotales();
-        } else {
-        // Inserta la fila nueva
-        const response = await fetch('/cotizador/render-item-carrito', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-            },
-            body: JSON.stringify({ producto })
-        });
-        const html = await response.text();
-        document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
+            // Recalcula totales con la fila ya actualizada
+            actualizarTotales();
+            } else {
+            // Inserta la fila nueva
+            const response = await fetch('/cotizador/render-item-carrito', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ producto })
+            });
+            const html = await response.text();
+            document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
 
-        // **Aquí** recalculamos totales ya con la fila nueva en el DOM
-        actualizarTotales();
+            // **Aquí** recalculamos totales ya con la fila nueva en el DOM
+            actualizarTotales();
+            }
         }
-    }
     }
 
     function eliminarDelCarrito(idProducto) {

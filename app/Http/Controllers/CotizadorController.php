@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Categorias;
 use App\Models\Cosmikausers;
+use App\Models\Factura;
 use App\Models\NotasExpo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
@@ -600,26 +601,12 @@ class CotizadorController extends Controller
 
     public function store_new(Request $request)
     {
-        dd($request);
         // 1) Valida lo esencial
         $data = $request->validate([
             'tipo'            => 'required|in:cosmica,nas,tiendita',
             'id_usuario'      => 'required|exists:users,id',
-            'productos'       => 'required|array|min:1',
-            'productos.*.id'  => 'required|integer|exists:productos,id',
-            'productos.*.cantidad'    => 'required|integer|min:1',
-            'productos.*.precio'      => 'required|numeric|min:0',
-            'productos.*.descuentoPct'=> 'nullable|numeric|min:0|max:100',
-            'descuento_total' => 'nullable|numeric|min:0|max:100',
-            'chkEnvio'        => 'nullable|boolean',
-            'chkFacturacion'  => 'nullable|boolean',
-            'postcode'        => 'nullable|string',
-            'state'           => 'nullable|string',
-            'city'            => 'nullable|string',
-            'direccion'       => 'nullable|string',
-            'referencia'      => 'nullable|string',
-            'country'         => 'nullable|string',
         ]);
+        $code = Str::random(8);
 
         // 2) Selecciona el modelo de cabecera según el tipo
         switch ($data['tipo']) {
@@ -637,41 +624,103 @@ class CotizadorController extends Controller
                 break;
         }
 
-        // 3) Calcula totales (puedes repetir tu lógica JS, o recalcular aquí)
-        $subtotal = 0;
-        foreach ($data['productos'] as $p) {
-            $lineTotal = $p['precio'] * $p['cantidad'] * (1 - ($p['descuentoPct'] ?? 0) / 100);
-            $subtotal += $lineTotal;
+        // 3) Cliente
+        if ($data['id_usuario'] == NULL) {
+            $payer = new User();
+            $payer->name = $request->get('name') . " " . $request->get('apellido');
+            $payer->email = $request->get('email');
+            $payer->username = $request->get('telefono');
+            $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('telefono'));
+            $payer->save();
+        } else {
+            $user = User::where('id', $data['id_usuario'])->first();
+            $user->postcode   = $data['postcode'];
+            $user->state      = $data['state'];
+            $user->city       = $data['city'];
+            $user->direccion  = $data['direccion'];
+            $user->referencia = $data['referencia'];
+            $user->country    = $data['country'];
+            if ($request->hasFile('reconocimiento')) {
+                $file      = $request->file('reconocimiento');
+                $clienteId = $user->id;  // o $user->id si lo prefieres
+                $timestamp = time();
+                $ext       = $file->getClientOriginalExtension();
+
+                // Construimos un nombre “limpio”:
+                $fileName  = "{$clienteId}_{$timestamp}.{$ext}";
+
+                // Opcional: asegúrate de que la carpeta existe
+                $destPath = public_path('reconocimientos');
+                if (! is_dir($destPath)) {
+                    mkdir($destPath, 0755, true);
+                }
+
+                // Move
+                $file->move($destPath, $fileName);
+
+                // Guarda en la BD
+                $user->reconocimiento = $fileName;
+            }
+            $user->save();
+            $payer = $user;
         }
-        $totalAntesEnvio = $subtotal * (1 - ($data['descuento_total'] ?? 0) / 100);
-        $envioCost = $data['chkEnvio']
-                ? /* lógica membresía/total para envío */
-                0
-                : 0;
-        $baseParaIVA = $totalAntesEnvio + $envioCost;
-        $ivaCost = $data['chkFacturacion']
-                ? $baseParaIVA * 0.16
-                : 0;
-        $totalFinal = $baseParaIVA + $ivaCost;
 
         // 4) Crea la orden
         $order = new $OrderModel();
-        $order->user_id         = $data['id_usuario'];
-        $order->subtotal        = $subtotal;
+        $order->user_id         = $payer->id;
+        $order->subtotal        = $data['subtotal_final'];
         $order->descuento_pct   = $data['descuento_total'] ?? 0;
-        $order->total_antes_env = $totalAntesEnvio;
-        $order->envio_cost      = $envioCost;
-        $order->iva_cost        = $ivaCost;
-        $order->total_final     = $totalFinal;
+        $order->envio_cost      = $data['envio_final'];
+        $order->iva_cost        = $data['iva_final'];
+        $order->total_final     = $data['total_final'];
+        $order->observaciones     = $data['nota'];
+        $order->tipo_nota     = $data['tipo_nota'];
+        $order->id_admin = auth()->user()->id;
+
+        if($request->get('tipo_cotizacion') == 'Expo'){
+            $order->tipo_nota = 'Expo';
+        }else{
+            $order->tipo_nota = 'Cotizacion';
+        }
+        $tipoNota = $order->tipo_nota;
+
+        // Obtener todos los folios del tipo de nota específico
+        $folios = NotasProductosCosmica::where('tipo_nota', $tipoNota)->pluck('folio');
+        // Extraer los números de los folios y encontrar el máximo
+        $maxNumero = $folios->map(function ($folio) use ($tipoNota) {
+            return intval(substr($folio, strlen($tipoNota[0])));
+        })->max();
+
+        // Si hay un folio existente, sumarle 1 al máximo número
+        if ($maxNumero) {
+            $numeroFolio = $maxNumero + 1;
+        } else {
+            // Si no hay un folio existente, empezar desde 1
+            $numeroFolio = 1;
+        }
+        // Crear el nuevo folio con el tipo de nota y el número
+        $folio = $tipoNota[0] . $numeroFolio;
+
+        // Asignar el nuevo folio al objeto
+        $order->folio = $folio;
+
+        if($request->get('factura') != NULL){
+            $order->factura = '1';
+            $order->save();
+            $facturas = new Factura;
+
+            $facturas->id_usuario = $order->id_usuario;
+            $facturas->fecha = $request->get('fecha');
+            $facturas->id_notas_cosmica = $order->id;
+            $estado = 'Por Facturar';
+            $facturas->estatus = $estado;
+            $facturas->save();
+        }
 
         // Campos de dirección
-        $order->postcode   = $data['postcode'];
-        $order->state      = $data['state'];
-        $order->city       = $data['city'];
-        $order->direccion  = $data['direccion'];
-        $order->referencia = $data['referencia'];
-        $order->country    = $data['country'];
-
         $order->save();
 
         // 5) Guarda cada ítem
