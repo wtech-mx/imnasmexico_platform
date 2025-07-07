@@ -440,206 +440,212 @@ class StpController extends Controller
     }
 
     // Procesa la orden
-public function registraOrden(Request $r)
-{
-    // 1) Validación de sólo los campos que en tu ejemplo envías
-    $f = $r->validate([
-        'institucionContraparte'   => 'required|digits:5',
-        'empresa'                  => 'required|string|max:15',
-        'fechaOperacion'           => 'nullable|digits:8',
-        'folioOrigen'              => 'nullable|string|max:50',
-        'claveRastreo'             => 'required|string|max:30',
-        'institucionOperante'      => 'required|digits:5',
-        'monto'                    => 'required|numeric',
-        'tipoPago'                 => 'required',
-        'tipoCuentaOrdenante'      => 'required|digits:2',
-        'nombreOrdenante'          => 'required|string|max:40',
-        'cuentaOrdenante'          => 'required|string|max:20',
-        'rfcCurpOrdenante'         => 'required|string|max:18',
-        'tipoCuentaBeneficiario'   => 'required|digits:2',
-        'nombreBeneficiario'       => 'required|string|max:40',
-        'cuentaBeneficiario'       => 'required|string|max:20',
-        'rfcCurpBeneficiario'      => 'required|string|max:18',
-        'referenciaNumerica'       => 'required|digits_between:1,7',
-        'latitud'                    => 'required|string|max:30',
-        'longitud'                   => 'required|string|max:30',
-        'conceptoPago'             => 'required|string|max:40',
-    ]);
-
-    // 2) Montar el arreglo DE 28 elementos en este caso (hasta referenciaNumerica),
-    //    reservando vacío para todos los opcionales intermedios:
-$campos = [
-  /*  1 */ $f['institucionContraparte'],
-  /*  2 */ $f['empresa'],
-  /*  3 */ '',                            // fechaOperacion (vacío)
-  /*  4 */ '',                            // folioOrigen   (vacío)
-  /*  5 */ $f['claveRastreo'],
-  /*  6 */ $f['institucionOperante'],
-  /*  7 */ number_format($f['monto'],2,'.',''),
-  /*  8 */ $f['tipoPago'],
-  /*  9 */ $f['tipoCuentaOrdenante'],
-  /* 10 */ $f['nombreOrdenante'],
-  /* 11 */ $f['cuentaOrdenante'],
-  /* 12 */ $f['rfcCurpOrdenante'],
-  /* 13 */ $f['tipoCuentaBeneficiario'],
-  /* 14 */ $f['nombreBeneficiario'],
-  /* 15 */ $f['cuentaBeneficiario'],
-  /* 16 */ $f['rfcCurpBeneficiario'],
-  /* 17 */ '',   // emailBeneficiario
-  /* 18 */ '',   // tipoCuentaBeneficiario2
-  /* 19 */ '',   // nombreBeneficiario2
-  /* 20 */ '',   // cuentaBeneficiario2
-  /* 21 */ '',   // rfcCurpBeneficiario2
-  /* 22 */ $f['conceptoPago'],
-  /* 23 */ '',   // conceptoPago2
-  /* 24 */ '',   // claveCatUsuario1
-  /* 25 */ '',   // claveCatUsuario2
-  /* 26 */ '',   // clavePago
-  /* 27 */ '',   // referenciaCobranza
-  /* 28 */ $f['referenciaNumerica'],
-  // ahora 6 posiciones vacías más para llegar a 34
-  /* 29 */ '',
-  /* 30 */ '',
-  /* 31 */ '',
-  /* 32 */ '',
-  /* 33 */ '',
-  /* 34 */ '',
-];
-
-// 3) Armas la cadena con doble pipe:
-$cadena = '||'.implode('|', $campos).'||';
-
-    // 3) La firmamos igual que antes
-    $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
-    $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
-    openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
-    $firma = base64_encode($bin);
-
-    // 4) Payload: solo tus campos + firma
-    $payload = [
-      'claveRastreo'           => $f['claveRastreo'],
-      'conceptoPago'           => $f['conceptoPago'],
-      'cuentaOrdenante'        => $f['cuentaOrdenante'],
-      'cuentaBeneficiario'     => $f['cuentaBeneficiario'],
-      'empresa'                => $f['empresa'],
-      'institucionContraparte' => $f['institucionContraparte'],
-      'institucionOperante'    => $f['institucionOperante'],
-      'monto'                  => number_format($f['monto'],2,'.',''),
-      'nombreBeneficiario'     => $f['nombreBeneficiario'],
-      'nombreOrdenante'        => $f['nombreOrdenante'],
-      'referenciaNumerica'     => $f['referenciaNumerica'],
-      'rfcCurpBeneficiario'    => $f['rfcCurpBeneficiario'],
-      'rfcCurpOrdenante'       => $f['rfcCurpOrdenante'],
-      'tipoCuentaBeneficiario' => $f['tipoCuentaBeneficiario'],
-      'tipoCuentaOrdenante'    => $f['tipoCuentaOrdenante'],
-      'tipoPago'               => $f['tipoPago'],
-      'latitud'               => $f['latitud'],
-      'longitud'               => $f['longitud'],
-      'firma'                  => $firma,
-    ];
-
-    // 5) Envío a STP
-    $resp = Http::withHeaders(['Content-Type'=>'application/json'])
-                ->put('https://demo.stpmex.com:7024/speiws/rest/ordenPago/registra', $payload);
-
-    // 6) Mostrar la misma vista con los resultados
-    return view('stp.registra_form', compact('f','cadena','firma','payload','resp'));
-}
-
-public function webhookEstado(Request $request)
-{
-    $data = $request->validate([
-        'id'               => 'required|integer',
-        'empresa'          => 'required|string|max:15',
-        'claveRastreo'     => 'required|string|max:30',
-        'estado'           => 'required|string|in:LQ,CN,D',
-        'causaDevolucion'  => [
-            'nullable',
-            'string',
-            'max:100',
-            \Illuminate\Validation\Rule::requiredIf(fn() => $request->input('estado') === 'D'),
-        ],
-        'tsLiquidacion'    => 'required|digits:13',
-    ]);
-
-    Log::info('STP Cambio de Estado recibido:', $data);
-
-    // Si es devolución, devolvemos 400 con el JSON que piden
-    if ($data['estado'] === 'D') {
-        return response()->json([
-            'mensaje' => 'devolver',
-            'id'      => '2',
-        ], 400);
-    }
-
-    // En cualquier otro caso, 200 OK con el payload
-    return response()->json([
-        'success' => true,
-        'payload' => $data,
-    ], 200);
-}
-
-
-public function webhookAbono(Request $request)
-{
-    try {
-        // 1) Validar los campos requeridos manualmente para poder atrapar la excepción
-        $validator = Validator::make($request->all(), [
-            'id'                      => 'required|integer',
-            'fechaOperacion'          => 'required|digits:8',
-            'institucionOrdenante'    => 'required|digits:5',
-            'institucionBeneficiaria' => 'required|digits:5',
-            'claveRastreo'            => 'required|string|max:30',
-            'monto'                   => 'required|numeric',
-            'nombreOrdenante'         => 'nullable|string|max:120',
-            'tipoCuentaOrdenante'     => 'nullable|digits:2',
-            'cuentaOrdenante'         => 'nullable|string|max:20',
-            'rfcCurpOrdenante'        => 'nullable|string|max:18',
-            'nombreBeneficiario'      => 'required|string|max:40',
-            'tipoCuentaBeneficiario'  => 'required|digits:2',
-            'cuentaBeneficiario'      => 'required|string|max:20',
-            'nombreBeneficiario2'     => 'nullable|string|max:40',
-            'tipoCuentaBeneficiario2' => 'nullable|digits:2',
-            'cuentaBeneficiario2'     => 'nullable|string|max:18',
-            'rfcCurpBeneficiario'     => 'required|string|max:18',
-            'conceptoPago'            => 'required|string|max:40',
-            'referenciaNumerica'      => 'required|digits_between:1,7',
-            'empresa'                 => 'required|string|max:15',
-            'tipoPago'                => 'required|digits_between:1,2',
-            'tsLiquidacion'           => 'required|digits:13',
-            'folioCodi'               => 'nullable|string|max:20',
+    public function registraOrden(Request $r)
+    {
+        // 1) Validación de sólo los campos que en tu ejemplo envías
+        $f = $r->validate([
+            'institucionContraparte'   => 'required|digits:5',
+            'empresa'                  => 'required|string|max:15',
+            'fechaOperacion'           => 'nullable|digits:8',
+            'folioOrigen'              => 'nullable|string|max:50',
+            'claveRastreo'             => 'required|string|max:30',
+            'institucionOperante'      => 'required|digits:5',
+            'monto'                    => 'required|numeric',
+            'tipoPago'                 => 'required',
+            'tipoCuentaOrdenante'      => 'required|digits:2',
+            'nombreOrdenante'          => 'required|string|max:40',
+            'cuentaOrdenante'          => 'required|string|max:20',
+            'rfcCurpOrdenante'         => 'required|string|max:18',
+            'tipoCuentaBeneficiario'   => 'required|digits:2',
+            'nombreBeneficiario'       => 'required|string|max:40',
+            'cuentaBeneficiario'       => 'required|string|max:20',
+            'rfcCurpBeneficiario'      => 'required|string|max:18',
+            'referenciaNumerica'       => 'required|digits_between:1,7',
+            'latitud'                    => 'required|string|max:30',
+            'longitud'                   => 'required|string|max:30',
+            'conceptoPago'             => 'required|string|max:40',
         ]);
 
-        if ($validator->fails()) {
-            // 2) Si falla validación, respondemos 400 con {"mensaje":"devolver","id":...}
-            $id = $request->input('id', null);
+        // 2) Montar el arreglo DE 28 elementos en este caso (hasta referenciaNumerica),
+        //    reservando vacío para todos los opcionales intermedios:
+    $campos = [
+    /*  1 */ $f['institucionContraparte'],
+    /*  2 */ $f['empresa'],
+    /*  3 */ '',                            // fechaOperacion (vacío)
+    /*  4 */ '',                            // folioOrigen   (vacío)
+    /*  5 */ $f['claveRastreo'],
+    /*  6 */ $f['institucionOperante'],
+    /*  7 */ number_format($f['monto'],2,'.',''),
+    /*  8 */ $f['tipoPago'],
+    /*  9 */ $f['tipoCuentaOrdenante'],
+    /* 10 */ $f['nombreOrdenante'],
+    /* 11 */ $f['cuentaOrdenante'],
+    /* 12 */ $f['rfcCurpOrdenante'],
+    /* 13 */ $f['tipoCuentaBeneficiario'],
+    /* 14 */ $f['nombreBeneficiario'],
+    /* 15 */ $f['cuentaBeneficiario'],
+    /* 16 */ $f['rfcCurpBeneficiario'],
+    /* 17 */ '',   // emailBeneficiario
+    /* 18 */ '',   // tipoCuentaBeneficiario2
+    /* 19 */ '',   // nombreBeneficiario2
+    /* 20 */ '',   // cuentaBeneficiario2
+    /* 21 */ '',   // rfcCurpBeneficiario2
+    /* 22 */ $f['conceptoPago'],
+    /* 23 */ '',   // conceptoPago2
+    /* 24 */ '',   // claveCatUsuario1
+    /* 25 */ '',   // claveCatUsuario2
+    /* 26 */ '',   // clavePago
+    /* 27 */ '',   // referenciaCobranza
+    /* 28 */ $f['referenciaNumerica'],
+    // ahora 6 posiciones vacías más para llegar a 34
+    /* 29 */ '',
+    /* 30 */ '',
+    /* 31 */ '',
+    /* 32 */ '',
+    /* 33 */ '',
+    /* 34 */ '',
+    ];
+
+    // 3) Armas la cadena con doble pipe:
+    $cadena = '||'.implode('|', $campos).'||';
+
+        // 3) La firmamos igual que antes
+        $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
+        $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
+        openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
+        $firma = base64_encode($bin);
+
+        // 4) Payload: solo tus campos + firma
+        $payload = [
+        'claveRastreo'           => $f['claveRastreo'],
+        'conceptoPago'           => $f['conceptoPago'],
+        'cuentaOrdenante'        => $f['cuentaOrdenante'],
+        'cuentaBeneficiario'     => $f['cuentaBeneficiario'],
+        'empresa'                => $f['empresa'],
+        'institucionContraparte' => $f['institucionContraparte'],
+        'institucionOperante'    => $f['institucionOperante'],
+        'monto'                  => number_format($f['monto'],2,'.',''),
+        'nombreBeneficiario'     => $f['nombreBeneficiario'],
+        'nombreOrdenante'        => $f['nombreOrdenante'],
+        'referenciaNumerica'     => $f['referenciaNumerica'],
+        'rfcCurpBeneficiario'    => $f['rfcCurpBeneficiario'],
+        'rfcCurpOrdenante'       => $f['rfcCurpOrdenante'],
+        'tipoCuentaBeneficiario' => $f['tipoCuentaBeneficiario'],
+        'tipoCuentaOrdenante'    => $f['tipoCuentaOrdenante'],
+        'tipoPago'               => $f['tipoPago'],
+        'latitud'               => $f['latitud'],
+        'longitud'               => $f['longitud'],
+        'firma'                  => $firma,
+        ];
+
+        // 5) Envío a STP
+        $resp = Http::withHeaders(['Content-Type'=>'application/json'])
+                    ->put('https://demo.stpmex.com:7024/speiws/rest/ordenPago/registra', $payload);
+
+        // 6) Mostrar la misma vista con los resultados
+        return view('stp.registra_form', compact('f','cadena','firma','payload','resp'));
+    }
+
+    public function webhookEstado(Request $request)
+    {
+        $data = $request->validate([
+            'id'               => 'required|integer',
+            'empresa'          => 'required|string|max:15',
+            'claveRastreo'     => 'required|string|max:30',
+            'estado'           => 'required|string|in:LQ,CN,D',
+            'causaDevolucion'  => [
+                'nullable',
+                'string',
+                'max:100',
+                \Illuminate\Validation\Rule::requiredIf(fn() => $request->input('estado') === 'D'),
+            ],
+            'tsLiquidacion'    => 'required|digits:13',
+        ]);
+
+        Log::info('STP Cambio de Estado recibido:', $data);
+
+        // Si es devolución, devolvemos 400 con el JSON que piden
+        if ($data['estado'] === 'D') {
             return response()->json([
                 'mensaje' => 'devolver',
                 'id'      => '2',
             ], 400);
         }
 
-        // 3) Obtener datos validados
-        $data = $validator->validated();
-
-        // 4) Procesar el abono (por ejemplo, guardarlo o disparar tu lógica)
-        Log::info('STP SendAbono recibido:', $data);
-
-        // 5) Responder rápido (<2500ms) con 200 OK
+        // En cualquier otro caso, 200 OK con el payload
         return response()->json([
             'success' => true,
             'payload' => $data,
         ], 200);
-
-    } catch (\Exception $e) {
-        // En caso de cualquier otro error inesperado
-        Log::error('Error en webhookAbono: '.$e->getMessage());
-        return response()->json([
-            'mensaje' => 'devolver',
-            'id'      => $request->input('id', null),
-        ], 400);
     }
-}
+
+
+    public function webhookAbono(Request $request)
+    {
+        try {
+            // 0) Si el conceptoPago es "devolucion", devolvemos inmediatamente 400
+            if (strtolower($request->input('conceptoPago','')) === 'devolucion') {
+                return response()->json([
+                    'mensaje' => 'devolver',
+                    'id'      => '2',
+                ], 400);
+            }
+
+            // 1) Validar los campos
+            $validator = Validator::make($request->all(), [
+                'id'                      => 'required|integer',
+                'fechaOperacion'          => 'required|digits:8',
+                'institucionOrdenante'    => 'required|digits:5',
+                'institucionBeneficiaria' => 'required|digits:5',
+                'claveRastreo'            => 'required|string|max:30',
+                'monto'                   => 'required|numeric',
+                'nombreOrdenante'         => 'nullable|string|max:120',
+                'tipoCuentaOrdenante'     => 'nullable|digits:2',
+                'cuentaOrdenante'         => 'nullable|string|max:20',
+                'rfcCurpOrdenante'        => 'nullable|string|max:18',
+                'nombreBeneficiario'      => 'required|string|max:40',
+                'tipoCuentaBeneficiario'  => 'required|digits:2',
+                'cuentaBeneficiario'      => 'required|string|max:20',
+                'nombreBeneficiario2'     => 'nullable|string|max:40',
+                'tipoCuentaBeneficiario2' => 'nullable|digits:2',
+                'cuentaBeneficiario2'     => 'nullable|string|max:18',
+                'rfcCurpBeneficiario'     => 'required|string|max:18',
+                'conceptoPago'            => 'required|string|max:40',
+                'referenciaNumerica'      => 'required|digits_between:1,7',
+                'empresa'                 => 'required|string|max:15',
+                'tipoPago'                => 'required|digits_between:1,2',
+                'tsLiquidacion'           => 'required|digits:13',
+                'folioCodi'               => 'nullable|string|max:20',
+            ]);
+
+            if ($validator->fails()) {
+                // Si hay errores de validación, devolvemos también el "devolver"
+                return response()->json([
+                    'mensaje' => 'devolver',
+                    'id'      => $request->input('id'),
+                ], 400);
+            }
+
+            // 2) Obtener datos validados
+            $data = $validator->validated();
+
+            // 3) Procesar el abono
+            Log::info('STP SendAbono recibido:', $data);
+
+            // 4) Responder rápido con 200 OK
+            return response()->json([
+                'success' => true,
+                'payload' => $data,
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Error en webhookAbono: '.$e->getMessage());
+            return response()->json([
+                'mensaje' => 'devolver',
+                'id'      => $request->input('id'),
+            ], 400);
+        }
+    }
 
     public function showRetornaForm()
     {
