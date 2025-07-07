@@ -118,7 +118,7 @@ Cosmica
         </div>
 
         <div class="col-lg-4 mt-3">
-            <form class="row" action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido">
+            <form class="row" action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido" enctype="multipart/form-data">
                 @csrf
                 <!-- Hidden para guardar el id seleccionado -->
                 <input type="hidden" name="id_usuario" id="idUsuario">
@@ -249,80 +249,61 @@ Cosmica
     .addEventListener('input', function(e) {
         if (!e.target.classList.contains('descuento-input')) return;
 
-        const input = e.target;
-        const descuentoPct = parseFloat(input.value) || 0;
+        const fila = e.target.closest('.list-group-item');
+        const pct  = parseFloat(e.target.value) || 0;
 
-        // Fila del producto
-        const fila = input.closest('.list-group-item');
-        fila.querySelector('.descuento-input-hidden').value = descuentoPct;
-        const idProducto = parseInt(fila.dataset.id, 10);
+        // 1) Sincroniza el hidden de esa fila
+        fila.querySelector('.descuento-input-hidden').value = pct;
 
-        // 1) Actualiza el objeto en carrito
-        const prod = carrito.find(p => p.id === idProducto);
-        if (prod) prod.descuentoPct = descuentoPct;
+        // 2) Recalcula el span .total de esa fila
+        const precio = parseFloat(fila.querySelector('.precio-unitario').dataset.precio);
+        const cantidad = parseInt(fila.querySelector('.cantidad').textContent, 10);
+        const tot = precio * cantidad * (1 - pct/100);
+        fila.querySelector('.total').textContent = `$${tot.toFixed(2)}`;
 
-        // 2) Recalcula el total de esta fila
-        const precioUnitario = parseFloat(
-            fila.querySelector('.precio-unitario').dataset.precio
-        );
-        const cantidad = parseInt(
-            fila.querySelector('.cantidad').textContent, 10
-        );
-        const totalSinDesc = precioUnitario * cantidad;
-        const totalConDesc = totalSinDesc * (1 - descuentoPct / 100);
-        fila.querySelector('.total').textContent = `$${totalConDesc.toFixed(2)}`;
-
-        // 3) Y actualiza el total global
+        // 3) Ahora recalcule todo (envío e IVA incluidos)
+        recalcEnvio();
+        recalcIVA();
         actualizarTotales();
     });
 
     document.getElementById('descuento-total').addEventListener('input', actualizarTotales);
     function actualizarTotales() {
-        // 1) Subtotal (items menos descuentos)
-        let subtotal = carrito.reduce((acc, p) => {
-            const totItem = p.precio * p.cantidad * (1 - (p.descuentoPct||0)/100);
-            return acc + totItem;
-        }, 0);
+        // 1) Sumar todos los "total" de cada fila (ya contemplan descuento individual)
+        let subtotal = 0;
+        document.querySelectorAll('.list-group-item .total').forEach(span => {
+            const val = parseFloat(span.textContent.replace(/[^0-9.-]+/g,'')) || 0;
+            subtotal += val;
+        });
 
-        // 2) Muestra subtotal
-        document.getElementById('subtotal-display')
-            .textContent = `$${subtotal.toFixed(2)}`;
+        // 2) Mostrar y guardar subtotal
+        document.getElementById('subtotal-display').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('subtotal-final-input').value   = subtotal.toFixed(2);
 
-        // 3) Descuento global
-        const descGlobalPct = parseFloat(
-            document.getElementById('descuento-total').value
-        ) || 0;
-        const totalAntesEnvio = subtotal * (1 - descGlobalPct/100);
+        // 3) Descuento global (%)
+        const descGlobalPct = parseFloat(document.getElementById('descuento-total').value) || 0;
+        const totalDespuesDescGlobal = subtotal * (1 - descGlobalPct/100);
 
-        // 4) Envío
+        // 4) Envío (usamos el mismo cachedEnvioCost que ya calculas en recalcEnvio)
         const envio = window.cachedEnvioCost || 0;
+        document.getElementById('envio-display').textContent = `$${envio.toFixed(2)}`;
+        document.getElementById('envio-final-input').value   = envio.toFixed(2);
 
         // 5) Base para IVA
-        const baseParaIVA = totalAntesEnvio + envio;
+        const baseParaIVA = totalDespuesDescGlobal + envio;
 
-        // 6) IVA si está chequeado
-        const chk = document.getElementById('chkFacturacion').checked;
-        if (chk) {
-            window.cachedIVA = baseParaIVA * 0.16;
-        } else {
-            window.cachedIVA = 0;
-        }
+        // 6) IVA 16% si hay checkbox marcado
+        const aplicaIva = document.getElementById('chkFacturacion').checked;
+        const iva = aplicaIva ? baseParaIVA * 0.16 : 0;
+        window.cachedIVA = iva;
+        document.getElementById('iva-display').textContent = `$${iva.toFixed(2)}`;
+        document.getElementById('iva-final-input').value   = iva.toFixed(2);
 
-        // Actualiza visual
-        document.getElementById('iva-display')
-            .textContent = `$${window.cachedIVA.toFixed(2)}`;
-
-        // 7) Total final = baseParaIVA + IVA
-        const totalFinal = baseParaIVA + window.cachedIVA;
-        document.getElementById('total-display')
-            .textContent = `$${totalFinal.toFixed(2)}`;
-
-        document.getElementById('subtotal-final-input').value = subtotal.toFixed(2);
-        document.getElementById('envio-final-input').value    = envio.toFixed(2);
-        document.getElementById('iva-final-input').value      = window.cachedIVA.toFixed(2);
-        document.getElementById('total-final-input').value    = totalFinal.toFixed(2);
+        // 7) Total final = baseParaIVA + iva
+        const totalFinal = baseParaIVA + iva;
+        document.getElementById('total-display').textContent = `$${totalFinal.toFixed(2)}`;
+        document.getElementById('total-final-input').value   = totalFinal.toFixed(2);
     }
-
 
     async function renderizarCarrito() {
         for (const producto of carrito) {
@@ -605,6 +586,43 @@ Cosmica
         window.cachedIVA = iva;
         ivaDisplay.textContent = `$${iva.toFixed(2)}`;
     }
+
+    document.getElementById('formGuardarPedido').addEventListener('submit', function(e){
+        e.preventDefault();
+        const form = this;
+        const data = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            if (json.success) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Pedido guardado!',
+                text: json.message,
+                showCancelButton: true,
+                confirmButtonText: 'Descargar PDF',
+                cancelButtonText: 'Seguir cotizando'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.open(`/cosmica/cotizacion/imprimir/${json.order_id}`, '_blank');
+                    location.reload();
+                } else {
+                    location.reload();
+                }
+            });
+            }
+        })
+        .catch(err => {
+            Swal.fire('Error', 'No se pudo guardar el pedido.', 'error');
+        });
+    });
 
 </script>
 

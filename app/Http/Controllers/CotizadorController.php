@@ -637,12 +637,12 @@ class CotizadorController extends Controller
             $payer->save();
         } else {
             $user = User::where('id', $data['id_usuario'])->first();
-            $user->postcode   = $data['postcode'];
-            $user->state      = $data['state'];
-            $user->city       = $data['city'];
-            $user->direccion  = $data['direccion'];
-            $user->referencia = $data['referencia'];
-            $user->country    = $data['country'];
+            $user->postcode   =$request->postcode;
+            $user->state      = $request->state;
+            $user->city       = $request->city;
+            $user->direccion  = $request->direccion;
+            $user->referencia = $request->referencia;
+            $user->country    = $request->country;
             if ($request->hasFile('reconocimiento')) {
                 $file      = $request->file('reconocimiento');
                 $clienteId = $user->id;  // o $user->id si lo prefieres
@@ -664,28 +664,28 @@ class CotizadorController extends Controller
                 // Guarda en la BD
                 $user->reconocimiento = $fileName;
             }
-            $user->save();
+            $user->update();
             $payer = $user;
         }
 
         // 4) Crea la orden
         $order = new $OrderModel();
-        $order->user_id         = $payer->id;
-        $order->subtotal        = $data['subtotal_final'];
-        $order->descuento_pct   = $data['descuento_total'] ?? 0;
-        $order->envio_cost      = $data['envio_final'];
-        $order->iva_cost        = $data['iva_final'];
-        $order->total_final     = $data['total_final'];
-        $order->observaciones     = $data['nota'];
-        $order->tipo_nota     = $data['tipo_nota'];
+        $order->id_usuario         = $payer->id;
+        $order->subtotal        = $request->subtotal_final;
+        $order->restante   = $request->descuento_total ?? 0;
+        $order->envio_cost      = $request->envio_final;
+        $order->iva_cost        = $request->iva_final;
+        $order->total     = $request->total_final;
+        $order->nota     = $request->observaciones;
+        $order->tipo_nota     = $request->tipo_nota;
         $order->id_admin = auth()->user()->id;
-
-        if($request->get('tipo_cotizacion') == 'Expo'){
-            $order->tipo_nota = 'Expo';
-        }else{
-            $order->tipo_nota = 'Cotizacion';
+        $order->fecha = date('Y-m-d');
+        $tipoNota = $request->tipo_nota;
+        if ($request->envio_final == '0') {
+            $order->envio = 'No';
+        } else {
+            $order->envio = 'Si';
         }
-        $tipoNota = $order->tipo_nota;
 
         // Obtener todos los folios del tipo de nota específico
         $folios = NotasProductosCosmica::where('tipo_nota', $tipoNota)->pluck('folio');
@@ -712,7 +712,7 @@ class CotizadorController extends Controller
             $order->save();
             $facturas = new Factura;
 
-            $facturas->id_usuario = $order->id_usuario;
+            $facturas->id_usuario = $payer->id;
             $facturas->fecha = $request->get('fecha');
             $facturas->id_notas_cosmica = $order->id;
             $estado = 'Por Facturar';
@@ -724,20 +724,22 @@ class CotizadorController extends Controller
         $order->save();
 
         // 5) Guarda cada ítem
-        foreach ($data['productos'] as $p) {
+        foreach ($request->get('productos') as $p) {
             $item = new $OrderItemModel();
-            $item->order_id       = $order->id;
-            $item->producto_id    = $p['id'];
+            $item->id_notas_productos       = $order->id;
+            $item->id_producto    = $p['id'];
             $item->cantidad       = $p['cantidad'];
-            $item->precio_unit    = $p['precio'];
-            $item->descuento_pct  = $p['descuentoPct'] ?? 0;
-            $item->total_linea    = $p['precio'] * $p['cantidad'] * (1 - ($p['descuentoPct'] ?? 0) / 100);
+            $item->precio_uni    = $p['precio'];
+            $item->descuento  = $p['descuentoPct'] ?? 0;
+            $item->price    = $p['precio'] * $p['cantidad'] * (1 - ($p['descuentoPct'] ?? 0) / 100);
             $item->save();
         }
 
-        return redirect()
-            ->back()
-            ->with('success', "Pedido {$data['tipo']} guardado correctamente (#{$order->id}).");
+        return response()->json([
+        'success' => true,
+        'message' => "Pedido {$data['tipo']} guardado {$order->folio}.",
+        'order_id'=> $order->id
+        ]);
     }
 
 

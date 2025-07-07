@@ -54,7 +54,7 @@
                 <div class="mb-2 d-flex justify-content-between align-items-center">
                 <span>Descuento:</span>
                     <div style="position: relative; width: 120px;">
-                        <input id="descuento-total" name="descuento-total" type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
+                        <input id="descuento-total" name="descuento_total" type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
                         <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
                     </div>
                 </div>
