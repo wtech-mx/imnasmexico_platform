@@ -552,7 +552,6 @@ public function webhookEstado(Request $request)
         'empresa'          => 'required|string|max:15',
         'claveRastreo'     => 'required|string|max:30',
         'estado'           => 'required|string|in:LQ,CN,D',
-        // Hacemos que sea nullable y además required_if sólo cuando estado=D
         'causaDevolucion'  => [
             'nullable',
             'string',
@@ -564,11 +563,21 @@ public function webhookEstado(Request $request)
 
     Log::info('STP Cambio de Estado recibido:', $data);
 
+    // Si es devolución, devolvemos 400 con el JSON que piden
+    if ($data['estado'] === 'D') {
+        return response()->json([
+            'mensaje' => 'devolver',
+            'id'      => '2',
+        ], 400);
+    }
+
+    // En cualquier otro caso, 200 OK con el payload
     return response()->json([
         'success' => true,
         'payload' => $data,
     ], 200);
 }
+
 
 
     public function webhookAbono(Request $request)
