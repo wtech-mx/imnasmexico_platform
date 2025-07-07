@@ -1,7 +1,7 @@
 <li class="list-group-item" data-id="{{ $producto['id'] }}" style="padding: 0!important;border: 0!important;">
     <div class="d-flex">
         <div class="me-3">
-            <img src="{{ $producto['imagen'] }}" alt="{{ $producto['nombre'] }}" class="rounded" style="width: 35px; height: 35px; object-fit: cover;">
+            <img src="{{ $producto['imagen'] }}" alt="{{ $producto['nombre'] }}" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
         </div>
         <div class="flex-grow-1 d-flex flex-column justify-content-between" style="position: relative">
             <div>

@@ -373,17 +373,18 @@ Cosmica
             const precio = parseFloat(target.dataset.precio);
             const imagen = target.dataset.img;
 
+            // Buscar si ya existe en el carrito
             const existente = carrito.find(p => p.id == id);
             if (existente) {
                 existente.cantidad++;
                 showToast('Cantidad actualizada');
+                renderizarCarrito(); // <-- ¡Asegúrate de actualizar la vista!
             } else {
                 carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
                 showToast('Producto agregado al carrito');
+                renderizarCarrito(); // <-- ¡Renderiza el nuevo producto!
             }
-
-            renderizarCarrito();
-        }, 500); // medio segundo
+        }, 500);
 
         // Y tu listener queda así:
         document.addEventListener('click', function(e) {
@@ -620,6 +621,42 @@ Cosmica
             Swal.fire('Error', 'No se pudo guardar el pedido.', 'error');
         });
     });
+
+$(document).on('click', '.btn-agregar-carrito', function() {
+    const btn = $(this);
+    btn.prop('disabled', true); // Deshabilita el botón
+
+    const id = btn.data('id');
+    const nombre = btn.data('nombre');
+    const precio = parseFloat(btn.data('precio'));
+    const imagen = btn.data('img');
+
+    // Busca el producto en el carrito
+    const existente = carrito.find(p => p.id == id);
+    if (existente) {
+        existente.cantidad++;
+        showToast('Cantidad actualizada');
+    } else {
+        carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+        showToast('Producto agregado al carrito');
+    }
+    renderizarCarrito();
+
+    setTimeout(() => btn.prop('disabled', false), 300); // Habilita después de 300ms
+});
+
+function agregarAlCarrito(id, nombre, precio, imagen) {
+    // Busca el producto en el array actualizado
+    let existente = carrito.find(p => p.id == id);
+    if (existente) {
+        existente.cantidad++;
+        showToast('Cantidad actualizada');
+    } else {
+        carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+        showToast('Producto agregado al carrito');
+    }
+    renderizarCarrito();
+}
 
 </script>
 
