@@ -457,13 +457,13 @@ Route::group(['middleware' => ['auth']], function() {
         ->name('stp.registra.orden');
 
 
-Route::get('/stp/test-webhook', function(){
-    return view('stp.test_webhook');
-});
+    Route::get('/stp/test-webhook', function(){
+        return view('stp.test_webhook');
+    });
 
-Route::get('/stp/test-abono', function(){
-    return view('stp.test_abono');
-});
+    Route::get('/stp/test-abono', function(){
+        return view('stp.test_abono');
+    });
 
 Route::get('/stp/retorna-orden', [StpController::class, 'showRetornaForm'])
      ->name('stp.retorna.form');

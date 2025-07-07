@@ -547,22 +547,24 @@ $cadena = '||'.implode('|', $campos).'||';
 
     public function webhookEstado(Request $request)
     {
-        // 1) Validar la carga mínima
+        // 1) Validar la carga mínima, haciendo causaDevolucion obligatoria sólo en estado "D"
         $data = $request->validate([
             'id'               => 'required|integer',
             'empresa'          => 'required|string|max:15',
             'claveRastreo'     => 'required|string|max:30',
             'estado'           => 'required|string|in:LQ,CN,D',
-            'causaDevolucion'  => 'required|string|max:100',
+            'causaDevolucion'  => 'required_if:estado,D|string|max:100',
             'tsLiquidacion'    => 'required|digits:13',
         ]);
 
-        // 2) Aquí procesas la notificación: por ejemplo, guardar en BD o disparar tu lógica
-        //    Por simplicidad, lo vamos a loggear:
+        // 2) Procesar la notificación (aquí, solo lo logeamos)
         Log::info('STP Cambio de Estado recibido:', $data);
 
-        // 3) Respuesta 200 OK
-        return response()->json(['success' => true], 200);
+        // 3) Responder 200 OK con todo el payload recibido
+        return response()->json([
+            'success' => true,
+            'payload' => $data
+        ], 200);
     }
 
     public function webhookAbono(Request $request)
@@ -598,7 +600,11 @@ $cadena = '||'.implode('|', $campos).'||';
         Log::info('STP SendAbono recibido:', $data);
 
         // 3) Responder rápido (<2500ms) con 200 OK
-        return response()->json(['success' => true], 200);
+        // return response()->json(['success' => true], 200);
+        return response()->json([
+            'success' => true,
+            'payload' => $data
+        ], 200);
     }
 
         public function showRetornaForm()
