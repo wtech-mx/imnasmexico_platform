@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 class StpController extends Controller
 {
     /**
@@ -579,48 +580,68 @@ public function webhookEstado(Request $request)
 }
 
 
-
-    public function webhookAbono(Request $request)
-    {
-        // 1) Validar los campos requeridos
-        $data = $request->validate([
-            'id'                    => 'required|integer',
-            'fechaOperacion'        => 'required|digits:8',
-            'institucionOrdenante'  => 'required|digits:5',
-            'institucionBeneficiaria'=> 'required|digits:5',
-            'claveRastreo'          => 'required|string|max:30',
-            'monto'                 => 'required|numeric',
-            'nombreOrdenante'       => 'nullable|string|max:120',
-            'tipoCuentaOrdenante'   => 'nullable|digits:2',
-            'cuentaOrdenante'       => 'nullable|string|max:20',
-            'rfcCurpOrdenante'      => 'nullable|string|max:18',
-            'nombreBeneficiario'    => 'required|string|max:40',
-            'tipoCuentaBeneficiario'=> 'required|digits:2',
-            'cuentaBeneficiario'    => 'required|string|max:20',
-            'nombreBeneficiario2'   => 'nullable|string|max:40',
-            'tipoCuentaBeneficiario2'=> 'nullable|digits:2',
-            'cuentaBeneficiario2'   => 'nullable|string|max:18',
-            'rfcCurpBeneficiario'   => 'required|string|max:18',
-            'conceptoPago'          => 'required|string|max:40',
-            'referenciaNumerica'    => 'required|digits_between:1,7',
-            'empresa'               => 'required|string|max:15',
-            'tipoPago'              => 'required|digits_between:1,2',
-            'tsLiquidacion'         => 'required|digits:13',
-            'folioCodi'             => 'nullable|string|max:20',
+public function webhookAbono(Request $request)
+{
+    try {
+        // 1) Validar los campos requeridos manualmente para poder atrapar la excepción
+        $validator = Validator::make($request->all(), [
+            'id'                      => 'required|integer',
+            'fechaOperacion'          => 'required|digits:8',
+            'institucionOrdenante'    => 'required|digits:5',
+            'institucionBeneficiaria' => 'required|digits:5',
+            'claveRastreo'            => 'required|string|max:30',
+            'monto'                   => 'required|numeric',
+            'nombreOrdenante'         => 'nullable|string|max:120',
+            'tipoCuentaOrdenante'     => 'nullable|digits:2',
+            'cuentaOrdenante'         => 'nullable|string|max:20',
+            'rfcCurpOrdenante'        => 'nullable|string|max:18',
+            'nombreBeneficiario'      => 'required|string|max:40',
+            'tipoCuentaBeneficiario'  => 'required|digits:2',
+            'cuentaBeneficiario'      => 'required|string|max:20',
+            'nombreBeneficiario2'     => 'nullable|string|max:40',
+            'tipoCuentaBeneficiario2' => 'nullable|digits:2',
+            'cuentaBeneficiario2'     => 'nullable|string|max:18',
+            'rfcCurpBeneficiario'     => 'required|string|max:18',
+            'conceptoPago'            => 'required|string|max:40',
+            'referenciaNumerica'      => 'required|digits_between:1,7',
+            'empresa'                 => 'required|string|max:15',
+            'tipoPago'                => 'required|digits_between:1,2',
+            'tsLiquidacion'           => 'required|digits:13',
+            'folioCodi'               => 'nullable|string|max:20',
         ]);
 
-        // 2) Procesar el abono: por ejemplo, guardarlo o disparar tu lógica
+        if ($validator->fails()) {
+            // 2) Si falla validación, respondemos 400 con {"mensaje":"devolver","id":...}
+            $id = $request->input('id', null);
+            return response()->json([
+                'mensaje' => 'devolver',
+                'id'      => '2',
+            ], 400);
+        }
+
+        // 3) Obtener datos validados
+        $data = $validator->validated();
+
+        // 4) Procesar el abono (por ejemplo, guardarlo o disparar tu lógica)
         Log::info('STP SendAbono recibido:', $data);
 
-        // 3) Responder rápido (<2500ms) con 200 OK
-        // return response()->json(['success' => true], 200);
+        // 5) Responder rápido (<2500ms) con 200 OK
         return response()->json([
             'success' => true,
-            'payload' => $data
+            'payload' => $data,
         ], 200);
-    }
 
-        public function showRetornaForm()
+    } catch (\Exception $e) {
+        // En caso de cualquier otro error inesperado
+        Log::error('Error en webhookAbono: '.$e->getMessage());
+        return response()->json([
+            'mensaje' => 'devolver',
+            'id'      => $request->input('id', null),
+        ], 400);
+    }
+}
+
+    public function showRetornaForm()
     {
         return view('stp.retorna_form');
     }
