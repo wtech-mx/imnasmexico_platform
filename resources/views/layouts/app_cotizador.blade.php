@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        Cotizador - @yield('template_title')
+        @yield('template_title') Cotizador -
     </title>
 
     <!-- Fonts -->

@@ -1,6 +1,10 @@
 {{-- resources/views/orders/summary.blade.php --}}
 @extends('layouts.app_cotizador')
 
+@section('template_title')
+    Estatus de Envio NAS
+@endsection
+
 <style>
     .card_custom{
         box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
@@ -19,7 +23,7 @@
 
       <div class="card mb-4 card_custom">
         <div class="card-body ">
-          <h4 class="card-title mb-3">Resumen de tu pedido</h4>
+          <h4 class="card-title mb-3">Estatus de tu pedido</h4>
 
           {{-- Datos de cliente --}}
           <dl class="row mb-4">
@@ -60,12 +64,11 @@
           {{-- Guía en PDF --}}
           <div class="mb-4">
             <h6>Guía de envío</h6>
-            <a href="#" target="_blank" class="d-inline-block">
-              <img src="#"
-                   alt="Vista previa del PDF de guía"
-                   class="img-fluid rounded"
-                   style="max-height: 120px;">
+
+            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$notas_nas->doc_guia) }}" download="{{asset('pago_fuera/'.$notas_nas->doc_guia) }}" style="background: #e6ab2d;">
+                <i class="fa fa-truck"></i>Guía de paqueteria
             </a>
+
           </div>
 
           {{-- Foto del pedido despachado --}}

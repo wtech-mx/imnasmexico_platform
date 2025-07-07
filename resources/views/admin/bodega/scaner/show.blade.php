@@ -3,11 +3,13 @@
 @section('template_title')
 Escaner #{{ $nota_scaner->id }} NAS
 @endsection
+
 <style>
     #guardarBtn {
         display: none;
     }
 </style>
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
