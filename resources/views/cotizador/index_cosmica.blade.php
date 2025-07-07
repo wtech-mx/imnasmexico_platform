@@ -519,11 +519,13 @@ Cosmica
         // Si no está seleccionado, tarifa 0
         if (!checked) {
             envioDisplay.textContent = '$0.00';
+            window.cachedEnvioCost = 0; // <-- ¡AQUÍ!
+            actualizarTotales();        // <-- ¡Y AQUÍ!
             return;
         }
 
+        // ... resto de tu lógica ...
         // Leemos el total SIN envío (descuento global ya aplicado)
-        // Para ello, parseamos el span #total-display antes de modificarlo
         const totalSinEnvio = parseFloat(
             document.getElementById('total-display')
             .textContent.replace(/[^0-9.-]+/g,'')
@@ -532,19 +534,14 @@ Cosmica
         let costoEnvio = 0;
 
         if (!membershipActive) {
-            // Cliente sin membresía
             costoEnvio = 180;
         } else if (membershipType === 'Cosmos') {
-            // Membresía Cosmos
             costoEnvio = totalSinEnvio < 1500 ? 126 : 90;
         } else if (membershipType === 'Estelar') {
-            // Membresía Estelar
             costoEnvio = totalSinEnvio < 2500 ? 90 : 0;
         }
 
         envioDisplay.textContent = `$${costoEnvio.toFixed(2)}`;
-
-        // Almacena en una variable para sumar en actualizarTotales
         window.cachedEnvioCost = costoEnvio;
     }
 
