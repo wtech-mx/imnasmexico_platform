@@ -14,7 +14,7 @@
         <option value="CN">CN</option>
         <option value="D">D</option>
       </select><br>
-    <label>Causa Devolución</label><input name="causaDevolucion" value="Retorno"><br>
+    <label>Causa Devolución</label><input name="causaDevolucion" value=""><br>
     <label>tsLiquidacion</label><input name="tsLiquidacion" value="{{ now()->timestamp }}000"><br>
     <button>Enviar</button>
   </form>

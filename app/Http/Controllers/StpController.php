@@ -545,27 +545,31 @@ $cadena = '||'.implode('|', $campos).'||';
     return view('stp.registra_form', compact('f','cadena','firma','payload','resp'));
 }
 
-    public function webhookEstado(Request $request)
-    {
-        // 1) Validar la carga mínima, haciendo causaDevolucion obligatoria sólo en estado "D"
-        $data = $request->validate([
-            'id'               => 'required|integer',
-            'empresa'          => 'required|string|max:15',
-            'claveRastreo'     => 'required|string|max:30',
-            'estado'           => 'required|string|in:LQ,CN,D',
-            'causaDevolucion'  => 'required_if:estado,D|string|max:100',
-            'tsLiquidacion'    => 'required|digits:13',
-        ]);
+public function webhookEstado(Request $request)
+{
+    $data = $request->validate([
+        'id'               => 'required|integer',
+        'empresa'          => 'required|string|max:15',
+        'claveRastreo'     => 'required|string|max:30',
+        'estado'           => 'required|string|in:LQ,CN,D',
+        // Hacemos que sea nullable y además required_if sólo cuando estado=D
+        'causaDevolucion'  => [
+            'nullable',
+            'string',
+            'max:100',
+            \Illuminate\Validation\Rule::requiredIf(fn() => $request->input('estado') === 'D'),
+        ],
+        'tsLiquidacion'    => 'required|digits:13',
+    ]);
 
-        // 2) Procesar la notificación (aquí, solo lo logeamos)
-        Log::info('STP Cambio de Estado recibido:', $data);
+    Log::info('STP Cambio de Estado recibido:', $data);
 
-        // 3) Responder 200 OK con todo el payload recibido
-        return response()->json([
-            'success' => true,
-            'payload' => $data
-        ], 200);
-    }
+    return response()->json([
+        'success' => true,
+        'payload' => $data,
+    ], 200);
+}
+
 
     public function webhookAbono(Request $request)
     {
