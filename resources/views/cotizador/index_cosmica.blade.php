@@ -19,7 +19,59 @@ Cosmica
                 <div class="col-12">
                     <h5 class="p-2">Cliente</h5>
 
-                    <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
+                    <div class="row">
+                        <div class="col-2 my-auto">
+                            <button class="btn btn-success btn-sm w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="bi bi-plus-circle"></i> Agregar
+                            </button>
+                        </div>
+
+                        <div class="col-10">
+                            <input type="text" id="usuarioInput" class="form-control" placeholder="Escribe nombre o teléfono…"/>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body sidebar mt-3" style="border: solid 0px;">
+                                    <div class="row">
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Nombre *</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="25px">
+                                                </span>
+                                                <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" value="{{old('name')}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Correo <strong style="color:red;">(No es forzoso)</strong></label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="25px">
+                                                </span>
+                                                <input id="email" name="email" type="email" class="form-control" placeholder="Correo" value="{{old('Correo')}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Telefono *</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="25px">
+                                                </span>
+                                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
 
                     <div id="reconocimiento-container" class="mt-2">
                         <!-- Este bloque sólo aparece si NO hay reconocimiento -->
