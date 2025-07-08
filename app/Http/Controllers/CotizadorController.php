@@ -92,7 +92,10 @@ class CotizadorController extends Controller
             ];
         })->values();
 
-        return view('cotizador.index_cosmica', compact('categoriasFacial', 'categoriasCorporal'));
+
+        $productsKit = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Kit')->orderby('nombre','asc')->get();
+
+        return view('cotizador.index_cosmica', compact('categoriasFacial', 'categoriasCorporal','productsKit'));
     }
 
     public function index_cotizaciones_cosmica_expo(Request $request){
@@ -383,6 +386,22 @@ class CotizadorController extends Controller
         $productos = $productos->limit(40)->get();
 
         return view('cotizador.productos_categoria', compact('productos'));
+    }
+
+    public function mostrarKitsCosmica()
+    {
+        // Trae los kits ordenados como quieras
+        $kits = Products::orderBy('id','DESC')
+            ->where('categoria', 'Cosmica')
+            ->where('subcategoria', 'Kit')
+            ->where('estatus','publicado')
+            ->orderBy('nombre','asc')
+            ->get();
+
+        // Reusa la misma vista parcial de productos (o crea una específica)
+        return view('cotizador.productos_categoria', [
+            'productos' => $kits
+        ]);
     }
 
     private function removeAccents($string)

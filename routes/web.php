@@ -57,7 +57,7 @@ Route::get('/cotizador/categoria/{id}', [App\Http\Controllers\CotizadorControlle
 
 Route::get('/cotizador/buscar', [App\Http\Controllers\CotizadorController::class, 'buscar'])->name('cotizador.buscar');
 Route::post('/cotizador/render-item-carrito', [App\Http\Controllers\CotizadorController::class, 'renderizarItemCarrito']);
-
+Route::get('/cotizador/kits',[App\Http\Controllers\CotizadorController::class, 'mostrarKitsCosmica'])->name('cotizador.kits');
 
 /*
 |--------------------------------------------------------------------------

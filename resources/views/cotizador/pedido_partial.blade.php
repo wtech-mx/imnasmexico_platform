@@ -47,7 +47,7 @@
                 <!-- Observaciones -->
                 <div class="mb-3">
                     <label for="observaciones" class="form-label">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" rows="3" class="form-control" placeholder="Alguna nota…"></textarea>
+                    <textarea id="observaciones" name="observaciones" rows="1" class="form-control" placeholder="Alguna nota…"></textarea>
                 </div>
 
                 <!-- Totales -->

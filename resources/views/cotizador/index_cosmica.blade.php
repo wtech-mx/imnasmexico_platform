@@ -72,7 +72,6 @@ Cosmica
 
                     </div>
 
-
                     <div id="reconocimiento-container" class="mt-2">
                         <!-- Este bloque sólo aparece si NO hay reconocimiento -->
                         <div id="reconocimiento-upload" class="d-none">
@@ -106,6 +105,10 @@ Cosmica
                             <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab" aria-controls="facial" aria-selected="false">
                                 Faciales
                             </button>
+                        </li>
+                        <!-- NUEVA pestaña Kits -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="kits-tab" type="button" role="tab">Kits</button>
                         </li>
                     </ul>
 
@@ -150,6 +153,7 @@ Cosmica
                                 @endforeach
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -277,6 +281,26 @@ Cosmica
             .then(html => {
                 document.getElementById('contenedor_productos').innerHTML = html;
             });
+    }
+
+    // 1) Al hacer clic en la pestaña Kits
+    document.getElementById('kits-tab')
+    .addEventListener('click', function() {
+        // desactivar otras pestañas (Bootstrap lo hace para el contenido)
+        cargarKits();
+    });
+
+    // 2) Función que carga los kits
+    function cargarKits() {
+    fetch('{{ route("cotizador.kits") }}')
+        .then(response => response.text())
+        .then(html => {
+        document.getElementById('contenedor_productos').innerHTML = html;
+        })
+        .catch(err => {
+        console.error('Error al cargar kits:', err);
+        Swal.fire('Error','No fue posible cargar los kits','error');
+        });
     }
 
     function modificarCantidad(idProducto, cambio) {
@@ -674,41 +698,41 @@ Cosmica
         });
     });
 
-$(document).on('click', '.btn-agregar-carrito', function() {
-    const btn = $(this);
-    btn.prop('disabled', true); // Deshabilita el botón
+    $(document).on('click', '.btn-agregar-carrito', function() {
+        const btn = $(this);
+        btn.prop('disabled', true); // Deshabilita el botón
 
-    const id = btn.data('id');
-    const nombre = btn.data('nombre');
-    const precio = parseFloat(btn.data('precio'));
-    const imagen = btn.data('img');
+        const id = btn.data('id');
+        const nombre = btn.data('nombre');
+        const precio = parseFloat(btn.data('precio'));
+        const imagen = btn.data('img');
 
-    // Busca el producto en el carrito
-    const existente = carrito.find(p => p.id == id);
-    if (existente) {
-        existente.cantidad++;
-        showToast('Cantidad actualizada');
-    } else {
-        carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
-        showToast('Producto agregado al carrito');
+        // Busca el producto en el carrito
+        const existente = carrito.find(p => p.id == id);
+        if (existente) {
+            existente.cantidad++;
+            showToast('Cantidad actualizada');
+        } else {
+            carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+            showToast('Producto agregado al carrito');
+        }
+        renderizarCarrito();
+
+        setTimeout(() => btn.prop('disabled', false), 300); // Habilita después de 300ms
+    });
+
+    function agregarAlCarrito(id, nombre, precio, imagen) {
+        // Busca el producto en el array actualizado
+        let existente = carrito.find(p => p.id == id);
+        if (existente) {
+            existente.cantidad++;
+            showToast('Cantidad actualizada');
+        } else {
+            carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+            showToast('Producto agregado al carrito');
+        }
+        renderizarCarrito();
     }
-    renderizarCarrito();
-
-    setTimeout(() => btn.prop('disabled', false), 300); // Habilita después de 300ms
-});
-
-function agregarAlCarrito(id, nombre, precio, imagen) {
-    // Busca el producto en el array actualizado
-    let existente = carrito.find(p => p.id == id);
-    if (existente) {
-        existente.cantidad++;
-        showToast('Cantidad actualizada');
-    } else {
-        carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
-        showToast('Producto agregado al carrito');
-    }
-    renderizarCarrito();
-}
 
 </script>
 
