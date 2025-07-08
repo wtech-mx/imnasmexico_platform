@@ -755,6 +755,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('cosmica/eventos/*') ? 'active' : '') }}" href="{{ route('eventos_cosmica.index') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-graduation-cap text-sm opacity-10" style="color: #322338"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Eventos Cosmica</span>
+                    </a>
+                </li>
+
                 @can('cosmica-cotizaciones')
                     <li class="nav-item">
                         <a class="nav-link {{ (Request::is('cosmica/cotizacion/*') ? 'active' : '') }}" href="{{ route('cotizacion_cosmica.index') }}">

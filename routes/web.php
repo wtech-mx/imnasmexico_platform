@@ -477,6 +477,8 @@ Route::put('/stp/retorna-orden', [StpController::class, 'retornaOrden'])
     Route::get('/cosmikausers/{cliente}/membership', [App\Http\Controllers\CotizadorController::class, 'membershipStatus']);
     Route::post('cotizador/{tipo}/guardar', [App\Http\Controllers\CotizadorController::class,'store_new'])->where('tipo','cosmica|nas|tiendita')->name('cotizador.store');
 
+    Route::get('/admin/cotizador/edit/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_cosmica'])->name('edit_cosmica.cotizador');
+
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 
@@ -546,6 +548,11 @@ Route::put('/stp/retorna-orden', [StpController::class, 'retornaOrden'])
 
     Route::post('/cursos/{id}/duplicar', [App\Http\Controllers\CursosController::class, 'duplicar'])->name('cursos.duplicar');
     Route::post('/cursos/inscripcion/masiva', [App\Http\Controllers\CursosController::class, 'inscribirUsuarios'])->name('masiva.inscripcion');
+
+    // =============== M O D U L O   C U R S O S  COSMICA===============================
+    Route::get('/cosmica/eventos', [App\Http\Controllers\CursosController::class, 'eventos_cosmica'])->name('eventos_cosmica.index');
+    Route::get('/cosmica/eventos/lista/{id}', [App\Http\Controllers\CursosController::class, 'listas_cosmica'])->name('eventos_cosmica.listas');
+
     // =============== M O D U L O  Profesores ===============================
     Route::get('/admin/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesores'])->name('profesores.index');
     Route::post('/admin/profesores/store', [App\Http\Controllers\ProfesoresController::class, 'store_profesores'])->name('profesores.store');

@@ -108,8 +108,8 @@
                     pregunta_10: ['a', 'b', 'd'],
                     pregunta_11: ['c', 'd'],
                     pregunta_12: ['a', 'b'],
-                    pregunta_13: ['c', 'd'],
-                    pregunta_14: ['d'],
+                    pregunta_13: ['a', 'b'],
+                    pregunta_14: ['a', 'b', 'c'],
                     pregunta_15: ['b', 'c', 'd']
                 },
                 esp_medio: {

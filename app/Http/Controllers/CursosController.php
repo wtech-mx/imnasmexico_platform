@@ -19,6 +19,9 @@ use App\Models\Recursos;
 use Illuminate\Support\Facades\Mail;
 use Str;
 use App\Models\Estandar;
+use App\Models\ProductosNotasCosmica;
+use App\Models\ProductosNotasId;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -130,6 +133,7 @@ class CursosController extends Controller
 
         return view('admin.cursos.index_dev', compact('cursos'));
     }
+
     public function create()
     {
         $profesores = User::where('cliente', '2')
@@ -496,7 +500,6 @@ class CursosController extends Controller
         return redirect()->back()->with('success', 'Actualziado con exito');
     }
 
-
     public function update_meet(Request $request, $id){
 
         $fechaHoraActual = date('Y-m-d H:i:s');
@@ -826,5 +829,48 @@ class CursosController extends Controller
         }
 
         return redirect()->back()->with('success', 'Usuarios inscritos exitosamente al curso destino.');
+    }
+
+    public function eventos_cosmica(Request $request){
+        $cursos = Products::where('evento', '1')->get();
+        foreach ($cursos as $curso) {
+            $curso->userCount = $curso->uniqueOrderTicketCount();
+        }
+
+        return view('admin.cursos.cosmica.index', compact('cursos'));
+    }
+
+    public function listas_cosmica($id){
+        $curso = Products::where('id', $id)->first();
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', $id)
+        ->whereHas('Nota', function($query) {
+            $query->whereNotNull('fecha_aprobada');
+        })
+        ->get();
+
+        $ordenes_basico_sum = ProductosNotasCosmica::where('id_producto', $id)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
+
+        $ordenes_nas_basico = ProductosNotasId::where('id_producto', $id)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->get();
+
+        $ordenes_nas_basico_sum = ProductosNotasId::where('id_producto', $id)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
+
+        $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
+        $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
+
+        return view('admin.cursos.cosmica.lista', compact('ordenes_basico',
+            'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'curso'));
+
     }
 }

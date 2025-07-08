@@ -75,5 +75,13 @@ class Products extends Model
         return $this->belongsTo(Categorias::class, 'id_categoria2');
     }
 
-
+    public function uniqueOrderTicketCount()
+    {
+        return ProductosNotasCosmica::selectRaw('COUNT(DISTINCT id_notas_productos) as user_count')
+        ->where('id_producto', $this->id)
+        ->whereHas('Nota', function ($query) {
+            $query->where('fecha_aprobada', '!=', NULL);
+        })
+        ->value('user_count');
+    }
 }
