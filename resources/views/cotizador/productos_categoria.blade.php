@@ -5,7 +5,7 @@
                 data-id="{{ $producto->id }}"
                 data-nombre="{{ $producto->nombre }}"
                 data-precio="{{ $producto->precio_normal }}"
-                data-subcategoria="{{ $producto->subcategoria == '' }}"
+                data-subcategoria="{{ $producto->subcategoria }}"
                 data-img="{{ $producto->imagenes }}">
 
                 @if($producto->subcategoria == 'Kit')
