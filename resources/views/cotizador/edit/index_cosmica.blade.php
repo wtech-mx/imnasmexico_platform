@@ -118,8 +118,9 @@ Cosmica {{$cotizacion->id}}
         </div>
 
         <div class="col-lg-4 mt-3">
-            <form class="row" action="{{ route('cotizador.store', ['tipo' => 'cosmica']) }}" method="POST" id="formGuardarPedido" enctype="multipart/form-data">
+            <form class="row" action="{{ route('update_new.cotizador', $cotizacion->id) }}" method="POST" id="formGuardarPedido" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="_method" value="PATCH">
                 <!-- Hidden para guardar el id seleccionado -->
                 <input type="hidden" name="id_usuario" id="idUsuario" value="{{$cotizacion->id_usuario}}">
                 <input type="hidden" name="tipo" value="cosmica">

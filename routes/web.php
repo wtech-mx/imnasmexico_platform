@@ -479,6 +479,7 @@ Route::put('/stp/retorna-orden', [StpController::class, 'retornaOrden'])
 
     Route::get('/admin/cotizador/edit/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_cosmica'])->name('edit_cosmica.cotizador');
     Route::post('/admin/cotizador/edit/render-item-carrito', [App\Http\Controllers\CotizadorController::class, 'edit_renderizarItemCarrito']);
+    Route::patch('/admin/cotizador/update/{id}', [App\Http\Controllers\CotizadorController::class, 'update_new'])->name('update_new.cotizador');
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 

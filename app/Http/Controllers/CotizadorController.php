@@ -824,4 +824,79 @@ class CotizadorController extends Controller
         return view('cotizador.edit.item_carrito', compact('producto'))->render();
     }
 
+    public function update_new(Request $request, $id){
+        // 1) Validación básica
+        $data = $request->validate([
+            'tipo'            => 'required|in:cosmica,nas,tiendita',
+            'id_usuario'      => 'required|exists:users,id',
+            'subtotal_final'            => 'required|numeric',
+            'total_final'               => 'required|numeric',
+            'observaciones'             => 'nullable|string',
+            'tipo_nota'                 => 'required|string',
+        ]);
+
+        // 2) Selección de modelos según tipo
+        switch ($data['tipo']) {
+            case 'cosmica':
+                $OrderModel     = NotasProductosCosmica::class;
+                $OrderItemModel = ProductosNotasCosmica::class;
+                $fkOrder        = 'id_notas_productos';
+                break;
+            case 'nas':
+            case 'tiendita':
+                $OrderModel     = NotasProductos::class;
+                $OrderItemModel = ProductosNotasId::class;
+                $fkOrder        = 'id_notas_productos';
+                break;
+        }
+
+        // 3) Recupera la orden
+        /** @var \Illuminate\Database\Eloquent\Model $order */
+        $order = $OrderModel::findOrFail($id);
+
+        // 4) Actualiza campos de cabecera
+        $order->id_usuario       = $data['id_usuario'];
+        $order->subtotal         = $data['subtotal_final'];
+        $order->total            = $data['total_final'];
+        $order->nota             = $data['observaciones'] ?? '';
+         $order->tipo_nota        = $data['tipo_nota'];
+        $order->restante         = $request->descuento_total ?? 0;
+        $order->envio_cost       = $request->envio_final;
+        $order->iva_cost         = $request->iva_final;
+        $order->envio            = $request->envio_final > 0 ? 'Si' : 'No';
+        $order->save();
+
+        // 5) Sincroniza los ítems
+        // a) Obtén los IDs en request
+        $requestedIds = collect($request->productos)->pluck('id')->all();
+
+        // b) Elimina los items que ya no vienen
+        $OrderItemModel::where($fkOrder, $order->id)
+            ->whereNotIn('id_producto', $requestedIds)
+            ->delete();
+
+        // c) Recorre cada producto enviado
+        foreach ($request->productos as $p) {
+            $item = $OrderItemModel::firstOrNew([
+                $fkOrder      => $order->id,
+                'id_producto' => $p['id'],
+            ]);
+
+            $item->cantidad      = $p['cantidad'];
+            $item->precio_uni    = $p['precio'];
+            $item->descuento     = $p['descuentoPct'] ?? 0;
+            $item->price         = $p['precio'] * $p['cantidad']
+                                * (1 - (($p['descuentoPct'] ?? 0) / 100));
+            // si tu modelo usa campo "precio" en lugar de "price" ajústalo
+            $item->save();
+        }
+
+        return response()->json([
+            'success'  => true,
+            'message'  => "Pedido {$data['tipo']} actualizado correctamente ({$order->folio}).",
+            'order_id' => $order->id,
+        ]);
+    }
+
+
 }
