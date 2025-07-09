@@ -324,7 +324,7 @@ Cosmica {{$cotizacion->id}}
                 actualizarTotales();
             } else {
                 // Inserta la fila nueva
-                const response = await fetch('/cotizador/render-item-carrito', {
+                const response = await fetch('/admin/cotizador/edit/render-item-carrito', {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',

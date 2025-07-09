@@ -17,9 +17,9 @@
                                         <small class="text-muted precio-unitario" style="font-size: 11px;" data-precio="{{ $cotizacion_producto->precio_uni }}">${{ number_format($cotizacion_producto->precio_uni, 2) }}</small>
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center mt-2 btns_flotantes">
-                                        <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $cotizacion_producto->id_producto }}, -1)">-</button>
+                                        <button type="button" class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $cotizacion_producto->id_producto }}, -1)">-</button>
                                         <span class="mx-2 cantidad">{{ $cotizacion_producto->cantidad }}</span>
-                                        <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $cotizacion_producto->id_producto }}, 1)">+</button>
+                                        <button type="button" class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $cotizacion_producto->id_producto }}, 1)">+</button>
 
                                         <button class="btn btn-sm ms-2" onclick="eliminarDelCarrito({{ $cotizacion_producto->id_producto }})">
                                             <i class="bi bi-trash3"></i>

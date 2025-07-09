@@ -818,4 +818,10 @@ class CotizadorController extends Controller
         return view('cotizador.edit.index_cosmica', compact('categoriasFacial', 'categoriasCorporal', 'cotizacion', 'cotizacion_productos'));
     }
 
+    public function edit_renderizarItemCarrito(Request $request){
+        $producto = $request->input('producto'); // Este será un array con los datos
+
+        return view('cotizador.edit.item_carrito', compact('producto'))->render();
+    }
+
 }
