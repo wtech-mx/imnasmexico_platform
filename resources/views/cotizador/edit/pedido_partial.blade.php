@@ -6,7 +6,7 @@
                 <!-- Lista de productos -->
                 <ul class="list-group mb-3" id="contenedor_carrito" style="max-height: 600px; overflow-y: auto;">
                     @foreach ($cotizacion_productos as $cotizacion_producto)
-                        <li  data-id="{{ $cotizacion_producto->id_producto }}" style="padding: 0!important;border: 0!important;">
+                        <li class="list-group-item" data-id="{{ $cotizacion_producto->id_producto }}" style="padding: 0!important;border: 0!important;">
                             <div class="d-flex">
                                 <div class="me-3">
                                     <img src="{{ $cotizacion_producto->Productos->imagenes }}" alt="{{ $cotizacion_producto->Productos->nombre }}" class="rounded" style="width: 35px; height: 35px; object-fit: cover;">
@@ -31,7 +31,7 @@
                                 <div class="d-flex justify-content-around align-items-center">
                                     <div class="content">
                                         <div style="position: relative; width: 120px;">
-                                            <input id="descuento-input" name="descuento[{{ $cotizacion_producto->id_producto }}]"  type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start;    font-size: 13px;" class="descuento-input">
+                                            <input id="descuento-input" name="descuento[{{ $cotizacion_producto->id_producto }}]"  type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start; font-size: 13px;" class="descuento-input" value="{{ $cotizacion_producto->descuento }}">
                                             <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                 <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][id]" value="{{ $cotizacion_producto->id_producto }}">
                                 <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][precio]" value="{{ $cotizacion_producto->precio_uni }}">
                                 <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][cantidad]" class="cantidad-input" value="{{ $cotizacion_producto->cantidad }}">
-                                <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][descuentoPct]" class="descuento-input-hidden" value="0">
+                                <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][descuentoPct]" class="descuento-input-hidden" value="{{ $cotizacion_producto->descuento ?? 0 }}">
                         </li>
                     @endforeach
                 </ul>
