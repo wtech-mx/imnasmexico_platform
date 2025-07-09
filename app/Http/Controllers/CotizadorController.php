@@ -368,8 +368,7 @@ class CotizadorController extends Controller
 
         $productos = Products::query();
 
-        $productos->where('categoria', 'NAS')
-                  ->where('subcategoria', '=', 'Producto');
+        $productos->whereIn('subcategoria', ['Producto', 'Kit']);
 
         $productos->where(function($subQuery) use ($palabras) {
             foreach ($palabras as $palabra) {
