@@ -19,6 +19,7 @@ use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
 use Carbon\Carbon;
 use DB;
+use Hash;
 
 class CotizadorController extends Controller
 {
@@ -632,8 +633,7 @@ class CotizadorController extends Controller
     {
         // 1) Valida lo esencial
         $data = $request->validate([
-            'tipo'            => 'required|in:cosmica,nas,tiendita',
-            'id_usuario'      => 'required|exists:users,id',
+            'tipo'            => 'required|in:cosmica,nas,tiendita'
         ]);
         $code = Str::random(8);
 
@@ -654,48 +654,7 @@ class CotizadorController extends Controller
         }
 
         // 3) Cliente
-        if ($data['id_usuario'] == NULL) {
-            $payer = new User();
-            $payer->name = $request->get('name') . " " . $request->get('apellido');
-            $payer->email = $request->get('email');
-            $payer->username = $request->get('telefono');
-            $payer->code = $code;
-            $payer->telefono = $request->get('telefono');
-            $payer->cliente = '1';
-            $payer->password = Hash::make($request->get('telefono'));
-            $payer->save();
-        } else {
-            $user = User::where('id', $data['id_usuario'])->first();
-            $user->postcode   =$request->postcode;
-            $user->state      = $request->state;
-            $user->city       = $request->city;
-            $user->direccion  = $request->direccion;
-            $user->referencia = $request->referencia;
-            $user->country    = $request->country;
-            if ($request->hasFile('reconocimiento')) {
-                $file      = $request->file('reconocimiento');
-                $clienteId = $user->id;  // o $user->id si lo prefieres
-                $timestamp = time();
-                $ext       = $file->getClientOriginalExtension();
-
-                // Construimos un nombre “limpio”:
-                $fileName  = "{$clienteId}_{$timestamp}.{$ext}";
-
-                // Opcional: asegúrate de que la carpeta existe
-                $destPath = public_path('reconocimientos');
-                if (! is_dir($destPath)) {
-                    mkdir($destPath, 0755, true);
-                }
-
-                // Move
-                $file->move($destPath, $fileName);
-
-                // Guarda en la BD
-                $user->reconocimiento = $fileName;
-            }
-            $user->update();
-            $payer = $user;
-        }
+        $payer = $this->syncClient($request);
 
         // 4) Crea la orden
         $order = new $OrderModel();
@@ -710,31 +669,10 @@ class CotizadorController extends Controller
         $order->id_admin = auth()->user()->id;
         $order->fecha = date('Y-m-d');
         $tipoNota = $request->tipo_nota;
-        if ($request->envio_final == '0') {
-            $order->envio = 'No';
-        } else {
-            $order->envio = 'Si';
-        }
+        $order->envio = $request->envio_final > 0 ? 'Si' : 'No';
 
-        // Obtener todos los folios del tipo de nota específico
-        $folios = NotasProductosCosmica::where('tipo_nota', $tipoNota)->pluck('folio');
-        // Extraer los números de los folios y encontrar el máximo
-        $maxNumero = $folios->map(function ($folio) use ($tipoNota) {
-            return intval(substr($folio, strlen($tipoNota[0])));
-        })->max();
-
-        // Si hay un folio existente, sumarle 1 al máximo número
-        if ($maxNumero) {
-            $numeroFolio = $maxNumero + 1;
-        } else {
-            // Si no hay un folio existente, empezar desde 1
-            $numeroFolio = 1;
-        }
-        // Crear el nuevo folio con el tipo de nota y el número
-        $folio = $tipoNota[0] . $numeroFolio;
-
-        // Asignar el nuevo folio al objeto
-        $order->folio = $folio;
+        $modelClass = $order instanceof NotasProductosCosmica ? NotasProductosCosmica::class : NotasProductos::class;
+        $order->folio = $this->generateFolio($order->tipo_nota, $modelClass);
 
         if($request->get('factura') != NULL){
             $order->factura = '1';
@@ -752,17 +690,11 @@ class CotizadorController extends Controller
         // Campos de dirección
         $order->save();
 
-        // 5) Guarda cada ítem
-        foreach ($request->get('productos') as $p) {
-            $item = new $OrderItemModel();
-            $item->id_notas_productos       = $order->id;
-            $item->id_producto    = $p['id'];
-            $item->cantidad       = $p['cantidad'];
-            $item->precio_uni    = $p['precio'];
-            $item->descuento  = $p['descuentoPct'] ?? 0;
-            $item->price    = $p['precio'] * $p['cantidad'] * (1 - ($p['descuentoPct'] ?? 0) / 100);
-            $item->save();
-        }
+        $this->syncItemsAndKits(
+            $order,
+            $request->get('productos'),
+            'id_notas_productos'
+        );
 
         return response()->json([
         'success' => true,
@@ -860,16 +792,17 @@ class CotizadorController extends Controller
                 break;
         }
 
+        $payer = $this->syncClient($request, $data['id_usuario']);
+
         // 3) Recupera la orden
         /** @var \Illuminate\Database\Eloquent\Model $order */
         $order = $OrderModel::findOrFail($id);
-
         // 4) Actualiza campos de cabecera
-        $order->id_usuario       = $data['id_usuario'];
+        $order->id_usuario       = $payer->id;
         $order->subtotal         = $data['subtotal_final'];
         $order->total            = $data['total_final'];
         $order->nota             = $data['observaciones'] ?? '';
-         $order->tipo_nota        = $data['tipo_nota'];
+        $order->tipo_nota        = $data['tipo_nota'];
         $order->restante         = $request->descuento_total ?? 0;
         $order->envio_cost       = $request->envio_final;
         $order->iva_cost         = $request->iva_final;
@@ -886,20 +819,25 @@ class CotizadorController extends Controller
             ->delete();
 
         // c) Recorre cada producto enviado
-        foreach ($request->productos as $p) {
-            $item = $OrderItemModel::firstOrNew([
-                $fkOrder      => $order->id,
-                'id_producto' => $p['id'],
-            ]);
-
-            $item->cantidad      = $p['cantidad'];
-            $item->precio_uni    = $p['precio'];
-            $item->descuento     = $p['descuentoPct'] ?? 0;
-            $item->price         = $p['precio'] * $p['cantidad']
-                                * (1 - (($p['descuentoPct'] ?? 0) / 100));
-            // si tu modelo usa campo "precio" en lugar de "price" ajústalo
-            $item->save();
+        for ($i = 1; $i <= 6; $i++) {
+            $idk     = 'id_kit' . ($i > 1 ? $i : '');
+            $cantk   = 'cantidad_kit' . ($i > 1 ? $i : '');
+            $desck   = 'descuento_kit' . ($i > 1 ? $i : '');
+            $order->$idk   = null;
+            $order->$cantk = null;
+            $order->$desck = null;
         }
+        $order->save();
+
+        // 3) Borra todos los ítems asociados
+        $OrderItemModel::where('id_notas_productos', $order->id)->delete();
+
+        // 4) Vuelve a insertar
+        $this->syncItemsAndKits(
+            $order,
+            $request->input('productos'),
+            'id_notas_productos'
+        );
 
         return response()->json([
             'success'  => true,
@@ -908,5 +846,167 @@ class CotizadorController extends Controller
         ]);
     }
 
+    /**
+     * Sincroniza los ítems de la orden, incluyendo la lógica de kits.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $order
+     * @param  array  $productos  El array de productos del request
+     * @param  string $fkOrder    La clave foránea en la tabla de items
+     * @param  string $subcategoriaField  El campo de subcategoría en Products
+     * @return void
+     */
+    protected function syncItemsAndKits($order, array $productos, string $fkOrder, string $subcategoriaField = 'subcategoria')
+    {
+        // 1) Resetea campos de kits en la cabecera
+        for ($i = 1; $i <= 6; $i++) {
+            $suffix = $i > 1 ? $i : '';
+            $order->{"id_kit{$suffix}"}        = null;
+            $order->{"cantidad_kit{$suffix}"}  = null;
+            $order->{"descuento_kit{$suffix}"} = null;
+        }
+        $order->save();
 
+        // 2) Elimina todos los ítems previos
+        $order->items()->where($fkOrder, $order->id)->delete();
+
+        // 3) Inserta nuevamente según el array
+        $kitCounter = 1;
+        foreach ($productos as $p) {
+            $prod = Products::find($p['id']);
+            $isKit = strtolower($prod->{$subcategoriaField}) === 'kit';
+
+            if ($isKit && $kitCounter <= 6) {
+                // 3a) Graba la info de kit en la cabecera
+                $suffix   = $kitCounter > 1 ? $kitCounter : '';
+                $order->{"id_kit{$suffix}"}        = $prod->id;
+                $order->{"cantidad_kit{$suffix}"}  = $p['cantidad'];
+                $order->{"descuento_kit{$suffix}"} = $p['descuentoPct'] ?? 0;
+                $order->save();
+
+                // 3b) Guarda cada componente del bundle
+                $bundles = ProductosBundleId::where('id_product', $prod->id)->get();
+                foreach ($bundles as $b) {
+                    $order->items()->create([
+                        $fkOrder   => $order->id,
+                        'id_producto'     => $b->id_producto,
+                        'cantidad'        => $b->cantidad * $p['cantidad'],
+                        'precio_uni'      => 0,
+                        'descuento'       => 0,
+                        'price'           => 0,
+                        'kit'             => 1,
+                        'num_kit'         => $prod->id,
+                    ]);
+                }
+
+                $kitCounter++;
+            } else {
+                // 3c) Guarda producto normal
+                $order->items()->create([
+                    $fkOrder   => $order->id,
+                    'id_producto'     => $p['id'],
+                    'cantidad'        => $p['cantidad'],
+                    'precio_uni'      => $p['precio'],
+                    'descuento'       => $p['descuentoPct'] ?? 0,
+                    'price'           => $p['precio'] * $p['cantidad'] * (1 - (($p['descuentoPct'] ?? 0)/100)),
+                    'kit'             => 0,
+                    'num_kit'         => null,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Crea o actualiza el cliente según el request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int|null  $userId
+     * @return \App\Models\User
+     */
+    protected function syncClient(Request $request, $userId = null)
+    {
+        // Si no viene ID, lo creamos
+        if (empty($userId)) {
+            $code = Str::random(8);
+            $payer = new User();
+            $payer->name       = $request->get('name');
+            $payer->email      = $request->get('telefono') . '@imnas.com';
+            $payer->username   = $request->get('telefono');
+            $payer->code       = $code;
+            $payer->telefono   = $request->get('telefono');
+            $payer->cliente    = '1';
+            $payer->password   = Hash::make($request->get('telefono'));
+            $payer->postcode   = $request->get('postcode');
+            $payer->state      = $request->get('state');
+            $payer->city       = $request->get('city');
+            $payer->direccion  = $request->get('direccion');
+            $payer->referencia = $request->get('referencia');
+            $payer->country    = $request->get('country');
+
+            if ($request->hasFile('reconocimiento_new')) {
+                $file      = $request->file('reconocimiento_new');
+                $timestamp = time();
+                $ext       = $file->getClientOriginalExtension();
+                $fileName  = "{$payer->id}_{$timestamp}.{$ext}";
+                $destPath  = public_path('reconocimientos');
+                if (! is_dir($destPath)) {
+                    mkdir($destPath, 0755, true);
+                }
+                $file->move($destPath, $fileName);
+                $payer->reconocimiento = $fileName;
+            }
+        }
+        // Si viene ID, lo actualizamos
+        else {
+            $payer = User::findOrFail($userId);
+            $payer->postcode   = $request->get('postcode');
+            $payer->state      = $request->get('state');
+            $payer->city       = $request->get('city');
+            $payer->direccion  = $request->get('direccion');
+            $payer->referencia = $request->get('referencia');
+            $payer->country    = $request->get('country');
+
+            // Si subieron reconocimiento, lo procesamos
+            if ($request->hasFile('reconocimiento')) {
+                $file      = $request->file('reconocimiento');
+                $timestamp = time();
+                $ext       = $file->getClientOriginalExtension();
+                $fileName  = "{$payer->id}_{$timestamp}.{$ext}";
+                $destPath  = public_path('reconocimientos');
+                if (! is_dir($destPath)) {
+                    mkdir($destPath, 0755, true);
+                }
+                $file->move($destPath, $fileName);
+                $payer->reconocimiento = $fileName;
+            }
+        }
+
+        $payer->save();
+        return $payer;
+    }
+
+
+    /**
+     * Genera el siguiente folio para el tipo de nota dado.
+     *
+     * @param  string  $tipoNota  La cadena completa de tipo de nota, p.ej. "Cosmica"
+     * @param  string  $modelClass El nombre completo de la clase de modelo de notas (Eloquent)
+     * @return string             El nuevo folio, p.ej. "C5"
+     */
+    protected function generateFolio(string $tipoNota, string $modelClass): string
+    {
+        // 1) Recoge todos los folios existentes para ese tipo
+        $folios = $modelClass::where('tipo_nota', $tipoNota)
+                             ->pluck('folio');
+
+        // 2) Extrae la parte numérica tras la inicial del tipo
+        $maxNumero = $folios
+            ->map(fn($folio) => (int) substr($folio, 1))
+            ->max();
+
+        // 3) Siguiente número (si no hay ninguno, empieza en 1)
+        $next = $maxNumero ? $maxNumero + 1 : 1;
+
+        // 4) El folio es la primera letra de tipo + número
+        return strtoupper($tipoNota[0]) . $next;
+    }
 }

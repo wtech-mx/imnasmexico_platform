@@ -41,17 +41,7 @@ Cosmica
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="25px">
                                                 </span>
-                                                <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" value="{{old('name')}}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-6">
-                                            <label for="name">Correo <strong style="color:red;">(No es forzoso)</strong></label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="25px">
-                                                </span>
-                                                <input id="email" name="email" type="email" class="form-control" placeholder="Correo" value="{{old('Correo')}}">
+                                                <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" value="{{old('name')}}" form="formGuardarPedido">
                                             </div>
                                         </div>
 
@@ -61,8 +51,13 @@ Cosmica
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="25px">
                                                 </span>
-                                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}">
+                                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}" form="formGuardarPedido">
                                             </div>
+                                        </div>
+
+                                        <div class="form-group col-12">
+                                            <label for="reconocimiento">Sube su diploma:</label>
+                                            <input type="file" name="reconocimiento_new" id="reconocimiento_new" accept="image/*,application/pdf" class="form-control" form="formGuardarPedido"/>
                                         </div>
 
                                     </div>
