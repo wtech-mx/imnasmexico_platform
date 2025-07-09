@@ -200,24 +200,24 @@ Cosmica
             envFields.style.display = chkEnv.checked ? 'block' : 'none';
         });
 
-    // Usa delegación:
-    $(document).on('input', '#codigo_postal', function () {
-        const cp = $(this).val();
-        if (cp.length !== 5) return;
-        // usa la ruta nombrada en lugar de escribir “/buscar-cp” a mano:
-        const url = '{{ route("buscarCP") }}?codigo_postal=' + encodeURIComponent(cp);
-        $.get(url)
-        .done(function (data) {
-            const $colonia = $('#colonia').empty();
-            data.colonias.forEach(c => $colonia.append(`<option>${c}</option>`));
-            $('#ciudad').val(data.ciudad);
-            $('#estado').val(data.estado);
-            $('#municipio').val(data.municipio);
-        })
-        .fail(function () {
-            Swal.fire('Oops','Código postal no encontrado','error');
+        // Usa delegación:
+        $(document).on('input', '#codigo_postal', function () {
+            const cp = $(this).val();
+            if (cp.length !== 5) return;
+            // usa la ruta nombrada en lugar de escribir “/buscar-cp” a mano:
+            const url = '{{ route("buscarCP") }}?codigo_postal=' + encodeURIComponent(cp);
+            $.get(url)
+            .done(function (data) {
+                const $colonia = $('#colonia').empty();
+                data.colonias.forEach(c => $colonia.append(`<option>${c}</option>`));
+                $('#ciudad').val(data.ciudad);
+                $('#estado').val(data.estado);
+                $('#municipio').val(data.municipio);
+            })
+            .fail(function () {
+                Swal.fire('Oops','Código postal no encontrado','error');
+            });
         });
-    });
 
     });
 </script>

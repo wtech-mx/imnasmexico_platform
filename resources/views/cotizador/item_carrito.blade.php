@@ -45,8 +45,37 @@
             </div>
             <span class="total" style="font-size: 13px;">${{ number_format($producto['precio'] * $producto['cantidad'], 2) }}</span>
         </div>
-
     </div>
+
+    {{-- ↓ **Aquí** inyectamos el desglose si es Kit --}}
+
+  @if(!empty($bundleItems))
+    <div class="row">
+        <div class="col-12">
+            <div class="mt-2 ps-4" style="font-size:.9em; color:#555;">
+            {{-- 1) El botón que colapsa --}}
+            <a style="text-decoration: none;" class=""
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#bundle-{{ $producto['id'] }}"
+                    aria-expanded="false"
+                    aria-controls="bundle-{{ $producto['id'] }}">
+                <i class="bi bi-arrow-bar-down"></i> Ver Productos
+            </a>
+
+            {{-- 2) El contenedor colapsable, oculto por defecto --}}
+            <div class="collapse mt-2" id="bundle-{{ $producto['id'] }}">
+                <ul class="list-unstyled mb-0">
+                @foreach($bundleItems as $item)
+                    <li>• {{ $item->producto }} @if($item->cantidad>1)x{{ $item->cantidad }}@endif</li>
+                @endforeach
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+  @endif
+
     <hr style="margin: 0.5rem 0!important">
         <input type="hidden" name="productos[{{ $producto['id'] }}][id]" value="{{ $producto['id'] }}">
         <input type="hidden" name="productos[{{ $producto['id'] }}][precio]" value="{{ $producto['precio'] }}">

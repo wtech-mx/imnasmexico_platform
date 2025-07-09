@@ -368,7 +368,7 @@ class CotizadorController extends Controller
 
         $productos = Products::query();
 
-        $productos->whereIn('subcategoria', ['Producto', 'Kit']);
+        $productos->whereIn('subcategoria', ['Producto', 'Kit'])->where('estatus','!=', 'no publicado');
 
         $productos->where(function($subQuery) use ($palabras) {
             foreach ($palabras as $palabra) {
@@ -435,7 +435,18 @@ class CotizadorController extends Controller
     {
         $producto = $request->input('producto'); // Este será un array con los datos
 
-        return view('cotizador.item_carrito', compact('producto'))->render();
+        // 2. Si es un Kit, carga sus componentes
+        $bundleItems = [];
+
+        if ($producto['subcategoria'] === 'Kit') {
+            $bundleItems = ProductosBundleId::where('id_product', $producto['id'])
+                ->whereNotNull('price')
+                ->get();  // Obtén aquí los campos que necesites
+            return view('cotizador.item_carrito', compact('producto','bundleItems'));
+
+        }else{
+            return view('cotizador.item_carrito', compact('producto'))->render();
+        }
     }
 
     public function index_recepcion_cosmica_expo(Request $request){
