@@ -190,7 +190,7 @@
 
                                     <div class="col-4 ">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="checkboxEnvio" name="envio">
+                                            <input class="form-check-input" type="checkbox" id="checkboxEnvio" name="envio" value="250">
                                             <h4 class="form-check-h4" for="flexCheckDefault">
                                                 <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Agregar envio?)</strong>
                                             </h4>
