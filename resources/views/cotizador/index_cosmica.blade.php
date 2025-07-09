@@ -448,6 +448,7 @@ Cosmica
             const nombre = target.dataset.nombre;
             const precio = parseFloat(target.dataset.precio);
             const imagen = target.dataset.img;
+            const subcategoria = target.dataset.subcategoria;
 
             // Buscar si ya existe en el carrito
             const existente = carrito.find(p => p.id == id);
@@ -456,7 +457,7 @@ Cosmica
                 showToast('Cantidad actualizada');
                 renderizarCarrito(); // <-- ¡Asegúrate de actualizar la vista!
             } else {
-                carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+                carrito.push({ id, nombre, precio, imagen,subcategoria, cantidad: 1 });
                 showToast('Producto agregado al carrito');
                 renderizarCarrito(); // <-- ¡Renderiza el nuevo producto!
             }
@@ -704,6 +705,7 @@ Cosmica
 
         const id = btn.data('id');
         const nombre = btn.data('nombre');
+        const subcategoria = btn.data('subcategoria');
         const precio = parseFloat(btn.data('precio'));
         const imagen = btn.data('img');
 
@@ -713,7 +715,7 @@ Cosmica
             existente.cantidad++;
             showToast('Cantidad actualizada');
         } else {
-            carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+            carrito.push({ id, nombre, precio,subcategoria, imagen, cantidad: 1 });
             showToast('Producto agregado al carrito');
         }
         renderizarCarrito();
@@ -721,14 +723,14 @@ Cosmica
         setTimeout(() => btn.prop('disabled', false), 300); // Habilita después de 300ms
     });
 
-    function agregarAlCarrito(id, nombre, precio, imagen) {
+    function agregarAlCarrito(id, nombre, precio,subcategoria, imagen) {
         // Busca el producto en el array actualizado
         let existente = carrito.find(p => p.id == id);
         if (existente) {
             existente.cantidad++;
             showToast('Cantidad actualizada');
         } else {
-            carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+            carrito.push({ id, nombre, precio, imagen,subcategoria, cantidad: 1 });
             showToast('Producto agregado al carrito');
         }
         renderizarCarrito();

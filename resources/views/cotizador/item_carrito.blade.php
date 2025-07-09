@@ -1,7 +1,23 @@
 <li class="list-group-item" data-id="{{ $producto['id'] }}" style="padding: 0!important;border: 0!important;">
     <div class="d-flex">
         <div class="me-3">
-            <img src="{{ $producto['imagen'] }}" alt="{{ $producto['nombre'] }}" class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+
+            {{-- <img src="{{ $producto['imagen'] }}" class="rounded" style="width: 50px; height: 50px; object-fit: cover;"> --}}
+
+            @if($producto['subcategoria'] == 'Kit')
+                @if ($producto['imagen'] == NULL)
+                    <img  class="rounded"src="{{asset('cursos/no-image.jpg') }}" style="width: 50px; height: 50px; object-fit: cover;" />
+                @else
+                    <img  class="rounded"src="{{asset('products/'.$producto['imagen']) }}" style="width: 50px; height: 50px; object-fit: cover;" />
+                @endif
+            @else
+                @if ($producto['imagen'] == NULL)
+                    <img  class="rounded"src="{{asset('cursos/no-image.jpg') }}" style="width: 50px; height: 50px; object-fit: cover;" />
+                @else
+                    <img  class="rounded"src="{{ $producto['imagen'] }}" style="width: 50px; height: 50px; object-fit: cover;">
+                @endif
+            @endif
+
         </div>
         <div class="flex-grow-1 d-flex flex-column justify-content-between" style="position: relative">
             <div>
