@@ -47,6 +47,7 @@ class Products extends Model
         'estatus',
         'id_categoria',
         'id_categoria2',
+        'precio_uni',
     ];
 
     public function ProductosBundleId()

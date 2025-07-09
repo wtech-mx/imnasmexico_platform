@@ -1,50 +1,67 @@
+@php
+  // Colección de todos los productos de la cotización
+  $items = collect($cotizacion_productos);
 
+  // 1) Agrupamos los bundle-items por num_kit
+  $kitGroups = $items
+    ->where('kit', 1)           // solo los items que vienen de un kit
+    ->groupBy('num_kit');       // agrupados por ID de kit
 
+  // 2) Productos sueltos
+  $singles = $items->where('kit', 0);
+@endphp
 <div class="sidebar">
                 <h5 class="mb-2 mt-1 text-center">Cotiza tu pedido</h5>
 
                 <!-- Lista de productos -->
-                <ul class="list-group mb-3" id="contenedor_carrito" style="max-height: 600px; overflow-y: auto;">
-                    @foreach ($cotizacion_productos as $cotizacion_producto)
-                        <li class="list-group-item" data-id="{{ $cotizacion_producto->id_producto }}" style="padding: 0!important;border: 0!important;">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <img src="{{ $cotizacion_producto->Productos->imagenes }}" alt="{{ $cotizacion_producto->Productos->nombre }}" class="rounded" style="width: 35px; height: 35px; object-fit: cover;">
-                                </div>
-                                <div class="flex-grow-1 d-flex flex-column justify-content-between" style="position: relative">
-                                    <div>
-                                        <div class="fw-semibold" style="color: #6d6d6d;font-size: 15px;">{{ $cotizacion_producto->Productos->nombre }}</div>
-                                        <small class="text-muted precio-unitario" style="font-size: 11px;" data-precio="{{ $cotizacion_producto->precio_uni }}">${{ number_format($cotizacion_producto->precio_uni, 2) }}</small>
-                                    </div>
-                                    <div class="d-flex justify-content-end align-items-center mt-2 btns_flotantes">
-                                        <button type="button" class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $cotizacion_producto->id_producto }}, -1)">-</button>
-                                        <span class="mx-2 cantidad">{{ $cotizacion_producto->cantidad }}</span>
-                                        <button type="button" class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $cotizacion_producto->id_producto }}, 1)">+</button>
+                <ul class="list-group mb-3" id="contenedor_carrito" style="max-height:600px;overflow-y:auto;">
+                    {{-- Kits --}}
+                    @foreach($kitGroups as $numKit => $group)
+                        @php
+                            // Calcula el sufijo para id_kitN, cantidad_kitN, descuento_kitN
+                            $i      = $loop->iteration;            // 1,2,3...
+                            $suffix = $i > 1 ? $i : '';
 
-                                        <button class="btn btn-sm ms-2" onclick="eliminarDelCarrito({{ $cotizacion_producto->id_producto }})">
-                                            <i class="bi bi-trash3"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-end mt-1">
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <div class="content">
-                                        <div style="position: relative; width: 120px;">
-                                            <input id="descuento-input" name="descuento[{{ $cotizacion_producto->id_producto }}]"  type="number" placeholder="Descuento" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: start; font-size: 13px;" class="descuento-input" value="{{ $cotizacion_producto->descuento }}">
-                                            <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">%</span>
-                                        </div>
-                                    </div>
-                                    <span class="total" style="font-size: 13px;">${{ number_format($cotizacion_producto->price, 2) }}</span>
-                                </div>
+                            // Ahora recupera los datos del kit en la cabecera
+                            $kitId    = $cotizacion->{"id_kit{$suffix}"};
+                            $kitQty   = $cotizacion->{"cantidad_kit{$suffix}"};
+                            $kitDisc  = $cotizacion->{"descuento_kit{$suffix}"};
 
-                            </div>
-                            <hr style="margin: 0.5rem 0!important">
-                                <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][id]" value="{{ $cotizacion_producto->id_producto }}">
-                                <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][precio]" value="{{ $cotizacion_producto->precio_uni }}">
-                                <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][cantidad]" class="cantidad-input" value="{{ $cotizacion_producto->cantidad }}">
-                                <input type="hidden" name="productos[{{ $cotizacion_producto->id_producto }}][descuentoPct]" class="descuento-input-hidden" value="{{ $cotizacion_producto->descuento ?? 0 }}">
-                        </li>
+                            // Producto “cabecera” del kit
+                            $kitProd  = \App\Models\Products::find($kitId);
+
+                            // Total de línea con descuento
+                            $lineTotal = $kitProd->precio_normal * $kitQty * (1 - $kitDisc/100);
+                        @endphp
+
+                        @include('cotizador.edit.product_partial', [
+                        'id'             => $kitProd->id,
+                        'imagen'         => $kitProd->imagenes,
+                        'nombre'         => $kitProd->nombre,
+                        'precioUnitario' => $kitProd->precio_normal,
+                        'cantidad'       => $kitQty,
+                        'descuentoPct'   => $kitDisc,
+                        'lineTotal'      => $lineTotal,
+                        'isKit'          => true,
+                        ])
+                    @endforeach
+
+                    {{-- Productos sueltos --}}
+                    @foreach($singles as $item)
+                        @php
+                        $prod      = $item->Productos;
+                        $lineTotal = $item->price;
+                        @endphp
+                        @include('cotizador.edit.product_partial', [
+                        'id'             => $prod->id,
+                        'imagen'         => $prod->imagenes,
+                        'nombre'         => $prod->nombre,
+                        'precioUnitario' => $prod->precio_normal,
+                        'cantidad'       => $item->cantidad,
+                        'descuentoPct'   => $item->descuento,
+                        'lineTotal'      => $lineTotal,
+                        'isKit'          => false,
+                        ])
                     @endforeach
                 </ul>
 
