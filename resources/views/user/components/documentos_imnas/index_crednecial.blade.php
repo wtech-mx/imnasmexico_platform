@@ -38,12 +38,13 @@
                     $nombreCurso = $tickets_externo->curso;
                     $nombreCompleto = explode(' ', $tickets_externo->cliente);
                     $foto = $tickets_externo->foto;
-
+                    $idocurp = $tickets_externo->idocurp;
+                    $curp = $tickets_externo->curp;
                 }else {
 
                     $foto = $tickets->User->Documentos->foto_tam_infantil;
                     $firma = $tickets->User->Documentos->firma;
-
+                    $idocurp = $tickets->idocurp;
                     $palabras = explode(' ', ucwords(strtolower($tickets->Cursos->nombre)));
 
                     $nombreCompleto = explode(' ', $tickets->User->name);
@@ -62,8 +63,10 @@
 
             if ( isset($tickets->curp_escrito)) {
                 $curp = $tickets->curp_escrito;
+                $idocurp = $tickets->idocurp;
+
             }else{
-                $curp = $tickets->User->curp_escrito ?? '';
+                $curp = $tickets->User->curp_escrito ?? $tickets_externo->curp;
 
             }
 
@@ -167,6 +170,13 @@
             color: red;
         }
 
+        .idocurp{
+            font-size:10px;
+            color: #000;
+            padding: 0px;
+            background: #fff;
+        }
+
         .nacionalidad{
             font-size:10px;
             color: red;
@@ -199,6 +209,14 @@
             transform: translate(-50%, -50%);
             text-align: center;
         }
+        .container_idocurp{
+            position: absolute;
+            top:92%;
+            left: 18%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
 
         .container_nacionalidad{
             position: absolute;
@@ -392,6 +410,12 @@
 
             @endphp
             <h4 class="curso">{!! $curso_formateado !!}</h4>
+        </div>
+
+        <div class="container_idocurp">
+            <h4 class="idocurp">
+                {{ $idocurp ?? 'CURP'}}
+            </h4>
         </div>
 
         <div class="container_curp">

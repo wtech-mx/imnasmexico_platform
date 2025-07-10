@@ -465,11 +465,11 @@ Route::group(['middleware' => ['auth']], function() {
         return view('stp.test_abono');
     });
 
-Route::get('/stp/retorna-orden', [StpController::class, 'showRetornaForm'])
-     ->name('stp.retorna.form');
+    Route::get('/stp/retorna-orden', [StpController::class, 'showRetornaForm'])
+        ->name('stp.retorna.form');
 
-Route::put('/stp/retorna-orden', [StpController::class, 'retornaOrden'])
-     ->name('stp.retorna.orden');
+    Route::put('/stp/retorna-orden', [StpController::class, 'retornaOrden'])
+        ->name('stp.retorna.orden');
 
     //================ MODULO COTIZADOR NEW ============================================
     Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');

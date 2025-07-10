@@ -356,8 +356,29 @@
                                                 @endif
                                             </div>
 
+
+                                            <div class="form-group col-6">
+                                                <label for="name">Tipo de identificacion *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <select name="idocurp" id="idocurp" class="form-select" >
+                                                        @if($registro_imnas->idocurp)
+                                                            <option value="{{ $registro_imnas->idocurp }}" selected>{{ $registro_imnas->idocurp }}</option>
+                                                            <option value="CURP">CURP</option>
+                                                            <option value="ID No.">ID No.</option>
+                                                        @else
+                                                            <option value="CURP" selected>CURP</option>
+                                                            <option value="ID No.">ID No.</option>
+                                                        @endif
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div class="form-group col-6 curp_content">
-                                                <label for="name">CURP *:</label>
+                                                <label for="name">CURP o ID No*:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img class="img_profile_label" src="{{asset('assets/user/icons/abc-block.png')}}" alt="" width="30px">

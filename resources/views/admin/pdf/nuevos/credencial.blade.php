@@ -386,7 +386,7 @@
                     <strong class="text_datos_strong">Nombre</strong> <br>
                     {!! $nombre !!}
 
-                    <br><br><strong class="text_datos_strong">curp</strong> <br>
+                    <br><br><strong class="text_datos_strong">{{ $idocurp ?? 'CURP' }}</strong> <br>
                     {{ $curp }}
 
                     <br><br><strong class="text_datos_strong">nacionalidad</strong> <br>

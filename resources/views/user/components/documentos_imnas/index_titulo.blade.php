@@ -49,11 +49,12 @@
                     $nombreCurso = $tickets_externo->curso;
                     $foto = $tickets_externo->foto;
                     $firma = $tickets_externo->firma;
+                    $idocurp = $tickets_externo->idocurp;
                 }else {
 
                     $foto = $tickets->User->Documentos->foto_tam_infantil;
                     $firma = $tickets->User->Documentos->firma;
-
+                    $idocurp = $tickets->idocurp;
                     $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
                     $nombrePersona = $tickets->User->name;
 
@@ -83,8 +84,9 @@
 
             if ( isset($tickets->curp_escrito)) {
                 $curp = $tickets->curp_escrito;
+                $idocurp = $tickets->idocurp;
             }else{
-                $curp = '';
+                $curp = $tickets->User->curp_escrito ?? $tickets_externo->curp;
             }
 @endphp
 
@@ -583,7 +585,7 @@
         <div class="container_texto_atras">
             <p class="nombre_reverso">
                 <strong class="text-dark"> NOMBRE: </strong>{!! $nombrePersona !!} <br>
-                <strong class="text-dark"> CURP:</strong> {{ $curp }} <br>
+                <strong class="text-dark"> {{ $idocurp ?? 'CURP'}}:</strong> {{ $curp }} <br>
                 <strong class="text-dark"> NACIONALIDAD:</strong> Mexicana <br>
                 <strong class="text-dark"> VIGENCIA: </strong>Permanente <br>
                 <strong class="text-dark"> CARRERA: </strong>{!! $nombreCurso !!} <br>

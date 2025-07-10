@@ -381,7 +381,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                         <strong class="text_datos_strong">Nombre</strong> <br>
                         {{ $tickets->nombre }}
 
-                        <br><br><strong class="text_datos_strong">curp</strong> <br>
+                        <br><br><strong class="text_datos_strong"> {{ $tickets->idocurp ?? 'CURP' }}</strong> <br>
                         {{ $tickets->curp_escrito }}
 
                         <br><br><strong class="text_datos_strong">nacionalidad</strong> <br>

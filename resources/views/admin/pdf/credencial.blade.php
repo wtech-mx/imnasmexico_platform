@@ -43,6 +43,14 @@
             text-align: left;
         }
 
+        .containeridocurp{
+            position: absolute;
+            top:89%;
+            left: 18%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .container3{
             position: absolute;
             top:93%;
@@ -129,6 +137,14 @@
         .curp{
             font-size: 7px;
             color: #000;
+        }
+
+        .idocurp{
+            font-size: 7px;
+            color: #000;
+            background: #fff;
+            padding: 0px;
+            border-radius: 10px;
         }
 
         .folio3{
@@ -327,6 +343,10 @@
                 }
             @endphp
             <h4 class="curso">{!! $curso_formateado !!}</h4>
+        </div>
+
+        <div class="containeridocurp">
+            <h4 class="idocurp">{{ $idocurp }}</h4>
         </div>
 
         <div class="container3">

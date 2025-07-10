@@ -48,6 +48,7 @@ class RegistroImnas extends Model
         'texto_firma_personalizada',
         'otra_firma_director',
         'texto_firma_personalizada2',
+        'idocurp',
     ];
 
     public function User()

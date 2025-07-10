@@ -613,7 +613,7 @@
                     <div class="col-6 text-start ">
                         <p class="uppercase lista" style="margin-left: 40px;">
                             <strong class="lista_strong"> Nombre: </strong>{{ $tickets->nombre }} <br>
-                            <strong class="lista_strong"> curp:</strong> {{ $tickets->curp_escrito }}  <br>
+                            <strong class="lista_strong"> {{ $tickets->idocurp ?? 'CURP' }} :</strong> {{ $tickets->curp_escrito }}  <br>
                             <strong class="lista_strong"> carrera:</strong> {{ $tickets->nom_curso }} <br>
                             <strong class="lista_strong"> nacionalidad:</strong> mexicana <br>
                             <strong class="lista_strong"> vigencia:</strong> permanente <br>
