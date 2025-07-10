@@ -165,6 +165,11 @@
             left:110px;
         }
 
+        .container_idocurp{
+            position: absolute;
+            top: 5.8%;
+            left:12px;
+        }
         .container7{
             position: absolute;
             top: 8.3%;
@@ -241,6 +246,14 @@
             position:relative;
             font-size: 18px;
             color: red;
+        }
+
+        .idocurp{
+            position:relative;
+            font-size: 18px;
+            color: #616161;
+            padding: 1px 10px 1px 5px;
+            background: #fff;
         }
 
         .folio3{
@@ -522,13 +535,13 @@
         </div>
 
         @if(!isset($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            <img src="https://plataforma.imnasmexico.com/tipos_documentos/titulo_reverso_limpio_firma_director.png" class="img_reverso">
 
             @elseif(empty($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            <img src="https://plataforma.imnasmexico.com/tipos_documentos/titulo_reverso_limpio_firma_director.png" class="img_reverso">
 
             @elseif($fileName_logo == 'Sin Logo')
-            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            <img src="https://plataforma.imnasmexico.com/tipos_documentos/titulo_reverso_limpio_firma_director.png" class="img_reverso">
             @else
 
             @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
@@ -601,6 +614,10 @@
 
         <div class="container4">
             <h4 class="folio2">{!! $nombre_formateado !!}</h4>
+        </div>
+
+        <div class="container_idocurp">
+            <h4 class="idocurp">{{ $idocurp }}</h4>
         </div>
 
         <div class="container6">
