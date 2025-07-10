@@ -1,7 +1,7 @@
 @extends('layouts.app_cotizador')
 
 @section('template_title')
-Cosmica {{$cotizacion->id}}
+Edit Cotizacion {{$cotizacion->id}}
 @endsection
 
 @section('cotizador')
@@ -152,13 +152,13 @@ Cosmica {{$cotizacion->id}}
         // usa la ruta nombrada en lugar de escribir “/buscar-cp” a mano:
         const url = '{{ route("buscarCP") }}?codigo_postal=' + encodeURIComponent(cp);
         $.get(url)
-        .done(function (data) {
-            const $colonia = $('#colonia').empty();
-            data.colonias.forEach(c => $colonia.append(`<option>${c}</option>`));
-            $('#ciudad').val(data.ciudad);
-            $('#estado').val(data.estado);
-            $('#municipio').val(data.municipio);
-        })
+            .done(function (data) {
+                const $colonia = $('#country').empty();
+                data.colonias.forEach(c => $colonia.append(`<option>${c}</option>`));
+                $('#city').val(data.ciudad);
+                $('#state').val(data.estado);
+                $('#alcaldia').val(data.municipio);
+            })
         .fail(function () {
             Swal.fire('Oops','Código postal no encontrado','error');
         });
