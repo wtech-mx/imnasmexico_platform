@@ -239,7 +239,7 @@
                             <ul>
                                 @foreach ($nota_productos->where('kit', 1)->where('num_kit', $nota->$kitId) as $producto)
                                     <li>
-                                        {{ $producto->cantidad }} {{ $producto->producto }}
+                                        {{ $producto->cantidad }} {{ $producto->Productos->nombre }}
                                     </li>
                                 @endforeach
                             </ul>
@@ -278,7 +278,7 @@
                     </td>
 
                     <td>
-                        <p style="font-size: 12px">{{ $producto->producto }} </p>
+                        <p style="font-size: 12px">{{ $producto->Productos->nombre }} </p>
                         <p style="font-size:10px">Precio Real Catalogo: ${{ $producto->Productos->precio_normal }}.0</p>
 
                     </td>
