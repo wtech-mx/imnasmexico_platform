@@ -450,7 +450,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 
-    Route::get('/stp/registra-orden', [StpController::class, 'showRegistraForm'])
+    Route::get('/stp/registra-orden/show', [StpController::class, 'showRegistraForm'])
         ->name('stp.registra.form');
 
     Route::put('/stp/registra-orden', [StpController::class, 'registraOrden'])
