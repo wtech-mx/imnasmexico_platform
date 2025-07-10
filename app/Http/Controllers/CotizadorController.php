@@ -151,7 +151,6 @@ class CotizadorController extends Controller
         return view('cotizador.index_cosmica_new', compact('productosPorSublinea', 'kits', 'personal'));
     }
 
-
     public function cotizador_cosmica(Request $request){
         // 1) Productos “normales”
         $productos = Products::query()
@@ -369,19 +368,37 @@ class CotizadorController extends Controller
 
         $productos = Products::query();
 
-        $productos->whereIn('subcategoria', ['Producto', 'Kit'])->where('estatus',null)->where('categoria', 'Cosmica');
-
-        $productos->where(function($subQuery) use ($palabras) {
-            foreach ($palabras as $palabra) {
-                $variantes = $this->generarVariantesSingularPlural($palabra);
-
-                foreach ($variantes as $variante) {
-                    $subQuery->orWhereRaw("
-                        LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(nombre, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u')) LIKE ?
-                    ", ["%{$variante}%"]);
+        $productos
+            ->where('categoria', 'Cosmica')
+            // Sólo Kits con estatus NULL, pero Productos siempre
+            ->where(function($q) {
+                $q->where('subcategoria', 'Producto')
+                ->orWhere(function($q2) {
+                    $q2->where('subcategoria', 'Kit')
+                        ->whereNull('estatus');
+                });
+            })
+            // A continuación tu búsqueda por nombre…
+            ->where(function($subQuery) use ($palabras) {
+                foreach ($palabras as $palabra) {
+                    $variantes = $this->generarVariantesSingularPlural($palabra);
+                    foreach ($variantes as $variante) {
+                        $subQuery->orWhereRaw("
+                            LOWER(
+                                REPLACE(
+                                REPLACE(
+                                    REPLACE(
+                                    REPLACE(
+                                        REPLACE(nombre, 'á', 'a'),
+                                    'é', 'e'),
+                                    'í', 'i'),
+                                'ó', 'o'),
+                                'ú', 'u')
+                            ) LIKE ?
+                        ", ["%{$variante}%"]);
+                    }
                 }
-            }
-        });
+            });
 
         $productos = $productos->limit(40)->get();
 
@@ -846,15 +863,6 @@ class CotizadorController extends Controller
         ]);
     }
 
-    /**
-     * Sincroniza los ítems de la orden, incluyendo la lógica de kits.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $order
-     * @param  array  $productos  El array de productos del request
-     * @param  string $fkOrder    La clave foránea en la tabla de items
-     * @param  string $subcategoriaField  El campo de subcategoría en Products
-     * @return void
-     */
     protected function syncItemsAndKits($order, array $productos, string $fkOrder, string $subcategoriaField = 'subcategoria')
     {
         // 1) Resetea campos de kits en la cabecera
@@ -915,13 +923,6 @@ class CotizadorController extends Controller
         }
     }
 
-    /**
-     * Crea o actualiza el cliente según el request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int|null  $userId
-     * @return \App\Models\User
-     */
     protected function syncClient(Request $request)
     {
         // Si no viene ID, lo creamos
@@ -985,13 +986,6 @@ class CotizadorController extends Controller
     }
 
 
-    /**
-     * Genera el siguiente folio para el tipo de nota dado.
-     *
-     * @param  string  $tipoNota  La cadena completa de tipo de nota, p.ej. "Cosmica"
-     * @param  string  $modelClass El nombre completo de la clase de modelo de notas (Eloquent)
-     * @return string             El nuevo folio, p.ej. "C5"
-     */
     protected function generateFolio(string $tipoNota, string $modelClass): string
     {
         // 1) Recoge todos los folios existentes para ese tipo

@@ -1,5 +1,5 @@
 <div class="row">
-    @foreach ($productos as $producto)
+    @forelse ($productos as $producto)
         <div class="col-4 col-sm-3 col-md-2 col-lg-2 mb-2">
             <div class="product-card agregar-carrito"
                 data-id="{{ $producto->id }}"
@@ -27,5 +27,11 @@
                 <div class="fw-bold text-start mt-1">${{ number_format($producto->precio_normal, 2) }}</div>
             </div>
         </div>
-    @endforeach
+    @empty
+        <div class="col-12">
+        <div class="alert alert-warning text-center">
+            No se encontraron resultados para tu búsqueda.
+        </div>
+        </div>
+    @endforelse
 </div>

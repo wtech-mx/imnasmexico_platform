@@ -20,6 +20,27 @@ Cosmica
                     <h5 class="p-2">Cliente</h5>
 
                     <div class="row">
+
+                        <div class="col-12">
+                            <div id="reconocimiento-container" class="mt-2">
+                                <!-- Este bloque sólo aparece si NO hay reconocimiento -->
+                                <div id="reconocimiento-upload" class="d-none">
+                                    <label for="reconocimiento">Sube su diploma:</label>
+                                    <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control" form="formGuardarPedido"/>
+                                </div>
+
+                                <!-- Este bloque sólo aparece si YA hay reconocimiento -->
+                                <div id="reconocimiento-message" class="alert alert-info d-none">
+                                    📄 Ya tiene un diploma cargado.
+                                </div>
+
+                                <!-- Este bloque es para membresía -->
+                                <div id="membership-container" class="mt-2">
+                                    <div id="membership-message" class="alert d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-2 my-auto">
                             <button class="btn btn-success btn-sm w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                 <i class="bi bi-plus-circle"></i> Agregar
@@ -35,7 +56,7 @@ Cosmica
                                 <div class="card card-body sidebar mt-3" style="border: solid 0px;">
                                     <div class="row">
 
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-5">
                                             <label for="name">Nombre *</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
@@ -45,7 +66,7 @@ Cosmica
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-3">
                                             <label for="name">Telefono *</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
@@ -55,7 +76,7 @@ Cosmica
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-12">
+                                        <div class="form-group col-4">
                                             <label for="reconocimiento">Sube su diploma:</label>
                                             <input type="file" name="reconocimiento_new" id="reconocimiento_new" accept="image/*,application/pdf" class="form-control" form="formGuardarPedido"/>
                                         </div>
@@ -67,23 +88,7 @@ Cosmica
 
                     </div>
 
-                    <div id="reconocimiento-container" class="mt-2">
-                        <!-- Este bloque sólo aparece si NO hay reconocimiento -->
-                        <div id="reconocimiento-upload" class="d-none">
-                            <label for="reconocimiento">Sube su diploma:</label>
-                            <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control" form="formGuardarPedido"/>
-                        </div>
 
-                        <!-- Este bloque sólo aparece si YA hay reconocimiento -->
-                        <div id="reconocimiento-message" class="alert alert-info d-none">
-                            📄 Ya tiene un diploma cargado.
-                        </div>
-
-                        <!-- Este bloque es para membresía -->
-                        <div id="membership-container" class="mt-2">
-                            <div id="membership-message" class="alert d-none"></div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-12">
@@ -196,18 +201,18 @@ Cosmica
         });
 
         // Usa delegación:
-        $(document).on('input', '#codigo_postal', function () {
+        $(document).on('input', '#postcode', function () {
             const cp = $(this).val();
             if (cp.length !== 5) return;
             // usa la ruta nombrada en lugar de escribir “/buscar-cp” a mano:
             const url = '{{ route("buscarCP") }}?codigo_postal=' + encodeURIComponent(cp);
             $.get(url)
             .done(function (data) {
-                const $colonia = $('#colonia').empty();
+                const $colonia = $('#country').empty();
                 data.colonias.forEach(c => $colonia.append(`<option>${c}</option>`));
-                $('#ciudad').val(data.ciudad);
-                $('#estado').val(data.estado);
-                $('#municipio').val(data.municipio);
+                $('#city').val(data.ciudad);
+                $('#state').val(data.estado);
+                $('#alcaldia').val(data.municipio);
             })
             .fail(function () {
                 Swal.fire('Oops','Código postal no encontrado','error');
