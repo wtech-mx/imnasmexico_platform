@@ -573,7 +573,7 @@
                 <div class="col-6 text-start border">
                     <p class="uppercase lista" style="margin-left: 90px;">
                         <strong class="lista_strong"> Nombre: </strong>{!! $nombre !!} <br>
-                        <strong class="lista_strong"> curp:</strong> {{$curp}} <br>
+                        <strong class="lista_strong"> {{$idocurp}}:</strong> {{$curp}} <br>
                         <strong class="lista_strong"> carrera:</strong>  {{ ucwords(strtolower($curso)) }} <br>
                         <strong class="lista_strong"> nacionalidad:</strong> mexicana <br>
                         <strong class="lista_strong"> vigencia:</strong> permanente <br>
