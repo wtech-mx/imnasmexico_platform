@@ -376,6 +376,9 @@ class CotizadorController extends Controller
                 ->orWhere(function($q2) {
                     $q2->where('subcategoria', 'Kit')
                         ->whereNull('estatus');
+                })
+                ->orWhere(function($q3) {
+                    $q3->where('subcategoria', 'Tiendita');
                 });
             })
             // A continuación tu búsqueda por nombre…
