@@ -586,7 +586,14 @@
             <p class="nombre_reverso">
                 <strong class="text-dark"> NOMBRE: </strong>{!! $nombrePersona !!} <br>
                 <strong class="text-dark"> {{ $idocurp ?? 'CURP'}}:</strong> {{ $curp }} <br>
-                <strong class="text-dark"> NACIONALIDAD:</strong> Mexicana <br>
+                <strong class="text-dark"> NACIONALIDAD:</strong>
+                @if($folio == 'EFDFFASM-20172')
+                    Guatemalteca
+                @else
+                    Mexicana
+                @endif
+
+                <br>
                 <strong class="text-dark"> VIGENCIA: </strong>Permanente <br>
                 <strong class="text-dark"> CARRERA: </strong>{!! $nombreCurso !!} <br>
             </p>

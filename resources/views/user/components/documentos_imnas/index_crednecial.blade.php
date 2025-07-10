@@ -425,7 +425,13 @@
         </div>
 
         <div class="container_nacionalidad">
-            <h4 class="nacionalidad">Mexicana</h4>
+            <h4 class="nacionalidad">
+                @if($folio == 'EFDFFASM-20172')
+                    Guatemalteca
+                @else
+                    Mexicana
+                @endif
+            </h4>
         </div>
 
         @php
@@ -447,8 +453,6 @@
         <div class="container_apellidoMaterno">
             <h4 class="nombre">{{$apellidoMaterno}}</h4>
         </div>
-
-
 
         <div class="qr_container">
             @php
