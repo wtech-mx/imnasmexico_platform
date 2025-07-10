@@ -24,7 +24,11 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <h2 class="mb-3">Cotizaciones Del Mes Cosmica</h2>
+                            <h2 class="mb-3">Cotizaciones Del Mes Cosmica <br>
+                                <a class="btn btn-sm btn-dark" href="{{ route('index_cosmica.cotizador') }}" style="background: #322338; color: #ffff; font-size: 20px;">
+                                    <i class="fa fa-fw fa-edit"></i> prb
+                                </a>
+                                </h2>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?

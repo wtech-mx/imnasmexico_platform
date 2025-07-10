@@ -19,3 +19,6 @@
     <a class="btn btn-sm btn-dark" href="{{ route('cotizacion_cosmica.link_pago', ['id' => $nota->id]) }}">
         <i class="fa fa-fw fa-share"></i>
     </a>
+    <a class="btn btn-sm btn-danger" href="{{ route('edit_cosmica.cotizador', ['id' => $nota->id]) }}">
+        pruebas ignorar
+    </a>
