@@ -922,10 +922,10 @@ class CotizadorController extends Controller
      * @param  int|null  $userId
      * @return \App\Models\User
      */
-    protected function syncClient(Request $request, $userId = null)
+    protected function syncClient(Request $request)
     {
         // Si no viene ID, lo creamos
-        if (empty($userId)) {
+        if ($request->id_usuario == NULL) {
             $code = Str::random(8);
             $payer = new User();
             $payer->name       = $request->get('name');
@@ -957,7 +957,7 @@ class CotizadorController extends Controller
         }
         // Si viene ID, lo actualizamos
         else {
-            $payer = User::findOrFail($userId);
+            $payer = User::findOrFail($request->id_usuario );
             $payer->postcode   = $request->get('postcode');
             $payer->state      = $request->get('state');
             $payer->city       = $request->get('city');
