@@ -332,7 +332,7 @@
                 </tr>
             @endif
 
-            @if ($nota->envio == 'Si')
+            @if ($nota->envio_cost > '0')
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
@@ -340,18 +340,18 @@
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
-                <td>${{$nota->dinero_recibido}}</td>
+                <td>${{$nota->envio_cost}}</td>
                 </tr>
             @endif
-            @if ($nota->factura == '1')
+            @if ($nota->iva_cost > '0')
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                <td style="text-align: right"><b>IVA por Factura</b> </td>
-                <td>16%</td>
+                <td style="text-align: right"><b>IVA 16%</b> </td>
+                <td>${{$nota->iva_cost}}</td>
                 </tr>
             @endif
             <tr style="background-color: #ffffff;">
@@ -377,14 +377,16 @@
         <b for="">Monto:</b> ${{ $nota->monto2 }} <br>
     @endif
 
-    @if ($nota->factura == '1')
-        <h2>Datos de Factura</h2>
-        <b for="">Razon Social:</b> {{ $nota->razon_social }} <br>
-        <b for="">RFC:</b> {{ $nota->rfc }} <br>
-        <b for="">CFDI:</b> {{ $nota->cfdi }} <br>
-        <b for="">Correo Factura:</b> {{ $nota->correo_fac }} <br>
-        <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
-        <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
+    @if ($nota->envio_cost > '0')
+        <h2>Datos de Direccion</h2>
+        <b for="">Dirección:</b> {{ $nota->User->direccion }}<br>
+        <b for="">CP:</b> {{ $nota->User->postcode }} <br>
+        <b for="">Colonia:</b> {{ $nota->User->country }} <br>
+        <b for="">Ciudad:</b> {{ $nota->User->city }} <br>
+        <b for="">Estado:</b> {{ $nota->User->state }} <br>
+        <b for="">Municipio / Alcaldía:</b> {{ $nota->User->alcaldia }} <br>
+        <b for="">Referencia:</b> {{ $nota->User->referencia }} <br>
+
     @endif
 
         <table style="width:100%" style="background: #322338;margin-top:6rem;">
