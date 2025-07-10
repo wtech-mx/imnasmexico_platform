@@ -16,103 +16,12 @@ Edit Cotizacion {{$cotizacion->id}}
 
                 @include('cotizador.barr_superior')
 
-                <div class="col-12">
-                    <h5 class="p-2">Cliente</h5>
+                @include('cotizador.componente_cliente')
 
-                    <input type="text" id="usuarioInput" class="form-control" placeholder="{{$cotizacion->User->name}}" disabled/>
+                @include('cotizador.component_categorias')
 
-                    <div id="reconocimiento-container" class="mt-2">
-                        <!-- Este bloque sólo aparece si NO hay reconocimiento -->
-                        <div id="reconocimiento-upload" class="d-none">
-                            <label for="reconocimiento">Sube su diploma:</label>
-                            <input type="file" name="reconocimiento" id="reconocimiento" accept="image/*,application/pdf" class="form-control" form="formGuardarPedido"/>
-                        </div>
+                @include('cotizador.compnent_buscador_productos')
 
-                        <!-- Este bloque sólo aparece si YA hay reconocimiento -->
-                        <div id="reconocimiento-message" class="alert alert-info d-none">
-                            📄 Ya tiene un diploma cargado.
-                        </div>
-
-                        <!-- Este bloque es para membresía -->
-                        <div id="membership-container" class="mt-2">
-                            <div id="membership-message" class="alert d-none"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <h5 class="p-2">Categorías</h5>
-
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs mb-3" id="categoriaTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="corp-tab" data-bs-toggle="tab" data-bs-target="#corp" type="button" role="tab" aria-controls="corp" aria-selected="true">
-                                Corporales
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab" aria-controls="facial" aria-selected="false">
-                                Faciales
-                            </button>
-                        </li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <!-- Corporales -->
-                        <div class="tab-pane fade show active" id="corp" role="tabpanel" aria-labelledby="corp-tab">
-                            <div id="loop_categorias_corp" class="owl-carousel">
-                                @foreach ($categoriasCorporal as $categoria)
-                                    <div class="item">
-                                        <div class="product_category" onclick="cargarProductosPorCategoria('{{ $categoria->nombre }}')">
-                                            <h6 class="mt-3 mb-1 tittle_category">Corporal</h6>
-                                            <img src="{{ asset('cosmika\inicio\lineas/'.$categoria->nombre.'.png') }}" alt="Producto">
-                                            <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
-                                            <div class="fw-bold mt-1">
-                                                <p class="text_items" style="margin: 0;">
-                                                    {{ $categoria->productos_count }} Artículos
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Faciales -->
-                        <div class="tab-pane fade" id="facial" role="tabpanel" aria-labelledby="facial-tab">
-                            <div id="loop_categorias_facial" class="owl-carousel">
-                                @foreach ($categoriasFacial as $categoria)
-                                    <div class="item">
-                                        <div class="product_category" onclick="cargarProductosPorCategoria('{{ $categoria->nombre }}')">
-                                            <h6 class="mt-3 mb-1 tittle_category">Facial</h6>
-                                            <img src="{{ asset('cosmika\inicio\lineas/'.$categoria->nombre.'.png') }}" alt="Producto">
-                                            <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
-                                            <div class="fw-bold mt-1">
-                                                <p class="text_items" style="margin: 0;">
-                                                    {{ $categoria->productos_count }} Artículos
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <form class="d-flex mt-3 mb-3" id="formBuscarProductos">
-                        <input id="inputBuscarProductos" class="form-control me-2" type="search" placeholder="Buscar producto..." aria-label="Search">
-                    </form>
-
-                </div>
-
-                <!-- Repetir este div para cada producto -->
-                    <div class="" id="contenedor_productos">
-                        <!-- Aquí se insertan los productos dinámicamente -->
-                    </div>
-                <!-- ... más productos -->
             </div>
 
         </div>
