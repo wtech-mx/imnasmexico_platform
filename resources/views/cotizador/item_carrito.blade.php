@@ -25,11 +25,11 @@
                 <small class="text-muted precio-unitario" style="font-size: 11px;" data-precio="{{ $producto['precio'] }}">${{ number_format($producto['precio'], 2) }}</small>
             </div>
             <div class="d-flex justify-content-end align-items-center mt-2 btns_flotantes">
-                <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, -1)">-</button>
+                <button type="button" class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, -1)">-</button>
                 <span class="mx-2 cantidad">{{ $producto['cantidad'] }}</span>
-                <button class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, 1)">+</button>
+                <button type="button" class="btn btn-counter btn-sm" onclick="modificarCantidad({{ $producto['id'] }}, 1)">+</button>
 
-                <button class="btn btn-sm ms-2" onclick="eliminarDelCarrito({{ $producto['id'] }})">
+                <button type="button" class="btn btn-sm ms-2" onclick="eliminarDelCarrito({{ $producto['id'] }})">
                     <i class="bi bi-trash3"></i>
                 </button>
             </div>
