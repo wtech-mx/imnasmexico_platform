@@ -958,6 +958,16 @@
                                     <span class="sidenav-normal">Consulta Orden por ClaveRastreo</span>
                                 </a>
 
+                                <a href="{{ route('stp.test_webhook') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Cambio de estado</span>
+                                </a>
+
+                                <a href="{{ route('stp.test_abono') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Enviar notificación SendAbono</span>
+                                </a>
+
 
                             </li>
                         </ul>
