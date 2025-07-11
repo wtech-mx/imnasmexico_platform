@@ -332,7 +332,7 @@
                 </tr>
             @endif
 
-            @if ($nota->envio_cost > '0')
+            @if ($nota->envio == 'Si')
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
@@ -340,7 +340,16 @@
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
-                <td>${{$nota->envio_cost}}</td>
+                <td>$
+                    @if ($nota->envio_cost == NULL)
+                        {{$nota->dinero_recibido}}
+                    @else
+                        {{$nota->envio_cost}}
+                    @endif
+
+
+
+                </td>
                 </tr>
             @endif
             @if ($nota->iva_cost > '0')
