@@ -600,7 +600,7 @@ class StpController extends Controller
                 'tipoCuentaBeneficiario'  => 'required|digits:2',
                 'cuentaBeneficiario'      => 'required|string|max:20',
                 'nombreBeneficiario2'     => 'nullable|string|max:40',
-                'tipoCuentaBeneficiario2' => 'nullable|digits:2',
+                'tipoCuentaBeneficiario2' => 'nullable',
                 'cuentaBeneficiario2'     => 'nullable|string|max:18',
                 'rfcCurpBeneficiario'     => 'required|string|max:18',
                 'conceptoPago'            => 'required|string|max:40',
@@ -616,6 +616,7 @@ class StpController extends Controller
                 return response()->json([
                     'mensaje' => 'devolver',
                     'id'      => $request->input('id'),
+                    'errores' => $validator->errors()->toArray(), // opcional, solo para pruebas
                 ], 400);
             }
 
