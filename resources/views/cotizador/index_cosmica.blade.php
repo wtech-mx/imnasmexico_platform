@@ -46,6 +46,25 @@ Cosmica
 @section('js_custom')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+        const inputTelefono = document.getElementById('telefono');
+
+        if (inputTelefono) {
+            const limpiarTelefono = (valor) => {
+                return valor.replace(/\D/g, '').slice(0, 10); // solo 10 dígitos
+            };
+
+            inputTelefono.addEventListener('input', function () {
+                this.value = limpiarTelefono(this.value);
+            });
+
+            inputTelefono.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const textoPegado = (e.clipboardData || window.clipboardData).getData('text');
+                this.value = limpiarTelefono(textoPegado);
+            });
+        }
+
         const chkEnv = document.getElementById('chkEnvio');
         const envFields = document.getElementById('envioFields');
 
