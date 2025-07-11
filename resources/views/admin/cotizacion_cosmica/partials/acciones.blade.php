@@ -11,14 +11,15 @@
     $total = 0;$totalCantidad = 0;
 @endphp
 @can('nota-productos-editar')
-    <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+    {{-- <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+        <i class="fa fa-fw fa-edit"></i>
+    </a> --}}
+
+    <a class="btn btn-sm btn-warning" href="{{ route('edit_cosmica.cotizador', $nota->id) }}">
         <i class="fa fa-fw fa-edit"></i>
     </a>
 @endcan
 
     <a class="btn btn-sm btn-dark" href="{{ route('cotizacion_cosmica.link_pago', ['id' => $nota->id]) }}">
         <i class="fa fa-fw fa-share"></i>
-    </a>
-    <a class="btn btn-sm btn-danger" href="{{ route('edit_cosmica.cotizador', ['id' => $nota->id]) }}">
-        pruebas ignorar
     </a>
