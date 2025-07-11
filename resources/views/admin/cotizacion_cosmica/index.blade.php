@@ -25,9 +25,6 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <h2 class="mb-3">Cotizaciones Del Mes Cosmica <br>
-                                <a class="btn btn-sm btn-dark" href="{{ route('index_cosmica.cotizador') }}" style="background: #322338; color: #ffff; font-size: 20px;">
-                                    <i class="fa fa-fw fa-edit"></i> prb
-                                </a>
                                 </h2>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
@@ -35,7 +32,11 @@
                             </a>
 
                             @can('nota-productos-crear')
-                                <a class="btn btn-sm btn-success" href="{{ route('cotizacion_cosmica.create') }}" style="background: #322338; color: #ffff; font-size: 20px;">
+                                {{-- <a class="btn btn-sm btn-success" href="{{ route('cotizacion_cosmica.create') }}" style="background: #322338; color: #ffff; font-size: 20px;">
+                                    <i class="fa fa-fw fa-edit"></i> Crear
+                                </a> --}}
+
+                                <a class="btn btn-sm btn-success" href="{{ route('index_cosmica.cotizador') }}" style="background: #322338; color: #ffff; font-size: 20px;">
                                     <i class="fa fa-fw fa-edit"></i> Crear
                                 </a>
                             @endcan
