@@ -468,46 +468,46 @@ class StpController extends Controller
 
         // 2) Montar el arreglo DE 28 elementos en este caso (hasta referenciaNumerica),
         //    reservando vacío para todos los opcionales intermedios:
-        $campos = [
-        /*  1 */ $f['institucionContraparte'],
-        /*  2 */ $f['empresa'],
-        /*  3 */ '',                            // fechaOperacion (vacío)
-        /*  4 */ '',                            // folioOrigen   (vacío)
-        /*  5 */ $f['claveRastreo'],
-        /*  6 */ $f['institucionOperante'],
-        /*  7 */ number_format($f['monto'],2,'.',''),
-        /*  8 */ $f['tipoPago'],
-        /*  9 */ $f['tipoCuentaOrdenante'],
-        /* 10 */ $f['nombreOrdenante'],
-        /* 11 */ $f['cuentaOrdenante'],
-        /* 12 */ $f['rfcCurpOrdenante'],
-        /* 13 */ $f['tipoCuentaBeneficiario'],
-        /* 14 */ $f['nombreBeneficiario'],
-        /* 15 */ $f['cuentaBeneficiario'],
-        /* 16 */ $f['rfcCurpBeneficiario'],
-        /* 17 */ '',   // emailBeneficiario
-        /* 18 */ '',   // tipoCuentaBeneficiario2
-        /* 19 */ '',   // nombreBeneficiario2
-        /* 20 */ '',   // cuentaBeneficiario2
-        /* 21 */ '',   // rfcCurpBeneficiario2
-        /* 22 */ $f['conceptoPago'],
-        /* 23 */ '',   // conceptoPago2
-        /* 24 */ '',   // claveCatUsuario1
-        /* 25 */ '',   // claveCatUsuario2
-        /* 26 */ '',   // clavePago
-        /* 27 */ '',   // referenciaCobranza
-        /* 28 */ $f['referenciaNumerica'],
-        // ahora 6 posiciones vacías más para llegar a 34
-        /* 29 */ '',
-        /* 30 */ '',
-        /* 31 */ '',
-        /* 32 */ '',
-        /* 33 */ '',
-        /* 34 */ '',
-        ];
+    $campos = [
+    /*  1 */ $f['institucionContraparte'],
+    /*  2 */ $f['empresa'],
+    /*  3 */ '',                            // fechaOperacion (vacío)
+    /*  4 */ '',                            // folioOrigen   (vacío)
+    /*  5 */ $f['claveRastreo'],
+    /*  6 */ $f['institucionOperante'],
+    /*  7 */ number_format($f['monto'],2,'.',''),
+    /*  8 */ $f['tipoPago'],
+    /*  9 */ $f['tipoCuentaOrdenante'],
+    /* 10 */ $f['nombreOrdenante'],
+    /* 11 */ $f['cuentaOrdenante'],
+    /* 12 */ $f['rfcCurpOrdenante'],
+    /* 13 */ $f['tipoCuentaBeneficiario'],
+    /* 14 */ $f['nombreBeneficiario'],
+    /* 15 */ $f['cuentaBeneficiario'],
+    /* 16 */ $f['rfcCurpBeneficiario'],
+    /* 17 */ '',   // emailBeneficiario
+    /* 18 */ '',   // tipoCuentaBeneficiario2
+    /* 19 */ '',   // nombreBeneficiario2
+    /* 20 */ '',   // cuentaBeneficiario2
+    /* 21 */ '',   // rfcCurpBeneficiario2
+    /* 22 */ $f['conceptoPago'],
+    /* 23 */ '',   // conceptoPago2
+    /* 24 */ '',   // claveCatUsuario1
+    /* 25 */ '',   // claveCatUsuario2
+    /* 26 */ '',   // clavePago
+    /* 27 */ '',   // referenciaCobranza
+    /* 28 */ $f['referenciaNumerica'],
+    // ahora 6 posiciones vacías más para llegar a 34
+    /* 29 */ '',
+    /* 30 */ '',
+    /* 31 */ '',
+    /* 32 */ '',
+    /* 33 */ '',
+    /* 34 */ '',
+    ];
 
-        // 3) Armas la cadena con doble pipe:
-        $cadena = '||'.implode('|', $campos).'||';
+    // 3) Armas la cadena con doble pipe:
+    $cadena = '||'.implode('|', $campos).'||';
 
         // 3) La firmamos igual que antes
         $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
@@ -554,50 +554,37 @@ class StpController extends Controller
             'claveRastreo'     => 'required|string|max:30',
             'estado'           => 'required|string|in:LQ,CN,D',
             'tsLiquidacion'    => 'nullable',
-            'causaDevolucion'  => 'nullable|string|max:255',
         ]);
 
-        // Cadena original estilo STP
-        $campos = [
-            $data['id'],
-            $data['empresa'],
-            $data['claveRastreo'],
-            $data['estado'],
-            $data['tsLiquidacion'],
-            $data['causaDevolucion'] ?? '',
-        ];
-        $cadena = '||'.implode('|', $campos).'||';
+        Log::info('STP Cambio de Estado recibido:', $data);
 
-        // Firma
-        $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
-        $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
-        openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
-        $firma = base64_encode($bin);
+        // Si es devolución, devolvemos 400 con el JSON que piden
+        // if ($data['estado'] === 'D') {
+        //     return response()->json([
+        //         'mensaje' => 'devolver',
+        //         'id'      => '2',
+        //     ], 400);
+        // }
 
-        $payload = array_merge($data, ['firma' => $firma]);
-
-        // Simula la respuesta que daría tu API
-        $resp = response()->json([
+        // En cualquier otro caso, 200 OK con el payload
+        return response()->json([
             'success' => true,
-            'payload' => $payload,
+            'payload' => $data,
         ], 200);
-
-        return view('stp.webhook_form', compact('cadena', 'firma', 'payload', 'resp'));
     }
-
 
     public function webhookAbono(Request $request)
     {
         try {
-            // Si conceptoPago = 'devolucion', respondemos 400 inmediatamente
-            if (strtolower($request->input('conceptoPago', '')) === 'devolucion') {
+            // 0) Si el conceptoPago es "devolucion", devolvemos inmediatamente 400
+            if (strtolower($request->input('conceptoPago','')) === 'devolucion') {
                 return response()->json([
                     'mensaje' => 'devolver',
-                    'id' => '2',
+                    'id'      => '2',
                 ], 400);
             }
 
-            // Validación
+            // 1) Validar los campos
             $validator = Validator::make($request->all(), [
                 'id'                      => 'required|integer',
                 'fechaOperacion'          => 'required|digits:8',
@@ -625,45 +612,33 @@ class StpController extends Controller
             ]);
 
             if ($validator->fails()) {
+                // Si hay errores de validación, devolvemos también el "devolver"
                 return response()->json([
                     'mensaje' => 'devolver',
-                    'id' => $request->input('id'),
+                    'id'      => $request->input('id'),
                 ], 400);
             }
 
+            // 2) Obtener datos validados
             $data = $validator->validated();
 
-            // Crear cadena original
-            $camposCadena = [
-                $data['id'],
-                $data['empresa'],
-                $data['claveRastreo'],
-                $data['monto'],
-                $data['fechaOperacion'],
-                $data['conceptoPago'],
-                $data['tsLiquidacion'],
-            ];
-            $cadena = '||' . implode('|', $camposCadena) . '||';
+            // 3) Procesar el abono
+            Log::info('STP SendAbono recibido:', $data);
 
-            // Firma con archivo PEM
-            $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
-            $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
-            openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
-            $firma = base64_encode($bin);
-
-            $payload = array_merge($data, ['firma' => $firma]);
-
-            Log::info('STP SendAbono recibido:', $payload);
-
-            return view('stp.send_abono_form', compact('cadena', 'firma', 'payload'))
-                ->with('resp', response()->json(['success' => true, 'payload' => $payload], 200));
+            // 4) Responder rápido con 200 OK
+            return response()->json([
+                'success' => true,
+                'payload' => $data,
+            ], 200);
 
         } catch (\Exception $e) {
-            Log::error('Error en webhookAbono: ' . $e->getMessage());
-            return back()->withErrors('Ocurrió un error inesperado: ' . $e->getMessage());
+            Log::error('Error en webhookAbono: '.$e->getMessage());
+            return response()->json([
+                'mensaje' => 'devolver',
+                'id'      => $request->input('id'),
+            ], 400);
         }
     }
-
      public function showRetornaForm()
     {
         return view('stp.retorna_form');
