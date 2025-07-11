@@ -968,6 +968,10 @@
                                     <span class="sidenav-normal">Enviar notificación SendAbono</span>
                                 </a>
 
+                                <a href="{{ route('stp.registra.form') }}" class="nav-link">
+                                    <span class="sidenav-mini-icon"></span>
+                                    <span class="sidenav-normal">Registra Orden SPEI</span>
+                                </a>
 
                             </li>
                         </ul>
