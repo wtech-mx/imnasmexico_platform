@@ -340,11 +340,11 @@
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
-                <td>$
+                <td>
                     @if ($nota->envio_cost == NULL)
-                        {{$nota->dinero_recibido}}
+                        ${{$nota->dinero_recibido}}
                     @else
-                        {{$nota->envio_cost}}
+                        ${{$nota->envio_cost}}
                     @endif
 
 
