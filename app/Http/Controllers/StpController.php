@@ -575,14 +575,14 @@ class StpController extends Controller
 
     public function webhookAbono(Request $request)
     {
-        try {
-            // 0) Si el conceptoPago es "devolucion", devolvemos inmediatamente 400
-            if (strtolower($request->input('conceptoPago','')) === 'devolucion') {
-                return response()->json([
-                    'mensaje' => 'devolver',
-                    'id'      => '2',
-                ], 400);
-            }
+        // try {
+        //     // 0) Si el conceptoPago es "devolucion", devolvemos inmediatamente 400
+        //     if (strtolower($request->input('conceptoPago','')) === 'devolucion') {
+        //         return response()->json([
+        //             'mensaje' => 'devolver',
+        //             'id'      => '2',
+        //         ], 400);
+        //     }
 
             // 1) Validar los campos
             $validator = Validator::make($request->all(), [
@@ -631,13 +631,13 @@ class StpController extends Controller
                 'payload' => $data,
             ], 200);
 
-        } catch (\Exception $e) {
-            Log::error('Error en webhookAbono: '.$e->getMessage());
-            return response()->json([
-                'mensaje' => 'devolver',
-                'id'      => $request->input('id'),
-            ], 400);
-        }
+        // } catch (\Exception $e) {
+        //     Log::error('Error en webhookAbono: '.$e->getMessage());
+        //     return response()->json([
+        //         'mensaje' => 'devolver',
+        //         'id'      => $request->input('id'),
+        //     ], 400);
+        // }
     }
      public function showRetornaForm()
     {
