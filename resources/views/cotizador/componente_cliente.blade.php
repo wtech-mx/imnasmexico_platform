@@ -44,7 +44,8 @@
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="25px">
                                                 </span>
-                                                <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" value="{{old('name')}}" form="formGuardarPedido">
+                                                {{-- <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" value="{{old('name')}}" form="formGuardarPedido"> --}}
+                                                <input type="text" id="name" name="name" class="form-control" placeholder="Nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios" value="{{ old('name') }}" form="formGuardarPedido">
                                             </div>
                                         </div>
 
@@ -54,7 +55,8 @@
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="25px">
                                                 </span>
-                                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}" form="formGuardarPedido">
+                                                {{-- <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}" form="formGuardarPedido"> --}}
+                                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" pattern="[0-9]{10}" inputmode="numeric" maxlength="10" minlength="10" title="Debe contener exactamente 10 dígitos numéricos" value="{{ old('telefono') }}" form="formGuardarPedido">
                                             </div>
                                         </div>
 
@@ -72,3 +74,25 @@
 
 
                 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const inputTelefono = document.getElementById('telefono');
+    const inputNombre = document.getElementById('name');
+    console.log(inputTelefono);
+    if (inputTelefono) {
+        inputTelefono.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+
+    if (inputNombre) {
+        inputNombre.addEventListener('input', function () {
+            this.value = this.value.replace(/[0-9]/g, '');
+        });
+    }
+
+    // 🟡 Aquí continúa tu código actual de búsqueda, toast, etc...
+});
+
+
+</script>
