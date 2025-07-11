@@ -553,7 +553,7 @@ class StpController extends Controller
             'empresa'          => 'required|string|max:15',
             'claveRastreo'     => 'required|string|max:30',
             'estado'           => 'required|string|in:LQ,CN,D',
-            'tsLiquidacion'    => 'required|digits:13',
+            'tsLiquidacion'    => 'nullable',
             'causaDevolucion'  => 'nullable|string|max:255',
         ]);
 
