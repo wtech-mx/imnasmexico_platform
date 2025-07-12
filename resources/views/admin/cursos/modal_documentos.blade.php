@@ -311,10 +311,24 @@
                                                 </select>
                                             </div>
 
+                                            <div class="form-group col-6">
+                                                <label for="name">Tipo de identificacion *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <select name="idocurp" id="idocurp" class="form-select" >
+                                                            <option value="" selected>Seleciona opcion</option>
+                                                            <option value="CURP" >CURP</option>
+                                                            <option value="ID No.">ID No.</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             @if ($order->User->Documentos)
                                                 @if ($order->User->Documentos->curp !== null)
 
-                                                <div class="form-group col-12 curp_content">
+                                                <div class="form-group col-6 curp_content">
                                                     <label for="name">CURP(ss)*:</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">

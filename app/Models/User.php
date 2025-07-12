@@ -35,6 +35,7 @@ class User extends Authenticatable
         'colonia',
         'habilitar_btn',
         'clave_clasificacion',
+        'idocurp',
     ];
 
     public function RegistroImnasEscuela()

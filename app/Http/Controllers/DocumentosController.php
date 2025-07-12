@@ -505,6 +505,7 @@ class DocumentosController extends Controller
         $tipo = $request->get('tipo');
         $folio = $request->get('folio');
         $curp = $request->get('curp');
+        $idocurp = $request->get('idocurp');
 
         $horas_default = "24";
         $duracion_hrs = $horas_default;
@@ -581,8 +582,9 @@ class DocumentosController extends Controller
         $id_usuario = $request->get('id_usuario');
         $user = User::find($id_usuario);
         $user->curp_escrito = $request->get('curp');
-        $user->update();
+        $user->idocurp = $request->get('idocurp');
 
+        $user->update();
         $destinatario = [ $email_user  , $email_diplomas];
 
         $tipo_documentos = Tipodocumentos::find($tipo);
@@ -663,7 +665,7 @@ class DocumentosController extends Controller
                 $ticket->folio = $request->get('folio');
                 $ticket->update();
 
-                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nacionalidad'));
                 // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
                 $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -682,7 +684,7 @@ class DocumentosController extends Controller
                 $ancho_puntos = $ancho_cm * 28.35;
                 $alto_puntos = $alto_cm * 28.35;
 
-                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('clave_rfc','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('clave_rfc','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nacionalidad'));
 
                 //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
                 $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
@@ -720,8 +722,7 @@ class DocumentosController extends Controller
 
                 $ancho_puntos = $ancho_cm * 28.35;
                 $alto_puntos = $alto_cm * 28.35;
-
-                $pdf = PDF::loadView('admin.pdf.credencial',compact('clave_rfc','tam_letra_esp_cred','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.credencial',compact('clave_rfc','tam_letra_esp_cred','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
                 $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
                 return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
@@ -938,7 +939,7 @@ class DocumentosController extends Controller
                     $ancho_puntos = $ancho_cm * 28.35;
                     $alto_puntos = $alto_cm * 28.35;
 
-                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('clave_rfc','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('clave_rfc','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nacionalidad'));
 
                     //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
                     $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
@@ -958,7 +959,7 @@ class DocumentosController extends Controller
                     $ticket->folio = $request->get('folio');
                     $ticket->update();
 
-                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nacionalidad'));
 
                     $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
 
@@ -1079,7 +1080,7 @@ class DocumentosController extends Controller
                     $ticket->folio = $request->get('folio');
                     $ticket->update();
 
-                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nacionalidad'));
                     // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
                     $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -1098,7 +1099,7 @@ class DocumentosController extends Controller
                     $ancho_puntos = $ancho_cm * 28.35;
                     $alto_puntos = $alto_cm * 28.35;
 
-                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('clave_rfc','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('clave_rfc','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nacionalidad'));
 
                     //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
                     $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
@@ -1137,7 +1138,7 @@ class DocumentosController extends Controller
                     $ancho_puntos = $ancho_cm * 28.35;
                     $alto_puntos = $alto_cm * 28.35;
 
-                    $pdf = PDF::loadView('admin.pdf.credencial',compact('clave_rfc','tam_letra_esp_cred','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+                    $pdf = PDF::loadView('admin.pdf.credencial',compact('clave_rfc','tam_letra_esp_cred','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','idocurp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
                     $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
                     return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
