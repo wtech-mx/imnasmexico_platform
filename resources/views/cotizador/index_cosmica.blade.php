@@ -534,7 +534,7 @@ Cosmica
         ivaDisplay.textContent = `$${iva.toFixed(2)}`;
     }
 
-    document.getElementById('formGuardarPedido').addEventListener('submit', function(e){
+    document.getElementById('formGuardarPedido').addEventListener('submit', function(e) {
         e.preventDefault();
         const form = this;
         const data = new FormData(form);
@@ -543,27 +543,33 @@ Cosmica
             method: form.method,
             body: data,
             headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest'
             }
         })
         .then(res => res.json())
         .then(json => {
             if (json.success) {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Pedido guardado!',
-                text: json.message,
-                showCancelButton: true,
-                confirmButtonText: 'Descargar PDF',
-                cancelButtonText: 'Seguir cotizando'
-            }).then(result => {
-                if (result.isConfirmed) {
-                    window.open(`/cosmica/cotizacion/imprimir/${json.order_id}`, '_blank');
-                    location.reload();
-                } else {
-                    location.reload();
-                }
-            });
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Pedido guardado!',
+                    text: json.message,
+                    showCancelButton: true,
+                    showDenyButton: true,
+                    confirmButtonText: 'Descargar PDF',
+                    cancelButtonText: 'Seguir cotizando',
+                    denyButtonText: 'Ver todas las cotizaciones',
+                    preDeny: () => {
+                        window.open("{{ route('cotizacion_cosmica.index') }}", '_blank');
+                        return false; // Evita que se cierre la alerta
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        window.open(`/cosmica/cotizacion/imprimir/${json.order_id}`, '_blank');
+                        location.reload();
+                    } else if (result.isDismissed) {
+                        location.reload();
+                    }
+                });
             }
         })
         .catch(err => {
