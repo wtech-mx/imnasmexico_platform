@@ -559,12 +559,12 @@ class StpController extends Controller
         Log::info('STP Cambio de Estado recibido:', $data);
 
         // Si es devolución, devolvemos 400 con el JSON que piden
-        // if ($data['estado'] === 'D') {
-        //     return response()->json([
-        //         'mensaje' => 'devolver',
-        //         'id'      => '2',
-        //     ], 400);
-        // }
+        if ($data['estado'] === 'D') {
+            return response()->json([
+                'mensaje' => 'devolver',
+                'id'      => '2',
+            ], 400);
+        }
 
         // En cualquier otro caso, 200 OK con el payload
         return response()->json([
@@ -583,7 +583,6 @@ class StpController extends Controller
                     'id'      => '2',
                 ], 400);
             }
-
             // 1) Validar los campos
             $validator = Validator::make($request->all(), [
                 'id'                      => 'required|integer',
