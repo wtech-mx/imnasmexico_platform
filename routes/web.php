@@ -409,6 +409,8 @@ Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroI
 
 
 Route::group(['middleware' => ['auth']], function() {
+    // =============== R H ===============================
+    Route::get('/panel/rh', [App\Http\Controllers\RhController::class, 'index'])->name('panel.index');
 
     Route::get  ('/stp/firma', [StpController::class, 'showForm'])->name('stp.firma.form');
     Route::post ('/stp/firma', [StpController::class, 'generateSignature'])->name('stp.firma.generate');
