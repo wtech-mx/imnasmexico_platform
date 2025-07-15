@@ -11,7 +11,9 @@
   $singles = $items->where('kit', 0);
 @endphp
 <div class="sidebar">
-                <h5 class="mb-2 mt-1 text-center">Cotiza tu pedido</h5>
+                <h5 class="mb-2 mt-1 text-center">Cotiza tu pedido
+                    Folio #{{ $cotizacion->id }}
+                </h5>
 
                 <!-- Lista de productos -->
                 <ul class="list-group mb-3" id="contenedor_carrito" style="max-height:600px;overflow-y:auto;">

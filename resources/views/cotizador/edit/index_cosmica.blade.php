@@ -14,7 +14,33 @@ Edit Cotizacion {{$cotizacion->id}}
 
             <div class="row ">
 
-                @include('cotizador.barr_superior')
+                <div class="col-12 mb-3">
+                    <div class="d-flex justify-content-start mt-3 mb-1 product-navbar my-auto">
+
+                        @php
+                            setlocale(LC_TIME, 'es_MX.UTF-8');
+                            $fecha = \Carbon\Carbon::now()->translatedFormat('l d F Y');
+                        @endphp
+
+                        <p class="p-2 my-auto">
+                            <i class="bi bi-calendar3 p-2"></i>{{ ucfirst($fecha) }}
+                        </p>
+
+                        <p class="p-2 my-auto">
+                            <i class="bi bi-clock p-2"></i> <span id="hora-actual"></span>
+                        </p>
+
+                        <p class="my-auto">
+                            <a class="btn btn-sm btn-outline-dark" href="{{ route('index_cosmica.cotizador') }}">Comica</a>
+                            {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a> --}}
+                        </p>
+                        <p class="my-auto">
+                            {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a> --}}
+                            <strong style="margin-left:1rem"> Cliente :</strong> {{$cotizacion->User->name}} / {{$cotizacion->User->telefono}}
+                            <input type="hidden" id="usuarioInput" class="form-control" placeholder="{{$cotizacion->User->name}}" disabled/>
+                        </p>
+                    </div>
+                </div>
 
                 @include('cotizador.componente_cliente')
 
@@ -492,42 +518,48 @@ Edit Cotizacion {{$cotizacion->id}}
         document.getElementById('iva-final-input').value = iva.toFixed(2);
     }
 
-    document.getElementById('formGuardarPedido').addEventListener('submit', function(e){
-        e.preventDefault();
-        const form = this;
-        const data = new FormData(form);
+        document.getElementById('formGuardarPedido').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const data = new FormData(form);
 
-        fetch(form.action, {
-            method: form.method,
-            body: data,
-            headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(res => res.json())
-        .then(json => {
-            if (json.success) {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Pedido guardado!',
-                text: json.message,
-                showCancelButton: true,
-                confirmButtonText: 'Descargar PDF',
-                cancelButtonText: 'Seguir cotizando'
-            }).then(result => {
-                if (result.isConfirmed) {
-                    window.open(`/cosmica/cotizacion/imprimir/${json.order_id}`, '_blank');
-                    location.reload();
-                } else {
-                    location.reload();
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Pedido guardado!',
+                        text: json.message,
+                        showCancelButton: true,
+                        showDenyButton: true,
+                        confirmButtonText: 'Descargar PDF',
+                        cancelButtonText: 'Seguir cotizando',
+                        denyButtonText: 'Ver todas las cotizaciones',
+                        preDeny: () => {
+                            window.open("{{ route('cotizacion_cosmica.index') }}", '_blank');
+                            return false; // Evita que se cierre la alerta
+                        }
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            window.open(`/cosmica/cotizacion/imprimir/${json.order_id}`, '_blank');
+                            location.reload();
+                        } else if (result.isDismissed) {
+                            location.reload();
+                        }
+                    });
+                }
+            })
+            .catch(err => {
+                Swal.fire('Error', 'No se pudo guardar el pedido.', 'error');
             });
-            }
-        })
-        .catch(err => {
-            Swal.fire('Error', 'No se pudo guardar el pedido.', 'error');
         });
-    });
 
         // 1.1. Inicializa carrito leyendo cada <li> existente
         document.querySelectorAll('#contenedor_carrito li[data-id]').forEach(li => {
