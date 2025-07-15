@@ -37,7 +37,7 @@ Edit Cotizacion {{$cotizacion->id}}
                         <p class="my-auto">
                             {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a> --}}
                             <strong style="margin-left:1rem"> Cliente :</strong> {{$cotizacion->User->name}} / {{$cotizacion->User->telefono}}
-                            <input type="hidden" id="usuarioInput" class="form-control" placeholder="{{$cotizacion->User->name}}" disabled/>
+                            {{-- <input type="hidden" id="usuarioInput" class="form-control" placeholder="{{$cotizacion->User->name}}" disabled/> --}}
                         </p>
                     </div>
                 </div>
