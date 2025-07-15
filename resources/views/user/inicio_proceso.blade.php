@@ -181,7 +181,7 @@
                         @csrf
 
                         <h3 class="text-center titulomin_alfa mb-3">Ingresa tu telefono con el que iniciaste tu proceso</h3>
-
+                        <input type="text" name="tipo" value="user" hidden>
                         <div class="input-group flex-nowrap mt-4">
                             <span class="input-group-text span_custom_login" ><i class="fas fa-phone-alt"></i></span>
                             <input class="form-control input_custom_login" type="number" id="username" name="username"  placeholder="Telefono" required>

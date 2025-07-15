@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TestResult;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Hash;
+use Illuminate\Support\Str;
 
 class TestController extends Controller
 {
@@ -29,5 +34,25 @@ class TestController extends Controller
 
     public function index_especializadoavanzado(){
         return view('user.test.espezializado.avanzado1');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'nivel'     => 'required|string',
+            'score'     => 'required|integer|min:0',
+            'passed'    => 'required|boolean',
+        ]);
+
+        // si tienes auth:
+        $data['user_id'] = Auth::check() ? Auth::id() : null;
+
+        $result = TestResult::create($data);
+
+        return response()->json([
+            'ok'      => true,
+            'message' => 'Resultado guardado',
+            'data'    => $result
+        ]);
     }
 }

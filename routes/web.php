@@ -158,6 +158,7 @@ Route::get('/test/cosmica/especializado/basico', [App\Http\Controllers\TestContr
 Route::get('/test/cosmica/especializado/medio', [App\Http\Controllers\TestController::class, 'index_especializadomedio'])->name('test.index_especializadomedio');
 Route::get('/test/cosmica/especializado/avanzado', [App\Http\Controllers\TestController::class, 'index_especializadoavanzado'])->name('test.index_especializadoavanzado');
 
+Route::post('/test/resultados', [App\Http\Controllers\TestController::class, 'store'])->name('test.resultados.store');
 // =============== Informacion Gernal de pedido ===============================
 
 Route::get('/pedido/estatus/{id}', [App\Http\Controllers\BodegaController::class, 'index_pedido_user'])->name('index_pedido_user');
