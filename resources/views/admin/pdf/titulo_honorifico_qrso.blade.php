@@ -535,15 +535,12 @@
         </div>
 
         @if(!isset($fileName_logo))
-            <img src="https://plataforma.imnasmexico.com/tipos_documentos/titulo_reverso_limpio_firma_director.png" class="img_reverso">
-
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
             @elseif(empty($fileName_logo))
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/titulo_reverso_limpio_firma_director.png" class="img_reverso">
-
             @elseif($fileName_logo == 'Sin Logo')
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/titulo_reverso_limpio_firma_director.png" class="img_reverso">
             @else
-
             @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
                 <img src="{{ $basePath . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
 
@@ -587,7 +584,7 @@
                 <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">
             @endif
 
-            @endif
+        @endif
 
         @php
             // Divide el curso por espacios en blanco
