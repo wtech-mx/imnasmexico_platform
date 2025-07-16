@@ -1097,7 +1097,7 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('index.proveedores') }}">
                                 <span class="sidenav-mini-icon"> P </span>
                                 <span class="sidenav-normal">Proveedores</span>
                             </a>

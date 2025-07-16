@@ -17,63 +17,72 @@
 
 @section('content')
 
+    @include('rh.modal_create_banco')
+
     <div class="container-fluid my-5 py-2">
       <div class="row">
 
         <div class="col-lg-8">
           <div class="row">
-            <div class="col-xl-6 mb-xl-0 mb-4">
-              <div class="card bg-transparent shadow-xl">
-                <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
-                  <span class="mask bg-gradient-dark"></span>
-                  <div class="card-body position-relative z-index-1 p-3">
-                    <i class="fas fa-wifi text-white p-2"></i>
-                    <h5 class="text-white mt-4 mb-5 pb-2">4562&nbsp;&nbsp;&nbsp;1122&nbsp;&nbsp;&nbsp;4594&nbsp;&nbsp;&nbsp;7852</h5>
-                    <div class="d-flex">
-                      <div class="d-flex">
-                        <div class="me-4">
-                          <p class="text-white text-sm opacity-8 mb-0">Card Holder</p>
-                          <h6 class="text-white mb-0">Jack Peterson</h6>
-                        </div>
-                        <div>
-                          <p class="text-white text-sm opacity-8 mb-0">Expires</p>
-                          <h6 class="text-white mb-0">11/22</h6>
-                        </div>
-                      </div>
-                      <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                        <img class="w-60 mt-2" src="../../../assets/img/logos/mastercard.png" alt="logo">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bancoModal">
+                  <i class="fa fa-fw fa-plus"></i> Crear Banco
+                </button>
             </div>
-            <div class="col-xl-6 mb-xl-0 mb-4">
-              <div class="card bg-transparent shadow-xl">
-                <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
-                  <span class="mask bg-gradient-dark"></span>
-                  <div class="card-body position-relative z-index-1 p-3">
-                    <i class="fas fa-wifi text-white p-2"></i>
-                    <h5 class="text-white mt-4 mb-5 pb-2">4562&nbsp;&nbsp;&nbsp;1122&nbsp;&nbsp;&nbsp;4594&nbsp;&nbsp;&nbsp;7852</h5>
-                    <div class="d-flex">
-                      <div class="d-flex">
-                        <div class="me-4">
-                          <p class="text-white text-sm opacity-8 mb-0">Card Holder</p>
-                          <h6 class="text-white mb-0">Jack Peterson</h6>
-                        </div>
-                        <div>
-                          <p class="text-white text-sm opacity-8 mb-0">Expires</p>
-                          <h6 class="text-white mb-0">11/22</h6>
-                        </div>
-                      </div>
-                      <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                        <img class="w-60 mt-2" src="../../../assets/img/logos/mastercard.png" alt="logo">
-                      </div>
+
+            <div class="row">
+                <div id="carouselBancos" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($bancos->chunk(2) as $chunkIndex => $chunk)
+                            <div class="carousel-item @if($chunkIndex == 0) active @endif">
+                                <div class="row">
+                                    @foreach ($chunk as $item)
+                                        <div class="col-6">
+                                            <div class="card bg-transparent shadow-xl">
+                                                <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
+                                                    <span class="mask bg-gradient-dark"></span>
+                                                    <div class="card-body position-relative z-index-1 p-3">
+                                                        <h4 class="text-white mb-0">{{ $item->nombre_beneficiario }}</h4>
+                                                        <h5 class="text-white mt-4 mb-5 pb-2">{{ chunk_split($item->clabe, 4, ' ') }}</h5>
+                                                        <div class="d-flex">
+                                                            <div class="d-flex">
+                                                                <div class="me-4">
+                                                                    <p class="text-white text-sm opacity-8 mb-0">Nombre Banco</p>
+                                                                    <h6 class="text-white mb-0">{{ $item->nombre_banco }}</h6>
+                                                                </div>
+                                                                <div>
+                                                                    <p class="text-white text-sm opacity-8 mb-0">Dinero en banco</p>
+                                                                    <h6 class="text-white mb-0">${{ number_format($item->saldo, 0, '.', ',') }}</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
+                                                                <img class="w-60 mt-2" src="../../assets/img/logos/mastercard.png" alt="logo">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                  </div>
+
+                    <!-- Controles -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselBancos" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselBancos" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
                 </div>
-              </div>
+
             </div>
+
 
             <div class="col-xl-6 mt-3">
               <div class="row">

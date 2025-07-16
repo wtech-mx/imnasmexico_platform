@@ -12,9 +12,31 @@ class TransaccionesBancarias extends Model
     protected $table = 'transacciones_bancarias';
 
     protected $fillable = [
-        'tipo',
-        'id_empresa',
+        'id_transaccion',
+        'fechaOperacion',
+        'institucionOrdenante',
+        'institucionBeneficiaria',
+        'claveRastreo',
+        'monto',
+        'nombreOrdenante',
+        'tipoCuentaOrdenante',
+        'cuentaOrdenante',
+        'rfcCurpOrdenante',
+        'nombreBeneficiario',
+        'tipoCuentaBeneficiario',
+        'cuentaBeneficiario',
+        'nombreBeneficiario2',
+        'tipoCuentaBeneficiario2',
+        'cuentaBeneficiario2',
+        'rfcCurpBeneficiario',
+        'conceptoPago',
+        'referenciaNumerica',
+        'empresa',
+        'tipoPago',
+        'tsLiquidacion',
+        'folioCo'
     ];
+
 
 
 }

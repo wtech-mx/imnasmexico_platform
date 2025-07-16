@@ -412,6 +412,16 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== R H ===============================
     Route::get('/panel/rh', [App\Http\Controllers\RhController::class, 'index'])->name('panel.index');
 
+    Route::post('bancos/create', [App\Http\Controllers\BancosController::class, 'store'])->name('store.bancos');
+
+    // ==================== P R O V E E D O R E S ====================
+    Route::get('proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');
+    Route::post('proveedores/create', [App\Http\Controllers\ProveedorController::class, 'store'])->name('store.proveedores');
+    Route::post('proveedores/create/cuenta', [App\Http\Controllers\ProveedorController::class, 'cuenta'])->name('cuenta.proveedores');
+    Route::patch('proveedores/update/{id}', [App\Http\Controllers\ProveedorController::class, 'update'])->name('update.proveedores');
+    Route::delete('proveedores/cuentas/{id}', [App\Http\Controllers\ProveedorController::class, 'destroy'])->name('cuentas.borrar');
+
+
     Route::get  ('/stp/firma', [StpController::class, 'showForm'])->name('stp.firma.form');
     Route::post ('/stp/firma', [StpController::class, 'generateSignature'])->name('stp.firma.generate');
 
