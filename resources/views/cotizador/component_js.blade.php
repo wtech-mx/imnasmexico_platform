@@ -359,4 +359,41 @@
         }
         renderizarCarrito();
     }
+
+    function validarClienteAntesDeGuardar() {
+        const idUsuario = (document.getElementById('idUsuario')?.value || '').trim();
+
+        // campos para nuevo cliente (pueden o no existir en la vista)
+        const nombre   = (document.getElementById('name')?.value || '').trim();
+        const telefono = (document.getElementById('telefono')?.value || '').trim();
+
+        // Limpia marcas visuales previas
+        ['name','telefono','usuarioInput'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('is-invalid');
+        });
+
+        // Si ya seleccionó un cliente existente, todo bien
+        if (idUsuario !== '') {
+            return { ok: true, tipo: 'existente' };
+        }
+
+        // Si NO hay idUsuario, esperamos datos para crear nuevo cliente
+        const faltantes = [];
+        if (!nombre)   { faltantes.push('nombre'); }
+        // (opcional) exige teléfono
+         if (!telefono) { faltantes.push('teléfono'); }
+
+        if (faltantes.length) {
+            // Marca campos
+            if (!nombre && document.getElementById('name')) document.getElementById('name').classList.add('is-invalid');
+            if (!telefono && document.getElementById('telefono')) document.getElementById('telefono').classList.add('is-invalid');
+
+            const msg = `Falta capturar ${faltantes.join(', ')} para crear un nuevo cliente, o selecciona uno existente.`;
+            return { ok: false, mensaje: msg };
+        }
+
+        // Tiene datos suficientes para crear nuevo
+        return { ok: true, tipo: 'nuevo', nombre, apellido, telefono };
+    }
 </script>

@@ -160,8 +160,24 @@ NAS
 
     document.getElementById('formGuardarPedido').addEventListener('submit', function(e){
         e.preventDefault();
+        const val = validarClienteAntesDeGuardar();
+        if (!val.ok) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Datos incompletos',
+                text: val.mensaje,
+            });
+            return; // NO envía
+        }
+
         const form = this;
         const data = new FormData(form);
+
+        if (val.tipo === 'nuevo') {
+            data.set('id_usuario', '');  // para que el backend sepa que es nuevo
+            data.set('name', val.nombre);
+            data.set('telefono', val.telefono);
+        }
 
         fetch(form.action, {
             method: form.method,
@@ -173,21 +189,27 @@ NAS
         .then(res => res.json())
         .then(json => {
             if (json.success) {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Pedido guardado!',
-                text: json.message,
-                showCancelButton: true,
-                confirmButtonText: 'Descargar PDF',
-                cancelButtonText: 'Seguir cotizando'
-            }).then(result => {
-                if (result.isConfirmed) {
-                    window.open(`/admin/notas/cotizacion/imprimir/${json.order_id}`, '_blank');
-                    location.reload();
-                } else {
-                    location.reload();
-                }
-            });
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Pedido guardado!',
+                    text: json.message,
+                    showCancelButton: true,
+                    showDenyButton: true,
+                    confirmButtonText: 'Descargar PDF',
+                    cancelButtonText: 'Seguir cotizando',
+                    denyButtonText: 'Ver todas las cotizaciones',
+                    preDeny: () => {
+                        window.open("{{ route('notas_cotizacion.index') }}", '_blank');
+                        return false; // Evita que se cierre la alerta
+                    }
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        window.open(`/admin/notas/cotizacion/imprimir/${json.order_id}`, '_blank');
+                        location.reload();
+                    } else if (result.isDismissed) {
+                        location.reload();
+                    }
+                });
             }
         })
         .catch(err => {
