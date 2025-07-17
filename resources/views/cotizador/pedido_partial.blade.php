@@ -33,18 +33,20 @@
                 <!-- Campos de envío (oculto por defecto) -->
                 @include('cotizador.datos_direcion')
 
-                <!-- Método de pago -->
-                <div class="mb-3">
-                    <img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"><label for="metodo_pago_cliente" class="form-label">Método de pago:</label>
-                    <select id="metodo_pago_cliente" name="metodo_pago_cliente" class="form-select">
-                        <option value="Efectivo">Efectivo</option>
-                        <option value="Tarjeta crédito">Tarjeta crédito</option>
-                        <option value="Tarjeta débito">Tarjeta débito</option>
-                        <option value="Transferencia">Transferencia</option>
-                        <option value="Mercado Pago">Mercado Pago</option>
-                        <option value="Contraentrega">Contraentrega</option>
-                    </select>
-                </div>
+                @if(Route::currentRouteName() == 'index_cosmica.cotizador')
+                    <!-- Método de pago -->
+                    <div class="mb-3">
+                        <img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"><label for="metodo_pago_cliente" class="form-label">Método de pago:</label>
+                        <select id="metodo_pago_cliente" name="metodo_pago_cliente" class="form-select">
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta crédito">Tarjeta crédito</option>
+                            <option value="Tarjeta débito">Tarjeta débito</option>
+                            <option value="Transferencia">Transferencia</option>
+                            <option value="Mercado Pago">Mercado Pago</option>
+                            <option value="Contraentrega">Contraentrega</option>
+                        </select>
+                    </div>
+                @endif
 
                 <!-- Observaciones -->
                 <div class="mb-3">
@@ -72,10 +74,14 @@
                     <span id="envio-display">$0.00</span>
                 </div>
 
-                <div class="mb-2 d-flex justify-content-between">
-                    <span><img src="{{ asset('assets/user/icons/por-ciento.png') }}" style="width:17px;"> IVA (16%):</span>
-                    <span id="iva-display">$0.00</span>
-                </div>
+                 @if(Route::currentRouteName() == 'index_cosmica.cotizador')
+                    <div class="mb-2 d-flex justify-content-between">
+                        <span><img src="{{ asset('assets/user/icons/por-ciento.png') }}" style="width:17px;"> IVA (16%):</span>
+                        <span id="iva-display">$0.00</span>
+                    </div>
+                    @else
+                    <span id="iva-display" class="d-none"></span>
+                @endif
 
                 <div class="mb-3 d-flex justify-content-between fw-bold border-top pt-2">
                     <span><img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" style="width:17px;"> TOTAL:</span>

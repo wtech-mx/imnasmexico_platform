@@ -20,6 +20,7 @@ class ProductosNotasId extends Model
         'num_kit',
         'id_producto',
         'escaneados',
+        'kit',
     ];
 
     public function Nota()

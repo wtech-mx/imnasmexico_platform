@@ -31,8 +31,6 @@ Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsContr
 Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
 Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
 
-
-Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index'])->name('index_nas.cotizador');
 Route::get('/cotizador/expo', [App\Http\Controllers\CotizadorController::class, 'index_cosmica_new'])->name('index_cosmica_new.cotizador');
 Route::get('/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'cotizador_cosmica'])->name('cotizador_cosmica');
 
@@ -52,12 +50,16 @@ Route::get('/notas/pagos/stream', [App\Http\Controllers\CotizadorController::cla
 Route::get('/admin/pagos/cosmica/expo', [App\Http\Controllers\CotizadorController::class, 'index_pagos_cosmica_expo'])->name('index_pagos_cosmica_expo.cotizador');
 Route::get('/notas/pago', [App\Http\Controllers\CotizadorController::class, 'togglePago'])->name('notas.pago.toggle');
 
-Route::get('/cotizador/categoria/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoriaCosmica'])->name('cotizador.productos_categoriaCosmica');
+Route::get('cotizador/{tipo}/categoria/{sublinea}', [App\Http\Controllers\CotizadorController::class,'mostrarProductosPorCategoria'])
+     ->where('tipo','cosmica|nas')
+     ->name('cotizador.categoria');
 Route::get('/cotizador/categoria/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoria'])->name('cotizador.productos_categoria');
 
 Route::get('/cotizador/buscar', [App\Http\Controllers\CotizadorController::class, 'buscar'])->name('cotizador.buscar');
 Route::post('/cotizador/render-item-carrito', [App\Http\Controllers\CotizadorController::class, 'renderizarItemCarrito']);
-Route::get('/cotizador/kits',[App\Http\Controllers\CotizadorController::class, 'mostrarKitsCosmica'])->name('cotizador.kits');
+Route::get('cotizador/{tipo}/kits', [App\Http\Controllers\CotizadorController::class,'mostrarKits'])
+     ->where('tipo','cosmica|nas|tiendita')
+     ->name('cotizador.kits');
 
 /*
 |--------------------------------------------------------------------------
@@ -485,7 +487,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('/stp/retorna-orden', [StpController::class, 'retornaOrden'])
         ->name('stp.retorna.orden');
 
-    //================ MODULO COTIZADOR NEW ============================================
+    //================ MODULO COTIZADOR NEW COSMICA ============================================
     Route::get('/admin/cotizador/cosmica', [App\Http\Controllers\CotizadorController::class, 'index_cosmica'])->name('index_cosmica.cotizador');
     Route::get('/admin/cotizador/usuarios/buscar', [App\Http\Controllers\CotizadorController::class, 'search'])->name('usuarios.search');
     Route::get('/cosmikausers/{cliente}/membership', [App\Http\Controllers\CotizadorController::class, 'membershipStatus']);
@@ -494,6 +496,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cotizador/edit/cosmica/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_cosmica'])->name('edit_cosmica.cotizador');
     Route::post('/admin/cotizador/edit/render-item-carrito', [App\Http\Controllers\CotizadorController::class, 'edit_renderizarItemCarrito']);
     Route::patch('/admin/cotizador/update/{id}', [App\Http\Controllers\CotizadorController::class, 'update_new'])->name('update_new.cotizador');
+
+    //================ MODULO COTIZADOR NEW NAS============================================
+    Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index_nas'])->name('index_nas.cotizador');
+
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 

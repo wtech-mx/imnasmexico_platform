@@ -23,7 +23,7 @@ use Hash;
 
 class CotizadorController extends Controller
 {
-    public function index()
+    public function index_nas()
     {
         // Traemos las categorías
         $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
@@ -345,83 +345,102 @@ class CotizadorController extends Controller
         return view('cotizador.productos_categoria', compact('productos'));
     }
 
-    public function mostrarProductosCategoriaCosmica($id)
+    public function mostrarProductosPorCategoria($tipo, $sublinea)
     {
-        $productos = Products::query();
+        // 1) Base de la consulta
+        $query = Products::query()
+            ->where('subcategoria','Producto')
+            ->where('sublinea', $sublinea);
 
-        $productos->where('categoria', 'Cosmica')
-                  ->where('subcategoria', 'Producto');
+        // 2) Filtra categorías según el tipo
+        if ($tipo === 'nas') {
+            // NAS ve productos de NAS y también de Cosmica
+            $query->whereIn('categoria',['NAS','Cosmica']);
+        } else {
+            // Cosmica o por defecto
+            $query->where('categoria','Cosmica');
+        }
 
-        $productos->where(function ($query) use ($id) {
-            $query->where('sublinea', $id);
-        });
+        // 3) Orden y obtención
+        $productos = $query->orderBy('nombre','ASC')->get();
 
-        $productos = $productos->orderBy('nombre', 'ASC')->get();
-
+        // 4) Misma vista parcial que ya usas
         return view('cotizador.productos_categoria', compact('productos'));
     }
 
     public function buscar(Request $request)
     {
-        $query = Str::lower($this->removeAccents($request->get('query', '')));
+        $tipo   = $request->get('tipo', 'cosmica');
+        $query  = Str::lower($this->removeAccents($request->get('query','')));
         $palabras = explode(' ', $query);
 
         $productos = Products::query();
 
-        $productos
-            ->where('categoria', 'Cosmica')
-            // Sólo Kits con estatus NULL, pero Productos siempre
-            ->where(function($q) {
-                $q->where('subcategoria', 'Producto')
-                ->orWhere(function($q2) {
-                    $q2->where('subcategoria', 'Kit')
-                        ->whereNull('estatus');
-                })
-                ->orWhere(function($q3) {
-                    $q3->where('subcategoria', 'Tiendita');
-                });
+        // 1) Defino el filtro de categorías según tipo
+        if ($tipo === 'nas') {
+            $cats = ['Nas','Cosmica'];
+            if (! empty($cats)) {
+                $productos->whereIn('categoria', $cats);
+            }
+        } else {
+            $productos->where('categoria','Cosmica');
+        }
+
+        // 2) tu resto de filtros de subcategoría
+        $productos->where(function($q) {
+            $q->where('subcategoria','Producto')
+            ->orWhere(function($q2) {
+                $q2->where('subcategoria','Kit')
+                    ->whereNull('estatus');
             })
-            // A continuación tu búsqueda por nombre…
-            ->where(function($subQuery) use ($palabras) {
-                foreach ($palabras as $palabra) {
-                    $variantes = $this->generarVariantesSingularPlural($palabra);
-                    foreach ($variantes as $variante) {
-                        $subQuery->orWhereRaw("
-                            LOWER(
-                                REPLACE(
-                                REPLACE(
-                                    REPLACE(
-                                    REPLACE(
-                                        REPLACE(nombre, 'á', 'a'),
-                                    'é', 'e'),
-                                    'í', 'i'),
-                                'ó', 'o'),
-                                'ú', 'u')
-                            ) LIKE ?
-                        ", ["%{$variante}%"]);
-                    }
-                }
-            });
+            ->orWhere('subcategoria','Tiendita');
+        });
+
+        // 3) búsqueda por nombre
+        $productos->where(function($sub) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $var = Str::lower($palabra);
+                $sub->orWhereRaw("
+                    LOWER(
+                    REPLACE(
+                        REPLACE(
+                        REPLACE(
+                            REPLACE(
+                            REPLACE(nombre,'á','a'),
+                            'é','e'),
+                        'í','i'),
+                        'ó','o'),
+                    'ú','u')
+                    ) LIKE ?
+                ", ["%{$var}%"]);
+            }
+        });
 
         $productos = $productos->limit(40)->get();
 
         return view('cotizador.productos_categoria', compact('productos'));
     }
 
-    public function mostrarKitsCosmica()
+    public function mostrarKits(string $tipo)
     {
-        // Trae los kits ordenados como quieras
-        $kits = Products::orderBy('id','DESC')
-            ->where('categoria', 'Cosmica')
+        $q = Products::query()
             ->where('subcategoria', 'Kit')
-            ->where('estatus','publicado')
-            ->orderBy('nombre','asc')
-            ->get();
+            ->where('estatus', 'publicado');
 
-        // Reusa la misma vista parcial de productos (o crea una específica)
-        return view('cotizador.productos_categoria', [
-            'productos' => $kits
-        ]);
+        if ($tipo === 'nas') {
+            // NAS ve kits de NAS y de Cosmica
+            $q->whereIn('categoria', ['NAS','Cosmica']);
+        } else {
+            // Cosmica (y por defecto) solo kits de Cosmica
+            $q->where('categoria', 'Cosmica');
+        }
+
+        // si en el futuro Tiendita tuviera kits, añade su lógica igual que arriba
+
+        $productos = $q->orderBy('nombre','asc')->get();
+
+        // reutiliza tu vista parcial habitual
+        return view('cotizador.productos_categoria', compact('productos'));
     }
 
     private function removeAccents($string)
@@ -987,7 +1006,6 @@ class CotizadorController extends Controller
         $payer->save();
         return $payer;
     }
-
 
     protected function generateFolio(string $tipoNota, string $modelClass): string
     {

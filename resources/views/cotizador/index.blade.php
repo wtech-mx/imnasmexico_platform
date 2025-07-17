@@ -6,7 +6,7 @@ NAS
 
 @section('cotizador')
 
-<div class="container-xxl">
+<div class="container-xxl" id="cotizadorApp" data-tipo="nas">
     <div class="row">
 
         <!-- Productos -->
@@ -16,109 +16,26 @@ NAS
 
                 @include('cotizador.barr_superior')
 
-                <div class="col-12">
-                    <h5 class="p-2">Categorías</h5>
+                @include('cotizador.componente_cliente')
 
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs mb-3" id="categoriaTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="corp-tab" data-bs-toggle="tab" data-bs-target="#corp" type="button" role="tab" aria-controls="corp" aria-selected="true">
-                                Corporales
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" type="button" role="tab" aria-controls="facial" aria-selected="false">
-                                Faciales
-                            </button>
-                        </li>
-                    </ul>
+                @include('cotizador.component_categorias')
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <!-- Corporales -->
-                        <div class="tab-pane fade show active" id="corp" role="tabpanel" aria-labelledby="corp-tab">
-                            <div id="loop_categorias_corp" class="owl-carousel">
-                                @foreach ($categoriasCorporal as $categoria)
-                                    <div class="item">
-                                        <div class="product_category" onclick="cargarProductosPorCategoria({{ $categoria->id }})">
-                                            <h6 class="mt-3 mb-1 tittle_category">Corporal</h6>
-                                            <img src="{{ asset('categorias/'.$categoria->imagen) }}" alt="Producto">
-                                            <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
-                                            <div class="fw-bold mt-1">
-                                                <p class="text_items" style="margin: 0;">
-                                                    {{ $categoria->productos_count }} Artículos
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+                @include('cotizador.compnent_buscador_productos')
 
-                        <!-- Faciales -->
-                        <div class="tab-pane fade" id="facial" role="tabpanel" aria-labelledby="facial-tab">
-                            <div id="loop_categorias_facial" class="owl-carousel">
-                                @foreach ($categoriasFacial as $categoria)
-                                    <div class="item">
-                                        <div class="product_category" onclick="cargarProductosPorCategoria({{ $categoria->id }})">
-                                            <h6 class="mt-3 mb-1 tittle_category">Facial</h6>
-                                            <img src="{{ asset('categorias/'.$categoria->imagen) }}" alt="Producto">
-                                            <h6 class="mt-3 mb-1 tittle_category">{{ $categoria->nombre }}</h6>
-                                            <div class="fw-bold mt-1">
-                                                <p class="text_items" style="margin: 0;">
-                                                    {{ $categoria->productos_count }} Artículos
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-12">
-                    <form class="d-flex mt-3 mb-3" id="formBuscarProductos">
-                        <input id="inputBuscarProductos" class="form-control me-2" type="search" placeholder="Buscar producto..." aria-label="Search">
-                    </form>
-
-                </div>
-
-                <!-- Repetir este div para cada producto -->
-                    <div class="" id="contenedor_productos">
-                        <!-- Aquí se insertan los productos dinámicamente -->
-                    </div>
-                <!-- ... más productos -->
             </div>
 
         </div>
 
         <!-- Orden -->
         <div class="col-lg-4 mt-3">
-            <div class="sidebar">
-                <h5 class="mb-4 mt-1 text-center">Cotiza tu pedido</h5>
-
-                <!-- Lista de productos -->
-                <ul class="list-group mb-3" id="contenedor_carrito" style="max-height: 600px; overflow-y: auto;">
-                    <!-- Aquí se insertan los productos dinámicamente -->
-                </ul>
-
-                <!-- Totales -->
-                <div class="mb-2 d-flex justify-content-between">
-                    <span>Subtotal:</span>
-                    <span id="subtotal">$0.00</span>
-                </div>
-
-                <div class="mb-3 d-flex justify-content-between fw-bold border-top pt-2">
-                    <span>TOTAL:</span>
-                    <span id="total">$0.00</span>
-                </div>
-
-                <!-- Botón -->
-                <button class="btn btn-xs btn-success w-100"><i class="bi bi-cart3"></i> Realizar pedido </button>
-            </div>
+            <form class="row" action="{{ route('cotizador.store', ['tipo' => 'nas']) }}" method="POST" id="formGuardarPedido" enctype="multipart/form-data">
+                @csrf
+                <!-- Hidden para guardar el id seleccionado -->
+                <input type="hidden" name="id_usuario" id="idUsuario">
+                <input type="hidden" name="tipo" value="nas">
+                <input type="hidden" name="tipo_nota" value="Cotizacion">
+                @include('cotizador.pedido_partial')
+            </form>
         </div>
 
     </div>
@@ -128,236 +45,155 @@ NAS
 
 
 @section('js_custom')
-
+ @include('cotizador.component_js')
 <script>
-    let timeout = null;
-    let carrito = [];
 
-    function showToast(mensaje, icono = 'success') {
-        Swal.fire({
-            toast: true,
-            position: 'bottom-start',
-            icon: icono,
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true
-        });
-    }
-
-    // Evitar que el formulario recargue la página al hacer submit
-    document.getElementById('formBuscarProductos').addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita recargar el formulario
-    });
-
-    // Evento de escritura en el input de búsqueda
-    document.getElementById('inputBuscarProductos').addEventListener('keyup', function(e) {
-        const valor = this.value;
-
-        // Si presiona Enter
-        if (e.key === 'Enter') {
-            e.preventDefault(); // Evita recargar
-            buscarProductos(valor);
-        }
-
-        // Esperar 2 segundos después de escribir
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            if (valor.trim() !== '') {
-                buscarProductos(valor);
-            }
-        }, 2000);
-    });
-
-    // Función que realiza la búsqueda y carga la vista parcial
-    function buscarProductos(valor) {
-        fetch(`/cotizador/buscar?query=${encodeURIComponent(valor)}`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('contenedor_productos').innerHTML = html;
-
-                // 🧼 Limpiar campo de búsqueda después de la búsqueda
-                document.getElementById('inputBuscarProductos').value = '';
-            });
-    }
-    // Cargar productos por categoría (usado al hacer clic en una categoría)
-    function cargarProductosPorCategoria(idCategoria) {
-        fetch(`/cotizador/categoria/${idCategoria}`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('contenedor_productos').innerHTML = html;
-            });
-    }
-
-    function modificarCantidad(idProducto, cambio) {
-        const index = carrito.findIndex(p => p.id == idProducto);
-
-        if (index !== -1) {
-            carrito[index].cantidad += cambio;
-
-            if (carrito[index].cantidad <= 0) {
-                carrito.splice(index, 1);
-                eliminarDelCarrito(idProducto); // Ya elimina del DOM
-                showToast('Producto eliminado del carrito', 'info');
-            } else {
-                renderizarCarrito();
-                showToast('Cantidad actualizada', 'info');
-            }
-        }
-    }
-
-    function actualizarTotales() {
-            let subtotal = 0;
-
-            carrito.forEach(producto => {
-                subtotal += producto.precio * producto.cantidad;
-            });
-
-            const total = subtotal; // puedes restar descuento si lo usas
-
-            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-    }
-
-    function renderizarCarrito() {
-        carrito.forEach(async producto => {
-            const total = producto.precio * producto.cantidad;
-
-            // Verificar si el producto ya está en el DOM
-            const productoExistente = document.querySelector(`.list-group-item[data-id="${producto.id}"]`);
-
-            if (productoExistente) {
-                // Si ya existe, solo actualizamos la cantidad y el total
-                productoExistente.querySelector('.cantidad').textContent = producto.cantidad;
-                productoExistente.querySelector('.total').textContent = `$${total.toFixed(2)}`;
-            } else {
-                // Si no existe, lo agregamos al carrito
-                const response = await fetch('/cotizador/render-item-carrito', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({ producto })
-                });
-
-                const html = await response.text();
-                document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
-            }
-        });
-
-        // Actualizar los totales después de procesar todos los productos
-        actualizarTotales();
-    }
-
-    function eliminarDelCarrito(idProducto) {
-        const index = carrito.findIndex(p => p.id == idProducto);
-
-        if (index !== -1) {
-            carrito.splice(index, 1); // ❌ eliminar del array
-
-            const productoElemento = document.querySelector(`.list-group-item[data-id="${idProducto}"]`);
-            if (productoElemento) {
-                productoElemento.remove(); // ❌ eliminar del DOM
-            }
-
-            actualizarTotales();
-            showToast('Producto eliminado del carrito', 'error');
-        }
-    }
-
-    // Inicialización de los carouseles corporales y faciales
-    $(document).ready(function() {
-        const owlSettings = {
-            loop: true,
-            margin: 15,
-            autoplay: false,
-            dots:false,
-            autoplayTimeout: 9000,
-            autoplayHoverPause: true,
-            nav: true,
-            responsive: {
-                0: { items: 3 },
-                420: { items: 3 },
-                576: { items: 4 },
-                676: { items: 5 },
-                768: { items: 5 },
-                950: { items: 6 },
-                1200: { items: 6 }
-            }
-        };
-
-        $("#loop_categorias_corp").owlCarousel(owlSettings);
-        $("#loop_categorias_facial").owlCarousel(owlSettings);
-
-        function actualizarHora() {
-            const ahora = new Date();
-            let horas = ahora.getHours();
-            const minutos = ahora.getMinutes().toString().padStart(2, '0');
-            const segundos = ahora.getSeconds().toString().padStart(2, '0');
-            const ampm = horas >= 12 ? 'PM' : 'AM';
-
-            horas = horas % 12;
-            horas = horas ? horas : 12; // hora 0 debe ser 12
-
-            const horaFormateada = `${horas}:${minutos}:${segundos} ${ampm}`;
-            document.getElementById('hora-actual').textContent = horaFormateada;
-        }
-
-        // Actualizar al cargar y luego cada segundo
-        actualizarHora();
-        setInterval(actualizarHora, 1000);
-
-        document.addEventListener('click', function(e) {
-            const target = e.target.closest('.agregar-carrito');
-            if (target) {
-                const id = target.dataset.id;
-                const nombre = target.dataset.nombre;
-                const precio = parseFloat(target.dataset.precio);
-                const imagen = target.dataset.img;
-
-                const existente = carrito.find(p => p.id == id);
-                if (existente) {
-                    existente.cantidad++;
-                    showToast('Cantidad actualizada');
-                } else {
-                    carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
-                    showToast('Producto agregado al carrito');
+    // BUSCADOR CLIENTE, RECONOCIMIENTO Y DISTRIBUIDORA
+    $(function(){
+        $('#usuarioInput').autocomplete({
+            source: function(request, response) {
+                $.getJSON("{{ route('usuarios.search') }}", { q: request.term }, response);
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                $('#idUsuario').val(ui.item.id);
+                console.log(ui.item);
+                // Si no tiene reconocimiento, muestro el upload y oculto el mensaje
+                if (!ui.item.reconocimiento) {
+                    $('#reconocimiento-upload').removeClass('d-none');
+                    $('#reconocimiento-message').addClass('d-none');
+                }
+                // Si ya tiene, muestro el mensaje y oculto el upload
+                else {
+                    $('#reconocimiento-upload').addClass('d-none');
+                    $('#reconocimiento-message').removeClass('d-none');
                 }
 
-                renderizarCarrito();
+                // Ahora consultamos membresía
+                $('#membership-message').removeClass('alert-success alert-danger alert-secondary').addClass('d-none').text('Cargando estado de membresía…');
+
+                $('#postcode').val(ui.item.postcode);
+                $('#state').val(ui.item.state);
+                $('#city').val(ui.item.city);
+                $('#direccion').val(ui.item.direccion);
+                $('#referencia').val(ui.item.referencia);
+                $('#country').val(ui.item.country);
+
+                $.getJSON(`/cosmikausers/${ui.item.id}/membership`).done(function(data) {
+                    if (data.activa) {
+                        // 1) Determina el % según el tipo de membresía
+                        let pct = 0;
+                        membershipActive = true;
+                        membershipType   = data.membresia; // “Estelar” o “Cosmos”
+                        if (data.membresia === 'Estelar') pct = 60;
+                        else if (data.membresia === 'Cosmos') pct = 40;
+
+                        // 2) Aplica al input global de descuento
+                        // const descuentoGlobalInput = document.getElementById('descuento-total');
+                        // descuentoGlobalInput.value = pct;
+
+                        // 3) Recalcula totales con ese % global
+                        actualizarTotales();
+
+                        $('#membership-message')
+                        .removeClass('d-none alert-secondary')
+                        .addClass('alert-success')
+                        .text(`🎉 Tiene membresía Estatus: ${data.membresia}. Descuento para cosmica: ${pct}%`);
+                    }
+                    else {
+                        membershipActive = false;
+                        membershipType   = null;
+                        $('#membership-message')
+                        .removeClass('d-none alert-success')
+                        .addClass('alert-secondary')
+                        .text('ℹ️ No tiene membresía activa');
+                    }
+                        recalcEnvio();
+                        actualizarTotales();
+                })
+                .fail(function() {
+                    membershipActive = false;
+                    membershipType   = null;
+                    $('#membership-message')
+                    .removeClass('d-none')
+                    .addClass('alert-danger')
+                    .text('⚠️ Error al consultar membresía');
+                });
+
+            },
+            change: function(e, ui) {
+                if (!ui.item) {
+                    $('#idUsuario').val('');
+                    // Al limpiar, oculto ambos
+                    $('#reconocimiento-upload, #reconocimiento-message, #membership-message').addClass('d-none');
+                }
             }
         });
-
-        function agregarAlCarrito(producto) {
-            const existente = carrito.find(p => p.id === producto.id);
-
-            if (existente) {
-                existente.cantidad++;
-                renderizarCarrito();
-            } else {
-                producto.cantidad = 1;
-                carrito.push(producto);
-
-                // Solo renderizar 1 nuevo producto y agregarlo al contenedor
-                fetch('/cotizador/render-item-carrito', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({ producto })
-                })
-                .then(response => response.text())
-                .then(html => {
-                    document.querySelector('.list-group').insertAdjacentHTML('beforeend', html);
-                    actualizarTotales();
-                });
-            }
-        }
-
     });
 
+    function recalcEnvio() {
+        const checked = document.getElementById('chkEnvio').checked;
+        const envioDisplay = document.getElementById('envio-display');
+
+        // Si no está seleccionado, tarifa 0
+        if (!checked) {
+            envioDisplay.textContent = '$0.00';
+            window.cachedEnvioCost = 0; // <-- ¡AQUÍ!
+            actualizarTotales();        // <-- ¡Y AQUÍ!
+            return;
+        }
+
+        // ... resto de tu lógica ...
+        // Leemos el total SIN envío (descuento global ya aplicado)
+        const totalSinEnvio = parseFloat(
+            document.getElementById('total-display')
+            .textContent.replace(/[^0-9.-]+/g,'')
+        ) || 0;
+
+        let costoEnvio = 0;
+
+        costoEnvio = 250;
+
+        envioDisplay.textContent = `$${costoEnvio.toFixed(2)}`;
+        window.cachedEnvioCost = costoEnvio;
+    }
+
+    document.getElementById('formGuardarPedido').addEventListener('submit', function(e){
+        e.preventDefault();
+        const form = this;
+        const data = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            if (json.success) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Pedido guardado!',
+                text: json.message,
+                showCancelButton: true,
+                confirmButtonText: 'Descargar PDF',
+                cancelButtonText: 'Seguir cotizando'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.open(`/admin/notas/cotizacion/imprimir/${json.order_id}`, '_blank');
+                    location.reload();
+                } else {
+                    location.reload();
+                }
+            });
+            }
+        })
+        .catch(err => {
+            Swal.fire('Error', 'No se pudo guardar el pedido.', 'error');
+        });
+    });
 </script>
 
 @endsection

@@ -233,7 +233,7 @@
                             <ul>
                                 @foreach ($nota_productos->where('kit', 1)->where('num_kit', $nota->$kitId) as $producto)
                                     <li>
-                                        {{ $producto->cantidad }} {{ $producto->producto }}
+                                        {{ $producto->cantidad }} {{ $producto->Productos->nombre }}
                                     </li>
                                 @endforeach
                             </ul>
