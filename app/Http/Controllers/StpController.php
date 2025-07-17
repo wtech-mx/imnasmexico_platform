@@ -9,17 +9,56 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 class StpController extends Controller
 {
-    /**
-     * Muestra el formulario para que el usuario ingrese los datos.
-     */
+
+    public function formConsultaSaldo()
+    {
+        return view('stp.saldo_form');
+    }
+
+    public function consultarSaldo(Request $request)
+    {
+        $data = $request->validate([
+            'empresa'          => 'required|string|max:15',
+            'cuentaOrdenante'  => 'required|string|max:18',
+            'fecha'            => 'nullable|digits:8',
+        ]);
+
+        // Construir cadena original
+        $cadena = '||' . $data['empresa'] . '|' . $data['cuentaOrdenante'];
+        if (!empty($data['fecha'])) {
+            $cadena .= '|' . $data['fecha'];
+        }
+        $cadena .= '||';
+
+        // Firmar cadena
+        $pem = file_get_contents(public_path('stp_leys_production/inmas.pem'));
+        $pkey = openssl_pkey_get_private($pem, 'F>qa}8K^I7|INgus/kI5');
+        openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
+        $firma = base64_encode($bin);
+
+        // Payload
+        $payload = [
+            'empresa'         => $data['empresa'],
+            'cuentaOrdenante' => $data['cuentaOrdenante'],
+            'firma'           => $firma,
+        ];
+
+        if (!empty($data['fecha'])) {
+            $payload['fecha'] = $data['fecha'];
+        }
+
+        // Envío a STP
+        $respuesta = Http::withHeaders(['Content-Type' => 'application/json'])
+            ->post('https://efws-dev.stpmex.com/efws/API/consultaSaldoCuenta', $payload);
+
+        return view('stp.consulta_saldo', compact('cadena', 'firma', 'payload', 'respuesta'));
+    }
+
     public function showForm()
     {
         return view('stp.firma_form');
     }
 
-    /**
-     * Recibe los datos, genera la firma y la muestra.
-     */
     public function generateSignature(Request $request)
     {
         $data = $request->validate([
@@ -29,14 +68,15 @@ class StpController extends Controller
         ]);
 
         // 1) Ruta al PEM en public/stp_leys
-        $privateKeyPath = public_path('stp_leys/inmas.pem');
+        $privateKeyPath = public_path('stp_leys_production/inmas.pem');
         if (! file_exists($privateKeyPath)) {
             return back()->withErrors("No existe el archivo de llave privada en {$privateKeyPath}");
         }
 
         // 2) Cargar la clave (si tu PEM lleva passphrase, ajústalo aquí)
         $pem    = file_get_contents($privateKeyPath);
-        $pass   = 'X}Zl0/RtjuI(=Esz3+Vq'; // tu passphrase
+        //$pass   = 'X}Zl0/RtjuI(=Esz3+Vq';
+        $pass   = 'F>qa}8K^I7|INgus/kI5';
         $pkey   = openssl_pkey_get_private($pem, $pass);
         if (! $pkey) {
             return back()->withErrors('No pude cargar la clave privada (¿passphrase correcta?)');
@@ -71,9 +111,6 @@ class StpController extends Controller
         return view('stp.operaciones_form');
     }
 
-    /**
-     * Procesa la consulta de operaciones según el tipo seleccionado.
-     */
     public function consultaOperaciones(Request $request)
     {
         $data = $request->validate([
@@ -114,9 +151,9 @@ class StpController extends Controller
 
 
         // 2) Generar firma
-        $privateKeyPath = public_path('stp_leys/inmas.pem');
+        $privateKeyPath = public_path('stp_leys_production/inmas.pem');
         $pem    = file_get_contents($privateKeyPath);
-        $pass   = 'X}Zl0/RtjuI(=Esz3+Vq';
+        $pass   = 'F>qa}8K^I7|INgus/kI5';
         $pkey   = openssl_pkey_get_private($pem, $pass);
         if (! $pkey) {
             return back()->withErrors('No pude cargar la clave privada.');
@@ -249,9 +286,7 @@ class StpController extends Controller
         return view('stp.comprobante_form');
     }
 
-    /**
-     * Procesa la consulta de comprobante
-     */
+
     public function consultaComprobante(Request $request)
     {
         $data = $request->validate([
@@ -323,9 +358,6 @@ class StpController extends Controller
         return view('stp.conciliacion_form');
     }
 
-    /**
-     * Procesa la consulta de conciliación
-     */
     public function consultaConciliacion(Request $request)
     {
         $data = $request->validate([
@@ -346,9 +378,9 @@ class StpController extends Controller
         }
 
         // 2) Firma SHA256-RSA
-        $pemPath = public_path('stp_leys/inmas.pem');
+        $pemPath = public_path('stp_leys_production/inmas.pem');
         $pem     = file_get_contents($pemPath);
-        $pass    = 'X}Zl0/RtjuI(=Esz3+Vq';
+        $pass    = 'F>qa}8K^I7|INgus/kI5';
         $pkey    = openssl_pkey_get_private($pem, $pass);
         if (! $pkey) {
             return back()->withErrors('No se pudo cargar la clave privada.');
@@ -387,9 +419,7 @@ class StpController extends Controller
         return view('stp.instituciones_form');
     }
 
-    /**
-     * Ejecutar consulta de instituciones a STP
-     */
+
     public function consultaInstituciones(Request $request)
     {
         // Validar
@@ -438,8 +468,6 @@ class StpController extends Controller
     {
         return view('stp.registra_form');
     }
-
-        // Procesa la orden
     public function registraOrden(Request $r)
     {
         // 1) Validación de sólo los campos que en tu ejemplo envías
@@ -639,12 +667,12 @@ class StpController extends Controller
             ], 400);
         }
     }
+
      public function showRetornaForm()
     {
         return view('stp.retorna_form');
     }
 
-    /** Procesar el retorno */
     public function retornaOrden(Request $r)
     {
         // 1) validación

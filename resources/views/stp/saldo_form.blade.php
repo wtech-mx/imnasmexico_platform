@@ -2,60 +2,45 @@
 
 @section('content')
 <div class="container py-4">
-  <h2>Consulta Saldo de Cuenta</h2>
+  <h2>Consulta de Saldo STP</h2>
 
-  @if($errors->any())
+  @if ($errors->any())
     <div class="alert alert-danger">{{ $errors->first() }}</div>
   @endif
 
-  <form action="{{ route('stp.saldo.consulta') }}" method="POST" class="mb-4">
+  <form method="POST" action="{{ route('stp.consulta.saldo') }}">
     @csrf
 
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label class="form-label">Empresa</label>
-        <input name="empresa"
-               class="form-control"
-               value="{{ old('empresa','INMAS') }}"
-               maxlength="15"
-               required>
+    <div class="row">
+      <div class="col-md-4 mb-2">
+        <label>Empresa</label>
+        <input name="empresa" class="form-control" value="{{ old('empresa', 'INMAS') }}" required>
       </div>
-      <div class="col-md-4">
-        <label class="form-label">Cuenta Ordenante</label>
-        <input name="cuentaOrdenante"
-               class="form-control"
-               value="646180580800000004"
-               maxlength="18"
-               required>
+      <div class="col-md-4 mb-2">
+        <label>Cuenta Ordenante</label>
+        <input name="cuentaOrdenante" class="form-control" value="{{ old('cuentaOrdenante', '646180209100000001') }}" required>
       </div>
-      <div class="col-md-4">
-        <label class="form-label">Fecha (AAAAMMDD)</label>
-        <input name="fecha"
-               class="form-control"
-               value="{{ old('fecha') }}"
-               placeholder="Opcional"
-               maxlength="8">
+      <div class="col-md-4 mb-2">
+        <label>Fecha (opcional, AAAAMMDD)</label>
+        <input name="fecha" class="form-control" value="{{ old('fecha') }}">
       </div>
     </div>
 
-    <button class="btn btn-primary">Consultar</button>
+    <button class="btn btn-success mt-3">Consultar</button>
   </form>
 
   @isset($cadena)
-    <h5>Cadena Original</h5>
+    <h5 class="mt-4">Cadena Original Firmada</h5>
     <pre>{{ $cadena }}</pre>
-
-    <h5>Firma Base64</h5>
-    <textarea class="form-control mb-3" rows="2" readonly>{{ $firma }}</textarea>
-
-    <h5>Request JSON</h5>
+    <h5>Firma</h5>
+    <textarea class="form-control" rows="3" readonly>{{ $firma }}</textarea>
+    <h5>Payload</h5>
     <pre>{{ json_encode($payload, JSON_PRETTY_PRINT) }}</pre>
   @endisset
 
-  @isset($resultado)
-    <hr>
+  @isset($respuesta)
     <h5>Respuesta STP</h5>
-    <pre>{{ json_encode($resultado, JSON_PRETTY_PRINT) }}</pre>
+    <pre>{{ $respuesta->body() }}</pre>
   @endisset
 </div>
 @endsection

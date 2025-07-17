@@ -928,7 +928,7 @@
                                     <span class="sidenav-normal">Prueba de firma</span>
                                 </a>
 
-                                <a href="{{ route('stp.saldo.form') }}" class="nav-link">
+                                <a href="{{ route('stp.consulta.form') }}" class="nav-link">
                                     <span class="sidenav-mini-icon"></span>
                                     <span class="sidenav-normal">Saldo de cuenta</span>
                                 </a>

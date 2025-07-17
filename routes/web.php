@@ -457,12 +457,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/stp/instituciones', [StpController::class, 'consultaInstituciones'])
     ->name('stp.instituciones.consulta');
 
-    Route::get('/stp/saldo-cuenta', [StpController::class, 'showSaldoCuentaForm'])
-        ->name('stp.saldo.form');
-
-    Route::post('/stp/saldo-cuenta', [StpController::class, 'consultaSaldoCuenta'])
-        ->name('stp.saldo.consulta');
-
+    Route::get('/stp/consulta-saldo', [StpController::class, 'formConsultaSaldo'])->name('stp.consulta.form');
+    Route::post('/stp/consulta-saldo', [StpController::class, 'consultarSaldo'])->name('stp.consulta.saldo');
 
 
     Route::get('/stp/registra-orden/show', [StpController::class, 'showRegistraForm'])
