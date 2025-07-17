@@ -21,7 +21,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/bootstrap.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}">
+    {{-- <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/ecommerce/css/twitter-bootstrap.css') }}">
     <link href="{{ asset('assets/ecommerce/bootstrap_icons/font/bootstrap-icons.min.css') }}" rel="stylesheet">
 

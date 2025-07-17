@@ -4,7 +4,20 @@
 Cosmica
 @endsection
 
+@section('css_custom')
+    <link rel="shortcut icon" href="{{ asset('cosmika/menu/logo.png') }}" type="image/png">
+
+    <style>
+        body{
+            background: #d3c2d3!important;
+        }
+    </style>
+
+@endsection
+
 @section('cotizador')
+
+
 
 <div class="container-xxl" id="cotizadorApp" data-tipo="cosmica">
     <div class="row">

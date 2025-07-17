@@ -3,6 +3,16 @@
 @section('template_title')
 NAS
 @endsection
+@section('css_custom')
+    <link rel="icon" type="image/x-icon" href="{{ asset('ecommerce/logo_nas.png') }}">
+
+    <style>
+        body{
+             background: #e5cccc !important;
+        }
+    </style>
+
+@endsection
 
 @section('cotizador')
 
