@@ -51,7 +51,7 @@ class StpController extends Controller
         $respuesta = Http::withHeaders(['Content-Type' => 'application/json'])
             ->post('https://efws-dev.stpmex.com/efws/API/consultaSaldoCuenta', $payload);
 
-        return view('stp.consulta_saldo', compact('cadena', 'firma', 'payload', 'respuesta'));
+        return view('stp.saldo_form', compact('cadena', 'firma', 'payload', 'respuesta'));
     }
 
     public function showForm()
