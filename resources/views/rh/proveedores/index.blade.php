@@ -44,7 +44,7 @@
                                         @foreach ($proveedores as $proveedor)
                                             <tr>
                                                 <td>{{$proveedor->id}}</td>
-                                                <td>{{$proveedor->nombre}}</td>
+                                                <td>{{$proveedor->item}}</td>
                                                 <td>{{$proveedor->telefono}}</td>
                                                 <td>{{$proveedor->rfc}}</td>
                                                 <td>
