@@ -799,6 +799,61 @@ class CotizadorController extends Controller
         return view('cotizador.edit.index_cosmica', compact('categoriasFacial', 'categoriasCorporal', 'cotizacion', 'cotizacion_productos'));
     }
 
+    public function edit_nas(Request $request, $id){
+        $cotizacion = NotasProductos::find($id);
+        $cotizacion_productos = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
+
+        // Determinar ruta según entorno
+        $dominio = $request->getHost();
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $ruta_imgs = base_path('../public_html/plataforma.imnasmexico.com/categorias/');
+            $ruta_asset = 'categorias/';
+        } else {
+            $ruta_imgs = public_path('categorias/');
+            $ruta_asset = 'categorias/';
+        }
+
+        // Función para verificar y asignar imagen de sublínea
+        $asignarImagen = function ($sublinea) use ($ruta_imgs, $ruta_asset) {
+            $nombre_archivo = Str::slug($sublinea, '_') . '.png';
+            $ruta_completa = $ruta_imgs . $nombre_archivo;
+
+            return File::exists($ruta_completa) ? $ruta_asset . $nombre_archivo : 'default.jpg';
+        };
+
+        // Faciales
+        $faciales = Products::where('linea', 'Facial')
+            ->where('subcategoria', 'Producto')
+            ->get()
+            ->groupBy('sublinea');
+
+        $categoriasFacial = $faciales->map(function ($productos, $sublinea) use ($asignarImagen) {
+            return (object) [
+                'id' => Str::slug($sublinea),
+                'nombre' => $sublinea,
+                'imagen' => $asignarImagen($sublinea),
+                'productos_count' => $productos->count(),
+            ];
+        })->values();
+
+        // Corporales
+        $corporales = Products::where('linea', 'Corporal')
+            ->where('subcategoria', 'Producto')
+            ->get()
+            ->groupBy('sublinea');
+
+        $categoriasCorporal = $corporales->map(function ($productos, $sublinea) use ($asignarImagen) {
+            return (object) [
+                'id' => Str::slug($sublinea),
+                'nombre' => $sublinea,
+                'imagen' => $asignarImagen($sublinea),
+                'productos_count' => $productos->count(),
+            ];
+        })->values();
+
+        return view('cotizador.edit.index_nas', compact('categoriasFacial', 'categoriasCorporal', 'cotizacion', 'cotizacion_productos'));
+    }
+
     public function edit_renderizarItemCarrito(Request $request){
         $producto = $request->input('producto'); // Este será un array con los datos
 

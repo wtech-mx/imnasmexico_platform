@@ -1,7 +1,7 @@
 @extends('layouts.app_cotizador')
 
 @section('template_title')
-Edit Cotizacion {{$cotizacion->id}}
+Edit Cotizacion NAS {{$cotizacion->id}}
 @endsection
 
 @section('css_custom')
@@ -9,7 +9,7 @@ Edit Cotizacion {{$cotizacion->id}}
 
     <style>
         body{
-            background: #d3c2d3!important;
+            background: #e5cccc!important;
         }
     </style>
 
@@ -17,7 +17,7 @@ Edit Cotizacion {{$cotizacion->id}}
 
 @section('cotizador')
 
-<div class="container-xxl" id="cotizadorApp" data-tipo="cosmica">
+<div class="container-xxl" id="cotizadorApp" data-tipo="nas">
     <div class="row">
 
         <!-- Productos -->
@@ -43,7 +43,7 @@ Edit Cotizacion {{$cotizacion->id}}
 
                         <p class="my-auto">
                             <a class="btn btn-sm btn-outline-dark" href="{{ route('index_cosmica.cotizador') }}">Comica</a>
-                            {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a> --}}
+                            <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a>
                         </p>
                         <p class="my-auto">
                             {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('index_nas.cotizador') }}">NAS</a> --}}
@@ -69,7 +69,7 @@ Edit Cotizacion {{$cotizacion->id}}
                 <input type="hidden" name="_method" value="PATCH">
                 <!-- Hidden para guardar el id seleccionado -->
                 <input type="hidden" name="id_usuario" id="idUsuario" value="{{$cotizacion->id_usuario}}">
-                <input type="hidden" name="tipo" value="cosmica">
+                <input type="hidden" name="tipo" value="nas">
                 <input type="hidden" name="tipo_nota" value="Cotizacion">
                 @include('cotizador.edit.pedido_partial')
             </form>
@@ -126,8 +126,8 @@ Edit Cotizacion {{$cotizacion->id}}
                         else if (data.membresia === 'Cosmos') pct = 40;
 
                         // 2) Aplica al input global de descuento
-                        const descuentoGlobalInput = document.getElementById('descuento-total');
-                        descuentoGlobalInput.value = pct;
+                        // const descuentoGlobalInput = document.getElementById('descuento-total');
+                        // descuentoGlobalInput.value = pct;
 
                         // 3) Recalcula totales con ese % global
                         actualizarTotales();
@@ -135,7 +135,7 @@ Edit Cotizacion {{$cotizacion->id}}
                         $('#membership-message')
                         .removeClass('d-none alert-secondary')
                         .addClass('alert-success')
-                        .text(`🎉 Tiene membresía Estatus: ${data.membresia}. Descuento aplicado: ${pct}%`);
+                        .text(`🎉 Tiene membresía Estatus: ${data.membresia}. Descuento para cosmica: ${pct}%`);
                     }
                     else {
                         membershipActive = false;
@@ -183,14 +183,7 @@ Edit Cotizacion {{$cotizacion->id}}
             document.getElementById('subtotal-final-input').value
         ) || 0;
 
-        let costoEnvio = 0;
-        if (!membershipActive) {
-            costoEnvio = 180;
-        } else if (membershipType === 'Cosmos') {
-            costoEnvio = subtotal < 1500 ? 126 : 90;
-        } else if (membershipType === 'Estelar') {
-            costoEnvio = subtotal < 2500 ? 90 : 0;
-        }
+        costoEnvio = 250;
 
         window.cachedEnvioCost = costoEnvio;
         envioDisplay.textContent = `$${costoEnvio.toFixed(2)}`;
@@ -222,12 +215,12 @@ Edit Cotizacion {{$cotizacion->id}}
                     cancelButtonText: 'Seguir cotizando',
                     denyButtonText: 'Ver todas las cotizaciones',
                     preDeny: () => {
-                        window.open("{{ route('cotizacion_cosmica.index') }}", '_blank');
+                        window.open("{{ route('notas_cotizacion.index') }}", '_blank');
                         return false; // Evita que se cierre la alerta
                     }
                 }).then(result => {
                     if (result.isConfirmed) {
-                        window.open(`/cosmica/cotizacion/imprimir/${json.order_id}`, '_blank');
+                        window.open(`/admin/notas/cotizacion/imprimir/${json.order_id}`, '_blank');
                         location.reload();
                     } else if (result.isDismissed) {
                         location.reload();

@@ -12,7 +12,7 @@
 @endphp
 <div class="sidebar">
                 <h5 class="mb-2 mt-1 text-center">Cotiza tu pedido
-                    Folio #{{ $cotizacion->id }}
+                    Folio #{{ $cotizacion->folio }}
                 </h5>
 
                 <!-- Lista de productos -->
@@ -139,10 +139,14 @@
                     <span id="envio-display">$0.00</span>
                 </div>
 
-                <div class="mb-2 d-flex justify-content-between">
-                    <span><img src="{{ asset('assets/user/icons/por-ciento.png') }}" style="width:17px;"> IVA (16%):</span>
-                    <span id="iva-display">$0.00</span>
-                </div>
+                 @if(Route::currentRouteName() == 'edit_cosmica.cotizador')
+                    <div class="mb-2 d-flex justify-content-between">
+                        <span><img src="{{ asset('assets/user/icons/por-ciento.png') }}" style="width:17px;"> IVA (16%):</span>
+                        <span id="iva-display">$0.00</span>
+                    </div>
+                    @else
+                    <span id="iva-display" class="d-none"></span>
+                @endif
 
                 <div class="mb-3 d-flex justify-content-between fw-bold border-top pt-2">
                     <span><img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" style="width:17px;"> TOTAL:</span>

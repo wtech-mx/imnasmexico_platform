@@ -495,7 +495,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     //================ MODULO COTIZADOR NEW NAS============================================
     Route::get('/admin/cotizador/nas', [App\Http\Controllers\CotizadorController::class, 'index_nas'])->name('index_nas.cotizador');
-
+    Route::get('/admin/cotizador/edit/nas/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_nas'])->name('edit_nas.cotizador');
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 
