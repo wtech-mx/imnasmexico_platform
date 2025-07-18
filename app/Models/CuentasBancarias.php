@@ -13,6 +13,9 @@ class CuentasBancarias extends Model
 
     protected $fillable = [
         'cuenta_bancaria',
+        'id_proveedores',
+        'nombre_beneficiario',
+        'cuenta_bancaria',
         'nombre_banco',
         'cuenta_clabe',
     ];

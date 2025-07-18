@@ -16,7 +16,7 @@
                         <label for="name">Nombre Beneficiario*</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/user_predeterminado.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/user_predeterminado.webp') }}" alt="" width="25px">
                             </span>
                             <input name="nombre_beneficiario" id="nombre_beneficiario" type="text" class="form-control">
                         </div>
@@ -26,7 +26,7 @@
                         <label for="name">Nombre Banco*</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/metodo-de-pago.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/metodo-de-pago.webp') }}" alt="" width="25px">
                             </span>
                             <input name="nombre_banco" id="nombre_banco" type="text" class="form-control">
                         </div>
@@ -36,7 +36,7 @@
                         <label for="name">Cuenta Bancaria *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/t debito.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/t debito.webp') }}" alt="" width="25px">
                             </span>
                             <input name="cuenta_bancaria" id="cuenta_bancaria" type="number" class="form-control">
                         </div>
@@ -46,7 +46,7 @@
                         <label for="name">Clabe *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/t credito.png.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/t credito.png.webp') }}" alt="" width="25px">
                             </span>
                             <input name="cuenta_clabe" id="cuenta_clabe" type="number" class="form-control">
                         </div>

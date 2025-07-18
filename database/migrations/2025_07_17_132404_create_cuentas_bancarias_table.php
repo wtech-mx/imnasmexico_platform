@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('cuentas_bancarias', function (Blueprint $table) {
             $table->id();
-            $table->string('cuenta_bancaria', 2)->nullable();
-            $table->string('nombre_banco', 2)->nullable();
-            $table->string('cuenta_clabe', 2)->nullable();
+            $table->unsignedBigInteger('id_proveedores');
+            $table->foreign('id_proveedores')
+                ->references('id')->on('proveedores')
+                ->inDelete('set null');
+
+            $table->string('nombre_beneficiario')->nullable();
+            $table->text('cuenta_bancaria')->nullable();
+            $table->text('nombre_banco')->nullable();
+            $table->text('cuenta_clabe')->nullable();
             $table->timestamps();
         });
     }

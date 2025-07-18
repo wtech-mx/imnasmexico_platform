@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Client
+    Proveedores
 @endsection
 
 @section('content')
@@ -34,7 +34,6 @@
                                         <th>No</th>
                                         <th>Nombre</th>
                                         <th>Telefono</th>
-                                        <th>Tipo</th>
                                         <th>RFC</th>
                                         <th>Cuentas Bancarias</th>
                                         <th>Acciones</th>
@@ -47,28 +46,20 @@
                                                 <td>{{$proveedor->id}}</td>
                                                 <td>{{$proveedor->nombre}}</td>
                                                 <td>{{$proveedor->telefono}}</td>
-                                                <td>{{$proveedor->tipo}}</td>
                                                 <td>{{$proveedor->rfc}}</td>
                                                 <td>
-                                                    @can('proovedores-cuentas')
                                                     <button type="button" class="btn btn-xs btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cuentasModal{{$proveedor->id}}">
-                                                        Ver cuentas registradas <img src="{{ asset('img/icon/business-card-design.webp') }}" alt="" width="20px">
+                                                        Ver cuentas registradas <img src="{{ asset('assets/cam/business-card-design.webp') }}" alt="" width="20px">
                                                     </button>
-                                                     @endcan
                                                 </td>
                                                 <td>
-                                                    @can('proovedores-edit')
-                                                        <button type="button" class="btn btn-xs btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editModal{{$proveedor->id}}">
-                                                            <img src="{{ asset('img/icon/editar.webp') }}" alt="" width="20px">
-                                                        </button>
-                                                    @endcan
+                                                    <button type="button" class="btn btn-xs btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editModal{{$proveedor->id}}">
+                                                        <img src="{{ asset('assets/cam/editar.webp') }}" alt="" width="20px">Editar Proveedor
+                                                    </button>
 
-                                                    @can('proovedores-cuentas-create')
-                                                        <button type="button" class="btn btn-xs btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarModal{{$proveedor->id}}">
-                                                            <img src="{{ asset('img/icon/t credito.png.webp') }}" alt="" width="20px">
-                                                        </button>
-                                                    @endcan
-
+                                                    <button type="button" class="btn btn-xs btn-outline-success" data-bs-toggle="modal" data-bs-target="#editarModal{{$proveedor->id}}">
+                                                        <img src="{{ asset('assets/cam/t credito.png.webp') }}" alt="" width="20px">Cuenta B
+                                                    </button>
                                                 </td>
                                             </tr>
                                             @include('rh.proveedores.modal_edit')
