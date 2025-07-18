@@ -709,6 +709,7 @@ class CotizadorController extends Controller
         $order->fecha = date('Y-m-d');
         $tipoNota = $request->tipo_nota;
         $order->envio = $request->envio_final > 0 ? 'Si' : 'No';
+         $order->factura         = $request->btn_facturacion;
 
         $modelClass = $order instanceof NotasProductosCosmica ? NotasProductosCosmica::class : NotasProductos::class;
         $order->folio = $this->generateFolio($order->tipo_nota, $modelClass);
@@ -899,6 +900,7 @@ class CotizadorController extends Controller
         $order->tipo_nota        = $data['tipo_nota'];
         $order->restante         = $request->descuento_total ?? 0;
         $order->envio_cost       = $request->envio_final;
+        $order->factura         = $request->btn_facturacion;
         $order->iva_cost         = $request->iva_final;
         $order->envio            = $request->envio_final > 0 ? 'Si' : 'No';
         $order->save();

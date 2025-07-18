@@ -13,7 +13,7 @@
                 <div class="row px-3">
                     <!-- Checkbox Facturación -->
                     <div class="form-check mb-2 col-6">
-                        <input class="form-check-input" type="checkbox" id="chkFacturacion">
+                        <input class="form-check-input" type="checkbox" id="chkFacturacion" name="btn_facturacion" value="1">
                         <label class="form-check-label" for="chkFacturacion">
                             Facturación
                         </label>

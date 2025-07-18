@@ -174,17 +174,21 @@
         // 5) Base para IVA
         const baseParaIVA = totalDespuesDescGlobal + envio;
 
-        // 6) IVA 16% si hay checkbox marcado
-        const aplicaIva = document.getElementById('chkFacturacion').checked;
-        const iva = aplicaIva ? baseParaIVA * 0.16 : 0;
+        let iva = 0;
+        if (tipo !== 'nas') {
+            // Sólo para Cosmica (u otros) usamos el checkbox
+            const chk = document.getElementById('chkFacturacion');
+            const aplicaIva = chk ? chk.checked : false;
+            iva = aplicaIva ? baseParaIVA * 0.16 : 0;
+        }
         window.cachedIVA = iva;
-        document.getElementById('iva-display').textContent = `$${iva.toFixed(2)}`;
-        document.getElementById('iva-final-input').value   = iva.toFixed(2);
+        document.getElementById('iva-display').textContent      = `$${iva.toFixed(2)}`;
+        document.getElementById('iva-final-input').value        = iva.toFixed(2);
 
         // 7) Total final = baseParaIVA + iva
         const totalFinal = baseParaIVA + iva;
-        document.getElementById('total-display').textContent = `$${totalFinal.toFixed(2)}`;
-        document.getElementById('total-final-input').value   = totalFinal.toFixed(2);
+        document.getElementById('total-display').textContent    = `$${totalFinal.toFixed(2)}`;
+        document.getElementById('total-final-input').value      = totalFinal.toFixed(2);
     }
 
     async function renderizarCarrito() {
