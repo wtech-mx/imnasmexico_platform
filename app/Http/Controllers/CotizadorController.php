@@ -101,7 +101,7 @@ class CotizadorController extends Controller
 
     public function index_cotizaciones_cosmica_expo(Request $request){
 
-        $primerDiaDelMes = '2025-06-30';
+        $primerDiaDelMes = '2025-07-19';
         $ultimoDiaDelMes = date('Y-m-t');
 
         $now = Carbon::now();
