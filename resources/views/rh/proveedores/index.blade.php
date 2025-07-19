@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <a href="{{ route('dashboard') }}" class="btn" style="background: {{$configuracion->color_boton_close}}; color: #ffff; margin-right: 3rem;">
+                            <a href="{{ route('panel.index') }}" class="btn" style="background: {{$configuracion->color_boton_close}}; color: #ffff; margin-right: 3rem;">
                                 Regresar
                             </a>
                             <span id="card_title">
@@ -44,7 +44,7 @@
                                         @foreach ($proveedores as $proveedor)
                                             <tr>
                                                 <td>{{$proveedor->id}}</td>
-                                                <td>{{$proveedor->item}}</td>
+                                                <td>{{$proveedor->nombre}}</td>
                                                 <td>{{$proveedor->telefono}}</td>
                                                 <td>{{$proveedor->rfc}}</td>
                                                 <td>

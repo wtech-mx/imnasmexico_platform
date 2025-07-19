@@ -414,7 +414,11 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== R H ===============================
     Route::get('/panel/rh', [App\Http\Controllers\RhController::class, 'index'])->name('panel.index');
 
+    Route::get('bancos', [App\Http\Controllers\BancosController::class, 'index'])->name('index.bancos');
     Route::post('bancos/create', [App\Http\Controllers\BancosController::class, 'store'])->name('store.bancos');
+    Route::patch('bancos/update/{id}', [App\Http\Controllers\BancosController::class, 'update'])->name('update.bancos');
+
+    Route::get('bancos/show/{id}', [App\Http\Controllers\BancosController::class, 'edit'])->name('edit.bancos');
 
     // ==================== P R O V E E D O R E S ====================
     Route::get('proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');

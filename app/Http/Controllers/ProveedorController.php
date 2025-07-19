@@ -36,8 +36,7 @@ class ProveedorController extends Controller
         $proveedor->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('index.proveedores')
-            ->with('success', 'Proveedor created successfully.');
+        return redirect()->back()->with('success', 'Proveedor created successfully.');
 
     }
 
@@ -61,8 +60,7 @@ class ProveedorController extends Controller
         $banco->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('index.proveedores')
-            ->with('success', 'Proveedor created successfully.');
+        return redirect()->back()->with('success', 'Proveedor created successfully.');
 
     }
 

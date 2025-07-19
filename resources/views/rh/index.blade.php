@@ -39,30 +39,32 @@
                                 <div class="row">
                                     @foreach ($chunk as $item)
                                         <div class="col-6">
-                                            <div class="card bg-transparent shadow-xl">
-                                                <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
-                                                    <span class="mask bg-gradient-dark"></span>
-                                                    <div class="card-body position-relative z-index-1 p-3">
-                                                        <h4 class="text-white mb-0">{{ $item->nombre_beneficiario }}</h4>
-                                                        <h5 class="text-white mt-4 mb-5 pb-2">{{ chunk_split($item->clabe, 4, ' ') }}</h5>
-                                                        <div class="d-flex">
+                                            <a href="{{ route('edit.bancos',$item->id) }}">
+                                                <div class="card bg-transparent shadow-xl">
+                                                    <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
+                                                        <span class="mask bg-gradient-dark"></span>
+                                                        <div class="card-body position-relative z-index-1 p-3">
+                                                            <h4 class="text-white mb-0">{{ $item->nombre_beneficiario }}</h4>
+                                                            <h5 class="text-white mt-4 mb-5 pb-2">{{ chunk_split($item->clabe, 4, ' ') }}</h5>
                                                             <div class="d-flex">
-                                                                <div class="me-4">
-                                                                    <p class="text-white text-sm opacity-8 mb-0">Nombre Banco</p>
-                                                                    <h6 class="text-white mb-0">{{ $item->nombre_banco }}</h6>
+                                                                <div class="d-flex">
+                                                                    <div class="me-4">
+                                                                        <p class="text-white text-sm opacity-8 mb-0">Nombre Banco</p>
+                                                                        <h6 class="text-white mb-0">{{ $item->nombre_banco }}</h6>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p class="text-white text-sm opacity-8 mb-0">Dinero en banco</p>
+                                                                        <h6 class="text-white mb-0">${{ number_format($item->saldo, 0, '.', ',') }}</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div>
-                                                                    <p class="text-white text-sm opacity-8 mb-0">Dinero en banco</p>
-                                                                    <h6 class="text-white mb-0">${{ number_format($item->saldo, 0, '.', ',') }}</h6>
+                                                                <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
+                                                                    <img class="w-60 mt-2" src="../../assets/img/logos/mastercard.png" alt="logo">
                                                                 </div>
-                                                            </div>
-                                                            <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                                                                <img class="w-60 mt-2" src="../../assets/img/logos/mastercard.png" alt="logo">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -242,22 +244,38 @@
             </h6>
             </div>
 
-            @foreach ($proveedores as $item)
+            @foreach ($proveedores as $proveedor)
             <div class="card-body pt-1 p-2">
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-3 text-sm">{{ $item->nombre }}</h6>
-                    <span class="mb-2 text-xs">Telefono: <span class="text-dark ms-sm-2 font-weight-bold">{{ $item->telefono }}</span></span>
-                    <span class="text-xs">RFC: <span class="text-dark ms-sm-2 font-weight-bold">{{ $item->rfc }}</span></span>
+                    <h6 class="mb-3 text-sm">{{ $proveedor->nombre }}</h6>
+                    <span class="mb-2 text-xs">Telefono: <span class="text-dark ms-sm-2 font-weight-bold">{{ $proveedor->telefono }}</span></span>
+                    <span class="text-xs">RFC: <span class="text-dark ms-sm-2 font-weight-bold">{{ $proveedor->rfc }}</span></span>
                   </div>
                   <div class="ms-auto text-end">
-                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+
+                    <a class="btn btn-link text-primary text-gradient px-3 mb-0" type="button" data-bs-toggle="modal" data-bs-target="#cuentasModal{{$proveedor->id}}">
+                        <i class="far fa-eye me-2"></i>Cuentas
+                    </a>
+
+                    <a class="btn btn-link text-success text-gradient px-3 mb-0" type="button" data-bs-toggle="modal" data-bs-target="#editarModal{{$proveedor->id}}">
+                        <i class="far fa-plus me-2"></i>Agregar C.
+                    </a>
+
+                    <a class="btn btn-link text-dark px-3 mb-0" type="button" data-bs-toggle="modal" data-bs-target="#editModal{{$proveedor->id}}">
+                        <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit
+                    </a>
+
                   </div>
                 </li>
               </ul>
             </div>
+
+            @include('rh.proveedores.modal_edit')
+            @include('rh.proveedores.modal_crear_cuenta')
+            @include('rh.proveedores.modal_cuentas')
+
             @endforeach
 
           </div>

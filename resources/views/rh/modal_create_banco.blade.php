@@ -15,7 +15,7 @@
                         <label for="name">Nombre Beneficiario*</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/user_predeterminado.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/user_predeterminado.webp') }}" alt="" width="25px">
                             </span>
                             <input name="nombre_beneficiario" id="nombre_beneficiario" type="text" class="form-control">
                         </div>
@@ -25,7 +25,7 @@
                         <label for="name">Nombre Banco *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/sobre.png.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/sobre.png.webp') }}" alt="" width="25px">
                             </span>
                             <input name="nombre_banco" id="nombre_banco" type="text" class="form-control">
                         </div>
@@ -35,7 +35,7 @@
                         <label for="name">Cuenta Bancaria *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/telefono.png.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/telefono.png.webp') }}" alt="" width="25px">
                             </span>
                             <input name="cuenta_bancaria" id="cuenta_bancaria" type="text" class="form-control">
                         </div>
@@ -45,7 +45,7 @@
                         <label for="name">Saldo inicial *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/billetera.png') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/billetera.png') }}" alt="" width="25px">
                             </span>
                             <input name="saldo_inicial" id="saldo_inicial" type="number" class="form-control">
                         </div>
@@ -55,7 +55,7 @@
                         <label for="name">Clabe *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('img/icon/mapa-de-la-ciudad.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/mapa-de-la-ciudad.webp') }}" alt="" width="25px">
                             </span>
                             <input name="clabe" id="clabe" type="text" class="form-control">
                         </div>

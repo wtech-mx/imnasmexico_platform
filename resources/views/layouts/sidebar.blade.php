@@ -1090,7 +1090,7 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('index.bancos') }}">
                                 <span class="sidenav-mini-icon"> B </span>
                                 <span class="sidenav-normal">Bancos</span>
                             </a>

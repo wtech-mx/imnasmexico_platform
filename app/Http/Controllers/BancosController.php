@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bancos;
-
+use Carbon\Carbon;
 class BancosController extends Controller
 {
+
+    public function index(){
+        $bancos = Bancos::get();
+
+        return view('rh.bancos.index', compact('bancos'));
+    }
+
+
     public function store(Request $request){
 
         $banco = new Bancos;
@@ -18,7 +26,15 @@ class BancosController extends Controller
         $banco->save();
 
         return redirect()->back();
+    }
 
+    public function edit($id){
+        $banco = Bancos::where('id', '=', $id)->first();
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+        $fecha = date('Y-m-d');
+
+        return view('rh.bancos.show', compact( 'startOfWeek', 'fecha', 'banco'));
     }
 
 }
