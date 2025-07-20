@@ -625,11 +625,11 @@ class CotizadorController extends Controller
         $ventasPorAdmin = NotasProductosCosmica::select(
                 'users.id AS admin_id',
                 'users.name AS admin_name',
-                DB::raw('SUM(notas_expo.total) AS total_ventas')
+                DB::raw('SUM(notas_productos_cosmica.total) AS total_ventas')
             )
-            ->join('users', 'notas_expo.id_admin_venta', '=', 'users.id')
-            ->where('notas_expo.tipo_nota', 'Cotizacion_Expo')
-            ->whereBetween('notas_expo.fecha', [$fechaInicio, $fechaFin])
+            ->join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
+            ->where('notas_productos_cosmica.tipo_nota', 'Cotizacion_Expo')
+            ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])
             ->groupBy('users.id', 'users.name')
             ->orderBy('total_ventas', 'desc')
             ->where('estatus_cotizacion', '==', 'Entregado')
