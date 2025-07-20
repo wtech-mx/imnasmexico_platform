@@ -502,9 +502,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cotizador/edit/nas/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_nas'])->name('edit_nas.cotizador');
 
     //================ MODULO COTIZADOR NEW TIENDITA============================================
-    Route::get('/admin/ventas/tiendita', [App\Http\Controllers\CotizadorController::class, 'index_nas'])->name('index_nas.tiendita');
-    Route::get('/admin/ventas/edit/tiendita/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_nas'])->name('edit_nas.tiendita');
-
+    Route::get('/admin/ventas/tiendita', [App\Http\Controllers\CotizadorController::class, 'index_tiendita'])->name('index_nas.tiendita');
+    Route::get('/admin/ventas/edit/tiendita/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_tiendita'])->name('edit_nas.tiendita');
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 

@@ -41,6 +41,24 @@ class CotizadorController extends Controller
         return view('cotizador.index', compact('categoriasFacial', 'categoriasCorporal'));
     }
 
+
+    public function index_tiendita(){
+        // Traemos las categorías
+        $categoriasFacial = Categorias::where('linea', '=', 'facial')->orderBy('id','DESC')->get();
+        $categoriasCorporal = Categorias::where('linea', '=', 'corporal')->orderBy('id','DESC')->get();
+
+        // Añadimos un atributo dinámico para contar los productos de cada categoría
+        foreach ($categoriasFacial as $cat) {
+            $cat->productos_count = Products::where('id_categoria', $cat->id)->orWhere('id_categoria2', $cat->id)->count();
+        }
+
+        foreach ($categoriasCorporal as $cat) {
+            $cat->productos_count = Products::where('id_categoria', $cat->id)->orWhere('id_categoria2', $cat->id)->count();
+        }
+
+        return view('cotizador.tiendita.create', compact('categoriasFacial', 'categoriasCorporal'));
+    }
+
     public function index_cosmica(Request $request)
     {
         // Determinar ruta según entorno
@@ -101,7 +119,7 @@ class CotizadorController extends Controller
 
     public function index_cotizaciones_cosmica_expo(Request $request){
 
-        $primerDiaDelMes = '2025-07-19';
+        $primerDiaDelMes = '2025-07-20';
         $ultimoDiaDelMes = date('Y-m-t');
 
         $now = Carbon::now();
@@ -580,28 +598,31 @@ class CotizadorController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin    = $request->input('fecha_fin');
 
-        $queryBase = NotasExpo::query()
+        $queryBase = NotasProductosCosmica::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
-            ->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '==', 'Entregado');
 
         // 4) Total general de todas las ventas en ese rango
         $totalVentas = $queryBase->sum('total');
 
         // 5) Total en Efectivo → volvemos a filtrar por metodo_pago
-        $totalEfectivo = NotasExpo::query()
+        $totalEfectivo = NotasProductosCosmica::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('metodo_pago', 'Efectivo')
+            ->where('estatus_cotizacion', '==', 'Entregado')
             ->sum('total');
 
         // 6) Total con Tarjeta
-        $totalTarjeta = NotasExpo::query()
+        $totalTarjeta = NotasProductosCosmica::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('metodo_pago', 'Tarjeta')
+            ->where('estatus_cotizacion', '==', 'Entregado')
             ->sum('total');
 
-        $ventasPorAdmin = NotasExpo::select(
+        $ventasPorAdmin = NotasProductosCosmica::select(
                 'users.id AS admin_id',
                 'users.name AS admin_name',
                 DB::raw('SUM(notas_expo.total) AS total_ventas')
@@ -611,6 +632,7 @@ class CotizadorController extends Controller
             ->whereBetween('notas_expo.fecha', [$fechaInicio, $fechaFin])
             ->groupBy('users.id', 'users.name')
             ->orderBy('total_ventas', 'desc')
+            ->where('estatus_cotizacion', '==', 'Entregado')
             ->get();
 
         $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_expo', compact('totalVentas', 'totalEfectivo', 'totalTarjeta', 'fechaInicio', 'fechaFin', 'ventasPorAdmin'));
@@ -709,7 +731,11 @@ class CotizadorController extends Controller
         $order->fecha = date('Y-m-d');
         $tipoNota = $request->tipo_nota;
         $order->envio = $request->envio_final > 0 ? 'Si' : 'No';
-         $order->factura         = $request->btn_facturacion;
+        $order->factura         = $request->btn_facturacion;
+        $order->metodo_pago         = $request->metodo_pago;
+        $order->monto         = $request->monto;
+        $order->monto2         = $request->monto2;
+        $order->metodo_pago2         = $request->metodo_pago2;
 
         $modelClass = $order instanceof NotasProductosCosmica ? NotasProductosCosmica::class : NotasProductos::class;
         $order->folio = $this->generateFolio($order->tipo_nota, $modelClass);
@@ -726,9 +752,24 @@ class CotizadorController extends Controller
             $facturas->estatus = $estado;
             $facturas->save();
         }
-
-        // Campos de dirección
         $order->save();
+
+        if ($tipoNota === 'Venta Presencial') {
+            if(Cosmikausers::where('id_cliente', $order->id_usuario)->exists()){
+                $distribuidora = Cosmikausers::where('id_cliente', $order->id_usuario)->first();
+                $suma = $distribuidora->puntos_acomulados + $order->total;
+
+                // Obtener solo los múltiplos de 1000
+                $puntos_sumar = floor($suma / 1000) * 1000;
+
+                // Solo sumar si puntos_sumar es mayor o igual a 1000
+                if ($puntos_sumar >= 1000) {
+                    $distribuidora->puntos_acomulados = $puntos_sumar;
+                    $distribuidora->consumido_totalmes = $suma;
+                    $distribuidora->update();
+                }
+            }
+        }
 
         $this->syncItemsAndKits(
             $order,
@@ -853,6 +894,61 @@ class CotizadorController extends Controller
         })->values();
 
         return view('cotizador.edit.index_nas', compact('categoriasFacial', 'categoriasCorporal', 'cotizacion', 'cotizacion_productos'));
+    }
+
+    public function edit_tiendita(Request $request, $id){
+        $cotizacion = NotasProductos::find($id);
+        $cotizacion_productos = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
+
+        // Determinar ruta según entorno
+        $dominio = $request->getHost();
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $ruta_imgs = base_path('../public_html/plataforma.imnasmexico.com/categorias/');
+            $ruta_asset = 'categorias/';
+        } else {
+            $ruta_imgs = public_path('categorias/');
+            $ruta_asset = 'categorias/';
+        }
+
+        // Función para verificar y asignar imagen de sublínea
+        $asignarImagen = function ($sublinea) use ($ruta_imgs, $ruta_asset) {
+            $nombre_archivo = Str::slug($sublinea, '_') . '.png';
+            $ruta_completa = $ruta_imgs . $nombre_archivo;
+
+            return File::exists($ruta_completa) ? $ruta_asset . $nombre_archivo : 'default.jpg';
+        };
+
+        // Faciales
+        $faciales = Products::where('linea', 'Facial')
+            ->where('subcategoria', 'Producto')
+            ->get()
+            ->groupBy('sublinea');
+
+        $categoriasFacial = $faciales->map(function ($productos, $sublinea) use ($asignarImagen) {
+            return (object) [
+                'id' => Str::slug($sublinea),
+                'nombre' => $sublinea,
+                'imagen' => $asignarImagen($sublinea),
+                'productos_count' => $productos->count(),
+            ];
+        })->values();
+
+        // Corporales
+        $corporales = Products::where('linea', 'Corporal')
+            ->where('subcategoria', 'Producto')
+            ->get()
+            ->groupBy('sublinea');
+
+        $categoriasCorporal = $corporales->map(function ($productos, $sublinea) use ($asignarImagen) {
+            return (object) [
+                'id' => Str::slug($sublinea),
+                'nombre' => $sublinea,
+                'imagen' => $asignarImagen($sublinea),
+                'productos_count' => $productos->count(),
+            ];
+        })->values();
+
+        return view('cotizador.tiendita.edit', compact('categoriasFacial', 'categoriasCorporal', 'cotizacion', 'cotizacion_productos'));
     }
 
     public function edit_renderizarItemCarrito(Request $request){
@@ -986,6 +1082,20 @@ class CotizadorController extends Controller
                 }
 
                 $kitCounter++;
+            } elseif ($prod->subcategoria == 'Tiendita') {
+                // Si no existe, crea un nuevo registro
+                $order->items()->create([
+                    $fkOrder   => $order->id,
+                    'id_producto'     => $p['id'],
+                    'cantidad'        => $p['cantidad'],
+                    'precio_uni'      => $p['precio'],
+                    'descuento'       => $p['descuentoPct'] ?? 0,
+                    'price'           => $p['precio'] * $p['cantidad'] * (1 - (($p['descuentoPct'] ?? 0)/100)),
+                    'kit'             => 0,
+                    'num_kit'         => null,
+                    'estatus'         => 1,
+                    'escaneados'      => $p['cantidad'],
+                ]);
             } else {
                 // 3c) Guarda producto normal
                 $order->items()->create([
