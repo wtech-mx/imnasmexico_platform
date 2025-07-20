@@ -601,7 +601,7 @@ class CotizadorController extends Controller
         $queryBase = NotasProductosCosmica::query()
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '==', 'Entregado');
+            ->where('estatus_cotizacion', '=', 'Entregado');
 
         // 4) Total general de todas las ventas en ese rango
         $totalVentas = $queryBase->sum('total');
@@ -611,7 +611,7 @@ class CotizadorController extends Controller
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('metodo_pago', 'Efectivo')
-            ->where('estatus_cotizacion', '==', 'Entregado')
+            ->where('estatus_cotizacion', '=', 'Entregado')
             ->sum('total');
 
         // 6) Total con Tarjeta
@@ -619,7 +619,7 @@ class CotizadorController extends Controller
             ->where('tipo_nota', 'Cotizacion_Expo')
             ->whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('metodo_pago', 'Tarjeta')
-            ->where('estatus_cotizacion', '==', 'Entregado')
+            ->where('estatus_cotizacion', '=', 'Entregado')
             ->sum('total');
 
         $ventasPorAdmin = NotasProductosCosmica::select(
@@ -632,7 +632,7 @@ class CotizadorController extends Controller
             ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicio, $fechaFin])
             ->groupBy('users.id', 'users.name')
             ->orderBy('total_ventas', 'desc')
-            ->where('estatus_cotizacion', '==', 'Entregado')
+            ->where('estatus_cotizacion', '=', 'Entregado')
             ->get();
 
         $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_expo', compact('totalVentas', 'totalEfectivo', 'totalTarjeta', 'fechaInicio', 'fechaFin', 'ventasPorAdmin'));
