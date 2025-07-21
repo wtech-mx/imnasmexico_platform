@@ -7,8 +7,35 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+
 class StpController extends Controller
 {
+
+    protected bool $modoProduccion = true; // ⚠️ CAMBIA a true para producción
+
+    protected function obtenerClavePrivada()
+    {
+        if ($this->modoProduccion) {
+            $pemPath = public_path('stp_leys_production/inmas.pem');
+            $pass    = 'F>qa}8K^I7|INgus/kI5';
+        } else {
+            $pemPath = public_path('stp_leys/inmas.pem');
+            $pass    = 'X}Zl0/RtjuI(=Esz3+Vq';
+        }
+
+        if (!file_exists($pemPath)) {
+            throw new \Exception("No se encontró el archivo PEM en: $pemPath");
+        }
+
+        $pem = file_get_contents($pemPath);
+        $pkey = openssl_pkey_get_private($pem, $pass);
+
+        if (!$pkey) {
+            throw new \Exception("No se pudo cargar la clave privada. ¿Pass incorrecta?");
+        }
+
+        return $pkey;
+    }
 
     public function formConsultaSaldo()
     {
@@ -31,8 +58,8 @@ class StpController extends Controller
         $cadena .= '||';
 
         // Firmar cadena
-        $pem = file_get_contents(public_path('stp_leys_production/inmas.pem'));
-        $pkey = openssl_pkey_get_private($pem, 'F>qa}8K^I7|INgus/kI5');
+        $pkey = $this->obtenerClavePrivada();
+
         openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
         $firma = base64_encode($bin);
 
@@ -68,18 +95,10 @@ class StpController extends Controller
         ]);
 
         // 1) Ruta al PEM en public/stp_leys
-        $privateKeyPath = public_path('stp_leys_production/inmas.pem');
-        if (! file_exists($privateKeyPath)) {
-            return back()->withErrors("No existe el archivo de llave privada en {$privateKeyPath}");
-        }
-
-        // 2) Cargar la clave (si tu PEM lleva passphrase, ajústalo aquí)
-        $pem    = file_get_contents($privateKeyPath);
-        //$pass   = 'X}Zl0/RtjuI(=Esz3+Vq';
-        $pass   = 'F>qa}8K^I7|INgus/kI5';
-        $pkey   = openssl_pkey_get_private($pem, $pass);
-        if (! $pkey) {
-            return back()->withErrors('No pude cargar la clave privada (¿passphrase correcta?)');
+        try {
+            $pkey = $this->obtenerClavePrivada();
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
         }
 
         // 3) Construir cadena original
@@ -149,14 +168,11 @@ class StpController extends Controller
                 break;
         }
 
-
         // 2) Generar firma
-        $privateKeyPath = public_path('stp_leys_production/inmas.pem');
-        $pem    = file_get_contents($privateKeyPath);
-        $pass   = 'F>qa}8K^I7|INgus/kI5';
-        $pkey   = openssl_pkey_get_private($pem, $pass);
-        if (! $pkey) {
-            return back()->withErrors('No pude cargar la clave privada.');
+        try {
+            $pkey = $this->obtenerClavePrivada();
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
         }
 
         if (! openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
@@ -170,9 +186,11 @@ class StpController extends Controller
             'firma'   => $firma,
             'pagina'  => $data['pagina'],
         ];
+
         if ($data['tipo'] === 'historica') {
             $payload['fechaOperacion'] = $data['fechaOperacion'];
         }
+
         if ($data['tipo'] === 'natural') {
             $payload['fechaNatural']      = $data['fechaNatural'];
             if ($data['horaCapturaInicio']) {
@@ -182,7 +200,6 @@ class StpController extends Controller
                 $payload['horaCapturaFin']    = $data['horaCapturaFin'];
             }
         }
-
 
         // 4) Llamar al servicio STP
         $response = Http::withHeaders([
@@ -209,9 +226,6 @@ class StpController extends Controller
         return view('stp.orden_rastreo_form');
     }
 
-    /**
-     * Procesa la consulta de orden por claveRastreo
-     */
     public function consultaOrdenRastreo(Request $request)
     {
         $data = $request->validate([
@@ -234,17 +248,16 @@ class StpController extends Controller
         }
 
         // 2) Generar firma (idéntico al otro método)
-        $privateKeyPath = public_path('stp_leys/inmas.pem');
-        $pem    = file_get_contents($privateKeyPath);
-        $pass   = 'X}Zl0/RtjuI(=Esz3+Vq';
-        $pkey   = openssl_pkey_get_private($pem, $pass);
-        if (! $pkey) {
-            return back()->withErrors('No pude cargar la clave privada.');
+        try {
+            $pkey = $this->obtenerClavePrivada();
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
         }
 
         if (! openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
             return back()->withErrors('Falló la generación de la firma.');
         }
+
         $firma = base64_encode($bin);
 
         // 3) Preparar payload
@@ -254,6 +267,7 @@ class StpController extends Controller
             'claveRastreo' => $data['claveRastreo'],
             'firma'        => $firma,
         ];
+
         if (! empty($data['fechaOperacion'])) {
             $payload['fechaOperacion'] = $data['fechaOperacion'];
         } else {
@@ -286,7 +300,6 @@ class StpController extends Controller
         return view('stp.comprobante_form');
     }
 
-
     public function consultaComprobante(Request $request)
     {
         $data = $request->validate([
@@ -308,13 +321,13 @@ class StpController extends Controller
         }
 
         // 2) Firmar igual que antes:
-        $pemPath = public_path('stp_leys/inmas.pem');
-        $pem     = file_get_contents($pemPath);
-        $pass    = 'X}Zl0/RtjuI(=Esz3+Vq';
-        $pkey    = openssl_pkey_get_private($pem, $pass);
-        if (!$pkey) {
-            return back()->withErrors('No se pudo cargar la llave privada.');
+        try {
+            $pkey = $this->obtenerClavePrivada();
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
         }
+
+
         if (! openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
             return back()->withErrors('Error generando la firma.');
         }
@@ -378,16 +391,17 @@ class StpController extends Controller
         }
 
         // 2) Firma SHA256-RSA
-        $pemPath = public_path('stp_leys_production/inmas.pem');
-        $pem     = file_get_contents($pemPath);
-        $pass    = 'F>qa}8K^I7|INgus/kI5';
-        $pkey    = openssl_pkey_get_private($pem, $pass);
-        if (! $pkey) {
-            return back()->withErrors('No se pudo cargar la clave privada.');
+        try {
+            $pkey = $this->obtenerClavePrivada();
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
         }
+
+
         if (! openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
             return back()->withErrors('Error al generar la firma.');
         }
+
         $firma = base64_encode($bin);
 
         // 3) Payload
@@ -396,6 +410,7 @@ class StpController extends Controller
             'firma'   => $firma,
             'pagina'  => $data['pagina'],
         ];
+
         if (! empty($data['fechaOperacion'])) {
             $payload['fechaOperacion'] = $data['fechaOperacion'];
         }
@@ -419,7 +434,6 @@ class StpController extends Controller
         return view('stp.instituciones_form');
     }
 
-
     public function consultaInstituciones(Request $request)
     {
         // Validar
@@ -431,13 +445,13 @@ class StpController extends Controller
         $cadena   = "||{$data['empresa']}||";
 
         // 2) Firmar
-        $pemPath  = public_path('stp_leys/inmas.pem');
-        $pem      = file_get_contents($pemPath);
-        $pass     = 'X}Zl0/RtjuI(=Esz3+Vq';
-        $pkey     = openssl_pkey_get_private($pem, $pass);
-        if (! $pkey) {
-            return back()->withErrors('No se pudo cargar la clave privada.');
+        try {
+            $pkey = $this->obtenerClavePrivada();
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
         }
+
+
         if (! openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256)) {
             return back()->withErrors('Error al generar la firma.');
         }
@@ -468,6 +482,7 @@ class StpController extends Controller
     {
         return view('stp.registra_form');
     }
+
     public function registraOrden(Request $r)
     {
         // 1) Validación de sólo los campos que en tu ejemplo envías
@@ -496,50 +511,51 @@ class StpController extends Controller
 
         // 2) Montar el arreglo DE 28 elementos en este caso (hasta referenciaNumerica),
         //    reservando vacío para todos los opcionales intermedios:
-    $campos = [
-    /*  1 */ $f['institucionContraparte'],
-    /*  2 */ $f['empresa'],
-    /*  3 */ '',                            // fechaOperacion (vacío)
-    /*  4 */ '',                            // folioOrigen   (vacío)
-    /*  5 */ $f['claveRastreo'],
-    /*  6 */ $f['institucionOperante'],
-    /*  7 */ number_format($f['monto'],2,'.',''),
-    /*  8 */ $f['tipoPago'],
-    /*  9 */ $f['tipoCuentaOrdenante'],
-    /* 10 */ $f['nombreOrdenante'],
-    /* 11 */ $f['cuentaOrdenante'],
-    /* 12 */ $f['rfcCurpOrdenante'],
-    /* 13 */ $f['tipoCuentaBeneficiario'],
-    /* 14 */ $f['nombreBeneficiario'],
-    /* 15 */ $f['cuentaBeneficiario'],
-    /* 16 */ $f['rfcCurpBeneficiario'],
-    /* 17 */ '',   // emailBeneficiario
-    /* 18 */ '',   // tipoCuentaBeneficiario2
-    /* 19 */ '',   // nombreBeneficiario2
-    /* 20 */ '',   // cuentaBeneficiario2
-    /* 21 */ '',   // rfcCurpBeneficiario2
-    /* 22 */ $f['conceptoPago'],
-    /* 23 */ '',   // conceptoPago2
-    /* 24 */ '',   // claveCatUsuario1
-    /* 25 */ '',   // claveCatUsuario2
-    /* 26 */ '',   // clavePago
-    /* 27 */ '',   // referenciaCobranza
-    /* 28 */ $f['referenciaNumerica'],
-    // ahora 6 posiciones vacías más para llegar a 34
-    /* 29 */ '',
-    /* 30 */ '',
-    /* 31 */ '',
-    /* 32 */ '',
-    /* 33 */ '',
-    /* 34 */ '',
-    ];
 
-    // 3) Armas la cadena con doble pipe:
-    $cadena = '||'.implode('|', $campos).'||';
+        $campos = [
+        /*  1 */ $f['institucionContraparte'],
+        /*  2 */ $f['empresa'],
+        /*  3 */ '',                            // fechaOperacion (vacío)
+        /*  4 */ '',                            // folioOrigen   (vacío)
+        /*  5 */ $f['claveRastreo'],
+        /*  6 */ $f['institucionOperante'],
+        /*  7 */ number_format($f['monto'],2,'.',''),
+        /*  8 */ $f['tipoPago'],
+        /*  9 */ $f['tipoCuentaOrdenante'],
+        /* 10 */ $f['nombreOrdenante'],
+        /* 11 */ $f['cuentaOrdenante'],
+        /* 12 */ $f['rfcCurpOrdenante'],
+        /* 13 */ $f['tipoCuentaBeneficiario'],
+        /* 14 */ $f['nombreBeneficiario'],
+        /* 15 */ $f['cuentaBeneficiario'],
+        /* 16 */ $f['rfcCurpBeneficiario'],
+        /* 17 */ '',   // emailBeneficiario
+        /* 18 */ '',   // tipoCuentaBeneficiario2
+        /* 19 */ '',   // nombreBeneficiario2
+        /* 20 */ '',   // cuentaBeneficiario2
+        /* 21 */ '',   // rfcCurpBeneficiario2
+        /* 22 */ $f['conceptoPago'],
+        /* 23 */ '',   // conceptoPago2
+        /* 24 */ '',   // claveCatUsuario1
+        /* 25 */ '',   // claveCatUsuario2
+        /* 26 */ '',   // clavePago
+        /* 27 */ '',   // referenciaCobranza
+        /* 28 */ $f['referenciaNumerica'],
+        // ahora 6 posiciones vacías más para llegar a 34
+        /* 29 */ '',
+        /* 30 */ '',
+        /* 31 */ '',
+        /* 32 */ '',
+        /* 33 */ '',
+        /* 34 */ '',
+        ];
+
+        // 3) Armas la cadena con doble pipe:
+        $cadena = '||'.implode('|', $campos).'||';
 
         // 3) La firmamos igual que antes
-        $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
-        $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
+        $pkey = $this->obtenerClavePrivada();
+
         openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
         $firma = base64_encode($bin);
 
@@ -701,8 +717,7 @@ class StpController extends Controller
         $cadena = '||'.implode('|', $parts).'||';
 
         // 3) firmar
-        $pem  = file_get_contents(public_path('stp_leys/inmas.pem'));
-        $pkey = openssl_pkey_get_private($pem, 'X}Zl0/RtjuI(=Esz3+Vq');
+        $pkey = $this->obtenerClavePrivada();
         openssl_sign($cadena, $bin, $pkey, OPENSSL_ALGO_SHA256);
         $firma = base64_encode($bin);
 
