@@ -29,7 +29,7 @@
                             </a>
 
                             @can('nota-productos-crear')
-                                <a class="btn btn-sm btn-success" href="{{ route('notas_cotizacion.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff; font-size: 20px;">
+                                <a class="btn btn-sm btn-success" href="{{ route('index_nas.cotizador') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff; font-size: 20px;">
                                     <i class="fa fa-fw fa-edit"></i> Crear
                                 </a>
                             @endcan
@@ -158,7 +158,7 @@
                                                     @endif
                                                 @endcan
                                                 @can('nota-productos-editar')
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('notas_cotizacion.edit', $item->id) }}">
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('edit_nas.cotizador', $item->id) }}">
                                                         <i class="fa fa-fw fa-edit"></i>
                                                     </a>
                                                 @endcan
