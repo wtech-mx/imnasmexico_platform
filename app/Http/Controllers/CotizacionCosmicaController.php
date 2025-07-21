@@ -848,9 +848,9 @@ class CotizacionCosmicaController extends Controller
         $diaActual = date('Y-m-d');
         $today =  date('d-m-Y');
 
-        $nota = NotasExpo::find($id);
+        $nota = NotasProductosCosmica::find($id);
 
-        $nota_productos = ProductosNotasExpo::where('id_notas_productos', $nota->id)->get();
+        $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
         $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
 
