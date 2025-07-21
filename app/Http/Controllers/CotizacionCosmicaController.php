@@ -850,7 +850,7 @@ class CotizacionCosmicaController extends Controller
 
         $nota = NotasProductosCosmica::find($id);
 
-        $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
+        $nota_productos = ProductosNotasCosmica::where('id_notas_productos', $nota->id)->get();
 
         $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
 
