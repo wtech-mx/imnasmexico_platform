@@ -394,6 +394,6 @@
         }
 
         // Tiene datos suficientes para crear nuevo
-        return { ok: true, tipo: 'nuevo', nombre, apellido, telefono };
+        return { ok: true, tipo: 'nuevo', nombre, telefono };
     }
 </script>
