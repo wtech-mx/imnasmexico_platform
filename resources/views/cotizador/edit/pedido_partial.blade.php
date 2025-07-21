@@ -100,23 +100,54 @@
                 <!-- Campos de envío (oculto por defecto) -->
                 @include('cotizador.datos_direcion')
 
-                <!-- Método de pago -->
-                <div class="mb-3">
-                    <img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"><label for="metodo_pago_cliente" class="form-label">Método de pago:</label>
-                    <select id="metodo_pago_cliente" name="metodo_pago_cliente" class="form-select">
-                        <option value="Efectivo">Efectivo</option>
-                        <option value="Tarjeta crédito">Tarjeta crédito</option>
-                        <option value="Tarjeta débito">Tarjeta débito</option>
-                        <option value="Transferencia">Transferencia</option>
-                        <option value="Mercado Pago">Mercado Pago</option>
-                        <option value="Contraentrega">Contraentrega</option>
-                    </select>
-                </div>
+                @if(Route::currentRouteName() == 'edit_nas.tiendita')
+                    <!-- Método de pago -->
+                    <div class="mb-3">
+                        <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" style="width:17px;"><label for="metodo_pago_cliente" class="form-label">Método de pago:</label>
+                        <select id="metodo_pago_cliente" name="metodo_pago" class="form-select">
+                            <option value="{{$cotizacion->metodo_pago}}">{{$cotizacion->metodo_pago}}</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta crédito">Tarjeta crédito</option>
+                            <option value="Tarjeta débito">Tarjeta débito</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-between align-items-center">
+                        <span><img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"> Dinero recibido:</span>
+                        <div style="position: relative; width: 120px;">
+                            <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">$</span>
+                            <input id="monto" name="monto" type="number" value="{{$cotizacion->monto}}" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
+                        </div>
+                    </div>
+
+                    <a class=" btn-primary mb-3" data-bs-toggle="collapse" href="#metodo2" aria-expanded="false" aria-controls="metodo2">Método de pago 2</a>
+
+                    <div class="row collapse multi-collapse mb-3" id="metodo2">
+                        <div class="col-6">
+                            <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" style="width:17px;"><label for="metodo_pago_cliente" class="form-label">Método de pago 2:</label>
+                            <select id="metodo_pago_cliente" name="metodo_pago2" class="form-select">
+                                <option value="{{$cotizacion->metodo_pago2}}">{{$cotizacion->metodo_pago2}}</option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta crédito">Tarjeta crédito</option>
+                                <option value="Tarjeta débito">Tarjeta débito</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <span><img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"> Dinero recibido 2:</span>
+                            <div style="position: relative; width: 120px;">
+                                <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">$</span>
+                                <input id="monto" name="monto2" type="number" value="{{$cotizacion->monto2}}" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 <!-- Observaciones -->
                 <div class="mb-3">
                     <img src="{{ asset('assets/user/icons/buscar.webp') }}" style="width:17px;"><label for="observaciones" class="form-label">Observaciones:</label>
-                    <textarea id="observaciones" name="observaciones" rows="3" class="form-control">{{$cotizacion->nota}}</textarea>
+                    <textarea id="observaciones" name="observaciones" rows="1" class="form-control">{{$cotizacion->nota}}</textarea>
                 </div>
 
                 <!-- Totales -->
@@ -135,7 +166,7 @@
                 </div>
 
                 <div class="mb-2 d-flex justify-content-between">
-                    <span><img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"> Envío:</span>
+                    <span><img src="{{ asset('assets/user/icons/paquete-o-empaquetar.png') }}" style="width:17px;"> Envío:</span>
                     <span id="envio-display">$0.00</span>
                 </div>
 
