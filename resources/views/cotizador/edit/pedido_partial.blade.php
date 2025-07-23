@@ -115,7 +115,7 @@
 
                     <div class="mb-2 d-flex justify-content-between align-items-center">
                         <span><img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"> Dinero recibido:</span>
-                        <div style="position: relative; width: 120px;">
+                        <div style="position: relative; width: 120px;margin-top: 0.7rem;">
                             <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">$</span>
                             <input id="monto" name="monto" type="number" value="{{$cotizacion->monto}}" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
                         </div>
