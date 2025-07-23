@@ -736,6 +736,8 @@ class CotizadorController extends Controller
         $order->monto         = $request->monto;
         $order->monto2         = $request->monto2;
         $order->metodo_pago2         = $request->metodo_pago2;
+        $order->cambio         = $request->cambio;
+        $order->restante_dinero         = $request->restante;
 
         $modelClass = $order instanceof NotasProductosCosmica ? NotasProductosCosmica::class : NotasProductos::class;
         $order->folio = $this->generateFolio($order->tipo_nota, $modelClass);

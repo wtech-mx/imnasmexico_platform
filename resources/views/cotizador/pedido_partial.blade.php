@@ -70,7 +70,7 @@
                             <span><img src="{{ asset('assets/cam/dar-dinero.png') }}" style="width:17px;"> Dinero recibido 2:</span>
                             <div style="position: relative; width: 120px;">
                                 <span style="position: absolute;right: 0.5rem;top: 50%;transform: translateY(-50%);pointer-events: none;color: #555;">$</span>
-                                <input id="monto" name="monto2" type="number" placeholder="Monto" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
+                                <input id="monto2" name="monto2" type="number" placeholder="Monto" style="width: 100%;padding-right: 1.5rem;border: 0;border-bottom: 1px solid #ffffff;text-align: end;">
                             </div>
                         </div>
                     </div>
@@ -83,6 +83,12 @@
                 </div>
 
                 <!-- Totales -->
+                @if(Route::currentRouteName() == 'index_nas.tiendita')
+                    <div id="payment-status" style="margin-top: .5rem; font-weight: bold;"></div>
+                @endif
+                    <!-- Campos ocultos para enviar al controller TIENDITA -->
+                    <input type="hidden" name="restante"  id="restante-input">
+                    <input type="hidden" name="cambio"    id="cambio-input">
                 <div class="mb-2 d-flex justify-content-between align-items-center">
                     <span><img src="{{ asset('assets/user/icons/descuento.png') }}" style="width:17px;"> Descuento:</span>
                     <div style="position: relative; width: 120px;">

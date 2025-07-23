@@ -195,6 +195,43 @@
         const totalFinal = baseParaIVA + iva;
         document.getElementById('total-display').textContent = `$${totalFinal.toFixed(2)}`;
         document.getElementById('total-final-input').value   = totalFinal.toFixed(2);
+        if (tipo == 'tiendita') {
+            actualizarEstadoPago(totalFinal);
+        }
+    }
+
+    // CAMBIO O RESTANTE
+    if (tipo == 'tiendita') {
+        function actualizarEstadoPago(total) {
+            const monto1 = parseFloat(document.getElementById('monto').value)  || 0;
+            const monto2 = parseFloat(document.getElementById('monto2').value) || 0;
+            const pagado = monto1 + monto2;
+            const statusEl = document.getElementById('payment-status');
+
+            if (pagado === 0) {
+                statusEl.textContent = '';
+                document.getElementById('restante-input').value = '';
+                document.getElementById('cambio-input').value   = '';
+                return;
+            }
+
+            if (pagado < total) {
+                const restante = total - pagado;
+                statusEl.textContent = `Restante $${restante.toFixed(2)}`;
+                document.getElementById('restante-input').value = restante.toFixed(2);
+                document.getElementById('cambio-input').value   = '';
+            } else if (pagado > total) {
+                const cambio = pagado - total;
+                statusEl.textContent = `Cambio $${cambio.toFixed(2)}`;
+                document.getElementById('cambio-input').value   = cambio.toFixed(2);
+                document.getElementById('restante-input').value = '';
+            } else {
+                // pagado === total
+                statusEl.textContent = '';
+                document.getElementById('restante-input').value = '';
+                document.getElementById('cambio-input').value   = '';
+            }
+        }
     }
 
     async function renderizarCarrito() {
@@ -315,7 +352,7 @@
 
     });
 
-        //CALCULOS PARA EL ENVIO
+    //CALCULOS PARA EL ENVIO
     document.getElementById('chkEnvio')
     .addEventListener('change', () => {
         recalcEnvio();
@@ -396,4 +433,10 @@
         // Tiene datos suficientes para crear nuevo
         return { ok: true, tipo: 'nuevo', nombre, telefono };
     }
+    document.getElementById('monto').addEventListener('input', () => {
+        actualizarTotales();
+    });
+    document.getElementById('monto2').addEventListener('input', () => {
+        actualizarTotales();
+    });
 </script>

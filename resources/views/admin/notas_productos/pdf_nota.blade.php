@@ -361,6 +361,15 @@
         <b for="">Monto:</b> ${{ number_format($nota->monto2, 1, '.', ',') }} <br>
     @endif
 
+    @if ($nota->cambio != NULL)
+        <h2>Cambio</h2>
+        <b for="">Monto:</b> ${{ number_format($nota->cambio, 1, '.', ',') }} <br>
+    @endif
+
+    @if ($nota->restante_dinero != NULL)
+        <h2>Restante</h2>
+        <b for="">Monto:</b> ${{ number_format($nota->restante_dinero, 1, '.', ',') }} <br>
+    @endif
   </div>
 </body>
 </html>
