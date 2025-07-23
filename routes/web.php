@@ -51,7 +51,7 @@ Route::get('/admin/pagos/cosmica/expo', [App\Http\Controllers\CotizadorControlle
 Route::get('/notas/pago', [App\Http\Controllers\CotizadorController::class, 'togglePago'])->name('notas.pago.toggle');
 
 Route::get('cotizador/{tipo}/categoria/{sublinea}', [App\Http\Controllers\CotizadorController::class,'mostrarProductosPorCategoria'])
-     ->where('tipo','cosmica|nas')
+     ->where('tipo','cosmica|nas|tiendita')
      ->name('cotizador.categoria');
 Route::get('/cotizador/categoria/{id}', [App\Http\Controllers\CotizadorController::class, 'mostrarProductosCategoria'])->name('cotizador.productos_categoria');
 
@@ -412,20 +412,28 @@ Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroI
 
 Route::group(['middleware' => ['auth']], function() {
     // =============== R H ===============================
-    Route::get('/panel/rh', [App\Http\Controllers\RhController::class, 'index'])->name('panel.index');
+    Route::get('rh/panel', [App\Http\Controllers\RhController::class, 'index'])->name('panel.index');
 
-    Route::get('bancos', [App\Http\Controllers\BancosController::class, 'index'])->name('index.bancos');
-    Route::post('bancos/create', [App\Http\Controllers\BancosController::class, 'store'])->name('store.bancos');
-    Route::patch('bancos/update/{id}', [App\Http\Controllers\BancosController::class, 'update'])->name('update.bancos');
+    Route::get('rh/bancos', [App\Http\Controllers\BancosController::class, 'index'])->name('index.bancos');
+    Route::post('rh/bancos/create', [App\Http\Controllers\BancosController::class, 'store'])->name('store.bancos');
+    Route::patch('rh/bancos/update/{id}', [App\Http\Controllers\BancosController::class, 'update'])->name('update.bancos');
 
-    Route::get('bancos/show/{id}', [App\Http\Controllers\BancosController::class, 'edit'])->name('edit.bancos');
+    Route::get('rh/bancos/show/{id}', [App\Http\Controllers\BancosController::class, 'edit'])->name('edit.bancos');
+
+    // =============== NOMINA ===============================
+    Route::get('rh/nominas', [App\Http\Controllers\RhController::class, 'index_nominas'])->name('index.nominas');
+    Route::post('rh/nominas/create', [App\Http\Controllers\RhController::class, 'store_nominas'])->name('store.nominas');
+    Route::get('rh/nominas/show/{id}', [App\Http\Controllers\RhController::class, 'show_nomina'])->name('show.nomina');
+    Route::get('rh/nominas/edit/{id}', [App\Http\Controllers\RhController::class, 'edit_nominas'])->name('edit.nomina');
+
+    Route::post('rh/nominas/solicitudes', [App\Http\Controllers\RhController::class, 'store_nominas_solicitudes'])->name('store.nominas_solicitudes');
 
     // ==================== P R O V E E D O R E S ====================
-    Route::get('proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');
-    Route::post('proveedores/create', [App\Http\Controllers\ProveedorController::class, 'store'])->name('store.proveedores');
-    Route::post('proveedores/create/cuenta', [App\Http\Controllers\ProveedorController::class, 'cuenta'])->name('cuenta.proveedores');
-    Route::patch('proveedores/update/{id}', [App\Http\Controllers\ProveedorController::class, 'update'])->name('update.proveedores');
-    Route::delete('proveedores/cuentas/{id}', [App\Http\Controllers\ProveedorController::class, 'destroy'])->name('cuentas.borrar');
+    Route::get('rh/proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');
+    Route::post('rh/proveedores/create', [App\Http\Controllers\ProveedorController::class, 'store'])->name('store.proveedores');
+    Route::post('rh/proveedores/create/cuenta', [App\Http\Controllers\ProveedorController::class, 'cuenta'])->name('cuenta.proveedores');
+    Route::patch('rh/proveedores/update/{id}', [App\Http\Controllers\ProveedorController::class, 'update'])->name('update.proveedores');
+    Route::delete('rh/proveedores/cuentas/{id}', [App\Http\Controllers\ProveedorController::class, 'destroy'])->name('cuentas.borrar');
 
 
     Route::get  ('/stp/firma', [StpController::class, 'showForm'])->name('stp.firma.form');
@@ -504,6 +512,7 @@ Route::group(['middleware' => ['auth']], function() {
     //================ MODULO COTIZADOR NEW TIENDITA============================================
     Route::get('/admin/ventas/tiendita', [App\Http\Controllers\CotizadorController::class, 'index_tiendita'])->name('index_nas.tiendita');
     Route::get('/admin/ventas/edit/tiendita/{id}', [App\Http\Controllers\CotizadorController::class, 'edit_tiendita'])->name('edit_nas.tiendita');
+
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 
