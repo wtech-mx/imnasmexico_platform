@@ -403,6 +403,11 @@ class CotizadorController extends Controller
             if (! empty($cats)) {
                 $productos->whereIn('categoria', $cats);
             }
+        } else if ($tipo === 'tiendita') {
+            $cats = ['Nas','Cosmica'];
+            if (! empty($cats)) {
+                $productos->whereIn('categoria', $cats);
+            }
         } else {
             $productos->where('categoria','Cosmica');
         }
