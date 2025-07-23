@@ -374,6 +374,9 @@ class CotizadorController extends Controller
         if ($tipo === 'nas') {
             // NAS ve productos de NAS y también de Cosmica
             $query->whereIn('categoria',['NAS','Cosmica']);
+        }else if ($tipo === 'tiendita') {
+            // NAS ve productos de NAS y también de Cosmica
+            $query->whereIn('categoria',['NAS','Cosmica']);
         } else {
             // Cosmica o por defecto
             $query->where('categoria','Cosmica');

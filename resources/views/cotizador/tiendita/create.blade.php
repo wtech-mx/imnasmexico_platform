@@ -16,7 +16,7 @@ Tiendita
 
 @section('cotizador')
 
-<div class="container-xxl" id="cotizadorApp" data-tipo="nas">
+<div class="container-xxl" id="cotizadorApp" data-tipo="tiendita">
     <div class="row">
 
         <!-- Productos -->

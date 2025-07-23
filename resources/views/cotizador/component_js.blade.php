@@ -195,14 +195,16 @@
         const totalFinal = baseParaIVA + iva;
         document.getElementById('total-display').textContent = `$${totalFinal.toFixed(2)}`;
         document.getElementById('total-final-input').value   = totalFinal.toFixed(2);
-        if (tipo == 'tiendita') {
+        console.log('tipo', tipo);
+        if (tipo === 'tiendita') {
             actualizarEstadoPago(totalFinal);
         }
     }
 
     // CAMBIO O RESTANTE
-    if (tipo == 'tiendita') {
-        function actualizarEstadoPago(total) {
+    function actualizarEstadoPago(total) {
+        console.log('tipo', tipo);
+        if (tipo === 'tiendita') {
             const monto1 = parseFloat(document.getElementById('monto').value)  || 0;
             const monto2 = parseFloat(document.getElementById('monto2').value) || 0;
             const pagado = monto1 + monto2;
