@@ -121,9 +121,13 @@
                         </div>
                     </div>
 
-                    <a class=" btn-primary mb-3" data-bs-toggle="collapse" href="#metodo2" aria-expanded="false" aria-controls="metodo2">Método de pago 2</a>
+                    {{-- <a class=" btn-primary mb-3" data-bs-toggle="collapse" href="#metodo2" aria-expanded="false" aria-controls="metodo2">Método de pago 2</a> --}}
 
-                    <div class="row collapse multi-collapse mb-3" id="metodo2">
+                    <div class="mb-2 d-flex justify-content-between align-items-center">
+                        <a class="text-dark" data-bs-toggle="collapse" href="#metodo2" aria-expanded="false" aria-controls="metodo2" style="text-decoration: none;"><img src="{{ asset('assets/cam/anadir.webp') }}" style="width:17px;"> Agregar Otro metodo de pago</a>
+                    </div>
+
+                    <div class="row collapse multi-collapse mt-3 mb-2" id="metodo2">
                         <div class="col-6">
                             <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" style="width:17px;"><label for="metodo_pago_cliente" class="form-label">Método de pago 2:</label>
                             <select id="metodo_pago_cliente" name="metodo_pago2" class="form-select">
