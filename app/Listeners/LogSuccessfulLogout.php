@@ -24,13 +24,14 @@ class LogSuccessfulLogout
     public function handle(Logout $event)
     {
         $user = $event->user;
-        // Actualiza la última sesión abierta sin logout_at
-        UserSession::where('user_id', $user->id)
+        if (! is_null($user->cliente)) {
+            return;
+        }
+
+        \App\Models\UserSession::where('user_id', $user->id)
             ->whereNull('logout_at')
-            ->orderByDesc('login_at')
+            ->latest('login_at')
             ->limit(1)
-            ->update([
-                'logout_at' => now(),
-            ]);
+            ->update(['logout_at' => now()]);
     }
 }

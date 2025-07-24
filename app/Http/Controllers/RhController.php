@@ -26,8 +26,11 @@ class RhController extends Controller
     public function index_nominas(){
 
         $users = User::where('cliente','=',null)->where('nomina_estatus', '=', '1')->orderBy('id','DESC')->get();
-        $sessions = UserSession::with('user')->latest('login_at')->paginate(50);
-        
+        $sessions = UserSession::with('user')
+        ->whereHas('user', fn($q) => $q->whereNull('cliente'))
+        ->latest('login_at')
+        ->paginate(50);
+
         return view('rh.nominas.index', compact('users', 'sessions'));
     }
 

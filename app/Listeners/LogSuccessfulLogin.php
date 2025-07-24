@@ -24,12 +24,17 @@ class LogSuccessfulLogin
     public function handle(Login $event)
     {
         $user = $event->user;
-        UserSession::create([
+
+        // Solo usuarios con cliente == null
+        if (! is_null($user->cliente)) {
+            return;
+        }
+
+        \App\Models\UserSession::create([
             'user_id'    => $user->id,
-            'ip_address' => Request::ip(),
-            'user_agent' => Request::header('User-Agent'),
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->header('User-Agent'),
             'login_at'   => now(),
-            'logout_at'  => null,
         ]);
     }
 }
