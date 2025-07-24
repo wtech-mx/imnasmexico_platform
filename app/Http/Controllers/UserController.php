@@ -199,4 +199,6 @@ class UserController extends Controller
 
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
+
+    
 }

@@ -7,20 +7,52 @@
     use Carbon\Carbon;
     use Carbon\CarbonInterface;
 @endphp
+
 @section('content')
-<div class="container-fluid py-0 py-lg-4">
-    @can('dashboard-cursos')
-        @include('admin.dashboard_admin')
-    @endcan
+    <div class="container-fluid py-0 py-lg-4">
+        @can('dashboard-cursos')
+            @include('admin.dashboard_admin')
+        @endcan
 
-    @can('dashboard-users')
-    @include('admin.dashboard_users')
-@endcan
+        @can('dashboard-users')
+            @include('admin.dashboard_users')
+        @endcan
 
-    @can('dashboard-cam')
+        @can('dashboard-cam')
+        @endcan
+        <div class="container">
+            <h3>Avisos del sistema</h3>
+            <ul class="list-group">
+                @foreach($avisos as $aviso)
+                    @php
+                        if($aviso->tipo_prioridad == 'Urgente'){
+                            $icon = asset('assets/cam/change.png');
+                        } elseif ($aviso->tipo_prioridad == 'Importante') {
+                            $icon = asset('assets/cam/checked.png');
+                        } else {
+                            $icon = asset('assets/cam/heart.png');
+                        }
+                    @endphp
+                <li class="list-group-item d-flex justify-content-between align-items-start"
+                    data-id="{{ $aviso->id }}">
+                    <div class="ms-2 me-auto">
 
-    @endcan
-</div>
+                        <div class="fw-bold">{{ $aviso->titulo }} <img src="{{ $icon }}" class="mt-2" width="20px"></div>
+                        <p class="fw-bold">{{ $aviso->fecha_programada }}</p>
+                        @if($aviso->descripcion)
+                            {!! Str::limit($aviso->descripcion, 100) !!}
+                        @endif
+                        @if($aviso->url)
+                            <br>
+                            <a href="{{ $aviso->url }}" target="_blank" class="ver-video">Ver video</a>
+                        @endif
+                    </div>
+                    <button class="btn btn-sm btn-primary btn-aviso-ver">Confirmar</button>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 @include('admin.profesores.modal_prof_create')
 @include('admin.marketing.modal_cupon_create')
 
@@ -119,4 +151,28 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.btn-aviso-ver').forEach(btn=>{
+    btn.addEventListener('click', function(){
+      const li     = this.closest('li[data-id]');
+      const avisoId= li.dataset.id;
+
+      fetch(`/avisos/${avisoId}/clic`, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+          'Accept': 'application/json'
+        }
+      }).then(r=>r.json())
+        .then(json=>{
+          if(json.ok) {
+            this.textContent = 'Leído ✓';
+            this.disabled = true;
+          }
+        });
+    });
+  });
+});
+</script>
 @endsection

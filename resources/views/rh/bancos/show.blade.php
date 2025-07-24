@@ -4,10 +4,35 @@
 @endsection
 
 @section('content')
-
+@php
+    if($banco->nombre_banco == 'STP') {
+        $img = asset('assets/bancos/stp.jpg');
+        $logo = asset('assets/bancos/logo_stp.png');
+    } elseif($banco->nombre_banco == 'BBVA') {
+        $img = asset('assets/bancos/bbva.webp');
+        $logo = asset('assets/bancos/logo_bbva.png');
+    } elseif($banco->nombre_banco == 'Banamex') {
+        $img = asset('assets/bancos/banamex.jpg');
+        $logo = asset('assets/bancos/logo_banamex.png');
+    } elseif($banco->nombre_banco == 'Inbursa') {
+        $img = asset('assets/bancos/inbursa.jpg');
+        $logo = asset('assets/bancos/logo_inbursa.png');
+    } elseif($banco->nombre_banco == 'Mercado Pago') {
+        $img = asset('assets/bancos/mercado_pago.jpg');
+        $logo = asset('assets/bancos/logo_mercado.png');
+    } elseif($banco->nombre_banco == 'Banco Azteca') {
+        $img = asset('assets/bancos/azteca.jpeg');
+        $logo = asset('assets/bancos/logo_azteca.png');
+    } elseif($banco->nombre_banco == 'NU') {
+        $img = asset('assets/bancos/nu.jpg');
+        $logo = asset('assets/bancos/logo_nu.png');
+    } else {
+        $img = 'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg';
+    }
+@endphp
 <div class="container-fluid my-5 py-2">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mb-2">
             <div class="card">
                 <form action="" method="GET">
                     <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
@@ -113,16 +138,12 @@
             </div>
         </div>
 
-      <div class="col-md-8 col-sm-10 mx-auto mt-3">
+      <div class="col-md-8 col-sm-10 mx-auto">
           <div class="card my-sm-5 my-lg-0">
             <div class="card-header text-center">
               <div class="row justify-content-between">
                 <div class="col-md-4 text-start">
-                    @if ($configuracion->logo == NULL)
-                        <img class="mb-2 w-25 p-2" src="{{asset('assets/cam/logo.jpg') }}" alt="Logo">
-                    @else
-                        <img class="mb-2 w-25 p-2" src="{{asset('logo/'.$configuracion->logo) }}" alt="Logo">
-                    @endif
+                   <img class="mb-2 w-25 p-2" src="{{$logo}}" alt="Logo">
 
                   <h6>
                     Reporte de Banco
@@ -170,31 +191,58 @@
               <div class="row">
                 <div class="col-12">
                   <div class="table-responsive border-radius-lg">
-                    <table class="table text-right">
+                    <table class="table text-right" >
                       <thead class="bg-default">
                         <tr>
-                          <th scope="col" class="pe-2 text-start ps-2 text-white">Fecha</th>
-                          <th scope="col" class="pe-2 text-white">Contenedor</th>
-                          <th scope="col" class="pe-2 text-white" colspan="2">Cobros</th>
-                          <th scope="col" class="pe-2 text-white">Pagos</th>
+                        <th scope="col" class="pe-2 text-start ps-2 text-white">ID</th>
+                          <th scope="col" class="pe-2 text-white">Fecha</th>
+                          <th scope="col" class="pe-2 text-white">Descripción</th>
+                          <th scope="col" class="pe-2 text-white" colspan="2">Entradas</th>
+                          <th scope="col" class="pe-2 text-white">Salidas</th>
                         </tr>
                       </thead>
                       <tbody>
-
+                        @foreach($transacciones as $t)
+                            <tr>
+                                <td class="text-start ps-2 pe-2">{{ $t['id'] }}</td>
+                                <td>
+                                @php
+                                    $ts = strtotime($t['fecha']);
+                                    $fecha = strftime('%e de %B del %Y', $ts);
+                                    $hora  = date('h:i A', $ts);
+                                @endphp
+                                {!! $fecha . '<br>a las ' . $hora !!}
+                                </td>
+                                <td style="white-space: pre-line;">
+                                    @php
+                                        $words = explode(' ', $t['descripcion']);
+                                        $formattedDesc = collect($words)
+                                        ->chunk(3)                // agrupa de 3 en 3
+                                        ->map->join(' ')          // por cada sub-colección une con espacio
+                                        ->join("\n");             // une las líneas con salto de línea
+                                    @endphp
+                                    {!! nl2br(e($formattedDesc)) !!}
+                                </td>
+                                <td style="color: rgb(114, 190, 14);">
+                                {{ $t['entrada'] !== null ? '$'.number_format($t['entrada'],2) : '' }}
+                                </td>
+                                <td style="color: red;">
+                                {{ $t['salida']  !== null ? '$'.number_format($t['salida'],2)  : '' }}
+                                </td>
+                            </tr>
+                        @endforeach
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th></th>
-                          <th class="h5 ps-4" colspan="2">SubTotal</th>
-                          <td id="totalPenultimaColumna" colspan="1" class="text-right h5 ps-4"></td>
-                          <td id="totalUltimaColumna" colspan="1" class="text-right h5 ps-4"></td>
+                            <th colspan="3" class="h5 ps-4">SubTotales:</th>
+                            <td class="h5 ps-4" id="totalEntradas"></td>
+                            <td class="h5 ps-4" id="totalSalidas"></td>
                         </tr>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th class="h5 ps-4" colspan="2">Total</th>
-                            <td id="diferenciaColumna2" colspan="1" class="text-right h5 ps-4"></td>
-                          </tr>
+                            <th colspan="3"></th>
+                            <th class="h5 ps-4">Saldo del mes:</th>
+                            <td class="h5 ps-4" id="diferencia"></td>
+                        </tr>
                       </tfoot>
                     </table>
                   </div>
@@ -209,28 +257,27 @@
 @section('datatable')
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Calcular el total de la penúltima columna
-        let totalPenultima = 0;
-        document.querySelectorAll('.penultima-columna').forEach(function(cell) {
-            let text = cell.textContent.trim().replace('$', '').replace(/,/g, '');
-            totalPenultima += parseFloat(text) || 0;
-        });
-        document.getElementById('totalPenultimaColumna').textContent = `$ ${totalPenultima.toLocaleString('en-US')}`;
-
-        // Calcular el total de la última columna
-        let totalUltima = 0;
-        document.querySelectorAll('.ultima-columna').forEach(function(cell) {
-            let text = cell.textContent.trim().replace('$', '').replace(/,/g, '');
-            totalUltima += parseFloat(text) || 0;
-        });
-        document.getElementById('totalUltimaColumna').textContent = `$ ${totalUltima.toLocaleString('en-US')}`;
-
-        // Calcular la diferencia y mostrarla
-        let diferencia = totalPenultima - totalUltima;
-        document.getElementById('diferenciaColumna').textContent = `$ ${diferencia.toLocaleString('en-US')}`;
-        document.getElementById('diferenciaColumna2').textContent = `$ ${diferencia.toLocaleString('en-US')}`;
+  // Opcional: calcular totales en frontend
+  function fmt(num) {
+    return num.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
+  }
+
+  let sumE = 0, sumS = 0;
+  document.querySelectorAll('tbody tr').forEach(tr => {
+    const e = parseFloat(tr.cells[3].textContent.replace(/[^0-9.-]+/g,'')) || 0;
+    const s = parseFloat(tr.cells[4].textContent.replace(/[^0-9.-]+/g,'')) || 0;
+    sumE += e;
+    sumS += s;
+  });
+
+  const dif = sumE - sumS;
+
+  document.getElementById('totalEntradas').textContent = '$' + fmt(sumE);
+  document.getElementById('totalSalidas').textContent  = '$' + fmt(sumS);
+  document.getElementById('diferencia').textContent    = '$' + fmt(dif);
 </script>
 
 @endsection

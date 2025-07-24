@@ -18,6 +18,7 @@ use App\Models\Factura;
 use App\Models\EnviosOrder;
 use MercadoPago\SDK;
 use App\Models\Cupon;
+use App\Models\NominaTareas;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\RegistroImnas;
@@ -204,8 +205,14 @@ class HomeController extends Controller
                     $comisionGrupal = 3000;
                 }
 
-
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'totalVentas', 'comisionGrupal'));
+            $avisos = NominaTareas::latest()->get();
+            $user_avisos = auth()->user();
+            foreach($avisos as $aviso) {
+                $user_avisos->avisos()->syncWithoutDetaching([
+                $aviso->id => ['visto_en' => now()]
+                ]);
+            }
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'totalVentas', 'comisionGrupal', 'avisos'));
         }
 
     }

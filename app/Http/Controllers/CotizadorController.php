@@ -700,6 +700,7 @@ class CotizadorController extends Controller
 
     public function store_new(Request $request)
     {
+        dd($request);
         // 1) Valida lo esencial
         $data = $request->validate([
             'tipo'            => 'required|in:cosmica,nas,tiendita'

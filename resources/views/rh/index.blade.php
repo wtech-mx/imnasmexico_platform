@@ -38,10 +38,36 @@
                             <div class="carousel-item @if($chunkIndex == 0) active @endif">
                                 <div class="row">
                                     @foreach ($chunk as $item)
+                                        @php
+                                            if($item->nombre_banco == 'STP') {
+                                                $img = asset('assets/bancos/stp.jpg');
+                                                $logo = asset('assets/bancos/logo_stp.png');
+                                            } elseif($item->nombre_banco == 'BBVA') {
+                                                $img = asset('assets/bancos/bbva.webp');
+                                                $logo = asset('assets/bancos/logo_bbva.png');
+                                            } elseif($item->nombre_banco == 'Banamex') {
+                                                $img = asset('assets/bancos/banamex.jpg');
+                                                $logo = asset('assets/bancos/logo_banamex.png');
+                                            } elseif($item->nombre_banco == 'Inbursa') {
+                                                $img = asset('assets/bancos/inbursa.jpg');
+                                                $logo = asset('assets/bancos/logo_inbursa.png');
+                                            } elseif($item->nombre_banco == 'Mercado Pago') {
+                                                $img = asset('assets/bancos/mercado_pago.jpg');
+                                                $logo = asset('assets/bancos/logo_mercado.png');
+                                            } elseif($item->nombre_banco == 'Banco Azteca') {
+                                                $img = asset('assets/bancos/azteca.jpeg');
+                                                $logo = asset('assets/bancos/logo_azteca.png');
+                                            } elseif($item->nombre_banco == 'NU') {
+                                                $img = asset('assets/bancos/nu.jpg');
+                                                $logo = asset('assets/bancos/logo_nu.png');
+                                            } else {
+                                                $img = 'https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg';
+                                            }
+                                        @endphp
                                         <div class="col-6">
                                             <a href="{{ route('edit.bancos',$item->id) }}">
                                                 <div class="card bg-transparent shadow-xl">
-                                                    <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg');">
+                                                    <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('{{$img}}');background-position: center center; background-repeat: no-repeat; background-size: cover;">
                                                         <span class="mask bg-gradient-dark"></span>
                                                         <div class="card-body position-relative z-index-1 p-3">
                                                             <h4 class="text-white mb-0">{{ $item->nombre_beneficiario }}</h4>
@@ -58,7 +84,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                                                                    <img class="w-60 mt-2" src="../../assets/img/logos/mastercard.png" alt="logo">
+                                                                    <img class="w-60 mt-2" src="{{$logo}}" alt="logo">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -90,25 +116,27 @@
               <div class="row">
 
                 <div class="col-md-6">
-                  <div class="card">
-                    <div class="card-header mx-4 p-3 text-center">
-                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                        <i class="fas fa-landmark opacity-10"></i>
-                      </div>
-                    </div>
-                    <div class="card-body pt-0 p-3 text-center">
-                      <h6 class="text-center mb-0">Salarios</h6>
-                      <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">+$2000</h5>
-                    </div>
-                  </div>
+                    <a href="{{ route('index.nominas') }}">
+                        <div class="card">
+                            <div class="card-header mx-4 p-3 text-center">
+                            <div class="icon icon-shape icon-lg bg-gradient-secondary shadow text-center border-radius-lg">
+                                <img src="{{ asset('assets/cam/empleados.webp') }}" class="mt-2" width="40px">
+                            </div>
+                            </div>
+                            <div class="card-body pt-0 p-3 text-center">
+                            <h6 class="text-center mb-0">Nominas</h6>
+                            <hr class="horizontal dark my-3">
+                            <h5 class="mb-0">+$2000</h5>
+                            </div>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="col-md-6 mt-md-0 mt-4">
                   <div class="card">
                     <div class="card-header mx-4 p-3 text-center">
-                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                        <i class="fab fa-paypal opacity-10"></i>
+                      <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg">
+                        <img src="{{ asset('assets/cam/dar-dinero.png') }}" class="mt-2" width="40px">
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
@@ -128,8 +156,8 @@
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-header mx-4 p-3 text-center">
-                      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                        <i class="fas fa-landmark opacity-10"></i>
+                      <div class="icon icon-shape icon-lg bg-gradient-warning shadow text-center border-radius-lg">
+                        <img src="{{ asset('assets/cam/impuesto.png') }}" class="mt-2" width="40px">
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
@@ -140,7 +168,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6 mt-md-0 mt-4">
+                {{-- <div class="col-md-6 mt-md-0 mt-4">
                   <div class="card">
                     <div class="card-header mx-4 p-3 text-center">
                       <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
@@ -153,7 +181,7 @@
                       <h5 class="mb-0">$455.00</h5>
                     </div>
                   </div>
-                </div>
+                </div> --}}
 
               </div>
             </div>

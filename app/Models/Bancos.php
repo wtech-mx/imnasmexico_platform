@@ -21,6 +21,7 @@ class Bancos extends Model
         'saldo',
         'saldo',
         'tipo',
+        'driver',
     ];
 
 }

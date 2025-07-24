@@ -428,6 +428,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('rh/nominas/solicitudes', [App\Http\Controllers\RhController::class, 'store_nominas_solicitudes'])->name('store.nominas_solicitudes');
 
+    Route::post('rh/nominas/avisos', [App\Http\Controllers\RhController::class, 'store_nominas_avisos'])->name('store.nominas_avisos');
+    // Registrar clic AJAX
+    Route::post('/avisos/{aviso}/clic', [App\Http\Controllers\RhController::class,'clic'])->middleware('auth')->name('avisos.clic');
     // ==================== P R O V E E D O R E S ====================
     Route::get('rh/proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');
     Route::post('rh/proveedores/create', [App\Http\Controllers\ProveedorController::class, 'store'])->name('store.proveedores');

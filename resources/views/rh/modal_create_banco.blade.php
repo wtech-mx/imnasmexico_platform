@@ -21,23 +21,31 @@
                         </div>
                     </div>
 
-                    <div class="col-6 form-group">
-                        <label for="name">Nombre Banco *</label>
+                    <div class="col-12 form-group">
+                        <label for="name">Cuenta bancaria *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('assets/cam/sobre.png.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/usuario.png') }}" alt="" width="25px">
                             </span>
-                            <input name="nombre_banco" id="nombre_banco" type="text" class="form-control">
+                            <input name="cuenta_bancaria" id="cuenta_bancaria" type="text" class="form-control">
                         </div>
                     </div>
 
                     <div class="col-6 form-group">
-                        <label for="name">Cuenta Bancaria *</label>
+                        <label for="name">Nombre Banco *</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">
-                                <img src="{{ asset('assets/cam/telefono.png.webp') }}" alt="" width="25px">
+                                <img src="{{ asset('assets/cam/t credito.png.webp') }}" alt="" width="25px">
                             </span>
-                            <input name="cuenta_bancaria" id="cuenta_bancaria" type="text" class="form-control">
+                            <select id="nombre_banco" name="nombre_banco" class="form-select">
+                                <option value="STP">STP</option>
+                                <option value="BBVA">BBVA</option>
+                                <option value="Banamex">Banamex</option>
+                                <option value="Inbursa">Inbursa</option>
+                                <option value="Mercado Pago">Mercado Pago</option>
+                                <option value="Banco Azteca">Banco Azteca</option>
+                                <option value="NU">NU</option>
+                            </select>
                         </div>
                     </div>
 

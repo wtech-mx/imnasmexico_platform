@@ -66,6 +66,8 @@
             $backgroundColor = '#344767';
         } elseif (Request::is('cosmica*')) {
             $backgroundColor = '#322338';
+        } elseif (Request::is('rh*')) {
+            $backgroundColor = '#232a38';
         } else {
             $backgroundColor = $configuracion->color_principal;
         }

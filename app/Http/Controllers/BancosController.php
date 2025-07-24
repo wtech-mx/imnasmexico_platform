@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bancos;
+use MercadoPago\SDK;
 use Carbon\Carbon;
+use App\Services\Bancos\TransactionServiceFactory;
+
 class BancosController extends Controller
 {
 
@@ -22,19 +25,24 @@ class BancosController extends Controller
         $banco->nombre_banco = $request->get('nombre_banco');
         $banco->cuenta_bancaria = $request->get('cuenta_bancaria');
         $banco->clabe = $request->get('clabe');
-        $banco->saldo = $request->get('saldo');
+        $banco->saldo = $request->get('saldo_inicial');
         $banco->save();
 
         return redirect()->back();
     }
 
-    public function edit($id){
-        $banco = Bancos::where('id', '=', $id)->first();
+    public function edit($id)
+    {
+        $banco = Bancos::findOrFail($id);
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
         $fecha = date('Y-m-d');
 
-        return view('rh.bancos.show', compact( 'startOfWeek', 'fecha', 'banco'));
+        // Obtén la colección ya ordenada y mezclada
+        $transacciones = TransactionServiceFactory::make($banco)
+                            ->fetchTransactions();
+
+        return view('rh.bancos.show', compact('banco', 'transacciones', 'startOfWeek', 'endOfWeek', 'fecha'));
     }
 
 }
