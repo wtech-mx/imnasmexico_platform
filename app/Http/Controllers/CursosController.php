@@ -866,11 +866,17 @@ class CursosController extends Controller
             })
             ->sum('cantidad');
 
+        $ordenes_pagina = OrdersTickets::where('id_curso', 1041)
+        ->whereHas('Orders', function($query){
+            $query->where('estatus', 1);
+        })
+        ->get();
+        
         $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
         $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
 
         return view('admin.cursos.cosmica.lista', compact('ordenes_basico',
-            'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'curso'));
+            'ordenes_nas_basico', 'totalPersonas', 'totalRegistros', 'curso', 'ordenes_pagina'));
 
     }
 }

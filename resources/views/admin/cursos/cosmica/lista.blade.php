@@ -33,6 +33,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                   @foreach ($ordenes_pagina as $order)
+                                        <tr>
+                                            <td>{{ $order->User->name }}</td>
+                                            <td>{{ $order->User->telefono }}</td>
+                                            <td>Pagina: {{ $order->id_order }}</td>
+                                            <th>
+                                                <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago', $order->id_order) }}">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    @endforeach
                                     @foreach ($ordenes_basico as $order)
                                         <tr>
                                             <td>{{ $order->Nota->User->name }}</td>
