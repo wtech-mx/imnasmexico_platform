@@ -833,8 +833,14 @@ class CursosController extends Controller
 
     public function eventos_cosmica(Request $request){
         $cursos = Products::where('evento', '1')->get();
+        $ordenes_pagina = OrdersTickets::where('id_curso', 1041)
+        ->whereHas('Orders', function($query){
+            $query->where('estatus', 1);
+        })
+        ->count();
+
         foreach ($cursos as $curso) {
-            $curso->userCount = $curso->uniqueOrderTicketCount();
+            $curso->userCount = $curso->uniqueOrderTicketCount() + $ordenes_pagina;
         }
 
         return view('admin.cursos.cosmica.index', compact('cursos'));
@@ -871,7 +877,7 @@ class CursosController extends Controller
             $query->where('estatus', 1);
         })
         ->get();
-        
+
         $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
         $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
 
