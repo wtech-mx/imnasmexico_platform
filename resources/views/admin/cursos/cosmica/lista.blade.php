@@ -36,8 +36,8 @@
                                 <tbody>
                                    @foreach ($ordenes_pagina as $order)
                                         <tr>
+                                            <td>+52{{ $order->User->telefono }}</td>
                                             <td>{{ $order->User->name }}</td>
-                                            <td>{{ $order->User->telefono }}</td>
                                             <td>{{ $order->User->email }}</td>
                                             <td>Pagina: {{ $order->id_order }}</td>
                                             <th>
@@ -49,8 +49,8 @@
                                     @endforeach
                                     @foreach ($ordenes_basico as $order)
                                         <tr>
+                                            <td>+52{{ $order->Nota->User->telefono }}</td>
                                             <td>{{ $order->Nota->User->name }}</td>
-                                            <td>{{ $order->Nota->User->telefono }}</td>
                                             <td>{{ $order->Nota->User->email }}</td>
                                             <td>{{ $order->Nota->folio }}</td>
                                             <th>
