@@ -51,6 +51,7 @@
                                         <tr>
                                             <td>{{ $order->Nota->User->name }}</td>
                                             <td>{{ $order->Nota->User->telefono }}</td>
+                                            <td>{{ $order->Nota->User->email }}</td>
                                             <td>{{ $order->Nota->folio }}</td>
                                             <th>
                                                 <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $order->Nota->id) }}">
