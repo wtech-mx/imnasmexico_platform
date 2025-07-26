@@ -28,6 +28,7 @@
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Telefono</th>
+                                        <th>Correo</th>
                                         <th>Cotizacion</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -37,6 +38,7 @@
                                         <tr>
                                             <td>{{ $order->User->name }}</td>
                                             <td>{{ $order->User->telefono }}</td>
+                                            <td>{{ $order->User->email }}</td>
                                             <td>Pagina: {{ $order->id_order }}</td>
                                             <th>
                                                 <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago', $order->id_order) }}">
