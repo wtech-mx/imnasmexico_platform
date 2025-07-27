@@ -411,8 +411,9 @@ Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroI
 
 
 Route::group(['middleware' => ['auth']], function() {
-    // =============== R H ===============================
+    // =============== RH INICIO===============================
     Route::get('rh/panel', [App\Http\Controllers\RhController::class, 'index'])->name('panel.index');
+    Route::get('rh/finanzas', [App\Http\Controllers\RhController::class, 'index_finanzas'])->name('finanzas.index');
 
     Route::get('rh/bancos', [App\Http\Controllers\BancosController::class, 'index'])->name('index.bancos');
     Route::post('rh/bancos/create', [App\Http\Controllers\BancosController::class, 'store'])->name('store.bancos');
@@ -420,7 +421,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('rh/bancos/show/{id}', [App\Http\Controllers\BancosController::class, 'edit'])->name('edit.bancos');
 
-    // =============== NOMINA ===============================
+    // =============== RH NOMINA ===============================
     Route::get('rh/nominas', [App\Http\Controllers\RhController::class, 'index_nominas'])->name('index.nominas');
     Route::post('rh/nominas/create', [App\Http\Controllers\RhController::class, 'store_nominas'])->name('store.nominas');
     Route::get('rh/nominas/show/{id}', [App\Http\Controllers\RhController::class, 'show_nomina'])->name('show.nomina');
@@ -431,6 +432,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('rh/nominas/avisos', [App\Http\Controllers\RhController::class, 'store_nominas_avisos'])->name('store.nominas_avisos');
     // Registrar clic AJAX
     Route::post('/avisos/{aviso}/clic', [App\Http\Controllers\RhController::class,'clic'])->middleware('auth')->name('avisos.clic');
+
+    // =============== RH SOLICIUTDES ===============================
+    Route::get('rh/solicitudes', [App\Http\Controllers\RhController::class, 'index_solicitudes'])->name('index.solicitudes');
+
     // ==================== P R O V E E D O R E S ====================
     Route::get('rh/proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');
     Route::post('rh/proveedores/create', [App\Http\Controllers\ProveedorController::class, 'store'])->name('store.proveedores');

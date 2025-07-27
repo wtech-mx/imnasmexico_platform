@@ -16,6 +16,18 @@ class RhController extends Controller
 {
     public function index(){
 
+        return view('rh.inicio');
+    }
+
+    public function index_solicitudes(){
+        $today =  date('d-m-Y');
+        $solicitudes = NominaSolicitudes::orderBy('fecha_inicio', 'asc')->get();
+
+        return view('rh.solicitudes.index', compact('today', 'solicitudes'));
+    }
+
+    public function index_finanzas(){
+
         $bancos = Bancos::get();
         $proveedores = Proveedor::orderBy('created_at', 'desc')->get();
         $cuentas = CuentasBancarias::orderBy('created_at', 'desc')->get();

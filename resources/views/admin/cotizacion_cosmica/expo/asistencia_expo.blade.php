@@ -3,7 +3,10 @@
 @section('template_title')
     Asistencia Expo Sabado
 @endsection
-
+@section('css')
+<link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+@endsection
 @section('content')
 
     <div class="container-fluid">
@@ -65,126 +68,27 @@
                                 </div>
 
                                 <div class="table-responsive">
-                                    <table class="table table-flush" id="datatable-search">
+
+                                    <table class="table table-flush" id="orden_servicio">
                                         <thead class="thead">
                                             <tr>
-                                                <th>Folio</th>
-                                                <th>Cliente</th>
-                                                <th>Tipo</th>
-                                                <th>Cantidad</th>
-                                                <th>Asistencia</th>
-                                                <th>WhatsApp</th>
+                                                <th>WhatsApp Number(with country code)</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Other</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($ordenes_basico as $item)
-                                                <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
-                                                    <td>{{ $item->Nota->folio ?? 'Sin folio' }}</td>
-                                                    <td>
-                                                        {{ $item->id }}
-                                                        <h5>
-                                                            @if ($item->Nota->id_usuario == NULL)
-                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
-                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
-                                                                }, explode(' ', $item->Nota->nombre), array_keys(explode(' ', $item->Nota->nombre))))) !!} <br>
-                                                                {{ $item->Nota->telefono }}
-                                                            @else
-                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
-                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
-                                                                }, explode(' ', $item->Nota->User->name), array_keys(explode(' ', $item->Nota->User->name))))) !!} <br>
-                                                                {{ $item->Nota->User->telefono }}
-                                                            @endif
-                                                        </h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5>
-                                                            {{ $item->producto }}
-                                                        </h5>
-                                                    </td>
-                                                    <td><h5>{{ $item->cantidad }}</h5></td>
-                                                    <td>
-                                                        @for ($i = 0; $i < $item->cantidad; $i++)
-                                                            <input data-id="{{ $item->id }}" data-table="cosmica" data-index="{{ $i }}" class="toggle-class" type="checkbox"
-                                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                            data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
-                                                        @endfor
-                                                    </td>
-                                                    <td>
-                                                        @php
-                                                            $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;
-                                                            $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
-                                                        @endphp
-                                                        <a class="btn btn-xs btn-success text-white whatsapp-btn" data-id="{{ $item->id }}" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
-                                                            <i class="fa fa-whatsapp"></i>
-                                                        </a>
-
-                                                        @if(isset($item->Nota->User->name))
-                                                                <a href="{{ route('ticket_brunch.index', ['nombre' => Str::slug($item->Nota->User->name)]) }}" target="_blank" class="btn btn-xs btn-primary text-white">
-                                                                    <i class="fa fa-share"></i>
-                                                                </a>
-                                                        @endif
-
-
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                            @foreach ($ordenes_nas_basico as $item)
-                                                <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
-                                                    <td>{{ $item->Nota->folio ?? 'Sin folio' }}</td>
-
-                                                    <td>
-                                                        {{ $item->id }}
-                                                        <h5>
-                                                            @if ($item->Nota->id_usuario == NULL)
-                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
-                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
-                                                                }, explode(' ', $item->Nota->nombre), array_keys(explode(' ', $item->Nota->nombre))))) !!} <br>
-                                                                {{ $item->Nota->telefono }}
-                                                            @else
-                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
-                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
-                                                                }, explode(' ', $item->Nota->User->name), array_keys(explode(' ', $item->Nota->User->name))))) !!} <br>
-                                                                {{ $item->Nota->User->telefono }}
-                                                            @endif
-                                                        </h5>
-                                                    </td>
-
-                                                    <td>
-                                                        <h5>
-                                                            {{ $item->producto }}
-                                                        </h5>
-                                                    </td>
-
-                                                    <td><h5>{{ $item->cantidad }}</h5></td>
-
-                                                    <td>
-                                                        @for ($i = 0; $i < $item->cantidad; $i++)
-                                                            <input data-id="{{ $item->id }}" data-table="nas" data-index="{{ $i }}" class="toggle-class" type="checkbox"
-                                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                            data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
-                                                        @endfor
-                                                    </td>
-
-                                                    <td>
-                                                        @php
-                                                            $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;
-                                                            $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
-                                                        @endphp
-                                                        <a class="btn btn-xs btn-success text-white whatsapp-btn" data-id="{{ $item->id }}" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
-                                                            <i class="fa fa-whatsapp"></i>
-                                                        </a>
-
-                                                        <a href="{{ route('ticket_brunch.index', ['nombre' => $item->Nota->nombre]) }}" class="btn btn-xs btn-primary text-white whatsapp-btn">
-                                                            <i class="fa fa-share"></i>
-                                                        </a>
-
-                                                    </td>
+                                            @foreach ($ordenes_basico as $order)
+                                                <tr>
+                                                    <td>+52{{ $order->Nota->User->telefono }}</td>
+                                                    <td>{{ $order->Nota->User->name }}</td>
+                                                    <td>{{ $order->Nota->User->id }}</td>
+                                                    <th>WAPI Sender Support</th>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
@@ -196,72 +100,69 @@
 @endsection
 
 @section('datatable')
-<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+ <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+ <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.cliente').select2();
-        $('.phone').select2();
-        $('.administradores').select2();
+        $(document).ready(function() {
+            $('#orden_servicio').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Imprimir',
+                        exportOptions: {
+                            columns: ':visible',
+                            modifier: {
+                                styles: {
+                                    fontSize: '80px' // Tamaño de letra más grande para exportación PDF
+                                }
+                            }
+                        },
+                        title: function() {
+                            var customText = '';
+                            var titulo = 'Lista de ';
+                            // Agregar un texto personalizado antes del título de la página
+                        }
+                    },
+                    'excel',
+                    {
+                        extend: 'pdfHtml5',
+                        customize: function(doc) {
+                            // Establecer el tamaño de fuente para el documento PDF
+                            doc.defaultStyle.fontSize = 14;
 
-        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-            searchable: true,
-            fixedHeight: false
-        });
+                            // Establecer el tamaño de fuente para el encabezado
+                            doc.content[0].fontSize = 20;
 
-        $(document).on('change', '.toggle-class', function() {
-            var id = $(this).data('id');
-            var table = $(this).data('table');
-            var checkboxes = $(`input[data-id="${id}"]`);
-            var asistencia = checkboxes.filter(':checked').length;
-            console.log(asistencia);
+                        }
+                    },
+                    'colvis'
+                ],
+                responsive: false,
+                stateSave: true,
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: '{{ route('updateAsistencia') }}',
-                data: {
-                    '_token': '{{ csrf_token() }}',
-                    'id': id,
-                    'table': table,
-                    'asistencia': asistencia
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
                 },
-                success: function(data){
-                    console.log(data.success);
-                    // Deshabilitar el checkbox después de marcarlo
-                    $(this).prop('disabled', true);
-                }.bind(this),
-                error: function(data){
-                    console.log(data.error);
-                }
+                columnDefs: [
+                    { type: 'num', targets: 0 } // Indica que la columna 0 (No) debe ser tratada como número
+                ]
             });
         });
-
-        $(document).on('click', '.whatsapp-btn', function(e) {
-            var id = $(this).data('id');
-            e.preventDefault();
-
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: '{{ route('updateConfirmacion') }}',
-                data: {
-                    '_token': '{{ csrf_token() }}',
-                    'id': id
-                },
-                success: function(data){
-                    console.log(data.success);
-                    // Cambiar el color de la fila a rosa
-                    $(`#row-${id}`).css('background-color', 'pink');
-                    // Redirigir a WhatsApp
-                    window.open($(this).attr('href'), '_blank');
-                }.bind(this),
-                error: function(data){
-                    console.log(data.error);
-                }
-            });
-        });
-    });
 </script>
 @endsection
 

@@ -20,7 +20,7 @@
                             <select id="tipo_permiso" name="tipo_permiso" class="form-select" required>
                                 <option value="Vacaciones">Vacaciones</option>
                                 <option value="Enfermedad">Enfermedad</option>
-                                <option value="Asuntos propios">Asuntos propios</option>
+                                <option value="Otro">Otro</option>
                             </select>
                         </div>
                     </div>

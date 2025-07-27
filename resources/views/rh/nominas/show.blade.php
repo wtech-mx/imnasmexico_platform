@@ -491,7 +491,7 @@
 
             </div>
     </div>
-    @include('rh.nominas.modal_solicitud')
+    @include('rh.solicitudes.modal_solicitud')
 </body>
 @endsection
 
