@@ -435,6 +435,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== RH SOLICIUTDES ===============================
     Route::get('rh/solicitudes', [App\Http\Controllers\RhController::class, 'index_solicitudes'])->name('index.solicitudes');
+    Route::patch('rh/solicitudes/update/{id}', [App\Http\Controllers\RhController::class, 'update_solicitudes'])->name('update.solicitudes');
+
+    // =============== RH CALENDARIO ===============================
+    Route::get('rh/calendario', [App\Http\Controllers\RhController::class, 'index_calendario'])->name('index.calendario');
 
     // ==================== P R O V E E D O R E S ====================
     Route::get('rh/proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('index.proveedores');

@@ -10,7 +10,7 @@
     <div class="main-content position-relative max-height-vh-100 h-100">
         <div class="row">
 
-            <div class="col-md-5 mt-md-0 mt-4">
+            <div class="col-md-12 mt-md-3 mt-4">
                 <div class="card h-100 mb-4">
                   <div class="card-header pb-0 px-3">
                     <div class="row">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-md-0 mt-4">
                 <div class="card h-100 text-center">
                     <p class="text-center">
                         <img src="{{ asset('assets/cam/calenda.png') }}" class="mt-2" width="40px">
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-md-0 mt-4">
                 <a href="{{ route('index.nominas') }}">
                     <div class="card h-100 text-center">
                         <p class="text-center">
@@ -76,7 +76,7 @@
                 </a>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-md-0 mt-4">
                 <a href="{{ route('index.solicitudes') }}">
                     <div class="card h-100 text-center">
                         <p class="text-center">
@@ -87,7 +87,7 @@
                 </a>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-md-0 mt-4">
                 <a href="{{ route('index.nominas') }}">
                     <div class="card h-100 text-center">
                         <p class="text-center">
@@ -98,7 +98,7 @@
                 </a>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-md-0 mt-4">
                 <a href="{{ route('index.proveedores') }}">
                     <div class="card h-100 text-center">
                         <p class="text-center">
@@ -109,7 +109,7 @@
                 </a>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-md-0 mt-4">
                 <a href="{{ route('finanzas.index') }}">
                     <div class="card h-100 text-center">
                         <p class="text-center">
@@ -120,7 +120,7 @@
                 </a>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4 mb-5">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-4 mt-md-0 mb-5">
                 <div class="card h-100 text-center">
                     <p class="text-center">
                         <img src="{{ asset('assets/cam/comprobante.png') }}" class="mt-2" width="40px">
@@ -129,7 +129,7 @@
                 </div>
             </div>
 
-            <div class="col-6 col-md-6 col-xl-4 mt-md-0 mt-4 mb-5">
+            <div class="col-6 col-md-6 col-xl-4 mt-md-3 mt-4 mt-md-0 mb-5">
                 <div class="card h-100 text-center">
                     <p class="text-center">
                         <img src="{{ asset('assets/cam/usuario.png') }}" class="mt-2" width="40px">

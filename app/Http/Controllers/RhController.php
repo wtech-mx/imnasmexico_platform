@@ -21,9 +21,11 @@ class RhController extends Controller
 
     public function index_solicitudes(){
         $today =  date('d-m-Y');
-        $solicitudes = NominaSolicitudes::orderBy('fecha_inicio', 'asc')->get();
+        $solicitudes_pendientes = NominaSolicitudes::where('estatus', '=', NULL)->orderBy('fecha_inicio', 'asc')->get();
+        $solicitudes_aprobadas = NominaSolicitudes::where('estatus', '=', 'Autorizar')->orderBy('fecha_inicio', 'asc')->get();
+        $solicitudes_cancelada = NominaSolicitudes::where('estatus', '=', 'Rechazar')->orderBy('fecha_inicio', 'asc')->get();
 
-        return view('rh.solicitudes.index', compact('today', 'solicitudes'));
+        return view('rh.solicitudes.index', compact('today', 'solicitudes_pendientes', 'solicitudes_aprobadas', 'solicitudes_cancelada'));
     }
 
     public function index_finanzas(){
@@ -105,5 +107,20 @@ class RhController extends Controller
         ]);
 
         return response()->json(['ok'=>true]);
+    }
+
+    public function update_solicitudes(Request $request, $id){
+
+        $solicitud = NominaSolicitudes::find($id);
+        $solicitud->autorizado_por = auth()->user()->id;
+        $solicitud->estatus = $request->get('estatus');
+        $solicitud->update();
+        return redirect()->back();
+    }
+
+    public function index_calendario(){
+
+        $users = User::where('cliente','=',null)->where('nomina_estatus', '=', '1')->orderBy('id','DESC')->get();
+        return view('rh.calendario.index', compact('users'));
     }
 }
