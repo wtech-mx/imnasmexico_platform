@@ -162,7 +162,7 @@
 
 @if($tickets_externo != "")
 {{-- Externos --}}
-<h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : {{ $folio}}</strong></h5>
+<h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio Ex: {{ $folio}}</strong></h5>
 
 <div class="row card card-body card_colapsable_comprar">
     <div class="col-12">
@@ -220,40 +220,67 @@
             @endphp
 
             <div class="col-12 col-md-6 col-lg-6 my-auto">
-                @if(in_array($tickets_externo->curso, [
+                @if($tickets_externo->folio === 'FMH-280725130454')
+                    <a href="{{ route('folio.index_titulo', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-white"
+                    style="background-color: #60594D">
+                        Título Honorífico
+                    </a>
+                @elseif(in_array($tickets_externo->curso, [
                     'Diplomado en Drenaje Linfático Facial y Corporal',
                     'Micropuntura Brasileña',
                     'Micropuntura Brasileña',
                 ]))
-                    <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
+                    <a href="{{ route('folio.index_titulo', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-white"
+                    style="background-color: #60594D">
                         Título Honorífico
                     </a>
                 @elseif(in_array($tickets_externo->curso, [
                     'Masoterapia en Técnicas de Masaje Relajante, Descontracturante y Deportivo',
                 ]))
-                    <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
+                    <a href="{{ route('folio.index_titulo', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-white"
+                    style="background-color: #60594D">
                         Título Honorífico
                     </a>
-                    <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">
+                    <a href="{{ route('folio.index_diploma', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-white"
+                    style="background-color: #8B635C">
                         Diploma de Profesionalización
                     </a>
-
                 @else
-                    <a href="{{ route('folio.index_cedula',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cédula de Identidad de Papel</a>
-                    <a href="{{ route('folio.index_crednecial',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
-                    <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma de Profesionalización</a>
-                    <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Título Honorífico</a>
+                    <a href="{{ route('folio.index_cedula', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-dark"
+                    style="background-color: #DDD78D">
+                        Cédula de Identidad de Papel
+                    </a>
+                    <a href="{{ route('folio.index_crednecial', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-dark"
+                    style="background-color: #DCBF85">
+                        Credencial Plastificada
+                    </a>
+                    <a href="{{ route('folio.index_diploma', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-white"
+                    style="background-color: #8B635C">
+                        Diploma de Profesionalización
+                    </a>
+                    <a href="{{ route('folio.index_titulo', $tickets_externo->folio) }}"
+                    class="text-center btn btn-xs mt-3 w-100 text-white"
+                    style="background-color: #60594D">
+                        Título Honorífico
+                    </a>
 
-                    @if($tickets_externo->curso === 'Cosmiatria Estética' or 'Cosmetología Y Cosmiatría Facial Y Corporal')
+                    @if(in_array($tickets_externo->curso, ['Cosmiatria Estética', 'Cosmetología Y Cosmiatría Facial Y Corporal']))
                         <a href="{{ route('folio.index_tira_externo', $tickets_externo->folio) }}?curso={{ urlencode($tickets_externo->curso) }}"
-                        class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias
+                        class="btn btn-xs mt-3 w-100 text-white"
+                        style="background-color: #93A29B">
+                            Tira de Materias
                         </a>
                     @endif
-
                 @endif
-
-
             </div>
+
 
         </div>
 
