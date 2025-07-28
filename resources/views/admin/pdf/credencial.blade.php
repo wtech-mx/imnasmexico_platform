@@ -346,7 +346,7 @@
         </div>
 
         <div class="containeridocurp">
-            <h4 class="idocurp">{{ $idocurp }}</h4>
+            <h4 class="idocurp">{{ $idocur ?? 'CURP' }}</h4>
         </div>
 
         <div class="container3">
