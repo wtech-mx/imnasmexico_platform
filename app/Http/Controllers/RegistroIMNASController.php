@@ -1551,7 +1551,12 @@ class RegistroIMNASController extends Controller
             $documento->update();
         }
 
-        $registro = new RegistroImnasEscuela;
+        $registro = RegistroImnasEscuela::where('id_user', $user->id)->first();
+
+        if (!$registro) {
+            $registro = new RegistroImnasEscuela;
+            $registro->id_user = $user->id;
+        };
         $registro->id_user = $user->id;
         $registro->direccion_escuela = $request->get('direccion_escuela');
         $registro->city_escuela = $request->get('city_escuela');
