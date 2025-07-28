@@ -33,7 +33,7 @@
         .nombre{
             font-family: 'Minion';
             font-size: 40px;
-            color: #fff;
+            color: #000;
         }
 
         .fecha{
@@ -50,7 +50,7 @@
 
     {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
     {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
-    <img src="https://plataforma.imnasmexico.com/tipos_documentos/diploma_lumina.png" class="img_portada">
+    <img src="https://plataforma.imnasmexico.com/tipos_documentos/diploma_head_spa.png" class="img_portada">
 
     @php
         $nombre_formateado = ucwords(strtolower($nombre));
