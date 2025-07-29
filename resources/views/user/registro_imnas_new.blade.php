@@ -99,183 +99,227 @@ Mi perfil- {{$cliente->name}}
         </div>
 
         <div class="tab-content" id="myTabContent">
+            
             <div class="tab-pane fade show active row" id="buscador" role="tabpanel" aria-labelledby="home-tab" style="background:#fff0!important; min-height: 0px; align-items: unset;">
-                <div class="col-12 col-md-8 col-lg-8">
-                    <div class="card_single_horizon" style="margin-right: auto;">
-                        <div class="col-12 espace_tittle_avales mb-3">
-                            <h3 class="title_curso text-center mb-3">Buscador de Documentos</h3>
-                        </div>
-
-                        <h4 class="text-center mt-4 mb-4">
-                            Ingresa el Folio de tu documento
-                        </h4>
-
-                        <form id="searchForm" class="d-flex" role="search">
-                            <input class="form-control me-2" placeholder="Ingresa Folio" name="folio" id="folio">
-                            <button class="btn btn-success" type="submit" style="background: #66C0CC">Buscar</button>
-                        </form>
-
-                        <div id="resultsContainer" class="p-0 p-md-5 p-lg-5"></div>
-
+                @if ($membresiaVencida)
+                    <div class="alert alert-warning" style="margin-bottom: 150%;">
+                        Tu membresía de Registro IMNAS ha vencido. Por favor renueva para seguir disfrutando del servicio.
                     </div>
-                </div>
-
-                <div class="col-12 col-md-4 col-lg-4">
-
-                    <div class="card_single_horizon">
-                        <h3 class="text-center mt-4 mb-4">¿Tienes dudas?</h3>
-                        <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5534316258</p>
-                        <div class="row">
-                            <div class="col-3 icon_footer">
-                                <a target="_blank" href="https://wa.link/3ldnex" class="text-center" style="margin-bottom: 0rem!important">
-                                    <i class="fas fa-phone-alt"></i>
-                                </a>
-                            </div>
-
-                            <div class="col-3 icon_footer">
-                                <a target="_blank" href="http://api.whatsapp.com/send?phone=525561672283" class="text-center" style="margin-bottom: 0rem!important">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                @foreach ($recien_comprados as $recien_comprado)
+                @else
                     <div class="col-12 col-md-8 col-lg-8">
-                        <div class="card_single_horizon">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="title_curso mb-3">Subir documentos</h3>
-                                <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
+                        <div class="card_single_horizon" style="margin-right: auto;">
+                            <div class="col-12 espace_tittle_avales mb-3">
+                                <h3 class="title_curso text-center mb-3">Buscador de Documentos</h3>
                             </div>
-                            <h4 style="font-size: 24px">
-                                @if ($recien_comprado->tipo == '1')
-                                    @if ($recien_comprado->id_ticket == NULL)
-                                        Emisión por alumno
-                                    @else
-                                        {{$recien_comprado->CursosTickets->nombre}}
-                                    @endif
-                                @elseif ($recien_comprado->tipo == '2')
-                                    Especialidad extra
-                                @endif
+
+                            <h4 class="text-center mt-4 mb-4">
+                                Ingresa el Folio de tu documento
                             </h4>
-                            <form   method="POST" action="{{ route('update_clientes.imnas', $recien_comprado->id) }}" enctype="multipart/form-data" role="form" >
-                                @csrf
-                                <input type="hidden" name="_method" value="PATCH">
-                                    <div class="row">
-                                        <input class="form-control" type="text" value="{{$recien_comprado->id_usuario}}" id="id_usuario" name="id_usuario" style="display: none">
 
-                                        <div class="col-12 col-lg-6 form-group ">
-                                            <label for="">Nombre completo *</label>
-                                            <div class="input-group input-group-alternative mb-4">
-                                                <span class="input-group-text">
-                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
-                                                </span>
+                            <form id="searchForm" class="d-flex" role="search">
+                                <input class="form-control me-2" placeholder="Ingresa Folio" name="folio" id="folio">
+                                <button class="btn btn-success" type="submit" style="background: #66C0CC">Buscar</button>
+                            </form>
 
-                                                <input class="form-control" type="text" id="nombre" name="nombre" required oninput="capitalizeInput(this)">
-                                            </div>
-                                        </div>
+                            <div id="resultsContainer" class="p-0 p-md-5 p-lg-5"></div>
 
-                                        <div class="col-12 col-lg-6 form-group ">
-                                            <label for="">Especialidad *</label>
-                                            <div class="input-group input-group-alternative mb-4">
-                                                <span class="input-group-text">
-                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
-                                                </span>
-                                                @if ($recien_comprado->id_ticket == 1369)
-                                                    <input class="form-control" type="text" id="nom_curso" name="nom_curso" required oninput="capitalizeInput(this)">
-                                                @else
-                                                    <select class="form-control" id="nom_curso" name="nom_curso" required>
-                                                        @foreach ($especialidades as $especialidad)
-                                                        <option value="{{ $especialidad->especialidad }}">{{ $especialidad->especialidad }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                @endif
-                                            </div>
-                                        </div>
+                        </div>
+                    </div>
 
-                                        <div class="col-12 col-lg-6 form-group ">
-                                            <label for="">Fecha del curso *</label>
-                                            <div class="input-group input-group-alternative mb-4">
-                                                <span class="input-group-text">
-                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/calendario.png')}}" alt="">
-                                                </span>
+                    <div class="col-12 col-md-4 col-lg-4">
 
-                                                <input class="form-control" type="date"  id="fecha_curso" name="fecha_curso" required>
-                                            </div>
-                                        </div>
+                        <div class="card_single_horizon">
+                            <h3 class="text-center mt-4 mb-4">¿Tienes dudas?</h3>
+                            <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5534316258</p>
+                            <div class="row">
+                                <div class="col-3 icon_footer">
+                                    <a target="_blank" href="https://wa.link/3ldnex" class="text-center" style="margin-bottom: 0rem!important">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </a>
+                                </div>
 
-                                        @if ($recien_comprado->id_ticket != 1369)
+                                <div class="col-3 icon_footer">
+                                    <a target="_blank" href="http://api.whatsapp.com/send?phone=525561672283" class="text-center" style="margin-bottom: 0rem!important">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @foreach ($recien_comprados as $recien_comprado)
+                        <div class="col-12 col-md-8 col-lg-8">
+                            <div class="card_single_horizon">
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="title_curso mb-3">Subir documentos</h3>
+                                    <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
+                                </div>
+                                <h4 style="font-size: 24px">
+                                    @if ($recien_comprado->tipo == '1')
+                                        @if ($recien_comprado->id_ticket == NULL)
+                                            Emisión por alumno
+                                        @else
+                                            {{$recien_comprado->CursosTickets->nombre}}
+                                        @endif
+                                    @elseif ($recien_comprado->tipo == '2')
+                                        Especialidad extra
+                                    @endif
+                                </h4>
+                                <form   method="POST" action="{{ route('update_clientes.imnas', $recien_comprado->id) }}" enctype="multipart/form-data" role="form" >
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                        <div class="row">
+                                            <input class="form-control" type="text" value="{{$recien_comprado->id_usuario}}" id="id_usuario" name="id_usuario" style="display: none">
+
                                             <div class="col-12 col-lg-6 form-group ">
-                                                <label for="">Diseño Documentos *</label>
+                                                <label for="">Nombre completo *</label>
                                                 <div class="input-group input-group-alternative mb-4">
                                                     <span class="input-group-text">
-                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/todos-docs.webp')}}" alt="">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
                                                     </span>
-                                                    <select class="form-control" id="diseno_doc" name="diseno_doc" required>
-                                                        <option value="Clasico">Diseño Clásico</option>
-                                                        <option value="Nuevo">Diseño nuevo</option>
-                                                    </select>
+
+                                                    <input class="form-control" type="text" id="nombre" name="nombre" required oninput="capitalizeInput(this)">
                                                 </div>
                                             </div>
-                                        @endif
 
-                                        <div class="col-12 col-lg-6 form-group ">
-                                            <label for="">Comentario extra</label>
-                                            <div class="input-group input-group-alternative mb-4">
-                                                <span class="input-group-text">
-                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
-                                                </span>
+                                            <div class="col-12 col-lg-6 form-group ">
+                                                <label for="">Especialidad *</label>
+                                                <div class="input-group input-group-alternative mb-4">
+                                                    <span class="input-group-text">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
+                                                    </span>
+                                                    @if ($recien_comprado->id_ticket == 1369)
+                                                        <input class="form-control" type="text" id="nom_curso" name="nom_curso" required oninput="capitalizeInput(this)">
+                                                    @else
+                                                        <select class="form-control" id="nom_curso" name="nom_curso" required>
+                                                            @foreach ($especialidades as $especialidad)
+                                                            <option value="{{ $especialidad->especialidad }}">{{ $especialidad->especialidad }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    @endif
+                                                </div>
+                                            </div>
 
-                                                <textarea class="form-control" cols="10" rows="2"  id="comentario_cliente" name="comentario_cliente"></textarea>
+                                            <div class="col-12 col-lg-6 form-group ">
+                                                <label for="">Fecha del curso *</label>
+                                                <div class="input-group input-group-alternative mb-4">
+                                                    <span class="input-group-text">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/calendario.png')}}" alt="">
+                                                    </span>
+
+                                                    <input class="form-control" type="date"  id="fecha_curso" name="fecha_curso" required>
+                                                </div>
+                                            </div>
+
+                                            @if ($recien_comprado->id_ticket != 1369)
+                                                <div class="col-12 col-lg-6 form-group ">
+                                                    <label for="">Diseño Documentos *</label>
+                                                    <div class="input-group input-group-alternative mb-4">
+                                                        <span class="input-group-text">
+                                                            <img class="img_profile_label" src="{{asset('assets/user/icons/todos-docs.webp')}}" alt="">
+                                                        </span>
+                                                        <select class="form-control" id="diseno_doc" name="diseno_doc" required>
+                                                            <option value="Clasico">Diseño Clásico</option>
+                                                            <option value="Nuevo">Diseño nuevo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            <div class="col-12 col-lg-6 form-group ">
+                                                <label for="">Comentario extra</label>
+                                                <div class="input-group input-group-alternative mb-4">
+                                                    <span class="input-group-text">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
+                                                    </span>
+
+                                                    <textarea class="form-control" cols="10" rows="2"  id="comentario_cliente" name="comentario_cliente"></textarea>
+                                                </div>
+                                            </div>
+
+                                            @if ($recien_comprado->id_ticket != 1369)
+                                                <div class="col-6 form-group mb-5">
+                                                    <label for="ine">INE Frente y Atras *</label>
+                                                    <input id="ine" name="ine" type="file" class="form-control ine_input" required>
+                                                </div>
+                                                <div class="col-6 form-group mb-5">
+                                                    <label for="ine">CURP *</label>
+                                                    <input id="curp_escrito" name="curp_escrito" type="text" class="form-control ine_input" required>
+                                                </div>
+                                                <div class="col-6 form-group mb-5">
+                                                    <label for="ine">Foto cuadrada <b>Blanco y negro</b>*</label>
+                                                    <input id="foto_cuadrada" name="foto_cuadrada" type="file" class="form-control ine_input" required>
+                                                </div>
+                                            @endif
+
+                                            <div class="col-12 col-lg-4 form-group ">
+                                                <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
+                                                    Guardar
+                                                </button>
                                             </div>
                                         </div>
-
-                                        @if ($recien_comprado->id_ticket != 1369)
-                                            <div class="col-6 form-group mb-5">
-                                                <label for="ine">INE Frente y Atras *</label>
-                                                <input id="ine" name="ine" type="file" class="form-control ine_input" required>
-                                            </div>
-                                            <div class="col-6 form-group mb-5">
-                                                <label for="ine">CURP *</label>
-                                                <input id="curp_escrito" name="curp_escrito" type="text" class="form-control ine_input" required>
-                                            </div>
-                                            <div class="col-6 form-group mb-5">
-                                                <label for="ine">Foto cuadrada <b>Blanco y negro</b>*</label>
-                                                <input id="foto_cuadrada" name="foto_cuadrada" type="file" class="form-control ine_input" required>
-                                            </div>
-                                        @endif
-
-                                        <div class="col-12 col-lg-4 form-group ">
-                                            <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                            </form>
-                            <h4>NOTA</h4>
-                            <h5 class=" mt-4 mb-4">
-                                Llena cuidadosamente los campos, asegurándote de que el nombre sea correcto y que los documentos sean correctos, ya que una vez guardado <b> no se podrán realizar correcciones</b>. Después de completar la información, haz clic en el botón <b>"Guardar"</b>.
-                            </h5>
+                                </form>
+                                <h4>NOTA</h4>
+                                <h5 class=" mt-4 mb-4">
+                                    Llena cuidadosamente los campos, asegurándote de que el nombre sea correcto y que los documentos sean correctos, ya que una vez guardado <b> no se podrán realizar correcciones</b>. Después de completar la información, haz clic en el botón <b>"Guardar"</b>.
+                                </h5>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
-                @if ($recien_comprados->isEmpty())
-                    <div class="col-8">
-                    </div>
-                @endif
+                    @if ($recien_comprados->isEmpty())
+                        <div class="col-8">
+                        </div>
+                    @endif
 
-                <div class="col-12 col-md-4 col-lg-4">
-                    <div class="card_single_horizon">
-                        <div class="row mb-3">
-                            @foreach ($cursos_tickets as $ticket)
-                                @if ($ticket->nombre == 'Emisión por alumno' && $ticket->costos_diferentes != $cliente->costos_diferentes)
-                                    @continue
-                                @endif
-                                @if ($cliente->costos_diferentes == 5)
-                                    @if ($ticket->costos_diferentes == 5 || $ticket->id == 1009)
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="card_single_horizon">
+                            <div class="row mb-3">
+                                @foreach ($cursos_tickets as $ticket)
+                                    @if ($ticket->nombre == 'Emisión por alumno' && $ticket->costos_diferentes != $cliente->costos_diferentes)
+                                        @continue
+                                    @endif
+                                    @if ($cliente->costos_diferentes == 5)
+                                        @if ($ticket->costos_diferentes == 5 || $ticket->id == 1009)
+                                            @php
+                                                $precio = number_format($ticket->precio, 2, '.', ',');
+                                            @endphp
+
+                                            <div class="col-12 mt-3">
+                                                <strong style="color: #66C0CC">{{ $ticket->nombre }}</strong>
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-3">
+                                                @if (is_null($ticket->descuento))
+                                                    <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                                @else
+                                                    @if ($ticket->nombre == 'Reconocimiento')
+                                                        <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                                    @else
+                                                        <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
+                                                        <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
+                                                    @endif
+                                                @endif
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-3">
+                                                <form action="{{ route('add.to.cart', $ticket->id) }}" method="GET">
+                                                    @csrf
+                                                    <div class="input-group">
+                                                        <input type="number" name="quantity" class="form-control" min="1" value="1" style="max-width: 70px; background: #66C0CC !important">
+                                                        <button type="submit" class="btn_ticket_comprar text-center btn btn-primary" style="background: #66C0CC !important">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
+                                            </div>
+                                        @endif
+                                    @else
                                         @php
                                             $precio = number_format($ticket->precio, 2, '.', ',');
                                         @endphp
@@ -313,73 +357,36 @@ Mi perfil- {{$cliente->name}}
                                             <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
                                         </div>
                                     @endif
-                                @else
-                                    @php
-                                        $precio = number_format($ticket->precio, 2, '.', ',');
-                                    @endphp
-
+                                @endforeach
+                                @foreach ($tickets_envio as $ticket)
                                     <div class="col-12 mt-3">
-                                        <strong style="color: #66C0CC">{{ $ticket->nombre }}</strong>
+                                        <strong style="color: #66C0CC">{{$ticket->nombre}}</strong>
                                     </div>
-
+                                    <div class="col-12">
+                                        <p style="color: #66C0CC">{{$ticket->descripcion}}</p>
+                                    </div>
                                     <div class="col-6 col-lg-6 mt-3">
-                                        @if (is_null($ticket->descuento))
-                                            <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                        @if ($ticket->descuento == NULL)
+                                            <h5 style="color: #66C0CC"><strong>$ {{ $ticket->precio }}</strong></h5>
                                         @else
-                                            @if ($ticket->nombre == 'Reconocimiento')
-                                                <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
-                                            @else
-                                                <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
-                                                <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
-                                            @endif
+                                            <del style="color: #66C0CC"><strong>De ${{ $ticket->precio }}</strong></del>
+                                            <h5 style="color: #66C0CC"><strong>A ${{$ticket->descuento}}</strong></h5>
                                         @endif
                                     </div>
 
                                     <div class="col-6 col-lg-6 mt-3">
-                                        <form action="{{ route('add.to.cart', $ticket->id) }}" method="GET">
-                                            @csrf
-                                            <div class="input-group">
-                                                <input type="number" name="quantity" class="form-control" min="1" value="1" style="max-width: 70px; background: #66C0CC !important">
-                                                <button type="submit" class="btn_ticket_comprar text-center btn btn-primary" style="background: #66C0CC !important">
-                                                    <i class="fas fa-ticket-alt"></i> Comprar
-                                                </button>
-                                            </div>
-                                        </form>
+                                        <p class="btn-holder">
+                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                            </a>
+                                        </p>
                                     </div>
 
-                                    <div class="col-12">
-                                        <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
-                                    </div>
-                                @endif
-                            @endforeach
-                            @foreach ($tickets_envio as $ticket)
-                                <div class="col-12 mt-3">
-                                    <strong style="color: #66C0CC">{{$ticket->nombre}}</strong>
-                                </div>
-                                <div class="col-12">
-                                    <p style="color: #66C0CC">{{$ticket->descripcion}}</p>
-                                </div>
-                                <div class="col-6 col-lg-6 mt-3">
-                                    @if ($ticket->descuento == NULL)
-                                        <h5 style="color: #66C0CC"><strong>$ {{ $ticket->precio }}</strong></h5>
-                                    @else
-                                        <del style="color: #66C0CC"><strong>De ${{ $ticket->precio }}</strong></del>
-                                        <h5 style="color: #66C0CC"><strong>A ${{$ticket->descuento}}</strong></h5>
-                                    @endif
-                                </div>
-
-                                <div class="col-6 col-lg-6 mt-3">
-                                    <p class="btn-holder">
-                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                            <i class="fas fa-ticket-alt"></i> Comprar
-                                        </a>
-                                    </p>
-                                </div>
-
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
 
             <div class="tab-pane fade row" id="estatus" role="tabpanel" aria-labelledby="estatus-tab" style="background:#fff0!important; min-height: 0px; align-items: unset;">

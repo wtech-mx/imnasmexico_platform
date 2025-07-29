@@ -960,10 +960,17 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/registro/imnas/especialidades/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'show_especialidades'])->name('show_especialidades.imnas');
     Route::patch('/registro/imnas/especialidades/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_especialidades'])->name('especialidades.update');
 
+    Route::get('/registro/imnas/renovaciones/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'show_renovaciones'])->name('show_renovaciones.imnas');
+
     Route::get('/registro/imnas/imprimir/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'imprimir_especialidad'])->name('imprimir_especialidad.imprimir');
     Route::post('/eliminar/folio', [App\Http\Controllers\RegistroIMNASController::class, 'eliminar_folio'])->name('eliminar_folio.imnas');
 
     Route::get('registro/imnas/imprimir/especialidad/afi', [App\Http\Controllers\RegistroIMNASController::class, 'imprimir_especialidades_afi'])->name('imprimir.especialidades');
+
+    // web.php
+    Route::put('/registro-imnas/ignorar/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'ignorar'])->name('registro-imnas.ignorar');
+    Route::patch('/registro/imnas/renovar/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_renovar'])->name('renovar.update');
+    
     // =============== M O D U L O   R E G I S T R O  I M N A S  C L I E N T E S ===============================
     Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
     Route::patch('/registro/imnas/subir/especialidad/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_especialidad'])->name('update_especialidad.imnas');

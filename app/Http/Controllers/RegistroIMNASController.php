@@ -27,12 +27,44 @@ use Mtownsend\RemoveBg\RemoveBg;
 class RegistroIMNASController extends Controller
 {
     public function index(){
+        $ordenes_raw = Orders::where('registro_imnas', 1)
+            ->orderBy('fecha', 'DESC') // Asegúrate que esté bien la columna de fecha
+            ->get();
 
-        $registros_imnas = Orders::where('registro_imnas', '=', '1')->orderby('id','DESC')->get();
-        $curso = Cursos::where('id', '=', 647)->first();
+        // Agrupar por cliente y quedarte con la más reciente
+        $registros_imnas = $ordenes_raw->unique('id_usuario')->values();
+
+        $vencidos = [];
+        $por_vencer_1_5 = [];
+        $por_vencer_6_10 = [];
+
+        $hoy = Carbon::now();
+
+        foreach ($registros_imnas as $registro) {
+            $fecha_compra = Carbon::parse($registro->fecha);
+            $fecha_vencimiento = $fecha_compra->copy()->addYear();
+            $dias_restantes = $hoy->diffInDays($fecha_vencimiento, false); // negativo si ya venció
+
+            if ($dias_restantes < 0) {
+                $vencidos[] = $registro;
+            } elseif ($dias_restantes >= 1 && $dias_restantes <= 5) {
+                $por_vencer_1_5[] = $registro;
+            } elseif ($dias_restantes >= 6 && $dias_restantes <= 10) {
+                $por_vencer_6_10[] = $registro;
+            }
+        }
+
+        $curso = Cursos::where('id', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->where('nombre', 'Emisión por alumno')->get();
 
-        return view('admin.registro_imnas.index', compact('registros_imnas', 'cursos_tickets'));
+
+        return view('admin.registro_imnas.index', compact(
+            'registros_imnas',
+            'cursos_tickets',
+            'vencidos',
+            'por_vencer_1_5',
+            'por_vencer_6_10'
+        ));
     }
 
     public function index_clientes($code){
@@ -63,7 +95,23 @@ class RegistroIMNASController extends Controller
         ->where('registro_imnas_doc.num_guia', NULL)
         ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
         ->get();
-        return view('user.registro_imnas_new', compact('registros_imnas', 'recien_comprados_especialidad','cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades', 'curso_envio', 'tickets_envio'));
+
+        $membresia = Orders::where('registro_imnas', '=', '1')
+            ->where('id_usuario', '=', $cliente->id)
+            ->orderby('id','DESC')->first();
+
+        $membresiaVencida = false;
+
+        if ($membresia) {
+            $fechaCompra = Carbon::parse($membresia->fecha); // o usa 'fecha' si es otro campo
+            $hoy = Carbon::now();
+
+            if ($fechaCompra->addYear()->isPast()) {
+                $membresiaVencida = true;
+            }
+        }
+
+        return view('user.registro_imnas_new', compact('registros_imnas', 'recien_comprados_especialidad','cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades', 'curso_envio', 'tickets_envio', 'membresia', 'membresiaVencida'));
     }
 
     public function buscador_registro(Request $request, $code){
@@ -985,6 +1033,19 @@ class RegistroIMNASController extends Controller
         return view('admin.registro_imnas.show_especialidades', compact('especialidades', 'cliente', 'temario'));
     }
 
+    public function show_renovaciones($id){
+
+        $cliente = User::where('id', $id)->firstOrFail();
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')
+            ->where('id_usuario', '=', $id)
+            ->orderby('id','DESC')->get();
+
+        $curso = Cursos::where('id', 647)->first();
+        $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->where('nombre', 'Emisión por alumno')->get();
+
+        return view('admin.registro_imnas.show_renovaciones', compact('registros_imnas', 'cliente', 'cursos_tickets'));
+    }
+
     public function update_especialidades(Request $request, $id){
         $registro_imnas_especialidad = RegistroImnasEspecialidad::where('id', $id)->first();
         $registro_imnas_especialidad->especialidad = $request->get('especialidad');
@@ -1756,5 +1817,66 @@ class RegistroIMNASController extends Controller
         $pdf = \PDF::loadView('admin.registro_imnas.pdf_especialidades', compact('especialidad', 'today', 'afiliado'));
         return $pdf->stream();
        //  return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+    }
+
+    public function ignorar($id){
+        $orden = Orders::findOrFail($id);
+        $orden->ignorado_registro_imnas = true;
+        $orden->save();
+
+        return back()->with('success', 'Cliente ignorado de alertas.');
+    }
+
+    public function update_renovar(Request $request, $id){
+
+        $cliente = User::where('id', $id)->firstOrFail();
+        $dominio = $request->getHost();
+        $fechaActual = date('Y-m-d');
+        $code = Str::random(8);
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono .'/');
+        }else{
+            $ruta_manual = public_path() . '/documentos'.'/'. $cliente->telefono;
+        }
+
+        $order = new Orders;
+        $order->id_usuario = $id;
+        $order->pago = $request->get('pago');
+
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $order->foto = $fileName;
+        }
+
+        $order->forma_pago = $request->get('forma_pago');
+        $order->pago2 = $request->get('pago2');
+
+        if ($request->hasFile("foto2")) {
+            $file = $request->file('foto2');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $order->foto2 = $fileName;
+        }
+
+        $order->forma_pago2 = $request->get('forma_pago2');
+        $order->fecha = $fechaActual;
+        $order->estatus = 1;
+        $order->registro_imnas = 1;
+        $order->code = $code;
+        $order->save();
+
+        $order_ticket = new OrdersTickets;
+        $order_ticket->id_order = $order->id;
+        $order_ticket->id_usuario = $cliente->id;
+        $order_ticket->id_tickets = 1007;
+        $order_ticket->id_curso = 647;
+        $order_ticket->save();
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 }

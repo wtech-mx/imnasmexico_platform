@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
+        @include('admin.registro_imnas.modal_por_vencer')
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -13,6 +14,15 @@
                     <div class="card-header">
 
                         <div class="d-flex justify-content-between">
+                            <!-- CAMPANA -->
+                            <button type="button" class="btn btn-warning position-relative" data-bs-toggle="modal" data-bs-target="#modalAlertas">
+                                <i class="fas fa-bell"></i>
+                                @if(count($vencidos) + count($por_vencer_1_5) + count($por_vencer_6_10) > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ count($vencidos) + count($por_vencer_1_5) + count($por_vencer_6_10) }}
+                                    </span>
+                                @endif
+                            </button>
 
                             <h3 class="mb-3">Registros IMNAS Show</h3>
 
@@ -80,8 +90,7 @@
                                                             }
                                                         }
                                                     @endphp
-                                                <p>{!! $nombre_formateado !!}</p>
-
+                                                    <p>{!! $nombre_formateado !!}</p>
                                                 </td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#registro_imnas_edit_{{ $item->id }}">
@@ -102,6 +111,10 @@
 
                                                     <a class="btn btn-sm btn-danger" href="{{ route('show_especialidades.imnas', $item->User->id) }}" target="_blank">
                                                         Especialidad
+                                                    </a>
+
+                                                    <a class="btn btn-sm btn-dark" href="{{ route('show_renovaciones.imnas', $item->User->id) }}" target="_blank">
+                                                        Renovaciones
                                                     </a>
                                                 </td>
                                             </tr>
