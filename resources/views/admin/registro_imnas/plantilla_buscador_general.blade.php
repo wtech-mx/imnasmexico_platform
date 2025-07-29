@@ -88,7 +88,7 @@
     @else
 
     @if ($tickets == NULL)
-        <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : {{ $folio}}</strong></h5>
+        <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio AF: {{ $folio}}</strong></h5>
 
         <div class="row card card-body card_colapsable_comprar">
             <div class="col-12">
