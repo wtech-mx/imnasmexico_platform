@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="col-4">
+        {{-- <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
 
@@ -92,7 +92,7 @@
                     <h5 class="tittle_border_cam_min">Carga Doc Gerales</h5>
                 </a>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 </section>
