@@ -833,14 +833,14 @@ class CursosController extends Controller
 
     public function eventos_cosmica(Request $request){
         $cursos = Products::where('evento', '1')->get();
-        $ordenes_pagina = OrdersTickets::where('id_curso', 1041)
-        ->whereHas('Orders', function($query){
-            $query->where('estatus', 1);
-        })
-        ->count();
+        $cursos_imnas = Cursos::where('evento_cosmica', '1')->get();
 
         foreach ($cursos as $curso) {
-            $curso->userCount = $curso->uniqueOrderTicketCount() + $ordenes_pagina;
+            foreach ($cursos_imnas as $curso_imnas) {
+                if($curso->id == $curso_imnas->id_evento){
+                    $curso->userCount = $curso->uniqueOrderTicketCount() + $curso_imnas->orderTicket->count();
+                }
+            }
         }
 
         return view('admin.cursos.cosmica.index', compact('cursos'));
@@ -872,11 +872,16 @@ class CursosController extends Controller
             })
             ->sum('cantidad');
 
-        $ordenes_pagina = OrdersTickets::where('id_curso', 1041)
-        ->whereHas('Orders', function($query){
-            $query->where('estatus', 1);
-        })
-        ->get();
+        $curso_relacionado = Cursos::where('id_evento', $id)->first();
+        $ordenes_pagina = collect(); // por si no hay curso relacionado
+
+        if ($curso_relacionado) {
+            $ordenes_pagina = OrdersTickets::where('id_curso', $curso_relacionado->id)
+                ->whereHas('Orders', function($query){
+                    $query->where('estatus', 1);
+                })
+                ->get();
+        }
 
         $totalPersonas = $ordenes_basico_sum + $ordenes_nas_basico_sum;
         $totalRegistros = $ordenes_nas_basico->count() + $ordenes_basico->count();
