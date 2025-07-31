@@ -1044,14 +1044,14 @@
                                 @if ($curso->nombre == 'Mes Becario EC0010' || $curso->nombre == 'Mes Becario EC0046')
                                     <a href="tel:+52 1 55 2220 8900" target="_blank" r>55 2220 8900</a>
                                 @else
-                                    <a href="tel:+52 1 55 3116 7046" target="_blank" r>55 3116 7046</a>
+                                    <a href="tel:+52 1 56 3754 0093" target="_blank" r>56 3754 0093</a>
                                 @endif
                                 con tu nombre completo y nombre del curso y/o diplomado que elegiste.
                             </p>
                         </div>
                         <div class="col-12">
                             <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
-                            <img class="img_depositos mt-2" src="{{asset('webpage/'.$webpage->img_cuenta_bancaria) }}" alt="">
+                            <img class="img_depositos mt-2" src="{{asset('webpage/'.$webpage->cuenta_cosmica) }}" alt="">
                             </a>
                         </div>
                         {{-- <div class="col-12">
