@@ -1051,7 +1051,7 @@
                         </div>
                         <div class="col-12">
                             <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
-                            <img class="img_depositos mt-2" src="{{asset('webpage/'.$webpage->cuenta_cosmica) }}" alt="">
+                            <img class="img_depositos mt-2" src="{{asset('webpage/cuenta_cosmica.jpg') }}" alt="">
                             </a>
                         </div>
                         {{-- <div class="col-12">
