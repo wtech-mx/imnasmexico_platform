@@ -843,7 +843,7 @@ class CursosController extends Controller
             }
         }
 
-        return view('admin.cursos.cosmica.index', compact('cursos'));
+        return view('admin.cursos.cosmica.index', compact('cursos', 'cursos_imnas'));
     }
 
     public function listas_cosmica($id){
